@@ -3,7 +3,7 @@
 import { useState, useEffect, useId } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { useLevelSlug, useSectionNavigation } from "@/components/kids/providers/level-context";
+import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
 
 interface WordPredictorProps {
@@ -34,13 +34,15 @@ export function WordPredictor({
 }: WordPredictorProps) {
   const t = useTranslations("kids.wordPredictor");
   const levelSlug = useLevelSlug();
-  const { currentSection, markSectionComplete, registerSectionRequirement } = useSectionNavigation();
+  const scope = useSectionIdentity();
   const componentId = useId();
   
-  // Register that this section has an interactive element requiring completion
+  // Register that this Section has an interactive element requiring completion,
+  // routed through the Section scope so it binds to the containing Section even while
+  // offscreen (all Sections stay mounted).
   useEffect(() => {
-    registerSectionRequirement(currentSection);
-  }, [currentSection, registerSectionRequirement]);
+    scope?.registerRequirement(true);
+  }, [scope]);
 
   const displayTitle = title || t("title");
   const displayInstruction = instruction || t("instruction");
@@ -84,10 +86,12 @@ export function WordPredictor({
   const handleSubmit = () => {
     if (!selectedAnswer) return;
     setSubmitted(true);
-    // Mark section as complete if correct answer
-    if (selectedAnswer === correctAnswer && levelSlug) {
-      markSectionCompleted(levelSlug, currentSection);
-      markSectionComplete(currentSection);
+    // Mark the containing Section complete only on the correct answer, keyed by its
+    // resolved Section index (both persisted and in-memory), never the cursor.
+    if (selectedAnswer === correctAnswer && levelSlug && scope) {
+      const index = scope.getIndex();
+      if (index !== null) markSectionCompleted(levelSlug, index);
+      scope.markComplete();
     }
   };
 
