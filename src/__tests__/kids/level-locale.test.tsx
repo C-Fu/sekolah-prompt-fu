@@ -22,10 +22,19 @@ vi.mock("next-intl", async (importOriginal) => {
 
 import { loadLevelContent } from "@/lib/kids/level-content";
 import { getAllLevels, getLevelBySlug } from "@/lib/kids/levels";
+import { isSectionCompleted, clearSectionCompletion } from "@/lib/kids/progress";
 import { generateStaticParams } from "@/app/kids/level/[slug]/page";
 import { useMDXComponents } from "../../../mdx-components";
 import { LevelProvider, useSectionIdentity, useSectionNavigation } from "@/components/kids/providers/level-context";
-import { Section } from "@/components/kids/elements";
+import {
+  Section,
+  ExampleMatcher,
+  MagicWords,
+  DragDropPrompt,
+  PromptParts,
+  PromptLab,
+  PromptDoctor,
+} from "@/components/kids/elements";
 import { LevelContentWrapper } from "@/components/kids/layout/level-content-wrapper";
 
 /**
@@ -105,6 +114,9 @@ describe("level-content locale/slug selection", () => {
 
 afterEach(() => {
   cleanup();
+  // Interactive consumers persist section completion to localStorage; isolate tests.
+  clearSectionCompletion("1-1-meet-promi");
+  localStorage.clear();
 });
 
 /** Probe that surfaces the resolved containing Section index to the test DOM. */
@@ -429,5 +441,194 @@ describe("mounted MDX Section registry", () => {
     expect((screen.getByTestId("state-input") as HTMLInputElement).value).toBe(
       "typed-by-user"
     );
+  });
+});
+
+/**
+ * 01-16 — interactive consumers attach to their *containing* Section, not the
+ * navigation cursor. An offscreen consumer registers its own Section requirement; a
+ * correct answer persists completion against its own resolved Section index.
+ */
+
+const SLUG = "1-1-meet-promi";
+
+async function renderControlled(Component: () => JSX.Element) {
+  render(
+    <LevelProvider levelSlug={SLUG}>
+      <LevelContentWrapper
+        levelSlug={SLUG}
+        levelNumber="1-1"
+        loadContent={async () => ({ Component, effectiveLocale: "en" })}
+      />
+    </LevelProvider>
+  );
+}
+
+async function nextButton() {
+  return (await screen.findByRole("button", { name: "navigation.next" })) as HTMLButtonElement;
+}
+
+/** Click Next n times, waiting for the active section to settle each time. */
+async function advance(n: number) {
+  for (let i = 0; i < n; i++) {
+    const next = await nextButton();
+    expect(next).toBeEnabled();
+    next.click();
+    await waitFor(() => {
+      expect(document.querySelector("section[data-section-index]:not([hidden])")).not.toBeNull();
+    });
+  }
+}
+
+describe("interactive consumers bind to their containing Section (01-16 task 1)", () => {
+  it("registers an offscreen consumer's requirement against its own Section, not the cursor", async () => {
+    function OffscreenInteractive() {
+      return (
+        <>
+          <Section>
+            <RequirementProbe />
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <RequirementProbe />
+            <span>plain second</span>
+          </Section>
+          <Section>
+            <RequirementProbe />
+            <ExampleMatcher
+              examples={[{ input: "a", output: "b" }]}
+              question="q"
+              options={["A", "B"]}
+              correctAnswer="B"
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(OffscreenInteractive);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    // Cursor is 0; the interactive consumer lives in Section 2. Only Section 2 requires.
+    expect(
+      document.querySelector('section[data-section-index="0"] [data-testid="probe-requirement"]')
+        ?.textContent
+    ).toBe("free:incomplete");
+    expect(
+      document.querySelector('section[data-section-index="2"] [data-testid="probe-requirement"]')
+        ?.textContent
+    ).toBe("required:incomplete");
+  });
+
+  it("writes localStorage completion against the ExampleMatcher's own Section index", async () => {
+    function MatcherInSectionTwo() {
+      return (
+        <>
+          <Section>
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <ExampleMatcher
+              examples={[{ input: "a", output: "b" }]}
+              question="q"
+              options={["A", "B"]}
+              correctAnswer="B"
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(MatcherInSectionTwo);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    await advance(1); // into Section 1 (the interactive one) → Next locked
+    expect(await nextButton()).toBeDisabled();
+    expect(isSectionCompleted(SLUG, 1)).toBe(false);
+
+    // Correct answer.
+    (screen.getByRole("button", { name: "B" }) as HTMLButtonElement).click();
+    (screen.getByRole("button", { name: "check" }) as HTMLButtonElement).click();
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 1)).toBe(true);
+    });
+    // Not the cursor (0), not any other index.
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+    // Section unlocks after its own correct answer.
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "navigation.next" })).toBeEnabled();
+    });
+  });
+
+  it("does not unlock on a wrong answer, but unlocks on the correct one (MagicWords)", async () => {
+    function MagicWordsInSection() {
+      return (
+        <>
+          <Section>
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <MagicWords
+              sentence="I like ___"
+              blanks={[{ hint: "animal", answers: ["cats"] }]}
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(MagicWordsInSection);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+    await advance(1);
+
+    // Place the word then check.
+    (screen.getByRole("button", { name: /cats/ }) as HTMLButtonElement).click();
+    (screen.getByRole("button", { name: "check" }) as HTMLButtonElement).click();
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 1)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+  });
+
+  it("binds DragDropPrompt's requirement to its containing Section, not the cursor", async () => {
+    function DragDropInSectionTwo() {
+      return (
+        <>
+          <Section>
+            <RequirementProbe />
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <RequirementProbe />
+            <DragDropPrompt
+              pieces={["a", "b"]}
+              correctOrder={[0, 1]}
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(DragDropInSectionTwo);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    expect(
+      document.querySelector('section[data-section-index="0"] [data-testid="probe-requirement"]')
+        ?.textContent
+    ).toBe("free:incomplete");
+    expect(
+      document.querySelector('section[data-section-index="1"] [data-testid="probe-requirement"]')
+        ?.textContent
+    ).toBe("required:incomplete");
   });
 });
