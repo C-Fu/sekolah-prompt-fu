@@ -37,3 +37,26 @@ Out-of-scope discoveries logged during plan execution (not fixed, per executor s
   `scripts/generate-book-pdf.ts:22` and `scripts/lint-mdx.js:17` reference the now-deleted
   `src/content/book` directory by path (no import specifier). Both scripts are in 01-13's
   `<files>` (`scripts/`), which prunes obsolete book/PDF tooling.
+
+- **`use-mobile` removed with no live importer; stale legacy tests now reference a deleted module (out of scope).**
+  `src/hooks/use-mobile.ts` had no live (non-test) importer in the retained game — the only
+  references were two stale legacy tests. 01-09 removed the hook (its `<files>` include
+  `src/hooks/`). Consequently the bounded typecheck now reports:
+  - `src/__tests__/hooks/use-mobile.test.ts:3` — `TS2307: Cannot find module '@/hooks/use-mobile'`
+  - `src/__tests__/components/injected-action-button.test.tsx:20` — `vi.mock("@/hooks/use-mobile", …)` (runtime only).
+  - **Owner:** `src/__tests__/**` is owned by 01-13, which retires tests of deleted modules.
+  - **Test-command implication for 01-02/01-06/01-07:** `npm test -- src/__tests__/hooks/use-mobile.test.ts`
+    (01-02's tracer verify line) and any full-suite run will fail until 01-13 removes the stale
+    test. `npx tsc --noEmit` likewise reports the missing-module error until 01-13 cleans it.
+    The retained kids suites (`src/__tests__/kids/*`) and the import-closure checker are unaffected.
+  - **Action:** leave the tests as-is in 01-09 (outside `<files>`); 01-13 removes them.
+
+- **`src/components/ui/tooltip` removed; stale legacy test references it (out of scope).**
+  `src/components/ui/tooltip.tsx` had no live importer in the retained game (only
+  `src/__tests__/components/bot-computer-badge.test.tsx` imported `TooltipProvider`). 01-09
+  removed it under its `src/components/ui/` `<files>` set, so the bounded typecheck reports
+  `TS2307: Cannot find module '@/components/ui/tooltip'` in that legacy test.
+  - **Owner:** `src/__tests__/**` is owned by 01-13. Other UI primitives removed here
+    (`masonry` et al.) were likewise referenced only from stale legacy tests / already-deleted
+    non-kids families.
+  - **Action:** leave as-is; 01-13 retires the stale tests.
