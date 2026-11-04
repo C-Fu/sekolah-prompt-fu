@@ -14,6 +14,7 @@ interface ErrorProps {
 export default function Error({ reset }: ErrorProps) {
   const router = useRouter();
   const t = useTranslations("serverError");
+  const tKids = useTranslations("kids.header");
 
   return (
     <div className="container flex flex-col items-center justify-center min-h-[60vh] py-12">
@@ -39,7 +40,7 @@ export default function Error({ reset }: ErrorProps) {
             {t("tryAgain")}
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/">
+            <Link href="/kids">
               <Home className="mr-2 h-4 w-4" />
               {t("goHome")}
             </Link>
@@ -56,14 +57,11 @@ export default function Error({ reset }: ErrorProps) {
             {t("helpfulLinks")}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-            <Link href="/prompts" className="text-primary hover:underline">
-              {t("browsePrompts")}
+            <Link href="/kids" className="text-primary hover:underline">
+              {tKids("home")}
             </Link>
-            <Link href="/categories" className="text-primary hover:underline">
-              {t("categories")}
-            </Link>
-            <Link href="/prompts/new" className="text-primary hover:underline">
-              {t("createPrompt")}
+            <Link href="/kids/map" className="text-primary hover:underline">
+              {tKids("map")}
             </Link>
           </div>
         </div>
