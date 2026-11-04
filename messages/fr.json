@@ -1542,8 +1542,8 @@
         "answer": "Bien que les modèles d'IA avancés puissent bien gérer les questions occasionnelles, les prompts deviennent critiques quand :\n\n• Vous utilisez l'IA via API dans des applications — vous n'avez souvent qu'une seule chance (\"one-shot prompting\"), sans dialogue aller-retour\n• Vous travaillez avec des modèles plus petits et économiques qui nécessitent des instructions plus précises\n• Vous construisez des systèmes de production où la cohérence et la fiabilité comptent\n\nLes prompts optimisés vous aident à obtenir de meilleurs résultats, économiser des tokens (et de l'argent), et créer des applications IA plus fiables."
       },
       "whatIsPromptschat": {
-        "question": "Qu'est-ce que prompts.chat ?",
-        "answer": "prompts.chat est une plateforme communautaire où les gens partagent, découvrent et collectent des prompts IA. Depuis plus de 4 ans, les utilisateurs partagent leurs techniques d'optimisation de prompts ici. La communauté s'entraide pour améliorer leurs prompts et apprendre de nouvelles approches pour travailler avec les systèmes d'IA."
+        "question": "Qu'est-ce que Sekolah Prompt-Fu ?",
+        "answer": "Sekolah Prompt-Fu est une plateforme communautaire où les gens partagent, découvrent et collectent des prompts IA. Depuis plus de 4 ans, les utilisateurs partagent leurs techniques d'optimisation de prompts ici. La communauté s'entraide pour améliorer leurs prompts et apprendre de nouvelles approches pour travailler avec les systèmes d'IA."
       },
       "howToUse": {
         "question": "Comment utiliser les prompts de cette plateforme ?",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "Puis-je utiliser ces prompts commercialement ?",
-        "answer": "Oui ! Tous les prompts sur prompts.chat sont publiés sous licence CC0 (Creative Commons Zero), ce qui signifie qu'ils sont dans le domaine public. Vous pouvez les utiliser, les modifier et les distribuer librement à n'importe quelle fin, y compris commerciale, sans attribution."
+        "answer": "Oui ! Tous les prompts sur Sekolah Prompt-Fu sont publiés sous licence CC0 (Creative Commons Zero), ce qui signifie qu'ils sont dans le domaine public. Vous pouvez les utiliser, les modifier et les distribuer librement à n'importe quelle fin, y compris commerciale, sans attribution."
       },
       "selfHost": {
         "question": "Puis-je auto-héberger cette plateforme ?",
-        "answer": "Absolument ! prompts.chat est entièrement open source. Vous pouvez déployer votre propre instance privée pour votre équipe ou organisation. Consultez notre documentation d'auto-hébergement pour les instructions de configuration."
+        "answer": "Absolument ! Sekolah Prompt-Fu est entièrement open source. Vous pouvez déployer votre propre instance privée pour votre équipe ou organisation. Consultez notre documentation d'auto-hébergement pour les instructions de configuration."
       },
       "verification": {
         "question": "Comment puis-je devenir un utilisateur vérifié ?",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "Téléchargez l'app prompts.chat pour iPhone, iPad et Mac",
+    "message": "Téléchargez l'app Sekolah Prompt-Fu pour iPhone, iPad et Mac",
     "messageShort": "Téléchargez l'app pour appareils Apple",
     "download": "Télécharger",
     "dismiss": "Fermer"
   },
   "about": {
-    "title": "À propos de prompts.chat",
+    "title": "À propos de Sekolah Prompt-Fu",
     "description": "L'histoire de la première bibliothèque de prompts IA, créée 2 semaines après l'annonce de ChatGPT.",
     "releasedOn": "5 décembre 2022",
     "storyTitle": "Notre Histoire",
     "goalTitle": "Notre Objectif",
-    "story1Rich": "prompts.chat est la visualisation web du dépôt <repoLink>Awesome ChatGPT Prompts</repoLink>. Cela a commencé comme un projet personnel de <authorLink>@f</authorLink> pour organiser les prompts ChatGPT, quand ChatGPT n'avait pas de fonction d'historique dans sa version initiale.",
+    "story1Rich": "Sekolah Prompt-Fu est la visualisation web du dépôt <repoLink>Awesome ChatGPT Prompts</repoLink>. Cela a commencé comme un projet personnel de <authorLink>@f</authorLink> pour organiser les prompts ChatGPT, quand ChatGPT n'avait pas de fonction d'historique dans sa version initiale.",
     "story2": "Le dépôt Awesome ChatGPT Prompts a été créé le 5 décembre 2022, seulement 2 semaines après l'annonce de ChatGPT au monde. Ce qui a commencé comme une solution simple est devenu la ressource incontournable pour des millions de passionnés d'IA.",
     "testimonialsRich": "Apprécié par les pionniers de l'IA, notamment les co-fondateurs d'OpenAI <gregLink>Greg Brockman</gregLink> et <wojciechLink>Wojciech Zaremba</wojciechLink>.",
     "openSource": "Entièrement gratuit et open source depuis le premier jour.",
@@ -2121,7 +2121,7 @@
     "metaTitle": "Guide de l'ingénierie des prompts : Le Livre Interactif du Prompting",
     "metaDescription": "Maîtrisez l'ingénierie des prompts IA avec ce guide interactif gratuit. Apprenez les prompts ChatGPT, le raisonnement chain-of-thought, le few-shot learning et les techniques avancées. 30+ chapitres avec des exemples réels.",
     "interactiveGuideBy": "Un Guide Interactif par",
-    "authorIntro": "Bonjour, je suis <author>Fatih Kadir Akın</author>, le curateur du populaire dépôt <repoLink>Awesome ChatGPT Prompts</repoLink> sur GitHub et de <siteName>prompts.chat</siteName>.",
+    "authorIntro": "Bonjour, je suis <author>Fatih Kadir Akın</author>, le curateur du populaire dépôt <repoLink>Awesome ChatGPT Prompts</repoLink> sur GitHub et de <siteName>Sekolah Prompt-Fu</siteName>.",
     "bookDescription": "Dans ce guide complet et interactif, vous découvrirez des stratégies expertes pour créer des prompts IA captivants qui génèrent des conversations efficaces. De la compréhension du fonctionnement des modèles IA à la maîtrise des techniques avancées comme le prompt chaining et les systèmes agentiques, ce livre vous fournit les outils nécessaires pour porter vos interactions IA au niveau supérieur.",
     "whatYouWillLearn": "Ce que vous apprendrez :",
     "highlights": {
@@ -2663,17 +2663,17 @@
   "seo": {
     "page": "Page {page}",
     "home": {
-      "title": "prompts.chat - Prompts gratuits pour ChatGPT, Claude et Gemini",
+      "title": "Sekolah Prompt-Fu - Prompts gratuits pour ChatGPT, Claude et Gemini",
       "description": "Bibliothèque de prompts IA gratuite et open source, ex-Awesome ChatGPT Prompts. Découvrez, copiez et partagez des milliers de prompts pour ChatGPT, Claude et Gemini."
     },
     "prompts": {
       "title": "Bibliothèque de prompts : prompts ChatGPT et IA gratuits",
-      "description": "Parcourez les derniers prompts gratuits de la communauté prompts.chat. Filtrez par catégorie, tag ou type, puis collez-les dans ChatGPT, Claude ou Gemini.",
+      "description": "Parcourez les derniers prompts gratuits de la communauté Sekolah Prompt-Fu. Filtrez par catégorie, tag ou type, puis collez-les dans ChatGPT, Claude ou Gemini.",
       "searchTitle": "Résultats de recherche pour « {query} »"
     },
     "discover": {
       "title": "Les meilleurs prompts IA : sélection et tendances",
-      "description": "Les prompts IA à la une, tendance et les plus votés par la communauté prompts.chat, avec chaque jour de nouveaux prompts ChatGPT, Claude, Gemini, image et vidéo.",
+      "description": "Les prompts IA à la une, tendance et les plus votés par la communauté Sekolah Prompt-Fu, avec chaque jour de nouveaux prompts ChatGPT, Claude, Gemini, image et vidéo.",
       "heading": "Découvrez les Prompts IA"
     },
     "categories": {
@@ -2684,7 +2684,7 @@
     "category": {
       "title": "Prompts {name} pour ChatGPT, Claude et Gemini",
       "description": "{description} Parcourez {count} prompts {name} gratuits pour ChatGPT, Claude, Gemini et d'autres outils d'IA.",
-      "fallbackDescription": "Parcourez {count} prompts {name} gratuits pour ChatGPT, Claude, Gemini et d'autres IA. Copiez, adaptez et partagez les prompts de la communauté prompts.chat.",
+      "fallbackDescription": "Parcourez {count} prompts {name} gratuits pour ChatGPT, Claude, Gemini et d'autres IA. Copiez, adaptez et partagez les prompts de la communauté Sekolah Prompt-Fu.",
       "heading": "Prompts {name}"
     },
     "tags": {
@@ -2693,12 +2693,12 @@
     },
     "tag": {
       "title": "Prompts {name}",
-      "description": "Parcourez {count} prompts IA gratuits tagués {name}. Utilisez-les avec ChatGPT, Claude, Gemini et d'autres outils d'IA, ou partagez les vôtres sur prompts.chat.",
+      "description": "Parcourez {count} prompts IA gratuits tagués {name}. Utilisez-les avec ChatGPT, Claude, Gemini et d'autres outils d'IA, ou partagez les vôtres sur Sekolah Prompt-Fu.",
       "heading": "Prompts {name}"
     },
     "skills": {
       "title": "Compétences d'agent : SKILL.md pour Claude Code et agents IA",
-      "description": "Compétences d'agent gratuites et open source (fichiers SKILL.md) pour Claude Code, Codex, Cursor et autres agents IA, enrichies par la communauté prompts.chat.",
+      "description": "Compétences d'agent gratuites et open source (fichiers SKILL.md) pour Claude Code, Codex, Cursor et autres agents IA, enrichies par la communauté Sekolah Prompt-Fu.",
       "heading": "Compétences d'Agent"
     },
     "workflows": {
@@ -2718,11 +2718,11 @@
     },
     "promptmasters": {
       "title": "Promptmasters : les meilleurs créateurs de prompts IA",
-      "description": "Découvrez les meilleurs prompt engineers de prompts.chat, classés selon les votes reçus par leurs prompts IA : classements global, mensuel et hebdomadaire."
+      "description": "Découvrez les meilleurs prompt engineers de Sekolah Prompt-Fu, classés selon les votes reçus par leurs prompts IA : classements global, mensuel et hebdomadaire."
     },
     "developers": {
       "title": "Outils dev : améliorateur de prompts, tokenizer et embeds",
-      "description": "Outils gratuits de prompts.chat : améliorez vos prompts avec l'IA, comptez les tokens, créez des widgets intégrables et écrivez vos prompts dans un éditeur type IDE."
+      "description": "Outils gratuits de Sekolah Prompt-Fu : améliorez vos prompts avec l'IA, comptez les tokens, créez des widgets intégrables et écrivez vos prompts dans un éditeur type IDE."
     },
     "howToWrite": {
       "title": "Comment écrire de bons prompts IA : conseils et exemples",
@@ -2737,25 +2737,25 @@
     },
     "apiDocs": {
       "title": "Documentation de l'API Prompts et du serveur MCP",
-      "description": "Recherchez et récupérez des prompts IA par programmation avec l'API gratuite et le serveur MCP de prompts.chat. Endpoints, paramètres et exemples prêts à copier."
+      "description": "Recherchez et récupérez des prompts IA par programmation avec l'API gratuite et le serveur MCP de Sekolah Prompt-Fu. Endpoints, paramètres et exemples prêts à copier."
     },
     "selfHosting": {
       "title": "Guide d'auto-hébergement",
-      "description": "Déployez votre propre instance privée de prompts.chat avec votre marque, vos thèmes et votre authentification. Gratuit, open source et prêt pour les équipes."
+      "description": "Déployez votre propre instance privée de Sekolah Prompt-Fu avec votre marque, vos thèmes et votre authentification. Gratuit, open source et prêt pour les équipes."
     },
     "privacy": {
       "title": "Politique de confidentialité",
-      "description": "Comment prompts.chat collecte, utilise et protège vos données."
+      "description": "Comment Sekolah Prompt-Fu collecte, utilise et protège vos données."
     },
     "terms": {
       "title": "Conditions d'utilisation",
-      "description": "Les conditions qui s'appliquent lorsque vous utilisez prompts.chat."
+      "description": "Les conditions qui s'appliquent lorsque vous utilisez Sekolah Prompt-Fu."
     },
     "profile": {
       "title": "{name} (@{username}) - Prompts IA",
-      "description": "Parcourez {count} prompts IA partagés par {name} (@{username}) sur prompts.chat, la bibliothèque de prompts gratuite et open source.",
-      "descriptionWithBots": "Parcourez {count} prompts IA et {botCount, plural, one {# bot IA} other {# bots IA}} partagés par {name} (@{username}) sur prompts.chat, la bibliothèque de prompts gratuite et open source.",
-      "descriptionBotsOnly": "Parcourez {botCount, plural, one {# bot IA} other {# bots IA}} partagés par {name} (@{username}) sur prompts.chat, la bibliothèque de prompts gratuite et open source."
+      "description": "Parcourez {count} prompts IA partagés par {name} (@{username}) sur Sekolah Prompt-Fu, la bibliothèque de prompts gratuite et open source.",
+      "descriptionWithBots": "Parcourez {count} prompts IA et {botCount, plural, one {# bot IA} other {# bots IA}} partagés par {name} (@{username}) sur Sekolah Prompt-Fu, la bibliothèque de prompts gratuite et open source.",
+      "descriptionBotsOnly": "Parcourez {botCount, plural, one {# bot IA} other {# bots IA}} partagés par {name} (@{username}) sur Sekolah Prompt-Fu, la bibliothèque de prompts gratuite et open source."
     },
     "bookChapter": {
       "title": "{chapter} - Guide de l'ingénierie des prompts"

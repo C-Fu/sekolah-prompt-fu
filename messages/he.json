@@ -1542,8 +1542,8 @@
         "answer": "בעוד שמודלים מתקדמים של AI יכולים להתמודד היטב עם שאלות יומיומיות, פרומפטים הופכים קריטיים כאשר:\n\n• משתמשים ב-AI דרך API באפליקציות — לעתים קרובות יש רק הזדמנות אחת (\"one-shot prompting\"), ללא דו-שיח הלוך ושוב\n• עובדים עם מודלים קטנים וחסכוניים שזקוקים להוראות מדויקות יותר\n• בונים מערכות ייצור שבהן עקביות ואמינות חשובות\n\nפרומפטים מותאמים עוזרים לכם לקבל תוצאות טובות יותר, לחסוך טוקנים (וכסף), וליצור אפליקציות AI אמינות יותר."
       },
       "whatIsPromptschat": {
-        "question": "מהו prompts.chat?",
-        "answer": "prompts.chat היא פלטפורמה מונעת קהילה שבה אנשים משתפים, מגלים ואוספים פרומפטים ל-AI. כבר יותר מ-4 שנים משתמשים משתפים כאן את טכניקות האופטימיזציה שלהם לפרומפטים. הקהילה עוזרת אחד לשני לשפר את הפרומפטים שלהם וללמוד גישות חדשות לעבודה עם מערכות AI."
+        "question": "מהו Sekolah Prompt-Fu?",
+        "answer": "Sekolah Prompt-Fu היא פלטפורמה מונעת קהילה שבה אנשים משתפים, מגלים ואוספים פרומפטים ל-AI. כבר יותר מ-4 שנים משתמשים משתפים כאן את טכניקות האופטימיזציה שלהם לפרומפטים. הקהילה עוזרת אחד לשני לשפר את הפרומפטים שלהם וללמוד גישות חדשות לעבודה עם מערכות AI."
       },
       "howToUse": {
         "question": "איך אני משתמש בפרומפטים מהפלטפורמה הזו?",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "האם אני יכול להשתמש בפרומפטים האלה מסחרית?",
-        "answer": "כן! כל הפרומפטים ב-prompts.chat מפורסמים תחת רישיון CC0 (Creative Commons Zero), מה שאומר שהם נחלת הכלל. אתם יכולים להשתמש בהם, לשנות אותם ולהפיץ אותם בחופשיות לכל מטרה, כולל שימוש מסחרי, ללא ייחוס."
+        "answer": "כן! כל הפרומפטים ב-Sekolah Prompt-Fu מפורסמים תחת רישיון CC0 (Creative Commons Zero), מה שאומר שהם נחלת הכלל. אתם יכולים להשתמש בהם, לשנות אותם ולהפיץ אותם בחופשיות לכל מטרה, כולל שימוש מסחרי, ללא ייחוס."
       },
       "selfHost": {
         "question": "האם אני יכול לארח את הפלטפורמה הזו בעצמי?",
-        "answer": "בהחלט! prompts.chat הוא קוד פתוח לחלוטין. אתם יכולים לפרוס מופע פרטי משלכם עבור הצוות או הארגון שלכם. עיינו בתיעוד האירוח העצמי להוראות ההגדרה."
+        "answer": "בהחלט! Sekolah Prompt-Fu הוא קוד פתוח לחלוטין. אתם יכולים לפרוס מופע פרטי משלכם עבור הצוות או הארגון שלכם. עיינו בתיעוד האירוח העצמי להוראות ההגדרה."
       },
       "verification": {
         "question": "איך אני יכול להפוך למשתמש מאומת?",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "הורד את אפליקציית prompts.chat ל-iPhone, iPad ו-Mac",
+    "message": "הורד את אפליקציית Sekolah Prompt-Fu ל-iPhone, iPad ו-Mac",
     "messageShort": "הורד את האפליקציה למכשירי Apple",
     "download": "הורדה",
     "dismiss": "סגור"
   },
   "about": {
-    "title": "אודות prompts.chat",
+    "title": "אודות Sekolah Prompt-Fu",
     "description": "הסיפור מאחורי ספריית פרומפטי ה-AI הראשונה, שנוצרה שבועיים אחרי הכרזת ChatGPT.",
     "releasedOn": "5 בדצמבר 2022",
     "storyTitle": "הסיפור שלנו",
     "goalTitle": "המטרה שלנו",
-    "story1Rich": "prompts.chat הוא הייצוג הוויזואלי של מאגר <repoLink>Awesome ChatGPT Prompts</repoLink>. זה התחיל כפרויקט אישי של <authorLink>@f</authorLink> לארגון פרומפטים של ChatGPT, כאשר ל-ChatGPT לא הייתה תכונת היסטוריה בגרסה הראשונית שלו.",
+    "story1Rich": "Sekolah Prompt-Fu הוא הייצוג הוויזואלי של מאגר <repoLink>Awesome ChatGPT Prompts</repoLink>. זה התחיל כפרויקט אישי של <authorLink>@f</authorLink> לארגון פרומפטים של ChatGPT, כאשר ל-ChatGPT לא הייתה תכונת היסטוריה בגרסה הראשונית שלו.",
     "story2": "מאגר Awesome ChatGPT Prompts נוצר ב-5 בדצמבר 2022, רק שבועיים אחרי ש-ChatGPT הוכרז לעולם. מה שהתחיל כפתרון פשוט הפך למשאב המוביל עבור מיליוני חובבי AI.",
     "testimonialsRich": "אהוב על ידי חלוצי ה-AI, כולל מייסדי OpenAI <gregLink>Greg Brockman</gregLink> ו-<wojciechLink>Wojciech Zaremba</wojciechLink>.",
     "openSource": "חינמי וקוד פתוח לחלוטין מהיום הראשון.",
@@ -2121,7 +2121,7 @@
     "metaTitle": "מדריך להנדסת פרומפטים: הספר האינטראקטיבי של Prompting",
     "metaDescription": "שלטו בהנדסת פרומפטים של AI עם המדריך האינטראקטיבי החינמי הזה. למדו פרומפטים ל-ChatGPT, שרשרת חשיבה, למידת few-shot וטכניקות מתקדמות. יותר מ-30 פרקים עם דוגמאות מהעולם האמיתי.",
     "interactiveGuideBy": "מדריך אינטראקטיבי מאת",
-    "authorIntro": "שלום, אני <author>פאטיח קאדיר אקין</author>, אוצר המאגר הפופולרי <repoLink>Awesome ChatGPT Prompts</repoLink> ב-GitHub ו-<siteName>prompts.chat</siteName>.",
+    "authorIntro": "שלום, אני <author>פאטיח קאדיר אקין</author>, אוצר המאגר הפופולרי <repoLink>Awesome ChatGPT Prompts</repoLink> ב-GitHub ו-<siteName>Sekolah Prompt-Fu</siteName>.",
     "bookDescription": "במדריך המקיף והאינטראקטיבי הזה, תגלו אסטרטגיות מומחה ליצירת פרומפטים משכנעים ל-AI שמייצרים שיחות מעניינות ויעילות. מהבנת אופן הפעולה של מודלי AI ועד שליטה בטכניקות מתקדמות כמו שרשור פרומפטים ומערכות סוכנים, הספר הזה נותן לכם את הכלים לשדרג את האינטראקציות שלכם עם AI.",
     "whatYouWillLearn": "מה תלמדו:",
     "highlights": {
@@ -2644,17 +2644,17 @@
   "seo": {
     "page": "עמוד {page}",
     "home": {
-      "title": "prompts.chat - פרומפטים חינמיים ל-ChatGPT, Claude ו-Gemini",
+      "title": "Sekolah Prompt-Fu - פרומפטים חינמיים ל-ChatGPT, Claude ו-Gemini",
       "description": "ספריית פרומפטים חינמית בקוד פתוח ל-AI, לשעבר Awesome ChatGPT Prompts. גלו, העתיקו ושתפו אלפי פרומפטים ל-ChatGPT, Claude, Gemini ועוד."
     },
     "prompts": {
       "title": "ספריית פרומפטים: פרומפטים חינמיים ל-ChatGPT ו-AI",
-      "description": "הפרומפטים החינמיים החדשים ביותר מקהילת prompts.chat. סננו לפי קטגוריה, תגית או סוג, והעתיקו אותם ל-ChatGPT, Claude, Gemini ועוד.",
+      "description": "הפרומפטים החינמיים החדשים ביותר מקהילת Sekolah Prompt-Fu. סננו לפי קטגוריה, תגית או סוג, והעתיקו אותם ל-ChatGPT, Claude, Gemini ועוד.",
       "searchTitle": "תוצאות חיפוש עבור \"{query}\""
     },
     "discover": {
       "title": "פרומפטי ה-AI הטובים ביותר: מומלצים וטרנדיים",
-      "description": "פרומפטים מומלצים, טרנדיים ומדורגים ביותר לבינה מלאכותית שבחרה קהילת prompts.chat, עם פרומפטים חדשים מדי יום ל-ChatGPT, Claude, Gemini, תמונות ווידאו.",
+      "description": "פרומפטים מומלצים, טרנדיים ומדורגים ביותר לבינה מלאכותית שבחרה קהילת Sekolah Prompt-Fu, עם פרומפטים חדשים מדי יום ל-ChatGPT, Claude, Gemini, תמונות ווידאו.",
       "heading": "גלו פרומפטים ל-AI"
     },
     "categories": {
@@ -2665,7 +2665,7 @@
     "category": {
       "title": "פרומפטים בנושא {name} ל-ChatGPT, Claude ו-Gemini",
       "description": "{description} עיינו ב-{count} פרומפטים חינמיים בנושא {name} ל-ChatGPT, Claude, Gemini ולכלי AI נוספים.",
-      "fallbackDescription": "עיינו ב-{count} פרומפטים חינמיים בנושא {name} ל-ChatGPT, Claude, Gemini ולכלי AI נוספים. העתיקו, התאימו ושתפו פרומפטים מקהילת prompts.chat.",
+      "fallbackDescription": "עיינו ב-{count} פרומפטים חינמיים בנושא {name} ל-ChatGPT, Claude, Gemini ולכלי AI נוספים. העתיקו, התאימו ושתפו פרומפטים מקהילת Sekolah Prompt-Fu.",
       "heading": "פרומפטים בנושא {name}"
     },
     "tags": {
@@ -2674,12 +2674,12 @@
     },
     "tag": {
       "title": "פרומפטים בנושא {name}",
-      "description": "עיינו ב-{count} פרומפטים חינמיים ל-AI עם התגית {name}. השתמשו בהם ב-ChatGPT, Claude, Gemini ובכלי AI נוספים, או שתפו פרומפטים משלכם ב-prompts.chat.",
+      "description": "עיינו ב-{count} פרומפטים חינמיים ל-AI עם התגית {name}. השתמשו בהם ב-ChatGPT, Claude, Gemini ובכלי AI נוספים, או שתפו פרומפטים משלכם ב-Sekolah Prompt-Fu.",
       "heading": "פרומפטים בנושא {name}"
     },
     "skills": {
       "title": "מיומנויות סוכן: קובצי SKILL.md ל-Claude Code ולסוכני AI",
-      "description": "מיומנויות סוכן חינמיות בקוד פתוח (קובצי SKILL.md) ל-Claude Code, Codex, Cursor ולסוכני AI נוספים, שקהילת prompts.chat משתפת ומשפרת.",
+      "description": "מיומנויות סוכן חינמיות בקוד פתוח (קובצי SKILL.md) ל-Claude Code, Codex, Cursor ולסוכני AI נוספים, שקהילת Sekolah Prompt-Fu משתפת ומשפרת.",
       "heading": "מיומנויות סוכן"
     },
     "workflows": {
@@ -2699,11 +2699,11 @@
     },
     "promptmasters": {
       "title": "מאסטרים: יוצרי פרומפטי ה-AI המובילים",
-      "description": "הכירו את מהנדסי הפרומפטים המובילים ב-prompts.chat, מדורגים לפי הדירוגים שקיבלו הפרומפטים שלהם. צפו בטבלאות המובילים של כל הזמנים, החודש והשבוע."
+      "description": "הכירו את מהנדסי הפרומפטים המובילים ב-Sekolah Prompt-Fu, מדורגים לפי הדירוגים שקיבלו הפרומפטים שלהם. צפו בטבלאות המובילים של כל הזמנים, החודש והשבוע."
     },
     "developers": {
       "title": "כלים למפתחים: שיפור פרומפטים, טוקנייזר והטמעה",
-      "description": "כלי פיתוח חינמיים מ-prompts.chat: שפרו פרומפטים עם AI, ספרו טוקנים, עצבו ווידג'טים להטמעה ובנו פרומפטים בעורך בסגנון IDE."
+      "description": "כלי פיתוח חינמיים מ-Sekolah Prompt-Fu: שפרו פרומפטים עם AI, ספרו טוקנים, עצבו ווידג'טים להטמעה ובנו פרומפטים בעורך בסגנון IDE."
     },
     "howToWrite": {
       "title": "איך לכתוב פרומפטים יעילים ל-AI: טיפים ודוגמאות",
@@ -2718,25 +2718,25 @@
     },
     "apiDocs": {
       "title": "תיעוד Prompts API ושרת MCP",
-      "description": "חפשו ושלפו פרומפטים ל-AI באופן תכנותי עם ה-API החינמי ושרת ה-MCP של prompts.chat. נקודות קצה, פרמטרים ודוגמאות מוכנות להעתקה."
+      "description": "חפשו ושלפו פרומפטים ל-AI באופן תכנותי עם ה-API החינמי ושרת ה-MCP של Sekolah Prompt-Fu. נקודות קצה, פרמטרים ודוגמאות מוכנות להעתקה."
     },
     "selfHosting": {
       "title": "מדריך לאירוח עצמי",
-      "description": "הקימו מופע פרטי משלכם של prompts.chat עם מיתוג, ערכות נושא ואימות משתמשים בהתאמה אישית. חינמי, בקוד פתוח ומוכן לעבודת צוות."
+      "description": "הקימו מופע פרטי משלכם של Sekolah Prompt-Fu עם מיתוג, ערכות נושא ואימות משתמשים בהתאמה אישית. חינמי, בקוד פתוח ומוכן לעבודת צוות."
     },
     "privacy": {
       "title": "מדיניות פרטיות",
-      "description": "איך prompts.chat אוסף, משתמש ומגן על המידע שלכם."
+      "description": "איך Sekolah Prompt-Fu אוסף, משתמש ומגן על המידע שלכם."
     },
     "terms": {
       "title": "תנאי שימוש",
-      "description": "התנאים החלים על השימוש ב-prompts.chat."
+      "description": "התנאים החלים על השימוש ב-Sekolah Prompt-Fu."
     },
     "profile": {
       "title": "{name} (@{username}) - פרומפטים ל-AI",
-      "description": "עיינו ב-{count} פרומפטים ל-AI מאת {name} (@{username}) ב-prompts.chat, ספריית הפרומפטים החינמית בקוד פתוח.",
-      "descriptionWithBots": "עיינו ב-{count} פרומפטים ו-{botCount, plural, one {בוט אחד} other {# בוטים}} ל-AI מאת {name} (@{username}) ב-prompts.chat, ספריית הפרומפטים החינמית בקוד פתוח.",
-      "descriptionBotsOnly": "עיינו ב-{botCount, plural, one {בוט אחד} other {# בוטים}} ל-AI מאת {name} (@{username}) ב-prompts.chat, ספריית הפרומפטים החינמית בקוד פתוח."
+      "description": "עיינו ב-{count} פרומפטים ל-AI מאת {name} (@{username}) ב-Sekolah Prompt-Fu, ספריית הפרומפטים החינמית בקוד פתוח.",
+      "descriptionWithBots": "עיינו ב-{count} פרומפטים ו-{botCount, plural, one {בוט אחד} other {# בוטים}} ל-AI מאת {name} (@{username}) ב-Sekolah Prompt-Fu, ספריית הפרומפטים החינמית בקוד פתוח.",
+      "descriptionBotsOnly": "עיינו ב-{botCount, plural, one {בוט אחד} other {# בוטים}} ל-AI מאת {name} (@{username}) ב-Sekolah Prompt-Fu, ספריית הפרומפטים החינמית בקוד פתוח."
     },
     "bookChapter": {
       "title": "{chapter} - מדריך להנדסת פרומפטים"

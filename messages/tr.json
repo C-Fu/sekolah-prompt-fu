@@ -1542,8 +1542,8 @@
         "answer": "Gelişmiş yapay zeka modelleri günlük soruları iyi karşılayabilirken, promptlar şu durumlarda kritik hale gelir:\n\n• Uygulamalarda API üzerinden yapay zeka kullanırken — genellikle tek şansınız vardır (\"one-shot prompting\"), karşılıklı diyalog yoktur\n• Daha hassas talimatlar gerektiren küçük, ekonomik modellerle çalışırken\n• Tutarlılık ve güvenilirliğin önemli olduğu üretim sistemleri oluştururken\n\nOptimize edilmiş promptlar daha iyi sonuçlar almanıza, token (ve para) tasarrufu yapmanıza ve daha güvenilir yapay zeka destekli uygulamalar oluşturmanıza yardımcı olur."
       },
       "whatIsPromptschat": {
-        "question": "prompts.chat nedir?",
-        "answer": "prompts.chat, insanların yapay zeka promptlarını paylaştığı, keşfettiği ve topladığı topluluk odaklı bir platformdur. 4 yılı aşkın süredir kullanıcılar prompt optimizasyon tekniklerini burada paylaşmaktadır. Topluluk, promptlarını geliştirmek ve yapay zeka sistemleriyle çalışmanın yeni yaklaşımlarını öğrenmek için birbirine yardımcı olur."
+        "question": "Sekolah Prompt-Fu nedir?",
+        "answer": "Sekolah Prompt-Fu, insanların yapay zeka promptlarını paylaştığı, keşfettiği ve topladığı topluluk odaklı bir platformdur. 4 yılı aşkın süredir kullanıcılar prompt optimizasyon tekniklerini burada paylaşmaktadır. Topluluk, promptlarını geliştirmek ve yapay zeka sistemleriyle çalışmanın yeni yaklaşımlarını öğrenmek için birbirine yardımcı olur."
       },
       "howToUse": {
         "question": "Bu platformdaki promptları nasıl kullanırım?",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "Bu promptları ticari olarak kullanabilir miyim?",
-        "answer": "Evet! prompts.chat'teki tüm promptlar CC0 (Creative Commons Zero) lisansı altında yayınlanmıştır, yani kamu malıdır. Ticari kullanım dahil herhangi bir amaç için atıf yapmadan özgürce kullanabilir, değiştirebilir ve dağıtabilirsiniz."
+        "answer": "Evet! Sekolah Prompt-Fu'teki tüm promptlar CC0 (Creative Commons Zero) lisansı altında yayınlanmıştır, yani kamu malıdır. Ticari kullanım dahil herhangi bir amaç için atıf yapmadan özgürce kullanabilir, değiştirebilir ve dağıtabilirsiniz."
       },
       "selfHost": {
         "question": "Bu platformu kendi sunucumda barındırabilir miyim?",
-        "answer": "Kesinlikle! prompts.chat tamamen açık kaynaklıdır. Ekibiniz veya kuruluşunuz için kendi özel örneğinizi dağıtabilirsiniz. Kurulum talimatları için self-hosting dokümantasyonumuza göz atın."
+        "answer": "Kesinlikle! Sekolah Prompt-Fu tamamen açık kaynaklıdır. Ekibiniz veya kuruluşunuz için kendi özel örneğinizi dağıtabilirsiniz. Kurulum talimatları için self-hosting dokümantasyonumuza göz atın."
       },
       "verification": {
         "question": "Doğrulanmış kullanıcı nasıl olabilirim?",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "iPhone, iPad ve Mac için prompts.chat uygulamasını indirin",
+    "message": "iPhone, iPad ve Mac için Sekolah Prompt-Fu uygulamasını indirin",
     "messageShort": "Apple cihazlar için uygulamayı indirin",
     "download": "İndir",
     "dismiss": "Kapat"
   },
   "about": {
-    "title": "prompts.chat Hakkında",
+    "title": "Sekolah Prompt-Fu Hakkında",
     "description": "ChatGPT duyurulduktan 2 hafta sonra oluşturulan ilk yapay zeka prompt kütüphanesinin hikayesi.",
     "releasedOn": "5 Aralık 2022",
     "storyTitle": "Hikayemiz",
     "goalTitle": "Hedefimiz",
-    "story1Rich": "prompts.chat, <repoLink>Awesome ChatGPT Prompts</repoLink> deposunun web görselleştirmesidir. ChatGPT'nin ilk sürümünde geçmiş özelliği yokken, <authorLink>@f</authorLink>'in ChatGPT promptlarını bir yerde düzenli tutmak için başlattığı kişisel bir proje olarak başladı.",
+    "story1Rich": "Sekolah Prompt-Fu, <repoLink>Awesome ChatGPT Prompts</repoLink> deposunun web görselleştirmesidir. ChatGPT'nin ilk sürümünde geçmiş özelliği yokken, <authorLink>@f</authorLink>'in ChatGPT promptlarını bir yerde düzenli tutmak için başlattığı kişisel bir proje olarak başladı.",
     "story2": "Awesome ChatGPT Prompts reposu, 5 Aralık 2022'de, ChatGPT dünyaya ilk kez duyurulduktan sadece 2 hafta sonra oluşturuldu. Basit bir çözüm olarak başlayan şey, milyonlarca yapay zeka meraklısı için başvuru kaynağı haline geldi.",
     "testimonialsRich": "<gregLink>Greg Brockman</gregLink> ve <wojciechLink>Wojciech Zaremba</wojciechLink> gibi OpenAI'ın kurucu ortaklarının da dahil olduğu yapay zeka öncüleri tarafından sevildi.",
     "openSource": "İlk günden beri tamamen ücretsiz ve açık kaynak.",
@@ -2121,7 +2121,7 @@
     "metaTitle": "Prompt Mühendisliği Rehberi: İnteraktif Prompt Yazma Kitabı",
     "metaDescription": "Bu ücretsiz, interaktif rehber ile AI prompt mühendisliğinde ustalaşın. ChatGPT promptları, düşünce zinciri muhakemesi, az örnekli öğrenme ve gelişmiş teknikleri öğrenin. Gerçek örneklerle 30+ bölüm.",
     "interactiveGuideBy": "İnteraktif Rehber - Yazar:",
-    "authorIntro": "Merhaba, ben <author>Fatih Kadir Akın</author>. GitHub'daki popüler <repoLink>Awesome ChatGPT Prompts</repoLink> deposunun ve <siteName>prompts.chat</siteName>'in küratörüyüm.",
+    "authorIntro": "Merhaba, ben <author>Fatih Kadir Akın</author>. GitHub'daki popüler <repoLink>Awesome ChatGPT Prompts</repoLink> deposunun ve <siteName>Sekolah Prompt-Fu</siteName>'in küratörüyüm.",
     "bookDescription": "Bu kapsamlı ve interaktif rehberde, ilgi çekici ve etkili sohbetler sağlayan çarpıcı AI promptları oluşturmak için uzman stratejilerini keşfedeceksiniz. AI modellerinin nasıl çalıştığını anlamaktan prompt zincirleme ve ajantik sistemler gibi gelişmiş tekniklerde ustalaşmaya kadar, bu kitap AI etkileşimlerinizi bir üst seviyeye taşımak için ihtiyacınız olan araçları sağlar.",
     "whatYouWillLearn": "Neler öğreneceksiniz:",
     "highlights": {
@@ -2659,17 +2659,17 @@
   "seo": {
     "page": "Sayfa {page}",
     "home": {
-      "title": "prompts.chat - Ücretsiz AI Promptları: ChatGPT, Claude, Gemini",
+      "title": "Sekolah Prompt-Fu - Ücretsiz AI Promptları: ChatGPT, Claude, Gemini",
       "description": "Eski adıyla Awesome ChatGPT Prompts olan ücretsiz, açık kaynak yapay zeka prompt kütüphanesi. ChatGPT, Claude ve Gemini için binlerce promptu keşfedin ve paylaşın."
     },
     "prompts": {
       "title": "Prompt Kütüphanesi: Ücretsiz ChatGPT ve AI Promptları",
-      "description": "prompts.chat topluluğunun en yeni ücretsiz promptlarına göz atın. Kategori, etiket veya türe göre filtreleyin; ChatGPT, Claude ve Gemini'ye kopyalayıp yapıştırın.",
+      "description": "Sekolah Prompt-Fu topluluğunun en yeni ücretsiz promptlarına göz atın. Kategori, etiket veya türe göre filtreleyin; ChatGPT, Claude ve Gemini'ye kopyalayıp yapıştırın.",
       "searchTitle": "“{query}” için arama sonuçları"
     },
     "discover": {
       "title": "En İyi AI Promptlarını Keşfedin: Öne Çıkanlar ve Trendler",
-      "description": "prompts.chat topluluğunun seçtiği öne çıkan, trend ve en çok oy alan AI promptları. Her gün yeni ChatGPT, Claude, Gemini, görsel ve video promptları eklenir.",
+      "description": "Sekolah Prompt-Fu topluluğunun seçtiği öne çıkan, trend ve en çok oy alan AI promptları. Her gün yeni ChatGPT, Claude, Gemini, görsel ve video promptları eklenir.",
       "heading": "AI Promptlarını Keşfedin"
     },
     "categories": {
@@ -2680,7 +2680,7 @@
     "category": {
       "title": "ChatGPT, Claude ve Gemini için {name} Promptları",
       "description": "{description} ChatGPT, Claude, Gemini ve diğer yapay zeka araçları için {count} ücretsiz {name} promptuna göz atın.",
-      "fallbackDescription": "ChatGPT, Claude, Gemini ve diğer AI araçları için {count} ücretsiz {name} promptuna göz atın. prompts.chat topluluğundan promptları kopyalayın, uyarlayın ve paylaşın.",
+      "fallbackDescription": "ChatGPT, Claude, Gemini ve diğer AI araçları için {count} ücretsiz {name} promptuna göz atın. Sekolah Prompt-Fu topluluğundan promptları kopyalayın, uyarlayın ve paylaşın.",
       "heading": "{name} Promptları"
     },
     "tags": {
@@ -2689,12 +2689,12 @@
     },
     "tag": {
       "title": "{name} Promptları",
-      "description": "{name} etiketli {count} ücretsiz AI promptuna göz atın. ChatGPT, Claude, Gemini ve diğer araçlarla kullanın ya da kendi promptlarınızı prompts.chat'te paylaşın.",
+      "description": "{name} etiketli {count} ücretsiz AI promptuna göz atın. ChatGPT, Claude, Gemini ve diğer araçlarla kullanın ya da kendi promptlarınızı Sekolah Prompt-Fu'te paylaşın.",
       "heading": "{name} Promptları"
     },
     "skills": {
       "title": "Ajan Yetenekleri: Claude Code ve AI Ajanları için SKILL.md",
-      "description": "Claude Code, Codex, Cursor ve diğer AI ajanları için ücretsiz, açık kaynak ajan yetenekleri (SKILL.md dosyaları). prompts.chat topluluğu paylaşıyor ve geliştiriyor.",
+      "description": "Claude Code, Codex, Cursor ve diğer AI ajanları için ücretsiz, açık kaynak ajan yetenekleri (SKILL.md dosyaları). Sekolah Prompt-Fu topluluğu paylaşıyor ve geliştiriyor.",
       "heading": "Ajan Yetenekleri"
     },
     "workflows": {
@@ -2714,11 +2714,11 @@
     },
     "promptmasters": {
       "title": "Promptmasters: En İyi AI Prompt Yazarları",
-      "description": "AI promptlarının aldığı oylara göre sıralanan, prompts.chat'in en iyi prompt mühendisleriyle tanışın. Tüm zamanlar, aylık ve haftalık sıralamaları görün."
+      "description": "AI promptlarının aldığı oylara göre sıralanan, Sekolah Prompt-Fu'in en iyi prompt mühendisleriyle tanışın. Tüm zamanlar, aylık ve haftalık sıralamaları görün."
     },
     "developers": {
       "title": "Geliştirici Araçları: Prompt Geliştirici, Tokenizer ve Embed",
-      "description": "prompts.chat'in ücretsiz geliştirici araçları: promptları AI ile iyileştirin, token sayın, gömülebilir widget'lar tasarlayın ve IDE tarzı editörde prompt yazın."
+      "description": "Sekolah Prompt-Fu'in ücretsiz geliştirici araçları: promptları AI ile iyileştirin, token sayın, gömülebilir widget'lar tasarlayın ve IDE tarzı editörde prompt yazın."
     },
     "howToWrite": {
       "title": "Etkili AI Promptları Nasıl Yazılır: İpuçları ve Örnekler",
@@ -2733,25 +2733,25 @@
     },
     "apiDocs": {
       "title": "Prompts API ve MCP Sunucusu Dokümantasyonu",
-      "description": "Ücretsiz prompts.chat API'si ve MCP sunucusuyla yapay zeka promptlarını programatik olarak arayın ve çekin. Uç noktalar, parametreler ve kopyalamaya hazır örnekler."
+      "description": "Ücretsiz Sekolah Prompt-Fu API'si ve MCP sunucusuyla yapay zeka promptlarını programatik olarak arayın ve çekin. Uç noktalar, parametreler ve kopyalamaya hazır örnekler."
     },
     "selfHosting": {
       "title": "Kendi Sunucunuzda Barındırma Rehberi",
-      "description": "Özel markalama, temalar ve kimlik doğrulama ile kendi prompts.chat kurulumunuzu yayına alın. Ücretsiz, açık kaynak ve ekipler için hazır."
+      "description": "Özel markalama, temalar ve kimlik doğrulama ile kendi Sekolah Prompt-Fu kurulumunuzu yayına alın. Ücretsiz, açık kaynak ve ekipler için hazır."
     },
     "privacy": {
       "title": "Gizlilik Politikası",
-      "description": "prompts.chat'in verilerinizi nasıl topladığı, kullandığı ve koruduğu hakkında bilgi."
+      "description": "Sekolah Prompt-Fu'in verilerinizi nasıl topladığı, kullandığı ve koruduğu hakkında bilgi."
     },
     "terms": {
       "title": "Kullanım Koşulları",
-      "description": "prompts.chat'i kullanırken geçerli olan koşullar."
+      "description": "Sekolah Prompt-Fu'i kullanırken geçerli olan koşullar."
     },
     "profile": {
       "title": "{name} (@{username}) - AI Promptları",
-      "description": "{name} (@{username}) tarafından ücretsiz ve açık kaynak prompt kütüphanesi prompts.chat'te paylaşılan {count} yapay zeka promptuna göz atın.",
-      "descriptionWithBots": "{name} (@{username}) tarafından ücretsiz ve açık kaynak prompt kütüphanesi prompts.chat'te paylaşılan {count} yapay zeka promptuna ve {botCount} yapay zeka botuna göz atın.",
-      "descriptionBotsOnly": "{name} (@{username}) tarafından ücretsiz ve açık kaynak prompt kütüphanesi prompts.chat'te paylaşılan {botCount} yapay zeka botuna göz atın."
+      "description": "{name} (@{username}) tarafından ücretsiz ve açık kaynak prompt kütüphanesi Sekolah Prompt-Fu'te paylaşılan {count} yapay zeka promptuna göz atın.",
+      "descriptionWithBots": "{name} (@{username}) tarafından ücretsiz ve açık kaynak prompt kütüphanesi Sekolah Prompt-Fu'te paylaşılan {count} yapay zeka promptuna ve {botCount} yapay zeka botuna göz atın.",
+      "descriptionBotsOnly": "{name} (@{username}) tarafından ücretsiz ve açık kaynak prompt kütüphanesi Sekolah Prompt-Fu'te paylaşılan {botCount} yapay zeka botuna göz atın."
     },
     "bookChapter": {
       "title": "{chapter} - Prompt Mühendisliği Rehberi"

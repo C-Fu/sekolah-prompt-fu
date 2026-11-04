@@ -1542,8 +1542,8 @@
         "answer": "高度なAIモデルはカジュアルな質問をうまく処理できますが、プロンプトは以下の場合に重要になります：\n\n• アプリケーションでAPIを介してAIを使用する場合 — 多くの場合、一発勝負（「ワンショットプロンプティング」）で、やり取りの対話がない\n• より正確な指示が必要な小型で経済的なモデルで作業する場合\n• 一貫性と信頼性が重要な本番システムを構築する場合\n\n最適化されたプロンプトは、より良い結果を得て、トークン（とお金）を節約し、より信頼性の高いAI搭載アプリケーションを作成するのに役立ちます。"
       },
       "whatIsPromptschat": {
-        "question": "prompts.chatとは何ですか？",
-        "answer": "prompts.chatは、人々がAIプロンプトを共有、発見、収集するコミュニティ主導のプラットフォームです。4年以上にわたり、ユーザーはここでプロンプト最適化のテクニックを共有してきました。コミュニティはお互いにプロンプトを改善し、AIシステムとの作業の新しいアプローチを学ぶのを助け合っています。"
+        "question": "Sekolah Prompt-Fuとは何ですか？",
+        "answer": "Sekolah Prompt-Fuは、人々がAIプロンプトを共有、発見、収集するコミュニティ主導のプラットフォームです。4年以上にわたり、ユーザーはここでプロンプト最適化のテクニックを共有してきました。コミュニティはお互いにプロンプトを改善し、AIシステムとの作業の新しいアプローチを学ぶのを助け合っています。"
       },
       "howToUse": {
         "question": "このプラットフォームのプロンプトをどのように使用しますか？",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "これらのプロンプトを商用利用できますか？",
-        "answer": "はい！prompts.chat上のすべてのプロンプトはCC0（Creative Commons Zero）ライセンスの下でリリースされており、パブリックドメインに属します。帰属表示なしで、商用利用を含むあらゆる目的で自由に使用、変更、配布できます。"
+        "answer": "はい！Sekolah Prompt-Fu上のすべてのプロンプトはCC0（Creative Commons Zero）ライセンスの下でリリースされており、パブリックドメインに属します。帰属表示なしで、商用利用を含むあらゆる目的で自由に使用、変更、配布できます。"
       },
       "selfHost": {
         "question": "このプラットフォームをセルフホストできますか？",
-        "answer": "もちろんです！prompts.chatは完全にオープンソースです。チームや組織のために独自のプライベートインスタンスをデプロイできます。セットアップ手順については、セルフホスティングのドキュメントをご確認ください。"
+        "answer": "もちろんです！Sekolah Prompt-Fuは完全にオープンソースです。チームや組織のために独自のプライベートインスタンスをデプロイできます。セットアップ手順については、セルフホスティングのドキュメントをご確認ください。"
       },
       "verification": {
         "question": "認証済みユーザーになるにはどうすればいいですか？",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "iPhone、iPad、Mac用のprompts.chatアプリを入手",
+    "message": "iPhone、iPad、Mac用のSekolah Prompt-Fuアプリを入手",
     "messageShort": "Appleデバイス用アプリを入手",
     "download": "ダウンロード",
     "dismiss": "閉じる"
   },
   "about": {
-    "title": "prompts.chatについて",
+    "title": "Sekolah Prompt-Fuについて",
     "description": "ChatGPT発表から2週間後に作られた、初のAIプロンプトライブラリの物語。",
     "releasedOn": "2022年12月5日",
     "storyTitle": "私たちの物語",
     "goalTitle": "私たちの目標",
-    "story1Rich": "prompts.chatは<repoLink>Awesome ChatGPT Prompts</repoLink>リポジトリのウェブ版です。ChatGPTの初期バージョンに履歴機能がなかった頃、<authorLink>@f</authorLink>がプロンプトを整理するために始めた個人プロジェクトでした。",
+    "story1Rich": "Sekolah Prompt-Fuは<repoLink>Awesome ChatGPT Prompts</repoLink>リポジトリのウェブ版です。ChatGPTの初期バージョンに履歴機能がなかった頃、<authorLink>@f</authorLink>がプロンプトを整理するために始めた個人プロジェクトでした。",
     "story2": "Awesome ChatGPT Promptsリポジトリは2022年12月5日、ChatGPTが世界に発表されてからわずか2週間後に作成されました。シンプルな解決策として始まったものが、数百万のAI愛好家のための主要なリソースとなりました。",
     "testimonialsRich": "AIパイオニアから愛されています。OpenAI共同創設者の<gregLink>Greg Brockman</gregLink>と<wojciechLink>Wojciech Zaremba</wojciechLink>も含まれます。",
     "openSource": "初日から完全に無料でオープンソース。",
@@ -2121,7 +2121,7 @@
     "metaTitle": "プロンプトエンジニアリングガイド：インタラクティブ・プロンプティングブック",
     "metaDescription": "この無料インタラクティブガイドでAIプロンプトエンジニアリングをマスターしましょう。ChatGPTプロンプト、Chain-of-Thought推論、Few-Shot学習、高度なテクニックを学べます。実例付き30以上のチャプター。",
     "interactiveGuideBy": "インタラクティブガイド by",
-    "authorIntro": "こんにちは、<author>Fatih Kadir Akın</author>です。GitHubで人気の<repoLink>Awesome ChatGPT Prompts</repoLink>リポジトリと<siteName>prompts.chat</siteName>のキュレーターです。",
+    "authorIntro": "こんにちは、<author>Fatih Kadir Akın</author>です。GitHubで人気の<repoLink>Awesome ChatGPT Prompts</repoLink>リポジトリと<siteName>Sekolah Prompt-Fu</siteName>のキュレーターです。",
     "bookDescription": "この包括的でインタラクティブなガイドでは、魅力的で効果的な会話を生み出す説得力のあるAIプロンプトを作成するための専門家の戦略を発見できます。AIモデルの仕組みの理解から、プロンプトチェーニングやエージェントシステムなどの高度なテクニックの習得まで、この本はAIインタラクションを次のレベルに引き上げるために必要なツールを提供します。",
     "whatYouWillLearn": "学べること：",
     "highlights": {
@@ -2648,17 +2648,17 @@
   "seo": {
     "page": "{page}ページ目",
     "home": {
-      "title": "prompts.chat - ChatGPT・Claude・Gemini向け無料AIプロンプト集",
+      "title": "Sekolah Prompt-Fu - ChatGPT・Claude・Gemini向け無料AIプロンプト集",
       "description": "旧Awesome ChatGPT Promptsの無料オープンソースAIプロンプトライブラリ。ChatGPT、Claude、Geminiなどで使える数千件のプロンプトを見つけて、コピー・共有できます。"
     },
     "prompts": {
       "title": "プロンプトライブラリ：無料のChatGPT・AIプロンプト",
-      "description": "prompts.chatコミュニティの最新の無料プロンプトを一覧で。カテゴリー・タグ・種類で絞り込み、ChatGPT、Claude、Geminiなどにコピー＆ペーストして使えます。",
+      "description": "Sekolah Prompt-Fuコミュニティの最新の無料プロンプトを一覧で。カテゴリー・タグ・種類で絞り込み、ChatGPT、Claude、Geminiなどにコピー＆ペーストして使えます。",
       "searchTitle": "「{query}」の検索結果"
     },
     "discover": {
       "title": "おすすめAIプロンプト：注目・トレンド・人気",
-      "description": "prompts.chatコミュニティが選んだ注目・トレンド・高評価のAIプロンプト。ChatGPT、Claude、Gemini、画像・動画生成の新しいプロンプトを毎日更新しています。",
+      "description": "Sekolah Prompt-Fuコミュニティが選んだ注目・トレンド・高評価のAIプロンプト。ChatGPT、Claude、Gemini、画像・動画生成の新しいプロンプトを毎日更新しています。",
       "heading": "AIプロンプトを探す"
     },
     "categories": {
@@ -2669,7 +2669,7 @@
     "category": {
       "title": "{name}のプロンプト集：ChatGPT・Claude・Gemini対応",
       "description": "{description} ChatGPT、Claude、GeminiなどのAIツールで使える{name}の無料プロンプトを{count}件掲載しています。",
-      "fallbackDescription": "ChatGPT、Claude、GeminiなどのAIツールで使える{name}の無料プロンプトを{count}件掲載。prompts.chatコミュニティのプロンプトをコピー・カスタマイズ・共有できます。",
+      "fallbackDescription": "ChatGPT、Claude、GeminiなどのAIツールで使える{name}の無料プロンプトを{count}件掲載。Sekolah Prompt-Fuコミュニティのプロンプトをコピー・カスタマイズ・共有できます。",
       "heading": "{name}のプロンプト"
     },
     "tags": {
@@ -2678,12 +2678,12 @@
     },
     "tag": {
       "title": "{name}のプロンプト",
-      "description": "「{name}」タグが付いた無料AIプロンプト{count}件。ChatGPT、Claude、GeminiなどのAIツールで使えるほか、自作のプロンプトをprompts.chatで共有することもできます。",
+      "description": "「{name}」タグが付いた無料AIプロンプト{count}件。ChatGPT、Claude、GeminiなどのAIツールで使えるほか、自作のプロンプトをSekolah Prompt-Fuで共有することもできます。",
       "heading": "{name}のプロンプト"
     },
     "skills": {
       "title": "エージェントスキル集：Claude Code・AIエージェント向けSKILL.md",
-      "description": "Claude Code、Codex、CursorなどのAIエージェント向けの無料・オープンソースのエージェントスキル（SKILL.mdファイル）。prompts.chatコミュニティが共有・改善しています。",
+      "description": "Claude Code、Codex、CursorなどのAIエージェント向けの無料・オープンソースのエージェントスキル（SKILL.mdファイル）。Sekolah Prompt-Fuコミュニティが共有・改善しています。",
       "heading": "エージェントスキル"
     },
     "workflows": {
@@ -2703,11 +2703,11 @@
     },
     "promptmasters": {
       "title": "Promptmasters：人気AIプロンプトクリエイター",
-      "description": "AIプロンプトが獲得した高評価の数でランク付けされた、prompts.chatのトッププロンプトエンジニアを紹介。総合・月間・週間ランキングをチェックしましょう。"
+      "description": "AIプロンプトが獲得した高評価の数でランク付けされた、Sekolah Prompt-Fuのトッププロンプトエンジニアを紹介。総合・月間・週間ランキングをチェックしましょう。"
     },
     "developers": {
       "title": "開発者ツール：プロンプト改善・トークナイザー・埋め込み",
-      "description": "prompts.chatの無料開発者ツール。AIでプロンプトを改善し、トークン数を数え、埋め込み用プロンプトウィジェットをデザインし、IDE風エディターでプロンプトを作成できます。"
+      "description": "Sekolah Prompt-Fuの無料開発者ツール。AIでプロンプトを改善し、トークン数を数え、埋め込み用プロンプトウィジェットをデザインし、IDE風エディターでプロンプトを作成できます。"
     },
     "howToWrite": {
       "title": "効果的なAIプロンプトの書き方：コツと例文",
@@ -2722,25 +2722,25 @@
     },
     "apiDocs": {
       "title": "プロンプトAPI・MCPサーバー ドキュメント",
-      "description": "prompts.chatの無料APIとMCPサーバーで、AIプロンプトをプログラムから検索・取得できます。エンドポイント、パラメーター、すぐ使えるサンプルコードを掲載。"
+      "description": "Sekolah Prompt-Fuの無料APIとMCPサーバーで、AIプロンプトをプログラムから検索・取得できます。エンドポイント、パラメーター、すぐ使えるサンプルコードを掲載。"
     },
     "selfHosting": {
       "title": "セルフホスティングガイド",
-      "description": "独自のブランディング、テーマ、認証を設定して、プライベートなprompts.chatを自分でホストできます。無料・オープンソースでチーム利用にも対応。"
+      "description": "独自のブランディング、テーマ、認証を設定して、プライベートなSekolah Prompt-Fuを自分でホストできます。無料・オープンソースでチーム利用にも対応。"
     },
     "privacy": {
       "title": "プライバシーポリシー",
-      "description": "prompts.chatがお客様のデータをどのように収集・利用・保護するかについて。"
+      "description": "Sekolah Prompt-Fuがお客様のデータをどのように収集・利用・保護するかについて。"
     },
     "terms": {
       "title": "利用規約",
-      "description": "prompts.chatのご利用に適用される規約です。"
+      "description": "Sekolah Prompt-Fuのご利用に適用される規約です。"
     },
     "profile": {
       "title": "{name} (@{username}) - AIプロンプト",
-      "description": "{name} (@{username}) さんがprompts.chatで公開しているAIプロンプト{count}件。prompts.chatは無料・オープンソースのプロンプトライブラリです。",
-      "descriptionWithBots": "{name} (@{username}) さんがprompts.chatで公開しているAIプロンプト{count}件とAIボット{botCount}件。prompts.chatは無料・オープンソースのプロンプトライブラリです。",
-      "descriptionBotsOnly": "{name} (@{username}) さんがprompts.chatで公開しているAIボット{botCount}件。prompts.chatは無料・オープンソースのプロンプトライブラリです。"
+      "description": "{name} (@{username}) さんがSekolah Prompt-Fuで公開しているAIプロンプト{count}件。Sekolah Prompt-Fuは無料・オープンソースのプロンプトライブラリです。",
+      "descriptionWithBots": "{name} (@{username}) さんがSekolah Prompt-Fuで公開しているAIプロンプト{count}件とAIボット{botCount}件。Sekolah Prompt-Fuは無料・オープンソースのプロンプトライブラリです。",
+      "descriptionBotsOnly": "{name} (@{username}) さんがSekolah Prompt-Fuで公開しているAIボット{botCount}件。Sekolah Prompt-Fuは無料・オープンソースのプロンプトライブラリです。"
     },
     "bookChapter": {
       "title": "{chapter} - プロンプトエンジニアリングガイド"

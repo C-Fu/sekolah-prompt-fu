@@ -1542,8 +1542,8 @@
         "answer": "Während fortgeschrittene KI-Modelle lockere Fragen gut handhaben können, werden Prompts kritisch, wenn:\n\n• Sie KI über API in Anwendungen verwenden — Sie haben oft nur eine Chance (\"one-shot prompting\"), ohne hin- und hergehenden Dialog\n• Sie mit kleineren, kostengünstigen Modellen arbeiten, die präzisere Anweisungen benötigen\n• Sie Produktionssysteme bauen, bei denen Konsistenz und Zuverlässigkeit wichtig sind\n\nOptimierte Prompts helfen Ihnen, bessere Ergebnisse zu erzielen, Token (und Geld) zu sparen und zuverlässigere KI-gestützte Anwendungen zu erstellen."
       },
       "whatIsPromptschat": {
-        "question": "Was ist prompts.chat?",
-        "answer": "prompts.chat ist eine Community-getriebene Plattform, auf der Menschen KI-Prompts teilen, entdecken und sammeln. Seit über 4 Jahren teilen Benutzer hier ihre Prompt-Optimierungstechniken. Die Community hilft sich gegenseitig, ihre Prompts zu verbessern und neue Ansätze für die Arbeit mit KI-Systemen zu lernen."
+        "question": "Was ist Sekolah Prompt-Fu?",
+        "answer": "Sekolah Prompt-Fu ist eine Community-getriebene Plattform, auf der Menschen KI-Prompts teilen, entdecken und sammeln. Seit über 4 Jahren teilen Benutzer hier ihre Prompt-Optimierungstechniken. Die Community hilft sich gegenseitig, ihre Prompts zu verbessern und neue Ansätze für die Arbeit mit KI-Systemen zu lernen."
       },
       "howToUse": {
         "question": "Wie verwende ich Prompts von dieser Plattform?",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "Kann ich diese Prompts kommerziell nutzen?",
-        "answer": "Ja! Alle Prompts auf prompts.chat sind unter der CC0-Lizenz (Creative Commons Zero) veröffentlicht, was bedeutet, dass sie gemeinfrei sind. Sie können sie frei für jeden Zweck nutzen, modifizieren und verteilen, einschließlich kommerzieller Nutzung, ohne Namensnennung."
+        "answer": "Ja! Alle Prompts auf Sekolah Prompt-Fu sind unter der CC0-Lizenz (Creative Commons Zero) veröffentlicht, was bedeutet, dass sie gemeinfrei sind. Sie können sie frei für jeden Zweck nutzen, modifizieren und verteilen, einschließlich kommerzieller Nutzung, ohne Namensnennung."
       },
       "selfHost": {
         "question": "Kann ich diese Plattform selbst hosten?",
-        "answer": "Absolut! prompts.chat ist vollständig Open Source. Sie können Ihre eigene private Instanz für Ihr Team oder Ihre Organisation bereitstellen. Schauen Sie sich unsere Self-Hosting-Dokumentation für Einrichtungsanweisungen an."
+        "answer": "Absolut! Sekolah Prompt-Fu ist vollständig Open Source. Sie können Ihre eigene private Instanz für Ihr Team oder Ihre Organisation bereitstellen. Schauen Sie sich unsere Self-Hosting-Dokumentation für Einrichtungsanweisungen an."
       },
       "verification": {
         "question": "Wie kann ich ein verifizierter Benutzer werden?",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "Hol dir die prompts.chat App für iPhone, iPad und Mac",
+    "message": "Hol dir die Sekolah Prompt-Fu App für iPhone, iPad und Mac",
     "messageShort": "Hol dir die App für Apple-Geräte",
     "download": "Laden",
     "dismiss": "Schließen"
   },
   "about": {
-    "title": "Über prompts.chat",
+    "title": "Über Sekolah Prompt-Fu",
     "description": "Die Geschichte hinter der ersten KI-Prompt-Bibliothek, erstellt 2 Wochen nach der ChatGPT-Ankündigung.",
     "releasedOn": "5. Dezember 2022",
     "storyTitle": "Unsere Geschichte",
     "goalTitle": "Unser Ziel",
-    "story1Rich": "prompts.chat ist die Web-Visualisierung des <repoLink>Awesome ChatGPT Prompts</repoLink> Repository. Es begann als persönliches Projekt von <authorLink>@f</authorLink>, um ChatGPT-Prompts zu organisieren, als ChatGPT in seiner ersten Version noch keine Verlaufsfunktion hatte.",
+    "story1Rich": "Sekolah Prompt-Fu ist die Web-Visualisierung des <repoLink>Awesome ChatGPT Prompts</repoLink> Repository. Es begann als persönliches Projekt von <authorLink>@f</authorLink>, um ChatGPT-Prompts zu organisieren, als ChatGPT in seiner ersten Version noch keine Verlaufsfunktion hatte.",
     "story2": "Das Awesome ChatGPT Prompts Repository wurde am 5. Dezember 2022 erstellt, nur 2 Wochen nachdem ChatGPT der Welt vorgestellt wurde. Was als einfache Lösung begann, wurde zur wichtigsten Ressource für Millionen von KI-Enthusiasten.",
     "testimonialsRich": "Geliebt von KI-Pionieren, einschließlich der OpenAI-Mitgründer <gregLink>Greg Brockman</gregLink> und <wojciechLink>Wojciech Zaremba</wojciechLink>.",
     "openSource": "Von Anfang an komplett kostenlos und Open Source.",
@@ -2121,7 +2121,7 @@
     "metaTitle": "Prompt-Engineering-Leitfaden: Das Interaktive Buch des Promptings",
     "metaDescription": "Meistern Sie KI-Prompt-Engineering mit diesem kostenlosen, interaktiven Leitfaden. Lernen Sie ChatGPT-Prompts, Chain-of-Thought-Reasoning, Few-Shot-Learning und fortgeschrittene Techniken. 30+ Kapitel mit echten Beispielen.",
     "interactiveGuideBy": "Ein Interaktiver Leitfaden von",
-    "authorIntro": "Hallo, ich bin <author>Fatih Kadir Akın</author>, der Kurator des beliebten <repoLink>Awesome ChatGPT Prompts</repoLink>-Repositories auf GitHub und von <siteName>prompts.chat</siteName>.",
+    "authorIntro": "Hallo, ich bin <author>Fatih Kadir Akın</author>, der Kurator des beliebten <repoLink>Awesome ChatGPT Prompts</repoLink>-Repositories auf GitHub und von <siteName>Sekolah Prompt-Fu</siteName>.",
     "bookDescription": "In diesem umfassenden und interaktiven Leitfaden entdecken Sie Expertenstrategien zur Erstellung überzeugender KI-Prompts, die ansprechende und effektive Gespräche fördern. Vom Verständnis der Funktionsweise von KI-Modellen bis zur Beherrschung fortgeschrittener Techniken wie Prompt-Chaining und agentische Systeme bietet Ihnen dieses Buch die Werkzeuge, die Sie benötigen, um Ihre KI-Interaktionen auf die nächste Stufe zu heben.",
     "whatYouWillLearn": "Was Sie lernen werden:",
     "highlights": {
@@ -2660,17 +2660,17 @@
   "seo": {
     "page": "Seite {page}",
     "home": {
-      "title": "prompts.chat - Kostenlose KI-Prompts: ChatGPT, Claude, Gemini",
+      "title": "Sekolah Prompt-Fu - Kostenlose KI-Prompts: ChatGPT, Claude, Gemini",
       "description": "Kostenlose Open-Source-Bibliothek für KI-Prompts, ehemals Awesome ChatGPT Prompts. Tausende Prompts für ChatGPT, Claude, Gemini & Co. entdecken, kopieren und teilen."
     },
     "prompts": {
       "title": "Prompt-Bibliothek: Kostenlose ChatGPT- & KI-Prompts",
-      "description": "Entdecken Sie die neuesten kostenlosen Prompts der prompts.chat-Community. Nach Kategorie, Tag oder Typ filtern und direkt in ChatGPT, Claude, Gemini & Co. einfügen.",
+      "description": "Entdecken Sie die neuesten kostenlosen Prompts der Sekolah Prompt-Fu-Community. Nach Kategorie, Tag oder Typ filtern und direkt in ChatGPT, Claude, Gemini & Co. einfügen.",
       "searchTitle": "Suchergebnisse für „{query}“"
     },
     "discover": {
       "title": "Die besten KI-Prompts entdecken: Empfohlen & im Trend",
-      "description": "Empfohlene, angesagte und bestbewertete KI-Prompts, ausgewählt von der prompts.chat-Community – täglich neue Prompts für ChatGPT, Claude, Gemini, Bilder und Videos.",
+      "description": "Empfohlene, angesagte und bestbewertete KI-Prompts, ausgewählt von der Sekolah Prompt-Fu-Community – täglich neue Prompts für ChatGPT, Claude, Gemini, Bilder und Videos.",
       "heading": "KI-Prompts entdecken"
     },
     "categories": {
@@ -2681,7 +2681,7 @@
     "category": {
       "title": "{name}-Prompts für ChatGPT, Claude & Gemini",
       "description": "{description} Entdecken Sie {count} kostenlose {name}-Prompts für ChatGPT, Claude, Gemini und andere KI-Tools.",
-      "fallbackDescription": "Entdecken Sie {count} kostenlose {name}-Prompts für ChatGPT, Claude, Gemini und andere KI-Tools. Prompts der prompts.chat-Community kopieren, anpassen und teilen.",
+      "fallbackDescription": "Entdecken Sie {count} kostenlose {name}-Prompts für ChatGPT, Claude, Gemini und andere KI-Tools. Prompts der Sekolah Prompt-Fu-Community kopieren, anpassen und teilen.",
       "heading": "{name}-Prompts"
     },
     "tags": {
@@ -2690,12 +2690,12 @@
     },
     "tag": {
       "title": "{name}-Prompts",
-      "description": "Entdecken Sie {count} kostenlose KI-Prompts mit dem Tag {name}. Nutzen Sie sie mit ChatGPT, Claude, Gemini & Co. oder teilen Sie eigene auf prompts.chat.",
+      "description": "Entdecken Sie {count} kostenlose KI-Prompts mit dem Tag {name}. Nutzen Sie sie mit ChatGPT, Claude, Gemini & Co. oder teilen Sie eigene auf Sekolah Prompt-Fu.",
       "heading": "{name}-Prompts"
     },
     "skills": {
       "title": "Agent Skills: SKILL.md für Claude Code & KI-Agenten",
-      "description": "Kostenlose Open-Source-Agent-Skills (SKILL.md-Dateien) für Claude Code, Codex, Cursor und andere KI-Agenten – geteilt und verbessert von der prompts.chat-Community.",
+      "description": "Kostenlose Open-Source-Agent-Skills (SKILL.md-Dateien) für Claude Code, Codex, Cursor und andere KI-Agenten – geteilt und verbessert von der Sekolah Prompt-Fu-Community.",
       "heading": "Agent Skills"
     },
     "workflows": {
@@ -2715,11 +2715,11 @@
     },
     "promptmasters": {
       "title": "Promptmasters: Die besten Ersteller von KI-Prompts",
-      "description": "Lernen Sie die besten Prompt-Engineers auf prompts.chat kennen – gerankt nach Stimmen für ihre KI-Prompts. Bestenlisten für alle Zeiten, den Monat und die Woche."
+      "description": "Lernen Sie die besten Prompt-Engineers auf Sekolah Prompt-Fu kennen – gerankt nach Stimmen für ihre KI-Prompts. Bestenlisten für alle Zeiten, den Monat und die Woche."
     },
     "developers": {
       "title": "Entwickler-Tools: Prompt-Verbesserer, Tokenizer & Embeds",
-      "description": "Kostenlose Entwickler-Tools von prompts.chat: Prompts mit KI verbessern, Tokens zählen, einbettbare Widgets gestalten und Prompts im IDE-artigen Editor bauen."
+      "description": "Kostenlose Entwickler-Tools von Sekolah Prompt-Fu: Prompts mit KI verbessern, Tokens zählen, einbettbare Widgets gestalten und Prompts im IDE-artigen Editor bauen."
     },
     "howToWrite": {
       "title": "Effektive KI-Prompts schreiben: Tipps & Beispiele",
@@ -2734,25 +2734,25 @@
     },
     "apiDocs": {
       "title": "Prompts-API & MCP-Server: Dokumentation",
-      "description": "KI-Prompts programmatisch suchen und abrufen – mit der kostenlosen API und dem MCP-Server von prompts.chat. Endpunkte, Parameter und Beispiele zum Kopieren."
+      "description": "KI-Prompts programmatisch suchen und abrufen – mit der kostenlosen API und dem MCP-Server von Sekolah Prompt-Fu. Endpunkte, Parameter und Beispiele zum Kopieren."
     },
     "selfHosting": {
       "title": "Self-Hosting-Anleitung",
-      "description": "Betreiben Sie Ihre eigene private prompts.chat-Instanz mit eigenem Branding, Themes und eigener Authentifizierung. Kostenlos, Open Source und bereit für Teams."
+      "description": "Betreiben Sie Ihre eigene private Sekolah Prompt-Fu-Instanz mit eigenem Branding, Themes und eigener Authentifizierung. Kostenlos, Open Source und bereit für Teams."
     },
     "privacy": {
       "title": "Datenschutzerklärung",
-      "description": "Wie prompts.chat Ihre Daten erhebt, verwendet und schützt."
+      "description": "Wie Sekolah Prompt-Fu Ihre Daten erhebt, verwendet und schützt."
     },
     "terms": {
       "title": "Nutzungsbedingungen",
-      "description": "Die Bedingungen, die für die Nutzung von prompts.chat gelten."
+      "description": "Die Bedingungen, die für die Nutzung von Sekolah Prompt-Fu gelten."
     },
     "profile": {
       "title": "{name} (@{username}) - KI-Prompts",
-      "description": "Entdecken Sie {count} KI-Prompts von {name} (@{username}) auf prompts.chat, der kostenlosen Open-Source-Bibliothek für Prompts.",
-      "descriptionWithBots": "Entdecken Sie {count} KI-Prompts und {botCount, plural, one {# KI-Bot} other {# KI-Bots}} von {name} (@{username}) auf prompts.chat, der kostenlosen Open-Source-Bibliothek für Prompts.",
-      "descriptionBotsOnly": "Entdecken Sie {botCount, plural, one {# KI-Bot} other {# KI-Bots}} von {name} (@{username}) auf prompts.chat, der kostenlosen Open-Source-Bibliothek für Prompts."
+      "description": "Entdecken Sie {count} KI-Prompts von {name} (@{username}) auf Sekolah Prompt-Fu, der kostenlosen Open-Source-Bibliothek für Prompts.",
+      "descriptionWithBots": "Entdecken Sie {count} KI-Prompts und {botCount, plural, one {# KI-Bot} other {# KI-Bots}} von {name} (@{username}) auf Sekolah Prompt-Fu, der kostenlosen Open-Source-Bibliothek für Prompts.",
+      "descriptionBotsOnly": "Entdecken Sie {botCount, plural, one {# KI-Bot} other {# KI-Bots}} von {name} (@{username}) auf Sekolah Prompt-Fu, der kostenlosen Open-Source-Bibliothek für Prompts."
     },
     "bookChapter": {
       "title": "{chapter} - Prompt-Engineering-Leitfaden"

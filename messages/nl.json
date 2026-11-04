@@ -1542,8 +1542,8 @@
         "answer": "Hoewel geavanceerde AI-modellen casual vragen goed aankunnen, worden prompts cruciaal wanneer:\n\n• AI gebruiken via API in applicaties — je krijgt vaak maar één kans om het goed te doen (\"one-shot prompting\"), zonder heen-en-weer dialoog\n• Werken met kleinere, kosteneffectieve modellen die preciezere instructies nodig hebben\n• Productiesystemen bouwen waar consistentie en betrouwbaarheid belangrijk zijn\n\nGeoptimaliseerde prompts helpen je betere resultaten te krijgen, tokens (en geld) te besparen, en betrouwbaardere AI-applicaties te maken."
       },
       "whatIsPromptschat": {
-        "question": "Wat is prompts.chat?",
-        "answer": "prompts.chat is een door de community aangedreven platform waar mensen AI-prompts delen, ontdekken en verzamelen. Al meer dan 4 jaar delen gebruikers hier hun promptoptimalisatietechnieken. De community helpt elkaar prompts te verbeteren en nieuwe benaderingen te leren voor het werken met AI-systemen."
+        "question": "Wat is Sekolah Prompt-Fu?",
+        "answer": "Sekolah Prompt-Fu is een door de community aangedreven platform waar mensen AI-prompts delen, ontdekken en verzamelen. Al meer dan 4 jaar delen gebruikers hier hun promptoptimalisatietechnieken. De community helpt elkaar prompts te verbeteren en nieuwe benaderingen te leren voor het werken met AI-systemen."
       },
       "howToUse": {
         "question": "Hoe gebruik ik prompts van dit platform?",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "Kan ik deze prompts commercieel gebruiken?",
-        "answer": "Ja! Alle prompts op prompts.chat zijn uitgebracht onder de CC0 (Creative Commons Zero) licentie, wat betekent dat ze in het publieke domein zijn. Je kunt ze vrij gebruiken, aanpassen en verspreiden voor elk doel, inclusief commercieel gebruik, zonder naamsvermelding."
+        "answer": "Ja! Alle prompts op Sekolah Prompt-Fu zijn uitgebracht onder de CC0 (Creative Commons Zero) licentie, wat betekent dat ze in het publieke domein zijn. Je kunt ze vrij gebruiken, aanpassen en verspreiden voor elk doel, inclusief commercieel gebruik, zonder naamsvermelding."
       },
       "selfHost": {
         "question": "Kan ik dit platform zelf hosten?",
-        "answer": "Absoluut! prompts.chat is volledig open source. Je kunt je eigen privé-instantie deployen voor je team of organisatie. Bekijk onze self-hosting documentatie voor setup-instructies."
+        "answer": "Absoluut! Sekolah Prompt-Fu is volledig open source. Je kunt je eigen privé-instantie deployen voor je team of organisatie. Bekijk onze self-hosting documentatie voor setup-instructies."
       },
       "verification": {
         "question": "Hoe kan ik een geverifieerde gebruiker worden?",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "Download de prompts.chat app voor iPhone, iPad en Mac",
+    "message": "Download de Sekolah Prompt-Fu app voor iPhone, iPad en Mac",
     "messageShort": "Download de app voor Apple-apparaten",
     "download": "Downloaden",
     "dismiss": "Sluiten"
   },
   "about": {
-    "title": "Over prompts.chat",
+    "title": "Over Sekolah Prompt-Fu",
     "description": "Het verhaal achter de allereerste AI-promptbibliotheek, gemaakt 2 weken na de aankondiging van ChatGPT.",
     "releasedOn": "5 december 2022",
     "storyTitle": "Ons verhaal",
     "goalTitle": "Ons doel",
-    "story1Rich": "prompts.chat is de webvisualisatie van de <repoLink>Awesome ChatGPT Prompts</repoLink> repository. Het begon als een persoonlijk project van <authorLink>@f</authorLink> om ChatGPT-prompts georganiseerd te houden, toen ChatGPT nog geen geschiedenisfunctie had in de eerste versie.",
+    "story1Rich": "Sekolah Prompt-Fu is de webvisualisatie van de <repoLink>Awesome ChatGPT Prompts</repoLink> repository. Het begon als een persoonlijk project van <authorLink>@f</authorLink> om ChatGPT-prompts georganiseerd te houden, toen ChatGPT nog geen geschiedenisfunctie had in de eerste versie.",
     "story2": "De Awesome ChatGPT Prompts repository werd gemaakt op 5 december 2022, slechts 2 weken nadat ChatGPT voor het eerst aan de wereld werd aangekondigd. Wat begon als een simpele oplossing werd de go-to bron voor miljoenen AI-enthousiastelingen.",
     "testimonialsRich": "Geliefd bij AI-pioniers, waaronder OpenAI mede-oprichters <gregLink>Greg Brockman</gregLink> en <wojciechLink>Wojciech Zaremba</wojciechLink>.",
     "openSource": "Volledig gratis en open source vanaf dag één.",
@@ -2121,7 +2121,7 @@
     "metaTitle": "Gids voor prompt engineering: Het Interactieve Prompting Boek",
     "metaDescription": "Beheers AI prompt engineering met deze gratis interactieve gids. Leer ChatGPT prompts, chain-of-thought redeneren, few-shot leren en geavanceerde technieken. 30+ hoofdstukken met echte voorbeelden.",
     "interactiveGuideBy": "Een Interactieve Gids door",
-    "authorIntro": "Hallo, ik ben <author>Fatih Kadir Akın</author>, de curator van de populaire <repoLink>Awesome ChatGPT Prompts</repoLink> repository op GitHub en <siteName>prompts.chat</siteName>.",
+    "authorIntro": "Hallo, ik ben <author>Fatih Kadir Akın</author>, de curator van de populaire <repoLink>Awesome ChatGPT Prompts</repoLink> repository op GitHub en <siteName>Sekolah Prompt-Fu</siteName>.",
     "bookDescription": "In deze uitgebreide, interactieve gids ontdek je expertstrategieën voor het maken van overtuigende AI-prompts die boeiende en effectieve gesprekken genereren. Van het begrijpen hoe AI-modellen werken tot het beheersen van geavanceerde technieken zoals prompt chaining en agentische systemen, dit boek geeft je de tools om je AI-interacties naar een hoger niveau te tillen.",
     "whatYouWillLearn": "Wat je zult leren:",
     "highlights": {
@@ -2651,17 +2651,17 @@
   "seo": {
     "page": "Pagina {page}",
     "home": {
-      "title": "prompts.chat - Gratis AI-prompts: ChatGPT, Claude en Gemini",
+      "title": "Sekolah Prompt-Fu - Gratis AI-prompts: ChatGPT, Claude en Gemini",
       "description": "Gratis open-source bibliotheek met AI-prompts, voorheen Awesome ChatGPT Prompts. Ontdek, kopieer en deel duizenden prompts voor ChatGPT, Claude, Gemini en meer."
     },
     "prompts": {
       "title": "Promptbibliotheek: gratis ChatGPT- en AI-prompts",
-      "description": "Bekijk de nieuwste gratis prompts van de prompts.chat-community. Filter op categorie, tag of type en plak ze in ChatGPT, Claude, Gemini en andere AI-tools.",
+      "description": "Bekijk de nieuwste gratis prompts van de Sekolah Prompt-Fu-community. Filter op categorie, tag of type en plak ze in ChatGPT, Claude, Gemini en andere AI-tools.",
       "searchTitle": "Zoekresultaten voor “{query}”"
     },
     "discover": {
       "title": "Ontdek de beste AI-prompts: uitgelicht en trending",
-      "description": "Uitgelichte, trending en best beoordeelde AI-prompts, gekozen door de prompts.chat-community. Elke dag nieuwe prompts voor ChatGPT, Claude, Gemini, beeld en video.",
+      "description": "Uitgelichte, trending en best beoordeelde AI-prompts, gekozen door de Sekolah Prompt-Fu-community. Elke dag nieuwe prompts voor ChatGPT, Claude, Gemini, beeld en video.",
       "heading": "Ontdek AI-prompts"
     },
     "categories": {
@@ -2672,7 +2672,7 @@
     "category": {
       "title": "{name}-prompts voor ChatGPT, Claude en Gemini",
       "description": "{description} Bekijk {count} gratis {name}-prompts voor ChatGPT, Claude, Gemini en andere AI-tools.",
-      "fallbackDescription": "Bekijk {count} gratis {name}-prompts voor ChatGPT, Claude, Gemini en andere AI-tools. Kopieer, pas aan en deel prompts uit de prompts.chat-community.",
+      "fallbackDescription": "Bekijk {count} gratis {name}-prompts voor ChatGPT, Claude, Gemini en andere AI-tools. Kopieer, pas aan en deel prompts uit de Sekolah Prompt-Fu-community.",
       "heading": "{name}-prompts"
     },
     "tags": {
@@ -2681,12 +2681,12 @@
     },
     "tag": {
       "title": "{name}-prompts",
-      "description": "Bekijk {count} gratis AI-prompts met de tag {name}. Gebruik ze met ChatGPT, Claude, Gemini en andere AI-tools, of deel je eigen prompts op prompts.chat.",
+      "description": "Bekijk {count} gratis AI-prompts met de tag {name}. Gebruik ze met ChatGPT, Claude, Gemini en andere AI-tools, of deel je eigen prompts op Sekolah Prompt-Fu.",
       "heading": "{name}-prompts"
     },
     "skills": {
       "title": "Agentvaardigheden: SKILL.md voor Claude Code en AI-agents",
-      "description": "Gratis open-source agentvaardigheden (SKILL.md-bestanden) voor Claude Code, Codex, Cursor en andere AI-agents, gedeeld en verbeterd door de prompts.chat-community.",
+      "description": "Gratis open-source agentvaardigheden (SKILL.md-bestanden) voor Claude Code, Codex, Cursor en andere AI-agents, gedeeld en verbeterd door de Sekolah Prompt-Fu-community.",
       "heading": "Agentvaardigheden"
     },
     "workflows": {
@@ -2706,11 +2706,11 @@
     },
     "promptmasters": {
       "title": "Promptmasters: de beste makers van AI-prompts",
-      "description": "Maak kennis met de beste prompt engineers van prompts.chat, gerangschikt op de upvotes van hun AI-prompts. Bekijk de ranglijsten van altijd, deze maand en deze week."
+      "description": "Maak kennis met de beste prompt engineers van Sekolah Prompt-Fu, gerangschikt op de upvotes van hun AI-prompts. Bekijk de ranglijsten van altijd, deze maand en deze week."
     },
     "developers": {
       "title": "Developertools: Prompt Enhancer, tokenizer en embeds",
-      "description": "Gratis developertools van prompts.chat: verbeter prompts met AI, tel tokens, ontwerp insluitbare promptwidgets en bouw prompts in een editor in IDE-stijl."
+      "description": "Gratis developertools van Sekolah Prompt-Fu: verbeter prompts met AI, tel tokens, ontwerp insluitbare promptwidgets en bouw prompts in een editor in IDE-stijl."
     },
     "howToWrite": {
       "title": "Effectieve AI-prompts schrijven: tips en voorbeelden",
@@ -2725,25 +2725,25 @@
     },
     "apiDocs": {
       "title": "Documentatie Prompts-API en MCP-server",
-      "description": "Zoek en haal AI-prompts programmatisch op met de gratis API en MCP-server van prompts.chat. Endpoints, parameters en voorbeelden die je zo kunt kopiëren."
+      "description": "Zoek en haal AI-prompts programmatisch op met de gratis API en MCP-server van Sekolah Prompt-Fu. Endpoints, parameters en voorbeelden die je zo kunt kopiëren."
     },
     "selfHosting": {
       "title": "Handleiding voor zelf hosten",
-      "description": "Draai je eigen privé-instantie van prompts.chat met eigen branding, thema's en authenticatie. Gratis, open source en klaar voor teams."
+      "description": "Draai je eigen privé-instantie van Sekolah Prompt-Fu met eigen branding, thema's en authenticatie. Gratis, open source en klaar voor teams."
     },
     "privacy": {
       "title": "Privacybeleid",
-      "description": "Hoe prompts.chat je gegevens verzamelt, gebruikt en beschermt."
+      "description": "Hoe Sekolah Prompt-Fu je gegevens verzamelt, gebruikt en beschermt."
     },
     "terms": {
       "title": "Gebruiksvoorwaarden",
-      "description": "De voorwaarden die gelden wanneer je prompts.chat gebruikt."
+      "description": "De voorwaarden die gelden wanneer je Sekolah Prompt-Fu gebruikt."
     },
     "profile": {
       "title": "{name} (@{username}) - AI-prompts",
-      "description": "Bekijk {count} AI-prompts gedeeld door {name} (@{username}) op prompts.chat, de gratis open-source promptbibliotheek.",
-      "descriptionWithBots": "Bekijk {count} AI-prompts en {botCount, plural, one {# AI-bot} other {# AI-bots}} gedeeld door {name} (@{username}) op prompts.chat, de gratis open-source promptbibliotheek.",
-      "descriptionBotsOnly": "Bekijk {botCount, plural, one {# AI-bot} other {# AI-bots}} gedeeld door {name} (@{username}) op prompts.chat, de gratis open-source promptbibliotheek."
+      "description": "Bekijk {count} AI-prompts gedeeld door {name} (@{username}) op Sekolah Prompt-Fu, de gratis open-source promptbibliotheek.",
+      "descriptionWithBots": "Bekijk {count} AI-prompts en {botCount, plural, one {# AI-bot} other {# AI-bots}} gedeeld door {name} (@{username}) op Sekolah Prompt-Fu, de gratis open-source promptbibliotheek.",
+      "descriptionBotsOnly": "Bekijk {botCount, plural, one {# AI-bot} other {# AI-bots}} gedeeld door {name} (@{username}) op Sekolah Prompt-Fu, de gratis open-source promptbibliotheek."
     },
     "bookChapter": {
       "title": "{chapter} - Gids voor prompt engineering"

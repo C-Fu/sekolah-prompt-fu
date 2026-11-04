@@ -1542,8 +1542,8 @@
         "answer": "虽然高级AI模型可以很好地处理随意的问题，但在以下情况下提示词变得至关重要：\n\n• 在应用程序中通过API使用AI时——通常只有一次机会（\"一次性提示\"），没有来回对话\n• 使用需要更精确指令的较小、经济型模型时\n• 构建一致性和可靠性很重要的生产系统时\n\n优化的提示词帮助您获得更好的结果，节省令牌（和金钱），并创建更可靠的AI驱动应用程序。"
       },
       "whatIsPromptschat": {
-        "question": "prompts.chat是什么？",
-        "answer": "prompts.chat是一个社区驱动的平台，人们在这里分享、发现和收集AI提示词。四年多来，用户一直在这里分享他们的提示词优化技术。社区互相帮助改进提示词，学习与AI系统协作的新方法。"
+        "question": "Sekolah Prompt-Fu是什么？",
+        "answer": "Sekolah Prompt-Fu是一个社区驱动的平台，人们在这里分享、发现和收集AI提示词。四年多来，用户一直在这里分享他们的提示词优化技术。社区互相帮助改进提示词，学习与AI系统协作的新方法。"
       },
       "howToUse": {
         "question": "如何使用这个平台的提示词？",
@@ -1551,11 +1551,11 @@
       },
       "license": {
         "question": "我可以商业使用这些提示词吗？",
-        "answer": "是的！prompts.chat上的所有提示词都在CC0（Creative Commons Zero）许可证下发布，这意味着它们属于公共领域。您可以自由使用、修改和分发它们用于任何目的，包括商业用途，无需注明出处。"
+        "answer": "是的！Sekolah Prompt-Fu上的所有提示词都在CC0（Creative Commons Zero）许可证下发布，这意味着它们属于公共领域。您可以自由使用、修改和分发它们用于任何目的，包括商业用途，无需注明出处。"
       },
       "selfHost": {
         "question": "我可以自托管这个平台吗？",
-        "answer": "当然可以！prompts.chat是完全开源的。您可以为您的团队或组织部署自己的私有实例。请查看我们的自托管文档了解设置说明。"
+        "answer": "当然可以！Sekolah Prompt-Fu是完全开源的。您可以为您的团队或组织部署自己的私有实例。请查看我们的自托管文档了解设置说明。"
       },
       "verification": {
         "question": "如何成为认证用户？",
@@ -1807,18 +1807,18 @@
     }
   },
   "appBanner": {
-    "message": "下载适用于 iPhone、iPad 和 Mac 的 prompts.chat 应用",
+    "message": "下载适用于 iPhone、iPad 和 Mac 的 Sekolah Prompt-Fu 应用",
     "messageShort": "下载 Apple 设备应用",
     "download": "下载",
     "dismiss": "关闭"
   },
   "about": {
-    "title": "关于 prompts.chat",
+    "title": "关于 Sekolah Prompt-Fu",
     "description": "ChatGPT发布两周后创建的首个AI提示词库的故事。",
     "releasedOn": "2022年12月5日",
     "storyTitle": "我们的故事",
     "goalTitle": "我们的目标",
-    "story1Rich": "prompts.chat是<repoLink>Awesome ChatGPT Prompts</repoLink>仓库的网页可视化版本。它始于<authorLink>@f</authorLink>的个人项目，用于整理ChatGPT提示词，当时ChatGPT初版还没有历史记录功能。",
+    "story1Rich": "Sekolah Prompt-Fu是<repoLink>Awesome ChatGPT Prompts</repoLink>仓库的网页可视化版本。它始于<authorLink>@f</authorLink>的个人项目，用于整理ChatGPT提示词，当时ChatGPT初版还没有历史记录功能。",
     "story2": "Awesome ChatGPT Prompts仓库创建于2022年12月5日，距离ChatGPT向世界宣布仅两周。最初只是一个简单的解决方案，现已成为数百万AI爱好者的首选资源。",
     "testimonialsRich": "深受AI先驱喜爱，包括OpenAI联合创始人<gregLink>Greg Brockman</gregLink>和<wojciechLink>Wojciech Zaremba</wojciechLink>。",
     "openSource": "从第一天起就完全免费开源。",
@@ -2121,7 +2121,7 @@
     "metaTitle": "提示词工程指南：互动提示词工程之书",
     "metaDescription": "通过这本免费互动指南掌握AI提示词工程。学习ChatGPT提示词、思维链推理、少样本学习和高级技术。30+章节配有真实示例。",
     "interactiveGuideBy": "互动指南 by",
-    "authorIntro": "你好，我是<author>Fatih Kadir Akın</author>，GitHub上热门<repoLink>Awesome ChatGPT Prompts</repoLink>仓库和<siteName>prompts.chat</siteName>的策展人。",
+    "authorIntro": "你好，我是<author>Fatih Kadir Akın</author>，GitHub上热门<repoLink>Awesome ChatGPT Prompts</repoLink>仓库和<siteName>Sekolah Prompt-Fu</siteName>的策展人。",
     "bookDescription": "在这本全面的互动指南中，你将发现创建引人入胜的AI提示词的专家策略，这些提示词能够产生有效的对话。从理解AI模型的工作原理到掌握提示词链和代理系统等高级技术，这本书为你提供了将AI交互提升到新水平所需的工具。",
     "whatYouWillLearn": "你将学到：",
     "highlights": {
@@ -2648,17 +2648,17 @@
   "seo": {
     "page": "第{page}页",
     "home": {
-      "title": "prompts.chat - 免费AI提示词库：ChatGPT、Claude、Gemini",
+      "title": "Sekolah Prompt-Fu - 免费AI提示词库：ChatGPT、Claude、Gemini",
       "description": "免费开源的AI提示词库，前身为Awesome ChatGPT Prompts。发现、复制并分享数千条适用于ChatGPT、Claude、Gemini等AI工具的提示词，覆盖写作、编程、绘图等各类场景。"
     },
     "prompts": {
       "title": "提示词库：免费ChatGPT与AI提示词大全",
-      "description": "浏览prompts.chat社区最新发布的免费提示词。可按分类、标签或类型筛选，一键复制到ChatGPT、Claude、Gemini等AI工具中直接使用。",
+      "description": "浏览Sekolah Prompt-Fu社区最新发布的免费提示词。可按分类、标签或类型筛选，一键复制到ChatGPT、Claude、Gemini等AI工具中直接使用。",
       "searchTitle": "“{query}”的搜索结果"
     },
     "discover": {
       "title": "发现优质AI提示词：精选与热门",
-      "description": "汇集prompts.chat社区精选、热门及高赞的AI提示词，每日更新，涵盖ChatGPT、Claude、Gemini以及图像和视频生成等方向的最新提示词。",
+      "description": "汇集Sekolah Prompt-Fu社区精选、热门及高赞的AI提示词，每日更新，涵盖ChatGPT、Claude、Gemini以及图像和视频生成等方向的最新提示词。",
       "heading": "发现AI提示词"
     },
     "categories": {
@@ -2669,7 +2669,7 @@
     "category": {
       "title": "{name}提示词：适用于ChatGPT、Claude和Gemini",
       "description": "{description} 浏览{count}条免费{name}提示词，适用于ChatGPT、Claude、Gemini等AI工具。",
-      "fallbackDescription": "浏览{count}条免费{name}提示词，适用于ChatGPT、Claude、Gemini等AI工具。复制、修改并分享来自prompts.chat社区的提示词。",
+      "fallbackDescription": "浏览{count}条免费{name}提示词，适用于ChatGPT、Claude、Gemini等AI工具。复制、修改并分享来自Sekolah Prompt-Fu社区的提示词。",
       "heading": "{name}提示词"
     },
     "tags": {
@@ -2678,12 +2678,12 @@
     },
     "tag": {
       "title": "{name}提示词",
-      "description": "浏览{count}条标签为“{name}”的免费AI提示词，可用于ChatGPT、Claude、Gemini等AI工具，也欢迎在prompts.chat分享你的提示词。",
+      "description": "浏览{count}条标签为“{name}”的免费AI提示词，可用于ChatGPT、Claude、Gemini等AI工具，也欢迎在Sekolah Prompt-Fu分享你的提示词。",
       "heading": "{name}提示词"
     },
     "skills": {
       "title": "智能体技能库：Claude Code等AI智能体的SKILL.md",
-      "description": "浏览免费开源的智能体技能（SKILL.md文件），适用于Claude Code、Codex、Cursor等AI智能体，由prompts.chat社区共享和持续完善。",
+      "description": "浏览免费开源的智能体技能（SKILL.md文件），适用于Claude Code、Codex、Cursor等AI智能体，由Sekolah Prompt-Fu社区共享和持续完善。",
       "heading": "智能体技能"
     },
     "workflows": {
@@ -2703,11 +2703,11 @@
     },
     "promptmasters": {
       "title": "Promptmasters：顶尖AI提示词创作者",
-      "description": "认识prompts.chat上的顶尖提示词工程师，按其AI提示词获得的点赞数排名。查看历史总榜、月榜和周榜，发现最受欢迎的提示词创作者。"
+      "description": "认识Sekolah Prompt-Fu上的顶尖提示词工程师，按其AI提示词获得的点赞数排名。查看历史总榜、月榜和周榜，发现最受欢迎的提示词创作者。"
     },
     "developers": {
       "title": "开发者工具：提示词优化、Token计数与嵌入组件",
-      "description": "prompts.chat免费开发者工具：用AI优化提示词、统计Token数量、设计可嵌入的提示词组件，并在IDE风格的编辑器中构建提示词。"
+      "description": "Sekolah Prompt-Fu免费开发者工具：用AI优化提示词、统计Token数量、设计可嵌入的提示词组件，并在IDE风格的编辑器中构建提示词。"
     },
     "howToWrite": {
       "title": "如何写出高效的AI提示词：技巧与示例",
@@ -2722,25 +2722,25 @@
     },
     "apiDocs": {
       "title": "提示词API与MCP服务器文档",
-      "description": "通过prompts.chat免费API和MCP服务器，以编程方式搜索和获取AI提示词。文档包含接口端点、参数说明以及可直接复制使用的示例代码。"
+      "description": "通过Sekolah Prompt-Fu免费API和MCP服务器，以编程方式搜索和获取AI提示词。文档包含接口端点、参数说明以及可直接复制使用的示例代码。"
     },
     "selfHosting": {
       "title": "自托管指南",
-      "description": "部署属于你自己的私有prompts.chat实例，支持自定义品牌、主题和身份验证。完全免费开源，开箱即用，适合团队内部部署与使用。"
+      "description": "部署属于你自己的私有Sekolah Prompt-Fu实例，支持自定义品牌、主题和身份验证。完全免费开源，开箱即用，适合团队内部部署与使用。"
     },
     "privacy": {
       "title": "隐私政策",
-      "description": "prompts.chat如何收集、使用和保护你的数据。"
+      "description": "Sekolah Prompt-Fu如何收集、使用和保护你的数据。"
     },
     "terms": {
       "title": "服务条款",
-      "description": "使用prompts.chat时适用的条款。"
+      "description": "使用Sekolah Prompt-Fu时适用的条款。"
     },
     "profile": {
       "title": "{name} (@{username}) - AI提示词",
-      "description": "浏览{name} (@{username}) 在prompts.chat分享的{count}条AI提示词。prompts.chat是免费开源的提示词库。",
-      "descriptionWithBots": "浏览{name} (@{username}) 在prompts.chat分享的{count}条AI提示词和{botCount}个AI机器人。prompts.chat是免费开源的提示词库。",
-      "descriptionBotsOnly": "浏览{name} (@{username}) 在prompts.chat分享的{botCount}个AI机器人。prompts.chat是免费开源的提示词库。"
+      "description": "浏览{name} (@{username}) 在Sekolah Prompt-Fu分享的{count}条AI提示词。Sekolah Prompt-Fu是免费开源的提示词库。",
+      "descriptionWithBots": "浏览{name} (@{username}) 在Sekolah Prompt-Fu分享的{count}条AI提示词和{botCount}个AI机器人。Sekolah Prompt-Fu是免费开源的提示词库。",
+      "descriptionBotsOnly": "浏览{name} (@{username}) 在Sekolah Prompt-Fu分享的{botCount}个AI机器人。Sekolah Prompt-Fu是免费开源的提示词库。"
     },
     "bookChapter": {
       "title": "{chapter} - 提示词工程指南"
