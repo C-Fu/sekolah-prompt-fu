@@ -7,192 +7,167 @@ vi.mock("@/../prompts.config", () => ({
 import {
   absoluteUrl,
   buildPageMetadata,
-  escapeXml,
   getBaseUrl,
-  paginatedPath,
+  NOINDEX_ROBOTS,
+  SITE_NAME,
   toMetaDescription,
-  toSitemapImageUrl,
 } from "@/lib/seo";
 
+describe("SITE_NAME", () => {
+  it("derives from the branding config", () => {
+    expect(SITE_NAME).toBe("prompts.chat");
+  });
+});
+
 describe("getBaseUrl", () => {
-  const originalUrl = process.env.NEXTAUTH_URL;
+  const originalUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   afterEach(() => {
-    process.env.NEXTAUTH_URL = originalUrl;
+    process.env.NEXT_PUBLIC_SITE_URL = originalUrl;
   });
 
-  it("should use NEXTAUTH_URL without a trailing slash", () => {
-    process.env.NEXTAUTH_URL = "https://example.com/";
+  it("uses NEXT_PUBLIC_SITE_URL without a trailing slash", () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://example.com/";
     expect(getBaseUrl()).toBe("https://example.com");
   });
 
-  it("should fall back to https://prompts.chat", () => {
-    delete process.env.NEXTAUTH_URL;
+  it("falls back to https://prompts.chat", () => {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
     expect(getBaseUrl()).toBe("https://prompts.chat");
+  });
+});
+
+describe("NOINDEX_ROBOTS", () => {
+  it("keeps pages out of the index while following links", () => {
+    expect(NOINDEX_ROBOTS).toMatchObject({ index: false, follow: true });
   });
 });
 
 describe("absoluteUrl", () => {
   beforeEach(() => {
-    process.env.NEXTAUTH_URL = "https://prompts.chat";
+    process.env.NEXT_PUBLIC_SITE_URL = "https://prompts.chat";
   });
 
-  it("should prefix paths with the site origin", () => {
-    expect(absoluteUrl("/categories/coding")).toBe("https://prompts.chat/categories/coding");
+  afterEach(() => {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
   });
 
-  it("should add a missing leading slash", () => {
-    expect(absoluteUrl("tags/python")).toBe("https://prompts.chat/tags/python");
+  it("prefixes paths with the site origin", () => {
+    expect(absoluteUrl("/kids/map")).toBe("https://prompts.chat/kids/map");
   });
 
-  it("should return absolute URLs unchanged", () => {
+  it("adds a missing leading slash", () => {
+    expect(absoluteUrl("kids/map")).toBe("https://prompts.chat/kids/map");
+  });
+
+  it("returns absolute URLs unchanged", () => {
     expect(absoluteUrl("https://github.com/f")).toBe("https://github.com/f");
   });
 });
 
-describe("paginatedPath", () => {
-  it("should not add a page parameter to the first page", () => {
-    expect(paginatedPath("/tags/python", 1)).toBe("/tags/python");
-  });
-
-  it("should add the page parameter to later pages", () => {
-    expect(paginatedPath("/tags/python", 3)).toBe("/tags/python?page=3");
-  });
-});
-
 describe("toMetaDescription", () => {
-  it("should collapse whitespace and line breaks", () => {
-    expect(toMetaDescription("Act as a\n\n  Linux   terminal.")).toBe("Act as a Linux terminal.");
+  it("collapses whitespace and line breaks", () => {
+    expect(toMetaDescription("Learn to\n\n  talk to AI.")).toBe("Learn to talk to AI.");
   });
 
-  it("should replace prompt variables with their names", () => {
+  it("replaces prompt variables with their names", () => {
     expect(toMetaDescription("Write a poem about ${topic} in ${style:haiku} form")).toBe(
       "Write a poem about topic in style form"
     );
   });
 
-  it("should strip markdown syntax and keep link text", () => {
+  it("strips markdown syntax and keeps link text", () => {
     expect(toMetaDescription("# Title\n**Bold** see [the docs](https://example.com) ![img](a.png)")).toBe(
       "Title Bold see the docs"
     );
   });
 
-  it("should keep short text as-is", () => {
+  it("keeps short text as-is", () => {
     expect(toMetaDescription("A short description.")).toBe("A short description.");
   });
 
-  it("should cut long text on a word boundary with an ellipsis", () => {
+  it("cuts long text on a word boundary with an ellipsis", () => {
     const text = "word ".repeat(60);
     const result = toMetaDescription(text, 50);
     expect(result.length).toBeLessThanOrEqual(50);
     expect(result.endsWith("word…")).toBe(true);
   });
 
-  it("should stay fast on very long unterminated markup", () => {
+  it("stays fast on very long unterminated markup", () => {
     const start = performance.now();
     toMetaDescription("[".repeat(1_000_000));
     toMetaDescription("${".repeat(500_000));
     expect(performance.now() - start).toBeLessThan(1000);
   });
 
-  it("should not leave trailing punctuation before the ellipsis", () => {
+  it("does not leave trailing punctuation before the ellipsis", () => {
     const result = toMetaDescription("First sentence here, second sentence goes on and on", 24);
     expect(result).toBe("First sentence here…");
   });
 });
 
-describe("escapeXml", () => {
-  it("should escape XML special characters", () => {
-    expect(escapeXml(`a&b<c>"d'`)).toBe("a&amp;b&lt;c&gt;&quot;d&apos;");
-  });
-});
-
-describe("toSitemapImageUrl", () => {
-  beforeEach(() => {
-    process.env.NEXTAUTH_URL = "https://prompts.chat";
-  });
-
-  it("should escape ampersands in query strings", () => {
-    expect(toSitemapImageUrl("https://pbs.twimg.com/media/abc?format=jpg&name=large")).toBe(
-      "https://pbs.twimg.com/media/abc?format=jpg&amp;name=large"
-    );
-  });
-
-  it("should make relative upload paths absolute", () => {
-    expect(toSitemapImageUrl("/uploads/image.png")).toBe("https://prompts.chat/uploads/image.png");
-  });
-
-  it("should percent-encode spaces", () => {
-    expect(toSitemapImageUrl("https://example.com/my image.png")).toBe("https://example.com/my%20image.png");
-  });
-
-  it("should reject non-http URLs", () => {
-    expect(toSitemapImageUrl("data:image/png;base64,AAAA")).toBeNull();
-  });
-});
-
 describe("buildPageMetadata", () => {
-  it("should set a self-referencing canonical and matching social tags", () => {
+  it("sets a self-referencing canonical and matching social tags", () => {
     const metadata = buildPageMetadata({
-      title: "Coding Prompts",
-      description: "Browse coding prompts.",
-      path: "/categories/coding",
+      title: "Learn to Talk to AI",
+      description: "A playful way for kids to learn how to talk to AI.",
+      path: "/kids",
     });
 
-    expect(metadata.title).toBe("Coding Prompts");
-    expect(metadata.alternates?.canonical).toBe("/categories/coding");
+    expect(metadata.title).toBe("Learn to Talk to AI");
+    expect(metadata.alternates?.canonical).toBe("/kids");
     expect(metadata.openGraph).toMatchObject({
-      url: "/categories/coding",
-      title: "Coding Prompts | prompts.chat",
-      description: "Browse coding prompts.",
+      url: "/kids",
+      title: "Learn to Talk to AI | prompts.chat",
+      description: "A playful way for kids to learn how to talk to AI.",
     });
-    expect(metadata.twitter).toMatchObject({ title: "Coding Prompts | prompts.chat" });
+    expect(metadata.twitter).toMatchObject({ title: "Learn to Talk to AI | prompts.chat" });
     expect(metadata.robots).toBeUndefined();
   });
 
-  it("should support absolute titles", () => {
+  it("supports absolute titles", () => {
     const metadata = buildPageMetadata({
-      title: "prompts.chat - Free AI Prompts",
-      description: "Home",
+      title: "Promi's Prompt School",
+      description: "Kids learn to talk to AI",
       path: "/",
       absoluteTitle: true,
     });
 
-    expect(metadata.title).toEqual({ absolute: "prompts.chat - Free AI Prompts" });
-    expect(metadata.openGraph).toMatchObject({ title: "prompts.chat - Free AI Prompts" });
+    expect(metadata.title).toEqual({ absolute: "Promi's Prompt School" });
+    expect(metadata.openGraph).toMatchObject({ title: "Promi's Prompt School" });
   });
 
-  it("should keep the canonical on noindex pages", () => {
+  it("keeps the canonical on noindex pages", () => {
     const metadata = buildPageMetadata({
-      title: "Search",
-      description: "Search results",
-      path: "/prompts",
+      title: "Map",
+      description: "World map",
+      path: "/kids/map",
       noindex: true,
     });
 
     expect(metadata.robots).toMatchObject({ index: false, follow: true });
-    expect(metadata.alternates?.canonical).toBe("/prompts");
+    expect(metadata.alternates?.canonical).toBe("/kids/map");
   });
 
-  it("should point the canonical and social URL at a preferred URL", () => {
+  it("points the canonical and social URL at a preferred URL", () => {
     const metadata = buildPageMetadata({
-      title: "Trending",
-      description: "Trending prompts",
-      path: "/prompts?trending=1",
-      canonical: "/prompts",
+      title: "Map",
+      description: "World map",
+      path: "/kids/map?world=1",
+      canonical: "/kids/map",
       noindex: true,
     });
 
-    expect(metadata.alternates?.canonical).toBe("/prompts");
-    expect(metadata.openGraph).toMatchObject({ url: "/prompts" });
+    expect(metadata.alternates?.canonical).toBe("/kids/map");
+    expect(metadata.openGraph).toMatchObject({ url: "/kids/map" });
     expect(metadata.robots).toMatchObject({ index: false, follow: true });
   });
 
-  it("should leave images to the route when requested", () => {
+  it("leaves images to the route when requested", () => {
     const metadata = buildPageMetadata({
-      title: "Prompt",
-      description: "A prompt",
-      path: "/prompts/abc_prompt",
+      title: "Level",
+      description: "A level",
+      path: "/kids/level/1-1-meet-promi",
       image: "route",
     });
 
