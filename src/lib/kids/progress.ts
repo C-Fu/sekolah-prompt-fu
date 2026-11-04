@@ -157,19 +157,27 @@ export function clearComponentState(levelSlug: string): void {
   }
 }
 
+// Section completion tracking
+const SECTION_COMPLETION_KEY = "kids-section-completion";
+
+/**
+ * Clear every kids gameplay store: level progress (stars/completed levels/unlocked
+ * worlds) plus the locale-dependent component drafts and Section completions.
+ *
+ * This is the confirmed-reset path (01-17). It must remove all three keys and is the
+ * only caller-authorized way to drop `kids-progress`.
+ */
 export function clearAllProgress(): void {
   if (typeof window === "undefined") return;
-  
+
   try {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(COMPONENT_STATE_KEY);
+    localStorage.removeItem(SECTION_COMPLETION_KEY);
   } catch {
     console.error("Failed to clear all progress");
   }
 }
-
-// Section completion tracking
-const SECTION_COMPLETION_KEY = "kids-section-completion";
 
 interface SectionCompletionState {
   [levelSlug: string]: {
@@ -220,6 +228,39 @@ export function clearSectionCompletion(levelSlug: string): void {
     localStorage.setItem(SECTION_COMPLETION_KEY, JSON.stringify(state));
   } catch {
     console.error("Failed to clear section completion");
+  }
+}
+
+/**
+ * Invalidate locale-incompatible interaction state for a genuine user language change
+ * (01-17).
+ *
+ * Section completions are keyed by numeric document-order index and component drafts by
+ * `useId`, and both are specific to the compiled MDX of the locale that produced them
+ * (en `1-1-meet-promi` has ten Sections, es has seven). Carrying an old locale's index or
+ * `useId` into a translated Section tree would silently unlock a challenge the child
+ * never solved, so both stores are cleared *across every slug* before the translated MDX
+ * mounts.
+ *
+ * This NEVER touches `kids-progress` (stars/completed levels/unlocked worlds), the
+ * music/sound preference, or the persisted locale preference.
+ *
+ * Unlike the other progress helpers — which swallow storage errors — this reports
+ * success/failure so the caller can fail closed (retain the current effective locale
+ * rather than activate translated MDX with stale completion keys) when storage is denied.
+ *
+ * @returns `true` when both keys are cleared (or absent), `false` on any storage error.
+ */
+export function invalidateLocaleIncompatibleInteractions(): boolean {
+  if (typeof window === "undefined") return true;
+
+  try {
+    localStorage.removeItem(COMPONENT_STATE_KEY);
+    localStorage.removeItem(SECTION_COMPLETION_KEY);
+    return true;
+  } catch (error) {
+    console.error("Failed to invalidate locale-incompatible interaction state", error);
+    return false;
   }
 }
 
