@@ -1,0 +1,19 @@
+# 01-17 Task 1 RED evidence (compiled-MDX language switching + persisted locale signal)
+
+Base commit: 2ea2fc8d1c246ace06638161508e4c886d1c1584
+
+The task-1 tests in src/__tests__/kids/level-locale.test.tsx import and assert
+symbols that do not exist in the base implementation:
+
+  - `LOCALE_PREFERENCE_KEY`, `loadMessages`, `transitionLocale`, `readPersistedLocale`
+    (src/lib/i18n/client.ts)  -> grep count at base: 0
+  - `useLocalePreference` / locale preference context (src/components/providers/index.tsx)
+    -> grep count at base: 0
+
+=> The new describe block ("client locale preference drives compiled MDX (01-17 task 1)")
+fails at import time / on the new assertions before the GREEN implementation, and the
+"ten en Sections vs seven es Sections" reactive-locale test fails with the previous
+hard-coded `useLocale: () => "en"` mock (no way to drive a locale change).
+
+Semantic RED assessment: the named target tests fail on their planned assertions
+(import/absence of the persisted-preference signal) before the GREEN implementation.

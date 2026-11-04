@@ -1,0 +1,24 @@
+# 01-17 Task 2 RED evidence (progress-preserving language switch + full reset)
+
+Base commit: 2ea2fc8d1c246ace06638161508e4c886d1c1584
+
+src/__tests__/kids/settings-locale.test.tsx asserts behaviour that the base code
+does NOT provide:
+
+  - `invalidateLocaleIncompatibleInteractions` (src/lib/kids/progress.ts)
+    -> grep count at base: 0
+  - The base `clearAllProgress` removed only `kids-progress` + `kids-component-state`
+    (NOT `kids-section-completion`) and the base `handleLanguageChange` called
+    `clearAllProgress()` (wiping stars on every language change) plus a hard reload.
+  - The base SettingsButton used `setLocale()` (cookie + window.location.reload).
+
+=> On the base code:
+  * "switches UI messages and MDX together ... retaining stars" FAILS (stars wiped by
+    handleLanguageChange -> clearAllProgress).
+  * "invalidates ... useId drafts" FAILS (no invalidation helper; and clearAllProgress
+    would also wipe progress).
+  * "confirming the reset removes ... kids-section-completion" FAILS (SECTION key not
+    removed by clearAllProgress).
+
+Semantic RED assessment: each named target test fails on its planned assertion before
+the GREEN implementation.
