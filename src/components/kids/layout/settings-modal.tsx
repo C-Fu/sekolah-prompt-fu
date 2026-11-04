@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { clearAllProgress, getTotalStars, getCompletedLevelsCount } from "@/lib/kids/progress";
-import { setLocale } from "@/lib/i18n/client";
+import { useLocalePreference } from "@/components/providers";
 import { analyticsKids } from "@/lib/analytics";
 import { Settings, X, Globe, Trash2, Check, Volume2 } from "lucide-react";
 import { MusicVolumeSlider } from "./background-music";
@@ -56,20 +56,32 @@ const smallPixelClipPath = "polygon(0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, c
 
 function SettingsModal({ onClose }: { onClose: () => void }) {
   const t = useTranslations("kids.settings");
+  const tCommon = useTranslations("common");
   const currentLocale = useLocale();
   const router = useRouter();
+  const localePreference = useLocalePreference();
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [resetComplete, setResetComplete] = useState(false);
+  const [languageError, setLanguageError] = useState(false);
 
   const stars = getTotalStars();
   const completed = getCompletedLevelsCount();
 
   const handleLanguageChange = (locale: string) => {
     if (locale === currentLocale) return;
-    
+
+    // Genuine user-initiated change: the provider invalidates locale-incompatible
+    // Section completions/drafts (never kids-progress or sound) and switches messages +
+    // compiled MDX atomically, without navigation. Confirmed reset owns clearAllProgress.
+    setLanguageError(false);
     analyticsKids.changeLanguage(locale);
-    clearAllProgress();
-    setLocale(locale);
+    localePreference?.setUserLocale(locale).then((result) => {
+      if (result && !result.ok) {
+        // Invalidation failed (storage denied): retain the current effective locale and
+        // surface it rather than activating translated MDX with stale completion keys.
+        setLanguageError(true);
+      }
+    });
   };
 
   const handleResetProgress = () => {
@@ -171,6 +183,11 @@ function SettingsModal({ onClose }: { onClose: () => void }) {
               </button>
             ))}
           </div>
+          {languageError && (
+            <p role="alert" className="mt-2 text-xs text-red-600 font-medium">
+              {tCommon("somethingWentWrong")}
+            </p>
+          )}
         </div>
 
         {/* Progress Info */}
