@@ -3,7 +3,7 @@
 import { useState, useEffect, useId } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { useLevelSlug, useSectionNavigation } from "@/components/kids/providers/level-context";
+import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
 
 interface Problem {
@@ -34,13 +34,14 @@ export function PromptDoctor({
 }: PromptDoctorProps) {
   const t = useTranslations("kids.promptDoctor");
   const levelSlug = useLevelSlug();
-  const { currentSection, markSectionComplete, registerSectionRequirement } = useSectionNavigation();
+  const scope = useSectionIdentity();
   const componentId = useId();
   
-  // Register that this section has an interactive element requiring completion
+  // Register that this Section has an interactive element requiring completion,
+  // routed through the Section scope so it binds to the containing Section.
   useEffect(() => {
-    registerSectionRequirement(currentSection);
-  }, [currentSection, registerSectionRequirement]);
+    scope?.registerRequirement(true);
+  }, [scope]);
   
   const displayTitle = title || t("title");
 
@@ -81,10 +82,11 @@ export function PromptDoctor({
     
     if (newFixed.length === problems.length) {
       setIsHealed(true);
-      // Mark section as complete
-      if (levelSlug) {
-        markSectionCompleted(levelSlug, currentSection);
-        markSectionComplete(currentSection);
+      // Mark the containing Section complete, keyed by its resolved index.
+      if (levelSlug && scope) {
+        const index = scope.getIndex();
+        if (index !== null) markSectionCompleted(levelSlug, index);
+        scope.markComplete();
       }
     }
   };
