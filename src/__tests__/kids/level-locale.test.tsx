@@ -761,3 +761,169 @@ describe("prompt editing consumers bind to their containing Section (01-16 task 
     expect(isSectionCompleted(SLUG, 0)).toBe(false);
   });
 });
+
+/**
+ * 01-16 task 3 — the real compiled en `1-1-meet-promi` level proves adjacent repeated
+ * challenges lock and complete independently.
+ *
+ * Real Section layout (0-indexed): 0/1/2 Panel, 3 WordPredictor (mat), 4 WordPredictor
+ * (time), 5/6 Panel, 7 PromptVsMistake (good), 8 PromptVsMistake (good), 9 Panel+Complete.
+ */
+describe("real compiled MDX: repeated adjacent challenges lock independently (01-16 task 3)", () => {
+  async function renderReal() {
+    render(
+      <LevelProvider levelSlug={SLUG}>
+        <LevelContentWrapper levelSlug={SLUG} levelNumber="1-1" />
+      </LevelProvider>
+    );
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(10);
+    });
+  }
+
+  function sectionEl(index: number): HTMLElement {
+    return document.querySelector(`section[data-section-index="${index}"]`) as HTMLElement;
+  }
+
+  /** Click a button by accessible name within a specific Section (works offscreen). */
+  function clickInSection(index: number, name: RegExp | string) {
+    fireEvent.click(within(sectionEl(index)).getByRole("button", { name, hidden: true }));
+  }
+
+  /** Solve a WordPredictor in a Section: pick the option then submit. */
+  async function solveWordPredictor(index: number, option: string) {
+    clickInSection(index, option);
+    await waitFor(() => {
+      expect(within(sectionEl(index)).getByRole("button", { name: "check", hidden: true })).toBeEnabled();
+    });
+    clickInSection(index, "check");
+  }
+
+  /** Solve a PromptVsMistake by picking the "good" option (matched by text). */
+  function solvePromptVsMistake(index: number, goodText: RegExp) {
+    clickInSection(index, goodText);
+  }
+
+  async function walkForwardToSection(target: number) {
+    for (let i = 0; i < 10; i++) {
+      const active = document.querySelector("section[data-section-index]:not([hidden])");
+      const activeIndex = Number(active?.getAttribute("data-section-index"));
+      if (activeIndex === target) return;
+      const next = screen.queryByRole("button", { name: "navigation.next" });
+      if (!next || (next as HTMLButtonElement).disabled) return;
+      fireEvent.click(next);
+      await waitFor(() => {
+        expect(document.querySelector("section[data-section-index]:not([hidden])")).not.toBeNull();
+      });
+    }
+  }
+
+  it("an off-render WordPredictor completion persists its own Section index, not the cursor", async () => {
+    await renderReal();
+    // Cursor stays at Section 0; drive the offscreen WordPredictor in Section 3.
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+    await solveWordPredictor(3, "mat");
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 3)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+  });
+
+  it("WordPredictor Sections 3 and 4 lock and complete independently through forward/back", async () => {
+    await renderReal();
+
+    await walkForwardToSection(3);
+    expect(document.querySelector('section[data-section-index]:not([hidden])')).toHaveAttribute(
+      "data-section-index",
+      "3"
+    );
+    // Section 3 requires completion and is incomplete → locked.
+    expect(await nextButton()).toBeDisabled();
+
+    await solveWordPredictor(3, "mat");
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "navigation.next" })).toBeEnabled();
+    });
+    // Completion is isolated to Section 3.
+    expect(isSectionCompleted(SLUG, 3)).toBe(true);
+    expect(isSectionCompleted(SLUG, 4)).toBe(false);
+
+    // Advance to Section 4: it must lock on its own, unhelped by Section 3.
+    fireEvent.click(await nextButton());
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index]:not([hidden])')).toHaveAttribute(
+        "data-section-index",
+        "4"
+      );
+    });
+    expect(await nextButton()).toBeDisabled();
+
+    await solveWordPredictor(4, "time");
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 4)).toBe(true);
+    });
+    // Section 3 remains complete; Section 4's key is its own index.
+    expect(isSectionCompleted(SLUG, 3)).toBe(true);
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Back to Section 3: the lock state persists (already complete → Next enabled).
+    fireEvent.click(screen.getByRole("button", { name: "navigation.back" }));
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index]:not([hidden])')).toHaveAttribute(
+        "data-section-index",
+        "3"
+      );
+    });
+    expect(await nextButton()).toBeEnabled();
+  });
+
+  it("PromptVsMistake Sections 7 and 8 lock and complete independently to the map link", async () => {
+    await renderReal();
+
+    // Solve the earlier interactive Sections so we can reach 7.
+    await solveWordPredictor(3, "mat");
+    await solveWordPredictor(4, "time");
+    await walkForwardToSection(7);
+    expect(document.querySelector('section[data-section-index]:not([hidden])')).toHaveAttribute(
+      "data-section-index",
+      "7"
+    );
+    expect(await nextButton()).toBeDisabled();
+
+    solvePromptVsMistake(7, /friendly dragon/);
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 7)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 8)).toBe(false);
+
+    fireEvent.click(await nextButton());
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index]:not([hidden])')).toHaveAttribute(
+        "data-section-index",
+        "8"
+      );
+    });
+    expect(await nextButton()).toBeDisabled();
+
+    solvePromptVsMistake(8, /poem about the ocean/);
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 8)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 7)).toBe(true);
+
+    // Section 9 is the final Section → the Next button is replaced by the map link.
+    fireEvent.click(await nextButton());
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index]:not([hidden])')).toHaveAttribute(
+        "data-section-index",
+        "9"
+      );
+    });
+    await waitFor(() => {
+      const mapLink = screen.getByRole("link", { name: /level\.map/ });
+      expect(mapLink).toHaveAttribute("href", "/kids/map");
+    });
+    expect(screen.queryByRole("button", { name: "navigation.next" })).toBeNull();
+  });
+});
