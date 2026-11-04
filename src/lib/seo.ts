@@ -24,10 +24,13 @@ export const NOINDEX_ROBOTS: Metadata["robots"] = {
 };
 
 /**
- * Returns the absolute site origin without a trailing slash
+ * Returns the absolute site origin without a trailing slash.
+ *
+ * Derived from the build-time `NEXT_PUBLIC_SITE_URL` so canonical URLs never
+ * depend on the removed community auth configuration.
  */
 export function getBaseUrl(): string {
-  return (process.env.NEXTAUTH_URL || "https://prompts.chat").replace(/\/+$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://prompts.chat").replace(/\/+$/, "");
 }
 
 /**
@@ -36,14 +39,6 @@ export function getBaseUrl(): string {
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//.test(path)) return path;
   return `${getBaseUrl()}${path.startsWith("/") ? path : `/${path}`}`;
-}
-
-/**
- * Returns the canonical path of a paginated listing.
- * The first page never carries a `page` parameter.
- */
-export function paginatedPath(path: string, page: number): string {
-  return page > 1 ? `${path}?page=${page}` : path;
 }
 
 /**
@@ -71,33 +66,6 @@ export function toMetaDescription(text: string, maxLength = 160): string {
   const lastSpace = cut.lastIndexOf(" ");
   const trimmed = lastSpace > maxLength * 0.6 ? cut.slice(0, lastSpace) : cut;
   return `${trimmed.replace(/[\s,;:.\-–—]+$/, "")}…`;
-}
-
-/**
- * Escapes a value for use in XML. Next.js writes sitemap values into the XML
- * as-is, so a URL with a query string such as "?format=jpg&name=large" would
- * otherwise make the whole sitemap invalid.
- */
-export function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
-/**
- * Turns a stored media URL into an absolute, XML-safe URL for an image
- * sitemap entry, or null when it isn't a usable http(s) URL
- */
-export function toSitemapImageUrl(mediaUrl: string): string | null {
-  try {
-    const url = new URL(mediaUrl, getBaseUrl());
-    return url.protocol === "http:" || url.protocol === "https:" ? escapeXml(url.href) : null;
-  } catch {
-    return null;
-  }
 }
 
 interface PageMetadataOptions {
