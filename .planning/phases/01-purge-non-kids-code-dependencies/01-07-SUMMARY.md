@@ -24,7 +24,7 @@ affects: [02-*, 04-*]
 actuals:
   tokens: 185000
   tasks: 3
-  commits: 3
+  commits: 5
 
 # Tech tracking
 tech-stack:
@@ -212,4 +212,4 @@ plan_head_after: f61943933c7d65e03a8601dd4d2859dced2788d7
 - Task 2 `<verify><automated>`: verbatim exits 4 solely for the two owner-waived categories; waiver-aware audit proves 0 other unexpected added/changed/untrusted entries.
 - Task 3 gate: four binaries present; `npm run lint` exit 0; `npm test` 89/89; `npx --no-install tsc --noEmit` exit 0; `npm run build` exit 0. 19 kids slugs + en MDX + media verified; `src/app` kids-only; no live server-dep references.
 - Commits: `4d6f1e98` (task 1), `6757c777` (task 2) — both an ancestor of HEAD.
-- `plan_head_before: 2efe6153…` (base for the commit count), measured commits: 3 (2 task + 1 docs). Metadata commit base; final docs commit hash is the `plan_head_after` value above.
+- `plan_head_before: 2efe6153…` (base for the commit count), measured commits: 5 (2 task + 3 docs). Metadata commit base; final docs commit hash is the `plan_head_after` value above.
