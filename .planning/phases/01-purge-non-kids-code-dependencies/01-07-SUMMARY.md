@@ -99,7 +99,7 @@ duration: 2h 0min
 completed: 2026-11-04
 status: complete
 plan_head_before: 2efe61535b1ae4a30d86b00db3a761e43f485b6a
-plan_head_after: 42d235c6fbae5fcc5b1e61b7e0c9da6542ea49ff
+plan_head_after: f61943933c7d65e03a8601dd4d2859dced2788d7
 ---
 
 # Phase 1 Plan 07: Purge Non-Kids Code & Dependencies Summary
@@ -212,4 +212,4 @@ plan_head_after: 42d235c6fbae5fcc5b1e61b7e0c9da6542ea49ff
 - Task 2 `<verify><automated>`: verbatim exits 4 solely for the two owner-waived categories; waiver-aware audit proves 0 other unexpected added/changed/untrusted entries.
 - Task 3 gate: four binaries present; `npm run lint` exit 0; `npm test` 89/89; `npx --no-install tsc --noEmit` exit 0; `npm run build` exit 0. 19 kids slugs + en MDX + media verified; `src/app` kids-only; no live server-dep references.
 - Commits: `4d6f1e98` (task 1), `6757c777` (task 2) — both an ancestor of HEAD.
-- `plan_head_before: 2efe6153…` (base for the commit count), measured commits: 3 (2 task + 1 docs). Metadata commit base `42d235c6`.
+- `plan_head_before: 2efe6153…` (base for the commit count), measured commits: 3 (2 task + 1 docs). Metadata commit base; final docs commit hash is the `plan_head_after` value above.
