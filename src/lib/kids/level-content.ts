@@ -23,11 +23,12 @@
  */
 
 import type { ComponentType } from "react";
+import type { MDXComponents } from "mdx/types";
 import { supportedLocales, defaultLocale } from "@/lib/i18n/config";
 import { getLevelBySlug } from "@/lib/kids/levels";
 
 /** A compiled MDX module default export. */
-export type CompiledLevelContent = ComponentType;
+export type CompiledLevelContent = ComponentType<{ components?: MDXComponents }>;
 
 /** Per-(locale, slug) lazy compiled-MDX loaders. */
 const L_ar__1_1_meet_promi = () => import("@/content/kids/ar/1-1-meet-promi.mdx");

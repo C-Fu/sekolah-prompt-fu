@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { render, screen, waitFor, cleanup } from "@testing-library/react";
+import { useEffect } from "react";
 
 // `page.tsx` pulls in `@/lib/seo` -> `prompts.config.ts`; the global setup mock of
 // `@/lib/config` does not expose `defineConfig`, so stub the config module directly
@@ -8,10 +9,24 @@ vi.mock("@/../prompts.config", () => ({
   default: { branding: { name: "prompts.chat" } },
 }));
 
+// next-intl `useTranslations`/`useLocale` are mocked to deterministic values; the
+// wrapper must not perform a request-time locale read (Phase 1: provider locale only).
+vi.mock("next-intl", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("next-intl")>();
+  return {
+    ...actual,
+    useLocale: () => "en",
+    useTranslations: () => (key: string) => key,
+  };
+});
+
 import { loadLevelContent } from "@/lib/kids/level-content";
 import { getAllLevels, getLevelBySlug } from "@/lib/kids/levels";
 import { generateStaticParams } from "@/app/kids/level/[slug]/page";
 import { useMDXComponents } from "../../../mdx-components";
+import { LevelProvider, useSectionIdentity, useSectionNavigation } from "@/components/kids/providers/level-context";
+import { Section } from "@/components/kids/elements";
+import { LevelContentWrapper } from "@/components/kids/layout/level-content-wrapper";
 
 /**
  * 01-15 Task 1 — client-side compiled level MDX selection.
@@ -80,6 +95,339 @@ describe("level-content locale/slug selection", () => {
     await expect(loadLevelContent("en", "does-not-exist")).resolves.toBeNull();
     await expect(loadLevelContent("en", "1-1-meet-promi")).resolves.toHaveProperty(
       "Component"
+    );
+  });
+});
+
+/**
+ * 01-15 Task 2 — mounted MDX Section rendering + ordered identity registry.
+ */
+
+afterEach(() => {
+  cleanup();
+});
+
+/** Probe that surfaces the resolved containing Section index to the test DOM. */
+function IndexProbe() {
+  const scope = useSectionIdentity();
+  return (
+    <span data-testid="probe-index">
+      {scope?.index === null || scope?.index === undefined ? "unresolved" : scope.index}
+    </span>
+  );
+}
+
+/** Probe that surfaces the containing Section's identity-scoped requirement state. */
+function RequirementProbe() {
+  const scope = useSectionIdentity();
+  return (
+    <span data-testid="probe-requirement">
+      {scope?.requiresCompletion() ? "required" : "free"}:
+      {scope?.isComplete() ? "complete" : "incomplete"}
+    </span>
+  );
+}
+
+/** Legacy consumer probe: registers a requirement through the legacy numeric signature. */
+function LegacyRequirementProbe() {
+  const { currentSection, registerSectionRequirement } = useSectionNavigation();
+  useEffect(() => {
+    registerSectionRequirement(currentSection);
+  }, [currentSection, registerSectionRequirement]);
+  return (
+    <>
+      <span data-testid="legacy-probe">legacy</span>
+      <RequirementProbe />
+    </>
+  );
+}
+
+describe("mounted MDX Section registry", () => {
+  it("renders one dot per real compiled Section in document order", async () => {
+    render(
+      <LevelProvider levelSlug="1-1-meet-promi">
+        <LevelContentWrapper levelSlug="1-1-meet-promi" levelNumber="1-1" />
+      </LevelProvider>
+    );
+
+    // Wait for the async compiled MDX to mount all ten Sections and resolve order.
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(10);
+    });
+
+    // Document order indexes are strictly ascending 0..9.
+    const indexes = Array.from(
+      document.querySelectorAll("section[data-section-index]")
+    ).map((el) => Number(el.getAttribute("data-section-index")));
+    expect(indexes).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+    // Desktop dot row has one button per section (mobile row mirrors it).
+    const desktopDots = document.querySelectorAll(
+      'div.hidden.sm\\:flex button[aria-label^="Go to section"]'
+    );
+    expect(desktopDots.length).toBe(10);
+  });
+
+  it("resolves a Section-scoped descendant index only after commit", async () => {
+    render(
+      <LevelProvider>
+        <Section>
+          <IndexProbe />
+        </Section>
+        <Section>
+          <IndexProbe />
+        </Section>
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    const sections = document.querySelectorAll("section[data-section-index]");
+    expect(sections[0].getAttribute("data-section-index")).toBe("0");
+    expect(sections[1].getAttribute("data-section-index")).toBe("1");
+
+    // The active section's probe resolves to its ordered index.
+    const firstProbe = document.querySelector(
+      'section[data-section-index="0"] [data-testid="probe-index"]'
+    );
+    expect(firstProbe?.textContent).toBe("0");
+  });
+
+  it("routes a legacy requirement to the containing Section identity, not the cursor", async () => {
+    render(
+      <LevelProvider>
+        <Section>
+          <span>plain first section</span>
+          <RequirementProbe />
+        </Section>
+        <Section>
+          <LegacyRequirementProbe />
+        </Section>
+        <Section>
+          <span>third</span>
+        </Section>
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    // The cursor is 0, yet the legacy probe lives in Section index 1. The requirement
+    // must attach to *its own* Section (fail closed) and remain incomplete.
+    const firstReq = document.querySelector(
+      'section[data-section-index="0"] [data-testid="probe-requirement"]'
+    );
+    const secondReq = document.querySelector(
+      'section[data-section-index="1"] [data-testid="probe-requirement"]'
+    );
+    expect(firstReq?.textContent).toBe("free:incomplete");
+    expect(secondReq?.textContent).toBe("required:incomplete");
+  });
+
+  it("locks Next while the active Section has an unresolved requirement", async () => {
+    // Controlled compiled component: section 0 is interactive (registers a
+    // requirement), section 1 is plain.
+    function InteractiveFirst() {
+      return (
+        <>
+          <Section>
+            <LegacyRequirementProbe />
+          </Section>
+          <Section>
+            <span>plain second</span>
+          </Section>
+        </>
+      );
+    }
+
+    render(
+      <LevelProvider levelSlug="1-1-meet-promi">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-promi"
+          levelNumber="1-1"
+          loadContent={async () => ({ Component: InteractiveFirst, effectiveLocale: "en" })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    // Active section 0 requires completion and is incomplete → Next locked.
+    await waitFor(() => {
+      const next = screen.getByRole("button", { name: "navigation.next" });
+      expect(next).toBeDisabled();
+    });
+  });
+
+  it("shows the comingSoon panel when the level has no Sections", async () => {
+    render(
+      <LevelProvider levelSlug="1-1-meet-promi">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-promi"
+          levelNumber="1-1"
+          loadContent={async () => ({
+            Component: () => <div data-testid="empty-mdx">no sections here</div>,
+            effectiveLocale: "en",
+          })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("level.comingSoon")).toBeInTheDocument();
+    });
+  });
+
+  it("shows the map link on the final Section instead of Next", async () => {
+    // Controlled compiled component with three plain (non-interactive) Sections so the
+    // Next button advances freely to the final Section.
+    function ThreePlain() {
+      return (
+        <>
+          <Section>
+            <span>one</span>
+          </Section>
+          <Section>
+            <span>two</span>
+          </Section>
+          <Section>
+            <span>three</span>
+          </Section>
+        </>
+      );
+    }
+
+    render(
+      <LevelProvider levelSlug="1-1-meet-promi">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-promi"
+          levelNumber="1-1"
+          loadContent={async () => ({ Component: ThreePlain, effectiveLocale: "en" })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    // Advance to the final Section (all plain → not locked).
+    for (let i = 0; i < 2; i++) {
+      const next = await screen.findByRole("button", { name: "navigation.next" });
+      (next as HTMLButtonElement).click();
+      await waitFor(() => {
+        expect(screen.queryByRole("button", { name: "navigation.next" })).not.toBeNull();
+      });
+    }
+
+    // On the final section the Next button is replaced by the Map link.
+    await waitFor(() => {
+      const mapLink = screen.getByRole("link", { name: /level\.map/ });
+      expect(mapLink).toHaveAttribute("href", "/kids/map");
+    });
+    expect(screen.queryByRole("button", { name: "navigation.next" })).toBeNull();
+  });
+
+  it("fails closed on real compiled MDX: a plain Section advances, an interactive one locks", async () => {
+    render(
+      <LevelProvider levelSlug="1-1-meet-promi">
+        <LevelContentWrapper levelSlug="1-1-meet-promi" levelNumber="1-1" />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(10);
+    });
+
+    // Section 0 of en 1-1 is a plain Panel → Next is enabled (no requirement).
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "navigation.next" })).toBeEnabled();
+    });
+
+    // Walk forward through the plain sections; the first interactive Section (which
+    // contains WordPredictor / PromptVsMistake) stays locked because its identity-scoped
+    // requirement is registered but not yet complete (01-16 wires completion).
+    let lockedSeen = false;
+    for (let i = 0; i < 9; i++) {
+      const next = screen.queryByRole("button", { name: "navigation.next" });
+      if (!next) break; // reached the final Section (map link)
+      if ((next as HTMLButtonElement).disabled) {
+        lockedSeen = true;
+        break;
+      }
+      (next as HTMLButtonElement).click();
+      await waitFor(() => {
+        expect(
+          document.querySelector("section[data-section-index]:not([hidden])")
+        ).not.toBeNull();
+      });
+    }
+
+    expect(lockedSeen).toBe(true);
+  });
+
+  it("keeps visited Sections mounted so their state survives back navigation", async () => {
+    function StatefulSections() {
+      return (
+        <>
+          <Section>
+            <input data-testid="state-input" defaultValue="draft-kept" />
+          </Section>
+          <Section>
+            <span>two</span>
+          </Section>
+          <Section>
+            <span>three</span>
+          </Section>
+        </>
+      );
+    }
+
+    render(
+      <LevelProvider levelSlug="1-1-meet-promi">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-promi"
+          levelNumber="1-1"
+          loadContent={async () => ({ Component: StatefulSections, effectiveLocale: "en" })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    // Capture the DOM node of the first section, then navigate forward and back. The
+    // same node must persist (all sections stay mounted, only visibility toggles).
+    const firstSection = document.querySelector('section[data-section-index="0"]');
+    const input = screen.getByTestId("state-input") as HTMLInputElement;
+    input.value = "typed-by-user";
+
+    const next = await screen.findByRole("button", { name: "navigation.next" });
+    (next as HTMLButtonElement).click();
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).toHaveAttribute(
+        "hidden"
+      );
+    });
+
+    const back = screen.getByRole("button", { name: "navigation.back" });
+    (back as HTMLButtonElement).click();
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toHaveAttribute(
+        "hidden"
+      );
+    });
+
+    // Same node retained and its live input value preserved.
+    expect(document.querySelector('section[data-section-index="0"]')).toBe(firstSection);
+    expect((screen.getByTestId("state-input") as HTMLInputElement).value).toBe(
+      "typed-by-user"
     );
   });
 });

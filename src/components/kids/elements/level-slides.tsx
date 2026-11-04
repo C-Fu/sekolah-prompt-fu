@@ -1,18 +1,86 @@
 "use client";
 
-import { useState, Children, isValidElement, ReactNode, ReactElement } from "react";
+import {
+  useState,
+  useRef,
+  useMemo,
+  useLayoutEffect,
+  Children,
+  isValidElement,
+  ReactNode,
+  ReactElement,
+} from "react";
 import { ChevronLeft, ChevronRight, Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import {
+  SectionScopeContext,
+  SectionScopeValue,
+  useSectionRegistry,
+  useSectionNavigation,
+} from "@/components/kids/providers/level-context";
 
 interface SectionProps {
   children: ReactNode;
 }
 
+/**
+ * A mounted MDX Section (01-15).
+ *
+ * Every Section stays mounted for the lifetime of its level tree and owns a stable
+ * identity. It registers its DOM element with the ordered registry, exposes its
+ * identity to interactive descendants via `SectionScopeContext`, and hides + inerts
+ * itself when it is not the active section.
+ *
+ * `useMDXComponents` maps the MDX `<Section>` element to this component (01-04
+ * preserves that mapping).
+ */
 export function Section({ children }: SectionProps) {
-  return <>{children}</>;
+  const registry = useSectionRegistry();
+  const { currentSection } = useSectionNavigation();
+  const [identity] = useState(() => registry.createIdentity());
+  const elementRef = useRef<HTMLElement | null>(null);
+
+  useLayoutEffect(() => {
+    registry.registerSection(identity, elementRef.current);
+    return () => registry.unregisterSection(identity);
+  }, [identity, registry]);
+
+  const index = registry.resolveIndex(identity);
+
+  const scope = useMemo<SectionScopeValue>(
+    () => ({
+      identity,
+      registerRequirement: (required: boolean) =>
+        registry.registerRequirementByIdentity(identity, required),
+      markComplete: () => registry.markSectionCompleteByIdentity(identity),
+      isComplete: () => registry.isSectionCompleteByIdentity(identity),
+      requiresCompletion: () => registry.sectionRequiresCompletionByIdentity(identity),
+      index,
+      getIndex: () => registry.resolveIndex(identity),
+    }),
+    [identity, registry, index]
+  );
+
+  // Before the registry has resolved order (pre-commit), keep the section visible so
+  // content is never blank; once resolved, only the active section is shown.
+  const isActive = index === null ? true : index === currentSection;
+
+  return (
+    <SectionScopeContext.Provider value={scope}>
+      <section
+        ref={elementRef}
+        data-section-index={index ?? undefined}
+        hidden={!isActive}
+        aria-hidden={!isActive || undefined}
+        {...(!isActive ? { inert: "" as unknown as boolean } : {})}
+      >
+        {children}
+      </section>
+    </SectionScopeContext.Provider>
+  );
 }
 
 interface LevelSlidesProps {
@@ -20,7 +88,7 @@ interface LevelSlidesProps {
   levelSlug: string;
 }
 
-export function LevelSlides({ children, levelSlug }: LevelSlidesProps) {
+export function LevelSlides({ children, levelSlug: _levelSlug }: LevelSlidesProps) {
   const t = useTranslations("kids");
   const [currentSection, setCurrentSection] = useState(0);
 
@@ -58,7 +126,7 @@ export function LevelSlides({ children, levelSlug }: LevelSlidesProps) {
       {/* Content area */}
       <div className="flex-1 overflow-hidden flex items-center justify-center p-4">
         <div className="w-full max-w-2xl h-full flex flex-col justify-center">
-          <div 
+          <div
             key={currentSection}
             className="animate-in fade-in slide-in-from-right-4 duration-300 prose max-w-none kids-prose"
           >
@@ -106,21 +174,12 @@ export function LevelSlides({ children, levelSlug }: LevelSlidesProps) {
 
           {/* Next button or Map link */}
           {!isLastSection ? (
-            <Button
-              size="lg"
-              onClick={goToNext}
-              className="rounded-full px-6"
-            >
+            <Button size="lg" onClick={goToNext} className="rounded-full px-6">
               {t("navigation.next")}
               <ChevronRight className="h-5 w-5 ml-1" />
             </Button>
           ) : (
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full px-6"
-            >
+            <Button asChild variant="outline" size="lg" className="rounded-full px-6">
               <Link href="/kids/map">
                 <Map className="h-5 w-5 mr-1" />
                 {t("level.map")}
