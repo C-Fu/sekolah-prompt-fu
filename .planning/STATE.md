@@ -1,14 +1,14 @@
 ---
 gsd_state_version: "1.0"
 status: unknown
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-11-04T17:52:01.995Z"
-state_head: dc2867fddd451e357b4d40d5562042f1043a4a1d
+stopped_at: Completed 01-05-PLAN.md
+last_updated: "2026-11-04T18:02:48.932Z"
+state_head: a1d971e09ea93ad47ea16a090c2ba961dc42b86e
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 17
-  completed_plans: 10
+  completed_plans: 12
   percent: 0
 ---
 
@@ -33,10 +33,10 @@ progress:
 
 ## Session
 
-**Last session:** 2026-11-04T17:52:01.947Z
-**Stopped at:** Completed 01-04-PLAN.md
+**Last session:** 2026-11-04T18:02:39.016Z
+**Stopped at:** Completed 01-05-PLAN.md
 **Resume file:** None
-- **Last Completed Plan:** 01-04 (Decouple retained game from legacy SEO/MDX/proxy/instrumentation)
+- **Last Completed Plan:** 01-05 (Prune legacy component families — admin/api/auth/book and bots/categories/changes/comments)
 
 ## Performance Metrics
 
@@ -46,6 +46,7 @@ progress:
 | Phase 01 P10 | 1 min | 2 tasks | 13 files |
 | Phase 01 P11 | 4 min | 2 tasks | 32 files |
 | Phase 01 P04 | 6 min | 2 tasks | 11 files |
+| Phase 01 P05 | 8 min | 2 tasks | 110 files |
 
 ## Decisions
 
@@ -54,3 +55,4 @@ progress:
 - [Phase 01]: Kids MDX registry reduced to the 12 components used by src/content/kids/**/*.mdx plus basic table tags; Section stays bound to the real exported component (no bypass wrapper) so 01-15/01-16 section registration is preserved; book/prompt imports removed.
 - [Phase 01]: src/lib/seo.ts canonical origin now derives from NEXT_PUBLIC_SITE_URL (fallback https://prompts.chat), removing NEXTAUTH_URL coupling; community pagination/sitemap helpers (paginatedPath, escapeXml, toSitemapImageUrl) removed; buildPageMetadata/NOINDEX_ROBOTS retained.
 - [Phase 01]: Sentry instrumentation/config and legacy proxy rewrites deleted; next.config.ts unwrapped from withSentryConfig and stripped of standalone output and legacy redirects/crawler headers; error/not-found pages retargeted to /kids and /kids/map. Static export and image optimization untouched (Phase 2).
+- [Phase 01]: Eight orphaned non-kids component families (admin, api, auth, book, bots, categories, changes, comments) deleted in two atomic groups after proving no retained kids importer references them; added a reusable read-only kids import-closure checker (scripts/check-kids-import-closure.js) as the bounded post-prune verification gate, since full-project tsc still includes stale legacy tests cleaned in 01-13.
