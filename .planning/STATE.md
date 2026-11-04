@@ -10,3 +10,11 @@
 - Storage and game state managed in `localStorage`.
 - Support for Bahasa Melayu (`ms`) added across UI and all 17 MDX levels.
 - Stripping all server/database dependencies (PostgreSQL, Prisma, NextAuth).
+- Root layout is a kids-compatible, auth-free, request-independent shell; the shared `Providers` wrapper exposes only `NextIntlClientProvider` (locale/messages kept as props for later client locale switching).
+- i18n request config is deterministic (bundled default-locale messages, no cookie/header lookup); a locale candidate is validated against `supportedLocales` before any message import path is built.
+
+## Session
+- **Last session:** 2026-11-04
+- **Stopped At:** Completed 01-02-PLAN.md
+- **Resume File:** None
+- **Last Completed Plan:** 01-02 (kids entry shell)
