@@ -1,14 +1,14 @@
 ---
 gsd_state_version: "1.0"
 status: unknown
-stopped_at: Completed 01-08-PLAN.md
-last_updated: "2026-11-04T18:07:19.866Z"
-state_head: 03f915f933fffba350ee9a4bbec378777186f0cc
+stopped_at: Completed 01-09-PLAN.md
+last_updated: "2026-11-04T18:19:24.025Z"
+state_head: 41018c943ac9bf77bc5c7faddf79023dfa5a54b4
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 17
-  completed_plans: 12
+  completed_plans: 13
   percent: 0
 ---
 
@@ -33,10 +33,10 @@ progress:
 
 ## Session
 
-**Last session:** 2026-11-04T18:07:19.806Z
-**Stopped at:** Completed 01-08-PLAN.md
+**Last session:** 2026-11-04T18:19:23.712Z
+**Stopped at:** Completed 01-09-PLAN.md
 **Resume file:** None
-- **Last Completed Plan:** 01-08 (Finish removing non-kids feature component families — 12 branches in two groups)
+- **Last Completed Plan:** 01-09 (Selective shared-dependency pruning — book/editor data removed; providers/UI/hooks pruned to live importers)
 
 ## Performance Metrics
 
@@ -48,6 +48,7 @@ progress:
 | Phase 01 P04 | 6 min | 2 tasks | 11 files |
 | Phase 01 P05 | 8 min | 2 tasks | 110 files |
 | Phase 01-purge-non-kids-code-dependencies P08 | 6 min | 2 tasks | 114 files |
+| Phase 01 P09 | 4 min | 2 tasks | 601 files |
 
 ## Decisions
 
@@ -58,3 +59,4 @@ progress:
 - [Phase 01]: Sentry instrumentation/config and legacy proxy rewrites deleted; next.config.ts unwrapped from withSentryConfig and stripped of standalone output and legacy redirects/crawler headers; error/not-found pages retargeted to /kids and /kids/map. Static export and image optimization untouched (Phase 2).
 - [Phase 01]: Eight orphaned non-kids component families (admin, api, auth, book, bots, categories, changes, comments) deleted in two atomic groups after proving no retained kids importer references them; added a reusable read-only kids import-closure checker (scripts/check-kids-import-closure.js) as the bounded post-prune verification gate, since full-project tsc still includes stale legacy tests cleaned in 01-13.
 - [Phase 01-purge-non-kids-code-dependencies]: Defer dangling src/lib/plugins/widgets import to 01-06/01-12 rather than expand 01-08 scope (dead chain, outside kids closure).
+- [Phase 01]: Selective shared-dependency prune (01-09): removed book MDX corpus (src/content/book) and editor data (src/data) plus 3 provider siblings, 31 UI primitives and src/hooks/use-mobile.ts, keeping only files with a live importer in the retained kids closure; providers/index.tsx, ui/button.tsx and ui/sonner.tsx retained; dangling importers in 01-12/01-13-owned subtrees logged, not fixed.
