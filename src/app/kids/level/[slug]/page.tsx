@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
 import { getLevelBySlug, getAllLevels } from "@/lib/kids/levels";
 import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo";
 import { LevelContentWrapper } from "@/components/kids/layout/level-content-wrapper";
@@ -33,27 +32,14 @@ export async function generateMetadata({ params }: LevelPageProps): Promise<Meta
 export default async function LevelPage({ params }: LevelPageProps) {
   const { slug } = await params;
   const level = getLevelBySlug(slug);
-  const locale = await getLocale();
 
   if (!level) {
     notFound();
   }
 
-  // Try to load locale-specific content, fall back to English
-  let Content;
-  try {
-    Content = (await import(`@/content/kids/${locale}/${slug}.mdx`)).default;
-  } catch {
-    try {
-      Content = (await import(`@/content/kids/en/${slug}.mdx`)).default;
-    } catch {
-      Content = null;
-    }
-  }
-
+  // Compiled MDX selection happens on the client against a validated slug (01-15),
+  // so this server component stays independent of the request-time browser locale.
   return (
-    <LevelContentWrapper levelSlug={slug} levelNumber={`${level.world}-${level.levelNumber}`}>
-      {Content ? <Content /> : null}
-    </LevelContentWrapper>
+    <LevelContentWrapper levelSlug={slug} levelNumber={`${level.world}-${level.levelNumber}`} />
   );
 }
