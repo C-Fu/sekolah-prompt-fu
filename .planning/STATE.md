@@ -1,9 +1,9 @@
 ---
 gsd_state_version: "1.0"
 status: unknown
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-11-05T00:00:00.000Z"
-state_head: c1099a0b64179ff11ab604794524c1ae57627106
+stopped_at: Completed 01-10-PLAN.md
+last_updated: "2026-11-04T17:37:17.474Z"
+state_head: 475fa21c66c12e09439305cee34b3f12bc2b1c47
 progress:
   total_phases: 4
   completed_phases: 0
@@ -33,13 +33,18 @@ progress:
 
 ## Session
 
-**Last session:** 2026-11-05T00:00:00.000Z
-**Stopped at:** Completed 01-03-PLAN.md
+**Last session:** 2026-11-04T17:36:57.887Z
+**Stopped at:** Completed 01-10-PLAN.md
 **Resume file:** None
-- **Last Completed Plan:** 01-03 (Remove legacy API, machine-readable and root endpoints)
+- **Last Completed Plan:** 01-10 (Delete thirteen legacy non-kids route branches)
 
 ## Performance Metrics
 
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 01 P03 | 1 min | 2 tasks | 83 files |
+| Phase 01 P10 | 1 min | 2 tasks | 13 files |
+
+## Decisions
+
+- [Phase 01]: Thirteen non-kids route trees (auth, [username], about, admin, book, bots, brand, categories, collection, developers, discover, docs, embed) deleted as two atomic route slices; kids entry/map/level/layout and all 01-11-owned routes preserved. Retained routes still linking to deleted paths are out of scope for this slice.
