@@ -60,3 +60,36 @@ Out-of-scope discoveries logged during plan execution (not fixed, per executor s
     (`masonry` et al.) were likewise referenced only from stale legacy tests / already-deleted
     non-kids families.
   - **Action:** leave as-is; 01-13 retires the stale tests.
+
+## From 01-12 (non-kids `src/lib` domain-tree pruning)
+
+- **Dangling `@/lib/bots` import left in dead non-kids helper (out of scope).**
+  `src/lib/related-content.ts:4` imports `{ botSelect, toBotView, type BotView } from "@/lib/bots"`.
+  01-12 removed the `src/lib/bots/` domain tree (declared `<files>`), so this module now has a
+  dangling specifier. `related-content.ts` already carried dangling `@prisma/client` (line 1) and
+  `@/lib/db` (line 3) imports from the 01-06 infrastructure retirement.
+  - **Importer chain is fully dead:** `related-content.ts` has **zero live importers** (only
+    `src/__tests__/lib/related-content.test.ts`); it is not in the retained kids import closure
+    (the closure checker exits 0).
+  - **Owner:** individual `src/lib/` helper cleanup is owned by **01-13** (its `src/lib/`
+    `<files>` and task-1 action "remove unreferenced prompt CRUD, rate limiting, listing,
+    webhook-adjacent, sitemap, old platform utilities"). `src/lib/related-content.ts` is an
+    unreferenced individual helper, so it belongs to 01-13's inventory, not 01-12's declared set.
+  - **Action:** leave as-is in 01-12; 01-13 removes the dead helper.
+
+- **Dangling `src/lib/book/chapters` import left in legacy PDF script (out of scope).**
+  `scripts/generate-book-pdf.ts:18` imports `{ parts, type Chapter } from '../src/lib/book/chapters'`.
+  01-12 removed the `src/lib/book/` tree; the script also references the deleted `src/content/book`
+  path (per the 01-09 note).
+  - **Owner:** `scripts/**` is owned by **01-13** (task 2 explicitly deletes
+    `scripts/generate-book-pdf.ts`). The closure checker ignores it (not a kids entry point).
+  - **Action:** leave as-is in 01-12; 01-13 deletes the script.
+
+- **Individual `src/lib` helpers orphaned by the 01-12 tree deletions (inventory for 01-13).**
+  After removing the five domain trees, these individual helpers have **0 live importers** and are
+  now fully dead (`src/lib/` individual-file cleanup is 01-13's task-1 mandate, outside 01-12's
+  declared `<files>`): `listing-pagination.ts`, `related-content.ts`, `date.ts`, `format.ts`,
+  `list-diff.ts`, `rate-limit.ts`, `run-platforms.ts`, `similarity.ts`, `skill-files.ts`,
+  `trending.ts`, `urls.ts`, `variable-detection.ts`, `works-best-with.ts`. `slug.ts`'s only live
+  importer is `scripts/convert-pairings-to-teams.ts`; `seo.ts` is now kids-only (preserve).
+  - **Action:** recorded for 01-13's inventory; nothing modified here.
