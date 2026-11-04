@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, screen, waitFor, cleanup, fireEvent, within } from "@testing-library/react";
 import { useEffect, type ReactElement } from "react";
 
@@ -9,13 +9,16 @@ vi.mock("@/../prompts.config", () => ({
   default: { branding: { name: "prompts.chat" } },
 }));
 
-// next-intl `useTranslations`/`useLocale` are mocked to deterministic values; the
+// next-intl `useLocale`/`useTranslations` are mocked to deterministic values; the
 // wrapper must not perform a request-time locale read (Phase 1: provider locale only).
+// `vi.hoisted` exposes a mutable locale so 01-17 can drive the wrapper's locale-reactive
+// compiled-MDX selection without rendering the real intl provider.
+const intlMock = vi.hoisted(() => ({ locale: "en" }));
 vi.mock("next-intl", async (importOriginal) => {
   const actual = await importOriginal<typeof import("next-intl")>();
   return {
     ...actual,
-    useLocale: () => "en",
+    useLocale: () => intlMock.locale,
     useTranslations: () => (key: string) => key,
   };
 });
@@ -23,6 +26,12 @@ vi.mock("next-intl", async (importOriginal) => {
 import { loadLevelContent } from "@/lib/kids/level-content";
 import { getAllLevels, getLevelBySlug } from "@/lib/kids/levels";
 import { isSectionCompleted, clearSectionCompletion } from "@/lib/kids/progress";
+import {
+  loadMessages,
+  readPersistedLocale,
+  transitionLocale,
+  LOCALE_PREFERENCE_KEY,
+} from "@/lib/i18n/client";
 import { generateStaticParams } from "@/app/kids/level/[slug]/page";
 import { useMDXComponents } from "../../../mdx-components";
 import { LevelProvider, useSectionIdentity, useSectionNavigation } from "@/components/kids/providers/level-context";
@@ -925,5 +934,142 @@ describe("real compiled MDX: repeated adjacent challenges lock independently (01
       expect(mapLink).toHaveAttribute("href", "/kids/map");
     });
     expect(screen.queryByRole("button", { name: "navigation.next" })).toBeNull();
+  });
+});
+
+/**
+ * 01-17 task 1 — the shared provider locale drives messages + compiled MDX together, with
+ * a validated persisted preference that survives reload and never uses request-time lookup.
+ *
+ * These exercise the wrapper's locale-reactive compiled-MDX selection (with the mocked
+ * provider locale) plus the pure client preference helpers. The full SettingsButton →
+ * provider switch is covered in settings-locale.test.tsx against the real provider.
+ */
+describe("client locale preference drives compiled MDX (01-17 task 1)", () => {
+  beforeEach(() => {
+    intlMock.locale = "en";
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    intlMock.locale = "en";
+  });
+
+  it("loads a bounded, locale-specific message bundle (never a request-time locale)", async () => {
+    const en = await loadMessages("en");
+    const es = await loadMessages("es");
+    expect((en.common as { loading: string }).loading).toBe("Loading...");
+    expect((es.common as { loading: string }).loading).not.toBe("Loading...");
+    // Unsupported candidates resolve to the deterministic default, never an ad-hoc path.
+    const bogus = await loadMessages("../evil");
+    expect((bogus.common as { loading: string }).loading).toBe(
+      (en.common as { loading: string }).loading
+    );
+  });
+
+  it("selects a different compiled MDX component on the same slug when the provider locale changes", async () => {
+    const en = await loadLevelContent("en", SLUG);
+    const es = await loadLevelContent("es", SLUG);
+    expect(es?.effectiveLocale).toBe("es");
+    expect(es?.Component).not.toBe(en?.Component);
+  });
+
+  it("renders ten en Sections but seven es Sections for the same slug as the locale changes", async () => {
+    // en first.
+    intlMock.locale = "en";
+    const { unmount } = render(
+      <LevelProvider levelSlug={SLUG}>
+        <LevelContentWrapper levelSlug={SLUG} levelNumber="1-1" />
+      </LevelProvider>
+    );
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(10);
+    });
+    unmount();
+
+    // es: the compiled es MDX has seven Sections, so a locale remount resets the registry.
+    intlMock.locale = "es";
+    render(
+      <LevelProvider levelSlug={SLUG}>
+        <LevelContentWrapper levelSlug={SLUG} levelNumber="1-1" />
+      </LevelProvider>
+    );
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(7);
+    });
+    const indexes = Array.from(
+      document.querySelectorAll("section[data-section-index]")
+    ).map((el) => Number(el.getAttribute("data-section-index")));
+    expect(indexes).toEqual([0, 1, 2, 3, 4, 5, 6]);
+  });
+
+  it("shows the English fallback MDX for a supported locale with no translated module", async () => {
+    // 'he' is supported by i18n config but has no kids content directory.
+    const he = await loadLevelContent("he", SLUG);
+    const en = await loadLevelContent("en", SLUG);
+    expect(he?.effectiveLocale).toBe("en");
+    expect(he?.Component).toBe(en?.Component);
+  });
+
+  it("reads a persisted preference only when it is a supported locale", () => {
+    localStorage.setItem(LOCALE_PREFERENCE_KEY, "es");
+    expect(readPersistedLocale()).toBe("es");
+
+    localStorage.setItem(LOCALE_PREFERENCE_KEY, "not-a-locale");
+    expect(readPersistedLocale()).toBeNull();
+
+    localStorage.removeItem(LOCALE_PREFERENCE_KEY);
+    expect(readPersistedLocale()).toBeNull();
+  });
+
+  it("treats repeated selection of the already-effective locale as a no-op", () => {
+    localStorage.setItem(LOCALE_PREFERENCE_KEY, "en");
+    const result = transitionLocale("en", "en");
+    expect(result.ok).toBe(true);
+    expect(result.changed).toBe(false);
+    expect(result.locale).toBe("en");
+    // Nothing re-persisted / no invalidation side effects.
+    expect(localStorage.getItem(LOCALE_PREFERENCE_KEY)).toBe("en");
+  });
+
+  it("validates and persists a genuine change (keeping progress and sound keys untouched)", () => {
+    localStorage.setItem("kids-progress", JSON.stringify({ levels: {}, totalStars: 3 }));
+    const setSpy = vi.spyOn(Storage.prototype, "removeItem");
+
+    const result = transitionLocale("es", "en");
+    expect(result.ok).toBe(true);
+    expect(result.changed).toBe(true);
+    expect(result.locale).toBe("es");
+    expect(readPersistedLocale()).toBe("es");
+
+    // The locale preference writer never removes progress or sound keys.
+    const removedKeys = setSpy.mock.calls.map((c) => c[0]);
+    expect(removedKeys).not.toContain("kids-progress");
+    expect(removedKeys).not.toContain("kids-music-enabled");
+    expect(removedKeys).not.toContain(LOCALE_PREFERENCE_KEY);
+    expect(localStorage.getItem("kids-progress")).not.toBeNull();
+    setSpy.mockRestore();
+  });
+
+  it("resolves an unsupported target to the default locale via transition", () => {
+    const result = transitionLocale("../evil", "es");
+    expect(result.ok).toBe(true);
+    expect(result.locale).toBe("en");
+    expect(readPersistedLocale()).toBe("en");
+  });
+
+  it("fails closed and retains the current locale when invalidation is denied", () => {
+    // Deny storage.removeItem so the locale-transition invalidation fails.
+    const removeSpy = vi.spyOn(Storage.prototype, "removeItem").mockImplementation(() => {
+      throw new Error("storage denied");
+    });
+    const result = transitionLocale("es", "en");
+    removeSpy.mockRestore();
+
+    expect(result.ok).toBe(false);
+    expect(result.invalidationFailed).toBe(true);
+    // Current effective locale retained, and the target was never persisted.
+    expect(result.locale).toBe("en");
+    expect(readPersistedLocale()).toBeNull();
   });
 });
