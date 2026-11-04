@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { render, screen, waitFor, cleanup } from "@testing-library/react";
-import { useEffect } from "react";
+import { render, screen, waitFor, cleanup, fireEvent, within } from "@testing-library/react";
+import { useEffect, type ReactElement } from "react";
 
 // `page.tsx` pulls in `@/lib/seo` -> `prompts.config.ts`; the global setup mock of
 // `@/lib/config` does not expose `defineConfig`, so stub the config module directly
@@ -452,7 +452,7 @@ describe("mounted MDX Section registry", () => {
 
 const SLUG = "1-1-meet-promi";
 
-async function renderControlled(Component: () => JSX.Element) {
+async function renderControlled(Component: () => ReactElement) {
   render(
     <LevelProvider levelSlug={SLUG}>
       <LevelContentWrapper
@@ -537,13 +537,16 @@ describe("interactive consumers bind to their containing Section (01-16 task 1)"
               correctAnswer="B"
             />
           </Section>
+          <Section>
+            <span>plain last</span>
+          </Section>
         </>
       );
     }
 
     await renderControlled(MatcherInSectionTwo);
     await waitFor(() => {
-      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
     });
 
     await advance(1); // into Section 1 (the interactive one) → Next locked
@@ -551,8 +554,12 @@ describe("interactive consumers bind to their containing Section (01-16 task 1)"
     expect(isSectionCompleted(SLUG, 1)).toBe(false);
 
     // Correct answer.
-    (screen.getByRole("button", { name: "B" }) as HTMLButtonElement).click();
-    (screen.getByRole("button", { name: "check" }) as HTMLButtonElement).click();
+    fireEvent.click(screen.getByRole("button", { name: "B" }));
+    // Wait for the selection to apply (check becomes enabled) before submitting.
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "check" })).toBeEnabled();
+    });
+    fireEvent.click(screen.getByRole("button", { name: "check" }));
 
     await waitFor(() => {
       expect(isSectionCompleted(SLUG, 1)).toBe(true);
@@ -578,19 +585,25 @@ describe("interactive consumers bind to their containing Section (01-16 task 1)"
               blanks={[{ hint: "animal", answers: ["cats"] }]}
             />
           </Section>
+          <Section>
+            <span>plain last</span>
+          </Section>
         </>
       );
     }
 
     await renderControlled(MagicWordsInSection);
     await waitFor(() => {
-      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
     });
     await advance(1);
 
     // Place the word then check.
-    (screen.getByRole("button", { name: /cats/ }) as HTMLButtonElement).click();
-    (screen.getByRole("button", { name: "check" }) as HTMLButtonElement).click();
+    fireEvent.click(screen.getByRole("button", { name: /cats/ }));
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "check" })).toBeEnabled();
+    });
+    fireEvent.click(screen.getByRole("button", { name: "check" }));
 
     await waitFor(() => {
       expect(isSectionCompleted(SLUG, 1)).toBe(true);
@@ -630,5 +643,121 @@ describe("interactive consumers bind to their containing Section (01-16 task 1)"
       document.querySelector('section[data-section-index="1"] [data-testid="probe-requirement"]')
         ?.textContent
     ).toBe("required:incomplete");
+  });
+});
+
+/**
+ * 01-16 task 2 — prompt editing interactions (PromptDoctor / PromptLab / PromptParts)
+ * mark only their own Section.
+ *
+ * To distinguish the Section index from the navigation cursor, each consumer is placed
+ * in Section index 2 and driven *while offscreen* (the cursor stays at 0). A cursor-based
+ * write would persist index 0; a Section-scoped write persists index 2.
+ */
+describe("prompt editing consumers bind to their containing Section (01-16 task 2)", () => {
+  function sectionButton(index: number, name: RegExp | string) {
+    const root = document.querySelector(`section[data-section-index="${index}"]`) as HTMLElement;
+    return within(root).getByRole("button", { name, hidden: true }) as HTMLButtonElement;
+  }
+
+  it("PromptParts persists completion against its own Section index, not the cursor", async () => {
+    function PartsInSectionTwo() {
+      return (
+        <>
+          <Section>
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <span>plain middle</span>
+          </Section>
+          <Section>
+            <PromptParts parts={[{ text: "You are a chef", type: "role" }]} />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(PartsInSectionTwo);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    // Cursor stays at 0; the interactive Section is index 2.
+    fireEvent.click(sectionButton(2, /You are a chef/));
+    fireEvent.click(sectionButton(2, /types\.role/));
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 2)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+  });
+
+  it("PromptLab persists completion against its own Section index, not the cursor", async () => {
+    function LabInSectionTwo() {
+      return (
+        <>
+          <Section>
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <span>plain middle</span>
+          </Section>
+          <Section>
+            <PromptLab
+              scenario="s"
+              basePrompt="p"
+              baseResponse="r"
+              improvements={[{ label: "Add detail", prompt: "p2", response: "r2" }]}
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(LabInSectionTwo);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    fireEvent.click(sectionButton(2, /Add detail/));
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 2)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+  });
+
+  it("PromptDoctor persists completion against its own Section index, not the cursor", async () => {
+    function DoctorInSectionTwo() {
+      return (
+        <>
+          <Section>
+            <span>plain first</span>
+          </Section>
+          <Section>
+            <span>plain middle</span>
+          </Section>
+          <Section>
+            <PromptDoctor
+              brokenPrompt="bad"
+              problems={[{ issue: "Too vague", symptom: "unclear", fix: "good" }]}
+              healedPrompt="good"
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(DoctorInSectionTwo);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(3);
+    });
+
+    fireEvent.click(sectionButton(2, /Too vague/));
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 2)).toBe(true);
+    });
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
   });
 });
