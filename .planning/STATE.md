@@ -1,14 +1,14 @@
 ---
 gsd_state_version: "1.0"
 status: unknown
-stopped_at: Completed 01-11-PLAN.md
-last_updated: "2026-11-05T00:00:00.000Z"
-state_head: 690e4caa3eeea2f497fd277582784207b62544fc
+stopped_at: Completed 01-04-PLAN.md
+last_updated: "2026-11-04T17:52:01.995Z"
+state_head: dc2867fddd451e357b4d40d5562042f1043a4a1d
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 17
-  completed_plans: 9
+  completed_plans: 10
   percent: 0
 ---
 
@@ -33,10 +33,10 @@ progress:
 
 ## Session
 
-**Last session:** 2026-11-05T00:00:00.000Z
-**Stopped at:** Completed 01-11-PLAN.md
+**Last session:** 2026-11-04T17:52:01.947Z
+**Stopped at:** Completed 01-04-PLAN.md
 **Resume file:** None
-- **Last Completed Plan:** 01-11 (Remove remaining non-kids community routes)
+- **Last Completed Plan:** 01-04 (Decouple retained game from legacy SEO/MDX/proxy/instrumentation)
 
 ## Performance Metrics
 
@@ -45,8 +45,12 @@ progress:
 | Phase 01 P03 | 1 min | 2 tasks | 83 files |
 | Phase 01 P10 | 1 min | 2 tasks | 13 files |
 | Phase 01 P11 | 4 min | 2 tasks | 32 files |
+| Phase 01 P04 | 6 min | 2 tasks | 11 files |
 
 ## Decisions
 
 - [Phase 01]: Thirteen non-kids route trees (auth, [username], about, admin, book, bots, brand, categories, collection, developers, discover, docs, embed) deleted as two atomic route slices; kids entry/map/level/layout and all 01-11-owned routes preserved. Retained routes still linking to deleted paths are out of scope for this slice.
 - [Phase 01]: Remaining thirteen community routes (feed, how-to-write-effective-prompts, presentation, privacy, promptmasters, prompts, settings, skills, support, tags, taste, terms, workflows) deleted as two atomic slices; `/kids` tree, root layout, globals.css and shared error files preserved. Cross-tree references to removed routes remain only in two 01-13-owned test files (reported, not modified).
+- [Phase 01]: Kids MDX registry reduced to the 12 components used by src/content/kids/**/*.mdx plus basic table tags; Section stays bound to the real exported component (no bypass wrapper) so 01-15/01-16 section registration is preserved; book/prompt imports removed.
+- [Phase 01]: src/lib/seo.ts canonical origin now derives from NEXT_PUBLIC_SITE_URL (fallback https://prompts.chat), removing NEXTAUTH_URL coupling; community pagination/sitemap helpers (paginatedPath, escapeXml, toSitemapImageUrl) removed; buildPageMetadata/NOINDEX_ROBOTS retained.
+- [Phase 01]: Sentry instrumentation/config and legacy proxy rewrites deleted; next.config.ts unwrapped from withSentryConfig and stripped of standalone output and legacy redirects/crawler headers; error/not-found pages retargeted to /kids and /kids/map. Static export and image optimization untouched (Phase 2).
