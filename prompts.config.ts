@@ -1,23 +1,25 @@
 import { defineConfig } from "@/lib/config";
 
-// Set to true to use clone branding (hide prompts.chat repo branding)
-const useCloneBranding = false;
-
+/**
+ * Kids-only application configuration.
+ *
+ * The retained surface of this app is the kids prompt-learning game, so the
+ * config is limited to its branding, theme and i18n inventory. The retired
+ * community-platform blocks (auth providers, feature flags, homepage sponsors,
+ * announcement bar) and the runtime `PCHAT_*` environment overrides were
+ * removed in Phase 01 with owner approval (01-01-SUMMARY.md).
+ */
 export default defineConfig({
-  // Branding - customize for white-label
+  // Branding for the kids game.
   branding: {
-    name: "prompts.chat",
+    name: "Promi's Prompt School",
     logo: "/logo.svg",
     logoDark: "/logo-dark.svg",
-    favicon: "/logo.svg",
-    description: "Collect, organize, and share AI prompts",
-
-    // Delete this if useCloneBranding is true
-    appStoreUrl: "https://apps.apple.com/tr/app/prompts-chat/id6756895736",
-    chromeExtensionUrl: "https://chromewebstore.google.com/detail/promptschat/eemdohkhbaifiocagjlhibfbhamlbeej",
+    favicon: "/favicon/favicon.svg",
+    description: "A playful way for kids to learn how to talk to AI.",
   },
 
-  // Theme - design system configuration
+  // Theme - design system configuration.
   theme: {
     // Border radius: "none" | "sm" | "md" | "lg"
     radius: "sm",
@@ -31,76 +33,9 @@ export default defineConfig({
     },
   },
 
-  // Authentication plugins
-  auth: {
-    // Available: "credentials" | "google" | "azure" | "github" | "apple" | "oidc" | "oauth" | custom
-    // Use `providers` array to enable multiple auth providers
-    providers: ["github", "google", "apple"],
-    // Allow public registration (only applies to credentials provider)
-    allowRegistration: false,
-  },
-
-  // Internationalization
+  // Internationalization - keep in sync with src/lib/i18n/config.ts.
   i18n: {
-    locales: ["en", "tr", "es", "zh", "ja", "ar", "pt", "fr", "it", "de", "nl", "ko", "ru", "he", "el", "az", "fa"],
+    locales: ["en", "tr", "es", "zh", "ja", "ar", "pt", "fr", "it", "de", "nl", "ko", "ru", "he", "el", "fa", "az"],
     defaultLocale: "en",
   },
-
-  // Features
-  features: {
-    // Allow users to create private prompts
-    privatePrompts: true,
-    // Enable change request system for versioning
-    changeRequests: true,
-    // Enable categories
-    categories: true,
-    // Enable tags
-    tags: true,
-    // Enable AI-powered semantic search (requires OPENAI_API_KEY)
-    aiSearch: true,
-    // Enable AI-powered generation features (requires OPENAI_API_KEY)
-    aiGeneration: true,
-    // Enable MCP (Model Context Protocol) features including API key generation
-    mcp: true,
-    // Enable comments on prompts
-    comments: true,
-    // Enable the AI Prompt Enhancer on /developers and the /api/improve-prompt endpoint (requires OPENAI_API_KEY)
-    promptEnhancer: false,
-  },
-
-  // Homepage customization
-  homepage: {
-    // Set to true to hide prompts.chat repo branding and use your own branding
-    useCloneBranding,
-    achievements: {
-      enabled: !useCloneBranding,
-    },
-    sponsors: {
-      enabled: !useCloneBranding,
-      items: [
-        // Add sponsors here
-        { name: "Neon", className: 'py-1', logo: '/sponsors/neon.svg', darkLogo: '/sponsors/neon-dark.svg', url: "https://get.neon.com/VqfnMo4" },
-        { name: "Clemta", logo: '/sponsors/clemta.webp', url: "https://clemta.com/?utm_source=prompts.chat" },
-        { name: "Wiro.ai", className: 'py-1', darkLogo: '/sponsors/wiro.png', logo: '/sponsors/wiro.png', url: "https://wiro.ai/?utm_source=prompts.chat" },
-        { name: "Cognition", logo: "/sponsors/cognition.svg", url: "https://wind.surf/prompts-chat" },
-        { name: "CodeRabbit", className: 'py-1', logo: '/sponsors/coderabbit.svg', darkLogo: '/sponsors/coderabbit-dark.svg', url: "https://coderabbit.link/fatih" },
-        { name: "Sentry", className: 'py-1', logo: '/sponsors/sentry.svg', darkLogo: '/sponsors/sentry-dark.svg', url: "https://sentry.io/?utm_source=prompts.chat" },
-
-        { name: "eachlabs", className: 'py-[6px]', logo: '/sponsors/eachlabs.png', darkLogo: '/sponsors/eachlabs-dark.png', url: "https://www.eachlabs.ai/?utm_source=promptschat&utm_medium=referral" },
-        { name: "CommandCode", className: 'py-1', logo: '/sponsors/commandcode.svg', darkLogo: '/sponsors/commandcode-dark.svg', url: "https://commandcode.ai/?utm_source=prompts.chat" },
-      ],
-    },
-  },
-
-  // Announcement bar shown above the header on every page. Set to null to hide it.
-  // Example:
-  // announcement: {
-  //   id: "my-event-2026", // change the id to re-show the bar to users who dismissed it
-  //   message: "prompts.chat is sponsoring My Event",
-  //   messageShort: "prompts.chat × My Event",
-  //   href: "https://example.com/",
-  //   external: true,
-  //   cta: "Learn more →",
-  // },
-  announcement: null,
 });
