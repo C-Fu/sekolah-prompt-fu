@@ -33,7 +33,7 @@ key-decisions:
   - "Reduced src/lib/analytics.ts to the analyticsKids interface only (9 methods + local trackEvent/GTagEvent helper); every non-kids analytics family dropped. No network/auth/database references remain — trackEvent forwards to the standard window.gtag global, and all seven live kids call sites are unchanged."
   - "Stayed strictly inside the declared <files> set: individual src/lib helper cleanup (listing-pagination, related-content, rate-limit, trending, urls, etc.) is 01-13's task-1 inventory, so the cascade-orphaned helpers were logged to deferred-items rather than deleted here."
   - "Committed directly on main, consistent with every prior plan in this phase (01-06/01-08/01-09 all landed on main); this is the purpose-run main checkout, not an agent worktree."
-requirements-completed: [NFR-1, FR-2]
+requirements-completed: [NFR-1, FR-2]  # declared by this plan; shared-ID gate keeps them unmarked until the last declaring sibling SUMMARY exists
 metrics:
   duration: 2 min
   completed: 2026-11-04T18:32:52Z
