@@ -4,7 +4,7 @@ import { render, screen, waitFor, cleanup, fireEvent, within, act } from "@testi
 // `settings-modal` -> `@/lib/seo` chain is not involved, but `prompts.config` is pulled in
 // by some transitive imports; stub it to the same shape as the other kids tests.
 vi.mock("@/../prompts.config", () => ({
-  default: { branding: { name: "prompts.chat" } },
+  default: { branding: { name: "Sekolah Prompt-Fu" } },
 }));
 
 // The global setup mocks `next-intl` down to only `useTranslations`/`useLocale`. These

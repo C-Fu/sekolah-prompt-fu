@@ -12,7 +12,7 @@ import { defineConfig } from "@/lib/config";
 export default defineConfig({
   // Branding for the kids game.
   branding: {
-    name: "Promi's Prompt School",
+    name: "Sekolah Prompt-Fu",
     logo: "/logo.svg",
     logoDark: "/logo-dark.svg",
     favicon: "/favicon/favicon.svg",

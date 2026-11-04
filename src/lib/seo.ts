@@ -7,7 +7,7 @@ const DEFAULT_OG_IMAGE = {
   url: "/og.png",
   width: 1200,
   height: 630,
-  alt: `${SITE_NAME} - AI Prompts Community`,
+  alt: `${SITE_NAME} - kids learn to talk to AI`,
 };
 
 /**
@@ -30,7 +30,7 @@ export const NOINDEX_ROBOTS: Metadata["robots"] = {
  * depend on the removed community auth configuration.
  */
 export function getBaseUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://prompts.chat").replace(/\/+$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://sekolah-prompt-fu.example").replace(/\/+$/, "");
 }
 
 /**
@@ -69,7 +69,7 @@ export function toMetaDescription(text: string, maxLength = 160): string {
 }
 
 interface PageMetadataOptions {
-  /** Page title. The "| prompts.chat" suffix is added by the root title template. */
+  /** Page title. The "| Sekolah Prompt-Fu" suffix is added by the root title template. */
   title: string;
   description: string;
   /** Path of the page relative to the site root, e.g. "/categories/coding" */
@@ -127,7 +127,6 @@ export function buildPageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: "@promptschat",
       title: socialTitle,
       description,
       ...(images && { images: images.map((img) => img.url) }),

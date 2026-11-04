@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
 vi.mock("@/../prompts.config", () => ({
-  default: { branding: { name: "prompts.chat" } },
+  default: { branding: { name: "Sekolah Prompt-Fu" } },
 }));
 
 import {
@@ -15,7 +15,7 @@ import {
 
 describe("SITE_NAME", () => {
   it("derives from the branding config", () => {
-    expect(SITE_NAME).toBe("prompts.chat");
+    expect(SITE_NAME).toBe("Sekolah Prompt-Fu");
   });
 });
 
@@ -31,9 +31,9 @@ describe("getBaseUrl", () => {
     expect(getBaseUrl()).toBe("https://example.com");
   });
 
-  it("falls back to https://prompts.chat", () => {
+  it("falls back to https://sekolah-prompt-fu.example", () => {
     delete process.env.NEXT_PUBLIC_SITE_URL;
-    expect(getBaseUrl()).toBe("https://prompts.chat");
+    expect(getBaseUrl()).toBe("https://sekolah-prompt-fu.example");
   });
 });
 
@@ -45,7 +45,7 @@ describe("NOINDEX_ROBOTS", () => {
 
 describe("absoluteUrl", () => {
   beforeEach(() => {
-    process.env.NEXT_PUBLIC_SITE_URL = "https://prompts.chat";
+    process.env.NEXT_PUBLIC_SITE_URL = "https://sekolah-prompt-fu.example";
   });
 
   afterEach(() => {
@@ -53,11 +53,11 @@ describe("absoluteUrl", () => {
   });
 
   it("prefixes paths with the site origin", () => {
-    expect(absoluteUrl("/kids/map")).toBe("https://prompts.chat/kids/map");
+    expect(absoluteUrl("/kids/map")).toBe("https://sekolah-prompt-fu.example/kids/map");
   });
 
   it("adds a missing leading slash", () => {
-    expect(absoluteUrl("kids/map")).toBe("https://prompts.chat/kids/map");
+    expect(absoluteUrl("kids/map")).toBe("https://sekolah-prompt-fu.example/kids/map");
   });
 
   it("returns absolute URLs unchanged", () => {
@@ -118,10 +118,10 @@ describe("buildPageMetadata", () => {
     expect(metadata.alternates?.canonical).toBe("/kids");
     expect(metadata.openGraph).toMatchObject({
       url: "/kids",
-      title: "Learn to Talk to AI | prompts.chat",
+      title: "Learn to Talk to AI | Sekolah Prompt-Fu",
       description: "A playful way for kids to learn how to talk to AI.",
     });
-    expect(metadata.twitter).toMatchObject({ title: "Learn to Talk to AI | prompts.chat" });
+    expect(metadata.twitter).toMatchObject({ title: "Learn to Talk to AI | Sekolah Prompt-Fu" });
     expect(metadata.robots).toBeUndefined();
   });
 

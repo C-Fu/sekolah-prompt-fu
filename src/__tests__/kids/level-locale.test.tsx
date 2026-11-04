@@ -6,7 +6,7 @@ import { useEffect, type ReactElement } from "react";
 // `@/lib/config` does not expose `defineConfig`, so stub the config module directly
 // (same pattern as src/__tests__/lib/seo.test.ts).
 vi.mock("@/../prompts.config", () => ({
-  default: { branding: { name: "prompts.chat" } },
+  default: { branding: { name: "Sekolah Prompt-Fu" } },
 }));
 
 // next-intl `useLocale`/`useTranslations` are mocked to deterministic values; the

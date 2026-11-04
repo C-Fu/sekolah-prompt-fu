@@ -1,7 +1,9 @@
 {
-  "name": "prompts.chat-v2",
+  "name": "sekolah-prompt-fu",
   "version": "0.1.0",
+  "description": "Sekolah Prompt-Fu — a playful way for kids to learn how to talk to AI.",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
