@@ -4,7 +4,7 @@ import { useState, useEffect, useId, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useLevelSlug, useSectionNavigation } from "@/components/kids/providers/level-context";
+import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
 
 interface DragDropPromptProps {
@@ -30,15 +30,17 @@ export function DragDropPrompt({
 }: DragDropPromptProps) {
   const t = useTranslations("kids.dragDrop");
   const levelSlug = useLevelSlug();
-  const { currentSection, markSectionComplete, registerSectionRequirement } = useSectionNavigation();
+  const scope = useSectionIdentity();
   const componentId = useId();
   const displayTitle = title || t("title");
   const displayInstruction = instruction || t("instruction");
   
-  // Register that this section has an interactive element requiring completion
+  // Register that this Section has an interactive element requiring completion.
+  // Routed through the Section scope so the requirement attaches to the containing
+  // Section even while it is offscreen.
   useEffect(() => {
-    registerSectionRequirement(currentSection);
-  }, [currentSection, registerSectionRequirement]);
+    scope?.registerRequirement(true);
+  }, [scope]);
 
   const [shuffledPieces, setShuffledPieces] = useState<number[]>([]);
   const [currentOrder, setCurrentOrder] = useState<number[]>([]);
@@ -222,10 +224,12 @@ export function DragDropPrompt({
 
   const handleSubmit = () => {
     setSubmitted(true);
-    // Mark section as complete if answer is correct
-    if (isCorrect() && levelSlug) {
-      markSectionCompleted(levelSlug, currentSection);
-      markSectionComplete(currentSection);
+    // Mark the containing Section complete only on the correct order, binding the
+    // persisted and in-memory completion to its resolved Section index.
+    if (isCorrect() && levelSlug && scope) {
+      const index = scope.getIndex();
+      if (index !== null) markSectionCompleted(levelSlug, index);
+      scope.markComplete();
     }
   };
 

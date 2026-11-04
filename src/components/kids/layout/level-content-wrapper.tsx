@@ -231,7 +231,7 @@ export function LevelContentWrapper({
  */
 function useCurrentSectionComplete(currentSection: number): boolean {
   const registry = useSectionRegistry();
-  const { totalSections, ordering } = useSectionNavigation();
+  const { totalSections, ordering, completedSections } = useSectionNavigation();
 
   return useMemo(() => {
     if (totalSections === 0) return true; // no mounted sections yet: not navigable anyway
@@ -239,7 +239,11 @@ function useCurrentSectionComplete(currentSection: number): boolean {
     if (!identity) return false; // unresolved → fail closed
     if (!registry.sectionRequiresCompletionByIdentity(identity)) return true;
     return registry.isSectionCompleteByIdentity(identity);
-  }, [registry, currentSection, totalSections, ordering]);
+    // `completedSections` is the reactive signal for identity-scoped completion writes
+    // (markSectionCompleteByIdentity updates it), so the lock must recompute when it
+    // changes — otherwise an interactive Section would never unlock after a correct
+    // answer (01-16).
+  }, [registry, currentSection, totalSections, ordering, completedSections]);
 }
 
 interface NavigationFooterProps {

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Check, RefreshCw, Sparkles, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useLevelSlug, useSectionNavigation } from "@/components/kids/providers/level-context";
+import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
 
 interface BlankConfig {
@@ -36,14 +36,16 @@ export function MagicWords({
 }: MagicWordsProps) {
   const t = useTranslations("kids.magicWords");
   const levelSlug = useLevelSlug();
-  const { currentSection, markSectionComplete, registerSectionRequirement } = useSectionNavigation();
+  const scope = useSectionIdentity();
   const componentId = useId();
   const displayTitle = title || t("title");
   
-  // Register that this section has an interactive element requiring completion
+  // Register that this Section has an interactive element requiring completion.
+  // Routed through the Section scope so the requirement attaches to the containing
+  // Section even while it is offscreen.
   useEffect(() => {
-    registerSectionRequirement(currentSection);
-  }, [currentSection, registerSectionRequirement]);
+    scope?.registerRequirement(true);
+  }, [scope]);
   
   const [placements, setPlacements] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -166,11 +168,13 @@ export function MagicWords({
 
   const handleSubmit = () => {
     setSubmitted(true);
-    // Check if all blanks are filled correctly
+    // Check if all blanks are filled correctly; bind completion to the containing
+    // Section's resolved index (both persisted and in-memory), never the cursor.
     const allFilled = blanksWithIds.every(blank => placements[blank.id]);
-    if (allFilled && levelSlug) {
-      markSectionCompleted(levelSlug, currentSection);
-      markSectionComplete(currentSection);
+    if (allFilled && levelSlug && scope) {
+      const index = scope.getIndex();
+      if (index !== null) markSectionCompleted(levelSlug, index);
+      scope.markComplete();
     }
   };
 
