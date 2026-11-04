@@ -12,14 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Compiled outputs
-    "packages/*/dist/**",
-    // Packages with their own ESLint config
-    "packages/raycast-extension/**",
     // Scripts - may use CommonJS
     "scripts/**",
-    // Prisma scripts
-    "prisma/**",
   ]),
   // Downgrade strict rules to warnings for gradual adoption
   {

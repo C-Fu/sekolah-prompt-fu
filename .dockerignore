@@ -32,8 +32,6 @@ docker-compose*.yml
 
 # Development files
 .github
-.claude
-packages
 *.md
 !README.md
 
@@ -50,6 +48,3 @@ Thumbs.db
 # Logs
 logs
 *.log
-
-# Prisma
-prisma/migrations/**/migration_lock.toml
