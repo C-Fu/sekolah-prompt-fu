@@ -345,6 +345,9 @@ const L_ms__2_4_detail_detective = () => import("@/content/kids/ms/2-4-detail-de
 const L_ms__3_1_setting_the_scene = () => import("@/content/kids/ms/3-1-setting-the-scene.mdx");
 const L_ms__3_2_show_dont_tell = () => import("@/content/kids/ms/3-2-show-dont-tell.mdx");
 const L_ms__3_3_format_finder = () => import("@/content/kids/ms/3-3-format-finder.mdx");
+const L_ms__3_4_context_champion = () => import("@/content/kids/ms/3-4-context-champion.mdx");
+const L_ms__4_1_pretend_time = () => import("@/content/kids/ms/4-1-pretend-time.mdx");
+const L_ms__4_2_story_starters = () => import("@/content/kids/ms/4-2-story-starters.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -694,6 +697,9 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "3-1-setting-the-scene": L_ms__3_1_setting_the_scene,
     "3-2-show-dont-tell": L_ms__3_2_show_dont_tell,
     "3-3-format-finder": L_ms__3_3_format_finder,
+    "3-4-context-champion": L_ms__3_4_context_champion,
+    "4-1-pretend-time": L_ms__4_1_pretend_time,
+    "4-2-story-starters": L_ms__4_2_story_starters,
   },
 };
 

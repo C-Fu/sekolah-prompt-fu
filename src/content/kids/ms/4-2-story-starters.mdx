@@ -1,0 +1,87 @@
+<Section>
+<Panel character="promi" mood="happy">
+Selamat kembali ke Ngarai Cipta! Hari ini kita akan mencipta **cerita** yang menakjubkan bersama-sama! 📚
+</Panel>
+</Section>
+
+<Section>
+## AI sebagai Penulis Bersama Anda
+
+Anda tidak perlu menulis cerita bersendirian! AI boleh membantu anda:
+
+- Memulakan cerita dengan pembukaan yang menarik
+- Meneruskan cerita yang telah anda mulakan
+- Menambah watak atau plot baharu
+- Memberi idea apabila anda tersekat
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Cerita terbaik datang daripada imaginasi anda DAN bantuan saya yang bekerjasama!
+</Panel>
+</Section>
+
+<Section>
+## Pembuka Cerita Yang Berkesan!
+
+<PromptVsMistake
+  question="Prompt pembuka cerita yang mana lebih bagus?"
+  good="Mulakan cerita misteri tentang seorang budak yang menjumpai peta bercahaya di loteng rumah neneknya. Jadikan perenggan pertama menarik dan penuh misteri!"
+  bad="Tulis satu cerita"
+  explanation="Prompt terperinci itu memberi saya watak (seorang budak), tempat (loteng rumah nenek), objek (peta bercahaya), dan gaya (menarik, penuh misteri)!"
+  promiMessage="Pembuka cerita yang hebat memberi saya cukup untuk bermula, tetapi masih ada ruang untuk pengembaraan!"
+/>
+</Section>
+
+<Section>
+## Teruskan Pengembaraan!
+
+<PromptVsMistake
+  question="Prompt yang mana membantu meneruskan cerita dengan lebih baik?"
+  good="Teruskan cerita saya: 'Luna menjumpai pintu kecil di belakang rak bukunya. Dia mendengar muzik datang dari dalam.' Apa yang berlaku apabila dia membukanya? Jadikan ia ajaib!"
+  bad="Teruskan cerita tentang sebuah pintu"
+  explanation="Dengan berkongsi apa yang telah anda tulis setakat ini, saya boleh meneruskannya dalam gaya yang sama!"
+  promiMessage="Kongsikan cerita anda setakat ini dan saya akan teruskan pengembaraan itu!"
+/>
+</Section>
+
+<Section>
+## Mulakan Cerita Anda!
+
+<DragDropPrompt
+  title="Pembuka Cerita"
+  instruction="Susun kepingan ini untuk mencipta prompt cerita yang menarik"
+  pieces={["Tulis pembukaannya", "yang menjumpai dia boleh bercakap dengan haiwan", "Jadikan ia lucu dan mengejutkan!", "sebuah cerita tentang seorang budak"]}
+  correctOrder={[0, 3, 1, 2]}
+  successMessage="Itu pembuka cerita yang hebat! Saya tidak sabar untuk menulis pengembaraan ini!"
+/>
+</Section>
+
+<Section>
+## Cipta Prompt Cerita Anda!
+
+<MagicWords
+  sentence="Tulis cerita ___ tentang seorang ___ yang menjumpai ___ yang boleh ___. Mulakan dengan pembukaan yang menarik!"
+  blanks={[
+    { hint: "✨ jenis cerita", answers: ["ajaib", "lucu", "penuh misteri", "penuh pengembaraan", "menyentuh hati"] },
+    { hint: "🧒 watak utama", answers: ["pencipta muda", "puteri berani", "robot ingin tahu", "naga pemalu", "musang pintar"] },
+    { hint: "🎁 objek istimewa", answers: ["buku purba", "kristal bercahaya", "tongkat sakti", "kunci misteri", "haiwan kesayangan bercakap"] },
+    { hint: "🌟 kuasa istimewa", answers: ["menunaikan hajat", "membuka portal", "menunjukkan masa depan", "menghidupkan lukisan", "bertutur sebarang bahasa"] }
+  ]}
+  successMessage="Idea cerita yang menakjubkan! Biarkan pengembaraan bermula!"
+/>
+</Section>
+
+<Section>
+## Pencipta Cerita! 🎉
+
+<Panel character="promi" mood="celebrating">
+Menakjubkan! Anda belajar cara menggunakan AI sebagai **penulis bersama** anda! Bersama-sama, kita boleh mencipta cerita yang paling hebat!
+</Panel>
+
+<LevelComplete 
+  levelSlug="4-2-story-starters" 
+  stars={3}
+  message="Anda belajar mencipta cerita bersama AI!"
+/>
+</Section>

@@ -1,0 +1,86 @@
+<Section>
+<Panel character="promi" mood="excited">
+Selamat datang ke **Ngarai Cipta**! 🎨 Di sinilah kreativiti hidup! Hari ini kita belajar tentang **prompt main peranan**!
+</Panel>
+</Section>
+
+<Section>
+## Apa Itu Main Peranan?
+
+**Main peranan** bermaksud meminta AI berpura-pura menjadi seseorang atau sesuatu!
+
+Anda boleh berkata seperti:
+- "Berlakon sebagai lanun..."
+- "Berpura-pura anda seorang guru..."
+- "Anda seorang cef yang mesra..."
+</Section>
+
+<Section>
+<Panel character="promi" mood="happy">
+Apabila anda meminta saya memainkan peranan, saya boleh memberi jawapan dengan suara dan gaya watak itu! Ia seperti kita bermain pura-pura bersama-sama!
+</Panel>
+</Section>
+
+<Section>
+## Lihat Main Peranan Beraksi!
+
+<PromptVsMistake
+  question="Prompt yang mana menggunakan main peranan?"
+  good="Berpura-pura anda seorang penjelajah angkasa yang mesra. Ceritakan pengembaraan anda di Marikh!"
+  bad="Ceritakan tentang Marikh"
+  explanation="Prompt pertama meminta saya MENJADI penjelajah angkasa, jadi saya boleh ceritakan pengembaraan 'saya' dengan cara yang menyeronokkan dan peribadi!"
+  promiMessage="Main peranan menjadikan perbualan kita lebih menyeronokkan dan kreatif!"
+/>
+</Section>
+
+<Section>
+## Pilih Watak Anda!
+
+<PromptVsMistake
+  question="Peranan yang mana paling bagus untuk belajar tentang laut?"
+  good="Berlakon sebagai penyu laut tua yang bijak yang telah hidup 100 tahun. Apakah perkara menarik yang pernah anda lihat di laut?"
+  bad="Apakah yang hidup di laut?"
+  explanation="Penyu laut berusia 100 tahun telah melihat begitu banyak! Ini menjadikan pembelajaran tentang laut terasa seperti mendengar cerita daripada seorang kawan!"
+  promiMessage="Peranan yang berbeza memberi perspektif yang berbeza dan menjadikan pembelajaran lebih menarik!"
+/>
+</Section>
+
+<Section>
+## Cipta Prompt Main Peranan!
+
+<DragDropPrompt
+  title="Masa Berpura-pura!"
+  instruction="Susun kepingan untuk mencipta prompt main peranan yang menyeronokkan"
+  pieces={["dan ceritakan kepada saya", "Berpura-pura anda seekor naga", "tentang harta kesayangan anda", "yang suka mengumpul barang berkilau"]}
+  correctOrder={[1, 3, 0, 2]}
+  successMessage="Prompt main peranan yang hebat! Kini naga itu boleh berkongsi cerita hartanya!"
+/>
+</Section>
+
+<Section>
+## Bina Main Peranan Anda Sendiri!
+
+<MagicWords
+  sentence="Berpura-pura anda seorang ___ yang ___. Ceritakan kepada saya tentang ___."
+  blanks={[
+    { hint: "🎭 satu watak", answers: ["ahli sihir", "superhero", "kucing bercakap", "pengembara masa", "pari-pari"] },
+    { hint: "⭐ apa yang mereka buat", answers: ["menunaikan hajat", "menyelamatkan hari", "menjelajah dunia ajaib", "mencipta alat menarik", "membuat ramuan"] },
+    { hint: "📖 apa untuk dikongsi", answers: ["pengembaraan terhebat anda", "hari terbaik anda", "kesilapan lucu yang anda buat", "tempat persembunyian rahsia anda", "kawan baik anda"] }
+  ]}
+  successMessage="Main peranan yang hebat! Kini kita boleh berbual pura-pura yang menyeronokkan!"
+/>
+</Section>
+
+<Section>
+## Pakar Main Peranan! 🎉
+
+<Panel character="promi" mood="celebrating">
+Hebat! Anda belajar bahawa **prompt main peranan** menjadikan perbualan kreatif dan menyeronokkan! Cuma minta saya "berlakon sebagai" atau "berpura-pura menjadi" seseorang!
+</Panel>
+
+<LevelComplete 
+  levelSlug="4-1-pretend-time" 
+  stars={3}
+  message="Anda belajar menggunakan prompt main peranan!"
+/>
+</Section>
