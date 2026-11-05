@@ -1,16 +1,16 @@
 # Roadmap: Kids Prompting Game Standalone & GitHub Pages
 
-## Phase 1: Purge Non-Kids Code & Dependencies
+## Phase 1: Purge Non-Kids Code & Dependencies ✅ Complete (verified)
 - Remove unused server code, Prisma ORM, database migrations, and NextAuth providers.
 - Delete non-kids app routes and components (`src/app/(auth)`, `src/app/admin`, `src/app/prompts`, etc.).
 - Delete large legacy prompt datasets (`prompts.csv`, `PROMPTS.md`).
 - Clean up `package.json` dependencies and prune unused node packages.
 
-## Phase 2: Promote Kids Game to Root & Configure Static Export
-- Move `src/app/kids/*` routes to root (`src/app/`) or configure root entry point.
-- Configure `next.config.ts` for static export (`output: 'export'`) and unoptimized images.
-- Verify client components handle static generation without SSR mismatches.
-- Add GitHub Pages CI/CD workflow (`.github/workflows/deploy.yml`).
+## Phase 2: Promote Kids Game to Root & Configure Static Export 🚧 In progress (02-01 complete)
+- Move `src/app/kids/*` routes to root (`src/app/`) or configure root entry point. ✅ done (02-01)
+- Configure `next.config.ts` for static export (`output: 'export'`) and unoptimized images. ✅ done (02-01)
+- Verify client components handle static generation without SSR mismatches. ✅ done (02-01; 89 tests pass, static build emits out/)
+- Add GitHub Pages CI/CD workflow (`.github/workflows/deploy.yml`). ✅ done (02-01)
 
 ## Phase 3: Bahasa Melayu (`ms`) Localization
 - Add `ms` locale to `i18n` configurations and language switcher.

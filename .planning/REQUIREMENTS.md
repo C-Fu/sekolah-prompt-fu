@@ -2,7 +2,7 @@
 
 ## Functional Requirements
 
-- **FR-1: Kids Game as Primary Experience**
+- **FR-1: Kids Game as Primary Experience** ✅ (Phase 2, 02-01)
   - The application root (`/`) must directly launch the Kids Prompting Game.
   - The level map, world selection, and 17 game levels must function seamlessly without route conflicts.
 
@@ -15,7 +15,7 @@
   - Translate all UI strings in `messages/ms.json` (navigation, instructions, quiz prompts, badges, world titles).
   - Translate all 17 MDX levels into `src/content/kids/ms/` with accurate terminology adapted for young learners.
 
-- **FR-4: GitHub Pages Static Deployment**
+- **FR-4: GitHub Pages Static Deployment** ✅ (Phase 2, 02-01)
   - Project must produce a static HTML/JS/CSS bundle (`out/`) via `npm run build`.
   - Provide an automated GitHub Actions deployment workflow for GitHub Pages.
 
@@ -27,7 +27,7 @@
   - Delete unused dependencies from `package.json` (`@prisma/client`, `prisma`, `next-auth`, `@aws-sdk/client-s3`, `@modelcontextprotocol/sdk`, `bcryptjs`, etc.).
   - Delete massive community prompt files (`prompts.csv`, `PROMPTS.md`).
 
-- **NFR-2: Quality & Type Safety**
+- **NFR-2: Quality & Type Safety** ◑ partial (Phase 2, 02-01: tsc 0, lint 0, tests 89/89, static build emits out/; final certification Phase 4)
   - TypeScript types must pass check (`npx tsc --noEmit`).
   - Next.js static build must succeed (`npm run build`).
   - Unit tests for kids components/utils must pass.

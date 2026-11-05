@@ -1,23 +1,23 @@
 ---
 gsd_state_version: "1.0"
-status: phase_complete
-stopped_at: Phase 1 verified (VERIFICATION.md: PASS)
-last_updated: "2026-11-05T00:00:00.000Z"
-state_head: 34befaf7
+status: phase_in_progress
+stopped_at: Completed 02-01-PLAN.md (kids game promoted to root; static export + Pages workflow)
+last_updated: "2026-11-05T08:35:00.000Z"
+state_head: bf449d63
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 17
-  completed_plans: 17
-  percent: 25
+  total_plans: 18
+  completed_plans: 18
+  percent: 28
 ---
 
 # Project State
 
 ## Status
 - **Current Phase:** Phase 2 (Promote Kids Game to Root & Configure Static Export)
-- **Status:** Phase 1 complete and verified (VERIFICATION.md: PASS, 9/9 must-haves)
-- **Next Command:** `/gsd-plan-phase 2`
+- **Status:** Phase 2 plan 01 complete (kids game at `/`, static export builds, Pages workflow added)
+- **Next Command:** `/gsd-plan-phase 3`
 
 ## Key Decisions
 - Pure client-side static site architecture for GitHub Pages deployment.
@@ -33,10 +33,10 @@ progress:
 
 ## Session
 
-**Last session:** 2026-11-05T00:00:00.000Z
-**Stopped at:** Phase 1 verified (VERIFICATION.md: PASS)
+**Last session:** 2026-11-05T08:35:00.000Z
+**Stopped at:** Completed 02-01-PLAN.md (kids game promoted to root; static export + Pages workflow)
 **Resume file:** None
-- **Last Completed Plan:** 01-07 (final wave — datasets/workflows pruned, npm dependencies + lifecycle scripts reconciled to kids-only, all four gates green)
+- **Last Completed Plan:** 02-01 (kids routes promoted to `/`, `/map`, `/level/[slug]`; music bundled; `output:'export'` static build; GitHub Pages deploy workflow)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
 
 ## Performance Metrics
@@ -54,6 +54,7 @@ progress:
 | Phase 01 P12 | 2 min | 2 tasks | 48 files |
 | Phase 01 P13 | 8 min | 3 tasks | 119 files |
 | Phase 01 P07 | 2h 0min | 3 tasks | 85 files |
+| Phase 02 P01 | 18 min | 3 tasks | 21 files |
 
 ## Decisions
 
@@ -69,3 +70,6 @@ progress:
 - [Phase 01]: Non-kids domain utilities pruned in 01-12 (two atomic commits): five domain trees (src/lib/{ai,book,bots,connectors,mcp}, 41 files) and six named server/prompt modules (api-key, hf-data-studio, prompt-access, prompt-list, prompt-write, webhook) removed after per-tree/per-module live-importer tracing proved no non-test importer survives outside the deleted set. src/lib/analytics.ts reduced to the retained analyticsKids interface (9 methods + local trackEvent helper forwarding to window.gtag) with no network/auth/database references; all seven live kids call sites and kids progress untouched. Individual orphaned src/lib helpers (related-content, listing-pagination, rate-limit, trending, urls, …) are 01-13's task-1 inventory — logged to deferred-items.md, not deleted here. Kids import closure stays closed (exit 0).
 - [Phase 01]: Kids-only config and dead-code/tests reconciliation (01-13): prompts.config.ts + src/lib/config/index.ts reduced to a typed KidsConfig (branding/theme/i18n) with no PCHAT_* runtime env overrides (owner-approved); 14 unreferenced non-kids src/lib helpers + the i18n barrel removed; 9 obsolete maintenance scripts pruned (keeping check-kids-import-closure.js/check-translations.js/lint-mdx.js); 91 stale tests importing deleted auth/API/bot/data/mcp modules retired; seo.test.ts and vitest.setup.ts repaired — retained suite (89 tests), lint, tsc and kids import closure all green.
 - [Phase 01]: [Phase 01-purge-non-kids-code-dependencies]: 01-07 finished dependency/dataset pruning: prompts.csv, PROMPTS.md, public/{book-pdf,bots,sponsors} and three non-kids workflows (docker-publish, reset-credits, update-contributors) deleted; CI env DATABASE_URL dropped (lint+test kept); .env.example reduced to NEXT_PUBLIC_SITE_URL (the only key retained source reads). package.json build -> next build; postinstall, prisma seed config, db:*, setup/generate:examples/book:pdf* scripts removed; every direct package with zero retained imports removed (Prisma/NextAuth/@auth/prisma-adapter/S3/MCP/bcryptjs + Sentry/Monaco/d3/jszip/openai/pino/react-markdown/react-hook-form/cmdk/date-fns/yaml/sharp/puppeteer/tsx/@clack/unused radix), keeping Next/React/next-intl/MDX/kids-UI/Vitest; lock regenerated --package-lock-only (1492 -> 826 packages). All four gates pass: lint 0, test 89/89, tsc 0, normal next build 0 (25 static pages, 19 level routes, no / root). Two lockfile divergences from immutable baseline 2c6e5cfc... were OWNER-APPROVED as benign (Option 2): @testing-library/dom 10.4.1->10.4.2 (registry-published 2026-09-13, integrity verified) and six npm-11-materialized bundled nested entries of the unchanged optional @tailwindcss/oxide-wasm32-wasi@4.1.18; verbatim audit gate human-waived for exactly these categories with 0 other unexpected diffs. All 19 kids levels preserved (requirements prose says 17). / root promotion + static export deferred to Phase 2; NFR-2 certification to Phase 4.
+- [Phase 02]: Kids routes relocated to the application root (`/`, `/map`, `/level/[slug]`) rather than redirected, because `output: 'export'` disables Next redirects and `/` must be a real page; the kids chrome (Schoolbell font, gradient sky, pixel clouds, KidsHeader, LevelProvider/MusicProvider/LocaleDirection, `<main>`) was merged into the existing root layout while preserving the already-rebranded root metadata.
+- [Phase 02]: Static export set with `output:'export'` + `images.unoptimized` + `trailingSlash:true` (directory-index output for GitHub Pages clean URLs); basePath/assetPrefix and the bundled music URL are driven by `NEXT_PUBLIC_BASE_PATH` (empty by default so local `npm run build` stays navigable). Removed the export-incompatible `experimental.serverActions` and now-unnecessary `images.remotePatterns`.
+- [Phase 02]: Background music now loads the bundled `/kids-music.mp3` base-path-aware; no `raw.githubusercontent.com` reference remains. Added `.github/workflows/deploy.yml` (Node 24, `npm ci`, static build, upload-pages-artifact, deploy-pages, github-pages environment, least-privilege perms, concurrency); `ci.yml` untouched.
