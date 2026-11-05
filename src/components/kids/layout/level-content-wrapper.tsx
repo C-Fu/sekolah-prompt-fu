@@ -321,7 +321,7 @@ function NavigationFooter({
             </button>
           ) : (
             <Link
-              href="/kids/map"
+              href="/map"
               className="pixel-btn pixel-btn-amber px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl"
             >
               <span className="flex items-center gap-1">
@@ -396,7 +396,7 @@ function ComingSoon({ label, backLabel }: { label: string; backLabel: string }) 
       <div className="text-center pixel-panel p-6">
         <p className="text-[#5D4037] mb-4">{label}</p>
         <Link
-          href="/kids/map"
+          href="/map"
           className="pixel-btn pixel-btn-green px-4 py-2 inline-flex items-center gap-2"
         >
           <PixelMapIcon />

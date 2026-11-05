@@ -6,7 +6,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "World Map | Learn Prompting for Kids",
   description: "Choose your adventure! Pick a level and start learning how to talk to AI.",
-  path: "/kids/map",
+  path: "/map",
 });
 
 export default async function KidsMapPage() {

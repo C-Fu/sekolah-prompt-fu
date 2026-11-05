@@ -180,7 +180,7 @@ export function LevelSlides({ children, levelSlug: _levelSlug }: LevelSlidesProp
             </Button>
           ) : (
             <Button asChild variant="outline" size="lg" className="rounded-full px-6">
-              <Link href="/kids/map">
+              <Link href="/map">
                 <Map className="h-5 w-5 mr-1" />
                 {t("level.map")}
               </Link>

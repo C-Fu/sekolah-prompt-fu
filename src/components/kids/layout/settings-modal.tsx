@@ -98,7 +98,7 @@ function SettingsModal({ onClose }: { onClose: () => void }) {
     // Navigate to world map
     setTimeout(() => {
       onClose();
-      router.push("/kids/map");
+      router.push("/map");
     }, 1000);
   };
 

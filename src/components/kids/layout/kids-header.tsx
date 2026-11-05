@@ -45,7 +45,7 @@ export function KidsHeader() {
     <header className="shrink-0 z-50 w-full bg-[#2C1810] border-b-4 border-[#8B4513]">
       <div className="container flex h-14 items-center justify-between px-4">
         {/* Logo */}
-        <a href="/kids" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <PixelRobot className="w-8 h-10" />
           <span className="text-[#FFD700] font-bold text-2xl pixel-text-shadow hidden sm:block">
             {t("header.title")}
@@ -79,13 +79,13 @@ export function KidsHeader() {
             <MusicButton />
             <SettingsButton />
             <a 
-              href="/kids" 
+              href="/" 
               className="pixel-btn px-3 py-1.5 text-sm h-8 flex items-center"
             >
               <PixelHomeIcon />
             </a>
             <Link 
-              href="/kids/map" 
+              href="/map" 
               className="pixel-btn pixel-btn-green px-3 py-1.5 text-sm h-8 flex items-center"
             >
               <PixelMapIcon />
@@ -124,7 +124,7 @@ export function KidsHeader() {
                   </div>
                   
                   <a 
-                    href="/kids" 
+                    href="/" 
                     className="pixel-btn px-3 py-2 text-sm flex items-center justify-center gap-2"
                     onClick={() => setMenuOpen(false)}
                   >
@@ -132,7 +132,7 @@ export function KidsHeader() {
                     {t("header.home")}
                   </a>
                   <Link 
-                    href="/kids/map" 
+                    href="/map" 
                     className="pixel-btn pixel-btn-green px-3 py-2 text-sm flex items-center justify-center gap-2"
                     onClick={() => setMenuOpen(false)}
                   >

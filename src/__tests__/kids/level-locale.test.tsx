@@ -32,7 +32,7 @@ import {
   transitionLocale,
   LOCALE_PREFERENCE_KEY,
 } from "@/lib/i18n/client";
-import { generateStaticParams } from "@/app/kids/level/[slug]/page";
+import { generateStaticParams } from "@/app/level/[slug]/page";
 import { useMDXComponents } from "../../../mdx-components";
 import { LevelProvider, useSectionIdentity, useSectionNavigation } from "@/components/kids/providers/level-context";
 import {
@@ -349,7 +349,7 @@ describe("mounted MDX Section registry", () => {
     // On the final section the Next button is replaced by the Map link.
     await waitFor(() => {
       const mapLink = screen.getByRole("link", { name: /level\.map/ });
-      expect(mapLink).toHaveAttribute("href", "/kids/map");
+      expect(mapLink).toHaveAttribute("href", "/map");
     });
     expect(screen.queryByRole("button", { name: "navigation.next" })).toBeNull();
   });
@@ -931,7 +931,7 @@ describe("real compiled MDX: repeated adjacent challenges lock independently (01
     });
     await waitFor(() => {
       const mapLink = screen.getByRole("link", { name: /level\.map/ });
-      expect(mapLink).toHaveAttribute("href", "/kids/map");
+      expect(mapLink).toHaveAttribute("href", "/map");
     });
     expect(screen.queryByRole("button", { name: "navigation.next" })).toBeNull();
   });

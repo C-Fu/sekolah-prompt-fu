@@ -40,7 +40,7 @@ export default function Error({ reset }: ErrorProps) {
             {t("tryAgain")}
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/kids">
+            <Link href="/">
               <Home className="mr-2 h-4 w-4" />
               {t("goHome")}
             </Link>
@@ -57,10 +57,10 @@ export default function Error({ reset }: ErrorProps) {
             {t("helpfulLinks")}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-            <Link href="/kids" className="text-primary hover:underline">
+            <Link href="/" className="text-primary hover:underline">
               {tKids("home")}
             </Link>
-            <Link href="/kids/map" className="text-primary hover:underline">
+            <Link href="/map" className="text-primary hover:underline">
               {tKids("map")}
             </Link>
           </div>

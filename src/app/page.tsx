@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    path: "/kids",
+    path: "/",
   });
 }
 

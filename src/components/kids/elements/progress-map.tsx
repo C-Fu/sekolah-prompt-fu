@@ -534,7 +534,7 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
   }
 
   return (
-    <Link href={`/kids/level/${level.slug}`} className="group cursor-pointer">
+    <Link href={`/level/${level.slug}`} className="group cursor-pointer">
       {nodeContent}
     </Link>
   );

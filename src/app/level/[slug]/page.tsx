@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: LevelPageProps): Promise<Meta
   return buildPageMetadata({
     title: `${level.title} | Learn Prompting for Kids`,
     description: level.description,
-    path: `/kids/level/${slug}`,
+    path: `/level/${slug}`,
   });
 }
 

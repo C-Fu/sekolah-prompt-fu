@@ -53,11 +53,11 @@ describe("absoluteUrl", () => {
   });
 
   it("prefixes paths with the site origin", () => {
-    expect(absoluteUrl("/kids/map")).toBe("https://sekolah-prompt-fu.example/kids/map");
+    expect(absoluteUrl("/map")).toBe("https://sekolah-prompt-fu.example/map");
   });
 
   it("adds a missing leading slash", () => {
-    expect(absoluteUrl("kids/map")).toBe("https://sekolah-prompt-fu.example/kids/map");
+    expect(absoluteUrl("map")).toBe("https://sekolah-prompt-fu.example/map");
   });
 
   it("returns absolute URLs unchanged", () => {
@@ -111,13 +111,13 @@ describe("buildPageMetadata", () => {
     const metadata = buildPageMetadata({
       title: "Learn to Talk to AI",
       description: "A playful way for kids to learn how to talk to AI.",
-      path: "/kids",
+      path: "/",
     });
 
     expect(metadata.title).toBe("Learn to Talk to AI");
-    expect(metadata.alternates?.canonical).toBe("/kids");
+    expect(metadata.alternates?.canonical).toBe("/");
     expect(metadata.openGraph).toMatchObject({
-      url: "/kids",
+      url: "/",
       title: "Learn to Talk to AI | Sekolah Prompt-Fu",
       description: "A playful way for kids to learn how to talk to AI.",
     });
@@ -141,25 +141,25 @@ describe("buildPageMetadata", () => {
     const metadata = buildPageMetadata({
       title: "Map",
       description: "World map",
-      path: "/kids/map",
+      path: "/map",
       noindex: true,
     });
 
     expect(metadata.robots).toMatchObject({ index: false, follow: true });
-    expect(metadata.alternates?.canonical).toBe("/kids/map");
+    expect(metadata.alternates?.canonical).toBe("/map");
   });
 
   it("points the canonical and social URL at a preferred URL", () => {
     const metadata = buildPageMetadata({
       title: "Map",
       description: "World map",
-      path: "/kids/map?world=1",
-      canonical: "/kids/map",
+      path: "/map?world=1",
+      canonical: "/map",
       noindex: true,
     });
 
-    expect(metadata.alternates?.canonical).toBe("/kids/map");
-    expect(metadata.openGraph).toMatchObject({ url: "/kids/map" });
+    expect(metadata.alternates?.canonical).toBe("/map");
+    expect(metadata.openGraph).toMatchObject({ url: "/map" });
     expect(metadata.robots).toMatchObject({ index: false, follow: true });
   });
 
@@ -167,7 +167,7 @@ describe("buildPageMetadata", () => {
     const metadata = buildPageMetadata({
       title: "Level",
       description: "A level",
-      path: "/kids/level/1-1-meet-promi",
+      path: "/level/1-1-meet-promi",
       image: "route",
     });
 

@@ -3,7 +3,7 @@
 /**
  * Client-side compiled level MDX selection (01-15).
  *
- * The retained `/kids/level/[slug]` route no longer resolves the browser locale at
+ * The retained `/level/[slug]` route no longer resolves the browser locale at
  * request time. The validated level slug is handed to this client module, which
  * selects a compiled MDX module from a statically analyzable, lazy import context
  * bounded by the supported locale inventory and the level registry.

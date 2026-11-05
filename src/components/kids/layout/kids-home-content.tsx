@@ -107,7 +107,7 @@ export function KidsHomeContent() {
               </p>
 
               <Link 
-                href="/kids/map"
+                href="/map"
                 onClick={() => analyticsKids.startGame()}
                 className="inline-block pixel-btn pixel-btn-green text-xl md:text-2xl px-8 py-4"
               >
@@ -176,7 +176,7 @@ export function KidsHomeContent() {
               </button>
             ) : (
               <Link
-                href="/kids/map"
+                href="/map"
                 className="pixel-btn pixel-btn-green px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg"
               >
                 <span className="flex items-center gap-1">

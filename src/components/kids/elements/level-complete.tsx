@@ -101,7 +101,7 @@ export function LevelComplete({
         <div className="flex flex-col sm:flex-row gap-3 justify-center p-4 bg-[#4A3728] border-t-4 border-[#8B4513]">
           {next ? (
             <Link 
-              href={`/kids/level/${next.slug}`}
+              href={`/level/${next.slug}`}
               className="pixel-btn pixel-btn-green px-8 py-3 text-xl text-center"
             >
               <span className="flex items-center justify-center gap-2">
@@ -111,7 +111,7 @@ export function LevelComplete({
             </Link>
           ) : (
             <Link 
-              href="/kids/map"
+              href="/map"
               className="pixel-btn pixel-btn-green px-8 py-3 text-xl text-center"
             >
               {t("levelComplete.allDone")}
@@ -119,7 +119,7 @@ export function LevelComplete({
           )}
           
           <Link 
-            href="/kids/map"
+            href="/map"
             className="pixel-btn pixel-btn-amber px-8 py-3 text-xl text-center"
           >
             <span className="flex items-center justify-center gap-2">
