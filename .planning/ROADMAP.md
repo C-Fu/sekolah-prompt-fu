@@ -48,11 +48,12 @@ Plans:
 ## Phase 4: Verification, Testing & Polish
 **Goal:** NFR-2 is certified end-to-end — a committed, rerunnable verification script re-runs `npx tsc --noEmit` and the Vitest suite and inspects the built `out/` export, CI enforces the same gate set, and an onboarding handoff (`HANDOFF.md`) documents architecture, gates, deploy, and known non-blocking advisories.
 **Requirements:** NFR-2, FR-1, FR-4
-**Plans:** 2/2 plans executed
+**Plans:** 3/3 plans executed
 Plans:
 **Wave 1** *(parallel — no shared files)*
 - [x] 04-01-PLAN.md — Tracer: `scripts/verify-project.js` certification script + `npm run verify` + `ci.yml` hardening (tsc step + verify step); `deploy.yml` untouched. Covers D-01…D-04, D-10…D-13; NFR-2/FR-1/FR-4.
 - [x] 04-02-PLAN.md — `.planning/HANDOFF.md` (architecture recap, gate commands, deploy process, WR-04/IN-03 advisories) + NFR-2 certification notes in REQUIREMENTS/STATE/PROJECT. Covers D-05…D-09; NFR-2.
+- [ ] 04-03-PLAN.md — Gap closure (CR-01/WR-01/WR-02): `--gates-only` mode on `scripts/verify-project.js` so CI passes on a clean checkout, `ci.yml` runs `npm run verify -- --gates-only` with a single suite run, finite gate timeout, aggregated absent-`out/` verdict (IN-01); `deploy.yml` untouched. Route 2 — preserves D-03/D-12/D-13. NFR-2.
 
 **Cross-cutting constraints:**
 - Certified gate set is exactly `npx tsc --noEmit` + `npm test` + `npm run build`/`out/` inspection; do NOT add lint/`lint:mdx`/guards to the NFR-2 claim (D-02).
