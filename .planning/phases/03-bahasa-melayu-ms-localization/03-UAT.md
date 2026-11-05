@@ -94,5 +94,15 @@ skipped: 0
   reason: "User reported: World 4 shows 'Ngarai Penciptaan' on the map but 'Ngarai Cipta' in lessons 4-1/4-2/4-4; World 5 shows 'Gunung Pakar' on the map but 'Gunung Master' in 5-1 (English 'Master' left untranslated). User decision: World 4 must read 'Gaung Penciptaan' everywhere; World 5 must read 'Gunung Pakar' everywhere."
   severity: minor
   test: 5
-  artifacts: []  # Filled by diagnosis
-  missing: []    # Filled by diagnosis
+  artifacts:
+    - messages/ms.json (kids.worlds.4.title, kids.worlds.5.title)
+    - src/content/kids/ms/4-1-pretend-time.mdx:3
+    - src/content/kids/ms/4-2-story-starters.mdx:3
+    - src/content/kids/ms/4-4-world-builder.mdx:3,77,83
+    - src/content/kids/ms/5-1-perfect-prompt.mdx:3
+  missing:
+    - "No single source of truth for World 4/5 display names: the ms bundle title and the ms MDX prose were translated independently"
+    - "World 4 name diverges: bundle 'Ngarai Penciptaan' vs MDX 'Ngarai Cipta'"
+    - "World 5 MDX keeps the English word 'Master' ('Gunung Master') vs bundle 'Gunung Pakar'"
+  root_cause: "ms World names were translated without reconciling the map-bundle title against the lesson-body prose; World 5's lesson copied the English 'Master' literally instead of using the bundle's translation"
+  fix_direction: "World 4 must read 'Gaung Penciptaan' in all six locations; World 5 must read 'Gunung Pakar' in 5-1 (removing the English 'Master'). No English word may remain in a World name."
