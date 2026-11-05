@@ -364,22 +364,19 @@ Also assert `supportedLocales.includes("ms")` and that the SettingsButton render
 
 **If this table is empty:** n/a — see above.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should `he` also be reconciled into the settings selector while adding `ms`?**
-   - What we know: `supportedLocales` has 17 (incl. `he`), but `settings-modal.tsx` lists 16 (no `he`), and `he` has no MDX content dir (English fallback by design).
-   - What's unclear: Whether surfacing `he` (with English MDX) is desired or intentional.
-   - Recommendation: Keep Phase 3 scoped to `ms`; note the drift and let the user decide in discuss. Do not silently change `he` behavior.
+1. **Should `he` also be reconciled into the settings selector while adding `ms`?** — **RESOLVED (D-02):** No. Phase 3 adds `ms` ONLY; do NOT add a `he` button, and do not otherwise change `he` behavior. The pre-existing `settings-modal.tsx` drift (16 entries, no `he`; `supportedLocales` has 17 incl. `he`; `he` has no MDX dir → English fallback by design) is documented as a known out-of-scope note. This is asserted negatively in 03-01 Task 1 (`if(/code:\s*"he"/.test(sm)) throw`).
+   - What we knew: `supportedLocales` had 17 (incl. `he`), `settings-modal.tsx` listed 16 (no `he`), and `he` had no MDX content dir.
+   - Resolution: User locked `ms`-only scope (D-02); `he` drift left untouched.
 
-2. **Target Malay variant / script for terminology.**
-   - What we know: `ms` is Malay; the game teaches prompt engineering to children 8-14.
-   - What's unclear: Malay (Malaysia) vs Indonesian (Indonesia) register, and whether to use local dialect terms (`gesaan`/`arahan`) vs loanwords (`prompt`).
-   - Recommendation: Use Malaysian-standard Bahasa Melayu with child-friendly, simple terminology; consider keeping the loanword "prompt"/"promai" where a native term would confuse. Confirm in discuss-phase. (This is the one place translation NATIVE terms matter more than mechanics.)
+2. **Target Malay variant / script for terminology.** — **RESOLVED (D-01):** Use Bahasa Melayu (Malaysia), Latin script (LTR; no `rtlLocales` change), in a kid-simple register for ages 8-14 with accurate, consistent terminology. Keep the loanword "prompt" where a native term (`gesaan`) would confuse a young learner. Label "Bahasa Melayu", flag 🇲🇾. Applied across `messages/ms.json` and every `src/content/kids/ms/*.mdx`.
+   - What we knew: `ms` is Malay; the game teaches prompt engineering to children 8-14.
+   - Resolution: User selected Malaysian variant + loanword policy (D-01).
 
-3. **Do translated `ms` MDX levels aim for section-parity with `en` or may they restructure?**
-   - What we know: es/fr/de/ja/zh/ar use fewer sections than `en` for `1-1` and still work.
-   - What's unclear: Whether the user wants a strict 1:1 port for easier review.
-   - Recommendation: Mirror `en` structure closely (same sections) for reviewability, but the engine does not require it.
+3. **Do translated `ms` MDX levels aim for section-parity with `en` or may they restructure?** — **RESOLVED (D-01):** Mirror `en` structure closely (1:1 section order/count) for reviewability; the engine does not require it, but strict parity is the authored contract (e.g. tracer 1-1 = 10 Sections, asserted in 03-01 Task 2).
+   - What we knew: es/fr/de/ja/zh/ar use fewer sections than `en` for `1-1` and still work.
+   - Resolution: User chose strict mirror-the-`en`-structure for reviewability (D-01).
 
 ## Environment Availability
 
