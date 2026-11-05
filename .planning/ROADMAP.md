@@ -30,7 +30,7 @@ Plans:
 - [x] 03-04-PLAN.md — All-19-slug ms resolution test + phase gate (tsc/lint/tests/parity + static build)
 
 **Wave 5 — gap closure** *(from UAT G-03-5)*
-- [ ] 03-05-PLAN.md — Reconcile `ms` World 4/5 names: `Gaung Penciptaan` + `Gunung Pakar` everywhere (bundle + lessons), removing the English "Master"
+- [x] 03-05-PLAN.md — Reconcile `ms` World 4/5 names: `Gaung Penciptaan` + `Gunung Pakar` everywhere (bundle + lessons), removing the English "Master"
 
 **Cross-cutting constraints:**
 - Each of the nine ms levels in this plan resolves via loadLevelContent('ms', slug) to effectiveLocale 'ms' with a Component distinct from en's for that slug.
