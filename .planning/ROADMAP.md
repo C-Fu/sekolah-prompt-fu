@@ -17,10 +17,22 @@
 **Requirements:** FR-3
 **Plans:** 4 plans
 Plans:
+**Wave 1**
 - [ ] 03-01-PLAN.md — Register `ms` in all five registries + author complete `messages/ms.json` + tracer level 1-1 + Wave 0 tests
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 03-02-PLAN.md — Author ms levels 1-2…3-3 (9 files) + register them
+
+**Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 03-03-PLAN.md — Author ms levels 3-4…5-4 (9 files) + register them (completes all 19)
+
+**Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 03-04-PLAN.md — All-19-slug ms resolution test + phase gate (tsc/lint/tests/parity + static build)
+
+**Cross-cutting constraints:**
+- Each of the nine ms levels in this plan resolves via loadLevelContent('ms', slug) to effectiveLocale 'ms' with a Component distinct from en's for that slug.
+- Every authored ms level ends in a LevelComplete with the matching real registry slug, so the map link renders.
+- Every interactive MDX prop value AND all Panel/heading prose is in Bahasa Melayu (no half-localized English props).
 
 - Add `ms` locale to `i18n` configurations and language switcher.
 - Create `messages/ms.json` containing complete translations for the game interface.
