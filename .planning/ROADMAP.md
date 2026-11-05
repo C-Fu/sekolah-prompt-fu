@@ -12,10 +12,10 @@
 - Verify client components handle static generation without SSR mismatches. ✅ done (02-01; 89 tests pass, static build emits out/)
 - Add GitHub Pages CI/CD workflow (`.github/workflows/deploy.yml`). ✅ done (02-01)
 
-## Phase 3: Bahasa Melayu (`ms`) Localization
+## Phase 3: Bahasa Melayu (`ms`) Localization ✅ Complete (verified)
 **Goal:** Bahasa Melayu (`ms`) is a fully selectable locale backed by a complete UI message bundle and 19 localized interactive MDX levels, with no silent English fallback.
 **Requirements:** FR-3
-**Plans:** 6/6 plans executed (5 executed; 2 gap closures done)
+**Plans:** 6/6 plans complete (5 executed; 2 gap closures done)
 Plans:
 **Wave 1**
 - [x] 03-01-PLAN.md — Register `ms` in all five registries + author complete `messages/ms.json` + tracer level 1-1 + Wave 0 tests

@@ -1,29 +1,30 @@
 ---
 gsd_state_version: "1.0"
-status: awaiting_human_verification
-stopped_at: "Re-ran phase verification after 03-06 gap closure → VERIFICATION.md regenerated, status human_needed (19/19 must-haves); code review refreshed (6 findings) + disposition recorded"
-last_updated: "2026-11-05T16:40:00.000Z"
-state_head: b3afb962
+status: phase_complete
+stopped_at: "Phase 3 complete (UAT 10/10, verification passed, security threats_open 0); ready to plan Phase 4"
+last_updated: "2026-11-05T11:20:00.000Z"
+state_head: 9ba2de846699194169b7ee414da3cbdec2a0c0c0
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 25
   completed_plans: 25
-  percent: 50
-current_phase_name: Bahasa Melayu (`ms`) Localization
+  percent: 75
+current_phase: 4
+current_phase_name: Verification, Testing & Polish
 ---
 
 # Project State
 
 ## Status
-- **Current Phase:** Phase 3 (Bahasa Melayu (`ms`) Localization)
-- **Status:** Phase 3 executed (6/6 plans; 03-05 + 03-06 gap closures done) — VERIFICATION.md regenerated after gap closure: `human_needed` (19/19 must-haves verified; translation-quality naturalness of the bundle + 19 MDX levels routed to human review). Code review refreshed (03-REVIEW.md: 6 findings — 2 Critical in the guard script, 2 Warning, 2 Info) with per-finding disposition recorded in 03-REVIEW-DISPOSITION.md (9 open rows incl. 3 carried).
-- **Next Command:** `/gsd-verify-work 03`
+- **Current Phase:** Phase 4 (Verification, Testing & Polish)
+- **Status:** Ready to plan — Phase 3 complete (6/6 plans; UAT 10/10 with G-03-4/G-03-5/G-03-6 all resolved/closed; verification regenerated and canonicalized to `passed`; security threats_open 0). Phase 4 owns the final end-to-end quality pass (tsc / tests / static build) and NFR-2 certification.
+- **Next Command:** `/gsd-discuss-phase 4` (or `/gsd-plan-phase 4`)
 
 ## Key Decisions
 - Pure client-side static site architecture for GitHub Pages deployment.
 - Storage and game state managed in `localStorage`.
-- Support for Bahasa Melayu (`ms`) added across UI and all 17 MDX levels.
+- Support for Bahasa Melayu (`ms`) added across UI and all 19 MDX levels.
 - Stripping all server/database dependencies (PostgreSQL, Prisma, NextAuth).
 - Root layout is a kids-compatible, auth-free, request-independent shell; the shared `Providers` wrapper exposes only `NextIntlClientProvider` (locale/messages kept as props for later client locale switching).
 - i18n request config is deterministic (bundled default-locale messages, no cookie/header lookup); a locale candidate is validated against `supportedLocales` before any message import path is built.
@@ -34,13 +35,13 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 
 ## Session
 
-**Last session:** 2026-11-05T06:44:00.000Z
-**Stopped at:** Completed 03-06-PLAN.md (gap-closure G-03-4 + G-03-6: ms vocabulary normalization + 1-1 WordPredictor re-grounding)
+**Last session:** 2026-11-05T11:20:00.000Z
+**Stopped at:** Phase 3 complete (UAT + verification + security), ready to plan Phase 4
 **Resume file:** None
 - **Last Completed Plan:** 03-06 (gap closure G-03-4 + G-03-6 — `bodil`→`lawak` ×3, `bedtime`→`sebelum tidur`, `level/LEVEL`→`tahap/TAHAP` ×4, `superhero`→`adiwira` ×5; 1-1:30 explanation re-grounded in Malay + 1-1:31 aiThinking quotes the Malay puzzle sentence; added persistent `scripts/check-ms-vocabulary.js` guard (exit 0 post-edit, exit 1 on pre-edit HEAD with 16 offenders); `messages/ms.json` unmodified at 212 keys; en/** and non-ms locales untouched)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
 - **Phase 2 Verification:** PASS — 8/8 must-haves independently reproduced in `.planning/phases/02-promote-kids-game-to-root-configure-static-export/VERIFICATION.md`. Kids game served at `/`, `/map`, `/level/[slug]`; static `out/` bundle (25 pages incl. 19 levels + bundled music); GitHub Pages workflow added. FR-1 and FR-4 satisfied; NFR-2 interim (final certification Phase 4). Follow-up fixed post-verification: kids header home links now use `next/link` so they respect `basePath` under a Pages project sub-path.
-- **Phase 3 Verification:** `human_needed` — 9/9 must-haves independently reproduced in `.planning/phases/03-bahasa-melayu-ms-localization/03-VERIFICATION.md`. All automated plumbing green (`tsc` 0, `lint --quiet` 0, `npm test` 94/94, `npm run build` exit 0 with 19 static level routes; `messages/ms.json` 212-key parity; all 19 slugs resolve to `effectiveLocale: ms` with `Component !== en`). Five items routed to human judgment: translation naturalness (bundle + 19 MDX levels) and three content warnings from `03-REVIEW.md` — WR-01 (World 4/5 names disagree between map and lessons), WR-02 (non-word "bodil" used for "silly", offered as a selectable answer), WR-03 (`1-1` WordPredictor explanation justifies a Malay puzzle "in English", keeps English `aiThinking`). FR-3 satisfaction pending `/gsd-verify-work 03`.
+- **Phase 3 Verification:** PASS — 19/19 must-haves independently reproduced in `.planning/phases/03-bahasa-melayu-ms-localization/03-VERIFICATION.md` (canonicalized `human_needed` → `passed` after UAT). All automated plumbing green (`tsc` 0, `lint` 0 errors, `npm test` 94/94, `npm run build` exit 0 with 19 static level routes; `messages/ms.json` 212-key parity; all 19 slugs resolve to `effectiveLocale: ms` with `Component !== en`). UAT 10/10: 8 passed, 2 originally-reported issues (G-03-4 `bodil`, G-03-6 1-1 re-localization) verified-resolved by 03-06; G-03-5 closed by 03-05. FR-3 satisfied. Security: `03-SECURITY.md` verified, threats_open 0 (15 threats, L1 grep-depth).
 
 ## Performance Metrics
 
@@ -80,3 +81,4 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 - [Phase 02]: Background music now loads the bundled `/kids-music.mp3` base-path-aware; no `raw.githubusercontent.com` reference remains. Added `.github/workflows/deploy.yml` (Node 24, `npm ci`, static build, upload-pages-artifact, deploy-pages, github-pages environment, least-privilege perms, concurrency); `ci.yml` untouched.
 - [Phase 03]: [G-03-5] World 4 reads `Gaung Penciptaan` everywhere (map bundle `messages/ms.json` title + lesson bodies 4-1:3, 4-2:3, 4-4:3/77/83) and World 5 reads `Gunung Pakar` everywhere (bundle + 5-1:3), removing the residual English word "Master" from the World 5 name. Value edits only — 212 bundle keys preserved; standalone `Master` content headings on 5-1 lines 8/43/55/67/79/91/96 deliberately left untouched as out of scope.
 - [Phase 03]: [G-03-4 + G-03-6] ms vocabulary normalized at enumerated file:line sites — invented non-word `bodil`→`lawak` (2-4:82, 3-2:56,58), `bedtime`→`sebelum tidur` (1-3:47), `level/LEVEL`→`tahap/TAHAP` (3-4:3, 4-4:3, 5-4:3,85), `superhero`→`adiwira` (4-1:66, 5-2:90, 5-4:30,31,32); 1-1:30 explanation re-grounded in Malay (no `bahasa Inggeris`) and 1-1:31 aiThinking now quotes the Malay puzzle sentence `Kucing itu duduk di atas tikar`. Committed a persistent deterministic guard `scripts/check-ms-vocabulary.js` (Node stdlib; `git ls-files`-resolved ms set with recursive-walk fallback + loud empty-set failure) that exits non-zero on any recurrence — proven exit 1 with 16 offenders on the pre-edit HEAD tree and exit 0 post-edit. `messages/ms.json` unmodified at 212 keys; en/** and all non-ms locales untouched; deskoped `master` prose/headings not touched.
+- [Phase 03]: Phase 3 closed — UAT 10/10 (G-03-4/G-03-6 resolved by 03-06, G-03-5 closed by 03-05); 03-VERIFICATION.md regenerated after gap closure (19/19 must-haves) and canonicalized `human_needed` → `passed`; `03-SECURITY.md` verified (15 threats, threats_open 0). Open advisory (non-blocking, tracked in `03-REVIEW-DISPOSITION.md`, 9 rows open): CR-01/CR-02/WR-01/WR-02 in `scripts/check-ms-vocabulary.js` — guard should walk on-disk (not just `git ls-files`), scope the 1-1 `aiThinking` check to the prop, add the `/i` flag to the `The cat sat` rule, and be wired into CI/npm to actually prevent recurrence. Recommended follow-up, not a Phase 3 blocker.

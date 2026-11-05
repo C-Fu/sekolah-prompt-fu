@@ -5,7 +5,7 @@ Transform the repository from a heavy social prompt-sharing platform into a ligh
 
 The entire codebase will be stripped of server-side dependencies (PostgreSQL, Prisma, NextAuth, OpenAI backend, large community prompt datasets) and configured to build as a 100% static site export capable of deploying directly to **GitHub Pages**.
 
-In addition, full support for **Bahasa Melayu (`ms`)** will be added alongside existing languages, including all 17 interactive MDX game levels.
+In addition, full support for **Bahasa Melayu (`ms`)** will be added alongside existing languages, including all 19 interactive MDX game levels.
 
 ## Key Decisions
 
@@ -32,24 +32,21 @@ In addition, full support for **Bahasa Melayu (`ms`)** will be added alongside e
 ## Requirements
 
 ### Validated
-- ✓ 17 gamified interactive prompting levels with interactive widgets (`src/content/kids/en/*.mdx`)
+- ✓ 19 gamified interactive prompting levels with interactive widgets (`src/content/kids/en/*.mdx`) — Phase 3 (19 registered slugs; the "17" figure in the vision prose is stale)
 - ✓ Client-side progress tracking via `localStorage` (`src/lib/kids/progress.ts`)
 - ✓ Audio effects and background music engine (`src/components/kids/layout/background-music.tsx`)
 - ✓ Pixel-art themed game UI and responsive map
+- ✓ Bahasa Melayu (`ms`) locale fully selectable, with a complete 212-key UI message bundle (`messages/ms.json`) and all 19 interactive MDX levels localized under `src/content/kids/ms/`; no silent English fallback — Phase 3
+- ✓ Kids game promoted to the root experience (`/`, `/map`, `/level/[slug]`) with a static `out/` export and a GitHub Pages deploy workflow — Phase 2
 
 ### Active
-- [ ] Remove all non-kids routes, components, and server-side code (Prisma, NextAuth, API routes).
-- [ ] Delete `prompts.csv` and `PROMPTS.md` to trim repo size.
-- [ ] Clean up `package.json` dependencies to keep only Next.js static site requirements.
-- [ ] Promote Kids game to root page (`/`).
-- [ ] Configure `next.config.ts` for static export (`output: 'export'`, `images: { unoptimized: true }`).
-- [ ] Add GitHub Actions deploy workflow for GitHub Pages (`.github/workflows/deploy.yml`).
-- [ ] Add Bahasa Melayu (`ms`) language support:
-  - Add `ms` to locale configurations.
-  - Create `messages/ms.json`.
-  - Create 17 localized level MDX files under `src/content/kids/ms/`.
-- [ ] Verify test suite and static build pass cleanly.
+- [ ] Verify the full quality stack end-to-end and produce an onboarding summary/handoff (Phase 4):
+  - `npx tsc --noEmit`, unit test suite, and `npm run build` static export all pass cleanly.
+- [ ] Final certification of NFR-2 (quality & type safety) in Phase 4.
 
 ### Out of Scope
 - Backend database / server-side user accounts (progress will be browser-local).
 - Live LLM calls via secret server keys (game relies on pre-programmed interactive feedback and simulations).
+
+---
+*Last updated: 2026-11-05 after Phase 3*
