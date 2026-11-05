@@ -1,10 +1,10 @@
 ---
-status: complete
+status: diagnosed
 phase: 03-bahasa-melayu-ms-localization
 source:
   - 03-VERIFICATION.md
 started: 2026-11-05T13:12:00Z
-updated: 2026-11-05T05:49:46.267Z
+updated: 2026-11-05T13:40:00Z
 ---
 
 ## Current Test
@@ -77,8 +77,22 @@ skipped: 0
   reason: "User reported: 'replace bodil with lawak. any rarely used words like bodil should be replaced with a more common variant'. 'bodil' is not a Malay word; it appears as a selectable MagicWords answer in 2-4:82 and as prose in 3-2:56 and 3-2:58. User also asked for a general pass to replace any other rarely-used words with more common variants."
   severity: major
   test: 4
-  artifacts: []  # Filled by diagnosis
-  missing: []    # Filled by diagnosis
+  root_cause: "The `ms` localization was produced by a translation pass with no Malay-vocabulary / child-readability review gate. English 'silly' was rendered with the invented non-word 'bodil' at three sites; the same gap left untranslated English content words ('superhero', 'bedtime', 'level') in flowing content. The automated gates (tsc/lint/test/build + 212-key parity) verify structure, not word validity."
+  artifacts:
+    - src/content/kids/ms/2-4-detail-detective.mdx:82  # 'bodil' selectable MagicWords answer
+    - src/content/kids/ms/3-2-show-dont-tell.mdx:56,58  # 'bodil' in prose/feedback
+    - src/content/kids/ms/1-3-being-clear.mdx:47  # 'bedtime'
+    - src/content/kids/ms/3-4-context-champion.mdx:3  # 'level'
+    - src/content/kids/ms/4-4-world-builder.mdx:3  # 'level'
+    - src/content/kids/ms/5-4-graduation-day.mdx:3,85  # 'level'/'LEVEL'
+    - src/content/kids/ms/4-1-pretend-time.mdx:66  # 'superhero'
+    - src/content/kids/ms/5-2-fix-it-up.mdx:90  # 'superhero'
+    - src/content/kids/ms/5-4-graduation-day.mdx:30,31,32  # 'superhero'
+  missing:
+    - "Replace the 3 'bodil' occurrences with the user-decided 'lawak'"
+    - "Normalize untranslated content words to common Malay: 'bedtime' -> 'sebelum tidur', 'level' -> 'tahap', 'superhero' -> 'adiwira'"
+    - "Add a grep-based vocabulary guard (expect 0 for 'bodil') to prevent recurrence"
+  debug_session: .planning/debug/ms-rare-vocabulary-bodil.md
 
 - gap_id: G-03-5
   truth: "World/level names shown on the map match the names used inside the lessons, with no divergence and no stray English words"
@@ -100,5 +114,11 @@ skipped: 0
   reason: "User reported: 're-localize both lines to Malay'. In 1-1-meet-promi.mdx the WordPredictor explanation (line 30) justifies the Malay answer 'Tikar' by its English collocation ('bunyi yang terkenal dalam bahasa Inggeris'), and aiThinking (line 31) retains the English sentence 'The cat sat on the mat'."
   severity: major
   test: 5
-  artifacts: []  # Filled by diagnosis
-  missing: []    # Filled by diagnosis
+  root_cause: "In the phase-03 `ms` translation pass (whole file introduced by commit 4ba02803), the first 1-1 WordPredictor exercise was localized by translating its puzzle to Malay but carrying the English exercise's rationale over verbatim. Line 30's explanation asserts the Malay answer 'tikar' is natural because it sounds like English, and line 31's aiThinking retains the untranslated English sentence. No review gate checks intra-interactive language consistency."
+  artifacts:
+    - src/content/kids/ms/1-1-meet-promi.mdx:30  # explanation justifies Malay answer via English
+    - src/content/kids/ms/1-1-meet-promi.mdx:31  # aiThinking retains English sentence
+  missing:
+    - "Re-localize explanation (line 30) to justify 'tikar' via the Malay collocation 'duduk di atas tikar', removing the English reference"
+    - "Re-localize aiThinking (line 31) to quote the Malay sentence the child is solving"
+  debug_session: .planning/debug/ms-1-1-wordpredictor-english.md
