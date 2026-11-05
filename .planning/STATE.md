@@ -1,13 +1,13 @@
 ---
 gsd_state_version: "1.0"
 status: phase_complete
-stopped_at: "Phase 3 complete (UAT 10/10, verification passed, security threats_open 0); ready to plan Phase 4"
-last_updated: "2026-11-05T11:20:00.000Z"
-state_head: 9ba2de846699194169b7ee414da3cbdec2a0c0c0
+stopped_at: Phase 4 context gathered
+last_updated: "2026-11-05T11:48:53.628Z"
+state_head: d36e3ec5af506b3224df787d40c8ab2962b05058
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 25
+  total_plans: 24
   completed_plans: 25
   percent: 75
 current_phase: 4
@@ -35,9 +35,9 @@ current_phase_name: Verification, Testing & Polish
 
 ## Session
 
-**Last session:** 2026-11-05T11:20:00.000Z
-**Stopped at:** Phase 3 complete (UAT + verification + security), ready to plan Phase 4
-**Resume file:** None
+**Last session:** 2026-11-05T11:48:52.498Z
+**Stopped at:** Phase 4 context gathered
+**Resume file:** .planning/phases/04-verification-testing-polish/04-CONTEXT.md
 - **Last Completed Plan:** 03-06 (gap closure G-03-4 + G-03-6 — `bodil`→`lawak` ×3, `bedtime`→`sebelum tidur`, `level/LEVEL`→`tahap/TAHAP` ×4, `superhero`→`adiwira` ×5; 1-1:30 explanation re-grounded in Malay + 1-1:31 aiThinking quotes the Malay puzzle sentence; added persistent `scripts/check-ms-vocabulary.js` guard (exit 0 post-edit, exit 1 on pre-edit HEAD with 16 offenders); `messages/ms.json` unmodified at 212 keys; en/** and non-ms locales untouched)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
 - **Phase 2 Verification:** PASS — 8/8 must-haves independently reproduced in `.planning/phases/02-promote-kids-game-to-root-configure-static-export/VERIFICATION.md`. Kids game served at `/`, `/map`, `/level/[slug]`; static `out/` bundle (25 pages incl. 19 levels + bundled music); GitHub Pages workflow added. FR-1 and FR-4 satisfied; NFR-2 interim (final certification Phase 4). Follow-up fixed post-verification: kids header home links now use `next/link` so they respect `basePath` under a Pages project sub-path.
