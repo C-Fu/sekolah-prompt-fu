@@ -35,7 +35,7 @@ export default defineConfig({
 
   // Internationalization - keep in sync with src/lib/i18n/config.ts.
   i18n: {
-    locales: ["en", "tr", "es", "zh", "ja", "ar", "pt", "fr", "it", "de", "nl", "ko", "ru", "he", "el", "fa", "az"],
+    locales: ["en", "tr", "es", "zh", "ja", "ar", "pt", "fr", "it", "de", "nl", "ko", "ru", "he", "el", "fa", "az", "ms"],
     defaultLocale: "en",
   },
 });

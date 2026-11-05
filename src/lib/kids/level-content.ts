@@ -335,6 +335,7 @@ const L_zh__5_1_perfect_prompt = () => import("@/content/kids/zh/5-1-perfect-pro
 const L_zh__5_2_fix_it_up = () => import("@/content/kids/zh/5-2-fix-it-up.mdx");
 const L_zh__5_3_prompt_remix = () => import("@/content/kids/zh/5-3-prompt-remix.mdx");
 const L_zh__5_4_graduation_day = () => import("@/content/kids/zh/5-4-graduation-day.mdx");
+const L_ms__1_1_meet_promi = () => import("@/content/kids/ms/1-1-meet-promi.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -672,6 +673,9 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-2-fix-it-up": L_zh__5_2_fix_it_up,
     "5-3-prompt-remix": L_zh__5_3_prompt_remix,
     "5-4-graduation-day": L_zh__5_4_graduation_day,
+  },
+  ms: {
+    "1-1-meet-promi": L_ms__1_1_meet_promi,
   },
 };
 

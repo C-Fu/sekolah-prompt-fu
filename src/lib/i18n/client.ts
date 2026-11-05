@@ -43,6 +43,7 @@ const messageLoaders: Record<string, () => Promise<{ default: unknown }>> = {
   el: () => import("@/../messages/el.json"),
   fa: () => import("@/../messages/fa.json"),
   az: () => import("@/../messages/az.json"),
+  ms: () => import("@/../messages/ms.json"),
 };
 
 /** True when `locale` is a supported locale. */

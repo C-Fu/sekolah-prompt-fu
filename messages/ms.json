@@ -1,0 +1,322 @@
+{
+  "common": {
+    "loading": "Sedang memuatkan...",
+    "error": "Ralat telah berlaku",
+    "somethingWentWrong": "Ada sesuatu yang tidak kena",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Padam",
+    "edit": "Sunting",
+    "create": "Cipta",
+    "search": "Cari",
+    "filter": "Tapis",
+    "sort": "Susun",
+    "copy": "Salin",
+    "copied": "Disalin!",
+    "reset": "Set semula",
+    "variables": "Pemboleh ubah",
+    "fillVariables": "Isi Pemboleh Ubah",
+    "fillVariablesDescription": "Sila isi pemboleh ubah yang diperlukan sebelum menjalankan prompt.",
+    "copiedToClipboard": "Disalin ke papan keratan",
+    "failedToCopy": "Gagal menyalin",
+    "submit": "Hantar",
+    "back": "Kembali",
+    "next": "Seterusnya",
+    "previous": "Sebelumnya",
+    "confirm": "Sahkan",
+    "close": "Tutup",
+    "all": "Semua",
+    "none": "Tiada",
+    "ad": "Iklan",
+    "moreLines": "+{count} baris lagi",
+    "codeView": "Kod",
+    "treeView": "Pokok",
+    "expandAll": "Kembangkan Semua",
+    "collapseAll": "Runtuhkan Semua"
+  },
+  "notFound": {
+    "title": "Halaman Tidak Dijumpai",
+    "description": "Halaman yang anda cari tidak wujud atau telah dipindahkan.",
+    "goHome": "Balik ke Laman Utama",
+    "goBack": "Kembali",
+    "helpfulLinks": "Ini beberapa pautan berguna:",
+    "browsePrompts": "Layari Prompt",
+    "categories": "Kategori",
+    "createPrompt": "Cipta Prompt"
+  },
+  "serverError": {
+    "title": "Ralat Pelayan",
+    "description": "Ada sesuatu yang tidak kena di pihak kami. Sila cuba lagi nanti.",
+    "tryAgain": "Cuba Lagi",
+    "goHome": "Balik ke Laman Utama",
+    "goBack": "Kembali",
+    "helpfulLinks": "Ini beberapa pautan berguna:",
+    "browsePrompts": "Layari Prompt",
+    "categories": "Kategori",
+    "createPrompt": "Cipta Prompt"
+  },
+  "kids": {
+    "header": {
+      "title": "Sekolah Prompt Promi",
+      "levels": "tahap",
+      "home": "Utama",
+      "map": "Peta",
+      "mainSite": "Laman Utama"
+    },
+    "home": {
+      "badge": "Pembelajaran untuk Kanak-kanak",
+      "title": "Belajar Bercakap dengan AI!",
+      "subtitle": "Sertai Promi si robot dalam pengembaraan menyeronokkan untuk belajar menulis prompt yang hebat!",
+      "promiIntro": {
+        "greeting": "Hai, saya Promi! 🤖",
+        "message": "Saya robot yang mesra dan perlukan BANTUAN anda! Mahukah anda mengajar saya memahami prompt dengan lebih baik?"
+      },
+      "features": {
+        "games": {
+          "title": "Permainan Menyeronokkan",
+          "description": "Belajar sambil bermain permainan seret-dan-lepas serta kuiz"
+        },
+        "stories": {
+          "title": "Cerita Hebat",
+          "description": "Ikuti pengembaraan Promi yang mengujakan"
+        },
+        "stars": {
+          "title": "Kumpul Bintang",
+          "description": "Kumpul bintang dan buka tahap baharu"
+        }
+      },
+      "startButton": "Mula Bermain!",
+      "ageNote": "Sesuai untuk kanak-kanak berumur 8-14 tahun yang boleh membaca dan menulis",
+      "whatYouLearn": "Apa Yang Akan Anda Pelajari",
+      "readyTitle": "Sedia untuk Mula?",
+      "readyMessage": "Mari kita mengembara dan belajar bercakap dengan AI!"
+    },
+    "navigation": {
+      "back": "Kembali",
+      "next": "Seterusnya",
+      "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan"
+    },
+    "map": {
+      "title": "Peta Dunia",
+      "subtitle": "Pilih satu tahap dan mulakan pengembaraan anda!",
+      "worldLevels": "{count} tahap",
+      "levelNumber": "Tahap {number}",
+      "locked": "Siapkan tahap sebelumnya untuk membuka kunci"
+    },
+    "worlds": {
+      "1": {
+        "title": "Kampung Permulaan"
+      },
+      "2": {
+        "title": "Istana Kejelasan"
+      },
+      "3": {
+        "title": "Gua Konteks"
+      },
+      "4": {
+        "title": "Ngarai Penciptaan"
+      },
+      "5": {
+        "title": "Gunung Pakar"
+      }
+    },
+    "levels": {
+      "1_1_meet_promi": {
+        "title": "Berjumpa Promi!",
+        "description": "Sapa kawan robot anda dan pelajari apa itu AI"
+      },
+      "1_2_first_words": {
+        "title": "Kata-kata Pertama Promi",
+        "description": "Bantu Promi memahami dengan menulis prompt pertama anda"
+      },
+      "1_3_being_clear": {
+        "title": "Bercakap Jelas",
+        "description": "Pelajari mengapa arahan yang jelas lebih berkesan"
+      },
+      "2_1_missing_details": {
+        "title": "Butiran Yang Hilang",
+        "description": "Temui mengapa butiran penting - prompt kabur berbanding yang khusus"
+      },
+      "2_2_who_and_what": {
+        "title": "Siapa & Apa",
+        "description": "Tambah watak dan objek untuk menghidupkan prompt anda"
+      },
+      "2_3_when_and_where": {
+        "title": "Bila & Di Mana",
+        "description": "Belajar menambah masa dan tempat dalam prompt anda"
+      },
+      "2_4_detail_detective": {
+        "title": "Detektif Butiran",
+        "description": "Jadi pakar dalam menambah semua butiran yang betul"
+      },
+      "3_1_setting_the_scene": {
+        "title": "Menyediakan Latar",
+        "description": "Pelajari mengapa maklumat latar membantu AI memahami anda"
+      },
+      "3_2_show_dont_tell": {
+        "title": "Tunjuk, Jangan Cakap Sahaja",
+        "description": "Gunakan contoh untuk menunjukkan kepada AI apa yang anda mahukan"
+      },
+      "3_3_format_finder": {
+        "title": "Pencari Format",
+        "description": "Minta senarai, cerita, puisi dan banyak lagi!"
+      },
+      "3_4_context_champion": {
+        "title": "Juara Konteks",
+        "description": "Gabungkan semua teknik konteks seperti seorang pakar"
+      },
+      "4_1_pretend_time": {
+        "title": "Masa Berlakon!",
+        "description": "Pelajari prompt lakonan - 'Berlakon sebagai...'"
+      },
+      "4_2_story_starters": {
+        "title": "Pembuka Cerita",
+        "description": "Cipta cerita hebat dengan AI sebagai penulis bersama anda"
+      },
+      "4_3_character_creator": {
+        "title": "Pencipta Watak",
+        "description": "Beri AI personaliti dan lihat ia menjadi hidup"
+      },
+      "4_4_world_builder": {
+        "title": "Pembina Dunia",
+        "description": "Cipta dunia dan senario yang penuh imaginasi"
+      },
+      "5_1_perfect_prompt": {
+        "title": "Prompt Yang Sempurna",
+        "description": "Gabungkan kejelasan, butiran dan konteks bersama-sama"
+      },
+      "5_2_fix_it_up": {
+        "title": "Betulkan!",
+        "description": "Cari dan perbaiki prompt yang lemah"
+      },
+      "5_3_prompt_remix": {
+        "title": "Remix Prompt",
+        "description": "Tulis semula prompt untuk hasil yang berbeza"
+      },
+      "5_4_graduation_day": {
+        "title": "Hari Graduasi",
+        "description": "Cabaran terakhir - jadilah Pakar Prompt!"
+      }
+    },
+    "level": {
+      "backToMap": "Kembali ke Peta",
+      "levelLabel": "Tahap {number}",
+      "comingSoon": "Tahap ini akan datang tidak lama lagi!",
+      "previous": "Sebelumnya",
+      "next": "Seterusnya",
+      "map": "Peta"
+    },
+    "levelComplete": {
+      "title": "Tahap Selesai!",
+      "nextLevel": "Tahap Seterusnya",
+      "backToMap": "Kembali ke Peta",
+      "allDone": "Kembali ke Peta"
+    },
+    "quiz": {
+      "goodLabel": "Prompt yang bagus!",
+      "badLabel": "Bukan yang terbaik",
+      "correct": "Betul!",
+      "incorrect": "Cubaan yang baik!",
+      "tryAgain": "Cuba Lagi"
+    },
+    "magicWords": {
+      "title": "Seret kata-kata ajaib! ✨",
+      "dragOrTap": "🎯 Seret atau ketik perkataan:",
+      "check": "Semak!",
+      "retry": "Cuba lagi",
+      "correct": "betul",
+      "tryAgain": "Cuba lagi!"
+    },
+    "dragDrop": {
+      "title": "Bina prompt itu!",
+      "instruction": "Gunakan anak panah untuk mengalih kepingan, atau ketik dua kepingan untuk menukarnya!",
+      "result": "Hasil",
+      "check": "Semak!",
+      "retry": "Cuba lagi",
+      "success": "Sempurna! Anda membina prompt yang hebat!",
+      "almost": "Hampir betul! Terus susun semula.",
+      "tapToSwap": "Ketik kepingan lain untuk menukar kedudukan!"
+    },
+    "promptParts": {
+      "title": "Susun Bahagian Prompt!",
+      "instruction": "Ketik setiap kepingan, kemudian pilih jenisnya!",
+      "score": "Markah",
+      "pickCategory": "Apakah jenis ini?",
+      "success": "Anda menyusun semua bahagian dengan betul!",
+      "retry": "Cuba Lagi",
+      "types": {
+        "role": "Peranan",
+        "task": "Tugasan",
+        "context": "Konteks",
+        "constraint": "Kekangan"
+      }
+    },
+    "exampleMatcher": {
+      "title": "Pencari Padanan",
+      "instruction": "Lihat corak itu dan pilih apa yang datang seterusnya!",
+      "pattern": "Coraknya:",
+      "check": "Semak!",
+      "retry": "Cuba Lagi",
+      "correct": "Betul! 🎉",
+      "tryAgain": "Belum tepat - lihat corak itu sekali lagi!"
+    },
+    "promptDoctor": {
+      "title": "Doktor Prompt",
+      "health": "Kesihatan Prompt",
+      "sick": "Prompt Sakit",
+      "healthy": "Prompt Sihat!",
+      "diagnose": "Klik masalah untuk membaikinya:",
+      "success": "Prompt itu sudah pulih sepenuhnya!",
+      "retry": "Mula Semula"
+    },
+    "stepByStep": {
+      "title": "Fikir Langkah demi Langkah",
+      "problem": "Masalahnya:",
+      "withoutMagic": "Tanpa kata ajaib:",
+      "addMagicWords": "Tambah Kata Ajaib!",
+      "magicWordsActive": "Kata ajaib ditambah!",
+      "nextStep": "Tunjuk Langkah Seterusnya",
+      "withMagic": "Dengan pemikiran langkah demi langkah:",
+      "retry": "Cuba Lagi"
+    },
+    "promptLab": {
+      "title": "Makmal Prompt",
+      "progress": "Penambahbaikan",
+      "yourPrompt": "Prompt Anda:",
+      "aiSays": "Respons AI:",
+      "addDetails": "Tambah penambahbaikan:",
+      "success": "Prompt anda kini sangat khusus!",
+      "retry": "Mula Semula"
+    },
+    "wordPredictor": {
+      "title": "Bagaimana AI Berfikir",
+      "instruction": "AI meneka perkataan seterusnya yang paling mungkin. Bolehkah anda berfikir seperti AI?",
+      "aiThinks": "AI sedang membaca:",
+      "thinkingDefault": "Hmm, perkataan apa yang paling masuk akal di sini?",
+      "check": "Semak Tekaan Saya!",
+      "correct": "Anda berfikir seperti AI!",
+      "tryAgain": "Belum tepat! AI memilih perkataan yang paling mungkin.",
+      "retry": "Cuba Lagi"
+    },
+    "settings": {
+      "title": "Tetapan",
+      "music": "Muzik",
+      "language": "Bahasa",
+      "progress": "Kemajuan Anda",
+      "stars": "Bintang",
+      "completed": "Selesai",
+      "resetTitle": "Set Semula Kemajuan",
+      "resetButton": "Set Semula Semua Kemajuan",
+      "resetWarning": "Ini akan memadamkan semua bintang dan kemajuan anda. Adakah anda pasti?",
+      "resetConfirm": "Ya, Set Semula Semuanya",
+      "resetComplete": "Kemajuan diset semula! Memuatkan semula...",
+      "cancel": "Batal"
+    }
+  },
+  "seo": {
+    "kids": {
+      "title": "Prompt untuk Kanak-kanak: Belajar Bercakap dengan AI",
+      "description": "Cara percuma berasaskan permainan untuk kanak-kanak belajar bercakap dengan AI. Sertai Promi si robot dalam pengembaraan melalui Dunia Prompt dan belajar menulis prompt yang hebat."
+    }
+  }
+}
