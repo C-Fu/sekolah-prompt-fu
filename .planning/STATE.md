@@ -1,22 +1,22 @@
 ---
 gsd_state_version: "1.0"
-status: phase_in_progress
-stopped_at: Completed 02-01-PLAN.md (kids game promoted to root; static export + Pages workflow)
-last_updated: "2026-11-05T08:35:00.000Z"
-state_head: bf449d63
+status: phase_complete
+stopped_at: Phase 2 verified (VERIFICATION.md: PASS)
+last_updated: "2026-11-05T08:50:00.000Z"
+state_head: 984c9d23
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 18
   completed_plans: 18
-  percent: 28
+  percent: 50
 ---
 
 # Project State
 
 ## Status
-- **Current Phase:** Phase 2 (Promote Kids Game to Root & Configure Static Export)
-- **Status:** Phase 2 plan 01 complete (kids game at `/`, static export builds, Pages workflow added)
+- **Current Phase:** Phase 3 (Bahasa Melayu (`ms`) Localization)
+- **Status:** Phase 2 complete and verified (VERIFICATION.md: PASS, 8/8 must-haves)
 - **Next Command:** `/gsd-plan-phase 3`
 
 ## Key Decisions
@@ -38,6 +38,7 @@ progress:
 **Resume file:** None
 - **Last Completed Plan:** 02-01 (kids routes promoted to `/`, `/map`, `/level/[slug]`; music bundled; `output:'export'` static build; GitHub Pages deploy workflow)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
+- **Phase 2 Verification:** PASS — 8/8 must-haves independently reproduced in `.planning/phases/02-promote-kids-game-to-root-configure-static-export/VERIFICATION.md`. Kids game served at `/`, `/map`, `/level/[slug]`; static `out/` bundle (25 pages incl. 19 levels + bundled music); GitHub Pages workflow added. FR-1 and FR-4 satisfied; NFR-2 interim (final certification Phase 4). Follow-up fixed post-verification: kids header home links now use `next/link` so they respect `basePath` under a Pages project sub-path.
 
 ## Performance Metrics
 
