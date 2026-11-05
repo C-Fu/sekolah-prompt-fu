@@ -348,6 +348,9 @@ const L_ms__3_3_format_finder = () => import("@/content/kids/ms/3-3-format-finde
 const L_ms__3_4_context_champion = () => import("@/content/kids/ms/3-4-context-champion.mdx");
 const L_ms__4_1_pretend_time = () => import("@/content/kids/ms/4-1-pretend-time.mdx");
 const L_ms__4_2_story_starters = () => import("@/content/kids/ms/4-2-story-starters.mdx");
+const L_ms__4_3_character_creator = () => import("@/content/kids/ms/4-3-character-creator.mdx");
+const L_ms__4_4_world_builder = () => import("@/content/kids/ms/4-4-world-builder.mdx");
+const L_ms__5_1_perfect_prompt = () => import("@/content/kids/ms/5-1-perfect-prompt.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -700,6 +703,9 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "3-4-context-champion": L_ms__3_4_context_champion,
     "4-1-pretend-time": L_ms__4_1_pretend_time,
     "4-2-story-starters": L_ms__4_2_story_starters,
+    "4-3-character-creator": L_ms__4_3_character_creator,
+    "4-4-world-builder": L_ms__4_4_world_builder,
+    "5-1-perfect-prompt": L_ms__5_1_perfect_prompt,
   },
 };
 

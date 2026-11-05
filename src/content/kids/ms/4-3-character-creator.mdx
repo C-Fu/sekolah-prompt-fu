@@ -1,0 +1,88 @@
+<Section>
+<Panel character="promi" mood="excited">
+Hari ini kita belajar memberi AI satu **personaliti**! 🎭 Ini menjadikan perbualan JAUH lebih menyeronokkan!
+</Panel>
+</Section>
+
+<Section>
+## Beri AI Personaliti!
+
+Anda boleh memberitahu AI personaliti yang anda mahukan:
+
+- **Mesra dan ceria** - sentiasa positif!
+- **Lucu dan kelakar** - banyak membuat jenaka
+- **Bijaksana dan tenang** - memberi jawapan yang berfikir
+- **Hebat dan bertenaga** - banyak menggunakan tanda seru!
+</Section>
+
+<Section>
+<Panel character="promi" mood="happy">
+Apabila anda memberitahu saya personaliti yang anda mahukan, saya boleh menyesuaikan mood yang anda cari!
+</Panel>
+</Section>
+
+<Section>
+## Personaliti Membuat Perbezaan!
+
+<PromptVsMistake
+  question="Prompt yang mana memberi personaliti yang menyeronokkan?"
+  good="Berlakon sebagai robot yang sangat teruja yang SANGAT suka sains! Gunakan banyak tanda seru dan sebut 'HEBAT!' kerap. Ceritakan tentang gunung berapi!"
+  bad="Ceritakan tentang gunung berapi"
+  explanation="Prompt pertama mencipta personaliti yang menyeronokkan dan teruja yang menjadikan pembelajaran terasa seperti pengembaraan!"
+  promiMessage="HEBAT! Lihat betapa lebih menyeronokkannya sains apabila saya teruja tentangnya?!"
+/>
+</Section>
+
+<Section>
+## Padankan Mood!
+
+<PromptVsMistake
+  question="Personaliti yang mana paling bagus untuk cerita sebelum tidur?"
+  good="Ceritakan cerita sebelum tidur dengan suara yang tenang dan menenangkan. Bercakap dengan lembut dan jadikan ia aman dan mengantuk."
+  bad="Ceritakan cerita sebelum tidur"
+  explanation="Dengan meminta personaliti yang tenang dan menenangkan, cerita itu akan membantu anda berehat!"
+  promiMessage="Mood yang berbeza lebih berkesan untuk situasi yang berbeza!"
+/>
+</Section>
+
+<Section>
+## Cipta Satu Watak!
+
+<DragDropPrompt
+  title="Personaliti Watak"
+  instruction="Susun untuk mencipta personaliti yang menyeronokkan"
+  pieces={["Berlakon sebagai burung hantu tua yang bijak", "Gunakan banyak bunyi 'hoo hoo'!", "yang suka mengajar burung muda.", "Bersabar dan baik hati."]}
+  correctOrder={[0, 2, 3, 1]}
+  successMessage="Watak yang sungguh hebat! Hoo hoo! Burung hantu ini bersedia untuk mengajar!"
+/>
+</Section>
+
+<Section>
+## Reka Personaliti AI Anda!
+
+<MagicWords
+  sentence="Berlakon sebagai seorang ___ yang sentiasa ___. Gunakan ___ dan jadi ___. Ceritakan tentang ___."
+  blanks={[
+    { hint: "🎭 jenis watak", answers: ["robot mesra", "ahli sihir bijak", "badut lucu", "kesateria berani", "makhluk asing ingin tahu"] },
+    { hint: "😊 sifat personaliti", answers: ["teruja", "tenang", "lucu", "memberi semangat", "penuh misteri"] },
+    { hint: "💬 gaya bercakap", answers: ["banyak jenaka", "kata-kata lembut", "rima", "perkataan besar", "kesan bunyi"] },
+    { hint: "❤️ satu lagi sifat", answers: ["suka menolong", "bersabar", "kreatif", "suka mengembara", "penyayang"] },
+    { hint: "📚 satu topik", answers: ["angkasa", "haiwan", "muzik", "persahabatan", "alam semula jadi"] }
+  ]}
+  successMessage="Anda mencipta personaliti yang menakjubkan! Mari berbual!"
+/>
+</Section>
+
+<Section>
+## Pakar Personaliti! 🎉
+
+<Panel character="promi" mood="celebrating">
+Hebat! Anda belajar bahawa memberi AI satu **personaliti** menjadikan perbualan lebih menyeronokkan dan menarik! Cuba personaliti yang berbeza untuk keperluan yang berbeza!
+</Panel>
+
+<LevelComplete 
+  levelSlug="4-3-character-creator" 
+  stars={3}
+  message="Anda belajar memberi AI personaliti!"
+/>
+</Section>
