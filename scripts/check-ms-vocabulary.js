@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable @typescript-eslint/no-require-imports */
 
 /**
  * Bahasa Melayu (`ms`) vocabulary / consistency guard.
@@ -9,12 +8,12 @@
  * explanation justified a Malay answer via English and kept an English
  * `aiThinking` sentence).
  *
- * Scans every tracked `src/content/kids/ms` MDX file and exits non-zero on:
+ * Scans every `src/content/kids/ms` MDX file (on-disk walk ∪ tracked) and exits non-zero on:
  *   1. a case-insensitive word-boundary match for `bodil`, `bedtime` or `superhero`;
  *   2. a case-insensitive word-boundary match for the bare English content word
  *      `level` (the common Malay term is `tahap`);
- *   3. a known English-residual marker: `bahasa inggeris`, `The cat sat`, `on the mat`;
- *   4. a 1-1 `aiThinking` that does not quote the Malay puzzle sentence
+ *   3. a case-insensitive English-residual marker: `bahasa inggeris`, `The cat sat`, `on the mat`;
+ *   4. a 1-1 `aiThinking` prop whose value does not quote the Malay puzzle sentence
  *      `Kucing itu duduk di atas tikar`.
  *
  * The guard is over `src/content/kids/ms` MDX only — it must NOT scan
@@ -30,35 +29,50 @@ const MS_DIR = path.join(__dirname, "..", "src", "content", "kids", "ms");
 const ONE_ONE = path.join(MS_DIR, "1-1-meet-promi.mdx");
 const PUZZLE_QUOTE = "Kucing itu duduk di atas tikar";
 
-// Enumerate every tracked `ms` MDX file. Prefer git (the tracked source of truth);
-// fall back to a recursive walk if git is unavailable. Never silently check nothing.
+// Enumerate every `ms` MDX file that exists on disk. The on-disk walk is the
+// SOURCE OF TRUTH for "what exists right now": it always covers untracked/new
+// files (CR-01 — a `git ls-files`-only enumeration silently skipped an
+// uncommitted level, exactly the self-check-before-commit workflow). git is
+// unioned in as a cheap completeness backstop (e.g. a tracked file whose bytes
+// are absent from the working tree is still reported); when both agree the set
+// is identical. Never silently check nothing.
 function listMsFiles() {
-  let files = [];
+  const seen = new Set();
+
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith(".mdx")) seen.add(path.resolve(full));
+    }
+  };
+
+  // 1. On-disk walk — the source of truth for what exists right now.
+  if (fs.existsSync(MS_DIR)) {
+    walk(MS_DIR);
+  } else {
+    console.error(
+      `❌ ms vocabulary guard: ${path.relative(path.join(__dirname, ".."), MS_DIR)} does not exist — refusing to pass silently.`
+    );
+    process.exit(1);
+  }
+
+  // 2. Union in tracked files (backstop for a tracked-but-missing-on-disk file).
   try {
     const out = execSync("git ls-files src/content/kids/ms", {
       cwd: path.join(__dirname, ".."),
       stdio: ["ignore", "pipe", "ignore"],
       encoding: "utf8",
     });
-    files = out
-      .split("\n")
-      .map((f) => f.trim())
-      .filter((f) => f.endsWith(".mdx"))
-      .map((f) => path.join(__dirname, "..", f));
+    for (const f of out.split("\n")) {
+      const rel = f.trim();
+      if (rel.endsWith(".mdx")) seen.add(path.resolve(path.join(__dirname, "..", rel)));
+    }
   } catch {
-    // Fallback: recursive walk.
-    const walk = (dir) => {
-      const out = [];
-      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        const full = path.join(dir, entry.name);
-        if (entry.isDirectory()) out.push(...walk(full));
-        else if (entry.name.endsWith(".mdx")) out.push(full);
-      }
-      return out;
-    };
-    if (fs.existsSync(MS_DIR)) files = walk(MS_DIR);
+    // No git available — the on-disk walk already covers every present file.
   }
-  return files;
+
+  return [...seen].sort();
 }
 
 const files = listMsFiles();
@@ -85,7 +99,11 @@ const LEVEL_RULE = { name: "level (use 'tahap')", re: /\blevel\b/i };
 // 3. Known English-residual markers (case-insensitive).
 const RESIDUAL_RULES = [
   { name: "'bahasa inggeris'", re: /bahasa inggeris/i },
-  { name: "'The cat sat'", re: /The cat sat/u },
+  // WR-01: the `i` flag is required — the comment above and the success line
+  // below both advertise case-insensitive matching, and `The Cat Sat` /
+  // `THE CAT SAT` / `the cat sat` must all be caught. The `u` flag is
+  // unnecessary for this ASCII marker.
+  { name: "'The cat sat'", re: /The cat sat/i },
   { name: "'on the mat'", re: /on the mat/i },
 ];
 
@@ -109,13 +127,22 @@ for (const file of files) {
   scanFile(file, RESIDUAL_RULES);
 }
 
-// 4. 1-1 WordPredictor consistency: `aiThinking` must quote the Malay puzzle sentence.
+// 4. 1-1 WordPredictor consistency: the `aiThinking` ATTRIBUTE VALUE must quote
+//    the Malay puzzle sentence. CR-02: the check must be scoped to the prop, not
+//    a whole-file substring search — a `sentence=`/`explanation=`/comment copy of
+//    the sentence elsewhere in the file would otherwise mask an English
+//    `aiThinking` (the exact G-03-6 defect this guard exists to catch).
 if (fs.existsSync(ONE_ONE)) {
   const text = fs.readFileSync(ONE_ONE, "utf8");
   const rel = path.relative(path.join(__dirname, ".."), ONE_ONE);
-  if (!text.includes(PUZZLE_QUOTE)) {
+  const m = text.match(/aiThinking\s*=\s*"([^"]*)"/);
+  if (!m) {
     offenders.push(
-      `${rel}  [1-1 aiThinking]  does not quote the Malay puzzle sentence "${PUZZLE_QUOTE}"`
+      `${rel}  [1-1 aiThinking]  no \`aiThinking="..."\` attribute found`
+    );
+  } else if (!m[1].includes(PUZZLE_QUOTE)) {
+    offenders.push(
+      `${rel}  [1-1 aiThinking]  aiThinking does not quote the Malay puzzle sentence "${PUZZLE_QUOTE}"`
     );
   }
 }
