@@ -32,6 +32,7 @@ import {
   transitionLocale,
   LOCALE_PREFERENCE_KEY,
 } from "@/lib/i18n/client";
+import { supportedLocales } from "@/lib/i18n/config";
 import { generateStaticParams } from "@/app/level/[slug]/page";
 import { useMDXComponents } from "../../../mdx-components";
 import { LevelProvider, useSectionIdentity, useSectionNavigation } from "@/components/kids/providers/level-context";
@@ -82,6 +83,28 @@ describe("level-content locale/slug selection", () => {
     // Spanish content differs from English for this level, so the resolved component
     // must not be the same module reference.
     expect(es?.Component).not.toBe(en?.Component);
+  });
+
+  it("selects ms content (not the en fallback) when the ms module exists", async () => {
+    const en = await loadLevelContent("en", "1-1-meet-promi");
+    const ms = await loadLevelContent("ms", "1-1-meet-promi");
+    // A missing `ms` registry entry would silently fall back to en; guard both the
+    // reported locale AND the module identity.
+    expect(ms?.effectiveLocale).toBe("ms");
+    expect(ms?.Component).not.toBe(en?.Component);
+  });
+
+  it("loads a bounded ms message bundle", async () => {
+    const en = await loadMessages("en");
+    const ms = await loadMessages("ms");
+    // An absent/missing ms loader would resolve to the en bundle; a real ms bundle differs.
+    expect((ms.common as { loading: string }).loading).not.toBe(
+      (en.common as { loading: string }).loading
+    );
+  });
+
+  it("includes ms in supportedLocales", () => {
+    expect(supportedLocales.includes("ms")).toBe(true);
   });
 
   it("falls back to English when the requested locale module is absent", async () => {

@@ -167,6 +167,39 @@ describe("SettingsButton language selection preserves progress and invalidates i
     expect(getCompletedLevelsCount()).toBe(completedBefore);
   });
 
+  it("switches UI messages and compiled MDX together when Bahasa Melayu is selected", async () => {
+    // Seed progress (also disables music, matching the es activation contract) so the
+    // real provider/level tree hydrates deterministically before the language switch.
+    seedProgress();
+    await renderApp();
+    await openSettings();
+
+    // en settings title before the switch.
+    expect(screen.getByRole("heading", { name: /Settings/ })).toBeInTheDocument();
+
+    // Select Bahasa Melayu.
+    fireEvent.click(screen.getByRole("button", { name: /Bahasa Melayu/ }));
+
+    // The ms-specific settings heading renders (the translated `kids.settings.title`,
+    // "Tetapan"), which cannot be satisfied by an en fallback.
+    await waitFor(() => {
+      expect(screen.getByRole("heading", { name: /Tetapan/ })).toBeInTheDocument();
+    });
+    // The en /Settings/ heading is gone — proving the bundle actually switched.
+    expect(screen.queryByRole("heading", { name: /^Settings$/ })).toBeNull();
+
+    // Compiled MDX switched to the ms content for the same slug (ten Sections, mirroring en).
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(10);
+    });
+
+    // Persisted preference recorded.
+    expect(localStorage.getItem(LOCALE_PREFERENCE_KEY)).toBe("ms");
+
+    // kids-progress survives the locale switch (the shared stores are not locale-scoped).
+    expect(getTotalStars()).toBe(5);
+  });
+
   it("invalidates index-based Section completions and useId drafts before the es MDX mounts", async () => {
     seedProgress();
     await renderApp();
