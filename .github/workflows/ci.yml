@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run TypeScript type check
+        run: npx tsc --noEmit
+
       - name: Run linter
         run: npm run lint
 
@@ -33,3 +36,6 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Run verification script
+        run: npm run verify
