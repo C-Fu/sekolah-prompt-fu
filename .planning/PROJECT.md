@@ -40,9 +40,9 @@ In addition, full support for **Bahasa Melayu (`ms`)** will be added alongside e
 - ✓ Kids game promoted to the root experience (`/`, `/map`, `/level/[slug]`) with a static `out/` export and a GitHub Pages deploy workflow — Phase 2
 
 ### Active
-- [ ] Verify the full quality stack end-to-end and produce an onboarding summary/handoff (Phase 4):
+- [x] Verify the full quality stack end-to-end and produce an onboarding summary/handoff (Phase 4):
   - `npx tsc --noEmit`, unit test suite, and `npm run build` static export all pass cleanly.
-- [ ] Final certification of NFR-2 (quality & type safety) in Phase 4.
+- [x] Final certification of NFR-2 (quality & type safety) in Phase 4.
 
 ### Out of Scope
 - Backend database / server-side user accounts (progress will be browser-local).
