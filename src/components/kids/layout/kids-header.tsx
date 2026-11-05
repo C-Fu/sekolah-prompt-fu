@@ -45,12 +45,12 @@ export function KidsHeader() {
     <header className="shrink-0 z-50 w-full bg-[#2C1810] border-b-4 border-[#8B4513]">
       <div className="container flex h-14 items-center justify-between px-4">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <PixelRobot className="w-8 h-10" />
           <span className="text-[#FFD700] font-bold text-2xl pixel-text-shadow hidden sm:block">
             {t("header.title")}
           </span>
-        </a>
+        </Link>
 
         {/* Stats & Nav */}
         <div className="flex items-center gap-3">
@@ -78,12 +78,12 @@ export function KidsHeader() {
           <div className="hidden sm:flex items-center gap-2">
             <MusicButton />
             <SettingsButton />
-            <a 
+            <Link 
               href="/" 
               className="pixel-btn px-3 py-1.5 text-sm h-8 flex items-center"
             >
               <PixelHomeIcon />
-            </a>
+            </Link>
             <Link 
               href="/map" 
               className="pixel-btn pixel-btn-green px-3 py-1.5 text-sm h-8 flex items-center"
@@ -91,12 +91,12 @@ export function KidsHeader() {
               <PixelMapIcon />
             </Link>
             {/* Back to main site */}
-            <a 
+            <Link 
               href="/" 
               className="hidden md:flex pixel-btn pixel-btn-amber px-3 py-1.5 text-sm h-8 items-center"
             >
               {t("header.mainSite")}
-            </a>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -123,14 +123,14 @@ export function KidsHeader() {
                     <SettingsButton />
                   </div>
                   
-                  <a 
+                  <Link 
                     href="/" 
                     className="pixel-btn px-3 py-2 text-sm flex items-center justify-center gap-2"
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelHomeIcon />
                     {t("header.home")}
-                  </a>
+                  </Link>
                   <Link 
                     href="/map" 
                     className="pixel-btn pixel-btn-green px-3 py-2 text-sm flex items-center justify-center gap-2"
@@ -139,13 +139,13 @@ export function KidsHeader() {
                     <PixelMapIcon />
                     {t("level.map")}
                   </Link>
-                  <a 
+                  <Link 
                     href="/" 
                     className="pixel-btn pixel-btn-amber px-3 py-2 text-sm flex items-center justify-center"
                     onClick={() => setMenuOpen(false)}
                   >
                     {t("header.mainSite")}
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}
