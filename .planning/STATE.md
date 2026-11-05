@@ -1,8 +1,8 @@
 ---
 gsd_state_version: "1.0"
-status: phase_complete
-stopped_at: "Phase 2 verified (VERIFICATION.md: PASS)"
-last_updated: "2026-11-05T02:22:35.210Z"
+status: awaiting_human_verification
+stopped_at: "Phase 3 executed; VERIFICATION.md: human_needed (9/9 must-haves verified)"
+last_updated: "2026-11-05T11:35:00.000Z"
 state_head: 536bf2f3587318cc30871d9dae811705d155049c
 progress:
   total_phases: 4
@@ -17,8 +17,8 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 
 ## Status
 - **Current Phase:** Phase 3 (Bahasa Melayu (`ms`) Localization)
-- **Status:** Phase 2 complete and verified (VERIFICATION.md: PASS, 8/8 must-haves)
-- **Next Command:** `/gsd-plan-phase 3`
+- **Status:** Phase 3 executed (4/4 plans, 4 waves) — VERIFICATION.md: `human_needed` (9/9 must-haves verified; translation-quality + 3 content warnings routed to human review)
+- **Next Command:** `/gsd-verify-work 03`
 
 ## Key Decisions
 - Pure client-side static site architecture for GitHub Pages deployment.
@@ -40,6 +40,7 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 - **Last Completed Plan:** 02-01 (kids routes promoted to `/`, `/map`, `/level/[slug]`; music bundled; `output:'export'` static build; GitHub Pages deploy workflow)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
 - **Phase 2 Verification:** PASS — 8/8 must-haves independently reproduced in `.planning/phases/02-promote-kids-game-to-root-configure-static-export/VERIFICATION.md`. Kids game served at `/`, `/map`, `/level/[slug]`; static `out/` bundle (25 pages incl. 19 levels + bundled music); GitHub Pages workflow added. FR-1 and FR-4 satisfied; NFR-2 interim (final certification Phase 4). Follow-up fixed post-verification: kids header home links now use `next/link` so they respect `basePath` under a Pages project sub-path.
+- **Phase 3 Verification:** `human_needed` — 9/9 must-haves independently reproduced in `.planning/phases/03-bahasa-melayu-ms-localization/03-VERIFICATION.md`. All automated plumbing green (`tsc` 0, `lint --quiet` 0, `npm test` 94/94, `npm run build` exit 0 with 19 static level routes; `messages/ms.json` 212-key parity; all 19 slugs resolve to `effectiveLocale: ms` with `Component !== en`). Five items routed to human judgment: translation naturalness (bundle + 19 MDX levels) and three content warnings from `03-REVIEW.md` — WR-01 (World 4/5 names disagree between map and lessons), WR-02 (non-word "bodil" used for "silly", offered as a selectable answer), WR-03 (`1-1` WordPredictor explanation justifies a Malay puzzle "in English", keeps English `aiThinking`). FR-3 satisfaction pending `/gsd-verify-work 03`.
 
 ## Performance Metrics
 
