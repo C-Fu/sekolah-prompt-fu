@@ -48,10 +48,10 @@ Plans:
 ## Phase 4: Verification, Testing & Polish
 **Goal:** NFR-2 is certified end-to-end — a committed, rerunnable verification script re-runs `npx tsc --noEmit` and the Vitest suite and inspects the built `out/` export, CI enforces the same gate set, and an onboarding handoff (`HANDOFF.md`) documents architecture, gates, deploy, and known non-blocking advisories.
 **Requirements:** NFR-2, FR-1, FR-4
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 Plans:
 **Wave 1** *(parallel — no shared files)*
-- [ ] 04-01-PLAN.md — Tracer: `scripts/verify-project.js` certification script + `npm run verify` + `ci.yml` hardening (tsc step + verify step); `deploy.yml` untouched. Covers D-01…D-04, D-10…D-13; NFR-2/FR-1/FR-4.
+- [x] 04-01-PLAN.md — Tracer: `scripts/verify-project.js` certification script + `npm run verify` + `ci.yml` hardening (tsc step + verify step); `deploy.yml` untouched. Covers D-01…D-04, D-10…D-13; NFR-2/FR-1/FR-4.
 - [ ] 04-02-PLAN.md — `.planning/HANDOFF.md` (architecture recap, gate commands, deploy process, WR-04/IN-03 advisories) + NFR-2 certification notes in REQUIREMENTS/STATE/PROJECT. Covers D-05…D-09; NFR-2.
 
 **Cross-cutting constraints:**

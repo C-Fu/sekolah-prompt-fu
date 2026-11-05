@@ -1,25 +1,31 @@
 ---
 gsd_state_version: "1.0"
-status: phase_complete
-stopped_at: Phase 4 context gathered
-last_updated: "2026-11-05T12:11:57.338Z"
-state_head: e9e4a00f277c3c57aee04e05719347ca74c9b4d6
+status: in_progress
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-11-05T12:22:26.000Z"
+state_head: d05c318f71e99491667130899aa0a1935862856f
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 26
-  completed_plans: 25
-  percent: 75
+  completed_plans: 26
+  percent: 100
 current_phase_name: Verification, Testing & Polish
 current_phase: 4
 ---
 
 # Project State
 
+## Current Position
+
+- **Current Plan:** 1
+- **Total Plans in Phase:** 2
+- **Current Phase:** Phase 4 (Verification, Testing & Polish)
+
 ## Status
 - **Current Phase:** Phase 4 (Verification, Testing & Polish)
-- **Status:** Ready to plan — Phase 3 complete (6/6 plans; UAT 10/10 with G-03-4/G-03-5/G-03-6 all resolved/closed; verification regenerated and canonicalized to `passed`; security threats_open 0). Phase 4 owns the final end-to-end quality pass (tsc / tests / static build) and NFR-2 certification.
-- **Next Command:** `/gsd-discuss-phase 4` (or `/gsd-plan-phase 4`)
+- **Status:** In progress — 04-01 complete (NFR-2 certification script `scripts/verify-project.js` + `npm run verify` + `ci.yml` hardened with tsc + verify steps; `deploy.yml` untouched). 04-02 (HANDOFF.md + NFR-2 certification notes) remains.
+- **Next Command:** `/gsd-execute-phase 4` (execute 04-02)
 
 ## Key Decisions
 - Pure client-side static site architecture for GitHub Pages deployment.
@@ -35,9 +41,9 @@ current_phase: 4
 
 ## Session
 
-**Last session:** 2026-11-05T11:48:52.498Z
-**Stopped at:** Phase 4 context gathered
-**Resume file:** .planning/phases/04-verification-testing-polish/04-CONTEXT.md
+**Last session:** 2026-11-05T12:22:26.000Z
+**Stopped at:** Completed 04-01-PLAN.md
+**Resume file:** None
 - **Last Completed Plan:** 03-06 (gap closure G-03-4 + G-03-6 — `bodil`→`lawak` ×3, `bedtime`→`sebelum tidur`, `level/LEVEL`→`tahap/TAHAP` ×4, `superhero`→`adiwira` ×5; 1-1:30 explanation re-grounded in Malay + 1-1:31 aiThinking quotes the Malay puzzle sentence; added persistent `scripts/check-ms-vocabulary.js` guard (exit 0 post-edit, exit 1 on pre-edit HEAD with 16 offenders); `messages/ms.json` unmodified at 212 keys; en/** and non-ms locales untouched)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
 - **Phase 2 Verification:** PASS — 8/8 must-haves independently reproduced in `.planning/phases/02-promote-kids-game-to-root-configure-static-export/VERIFICATION.md`. Kids game served at `/`, `/map`, `/level/[slug]`; static `out/` bundle (25 pages incl. 19 levels + bundled music); GitHub Pages workflow added. FR-1 and FR-4 satisfied; NFR-2 interim (final certification Phase 4). Follow-up fixed post-verification: kids header home links now use `next/link` so they respect `basePath` under a Pages project sub-path.
@@ -61,6 +67,7 @@ current_phase: 4
 | Phase 02 P01 | 18 min | 3 tasks | 21 files |
 | Phase 03 P05 | 2 min | 2 tasks | 5 files |
 | Phase 03 P06 | 3 min | 2 tasks | 10 files |
+| Phase 04 P01 | 3 min | 3 tasks | 3 files |
 
 ## Decisions
 
@@ -82,3 +89,4 @@ current_phase: 4
 - [Phase 03]: [G-03-5] World 4 reads `Gaung Penciptaan` everywhere (map bundle `messages/ms.json` title + lesson bodies 4-1:3, 4-2:3, 4-4:3/77/83) and World 5 reads `Gunung Pakar` everywhere (bundle + 5-1:3), removing the residual English word "Master" from the World 5 name. Value edits only — 212 bundle keys preserved; standalone `Master` content headings on 5-1 lines 8/43/55/67/79/91/96 deliberately left untouched as out of scope.
 - [Phase 03]: [G-03-4 + G-03-6] ms vocabulary normalized at enumerated file:line sites — invented non-word `bodil`→`lawak` (2-4:82, 3-2:56,58), `bedtime`→`sebelum tidur` (1-3:47), `level/LEVEL`→`tahap/TAHAP` (3-4:3, 4-4:3, 5-4:3,85), `superhero`→`adiwira` (4-1:66, 5-2:90, 5-4:30,31,32); 1-1:30 explanation re-grounded in Malay (no `bahasa Inggeris`) and 1-1:31 aiThinking now quotes the Malay puzzle sentence `Kucing itu duduk di atas tikar`. Committed a persistent deterministic guard `scripts/check-ms-vocabulary.js` (Node stdlib; `git ls-files`-resolved ms set with recursive-walk fallback + loud empty-set failure) that exits non-zero on any recurrence — proven exit 1 with 16 offenders on the pre-edit HEAD tree and exit 0 post-edit. `messages/ms.json` unmodified at 212 keys; en/** and all non-ms locales untouched; deskoped `master` prose/headings not touched.
 - [Phase 03]: Phase 3 closed — UAT 10/10 (G-03-4/G-03-6 resolved by 03-06, G-03-5 closed by 03-05); 03-VERIFICATION.md regenerated after gap closure (19/19 must-haves) and canonicalized `human_needed` → `passed`; `03-SECURITY.md` verified (15 threats, threats_open 0). Open advisory (non-blocking, tracked in `03-REVIEW-DISPOSITION.md`, 9 rows open): CR-01/CR-02/WR-01/WR-02 in `scripts/check-ms-vocabulary.js` — guard should walk on-disk (not just `git ls-files`), scope the 1-1 `aiThinking` check to the prop, add the `/i` flag to the `The cat sat` rule, and be wired into CI/npm to actually prevent recurrence. Recommended follow-up, not a Phase 3 blocker.
+- [Phase 04]: 04-01 delivered the rerunnable NFR-2 certification source of truth: `scripts/verify-project.js` (Node-stdlib, read-only) re-runs `npx tsc --noEmit` + `npm test` and inspects the already-built `out/` tree (`/`, `/map`, 19 level routes derived from `src/lib/kids/levels.ts`, `kids-music.mp3`), printing PASS/FAIL and exiting non-zero on failure. It deliberately does NOT run `npm run build` (D-12 — build stays in `deploy.yml`); refuses loudly on absent `out/` or an empty derived slug set. Exposed as `npm run verify` and wired into `ci.yml` (new `Run TypeScript type check` step before lint + `Run verification script` step last); `deploy.yml` byte-identical to HEAD (D-13). Certification reproduced: tsc 0, tests 94/94, `npm run verify` exit 0.
