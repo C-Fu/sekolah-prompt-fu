@@ -12,6 +12,17 @@
  * pass inside a bare sandbox (no deps installed), so gate failure is expected and
  * asserted separately; the artifact-inspection behaviors are asserted on their own
  * output lines/exit status so a gate failure does not mask them.
+ *
+ * Deferred review findings (04-REVIEW.md, recorded, not implemented here):
+ *   - IN-02 (assert `out/` is a directory) — DEFERRED. `fs.existsSync(OUT)`
+ *     accepting a regular file is still safe (every downstream `path.join(OUT, …)`
+ *     `existsSync` fails loudly), and `04-REVIEW.md:112` calls it "explicitly out of
+ *     scope per the file header … purely informational". Adding `statSync().isDirectory()`
+ *     would change default-mode behaviour beyond the gap-closure scope.
+ *   - IN-03 (short-circuit `npm test` when `tsc` fails) — DEFERRED.
+ *     `04-REVIEW.md:118` calls it "Informational only"; running both gates reports
+ *     both failures, and short-circuiting would change the certified-gate reporting
+ *     contract.
  */
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { execFileSync } from "node:child_process";
@@ -76,10 +87,11 @@ function makeSandbox(name: string, opts: {
   return base;
 }
 
-/** Run the sandboxed script; return exit code + combined output. */
-function runVerify(cwd: string): { code: number; output: string } {
+/** Run the sandboxed script; return exit code + combined output.
+ *  `args` appends extra argv (e.g. `["--gates-only"]`); defaults to none. */
+function runVerify(cwd: string, args: string[] = []): { code: number; output: string } {
   try {
-    const output = execFileSync("node", ["scripts/verify-project.js"], {
+    const output = execFileSync("node", ["scripts/verify-project.js", ...args], {
       cwd,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
@@ -115,6 +127,23 @@ describe("scripts/verify-project.js — refuse-loudly paths", () => {
     expect(code).toBe(1);
     expect(output).toContain("out/ does not exist");
     expect(output).toContain("npm run build");
+    expect(output).not.toContain("✅ NFR-2 certified");
+  });
+
+  it("aggregates the absent-out/ case into the FAILED verdict block (IN-01)", () => {
+    const base = sandbox("noout-agg", {
+      slugs: ["1-1-meet-promi"],
+      withOut: false,
+    });
+    const { code, output } = runVerify(base);
+    expect(code).toBe(1);
+    // The standalone message is still visible AND the structured verdict now runs.
+    expect(output).toContain("❌ out/ does not exist");
+    expect(output).toContain("❌ NFR-2 certification FAILED");
+    expect(output).toContain("out/ does not exist");
+    // No cascade of redundant "missing …" problems after the absent-out/ problem.
+    expect(output).not.toContain("missing artifact:");
+    expect(output).not.toContain("missing level route:");
     expect(output).not.toContain("✅ NFR-2 certified");
   });
 
@@ -249,6 +278,52 @@ describe("scripts/verify-project.js — real built tree (integration)", () => {
   );
 });
 
+describe("scripts/verify-project.js — --gates-only mode", () => {
+  it("does not hard-fail on an absent out/ (skips the artifact inspection)", () => {
+    // The sandbox has no deps, so the two certified gates themselves fail; the
+    // point is the out/ dimension: gates-only must NOT report the absent-out/
+    // problem (it never inspects out/).
+    const base = sandbox("gatesonly-noout", {
+      slugs: ["1-1-meet-promi"],
+      withOut: false,
+    });
+    const { output } = runVerify(base, ["--gates-only"]);
+    expect(output).not.toContain("out/ does not exist");
+    expect(output).not.toContain("missing artifact:");
+    expect(output).not.toContain("missing level route:");
+  });
+
+  it("does not inspect artifacts when out/ is absent (no route/media claims)", () => {
+    const base = sandbox("gatesonly-noinspect", {
+      slugs: ["1-1-meet-promi"],
+      withOut: false,
+    });
+    const { output } = runVerify(base, ["--gates-only"]);
+    expect(output).not.toContain("level routes");
+    expect(output).not.toContain("bundled media");
+    expect(output).not.toContain("out/map/index.html");
+  });
+
+  it("runs only the two certified gates and skips artifact inspection even when out/ is present", () => {
+    const base = sandbox("gatesonly-without", {
+      slugs: ["1-1-meet-promi"],
+      emittedSlugs: ["1-1-meet-promi"],
+    });
+    const { output } = runVerify(base, ["--gates-only"]);
+    // out/ exists and is complete, yet gates-only still does not inspect it.
+    expect(output).not.toContain("root / route");
+    expect(output).not.toContain("bundled media");
+  });
+
+  it("exits non-zero with a usage message naming --gates-only for an unknown flag", () => {
+    const base = sandbox("bogusflag", { slugs: ["1-1-meet-promi"] });
+    const { code, output } = runVerify(base, ["--bogus"]);
+    expect(code).toBe(1);
+    expect(output).toContain("--bogus");
+    expect(output).toContain("--gates-only");
+  });
+});
+
 describe("scripts/verify-project.js — D-12: never runs the build", () => {
   it("does not invoke `npm run build` even when out/ is absent", () => {
     const base = sandbox("nobuild", { slugs: ["1-1-meet-promi"], withOut: false });
@@ -271,6 +346,31 @@ describe("scripts/verify-project.js — D-12: never runs the build", () => {
       });
     } catch {
       /* expect non-zero exit due to absent out/ */
+    }
+    const log = fs.existsSync(record) ? fs.readFileSync(record, "utf8") : "";
+    expect(log).not.toContain("run build");
+  });
+
+  it("does not invoke `npm run build` in --gates-only mode either", () => {
+    const base = sandbox("nobuild-gatesonly", { slugs: ["1-1-meet-promi"], withOut: false });
+    const binDir = path.join(base, "bin");
+    fs.mkdirSync(binDir, { recursive: true });
+    const record = path.join(base, "invoked.log");
+    for (const cmd of ["npm", "npx"]) {
+      const p = path.join(binDir, cmd);
+      fs.writeFileSync(p, `#!/bin/sh\necho "$${cmd} $@" >> "${record}"\nexit 0\n`);
+      fs.chmodSync(p, 0o755);
+    }
+    const env = { ...process.env, PATH: `${binDir}:${process.env.PATH}` };
+    try {
+      execFileSync("node", ["scripts/verify-project.js", "--gates-only"], {
+        cwd: base,
+        encoding: "utf8",
+        env,
+        stdio: ["ignore", "pipe", "pipe"],
+      });
+    } catch {
+      /* stubbed gates exit 0, so this should not throw; tolerate either way */
     }
     const log = fs.existsSync(record) ? fs.readFileSync(record, "utf8") : "";
     expect(log).not.toContain("run build");

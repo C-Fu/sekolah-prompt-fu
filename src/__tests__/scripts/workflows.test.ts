@@ -50,26 +50,34 @@ describe("FR-4: GitHub Pages deploy workflow (.github/workflows/deploy.yml)", ()
 describe("CI workflow (.github/workflows/ci.yml) — D-10/D-11/D-12", () => {
   const ci = read(".github/workflows/ci.yml");
 
-  it("runs npx tsc --noEmit and npm run verify as steps", () => {
+  it("runs npx tsc --noEmit and the gates-only verification script as steps", () => {
     expect(ci).toMatch(/run:\s*npx tsc --noEmit/);
-    expect(ci).toMatch(/run:\s*npm run verify/);
+    expect(ci).toMatch(/run:\s*npm run verify -- --gates-only/);
   });
 
   it("does not build (D-12: the build stays solely in deploy.yml)", () => {
     expect(ci).not.toMatch(/npm run build/);
   });
 
-  it("keeps the pre-existing lint / lint:ms / test steps", () => {
+  it("keeps the pre-existing lint / lint:ms steps", () => {
     expect(ci).toMatch(/run:\s*npm run lint/);
     expect(ci).toMatch(/run:\s*npm run lint:ms/);
-    expect(ci).toMatch(/run:\s*npm test/);
   });
 
-  it("orders the verification step after the test step (D-11: CI and local share gates)", () => {
-    const testIdx = ci.indexOf("Run tests");
+  it("runs the Vitest suite exactly once — no standalone `Run tests` step (WR-01)", () => {
+    // The suite runs once, inside the gates-only verify (the verifier's certified
+    // gate set includes `npm test`); no second standalone step exists.
+    expect(ci).not.toMatch(/name:\s*Run tests\b/);
+  });
+
+  it("orders the verification step after the type-check, lint, and vocabulary-guard steps (D-11)", () => {
+    const tscIdx = ci.indexOf("Run TypeScript type check");
+    const lintIdx = ci.indexOf("Run linter");
+    const msIdx = ci.indexOf("Check `ms` vocabulary guard");
     const verifyIdx = ci.indexOf("Run verification script");
-    expect(testIdx).toBeGreaterThan(-1);
     expect(verifyIdx).toBeGreaterThan(-1);
-    expect(verifyIdx).toBeGreaterThan(testIdx);
+    expect(verifyIdx).toBeGreaterThan(tscIdx);
+    expect(verifyIdx).toBeGreaterThan(lintIdx);
+    expect(verifyIdx).toBeGreaterThan(msIdx);
   });
 });
