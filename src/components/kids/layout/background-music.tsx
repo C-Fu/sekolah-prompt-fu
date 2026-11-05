@@ -5,6 +5,19 @@ import { useState, useEffect, useRef, useCallback, createContext, useContext } f
 const MUSIC_ENABLED_KEY = "kids-music-enabled";
 const MUSIC_VOLUME_KEY = "kids-music-volume";
 
+/**
+ * Bundled, base-path-aware URL for the background music asset.
+ *
+ * The game is deployed as a GitHub Pages project site, so the static export
+ * serves the app under a base path (e.g. `/sekolah-prompt-fu`). `NEXT_PUBLIC_BASE_PATH`
+ * carries that prefix at build time; when unset (local dev / plain `next build`)
+ * the asset resolves to the site root.
+ */
+function getMusicUrl(): string {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/+$/, "");
+  return `${basePath}/kids-music.mp3`;
+}
+
 // Shared audio instance and context for cross-component communication
 interface MusicContextType {
   isPlaying: boolean;
@@ -73,7 +86,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   // Create and manage audio element
   useEffect(() => {
     if (!audioRef.current) {
-      const audio = new Audio("https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/public/kids-music.mp3");
+      const audio = new Audio(getMusicUrl());
       audio.loop = true;
       audio.volume = volume;
       audioRef.current = audio;
@@ -153,7 +166,7 @@ export function MusicButton() {
     } else {
       // Fallback behavior
       if (!localAudioRef.current) {
-        localAudioRef.current = new Audio("https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/public/kids-music.mp3");
+        localAudioRef.current = new Audio(getMusicUrl());
         localAudioRef.current.loop = true;
         localAudioRef.current.volume = 0.3;
       }
