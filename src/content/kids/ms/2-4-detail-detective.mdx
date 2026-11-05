@@ -1,0 +1,104 @@
+<Section>
+<Panel character="promi" mood="excited">
+Selamat datang ke tahap terakhir Istana Kejelasan! 🏰 Anda telah belajar tentang SIAPA, APA, BILA, dan DI MANA. Sekarang mari kita gabungkan SEMUA!
+</Panel>
+</Section>
+
+<Section>
+## Senarai Semak Detektif Butiran
+
+Sebelum anda menghantar prompt, tanya diri anda:
+
+✅ **SIAPA** - Siapa yang terlibat?
+✅ **APA** - Apa yang saya mahu? Apa yang sedang berlaku?
+✅ **BILA** - Bila ia berlaku?
+✅ **DI MANA** - Di mana ia berlaku?
+</Section>
+
+<Section>
+## Susun Bahagian-bahagian Prompt!
+
+<PromptParts
+  title="Padankan Setiap Bahagian!"
+  instruction="Ketik satu bahagian, kemudian pilih sama ada ia Peranan, Tugasan, Konteks, atau Kekangan!"
+  parts={[
+    { text: "Tulis cerita yang kelakar", type: "task" },
+    { text: "tentang ahli sihir yang kekok", type: "context" },
+    { text: "di sekolah sihir", type: "context" },
+    { text: "Pastikan ia pendek", type: "constraint" }
+  ]}
+  successMessage="Anda telah mengenal pasti semua bahagian prompt! Sekarang anda boleh membina prompt seperti pakar!"
+/>
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Anda tidak perlu KEEMPAT-EMPATNYA setiap kali, tetapi semakin banyak butiran anda tambah, semakin bagus saya boleh membantu anda!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran Detektif #1
+
+<PromptVsMistake
+  question="Prompt yang mana mempunyai butiran yang paling membantu?"
+  good="Tulis cerita kelakar tentang ahli sihir yang kekok bernama Zap yang secara tidak sengaja menukar kucingnya menjadi gergasi semasa pertunjukan sihir di istana diraja"
+  bad="Tulis cerita tentang sihir"
+  explanation="Prompt yang mempunyai butiran itu ada SIAPA (ahli sihir Zap, kucingnya), APA (menukar kucing jadi gergasi, pertunjukan sihir), DI MANA (istana diraja), dan juga satu gaya (kelakar)!"
+  promiMessage="Wah! Prompt itu memberikan saya begitu banyak untuk bekerja. Saya boleh membayangkan keseluruhan adegannya!"
+/>
+</Section>
+
+<Section>
+## Cabaran Detektif #2
+
+<PromptVsMistake
+  question="Prompt yang mana akan menghasilkan puisi yang lebih bagus?"
+  good="Tulis puisi pendek berima tentang beruang yang mengantuk bersiap sedia untuk hibernasi musim sejuk di gua selesa miliknya"
+  bad="Tulis puisi tentang seekor haiwan"
+  explanation="Prompt pertama memberitahu saya SIAPA (beruang yang mengantuk), APA (bersiap sedia untuk hibernasi), BILA (musim sejuk), DI MANA (gua selesa), dan gaya (pendek, berima)!"
+  promiMessage="Setiap butiran membantu saya mencipta sesuatu yang istimewa khas untuk anda!"
+/>
+</Section>
+
+<Section>
+## Bina Prompt Terbaik!
+
+<DragDropPrompt
+  title="Detektif Pakar"
+  instruction="Susun SEMUA butiran menjadi prompt yang sempurna"
+  pieces={["Tulis cerita yang menarik", "tentang pencipta muda", "yang membina robot kawan baik", "di bandar masa hadapan", "pada hari pertama musim panas"]}
+  correctOrder={[0, 1, 2, 3, 4]}
+  successMessage="Sempurna! Anda telah memasukkan SIAPA, APA, DI MANA, dan BILA!"
+/>
+</Section>
+
+<Section>
+## Cipta Karya Agung Anda!
+
+<MagicWords
+  sentence="Tolong tulis cerita ___ tentang ___ yang ___ di ___ semasa ___"
+  blanks={[
+    { hint: "😊 satu mood/gaya", answers: ["kelakar", "menarik", "misteri", "menyentuh hati", "bodil"] },
+    { hint: "🦸 satu watak", answers: ["kesateria berani", "pari-pari kecil", "musang pintar", "angkasawan muda", "hantu mesra"] },
+    { hint: "🎬 satu aksi", answers: ["menemui rahsia", "pergi mengembara", "berkawan baharu", "menyelesaikan misteri", "belajar terbang"] },
+    { hint: "🏰 satu tempat", answers: ["kerajaan ajaib", "hutan belantara", "stesen angkasa", "kota bawah laut", "hutan mempesona"] },
+    { hint: "🌙 satu masa", answers: ["bulan penuh", "hari jadi mereka", "ribut besar", "hari terakhir sekolah", "tengah malam"] }
+  ]}
+  successMessage="Anda memang Detektif Butiran sejati! Itulah prompt yang menakjubkan!"
+/>
+</Section>
+
+<Section>
+## Tahniah, Detektif! 🎉
+
+<Panel character="promi" mood="celebrating">
+Anda berjaya! Anda telah menamatkan Istana Kejelasan dan menjadi **Detektif Butiran**! Anda kini tahu rahsianya: SIAPA + APA + BILA + DI MANA = Prompt yang Menakjubkan!
+</Panel>
+
+<LevelComplete 
+  levelSlug="2-4-detail-detective" 
+  stars={3}
+  message="Anda telah menamatkan Istana Kejelasan! Anda seorang Detektif Butiran!"
+/>
+</Section>

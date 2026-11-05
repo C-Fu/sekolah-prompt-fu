@@ -1,0 +1,97 @@
+<Section>
+<Panel character="promi" mood="happy">
+Selamat kembali ke Istana Kejelasan! Hari ini kita belajar tentang **SIAPA** dan **APA** - dua butiran yang sangat penting!
+</Panel>
+</Section>
+
+<Section>
+## Soalan SIAPA
+
+Apabila anda meminta bantuan AI, fikirkan: **Siapa yang terlibat?**
+
+- Seorang manusia? (budak lelaki, budak perempuan, nenek, adiwira)
+- Seekor haiwan? (kucing, naga, ikan paus)
+- Sebuah watak? (robot, ahli sihir, makhluk asing)
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Jika anda berkata "Tulis cerita," saya tidak tahu tentang siapa! Tetapi "Tulis cerita tentang kesateria yang berani" memberitahu saya dengan tepat siapa watak utamanya!
+</Panel>
+</Section>
+
+<Section>
+## Mari Berlatih SIAPA!
+
+<PromptVsMistake
+  question="Prompt yang mana memberitahu kita SIAPA cerita itu tentangnya?"
+  good="Tulis cerita tentang tikus kecil yang ingin tahu bernama Pip"
+  bad="Tulis cerita tentang sesuatu"
+  explanation="Prompt pertama memberitahu kita SIAPA (tikus), JENIS apa (ingin tahu, kecil), dan juga NAMA mereka (Pip)!"
+  promiMessage="Nama dan keterangan membantu saya membayangkan watak itu!"
+/>
+</Section>
+
+<Section>
+## Soalan APA
+
+Sekarang fikirkan: **Apa yang sedang berlaku? Apa yang anda mahu?**
+
+- Aksi apa? (berlari, menyanyi, membina)
+- Objek apa? (kek, kapal angkasa, puisi)
+- Jenis apa? (kelakar, menakutkan, berwarna-warni)
+</Section>
+
+<Section>
+## Mari Berlatih APA!
+
+<PromptVsMistake
+  question="Prompt yang mana memberitahu kita APA yang perlu dicipta?"
+  good="Tulis puisi kelakar tentang pizza dengan banyak rima"
+  bad="Tulis sesuatu yang kelakar"
+  explanation="Prompt yang mempunyai butiran memberitahu kita APA (puisi), APA tentangnya (pizza), GAYA apa (kelakar dengan rima)!"
+  promiMessage="Menjadi khusus tentang APA yang anda mahu membantu saya mencipta tepat itu!"
+/>
+</Section>
+
+<Section>
+## Bina Prompt Anda Sendiri!
+
+Gabungkan SIAPA dan APA:
+
+<DragDropPrompt
+  title="Bina Prompt"
+  instruction="Seret bahagian-bahagian ke urutan yang betul"
+  pieces={["Tulis cerita", "tentang naga yang mesra", "yang belajar", "membuat aiskrim"]}
+  correctOrder={[0, 1, 2, 3]}
+  successMessage="Sempurna! Anda telah menggabungkan SIAPA (naga yang mesra) dan APA (belajar membuat aiskrim)!"
+/>
+</Section>
+
+<Section>
+## Cipta Anda Sendiri!
+
+<MagicWords
+  sentence="Tolong tulis ___ tentang ___ yang mahu ___"
+  blanks={[
+    { hint: "📝 jenis tulisan", answers: ["cerita", "puisi", "lagu", "jenaka"] },
+    { hint: "🦸 satu watak", answers: ["adiwira", "puteri", "robot", "ahli sihir", "lanun"] },
+    { hint: "🎯 satu matlamat", answers: ["jumpa harta karun", "berkawan", "selamatkan dunia", "belajar keajaiban", "menang perlumbaan"] }
+  ]}
+  successMessage="Anda telah menambah SIAPA dan APA dengan sempurna!"
+/>
+</Section>
+
+<Section>
+## Kemajuan yang Menakjubkan! 🎉
+
+<Panel character="promi" mood="celebrating">
+Anda semakin mahir dalam hal ini! Sekarang anda tahu untuk sentiasa memasukkan **SIAPA** dalam prompt anda dan **APA** yang anda mahu. Teruskan begitu!
+</Panel>
+
+<LevelComplete 
+  levelSlug="2-2-who-and-what" 
+  stars={3}
+  message="Anda telah menguasai SIAPA dan APA dalam prompt!"
+/>
+</Section>

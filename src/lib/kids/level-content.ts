@@ -339,6 +339,9 @@ const L_ms__1_1_meet_promi = () => import("@/content/kids/ms/1-1-meet-promi.mdx"
 const L_ms__1_2_first_words = () => import("@/content/kids/ms/1-2-first-words.mdx");
 const L_ms__1_3_being_clear = () => import("@/content/kids/ms/1-3-being-clear.mdx");
 const L_ms__2_1_missing_details = () => import("@/content/kids/ms/2-1-missing-details.mdx");
+const L_ms__2_2_who_and_what = () => import("@/content/kids/ms/2-2-who-and-what.mdx");
+const L_ms__2_3_when_and_where = () => import("@/content/kids/ms/2-3-when-and-where.mdx");
+const L_ms__2_4_detail_detective = () => import("@/content/kids/ms/2-4-detail-detective.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -682,6 +685,9 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "1-2-first-words": L_ms__1_2_first_words,
     "1-3-being-clear": L_ms__1_3_being_clear,
     "2-1-missing-details": L_ms__2_1_missing_details,
+    "2-2-who-and-what": L_ms__2_2_who_and_what,
+    "2-3-when-and-where": L_ms__2_3_when_and_where,
+    "2-4-detail-detective": L_ms__2_4_detail_detective,
   },
 };
 
