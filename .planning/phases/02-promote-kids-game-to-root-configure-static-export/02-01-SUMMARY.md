@@ -121,7 +121,7 @@ Each task was committed atomically:
 2. **Task 2: Bundle the music asset and enable the static export** - `bde85115` (feat)
 3. **Task 3: Add the GitHub Pages deployment workflow and verify the static bundle** - `bf449d63` (ci)
 
-**Plan metadata:** `_pending_` (docs: complete plan)
+**Plan metadata:** `495b20ba` (docs: complete plan)
 
 ## Files Created/Modified
 - `src/app/page.tsx` (renamed from `src/app/kids/page.tsx`) - kids home at `/`; metadata path `/`
