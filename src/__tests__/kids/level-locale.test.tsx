@@ -94,6 +94,20 @@ describe("level-content locale/slug selection", () => {
     expect(ms?.Component).not.toBe(en?.Component);
   });
 
+  it("resolves effectiveLocale 'ms' for every one of the 19 registered slugs", async () => {
+    const levels = getAllLevels();
+    // The corpus must cover exactly the 19-slug registry.
+    expect(levels).toHaveLength(19);
+    for (const { slug } of levels) {
+      const ms = await loadLevelContent("ms", slug);
+      const en = await loadLevelContent("en", slug);
+      // A missing loader for ANY slug silently falls back to en; the slug in the
+      // message pinpoints the offending registry/map miss.
+      expect(ms?.effectiveLocale, slug).toBe("ms");
+      expect(ms?.Component, slug).not.toBe(en?.Component);
+    }
+  });
+
   it("loads a bounded ms message bundle", async () => {
     const en = await loadMessages("en");
     const ms = await loadMessages("ms");
