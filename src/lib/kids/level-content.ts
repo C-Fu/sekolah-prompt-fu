@@ -351,6 +351,9 @@ const L_ms__4_2_story_starters = () => import("@/content/kids/ms/4-2-story-start
 const L_ms__4_3_character_creator = () => import("@/content/kids/ms/4-3-character-creator.mdx");
 const L_ms__4_4_world_builder = () => import("@/content/kids/ms/4-4-world-builder.mdx");
 const L_ms__5_1_perfect_prompt = () => import("@/content/kids/ms/5-1-perfect-prompt.mdx");
+const L_ms__5_2_fix_it_up = () => import("@/content/kids/ms/5-2-fix-it-up.mdx");
+const L_ms__5_3_prompt_remix = () => import("@/content/kids/ms/5-3-prompt-remix.mdx");
+const L_ms__5_4_graduation_day = () => import("@/content/kids/ms/5-4-graduation-day.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -706,6 +709,9 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "4-3-character-creator": L_ms__4_3_character_creator,
     "4-4-world-builder": L_ms__4_4_world_builder,
     "5-1-perfect-prompt": L_ms__5_1_perfect_prompt,
+    "5-2-fix-it-up": L_ms__5_2_fix_it_up,
+    "5-3-prompt-remix": L_ms__5_3_prompt_remix,
+    "5-4-graduation-day": L_ms__5_4_graduation_day,
   },
 };
 

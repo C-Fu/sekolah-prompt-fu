@@ -1,0 +1,108 @@
+<Section>
+<Panel character="promi" mood="happy">
+Selamat kembali! Hari ini kita belajar kemahiran yang sangat penting: **mencari dan membaiki prompt yang lemah**! 🔧
+</Panel>
+</Section>
+
+<Section>
+## Kenal Pasti Masalahnya!
+
+Prompt yang lemah selalunya mempunyai:
+
+❌ Terlalu kabur - "Tulis sesuatu"
+❌ Tiada butiran - "Ceritakan tentang seseorang"
+❌ Tiada format - Hanya bertanya tanpa struktur
+❌ Gaya yang tidak jelas - Tidak menyatakan bagaimana anda mahukannya
+</Section>
+
+<Section>
+## Jadilah Doktor Prompt! 🏥
+
+<PromptDoctor
+  title="Ubat Prompt Ini"
+  brokenPrompt="Tulis sesuatu"
+  problems={[
+    { issue: "Terlalu Kabur", symptom: "Apa yang perlu saya tulis? Cerita? Puisi? Jenaka?", fix: "Tulis satu cerita" },
+    { issue: "Tiada Topik", symptom: "Cerita itu tentang apa?", fix: "Tulis satu cerita tentang seekor naga" },
+    { issue: "Tiada Butiran", symptom: "Naga jenis apa? Apa yang berlaku?", fix: "Tulis cerita pendek tentang seekor naga mesra yang membakar biskut" }
+  ]}
+  healedPrompt="Tulis cerita pendek tentang seekor naga mesra yang membakar biskut"
+  successMessage="Anda mengubati prompt itu! Daripada 2 perkataan kepada permintaan yang hebat dan terperinci!"
+/>
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Belajar mengenal pasti prompt yang lemah membantu anda menulis yang lebih bagus! Ia seperti menjadi detektif prompt!
+</Panel>
+</Section>
+
+<Section>
+## Cari Pembaikannya!
+
+<PromptVsMistake
+  question="Prompt ini lemah: 'Tulis satu puisi.' Bagaimana anda akan membaikinya?"
+  good="Tulis puisi berima pendek 4 baris tentang pelangi selepas ribut. Jadikan ia ceria dan gunakan perkataan berwarna-warni!"
+  bad="Tulis puisi yang sangat bagus tolong"
+  explanation="Hanya berkata 'sangat bagus' tidak membantu! Sebaliknya, tambah butiran: topik (pelangi), format (4 baris, berima), dan gaya (ceria, berwarna-warni)!"
+  promiMessage="Menambah butiran yang khusus mengubah prompt lemah menjadi kuat!"
+/>
+</Section>
+
+<Section>
+## Baiki Prompt Ini!
+
+<PromptVsMistake
+  question="Prompt lemah: 'Tolong dengan kerja rumah saya.' Bagaimana anda boleh menjadikannya lebih bagus?"
+  good="Saya dalam darjah 4 dan perlukan bantuan memahami pecahan. Bolehkah anda terangkan apa maksud 1/2 menggunakan piza sebagai contoh? Biarkan mudah!"
+  bad="Tolong dengan kerja rumah saya lagi"
+  explanation="Versi yang bagus memberitahu saya: tahap anda (darjah 4), topik (pecahan), meminta contoh (piza), dan gaya (mudah)!"
+  promiMessage="Semakin khusus anda, semakin bagus saya boleh membantu!"
+/>
+</Section>
+
+<Section>
+## Baiki Prompt Itu!
+
+<DragDropPrompt
+  title="Pembaikan Prompt"
+  instruction="Prompt 'Ceritakan satu cerita' terlalu lemah. Susun tambahan ini untuk membaikinya:"
+  pieces={["tentang seekor tikus kecil yang berani", "Ceritakan cerita pendek sebelum tidur", "yang membantu anak burung yang tersesat mencari rumah.", "Jadikan ia lembut dan akhirkan dengan semua orang selamat."]}
+  correctOrder={[1, 0, 2, 3]}
+  successMessage="Anda mengubah prompt yang lemah menjadi satu yang hebat!"
+/>
+</Section>
+
+<Section>
+## Cabaran Penambahbaikan!
+
+Ambil prompt lemah ini dan jadikannya kuat:
+
+**Lemah:** "Beri saya idea"
+
+<MagicWords
+  sentence="Beri saya ___ idea kreatif untuk ___ yang ___ dan ___. Sesuatu seperti ___!"
+  blanks={[
+    { hint: "🔢 berapa banyak", answers: ["5", "3", "7", "10", "4"] },
+    { hint: "🎯 untuk apa", answers: ["pesta hari lahir", "projek sains", "permainan menyeronokkan", "cerita untuk ditulis", "menghias bilik saya"] },
+    { hint: "✨ gaya 1", answers: ["menyeronokkan", "mudah dilakukan", "kreatif", "mengejutkan", "berwarna-warni"] },
+    { hint: "🌟 gaya 2", answers: ["mesra kanak-kanak", "tidak terlalu mahal", "unik", "menarik", "mudah"] },
+    { hint: "💡 contoh", answers: ["pemburuan harta karun", "membuat slime", "tema superhero", "barang menyala dalam gelap", "persembahan silap mata"] }
+  ]}
+  successMessage="Anda mengubah prompt lemah 2 perkataan menjadi satu yang hebat dan terperinci!"
+/>
+</Section>
+
+<Section>
+## Pembaiki Prompt! 🎉
+
+<Panel character="promi" mood="celebrating">
+Cemerlang! Anda belajar mengenal pasti prompt yang lemah dan **membaikinya** dengan menambah butiran, format, dan gaya! Kemahiran ini akan membantu anda selama-lamanya!
+</Panel>
+
+<LevelComplete 
+  levelSlug="5-2-fix-it-up" 
+  stars={3}
+  message="Anda belajar mencari dan membaiki prompt yang lemah!"
+/>
+</Section>

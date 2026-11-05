@@ -1,0 +1,106 @@
+<Section>
+<Panel character="promi" mood="excited">
+Hari ini kita belajar **Adunan Semula Prompt**! 🎵 Ini bermaksud mengubah prompt untuk mendapat hasil yang berbeza!
+</Panel>
+</Section>
+
+<Section>
+## Topik Sama, Hasil Berbeza!
+
+Anda boleh bertanya tentang perkara yang sama dengan cara yang berbeza untuk mendapat jawapan yang berbeza:
+
+- **Untuk keseronokan**: "Ceritakan tentang ikan lumba-lumba dengan cara yang lucu"
+- **Untuk sekolah**: "Beri saya 5 fakta pendidikan tentang ikan lumba-lumba"
+- **Untuk kreativiti**: "Tulis puisi daripada sudut pandangan ikan lumba-lumba"
+</Section>
+
+<Section>
+## Cuba Makmal Prompt! 🔬
+
+<PromptLab
+  title="Baiki Prompt Anda"
+  scenario="Mari jadikan prompt mudah lebih bagus dengan menambah butiran satu demi satu!"
+  basePrompt="Ceritakan tentang anjing"
+  baseResponse="Anjing ialah haiwan. Ia mempunyai empat kaki dan bulu."
+  improvements={[
+    { label: "Tambah baka yang khusus", prompt: "Ceritakan tentang anjing Golden Retriever", response: "Golden Retriever ialah anjing hebat yang dikenali kerana personaliti mesra, bulu keemasannya, dan suka berenang!" },
+    { label: "Tambah khalayak", prompt: "Ceritakan tentang anjing Golden Retriever untuk budak 10 tahun", response: "Golden Retriever ialah anjing yang sangat mesra yang suka bermain tangkap dan berenang! Ia mempunyai bulu keemasan lembut dan senyuman gembira yang besar!" },
+    { label: "Tambah format", prompt: "Beri saya 3 fakta menyeronokkan tentang anjing Golden Retriever untuk budak 10 tahun", response: "Inilah 3 fakta menyeronokkan tentang Golden Retriever: 1) Ia dilatih untuk mengambil burung untuk pemburu, 2) Ia boleh belajar lebih 200 perkataan, 3) Ia mempunyai kaki berselaput yang menjadikannya perenang hebat!" }
+  ]}
+  successMessage="Setiap butiran yang anda tambah menjadikan jawapan lebih bagus dan lebih berguna!"
+/>
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Mengadun semula prompt bermaksud anda boleh meneroka topik yang sama dalam banyak cara yang menarik!
+</Panel>
+</Section>
+
+<Section>
+## Lihat Adunan Semulanya!
+
+<PromptVsMistake
+  question="Anda ingin belajar tentang dinosaur tetapi dengan cara yang MENYERONOKKAN. Adunan semula yang mana paling bagus?"
+  good="Berpura-pura anda seekor T-Rex yang baru bangun tidur. Ceritakan tentang hari anda - apa yang anda makan, siapa kawan anda, dan apa yang membuat anda merajuk?"
+  bad="Beri saya fakta tentang T-Rex"
+  explanation="Topik sama (T-Rex), tetapi adunan semula menjadikannya cerita menyeronokkan daripada sudut pandangan dinosaur!"
+  promiMessage="Mengadun semula topik yang sama memberi anda cara baharu yang menyeronokkan untuk belajar!"
+/>
+</Section>
+
+<Section>
+## Adun Semula untuk Matlamat Berbeza!
+
+<PromptVsMistake
+  question="Anda belajar tentang bulan. Kini anda ingin menulis cerita kreatif. Adunan semula yang mana berkesan?"
+  good="Tulis cerita sebelum tidur tentang bintang kecil yang ingin melawat bulan. Jadikan ia ajaib dengan pengakhiran yang manis!"
+  bad="Ceritakan lebih banyak fakta tentang bulan"
+  explanation="Anda mengadun semula daripada 'belajar fakta' kepada 'cerita kreatif' - topik sama, tujuan berbeza!"
+  promiMessage="Mengadun semula membolehkan anda menggunakan apa yang anda tahu dengan cara kreatif yang baharu!"
+/>
+</Section>
+
+<Section>
+## Cuba Adunan Semula Berbeza!
+
+<DragDropPrompt
+  title="Adunan Semula Prompt"
+  instruction="Adun semula 'Ceritakan tentang kucing' menjadi prompt kreatif:"
+  pieces={["dan gambarkan tempat tidur kesayangan anda", "Tulis daripada sudut pandangan kucing malas", "yang tinggal di sebuah kedai buku yang selesa.", "Jadikan ia lucu dan santai!!"]}
+  correctOrder={[1, 2, 0, 3]}
+  successMessage="Adunan semula yang hebat! Topik sama, pendekatan yang sama sekali berbeza dan menyeronokkan!"
+/>
+</Section>
+
+<Section>
+## Cipta Adunan Semula Anda!
+
+Ambil topik asas "robot" dan adun semulanya:
+
+<MagicWords
+  sentence="___ robot ___ yang ___. Gambarkan ___. Jadikan ia ___!"
+  blanks={[
+    { hint: "📝 apa untuk ditulis", answers: ["Ceritakan kisah tentang", "Tulis catatan diari daripada", "Cipta lagu tentang", "Gambarkan satu hari untuk", "Temubual"] },
+    { hint: "🤖 jenis robot", answers: ["pembantu kecil", "menari", "memasak", "penjelajah angkasa", "bilik darjah mesra"] },
+    { hint: "⭐ apa yang ia buat", answers: ["baru belajar mencari kawan", "menjumpai ia suka muzik", "membuat kesilapan lucu", "sedang menuju pengembaraan pertama", "berjumpa manusia buat kali pertama"] },
+    { hint: "🎯 apa untuk disertakan", answers: ["bagaimana ia rasa tentang penemuan baharunya", "saat paling lucu dalam harinya", "apa yang ia impikan", "kenangan kesayangannya", "apa yang ia pelajari hari ini"] },
+    { hint: "✨ gaya", answers: ["menyentuh hati dan manis", "lucu dan menyeronokkan", "menarik dan penuh pengembaraan", "aman dan tenang", "penuh misteri dan ingin tahu"] }
+  ]}
+  successMessage="Adunan semula yang hebat! Anda mengubah 'robot' menjadi sesuatu yang sungguh unik!"
+/>
+</Section>
+
+<Section>
+## Pakar Adunan Semula! 🎉
+
+<Panel character="promi" mood="celebrating">
+Hebat! Anda belajar **mengadun semula prompt** untuk mendapat hasil yang berbeza daripada topik yang sama! Ini menjadikan kreativiti anda tidak berkesudahan!
+</Panel>
+
+<LevelComplete 
+  levelSlug="5-3-prompt-remix" 
+  stars={3}
+  message="Anda belajar mengadun semula prompt untuk hasil yang berbeza!"
+/>
+</Section>
