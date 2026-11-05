@@ -1,0 +1,104 @@
+<Section>
+<Panel character="promi" mood="happy">
+Selamat kembali! Pelajaran hari ini sangat penting: **Tunjuk, Jangan Beritahu**! Menggunakan contoh ialah salah satu cara terbaik untuk membantu AI memahami!
+</Panel>
+</Section>
+
+<Section>
+## Kuasa Contoh
+
+Daripada hanya menerangkan apa yang anda mahu, **tunjukkan kepada saya satu contoh**!
+
+Ia seperti apabila anda mengajar seseorang permainan - lebih mudah menunjuk cara bermain daripada hanya memberitahu peraturannya!
+</Section>
+
+<Section>
+## Pelajari Coraknya!
+
+<ExampleMatcher
+  title="Kuasa Corak"
+  instruction="AI belajar daripada contoh! Lihat corak dan pilih apa yang datang seterusnya."
+  examples={[
+    { input: "gembira", output: "😊" },
+    { input: "sedih", output: "😢" },
+    { input: "mengantuk", output: "😴" }
+  ]}
+  question="marah"
+  options={["😠", "😊", "🎉", "😴"]}
+  correctAnswer="😠"
+  explanation="AI belajar: perkataan perasaan → emoji yang sepadan! Ini dipanggil 'belajar melalui contoh' - sama seperti anda!"
+/>
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Jika anda berkata "jadikan ia kedengaran menarik," saya mungkin tidak tahu apa maksud "menarik" bagi anda. Tetapi jika anda tunjukkan satu contoh, saya akan memahaminya dengan sempurna!
+</Panel>
+</Section>
+
+<Section>
+## Lihat Perbezaannya
+
+<PromptVsMistake
+  question="Prompt yang mana menggunakan contoh dengan lebih bagus?"
+  good="Tulis nama produk yang menyeronokkan seperti 'Shampu Berkilau Super' atau 'Bantal Awan Ajaib' - sesuatu yang mudah diingat dan suka bermain!"
+  bad="Tulis nama produk yang menyeronokkan"
+  explanation="Contoh-contoh itu menunjukkan dengan tepat gaya nama yang anda cari - mudah diingat, suka bermain, dengan kata sifat yang menyeronokkan!"
+  promiMessage="Contoh itu seperti peta harta karun - ia menunjukkan dengan tepat ke mana anda mahu pergi!"
+/>
+</Section>
+
+<Section>
+## Tunjukkan Gaya Anda
+
+<PromptVsMistake
+  question="Prompt yang mana lebih bagus menunjukkan gaya penulisan?"
+  good="Tulis jenaka dalam gaya ini: 'Kenapa pisang pergi ke doktor? Kerana ia tidak mengupas dengan baik!' - sesuatu yang bodil dengan permainan kata!"
+  bad="Tulis jenaka yang kelakar"
+  explanation="Dengan menunjukkan contoh jenaka dengan permainan kata, saya tahu anda mahu gaya permainan kata yang bodil itu!"
+  promiMessage="Apabila anda menunjukkan kepada saya apa yang anda suka, saya boleh memadankan gaya itu!"
+/>
+</Section>
+
+<Section>
+## Berikan Contoh!
+
+<DragDropPrompt
+  title="Bina dengan Contoh"
+  instruction="Susun bahagian-bahagian ini untuk mencipta prompt dengan contoh yang membantu"
+  pieces={["Tulis nama adiwira", "seperti 'Kapten Keberanian'", "atau 'Wanita Kilat'", "- sesuatu yang wira dan mudah diingati"]}
+  correctOrder={[0, 1, 2, 3]}
+  successMessage="Sempurna! Contoh-contoh anda menunjukkan dengan tepat jenis nama yang anda mahu!"
+/>
+</Section>
+
+<Section>
+## Cipta Prompt-Contoh Anda Sendiri!
+
+<MagicWords
+  sentence="Tulis ___ seperti '___ ___ ___' - sesuatu yang ___ dan ___"
+  blanks={[
+    { hint: "📝 apa yang perlu ditulis", answers: ["nama pasukan", "nama haiwan peliharaan", "nama kumpulan muzik", "tajuk buku", "nama restoran"] },
+    { hint: "✨ kata sifat", answers: ["Gembira", "Super", "Emas", "Ajaib", "Perkasa"] },
+    { hint: "🌟 kata nama", answers: ["Bintang", "Naga", "Impian", "Guruh", "Phoenix"] },
+    { hint: "🎯 perkataan", answers: ["Kelab", "Skuad", "Krew", "Kerajaan", "Pengembaraan"] },
+    { hint: "😊 gaya 1", answers: ["menyeronokkan", "menarik", "hebat", "kreatif", "mudah diingat"] },
+    { hint: "🎨 gaya 2", answers: ["mudah diingati", "unik", "berkuasa", "mesra", "berani"] }
+  ]}
+  successMessage="Hebat! Contoh anda menunjukkan dengan tepat gaya yang anda mahu!"
+/>
+</Section>
+
+<Section>
+## Contoh Itu Berkuasa! 🎉
+
+<Panel character="promi" mood="celebrating">
+Kerja yang menakjubkan! Anda belajar bahawa **menunjukkan contoh** ialah salah satu cara terbaik untuk membantu AI memahami dengan tepat apa yang anda mahu!
+</Panel>
+
+<LevelComplete 
+  levelSlug="3-2-show-dont-tell" 
+  stars={3}
+  message="Anda telah menguasai penggunaan contoh dalam prompt!"
+/>
+</Section>

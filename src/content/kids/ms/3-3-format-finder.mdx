@@ -1,0 +1,87 @@
+<Section>
+<Panel character="promi" mood="excited">
+Hari ini kita belajar tentang **format**! 📝 Tahukah anda boleh meminta AI menjawab dalam pelbagai cara?
+</Panel>
+</Section>
+
+<Section>
+## Apa Itu Format?
+
+**Format** ialah BAGAIMANA anda mahu jawapan itu dipersembahkan:
+
+- 📋 **Senarai** - bernombor atau titik peluru
+- 📖 **Cerita** - naratif dengan permulaan, pertengahan, pengakhiran
+- 🎵 **Puisi** - dengan rima dan irama
+- ❓ **S&J** - gaya soalan dan jawapan
+- 📊 **Jadual** - disusun dalam baris dan lajur
+</Section>
+
+<Section>
+<Panel character="promi" mood="happy">
+Dengan memberitahu saya formatnya, anda membantu saya menyusun jawapan saya dengan cara yang paling berguna untuk anda!
+</Panel>
+</Section>
+
+<Section>
+## Format Membuat Perbezaan!
+
+<PromptVsMistake
+  question="Prompt yang mana meminta format yang jelas?"
+  good="Berikan saya 5 fakta menyeronokkan tentang ikan lumba-lumba dalam senarai bernombor"
+  bad="Beritahu saya tentang ikan lumba-lumba"
+  explanation="Prompt pertama memberitahu saya dengan tepat cara menyusun jawapan - sebagai 5 fakta bernombor!"
+  promiMessage="Apabila anda meminta format yang khusus, anda mendapat tepat apa yang anda perlukan!"
+/>
+</Section>
+
+<Section>
+## Pilih Format Anda!
+
+<PromptVsMistake
+  question="Format yang mana paling bagus untuk mengingati sesuatu?"
+  good="Senaraikan planet mengikut urutan dari matahari sebagai titik peluru"
+  bad="Beritahu saya tentang planet-planet"
+  explanation="Format senarai memudahkan untuk mengingati dan mengira planet mengikut urutan!"
+  promiMessage="Senarai sangat bagus untuk belajar dan mengingati!"
+/>
+</Section>
+
+<Section>
+## Latihan Format!
+
+<DragDropPrompt
+  title="Tambah Format"
+  instruction="Susun untuk meminta format yang khusus"
+  pieces={["sebagai puisi pendek", "dengan baris berima", "Tulis tentang hujan", "yang panjangnya 4 baris"]}
+  correctOrder={[2, 0, 1, 3]}
+  successMessage="Sempurna! Anda meminta format puisi dengan butiran yang khusus!"
+/>
+</Section>
+
+<Section>
+## Pilih Format Anda!
+
+<MagicWords
+  sentence="Berikan saya ___ tentang ___ sebagai ___"
+  blanks={[
+    { hint: "🔢 berapa banyak", answers: ["5 petua", "3 idea", "10 fakta", "7 langkah", "4 contoh"] },
+    { hint: "📚 topik", answers: ["menjadi kawan yang baik", "menyelamatkan planet", "kekal sihat", "menjadi kreatif", "belajar perkara baharu"] },
+    { hint: "📋 format", answers: ["senarai bernombor", "titik peluru", "puisi pendek", "cerita mudah", "langkah mudah"] }
+  ]}
+  successMessage="Kerja yang bagus memilih format! Ini menjadikan jawapan lebih mudah dibaca!"
+/>
+</Section>
+
+<Section>
+## Pakar Format! 🎉
+
+<Panel character="promi" mood="celebrating">
+Hebat! Anda belajar bahawa meminta **format** yang khusus membantu anda mendapatkan jawapan yang disusun tepat seperti yang anda perlukan!
+</Panel>
+
+<LevelComplete 
+  levelSlug="3-3-format-finder" 
+  stars={3}
+  message="Anda belajar meminta format yang berbeza-beza!"
+/>
+</Section>
