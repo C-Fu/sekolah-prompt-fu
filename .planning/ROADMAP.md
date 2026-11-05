@@ -15,7 +15,7 @@
 ## Phase 3: Bahasa Melayu (`ms`) Localization
 **Goal:** Bahasa Melayu (`ms`) is a fully selectable locale backed by a complete UI message bundle and 19 localized interactive MDX levels, with no silent English fallback.
 **Requirements:** FR-3
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans executed
 Plans:
 **Wave 1**
 - [x] 03-01-PLAN.md — Register `ms` in all five registries + author complete `messages/ms.json` + tracer level 1-1 + Wave 0 tests
@@ -27,7 +27,7 @@ Plans:
 - [x] 03-03-PLAN.md — Author ms levels 3-4…5-4 (9 files) + register them (completes all 19)
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 03-04-PLAN.md — All-19-slug ms resolution test + phase gate (tsc/lint/tests/parity + static build)
+- [x] 03-04-PLAN.md — All-19-slug ms resolution test + phase gate (tsc/lint/tests/parity + static build)
 
 **Cross-cutting constraints:**
 - Each of the nine ms levels in this plan resolves via loadLevelContent('ms', slug) to effectiveLocale 'ms' with a Component distinct from en's for that slug.
