@@ -2,5 +2,11 @@
   "commit_docs": true,
   "search_gitignored": false,
   "parallelization": true,
-  "subagent_timeout": 300000
+  "subagent_timeout": 300000,
+  "workflow": {
+    "_auto_chain_active": true
+  },
+  "git": {
+    "allow_default_branch_commits": true
+  }
 }
