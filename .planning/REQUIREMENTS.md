@@ -27,7 +27,8 @@
   - Delete unused dependencies from `package.json` (`@prisma/client`, `prisma`, `next-auth`, `@aws-sdk/client-s3`, `@modelcontextprotocol/sdk`, `bcryptjs`, etc.).
   - Delete massive community prompt files (`prompts.csv`, `PROMPTS.md`).
 
-- **NFR-2: Quality & Type Safety** ◑ partial (Phase 2, 02-01: tsc 0, lint 0, tests 89/89, static build emits out/; final certification Phase 4)
-  - TypeScript types must pass check (`npx tsc --noEmit`).
-  - Next.js static build must succeed (`npm run build`).
-  - Unit tests for kids components/utils must pass.
+- **NFR-2: Quality & Type Safety** ✅ ✓ (Phase 4, certified)
+  - TypeScript types must pass check (`npx tsc --noEmit`) — ✓ 0 errors.
+  - Next.js static build must succeed (`npm run build`) — ✓ emits `out/` with `/` + `/map` + 19 level routes.
+  - Unit tests for kids components/utils must pass — ✓ Vitest 94/94.
+  - Phase-4 certification evidence: `npx tsc --noEmit` 0; `npm test` green (94/94); `npm run build` emits `out/` (`/`, `/map`, 19 level routes); re-certifiable via `npm run verify` (the committed rerunnable certification script, `scripts/verify-project.js`). Certified gate set bounded to tsc + tests + build/`out/` inspection (D-02).
