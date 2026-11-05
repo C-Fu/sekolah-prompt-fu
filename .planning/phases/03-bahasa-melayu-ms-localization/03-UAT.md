@@ -1,10 +1,10 @@
 ---
-status: diagnosed
+status: complete
 phase: 03-bahasa-melayu-ms-localization
 source:
   - 03-VERIFICATION.md
 started: 2026-11-05T13:12:00Z
-updated: 2026-11-05T13:40:00Z
+updated: 2026-11-05T11:16:24.512Z
 ---
 
 ## Current Test
@@ -73,7 +73,9 @@ skipped: 0
 
 - gap_id: G-03-4
   truth: "Interactive answer options and lesson prose use common, natural Malay vocabulary a child would recognise — no non-words or rarely-used variants"
-  status: failed
+  status: resolved
+  resolved_by: 03-06-PLAN.md
+  resolved_at: 2026-11-05
   reason: "User reported: 'replace bodil with lawak. any rarely used words like bodil should be replaced with a more common variant'. 'bodil' is not a Malay word; it appears as a selectable MagicWords answer in 2-4:82 and as prose in 3-2:56 and 3-2:58. User also asked for a general pass to replace any other rarely-used words with more common variants."
   severity: major
   test: 4
@@ -110,7 +112,9 @@ skipped: 0
 
 - gap_id: G-03-6
   truth: "Every `ms` interactive explanation is internally consistent in Malay — no Malay puzzle justified by English wording and no leftover English strings"
-  status: failed
+  status: resolved
+  resolved_by: 03-06-PLAN.md
+  resolved_at: 2026-11-05
   reason: "User reported: 're-localize both lines to Malay'. In 1-1-meet-promi.mdx the WordPredictor explanation (line 30) justifies the Malay answer 'Tikar' by its English collocation ('bunyi yang terkenal dalam bahasa Inggeris'), and aiThinking (line 31) retains the English sentence 'The cat sat on the mat'."
   severity: major
   test: 5
