@@ -1,14 +1,14 @@
 ---
 gsd_state_version: "1.0"
 status: awaiting_human_verification
-stopped_at: "Completed 03-05-PLAN.md (gap-closure G-03-5: ms World 4/5 names reconciled)"
-last_updated: "2026-11-05T04:40:00.000Z"
-state_head: 5ed4219314a65ef3ce9dee07cdb5119ba52c5b48
+stopped_at: "Completed 03-06-PLAN.md (gap-closure G-03-4 + G-03-6: ms vocabulary normalization + 1-1 WordPredictor re-grounding)"
+last_updated: "2026-11-05T06:44:00.000Z"
+state_head: d67b34cc5a778dc62aefff3040e32c12c7a429fe
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 23
-  completed_plans: 23
+  total_plans: 25
+  completed_plans: 25
   percent: 50
 current_phase_name: Bahasa Melayu (`ms`) Localization
 ---
@@ -34,10 +34,10 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 
 ## Session
 
-**Last session:** 2026-11-05T04:40:00.000Z
-**Stopped at:** Completed 03-05-PLAN.md (gap-closure G-03-5: ms World 4/5 names reconciled)
+**Last session:** 2026-11-05T06:44:00.000Z
+**Stopped at:** Completed 03-06-PLAN.md (gap-closure G-03-4 + G-03-6: ms vocabulary normalization + 1-1 WordPredictor re-grounding)
 **Resume file:** None
-- **Last Completed Plan:** 03-05 (gap closure G-03-5 — World 4 = `Gaung Penciptaan` and World 5 = `Gunung Pakar` everywhere across `messages/ms.json` + 4 ms lesson bodies; zero `Ngarai`, zero `Gunung Master`; out-of-scope `Master` headings untouched)
+- **Last Completed Plan:** 03-06 (gap closure G-03-4 + G-03-6 — `bodil`→`lawak` ×3, `bedtime`→`sebelum tidur`, `level/LEVEL`→`tahap/TAHAP` ×4, `superhero`→`adiwira` ×5; 1-1:30 explanation re-grounded in Malay + 1-1:31 aiThinking quotes the Malay puzzle sentence; added persistent `scripts/check-ms-vocabulary.js` guard (exit 0 post-edit, exit 1 on pre-edit HEAD with 16 offenders); `messages/ms.json` unmodified at 212 keys; en/** and non-ms locales untouched)
 - **Phase 1 Verification:** PASS — 9/9 must-haves independently reproduced in `.planning/phases/01-purge-non-kids-code-dependencies/VERIFICATION.md`. NFR-1 satisfied; FR-1/FR-2 preparatory (root `/` promotion + full FR-2 verification owned by Phase 2 / later phases); FR-3, FR-4 and NFR-2 final certification explicitly out of Phase 1 scope.
 - **Phase 2 Verification:** PASS — 8/8 must-haves independently reproduced in `.planning/phases/02-promote-kids-game-to-root-configure-static-export/VERIFICATION.md`. Kids game served at `/`, `/map`, `/level/[slug]`; static `out/` bundle (25 pages incl. 19 levels + bundled music); GitHub Pages workflow added. FR-1 and FR-4 satisfied; NFR-2 interim (final certification Phase 4). Follow-up fixed post-verification: kids header home links now use `next/link` so they respect `basePath` under a Pages project sub-path.
 - **Phase 3 Verification:** `human_needed` — 9/9 must-haves independently reproduced in `.planning/phases/03-bahasa-melayu-ms-localization/03-VERIFICATION.md`. All automated plumbing green (`tsc` 0, `lint --quiet` 0, `npm test` 94/94, `npm run build` exit 0 with 19 static level routes; `messages/ms.json` 212-key parity; all 19 slugs resolve to `effectiveLocale: ms` with `Component !== en`). Five items routed to human judgment: translation naturalness (bundle + 19 MDX levels) and three content warnings from `03-REVIEW.md` — WR-01 (World 4/5 names disagree between map and lessons), WR-02 (non-word "bodil" used for "silly", offered as a selectable answer), WR-03 (`1-1` WordPredictor explanation justifies a Malay puzzle "in English", keeps English `aiThinking`). FR-3 satisfaction pending `/gsd-verify-work 03`.
@@ -59,6 +59,7 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 | Phase 01 P07 | 2h 0min | 3 tasks | 85 files |
 | Phase 02 P01 | 18 min | 3 tasks | 21 files |
 | Phase 03 P05 | 2 min | 2 tasks | 5 files |
+| Phase 03 P06 | 3 min | 2 tasks | 10 files |
 
 ## Decisions
 
@@ -78,3 +79,4 @@ current_phase_name: Bahasa Melayu (`ms`) Localization
 - [Phase 02]: Static export set with `output:'export'` + `images.unoptimized` + `trailingSlash:true` (directory-index output for GitHub Pages clean URLs); basePath/assetPrefix and the bundled music URL are driven by `NEXT_PUBLIC_BASE_PATH` (empty by default so local `npm run build` stays navigable). Removed the export-incompatible `experimental.serverActions` and now-unnecessary `images.remotePatterns`.
 - [Phase 02]: Background music now loads the bundled `/kids-music.mp3` base-path-aware; no `raw.githubusercontent.com` reference remains. Added `.github/workflows/deploy.yml` (Node 24, `npm ci`, static build, upload-pages-artifact, deploy-pages, github-pages environment, least-privilege perms, concurrency); `ci.yml` untouched.
 - [Phase 03]: [G-03-5] World 4 reads `Gaung Penciptaan` everywhere (map bundle `messages/ms.json` title + lesson bodies 4-1:3, 4-2:3, 4-4:3/77/83) and World 5 reads `Gunung Pakar` everywhere (bundle + 5-1:3), removing the residual English word "Master" from the World 5 name. Value edits only — 212 bundle keys preserved; standalone `Master` content headings on 5-1 lines 8/43/55/67/79/91/96 deliberately left untouched as out of scope.
+- [Phase 03]: [G-03-4 + G-03-6] ms vocabulary normalized at enumerated file:line sites — invented non-word `bodil`→`lawak` (2-4:82, 3-2:56,58), `bedtime`→`sebelum tidur` (1-3:47), `level/LEVEL`→`tahap/TAHAP` (3-4:3, 4-4:3, 5-4:3,85), `superhero`→`adiwira` (4-1:66, 5-2:90, 5-4:30,31,32); 1-1:30 explanation re-grounded in Malay (no `bahasa Inggeris`) and 1-1:31 aiThinking now quotes the Malay puzzle sentence `Kucing itu duduk di atas tikar`. Committed a persistent deterministic guard `scripts/check-ms-vocabulary.js` (Node stdlib; `git ls-files`-resolved ms set with recursive-walk fallback + loud empty-set failure) that exits non-zero on any recurrence — proven exit 1 with 16 offenders on the pre-edit HEAD tree and exit 0 post-edit. `messages/ms.json` unmodified at 212 keys; en/** and all non-ms locales untouched; deskoped `master` prose/headings not touched.
