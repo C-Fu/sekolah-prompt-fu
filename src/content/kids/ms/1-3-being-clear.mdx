@@ -1,0 +1,115 @@
+<Section>
+<Panel character="promi" mood="happy">
+Hai bintang! 🌟 Hari ini kita akan belajar kemahiran yang paling penting: menjadi **JELAS**!
+</Panel>
+</Section>
+
+<Section>
+## Kenapa Menjadi Jelas Itu Penting
+
+Bayangkan meminta "makanan" daripada ibu anda berbanding meminta "sandwic mentega kacang tanpa kerak." Yang mana memberikan anda tepat apa yang anda mahu?
+
+<Panel character="promi" mood="thinking">
+Sama juga dengan saya! Apabila anda jelas, saya tahu dengan tepat cara membantu. Apabila anda kabur, saya terpaksa meneka... dan saya mungkin tersalah teka!
+</Panel>
+</Section>
+
+<Section>
+## Jelas vs. Tidak Jelas
+
+<PromptVsMistake
+  question="Prompt yang mana lebih jelas?"
+  good="Tulis puisi 4 baris tentang rama-rama di taman, menggunakan perkataan berima"
+  bad="Tulis puisi rama-rama"
+  explanation="Prompt yang jelas memberitahu saya: berapa panjang (4 baris), tentang apa (rama-rama di taman), dan satu peraturan khas (berima). Jauh lebih bagus!"
+  promiMessage="Prompt yang jelas = hasil yang lebih bagus! Ia seperti keajaiban!"
+/>
+</Section>
+
+<Section>
+<PromptVsMistake
+  question="Yang mana memberitahu saya dengan tepat apa yang anda perlukan?"
+  good="Bantu saya menulis 3 fakta menyeronokkan tentang ikan lumba-lumba yang akan dinikmati oleh kanak-kanak berusia 10 tahun"
+  bad="Beritahu saya tentang ikan lumba-lumba"
+  explanation="Prompt pertama memberitahu saya: berapa banyak fakta (3), jenis apa (menyeronokkan), dan untuk siapa (kanak-kanak 10 tahun). Itu banyak membantu!"
+  promiMessage="Apabila anda memberitahu saya untuk siapa ia, saya boleh menjadikannya sempurna untuk mereka!"
+/>
+</Section>
+
+<Section>
+## Cabaran Kejelasan
+
+<DragDropPrompt
+  title="Jadikan ia sangat jelas! 💎"
+  instruction="Susun bahagian-bahagian ini untuk membuat prompt yang sangat jelas"
+  pieces={[
+    "Tolong bantu saya menulis",
+    "cerita bedtime pendek",
+    "tentang seekor burung hantu yang mengantuk",
+    "dengan pengakhiran yang gembira",
+    "untuk adik saya"
+  ]}
+  correctOrder={[0, 1, 2, 3, 4]}
+  successMessage="Itulah prompt yang paling jelas! Hebat!"
+/>
+</Section>
+
+<Section>
+## Isi Butiran yang Jelas
+
+<MagicWords
+  title="Tambah butirannya! 🎯"
+  sentence="Tulis {{length}} {{type}} tentang {{topic}} untuk {{audience}}"
+  blanks={[
+    { id: "length", hint: "Berapa panjang? (pendek, 5 ayat, satu halaman)", answers: ["pendek", "panjang", "5 ayat", "satu halaman", "ringkas", "cepat"], emoji: "📏" },
+    { id: "type", hint: "Jenis apa? (cerita, senarai, penjelasan)", answers: ["cerita", "senarai", "penjelasan", "puisi", "lagu", "panduan"], emoji: "📝" },
+    { id: "topic", hint: "Tentang apa? (angkasa lepas, haiwan, sukan)", answers: ["angkasa lepas", "haiwan", "sukan", "dinosaur", "robot", "keajaiban", "alam semula jadi", "sains"], emoji: "🎯" },
+    { id: "audience", hint: "Untuk siapa? (kanak-kanak, pemula, cikgu saya)", answers: ["kanak-kanak", "pemula", "cikgu saya", "kawan saya", "keluarga saya", "pelajar"], emoji: "👥" }
+  ]}
+  successMessage="Anda telah menambah semua butiran penting! Kerja yang bagus!"
+/>
+</Section>
+
+<Section>
+## Peraturan Emas Kejelasan
+
+<Panel character="promi" mood="excited">
+Inilah petua teratas saya untuk menjadi jelas:
+</Panel>
+
+Ingat tiga soalan ini apabila menulis prompt:
+
+1. **APA** yang saya mahu? (cerita, bantuan, maklumat)
+2. **BAGAIMANA** ia sepatutnya? (pendek, kelakar, mudah)
+3. **UNTUK SIAPA**? (saya, kawan saya, kelas saya)
+</Section>
+
+<Section>
+<PromptVsMistake
+  question="Cabaran terakhir! Yang mana menggunakan ketiga-tiga peraturan?"
+  good="Tulis jenaka pendek dan kelakar tentang pizza yang boleh saya sampaikan kepada kawan saya semasa makan tengah hari"
+  bad="Buat sesuatu yang kelakar"
+  explanation="Prompt yang hebat mempunyai APA (jenaka tentang pizza), BAGAIMANA (pendek dan kelakar), dan UNTUK SIAPA (untuk disampaikan kepada kawan semasa makan tengah hari)!"
+  promiMessage="Anda juara kejelasan! 🏆"
+/>
+</Section>
+
+<Section>
+## Dunia 1 Selesai! 🎊
+
+<Panel character="promi" mood="celebrating">
+WOW! Anda telah menamatkan keseluruhan Dunia 1! Anda telah belajar:
+
+- ✅ Apa itu AI dan prompt
+- ✅ Cara menulis prompt pertama anda
+- ✅ Kenapa menjadi jelas itu sangat penting
+
+Anda sudah bersedia untuk pengembaraan baharu!
+</Panel>
+
+<LevelComplete 
+  levelSlug="1-3-being-clear" 
+  stars={3}
+  message="Anda telah menguasai seni menjadi jelas! Dunia 1 selesai!"
+/>
+</Section>

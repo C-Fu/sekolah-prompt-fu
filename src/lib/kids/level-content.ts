@@ -336,6 +336,9 @@ const L_zh__5_2_fix_it_up = () => import("@/content/kids/zh/5-2-fix-it-up.mdx");
 const L_zh__5_3_prompt_remix = () => import("@/content/kids/zh/5-3-prompt-remix.mdx");
 const L_zh__5_4_graduation_day = () => import("@/content/kids/zh/5-4-graduation-day.mdx");
 const L_ms__1_1_meet_promi = () => import("@/content/kids/ms/1-1-meet-promi.mdx");
+const L_ms__1_2_first_words = () => import("@/content/kids/ms/1-2-first-words.mdx");
+const L_ms__1_3_being_clear = () => import("@/content/kids/ms/1-3-being-clear.mdx");
+const L_ms__2_1_missing_details = () => import("@/content/kids/ms/2-1-missing-details.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -676,6 +679,9 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
   },
   ms: {
     "1-1-meet-promi": L_ms__1_1_meet_promi,
+    "1-2-first-words": L_ms__1_2_first_words,
+    "1-3-being-clear": L_ms__1_3_being_clear,
+    "2-1-missing-details": L_ms__2_1_missing_details,
   },
 };
 

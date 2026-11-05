@@ -1,0 +1,100 @@
+<Section>
+<Panel character="promi" mood="happy">
+Selamat kembali, kawan! Sedia untuk menulis prompt sebenar yang pertama? Mari kita pergi! 🚀
+</Panel>
+</Section>
+
+<Section>
+## Keajaiban Perkataan
+
+Apabila anda bercakap dengan AI, setiap perkataan penting! Mari lihat bagaimana menambah lebih banyak perkataan menjadikan prompt lebih bagus.
+
+<WordPredictor
+  title="Kenapa Perkataan Penting"
+  instruction="Ingat bagaimana saya meneka perkataan seterusnya? Perhatikan apa yang berlaku dengan prompt!"
+  sentence="Tulis sebuah cerita tentang seekor ___"
+  options={["naga", "benda", "itu", "sangat"]}
+  correctAnswer="naga"
+  explanation="'Naga' paling masuk akal kerana cerita biasanya tentang watak atau sesuatu! 'Benda' terlalu kabur, dan 'itu' atau 'sangat' tidak sesuai dengan corak itu."
+  aiThinking="Cerita biasanya tentang seseorang atau sesuatu yang menarik..."
+  successMessage="Tepat sekali! Perkataan yang khusus membimbing tekaan saya - itulah sebabnya butiran penting dalam prompt!"
+/>
+
+<Panel character="promi" mood="thinking">
+Perhatikan ini! Jika seseorang hanya berkata "kucing" kepada saya, saya tidak tahu apa yang mereka mahu. Mahu gambar? Cerita? Fakta tentang kucing? Saya keliru! 😵‍💫
+</Panel>
+</Section>
+
+<Section>
+## Membina Prompt yang Lebih Bagus
+
+Prompt yang bagus mempunyai **tiga bahagian**:
+
+1. **Apa yang anda mahu** (cerita, bantuan, maklumat)
+2. **Topik** (kucing, angkasa lepas, dinosaur)
+3. **Butiran** (pendek, kelakar, untuk kanak-kanak)
+
+<Panel character="promi" mood="excited">
+Mari kita bina satu prompt bersama-sama!
+</Panel>
+</Section>
+
+<Section>
+## Seret Bahagian-bahagiannya!
+
+<DragDropPrompt
+  title="Bina prompt pertama anda! 🧩"
+  instruction="Susun bahagian-bahagian ini mengikut urutan yang betul untuk meminta cerita."
+  pieces={[
+    "Tolong tulis",
+    "cerita pendek",
+    "tentang anak kucing yang berani",
+    "yang pergi mengembara"
+  ]}
+  correctOrder={[0, 1, 2, 3]}
+  successMessage="Sempurna! Itulah prompt yang sangat bagus!"
+/>
+</Section>
+
+<Section>
+## Isi Tempat Kosong!
+
+Sekarang cuba buat prompt anda sendiri dengan menyeret perkataan ajaib:
+
+<MagicWords
+  title="Cipta prompt anda sendiri! ✨"
+  sentence="Tolong tulis sebuah {{type}} tentang {{character}} yang {{action}}"
+  blanks={[
+    { id: "type", hint: "Jenis tulisan apa? (cerita, puisi, lagu)", answers: ["cerita", "puisi", "lagu", "surat", "jenaka"], emoji: "📝" },
+    { id: "character", hint: "Tentang siapa? (robot, naga, anak anjing)", answers: ["robot", "naga", "anak anjing", "kucing", "ahli sihir", "puteri", "kesateria", "arnab", "unicorn"], emoji: "🦸" },
+    { id: "action", hint: "Apa yang mereka lakukan? (jumpa harta karun, berkawan, selamatkan hari)", answers: ["jumpa harta karun", "berkawan", "selamatkan hari", "pergi mengembara", "belajar terbang", "jumpa kawan", "temui keajaiban"], emoji: "⚡" }
+  ]}
+  successMessage="Wah! Anda telah mencipta prompt yang hebat!"
+/>
+</Section>
+
+<Section>
+## Giliran Anda Memilih!
+
+<PromptVsMistake
+  question="Prompt yang mana akan menghasilkan cerita yang lebih bagus?"
+  good="Tulis cerita kelakar tentang seekor penguin yang mahu belajar menari"
+  bad="Tulis cerita penguin"
+  explanation="Prompt pertama memberitahu saya ia harus kelakar, ia tentang penguin, DAN apa yang penguin itu mahu lakukan!"
+  promiMessage="Butiran menjadikan semuanya lebih bagus! Saya suka tahu dengan tepat apa yang anda mahu!"
+/>
+</Section>
+
+<Section>
+## Kerja Bagus! 🌟
+
+<Panel character="promi" mood="celebrating">
+Anda telah menulis prompt pertama anda! Anda belajar bahawa prompt yang bagus memerlukan: apa yang anda mahu, satu topik, dan butiran. Anda semakin mahir dalam hal ini!
+</Panel>
+
+<LevelComplete 
+  levelSlug="1-2-first-words" 
+  stars={3}
+  message="Anda belajar cara menulis prompt pertama anda!"
+/>
+</Section>

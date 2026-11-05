@@ -1,0 +1,81 @@
+<Section>
+<Panel character="promi" mood="excited">
+Selamat datang ke **Istana Kejelasan**! 🏰 Saya sangat gembira anda berjaya sampai ke sini! Dalam dunia ini, kita akan belajar keajaiban **butiran**!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="promi" mood="thinking">
+Pernahkah anda meminta sesuatu daripada seseorang, tetapi mereka tidak faham apa yang anda maksudkan? Itu juga berlaku kepada AI!
+</Panel>
+</Section>
+
+<Section>
+## Masalah dengan Prompt yang Kabur
+
+Lihat dua prompt ini:
+
+❌ **Kabur:** "Lukis satu gambar"
+
+✅ **Khusus:** "Lukis gambar anak anjing yang gembira bermain di taman yang cerah"
+
+Yang mana memberikan saya lebih banyak maklumat untuk bekerja?
+</Section>
+
+<Section>
+<Panel character="promi" mood="happy">
+Yang kedua memberitahu saya **apa** yang perlu dilukis (anak anjing), **apa yang sedang dilakukannya** (bermain), dan **di mana** (taman yang cerah). Itulah kuasa butiran!
+</Panel>
+</Section>
+
+<Section>
+## Mari Berlatih!
+
+<PromptVsMistake
+  question="Prompt yang mana mempunyai butiran yang lebih bagus?"
+  good="Tulis jenaka kelakar tentang seekor penguin yang mahu belajar terbang"
+  bad="Beritahu saya satu jenaka"
+  explanation="Prompt yang mempunyai butiran memberitahu saya dengan tepat jenis jenaka yang anda mahu - kelakar, tentang penguin, dengan cerita yang khusus!"
+  promiMessage="Butiran itu seperti petunjuk yang membantu saya memahami dengan tepat apa yang anda mahu!"
+/>
+</Section>
+
+<Section>
+## Kenapa Butiran Penting
+
+<PromptVsMistake
+  question="Yang mana akan membantu Promi membuat kad hari jadi yang lebih bagus?"
+  good="Buat kad hari jadi untuk nenek saya yang suka berkebun dan warna ungu"
+  bad="Buat kad hari jadi"
+  explanation="Mengetahui ia untuk nenek, yang suka berkebun, dan warna kegemarannya membantu mencipta sesuatu yang istimewa dan peribadi!"
+  promiMessage="Semakin banyak saya tahu tentang apa yang anda mahu, semakin bagus saya boleh membantu!"
+/>
+</Section>
+
+<Section>
+## Isi Butirannya!
+
+<MagicWords
+  sentence="Tolong tulis cerita tentang ___ yang tinggal di ___ dan suka ___"
+  blanks={[
+    { hint: "🐱 seekor haiwan", answers: ["kucing", "anjing", "arnab", "naga", "unicorn"] },
+    { hint: "🏠 satu tempat", answers: ["istana", "hutan", "bandar", "rumah atas pokok", "gua"] },
+    { hint: "⭐ satu aktiviti", answers: ["menyanyi", "menari", "memasak", "melukis", "meneroka"] }
+  ]}
+  successMessage="Kerja yang bagus menambah butiran!"
+/>
+</Section>
+
+<Section>
+## Anda Sedang Belajar! 🎉
+
+<Panel character="promi" mood="celebrating">
+Kerja yang hebat! Anda telah menemui bahawa **butiran menjadikan prompt lebih bagus**. Prompt yang kabur = AI yang keliru. Prompt yang mempunyai butiran = hasil yang menakjubkan!
+</Panel>
+
+<LevelComplete 
+  levelSlug="2-1-missing-details" 
+  stars={3}
+  message="Anda belajar kenapa butiran penting dalam prompt!"
+/>
+</Section>
