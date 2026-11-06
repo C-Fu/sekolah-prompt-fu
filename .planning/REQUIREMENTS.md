@@ -6,11 +6,11 @@
   - The application root (`/`) must directly launch the Kids Prompting Game.
   - The level map, world selection, and 17 game levels must function seamlessly without route conflicts.
 
-- **FR-2: Pure Client-Side Persistence**
+- **FR-2: Pure Client-Side Persistence** ✅ (Phase 1, 01-02/07/12/13/15/16/17)
   - All player progress (stars, completed levels, unlocked worlds, sound settings) must persist via `localStorage`.
   - No server session or user database required to play.
 
-- **FR-3: Bahasa Melayu Localization (`ms`)**
+- **FR-3: Bahasa Melayu Localization (`ms`)** ✅ (Phase 3, 03-01…03-06)
   - Add `ms` (Bahasa Melayu) to the available language selector.
   - Translate all UI strings in `messages/ms.json` (navigation, instructions, quiz prompts, badges, world titles).
   - Translate all 17 MDX levels into `src/content/kids/ms/` with accurate terminology adapted for young learners.
@@ -21,7 +21,7 @@
 
 ## Non-Functional & Codebase Requirements
 
-- **NFR-1: Repository Pruning & Cleanliness**
+- **NFR-1: Repository Pruning & Cleanliness** ✅ (Phase 1)
   - Delete unused database schema, migrations, and seed files (`prisma/`).
   - Delete non-kids routes (`src/app/(auth)`, `src/app/admin`, `src/app/prompts`, `src/app/bots`, etc.).
   - Delete unused dependencies from `package.json` (`@prisma/client`, `prisma`, `next-auth`, `@aws-sdk/client-s3`, `@modelcontextprotocol/sdk`, `bcryptjs`, etc.).
