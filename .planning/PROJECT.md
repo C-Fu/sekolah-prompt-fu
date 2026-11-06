@@ -38,15 +38,15 @@ In addition, full support for **Bahasa Melayu (`ms`)** will be added alongside e
 - ✓ Pixel-art themed game UI and responsive map
 - ✓ Bahasa Melayu (`ms`) locale fully selectable, with a complete 212-key UI message bundle (`messages/ms.json`) and all 19 interactive MDX levels localized under `src/content/kids/ms/`; no silent English fallback — Phase 3
 - ✓ Kids game promoted to the root experience (`/`, `/map`, `/level/[slug]`) with a static `out/` export and a GitHub Pages deploy workflow — Phase 2
+- ✓ NFR-2 certified end-to-end via a committed, rerunnable verification script (`scripts/verify-project.js` / `npm run verify`) and a CI job enforcing the same gate set — Phase 4
+- ✓ Onboarding handoff (`.planning/HANDOFF.md`) documenting architecture, gate commands, deploy process, and known non-blocking advisories — Phase 4
 
 ### Active
-- [x] Verify the full quality stack end-to-end and produce an onboarding summary/handoff (Phase 4):
-  - `npx tsc --noEmit`, unit test suite, and `npm run build` static export all pass cleanly.
-- [x] Final certification of NFR-2 (quality & type safety) in Phase 4.
+- (none — all four roadmap phases complete)
 
 ### Out of Scope
 - Backend database / server-side user accounts (progress will be browser-local).
 - Live LLM calls via secret server keys (game relies on pre-programmed interactive feedback and simulations).
 
 ---
-*Last updated: 2026-11-05 after Phase 3*
+*Last updated: 2026-11-06 after Phase 4*
