@@ -11,6 +11,7 @@ import {
   NOINDEX_ROBOTS,
   SITE_NAME,
   toMetaDescription,
+  withBasePath,
 } from "@/lib/seo";
 
 describe("SITE_NAME", () => {
@@ -62,6 +63,46 @@ describe("absoluteUrl", () => {
 
   it("returns absolute URLs unchanged", () => {
     expect(absoluteUrl("https://github.com/f")).toBe("https://github.com/f");
+  });
+});
+
+describe("withBasePath", () => {
+  const originalBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
+
+  afterEach(() => {
+    if (originalBasePath === undefined) delete process.env.NEXT_PUBLIC_BASE_PATH;
+    else process.env.NEXT_PUBLIC_BASE_PATH = originalBasePath;
+  });
+
+  it("returns the path unchanged when no base path is configured", () => {
+    delete process.env.NEXT_PUBLIC_BASE_PATH;
+    expect(withBasePath("/favicon/favicon.svg")).toBe("/favicon/favicon.svg");
+  });
+
+  it("prefixes a root-absolute path with the configured base path", () => {
+    process.env.NEXT_PUBLIC_BASE_PATH = "/sekolah-prompt-fu";
+    expect(withBasePath("/favicon/favicon.svg")).toBe(
+      "/sekolah-prompt-fu/favicon/favicon.svg"
+    );
+  });
+
+  it("normalises a trailing slash on the base path", () => {
+    process.env.NEXT_PUBLIC_BASE_PATH = "/sekolah-prompt-fu/";
+    expect(withBasePath("/manifest.webmanifest")).toBe(
+      "/sekolah-prompt-fu/manifest.webmanifest"
+    );
+  });
+
+  it("is idempotent for a path already carrying the base path", () => {
+    process.env.NEXT_PUBLIC_BASE_PATH = "/sekolah-prompt-fu";
+    expect(withBasePath("/sekolah-prompt-fu/favicon/favicon.ico")).toBe(
+      "/sekolah-prompt-fu/favicon/favicon.ico"
+    );
+  });
+
+  it("leaves absolute URLs untouched", () => {
+    process.env.NEXT_PUBLIC_BASE_PATH = "/sekolah-prompt-fu";
+    expect(withBasePath("https://example.com/x.png")).toBe("https://example.com/x.png");
   });
 });
 

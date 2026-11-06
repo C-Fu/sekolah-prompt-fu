@@ -15,7 +15,8 @@
     "test:coverage": "vitest run --coverage",
     "lint:mdx": "node scripts/lint-mdx.js",
     "lint:ms": "node scripts/check-ms-vocabulary.js",
-    "verify": "node scripts/verify-project.js"
+    "verify": "node scripts/verify-project.js",
+    "icons": "node scripts/generate-favicons.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

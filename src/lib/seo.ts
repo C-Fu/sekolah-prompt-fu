@@ -42,6 +42,35 @@ export function absoluteUrl(path: string): string {
 }
 
 /**
+ * The GitHub Pages project sub-path for this build (e.g. `/sekolah-prompt-fu`),
+ * or an empty string for local dev and plain `next build`.
+ *
+ * Mirrors `next.config.ts`, which derives `basePath`/`assetPrefix` from the same
+ * `NEXT_PUBLIC_BASE_PATH` variable.
+ */
+export function getBasePath(): string {
+  return (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/+$/, "");
+}
+
+/**
+ * Prefixes a root-absolute public path with the Pages base path.
+ *
+ * Next.js applies `basePath` to its own router/runtime asset URLs but *not* to
+ * strings placed in `metadata.icons`, `metadata.manifest`, or manifest entries,
+ * so those must be prefixed explicitly or they resolve against the domain root
+ * on a project-site deployment. Absolute (`http(s)://`, protocol-relative, or
+ * hash/data) URLs are returned unchanged; a path already carrying the base path
+ * is left alone so the helper is idempotent.
+ */
+export function withBasePath(path: string): string {
+  const basePath = getBasePath();
+  if (!basePath) return path;
+  if (!path.startsWith("/")) return path;
+  if (path === basePath || path.startsWith(`${basePath}/`)) return path;
+  return `${basePath}${path}`;
+}
+
+/**
  * Turns free text (markdown, prompt variables, line breaks) into a plain
  * meta description of at most `maxLength` characters, cut on a word boundary.
  */
