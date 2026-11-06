@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promiのプロンプトスクール",
+      "title": "Peromfuのプロンプトスクール",
       "levels": "レベル",
       "home": "ホーム",
       "map": "マップ",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "キッズ向け学習",
       "title": "AIと話すことを学ぼう！",
-      "subtitle": "ロボットのPromiと一緒に、素晴らしいプロンプトを書く楽しい冒険に出かけよう！",
-      "promiIntro": {
-        "greeting": "こんにちは、Promiだよ！🤖",
+      "subtitle": "ロボットのPeromfuと一緒に、素晴らしいプロンプトを書く楽しい冒険に出かけよう！",
+      "peromfuIntro": {
+        "greeting": "こんにちは、Peromfuだよ！🤖",
         "message": "キミの助けが必要なフレンドリーなロボットだよ！プロンプトをもっとよく理解できるように手伝ってくれる？"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "すごいストーリー",
-          "description": "Promiと一緒にワクワクする冒険を体験"
+          "description": "Peromfuと一緒にワクワクする冒険を体験"
         },
         "stars": {
           "title": "スターを集めよう",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Promiに会おう！",
+      "1_1_meet_peromfu": {
+        "title": "Peromfuに会おう！",
         "description": "ロボットの友達に挨拶してAIとは何かを学ぼう"
       },
       "1_2_first_words": {
-        "title": "Promiの最初の言葉",
-        "description": "最初のプロンプトを書いてPromiの理解を助けよう"
+        "title": "Peromfuの最初の言葉",
+        "description": "最初のプロンプトを書いてPeromfuの理解を助けよう"
       },
       "1_3_being_clear": {
         "title": "はっきり伝えよう",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "子ども向けプロンプト入門：AIと話す方法を学ぼう",
-      "description": "子どもがAIとの話し方をゲーム感覚で学べる無料コンテンツ。ロボットのPromiと一緒にプロンプトランドを冒険して、上手なプロンプトの書き方を身につけよう。"
+      "description": "子どもがAIとの話し方をゲーム感覚で学べる無料コンテンツ。ロボットのPeromfuと一緒にプロンプトランドを冒険して、上手なプロンプトの書き方を身につけよう。"
     }
   }
 }

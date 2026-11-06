@@ -42,9 +42,9 @@ export function KidsHomeContent() {
                     <PixelRobot className="w-16 h-20" />
                   </div>
                   <div className="text-center sm:text-left">
-                    <p className="text-2xl md:text-3xl font-bold text-[#2C1810] mb-2">{t("home.promiIntro.greeting")}</p>
+                    <p className="text-2xl md:text-3xl font-bold text-[#2C1810] mb-2">{t("home.peromfuIntro.greeting")}</p>
                     <p className="text-xl md:text-2xl text-[#5D4037]">
-                      {t("home.promiIntro.message")}
+                      {t("home.peromfuIntro.message")}
                     </p>
                   </div>
                 </div>

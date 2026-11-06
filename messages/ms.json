@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Sekolah Prompt Promi",
+      "title": "Sekolah Prompt Peromfu",
       "levels": "tahap",
       "home": "Utama",
       "map": "Peta",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Pembelajaran untuk Kanak-kanak",
       "title": "Belajar Bercakap dengan AI!",
-      "subtitle": "Sertai Promi si robot dalam pengembaraan menyeronokkan untuk belajar menulis prompt yang hebat!",
-      "promiIntro": {
-        "greeting": "Hai, saya Promi! 🤖",
+      "subtitle": "Sertai Peromfu si robot dalam pengembaraan menyeronokkan untuk belajar menulis prompt yang hebat!",
+      "peromfuIntro": {
+        "greeting": "Hai, saya Peromfu! 🤖",
         "message": "Saya robot yang mesra dan perlukan BANTUAN anda! Mahukah anda mengajar saya memahami prompt dengan lebih baik?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Cerita Hebat",
-          "description": "Ikuti pengembaraan Promi yang mengujakan"
+          "description": "Ikuti pengembaraan Peromfu yang mengujakan"
         },
         "stars": {
           "title": "Kumpul Bintang",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Berjumpa Promi!",
+      "1_1_meet_peromfu": {
+        "title": "Berjumpa Peromfu!",
         "description": "Sapa kawan robot anda dan pelajari apa itu AI"
       },
       "1_2_first_words": {
-        "title": "Kata-kata Pertama Promi",
-        "description": "Bantu Promi memahami dengan menulis prompt pertama anda"
+        "title": "Kata-kata Pertama Peromfu",
+        "description": "Bantu Peromfu memahami dengan menulis prompt pertama anda"
       },
       "1_3_being_clear": {
         "title": "Bercakap Jelas",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Prompt untuk Kanak-kanak: Belajar Bercakap dengan AI",
-      "description": "Cara percuma berasaskan permainan untuk kanak-kanak belajar bercakap dengan AI. Sertai Promi si robot dalam pengembaraan melalui Dunia Prompt dan belajar menulis prompt yang hebat."
+      "description": "Cara percuma berasaskan permainan untuk kanak-kanak belajar bercakap dengan AI. Sertai Peromfu si robot dalam pengembaraan melalui Dunia Prompt dan belajar menulis prompt yang hebat."
     }
   }
 }

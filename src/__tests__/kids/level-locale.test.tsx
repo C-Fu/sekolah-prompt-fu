@@ -66,19 +66,19 @@ describe("level-content locale/slug selection", () => {
   });
 
   it("resolves a compiled MDX component for a valid locale and slug", async () => {
-    const result = await loadLevelContent("en", "1-1-meet-promi");
+    const result = await loadLevelContent("en", "1-1-meet-peromfu");
     expect(result).not.toBeNull();
     if (!result) throw new Error("expected compiled content");
     expect(result.effectiveLocale).toBe("en");
     expect(typeof result.Component).toBe("function");
     const components = { ...useMDXComponents({}) };
     render(<result.Component components={components} />);
-    expect(screen.getAllByText(/Promi/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Peromfu/i).length).toBeGreaterThan(0);
   });
 
   it("selects locale-specific content when the translated module exists", async () => {
-    const en = await loadLevelContent("en", "1-1-meet-promi");
-    const es = await loadLevelContent("es", "1-1-meet-promi");
+    const en = await loadLevelContent("en", "1-1-meet-peromfu");
+    const es = await loadLevelContent("es", "1-1-meet-peromfu");
     expect(es?.effectiveLocale).toBe("es");
     // Spanish content differs from English for this level, so the resolved component
     // must not be the same module reference.
@@ -86,8 +86,8 @@ describe("level-content locale/slug selection", () => {
   });
 
   it("selects ms content (not the en fallback) when the ms module exists", async () => {
-    const en = await loadLevelContent("en", "1-1-meet-promi");
-    const ms = await loadLevelContent("ms", "1-1-meet-promi");
+    const en = await loadLevelContent("en", "1-1-meet-peromfu");
+    const ms = await loadLevelContent("ms", "1-1-meet-peromfu");
     // A missing `ms` registry entry would silently fall back to en; guard both the
     // reported locale AND the module identity.
     expect(ms?.effectiveLocale).toBe("ms");
@@ -123,15 +123,15 @@ describe("level-content locale/slug selection", () => {
 
   it("falls back to English when the requested locale module is absent", async () => {
     // 'he' is a supported locale (i18n config) with no content directory.
-    const he = await loadLevelContent("he", "1-1-meet-promi");
-    const en = await loadLevelContent("en", "1-1-meet-promi");
+    const he = await loadLevelContent("he", "1-1-meet-peromfu");
+    const en = await loadLevelContent("en", "1-1-meet-peromfu");
     expect(he?.effectiveLocale).toBe("en");
     expect(he?.Component).toBe(en?.Component);
   });
 
   it("defaults an unsupported locale to English without touching the import path", async () => {
-    const bogus = await loadLevelContent("../evil", "1-1-meet-promi");
-    const en = await loadLevelContent("en", "1-1-meet-promi");
+    const bogus = await loadLevelContent("../evil", "1-1-meet-peromfu");
+    const en = await loadLevelContent("en", "1-1-meet-peromfu");
     expect(bogus?.effectiveLocale).toBe("en");
     expect(bogus?.Component).toBe(en?.Component);
   });
@@ -148,7 +148,7 @@ describe("level-content locale/slug selection", () => {
     // by checking that a known slug resolves while an unregistered one returns null —
     // i.e. failures are not silently coerced to the fallback success path.
     await expect(loadLevelContent("en", "does-not-exist")).resolves.toBeNull();
-    await expect(loadLevelContent("en", "1-1-meet-promi")).resolves.toHaveProperty(
+    await expect(loadLevelContent("en", "1-1-meet-peromfu")).resolves.toHaveProperty(
       "Component"
     );
   });
@@ -161,7 +161,7 @@ describe("level-content locale/slug selection", () => {
 afterEach(() => {
   cleanup();
   // Interactive consumers persist section completion to localStorage; isolate tests.
-  clearSectionCompletion("1-1-meet-promi");
+  clearSectionCompletion("1-1-meet-peromfu");
   localStorage.clear();
 });
 
@@ -203,8 +203,8 @@ function LegacyRequirementProbe() {
 describe("mounted MDX Section registry", () => {
   it("renders one dot per real compiled Section in document order", async () => {
     render(
-      <LevelProvider levelSlug="1-1-meet-promi">
-        <LevelContentWrapper levelSlug="1-1-meet-promi" levelNumber="1-1" />
+      <LevelProvider levelSlug="1-1-meet-peromfu">
+        <LevelContentWrapper levelSlug="1-1-meet-peromfu" levelNumber="1-1" />
       </LevelProvider>
     );
 
@@ -302,9 +302,9 @@ describe("mounted MDX Section registry", () => {
     }
 
     render(
-      <LevelProvider levelSlug="1-1-meet-promi">
+      <LevelProvider levelSlug="1-1-meet-peromfu">
         <LevelContentWrapper
-          levelSlug="1-1-meet-promi"
+          levelSlug="1-1-meet-peromfu"
           levelNumber="1-1"
           loadContent={async () => ({ Component: InteractiveFirst, effectiveLocale: "en" })}
         />
@@ -324,9 +324,9 @@ describe("mounted MDX Section registry", () => {
 
   it("shows the comingSoon panel when the level has no Sections", async () => {
     render(
-      <LevelProvider levelSlug="1-1-meet-promi">
+      <LevelProvider levelSlug="1-1-meet-peromfu">
         <LevelContentWrapper
-          levelSlug="1-1-meet-promi"
+          levelSlug="1-1-meet-peromfu"
           levelNumber="1-1"
           loadContent={async () => ({
             Component: () => <div data-testid="empty-mdx">no sections here</div>,
@@ -361,9 +361,9 @@ describe("mounted MDX Section registry", () => {
     }
 
     render(
-      <LevelProvider levelSlug="1-1-meet-promi">
+      <LevelProvider levelSlug="1-1-meet-peromfu">
         <LevelContentWrapper
-          levelSlug="1-1-meet-promi"
+          levelSlug="1-1-meet-peromfu"
           levelNumber="1-1"
           loadContent={async () => ({ Component: ThreePlain, effectiveLocale: "en" })}
         />
@@ -393,8 +393,8 @@ describe("mounted MDX Section registry", () => {
 
   it("fails closed on real compiled MDX: a plain Section advances, an interactive one locks", async () => {
     render(
-      <LevelProvider levelSlug="1-1-meet-promi">
-        <LevelContentWrapper levelSlug="1-1-meet-promi" levelNumber="1-1" />
+      <LevelProvider levelSlug="1-1-meet-peromfu">
+        <LevelContentWrapper levelSlug="1-1-meet-peromfu" levelNumber="1-1" />
       </LevelProvider>
     );
 
@@ -447,9 +447,9 @@ describe("mounted MDX Section registry", () => {
     }
 
     render(
-      <LevelProvider levelSlug="1-1-meet-promi">
+      <LevelProvider levelSlug="1-1-meet-peromfu">
         <LevelContentWrapper
-          levelSlug="1-1-meet-promi"
+          levelSlug="1-1-meet-peromfu"
           levelNumber="1-1"
           loadContent={async () => ({ Component: StatefulSections, effectiveLocale: "en" })}
         />
@@ -496,7 +496,7 @@ describe("mounted MDX Section registry", () => {
  * correct answer persists completion against its own resolved Section index.
  */
 
-const SLUG = "1-1-meet-promi";
+const SLUG = "1-1-meet-peromfu";
 
 async function renderControlled(Component: () => ReactElement) {
   render(
@@ -809,7 +809,7 @@ describe("prompt editing consumers bind to their containing Section (01-16 task 
 });
 
 /**
- * 01-16 task 3 — the real compiled en `1-1-meet-promi` level proves adjacent repeated
+ * 01-16 task 3 — the real compiled en `1-1-meet-peromfu` level proves adjacent repeated
  * challenges lock and complete independently.
  *
  * Real Section layout (0-indexed): 0/1/2 Panel, 3 WordPredictor (mat), 4 WordPredictor

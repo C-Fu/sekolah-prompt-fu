@@ -127,14 +127,14 @@ describe("buildPageMetadata", () => {
 
   it("supports absolute titles", () => {
     const metadata = buildPageMetadata({
-      title: "Promi's Prompt School",
+      title: "Peromfu's Prompt School",
       description: "Kids learn to talk to AI",
       path: "/",
       absoluteTitle: true,
     });
 
-    expect(metadata.title).toEqual({ absolute: "Promi's Prompt School" });
-    expect(metadata.openGraph).toMatchObject({ title: "Promi's Prompt School" });
+    expect(metadata.title).toEqual({ absolute: "Peromfu's Prompt School" });
+    expect(metadata.openGraph).toMatchObject({ title: "Peromfu's Prompt School" });
   });
 
   it("keeps the canonical on noindex pages", () => {
@@ -167,7 +167,7 @@ describe("buildPageMetadata", () => {
     const metadata = buildPageMetadata({
       title: "Level",
       description: "A level",
-      path: "/level/1-1-meet-promi",
+      path: "/level/1-1-meet-peromfu",
       image: "route",
     });
 

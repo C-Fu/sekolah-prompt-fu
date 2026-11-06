@@ -31,7 +31,7 @@ import { getLevelBySlug } from "@/lib/kids/levels";
 export type CompiledLevelContent = ComponentType<{ components?: MDXComponents }>;
 
 /** Per-(locale, slug) lazy compiled-MDX loaders. */
-const L_ar__1_1_meet_promi = () => import("@/content/kids/ar/1-1-meet-promi.mdx");
+const L_ar__1_1_meet_peromfu = () => import("@/content/kids/ar/1-1-meet-peromfu.mdx");
 const L_ar__1_2_first_words = () => import("@/content/kids/ar/1-2-first-words.mdx");
 const L_ar__1_3_being_clear = () => import("@/content/kids/ar/1-3-being-clear.mdx");
 const L_ar__2_1_missing_details = () => import("@/content/kids/ar/2-1-missing-details.mdx");
@@ -50,7 +50,7 @@ const L_ar__5_1_perfect_prompt = () => import("@/content/kids/ar/5-1-perfect-pro
 const L_ar__5_2_fix_it_up = () => import("@/content/kids/ar/5-2-fix-it-up.mdx");
 const L_ar__5_3_prompt_remix = () => import("@/content/kids/ar/5-3-prompt-remix.mdx");
 const L_ar__5_4_graduation_day = () => import("@/content/kids/ar/5-4-graduation-day.mdx");
-const L_az__1_1_meet_promi = () => import("@/content/kids/az/1-1-meet-promi.mdx");
+const L_az__1_1_meet_peromfu = () => import("@/content/kids/az/1-1-meet-peromfu.mdx");
 const L_az__1_2_first_words = () => import("@/content/kids/az/1-2-first-words.mdx");
 const L_az__1_3_being_clear = () => import("@/content/kids/az/1-3-being-clear.mdx");
 const L_az__2_1_missing_details = () => import("@/content/kids/az/2-1-missing-details.mdx");
@@ -69,7 +69,7 @@ const L_az__5_1_perfect_prompt = () => import("@/content/kids/az/5-1-perfect-pro
 const L_az__5_2_fix_it_up = () => import("@/content/kids/az/5-2-fix-it-up.mdx");
 const L_az__5_3_prompt_remix = () => import("@/content/kids/az/5-3-prompt-remix.mdx");
 const L_az__5_4_graduation_day = () => import("@/content/kids/az/5-4-graduation-day.mdx");
-const L_de__1_1_meet_promi = () => import("@/content/kids/de/1-1-meet-promi.mdx");
+const L_de__1_1_meet_peromfu = () => import("@/content/kids/de/1-1-meet-peromfu.mdx");
 const L_de__1_2_first_words = () => import("@/content/kids/de/1-2-first-words.mdx");
 const L_de__1_3_being_clear = () => import("@/content/kids/de/1-3-being-clear.mdx");
 const L_de__2_1_missing_details = () => import("@/content/kids/de/2-1-missing-details.mdx");
@@ -88,7 +88,7 @@ const L_de__5_1_perfect_prompt = () => import("@/content/kids/de/5-1-perfect-pro
 const L_de__5_2_fix_it_up = () => import("@/content/kids/de/5-2-fix-it-up.mdx");
 const L_de__5_3_prompt_remix = () => import("@/content/kids/de/5-3-prompt-remix.mdx");
 const L_de__5_4_graduation_day = () => import("@/content/kids/de/5-4-graduation-day.mdx");
-const L_el__1_1_meet_promi = () => import("@/content/kids/el/1-1-meet-promi.mdx");
+const L_el__1_1_meet_peromfu = () => import("@/content/kids/el/1-1-meet-peromfu.mdx");
 const L_el__1_2_first_words = () => import("@/content/kids/el/1-2-first-words.mdx");
 const L_el__1_3_being_clear = () => import("@/content/kids/el/1-3-being-clear.mdx");
 const L_el__2_1_missing_details = () => import("@/content/kids/el/2-1-missing-details.mdx");
@@ -107,7 +107,7 @@ const L_el__5_1_perfect_prompt = () => import("@/content/kids/el/5-1-perfect-pro
 const L_el__5_2_fix_it_up = () => import("@/content/kids/el/5-2-fix-it-up.mdx");
 const L_el__5_3_prompt_remix = () => import("@/content/kids/el/5-3-prompt-remix.mdx");
 const L_el__5_4_graduation_day = () => import("@/content/kids/el/5-4-graduation-day.mdx");
-const L_en__1_1_meet_promi = () => import("@/content/kids/en/1-1-meet-promi.mdx");
+const L_en__1_1_meet_peromfu = () => import("@/content/kids/en/1-1-meet-peromfu.mdx");
 const L_en__1_2_first_words = () => import("@/content/kids/en/1-2-first-words.mdx");
 const L_en__1_3_being_clear = () => import("@/content/kids/en/1-3-being-clear.mdx");
 const L_en__2_1_missing_details = () => import("@/content/kids/en/2-1-missing-details.mdx");
@@ -126,7 +126,7 @@ const L_en__5_1_perfect_prompt = () => import("@/content/kids/en/5-1-perfect-pro
 const L_en__5_2_fix_it_up = () => import("@/content/kids/en/5-2-fix-it-up.mdx");
 const L_en__5_3_prompt_remix = () => import("@/content/kids/en/5-3-prompt-remix.mdx");
 const L_en__5_4_graduation_day = () => import("@/content/kids/en/5-4-graduation-day.mdx");
-const L_es__1_1_meet_promi = () => import("@/content/kids/es/1-1-meet-promi.mdx");
+const L_es__1_1_meet_peromfu = () => import("@/content/kids/es/1-1-meet-peromfu.mdx");
 const L_es__1_2_first_words = () => import("@/content/kids/es/1-2-first-words.mdx");
 const L_es__1_3_being_clear = () => import("@/content/kids/es/1-3-being-clear.mdx");
 const L_es__2_1_missing_details = () => import("@/content/kids/es/2-1-missing-details.mdx");
@@ -145,7 +145,7 @@ const L_es__5_1_perfect_prompt = () => import("@/content/kids/es/5-1-perfect-pro
 const L_es__5_2_fix_it_up = () => import("@/content/kids/es/5-2-fix-it-up.mdx");
 const L_es__5_3_prompt_remix = () => import("@/content/kids/es/5-3-prompt-remix.mdx");
 const L_es__5_4_graduation_day = () => import("@/content/kids/es/5-4-graduation-day.mdx");
-const L_fa__1_1_meet_promi = () => import("@/content/kids/fa/1-1-meet-promi.mdx");
+const L_fa__1_1_meet_peromfu = () => import("@/content/kids/fa/1-1-meet-peromfu.mdx");
 const L_fa__1_2_first_words = () => import("@/content/kids/fa/1-2-first-words.mdx");
 const L_fa__1_3_being_clear = () => import("@/content/kids/fa/1-3-being-clear.mdx");
 const L_fa__2_1_missing_details = () => import("@/content/kids/fa/2-1-missing-details.mdx");
@@ -164,7 +164,7 @@ const L_fa__5_1_perfect_prompt = () => import("@/content/kids/fa/5-1-perfect-pro
 const L_fa__5_2_fix_it_up = () => import("@/content/kids/fa/5-2-fix-it-up.mdx");
 const L_fa__5_3_prompt_remix = () => import("@/content/kids/fa/5-3-prompt-remix.mdx");
 const L_fa__5_4_graduation_day = () => import("@/content/kids/fa/5-4-graduation-day.mdx");
-const L_fr__1_1_meet_promi = () => import("@/content/kids/fr/1-1-meet-promi.mdx");
+const L_fr__1_1_meet_peromfu = () => import("@/content/kids/fr/1-1-meet-peromfu.mdx");
 const L_fr__1_2_first_words = () => import("@/content/kids/fr/1-2-first-words.mdx");
 const L_fr__1_3_being_clear = () => import("@/content/kids/fr/1-3-being-clear.mdx");
 const L_fr__2_1_missing_details = () => import("@/content/kids/fr/2-1-missing-details.mdx");
@@ -183,7 +183,7 @@ const L_fr__5_1_perfect_prompt = () => import("@/content/kids/fr/5-1-perfect-pro
 const L_fr__5_2_fix_it_up = () => import("@/content/kids/fr/5-2-fix-it-up.mdx");
 const L_fr__5_3_prompt_remix = () => import("@/content/kids/fr/5-3-prompt-remix.mdx");
 const L_fr__5_4_graduation_day = () => import("@/content/kids/fr/5-4-graduation-day.mdx");
-const L_it__1_1_meet_promi = () => import("@/content/kids/it/1-1-meet-promi.mdx");
+const L_it__1_1_meet_peromfu = () => import("@/content/kids/it/1-1-meet-peromfu.mdx");
 const L_it__1_2_first_words = () => import("@/content/kids/it/1-2-first-words.mdx");
 const L_it__1_3_being_clear = () => import("@/content/kids/it/1-3-being-clear.mdx");
 const L_it__2_1_missing_details = () => import("@/content/kids/it/2-1-missing-details.mdx");
@@ -202,7 +202,7 @@ const L_it__5_1_perfect_prompt = () => import("@/content/kids/it/5-1-perfect-pro
 const L_it__5_2_fix_it_up = () => import("@/content/kids/it/5-2-fix-it-up.mdx");
 const L_it__5_3_prompt_remix = () => import("@/content/kids/it/5-3-prompt-remix.mdx");
 const L_it__5_4_graduation_day = () => import("@/content/kids/it/5-4-graduation-day.mdx");
-const L_ja__1_1_meet_promi = () => import("@/content/kids/ja/1-1-meet-promi.mdx");
+const L_ja__1_1_meet_peromfu = () => import("@/content/kids/ja/1-1-meet-peromfu.mdx");
 const L_ja__1_2_first_words = () => import("@/content/kids/ja/1-2-first-words.mdx");
 const L_ja__1_3_being_clear = () => import("@/content/kids/ja/1-3-being-clear.mdx");
 const L_ja__2_1_missing_details = () => import("@/content/kids/ja/2-1-missing-details.mdx");
@@ -221,7 +221,7 @@ const L_ja__5_1_perfect_prompt = () => import("@/content/kids/ja/5-1-perfect-pro
 const L_ja__5_2_fix_it_up = () => import("@/content/kids/ja/5-2-fix-it-up.mdx");
 const L_ja__5_3_prompt_remix = () => import("@/content/kids/ja/5-3-prompt-remix.mdx");
 const L_ja__5_4_graduation_day = () => import("@/content/kids/ja/5-4-graduation-day.mdx");
-const L_ko__1_1_meet_promi = () => import("@/content/kids/ko/1-1-meet-promi.mdx");
+const L_ko__1_1_meet_peromfu = () => import("@/content/kids/ko/1-1-meet-peromfu.mdx");
 const L_ko__1_2_first_words = () => import("@/content/kids/ko/1-2-first-words.mdx");
 const L_ko__1_3_being_clear = () => import("@/content/kids/ko/1-3-being-clear.mdx");
 const L_ko__2_1_missing_details = () => import("@/content/kids/ko/2-1-missing-details.mdx");
@@ -240,7 +240,7 @@ const L_ko__5_1_perfect_prompt = () => import("@/content/kids/ko/5-1-perfect-pro
 const L_ko__5_2_fix_it_up = () => import("@/content/kids/ko/5-2-fix-it-up.mdx");
 const L_ko__5_3_prompt_remix = () => import("@/content/kids/ko/5-3-prompt-remix.mdx");
 const L_ko__5_4_graduation_day = () => import("@/content/kids/ko/5-4-graduation-day.mdx");
-const L_nl__1_1_meet_promi = () => import("@/content/kids/nl/1-1-meet-promi.mdx");
+const L_nl__1_1_meet_peromfu = () => import("@/content/kids/nl/1-1-meet-peromfu.mdx");
 const L_nl__1_2_first_words = () => import("@/content/kids/nl/1-2-first-words.mdx");
 const L_nl__1_3_being_clear = () => import("@/content/kids/nl/1-3-being-clear.mdx");
 const L_nl__2_1_missing_details = () => import("@/content/kids/nl/2-1-missing-details.mdx");
@@ -259,7 +259,7 @@ const L_nl__5_1_perfect_prompt = () => import("@/content/kids/nl/5-1-perfect-pro
 const L_nl__5_2_fix_it_up = () => import("@/content/kids/nl/5-2-fix-it-up.mdx");
 const L_nl__5_3_prompt_remix = () => import("@/content/kids/nl/5-3-prompt-remix.mdx");
 const L_nl__5_4_graduation_day = () => import("@/content/kids/nl/5-4-graduation-day.mdx");
-const L_pt__1_1_meet_promi = () => import("@/content/kids/pt/1-1-meet-promi.mdx");
+const L_pt__1_1_meet_peromfu = () => import("@/content/kids/pt/1-1-meet-peromfu.mdx");
 const L_pt__1_2_first_words = () => import("@/content/kids/pt/1-2-first-words.mdx");
 const L_pt__1_3_being_clear = () => import("@/content/kids/pt/1-3-being-clear.mdx");
 const L_pt__2_1_missing_details = () => import("@/content/kids/pt/2-1-missing-details.mdx");
@@ -278,7 +278,7 @@ const L_pt__5_1_perfect_prompt = () => import("@/content/kids/pt/5-1-perfect-pro
 const L_pt__5_2_fix_it_up = () => import("@/content/kids/pt/5-2-fix-it-up.mdx");
 const L_pt__5_3_prompt_remix = () => import("@/content/kids/pt/5-3-prompt-remix.mdx");
 const L_pt__5_4_graduation_day = () => import("@/content/kids/pt/5-4-graduation-day.mdx");
-const L_ru__1_1_meet_promi = () => import("@/content/kids/ru/1-1-meet-promi.mdx");
+const L_ru__1_1_meet_peromfu = () => import("@/content/kids/ru/1-1-meet-peromfu.mdx");
 const L_ru__1_2_first_words = () => import("@/content/kids/ru/1-2-first-words.mdx");
 const L_ru__1_3_being_clear = () => import("@/content/kids/ru/1-3-being-clear.mdx");
 const L_ru__2_1_missing_details = () => import("@/content/kids/ru/2-1-missing-details.mdx");
@@ -297,7 +297,7 @@ const L_ru__5_1_perfect_prompt = () => import("@/content/kids/ru/5-1-perfect-pro
 const L_ru__5_2_fix_it_up = () => import("@/content/kids/ru/5-2-fix-it-up.mdx");
 const L_ru__5_3_prompt_remix = () => import("@/content/kids/ru/5-3-prompt-remix.mdx");
 const L_ru__5_4_graduation_day = () => import("@/content/kids/ru/5-4-graduation-day.mdx");
-const L_tr__1_1_meet_promi = () => import("@/content/kids/tr/1-1-meet-promi.mdx");
+const L_tr__1_1_meet_peromfu = () => import("@/content/kids/tr/1-1-meet-peromfu.mdx");
 const L_tr__1_2_first_words = () => import("@/content/kids/tr/1-2-first-words.mdx");
 const L_tr__1_3_being_clear = () => import("@/content/kids/tr/1-3-being-clear.mdx");
 const L_tr__2_1_missing_details = () => import("@/content/kids/tr/2-1-missing-details.mdx");
@@ -316,7 +316,7 @@ const L_tr__5_1_perfect_prompt = () => import("@/content/kids/tr/5-1-perfect-pro
 const L_tr__5_2_fix_it_up = () => import("@/content/kids/tr/5-2-fix-it-up.mdx");
 const L_tr__5_3_prompt_remix = () => import("@/content/kids/tr/5-3-prompt-remix.mdx");
 const L_tr__5_4_graduation_day = () => import("@/content/kids/tr/5-4-graduation-day.mdx");
-const L_zh__1_1_meet_promi = () => import("@/content/kids/zh/1-1-meet-promi.mdx");
+const L_zh__1_1_meet_peromfu = () => import("@/content/kids/zh/1-1-meet-peromfu.mdx");
 const L_zh__1_2_first_words = () => import("@/content/kids/zh/1-2-first-words.mdx");
 const L_zh__1_3_being_clear = () => import("@/content/kids/zh/1-3-being-clear.mdx");
 const L_zh__2_1_missing_details = () => import("@/content/kids/zh/2-1-missing-details.mdx");
@@ -335,7 +335,7 @@ const L_zh__5_1_perfect_prompt = () => import("@/content/kids/zh/5-1-perfect-pro
 const L_zh__5_2_fix_it_up = () => import("@/content/kids/zh/5-2-fix-it-up.mdx");
 const L_zh__5_3_prompt_remix = () => import("@/content/kids/zh/5-3-prompt-remix.mdx");
 const L_zh__5_4_graduation_day = () => import("@/content/kids/zh/5-4-graduation-day.mdx");
-const L_ms__1_1_meet_promi = () => import("@/content/kids/ms/1-1-meet-promi.mdx");
+const L_ms__1_1_meet_peromfu = () => import("@/content/kids/ms/1-1-meet-peromfu.mdx");
 const L_ms__1_2_first_words = () => import("@/content/kids/ms/1-2-first-words.mdx");
 const L_ms__1_3_being_clear = () => import("@/content/kids/ms/1-3-being-clear.mdx");
 const L_ms__2_1_missing_details = () => import("@/content/kids/ms/2-1-missing-details.mdx");
@@ -357,7 +357,7 @@ const L_ms__5_4_graduation_day = () => import("@/content/kids/ms/5-4-graduation-
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
-    "1-1-meet-promi": L_ar__1_1_meet_promi,
+    "1-1-meet-peromfu": L_ar__1_1_meet_peromfu,
     "1-2-first-words": L_ar__1_2_first_words,
     "1-3-being-clear": L_ar__1_3_being_clear,
     "2-1-missing-details": L_ar__2_1_missing_details,
@@ -378,7 +378,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_ar__5_4_graduation_day,
   },
   az: {
-    "1-1-meet-promi": L_az__1_1_meet_promi,
+    "1-1-meet-peromfu": L_az__1_1_meet_peromfu,
     "1-2-first-words": L_az__1_2_first_words,
     "1-3-being-clear": L_az__1_3_being_clear,
     "2-1-missing-details": L_az__2_1_missing_details,
@@ -399,7 +399,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_az__5_4_graduation_day,
   },
   de: {
-    "1-1-meet-promi": L_de__1_1_meet_promi,
+    "1-1-meet-peromfu": L_de__1_1_meet_peromfu,
     "1-2-first-words": L_de__1_2_first_words,
     "1-3-being-clear": L_de__1_3_being_clear,
     "2-1-missing-details": L_de__2_1_missing_details,
@@ -420,7 +420,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_de__5_4_graduation_day,
   },
   el: {
-    "1-1-meet-promi": L_el__1_1_meet_promi,
+    "1-1-meet-peromfu": L_el__1_1_meet_peromfu,
     "1-2-first-words": L_el__1_2_first_words,
     "1-3-being-clear": L_el__1_3_being_clear,
     "2-1-missing-details": L_el__2_1_missing_details,
@@ -441,7 +441,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_el__5_4_graduation_day,
   },
   en: {
-    "1-1-meet-promi": L_en__1_1_meet_promi,
+    "1-1-meet-peromfu": L_en__1_1_meet_peromfu,
     "1-2-first-words": L_en__1_2_first_words,
     "1-3-being-clear": L_en__1_3_being_clear,
     "2-1-missing-details": L_en__2_1_missing_details,
@@ -462,7 +462,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_en__5_4_graduation_day,
   },
   es: {
-    "1-1-meet-promi": L_es__1_1_meet_promi,
+    "1-1-meet-peromfu": L_es__1_1_meet_peromfu,
     "1-2-first-words": L_es__1_2_first_words,
     "1-3-being-clear": L_es__1_3_being_clear,
     "2-1-missing-details": L_es__2_1_missing_details,
@@ -483,7 +483,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_es__5_4_graduation_day,
   },
   fa: {
-    "1-1-meet-promi": L_fa__1_1_meet_promi,
+    "1-1-meet-peromfu": L_fa__1_1_meet_peromfu,
     "1-2-first-words": L_fa__1_2_first_words,
     "1-3-being-clear": L_fa__1_3_being_clear,
     "2-1-missing-details": L_fa__2_1_missing_details,
@@ -504,7 +504,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_fa__5_4_graduation_day,
   },
   fr: {
-    "1-1-meet-promi": L_fr__1_1_meet_promi,
+    "1-1-meet-peromfu": L_fr__1_1_meet_peromfu,
     "1-2-first-words": L_fr__1_2_first_words,
     "1-3-being-clear": L_fr__1_3_being_clear,
     "2-1-missing-details": L_fr__2_1_missing_details,
@@ -525,7 +525,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_fr__5_4_graduation_day,
   },
   it: {
-    "1-1-meet-promi": L_it__1_1_meet_promi,
+    "1-1-meet-peromfu": L_it__1_1_meet_peromfu,
     "1-2-first-words": L_it__1_2_first_words,
     "1-3-being-clear": L_it__1_3_being_clear,
     "2-1-missing-details": L_it__2_1_missing_details,
@@ -546,7 +546,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_it__5_4_graduation_day,
   },
   ja: {
-    "1-1-meet-promi": L_ja__1_1_meet_promi,
+    "1-1-meet-peromfu": L_ja__1_1_meet_peromfu,
     "1-2-first-words": L_ja__1_2_first_words,
     "1-3-being-clear": L_ja__1_3_being_clear,
     "2-1-missing-details": L_ja__2_1_missing_details,
@@ -567,7 +567,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_ja__5_4_graduation_day,
   },
   ko: {
-    "1-1-meet-promi": L_ko__1_1_meet_promi,
+    "1-1-meet-peromfu": L_ko__1_1_meet_peromfu,
     "1-2-first-words": L_ko__1_2_first_words,
     "1-3-being-clear": L_ko__1_3_being_clear,
     "2-1-missing-details": L_ko__2_1_missing_details,
@@ -588,7 +588,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_ko__5_4_graduation_day,
   },
   nl: {
-    "1-1-meet-promi": L_nl__1_1_meet_promi,
+    "1-1-meet-peromfu": L_nl__1_1_meet_peromfu,
     "1-2-first-words": L_nl__1_2_first_words,
     "1-3-being-clear": L_nl__1_3_being_clear,
     "2-1-missing-details": L_nl__2_1_missing_details,
@@ -609,7 +609,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_nl__5_4_graduation_day,
   },
   pt: {
-    "1-1-meet-promi": L_pt__1_1_meet_promi,
+    "1-1-meet-peromfu": L_pt__1_1_meet_peromfu,
     "1-2-first-words": L_pt__1_2_first_words,
     "1-3-being-clear": L_pt__1_3_being_clear,
     "2-1-missing-details": L_pt__2_1_missing_details,
@@ -630,7 +630,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_pt__5_4_graduation_day,
   },
   ru: {
-    "1-1-meet-promi": L_ru__1_1_meet_promi,
+    "1-1-meet-peromfu": L_ru__1_1_meet_peromfu,
     "1-2-first-words": L_ru__1_2_first_words,
     "1-3-being-clear": L_ru__1_3_being_clear,
     "2-1-missing-details": L_ru__2_1_missing_details,
@@ -651,7 +651,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_ru__5_4_graduation_day,
   },
   tr: {
-    "1-1-meet-promi": L_tr__1_1_meet_promi,
+    "1-1-meet-peromfu": L_tr__1_1_meet_peromfu,
     "1-2-first-words": L_tr__1_2_first_words,
     "1-3-being-clear": L_tr__1_3_being_clear,
     "2-1-missing-details": L_tr__2_1_missing_details,
@@ -672,7 +672,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_tr__5_4_graduation_day,
   },
   zh: {
-    "1-1-meet-promi": L_zh__1_1_meet_promi,
+    "1-1-meet-peromfu": L_zh__1_1_meet_peromfu,
     "1-2-first-words": L_zh__1_2_first_words,
     "1-3-being-clear": L_zh__1_3_being_clear,
     "2-1-missing-details": L_zh__2_1_missing_details,
@@ -693,7 +693,7 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-4-graduation-day": L_zh__5_4_graduation_day,
   },
   ms: {
-    "1-1-meet-promi": L_ms__1_1_meet_promi,
+    "1-1-meet-peromfu": L_ms__1_1_meet_peromfu,
     "1-2-first-words": L_ms__1_2_first_words,
     "1-3-being-clear": L_ms__1_3_being_clear,
     "2-1-missing-details": L_ms__2_1_missing_details,

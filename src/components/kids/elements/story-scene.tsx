@@ -4,11 +4,11 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { PixelRobot } from "./pixel-art";
 
-type PromiMood = "happy" | "thinking" | "excited" | "confused" | "celebrating";
+type PeromfuMood = "happy" | "thinking" | "excited" | "confused" | "celebrating";
 
 interface StoryPanel {
-  character?: "promi" | "none";
-  mood?: PromiMood;
+  character?: "peromfu" | "none";
+  mood?: PeromfuMood;
   text: string;
   highlight?: boolean;
 }
@@ -29,7 +29,7 @@ export function StoryScene({ panels, className }: StorySceneProps) {
       {/* Story panel */}
       <div className="p-4 min-h-[180px] flex items-center">
         <div className="flex items-start gap-4 w-full">
-          {panel.character === "promi" && (
+          {panel.character === "peromfu" && (
             <div className="shrink-0">
               <PixelRobot className="w-12 h-16" mood={panel.mood} />
             </div>
@@ -88,18 +88,18 @@ export function StoryScene({ panels, className }: StorySceneProps) {
 }
 
 interface SinglePanelProps {
-  character?: "promi" | "none";
-  mood?: PromiMood;
+  character?: "peromfu" | "none";
+  mood?: PeromfuMood;
   children: React.ReactNode;
   highlight?: boolean;
 }
 
-export function Panel({ character = "promi", mood = "happy", children, highlight }: SinglePanelProps) {
+export function Panel({ character = "peromfu", mood = "happy", children, highlight }: SinglePanelProps) {
   return (
     <div className="my-6 pixel-panel">
       <div className="p-4">
         <div className="flex items-start gap-4">
-          {character === "promi" && (
+          {character === "peromfu" && (
             <div className="shrink-0">
               <PixelRobot className="w-12 h-16" mood={mood} />
             </div>

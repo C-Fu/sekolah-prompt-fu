@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promi's Promptschool",
+      "title": "Peromfu's Promptschool",
       "levels": "levels",
       "home": "Home",
       "map": "Kaart",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Leren voor kinderen",
       "title": "Leer praten met AI!",
-      "subtitle": "Ga met Promi de robot op een leuk avontuur om te leren hoe je geweldige prompts schrijft!",
-      "promiIntro": {
-        "greeting": "Hoi, ik ben Promi! 🤖",
+      "subtitle": "Ga met Peromfu de robot op een leuk avontuur om te leren hoe je geweldige prompts schrijft!",
+      "peromfuIntro": {
+        "greeting": "Hoi, ik ben Peromfu! 🤖",
         "message": "Ik ben een vriendelijke robot die JOUW hulp nodig heeft! Wil je me leren hoe ik prompts beter kan begrijpen?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Coole verhalen",
-          "description": "Volg Promi door spannende avonturen"
+          "description": "Volg Peromfu door spannende avonturen"
         },
         "stars": {
           "title": "Verdien sterren",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Ontmoet Promi!",
+      "1_1_meet_peromfu": {
+        "title": "Ontmoet Peromfu!",
         "description": "Zeg hallo tegen je robotvriend en leer wat AI is"
       },
       "1_2_first_words": {
-        "title": "Promi's eerste woorden",
-        "description": "Help Promi begrijpen door je eerste prompt te schrijven"
+        "title": "Peromfu's eerste woorden",
+        "description": "Help Peromfu begrijpen door je eerste prompt te schrijven"
       },
       "1_3_being_clear": {
         "title": "Duidelijk zijn",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Prompting voor kinderen: leer praten met AI",
-      "description": "Een gratis spel waarmee kinderen leren praten met AI. Ga met Promi de robot op avontuur door Promptland en leer hoe je geweldige prompts schrijft."
+      "description": "Een gratis spel waarmee kinderen leren praten met AI. Ga met Peromfu de robot op avontuur door Promptland en leer hoe je geweldige prompts schrijft."
     }
   }
 }

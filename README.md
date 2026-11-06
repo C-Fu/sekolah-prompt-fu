@@ -9,7 +9,7 @@
 ## What is Sekolah Prompt-Fu?
 
 Sekolah Prompt-Fu is a browser game that teaches children how to write good
-prompts for AI. Players join Promi on a map of levels, each one a small puzzle
+prompts for AI. Players join Peromfu on a map of levels, each one a small puzzle
 that shows why clear, specific instructions get better answers than vague ones.
 
 The game is a single, self-contained Next.js app. There is no account, no

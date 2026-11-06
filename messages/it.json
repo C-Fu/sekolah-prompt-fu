@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "La Scuola di Prompt di Promi",
+      "title": "La Scuola di Prompt di Peromfu",
       "levels": "livelli",
       "home": "Home",
       "map": "Mappa",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Apprendimento per Bambini",
       "title": "Impara a Parlare con l'IA!",
-      "subtitle": "Unisciti al robot Promi in un'avventura divertente per imparare a scrivere prompt fantastici!",
-      "promiIntro": {
-        "greeting": "Ciao, sono Promi! 🤖",
+      "subtitle": "Unisciti al robot Peromfu in un'avventura divertente per imparare a scrivere prompt fantastici!",
+      "peromfuIntro": {
+        "greeting": "Ciao, sono Peromfu! 🤖",
         "message": "Sono un robot amichevole che ha bisogno del TUO aiuto! Mi aiuti a capire meglio i prompt?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Storie Fantastiche",
-          "description": "Segui Promi in avventure emozionanti"
+          "description": "Segui Peromfu in avventure emozionanti"
         },
         "stars": {
           "title": "Guadagna Stelle",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Incontra Promi!",
+      "1_1_meet_peromfu": {
+        "title": "Incontra Peromfu!",
         "description": "Saluta il tuo amico robot e scopri cos'è l'IA"
       },
       "1_2_first_words": {
-        "title": "Le Prime Parole di Promi",
-        "description": "Aiuta Promi a capire scrivendo il tuo primo prompt"
+        "title": "Le Prime Parole di Peromfu",
+        "description": "Aiuta Peromfu a capire scrivendo il tuo primo prompt"
       },
       "1_3_being_clear": {
         "title": "Essere Chiari",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Prompting per bambini: impara a parlare con l'AI",
-      "description": "Un modo gratuito e giocoso per imparare a parlare con l'AI. Parti all'avventura con il robot Promi nel Paese dei Prompt e impara a scrivere prompt fantastici."
+      "description": "Un modo gratuito e giocoso per imparare a parlare con l'AI. Parti all'avventura con il robot Peromfu nel Paese dei Prompt e impara a scrivere prompt fantastici."
     }
   }
 }

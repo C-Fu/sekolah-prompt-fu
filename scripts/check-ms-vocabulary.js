@@ -26,7 +26,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 
 const MS_DIR = path.join(__dirname, "..", "src", "content", "kids", "ms");
-const ONE_ONE = path.join(MS_DIR, "1-1-meet-promi.mdx");
+const ONE_ONE = path.join(MS_DIR, "1-1-meet-peromfu.mdx");
 const PUZZLE_QUOTE = "Kucing itu duduk di atas tikar";
 
 // Enumerate every `ms` MDX file that exists on disk. The on-disk walk is the

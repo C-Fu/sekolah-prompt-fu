@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promi's Prompt School",
+      "title": "Peromfu's Prompt School",
       "levels": "levels",
       "home": "Home",
       "map": "Map",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Learning for Kids",
       "title": "Learn to Talk to AI!",
-      "subtitle": "Join Promi the robot on a fun adventure to learn how to write awesome prompts!",
-      "promiIntro": {
-        "greeting": "Hi, I'm Promi! 🤖",
+      "subtitle": "Join Peromfu the robot on a fun adventure to learn how to write awesome prompts!",
+      "peromfuIntro": {
+        "greeting": "Hi, I'm Peromfu! 🤖",
         "message": "I'm a friendly robot who needs YOUR help! Will you teach me how to understand prompts better?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Cool Stories",
-          "description": "Follow Promi through exciting adventures"
+          "description": "Follow Peromfu through exciting adventures"
         },
         "stars": {
           "title": "Earn Stars",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Meet Promi!",
+      "1_1_meet_peromfu": {
+        "title": "Meet Peromfu!",
         "description": "Say hello to your robot friend and learn what AI is"
       },
       "1_2_first_words": {
-        "title": "Promi's First Words",
-        "description": "Help Promi understand by writing your first prompt"
+        "title": "Peromfu's First Words",
+        "description": "Help Peromfu understand by writing your first prompt"
       },
       "1_3_being_clear": {
         "title": "Being Clear",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Prompting for Kids: Learn to Talk to AI",
-      "description": "A free, game-based way for kids to learn how to talk to AI. Join Promi the robot on an adventure through Prompt Land and learn to write great prompts."
+      "description": "A free, game-based way for kids to learn how to talk to AI. Join Peromfu the robot on an adventure through Prompt Land and learn to write great prompts."
     }
   }
 }

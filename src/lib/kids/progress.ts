@@ -21,13 +21,42 @@ const defaultProgress: KidsProgress = {
   totalStars: 0,
 };
 
+// Legacy level slugs from before the Promi → Peromfu rename. Progress is keyed
+// by slug, so returning players' stored entries are migrated to the new slug
+// on read (stars, completion, and currentLevel pointer).
+const LEGACY_SLUG_ALIASES: Record<string, string> = {
+  "1-1-meet-promi": "1-1-meet-peromfu",
+};
+
+function migrateLegacySlugs(progress: KidsProgress): KidsProgress {
+  let migrated = false;
+
+  for (const [oldSlug, newSlug] of Object.entries(LEGACY_SLUG_ALIASES)) {
+    const legacy = progress.levels[oldSlug];
+    if (legacy) {
+      if (!progress.levels[newSlug]) {
+        progress.levels[newSlug] = legacy;
+      }
+      delete progress.levels[oldSlug];
+      migrated = true;
+    }
+    if (progress.currentLevel === oldSlug) {
+      progress.currentLevel = newSlug;
+      migrated = true;
+    }
+  }
+
+  if (migrated) saveProgress(progress);
+  return progress;
+}
+
 export function getProgress(): KidsProgress {
   if (typeof window === "undefined") return defaultProgress;
   
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) return defaultProgress;
-    return JSON.parse(stored) as KidsProgress;
+    return migrateLegacySlugs(JSON.parse(stored) as KidsProgress);
   } catch {
     return defaultProgress;
   }
@@ -237,7 +266,7 @@ export function clearSectionCompletion(levelSlug: string): void {
  *
  * Section completions are keyed by numeric document-order index and component drafts by
  * `useId`, and both are specific to the compiled MDX of the locale that produced them
- * (en `1-1-meet-promi` has ten Sections, es has seven). Carrying an old locale's index or
+ * (en `1-1-meet-peromfu` has ten Sections, es has seven). Carrying an old locale's index or
  * `useId` into a translated Section tree would silently unlock a challenge the child
  * never solved, so both stores are cleared *across every slug* before the translated MDX
  * mounts.

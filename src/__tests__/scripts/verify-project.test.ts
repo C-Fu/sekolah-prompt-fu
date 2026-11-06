@@ -120,7 +120,7 @@ afterAll(() => {
 describe("scripts/verify-project.js — refuse-loudly paths", () => {
   it("exits non-zero with a loud message when out/ is absent (does not pass silently)", () => {
     const base = sandbox("noout", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       withOut: false,
     });
     const { code, output } = runVerify(base);
@@ -132,7 +132,7 @@ describe("scripts/verify-project.js — refuse-loudly paths", () => {
 
   it("aggregates the absent-out/ case into the FAILED verdict block (IN-01)", () => {
     const base = sandbox("noout-agg", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       withOut: false,
     });
     const { code, output } = runVerify(base);
@@ -174,8 +174,8 @@ describe("scripts/verify-project.js — refuse-loudly paths", () => {
 describe("scripts/verify-project.js — artifact inspection", () => {
   it("names each missing level route by slug and exits non-zero", () => {
     const base = sandbox("misslevel", {
-      slugs: ["1-1-meet-promi", "2-1-missing-details"],
-      emittedSlugs: ["1-1-meet-promi"], // 2-1 deliberately not emitted
+      slugs: ["1-1-meet-peromfu", "2-1-missing-details"],
+      emittedSlugs: ["1-1-meet-peromfu"], // 2-1 deliberately not emitted
     });
     const { code, output } = runVerify(base);
     expect(code).toBe(1);
@@ -185,7 +185,7 @@ describe("scripts/verify-project.js — artifact inspection", () => {
 
   it("reports a missing /map route", () => {
     const base = sandbox("nomapl", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       mapIndex: false,
     });
     const { code, output } = runVerify(base);
@@ -196,7 +196,7 @@ describe("scripts/verify-project.js — artifact inspection", () => {
 
   it("reports a missing root / route", () => {
     const base = sandbox("noroot", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       rootIndex: false,
     });
     const { code, output } = runVerify(base);
@@ -207,7 +207,7 @@ describe("scripts/verify-project.js — artifact inspection", () => {
 
   it("reports a missing bundled media asset", () => {
     const base = sandbox("nomusic", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       music: false,
     });
     const { code, output } = runVerify(base);
@@ -219,8 +219,8 @@ describe("scripts/verify-project.js — artifact inspection", () => {
   it("derives the slug set from levels.ts text (not a hard-coded count)", () => {
     // A non-slug-shaped `slug:` value (world slug) must NOT be treated as a level.
     const base = sandbox("derive", {
-      slugs: ["1-1-meet-promi", "5-4-graduation-day"],
-      emittedSlugs: ["1-1-meet-promi", "5-4-graduation-day"],
+      slugs: ["1-1-meet-peromfu", "5-4-graduation-day"],
+      emittedSlugs: ["1-1-meet-peromfu", "5-4-graduation-day"],
     });
     // Inject a world-style slug that does not match /^\d-\d-/.
     const levelsPath = path.join(base, "src", "lib", "kids", "levels.ts");
@@ -284,7 +284,7 @@ describe("scripts/verify-project.js — --gates-only mode", () => {
     // point is the out/ dimension: gates-only must NOT report the absent-out/
     // problem (it never inspects out/).
     const base = sandbox("gatesonly-noout", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       withOut: false,
     });
     const { output } = runVerify(base, ["--gates-only"]);
@@ -295,7 +295,7 @@ describe("scripts/verify-project.js — --gates-only mode", () => {
 
   it("does not inspect artifacts when out/ is absent (no route/media claims)", () => {
     const base = sandbox("gatesonly-noinspect", {
-      slugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
       withOut: false,
     });
     const { output } = runVerify(base, ["--gates-only"]);
@@ -306,8 +306,8 @@ describe("scripts/verify-project.js — --gates-only mode", () => {
 
   it("runs only the two certified gates and skips artifact inspection even when out/ is present", () => {
     const base = sandbox("gatesonly-without", {
-      slugs: ["1-1-meet-promi"],
-      emittedSlugs: ["1-1-meet-promi"],
+      slugs: ["1-1-meet-peromfu"],
+      emittedSlugs: ["1-1-meet-peromfu"],
     });
     const { output } = runVerify(base, ["--gates-only"]);
     // out/ exists and is complete, yet gates-only still does not inspect it.
@@ -316,7 +316,7 @@ describe("scripts/verify-project.js — --gates-only mode", () => {
   });
 
   it("exits non-zero with a usage message naming --gates-only for an unknown flag", () => {
-    const base = sandbox("bogusflag", { slugs: ["1-1-meet-promi"] });
+    const base = sandbox("bogusflag", { slugs: ["1-1-meet-peromfu"] });
     const { code, output } = runVerify(base, ["--bogus"]);
     expect(code).toBe(1);
     expect(output).toContain("--bogus");
@@ -326,7 +326,7 @@ describe("scripts/verify-project.js — --gates-only mode", () => {
 
 describe("scripts/verify-project.js — D-12: never runs the build", () => {
   it("does not invoke `npm run build` even when out/ is absent", () => {
-    const base = sandbox("nobuild", { slugs: ["1-1-meet-promi"], withOut: false });
+    const base = sandbox("nobuild", { slugs: ["1-1-meet-peromfu"], withOut: false });
     // Shadow `npm`/`npx` with sentinels that record invocation.
     const binDir = path.join(base, "bin");
     fs.mkdirSync(binDir, { recursive: true });
@@ -352,7 +352,7 @@ describe("scripts/verify-project.js — D-12: never runs the build", () => {
   });
 
   it("does not invoke `npm run build` in --gates-only mode either", () => {
-    const base = sandbox("nobuild-gatesonly", { slugs: ["1-1-meet-promi"], withOut: false });
+    const base = sandbox("nobuild-gatesonly", { slugs: ["1-1-meet-peromfu"], withOut: false });
     const binDir = path.join(base, "bin");
     fs.mkdirSync(binDir, { recursive: true });
     const record = path.join(base, "invoked.log");

@@ -2,16 +2,16 @@
 
 import { cn } from "@/lib/utils";
 
-type PromiMood = "happy" | "thinking" | "excited" | "confused" | "celebrating";
+type PeromfuMood = "happy" | "thinking" | "excited" | "confused" | "celebrating";
 
-interface PromiCharacterProps {
-  mood?: PromiMood;
+interface PeromfuCharacterProps {
+  mood?: PeromfuMood;
   size?: "sm" | "md" | "lg";
   className?: string;
   animate?: boolean;
 }
 
-const moodEmojis: Record<PromiMood, string> = {
+const moodEmojis: Record<PeromfuMood, string> = {
   happy: "😊",
   thinking: "🤔",
   excited: "🤩",
@@ -25,12 +25,12 @@ const sizeClasses = {
   lg: "w-28 h-28 text-5xl",
 };
 
-export function PromiCharacter({ 
+export function PeromfuCharacter({ 
   mood = "happy", 
   size = "md",
   className,
   animate = true 
-}: PromiCharacterProps) {
+}: PeromfuCharacterProps) {
   return (
     <div 
       className={cn(
@@ -86,25 +86,25 @@ export function SpeechBubble({
   );
 }
 
-interface PromiWithMessageProps {
+interface PeromfuWithMessageProps {
   message: string;
-  mood?: PromiMood;
-  promiPosition?: "left" | "right";
+  mood?: PeromfuMood;
+  peromfuPosition?: "left" | "right";
 }
 
-export function PromiWithMessage({ 
+export function PeromfuWithMessage({ 
   message, 
   mood = "happy",
-  promiPosition = "left" 
-}: PromiWithMessageProps) {
+  peromfuPosition = "left" 
+}: PeromfuWithMessageProps) {
   return (
     <div className={cn(
       "flex items-start gap-4 my-6",
-      promiPosition === "right" && "flex-row-reverse"
+      peromfuPosition === "right" && "flex-row-reverse"
     )}>
-      <PromiCharacter mood={mood} size="md" />
+      <PeromfuCharacter mood={mood} size="md" />
       <SpeechBubble 
-        direction={promiPosition === "left" ? "left" : "right"}
+        direction={peromfuPosition === "left" ? "left" : "right"}
         className="flex-1"
       >
         <p className="text-base leading-relaxed m-0">{message}</p>

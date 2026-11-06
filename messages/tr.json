@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promi'in Prompt Okulu",
+      "title": "Peromfu'in Prompt Okulu",
       "levels": "seviye",
       "home": "Ana Sayfa",
       "map": "Harita",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Çocuklar İçin Öğrenme",
       "title": "Yapay Zeka ile Konuşmayı Öğren!",
-      "subtitle": "Robot Promi ile harika promptlar yazmayı öğrenmek için eğlenceli bir maceraya katıl!",
-      "promiIntro": {
-        "greeting": "Merhaba, ben Promi! 🤖",
+      "subtitle": "Robot Peromfu ile harika promptlar yazmayı öğrenmek için eğlenceli bir maceraya katıl!",
+      "peromfuIntro": {
+        "greeting": "Merhaba, ben Peromfu! 🤖",
         "message": "Senin yardımına ihtiyacı olan dostça bir robotum! Promptları daha iyi anlamam için bana yardım eder misin?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Harika Hikayeler",
-          "description": "Promi ile heyecanlı maceralar yaşa"
+          "description": "Peromfu ile heyecanlı maceralar yaşa"
         },
         "stars": {
           "title": "Yıldız Kazan",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Promi ile Tanış!",
+      "1_1_meet_peromfu": {
+        "title": "Peromfu ile Tanış!",
         "description": "Robot arkadaşınla tanış ve yapay zekanın ne olduğunu öğren"
       },
       "1_2_first_words": {
-        "title": "Promi'in İlk Sözleri",
-        "description": "İlk promptunu yazarak Promi'in anlamasına yardım et"
+        "title": "Peromfu'in İlk Sözleri",
+        "description": "İlk promptunu yazarak Peromfu'in anlamasına yardım et"
       },
       "1_3_being_clear": {
         "title": "Net Olmak",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Çocuklar için Prompt Yazma: Yapay Zekayla Konuşmayı Öğren",
-      "description": "Çocukların yapay zekayla konuşmayı oyun oynayarak öğrendiği ücretsiz bir yol. Robot Promi ile Prompt Diyarı'nda maceraya atıl ve harika promptlar yazmayı öğren."
+      "description": "Çocukların yapay zekayla konuşmayı oyun oynayarak öğrendiği ücretsiz bir yol. Robot Peromfu ile Prompt Diyarı'nda maceraya atıl ve harika promptlar yazmayı öğren."
     }
   }
 }

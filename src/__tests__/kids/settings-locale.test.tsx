@@ -37,7 +37,7 @@ import enMessages from "@/../messages/en.json";
  * localStorage behaviour rather than source text.
  */
 
-const SLUG = "1-1-meet-promi";
+const SLUG = "1-1-meet-peromfu";
 const COMPONENT_STATE_KEY = "kids-component-state";
 const SECTION_COMPLETION_KEY = "kids-section-completion";
 const PROGRESS_KEY = "kids-progress";
@@ -87,7 +87,7 @@ async function openSettings() {
 
 /** Seed a completed level, an unlocked next level, sound preference and interaction state. */
 function seedProgress() {
-  // 1-1-meet-promi completed with three stars (an unlocked world beyond the first).
+  // 1-1-meet-peromfu completed with three stars (an unlocked world beyond the first).
   localStorage.setItem(
     PROGRESS_KEY,
     JSON.stringify({

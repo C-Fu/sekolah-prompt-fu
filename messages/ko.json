@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promi의 프롬프트 학교",
+      "title": "Peromfu의 프롬프트 학교",
       "levels": "레벨",
       "home": "홈",
       "map": "지도",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "어린이 학습",
       "title": "AI와 대화하는 법을 배워요!",
-      "subtitle": "로봇 Promi과 함께 재미있는 모험을 떠나 멋진 프롬프트 작성법을 배워보세요!",
-      "promiIntro": {
-        "greeting": "안녕, 나는 Promi이야! 🤖",
+      "subtitle": "로봇 Peromfu과 함께 재미있는 모험을 떠나 멋진 프롬프트 작성법을 배워보세요!",
+      "peromfuIntro": {
+        "greeting": "안녕, 나는 Peromfu이야! 🤖",
         "message": "네 도움이 필요한 친절한 로봇이야! 프롬프트를 더 잘 이해할 수 있게 도와줄래?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "멋진 이야기",
-          "description": "Promi과 함께 신나는 모험을 떠나요"
+          "description": "Peromfu과 함께 신나는 모험을 떠나요"
         },
         "stars": {
           "title": "별 모으기",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Promi을 만나요!",
+      "1_1_meet_peromfu": {
+        "title": "Peromfu을 만나요!",
         "description": "로봇 친구에게 인사하고 AI가 무엇인지 배워요"
       },
       "1_2_first_words": {
-        "title": "Promi의 첫 번째 말",
-        "description": "첫 번째 프롬프트를 작성해서 Promi이 이해하도록 도와주세요"
+        "title": "Peromfu의 첫 번째 말",
+        "description": "첫 번째 프롬프트를 작성해서 Peromfu이 이해하도록 도와주세요"
       },
       "1_3_being_clear": {
         "title": "명확하게 말하기",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "어린이를 위한 프롬프트: AI와 대화하는 법 배우기",
-      "description": "아이들이 게임처럼 즐기며 AI와 대화하는 법을 배우는 무료 학습 공간입니다. 로봇 Promi와 함께 프롬프트 랜드를 모험하며 멋진 프롬프트 쓰는 법을 배워요."
+      "description": "아이들이 게임처럼 즐기며 AI와 대화하는 법을 배우는 무료 학습 공간입니다. 로봇 Peromfu와 함께 프롬프트 랜드를 모험하며 멋진 프롬프트 쓰는 법을 배워요."
     }
   }
 }

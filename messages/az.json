@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promi-in Prompt Məktəbi",
+      "title": "Peromfu-in Prompt Məktəbi",
       "levels": "səviyyə",
       "home": "Ana Səhifə",
       "map": "Xəritə",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Uşaqlar üçün Öyrənmə",
       "title": "AI ilə Danışmağı Öyrən!",
-      "subtitle": "Robot Promi ilə birlikdə əyləncəli bir macəraya çıx və möhtəşəm promptlar yazmağı öyrən!",
-      "promiIntro": {
-        "greeting": "Salam, mən Promi-əm! 🤖",
+      "subtitle": "Robot Peromfu ilə birlikdə əyləncəli bir macəraya çıx və möhtəşəm promptlar yazmağı öyrən!",
+      "peromfuIntro": {
+        "greeting": "Salam, mən Peromfu-əm! 🤖",
         "message": "Mən SƏNİN köməyinə ehtiyacı olan dost robotam! Promptları daha yaxşı başa düşməyimə kömək edərsən?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Gözəl Hekayələr",
-          "description": "Promi ilə həyəcanlı macəralara çıx"
+          "description": "Peromfu ilə həyəcanlı macəralara çıx"
         },
         "stars": {
           "title": "Ulduz Qazan",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Promi ilə Tanış Ol!",
+      "1_1_meet_peromfu": {
+        "title": "Peromfu ilə Tanış Ol!",
         "description": "Robot dostunla salamlaş və AI-nin nə olduğunu öyrən"
       },
       "1_2_first_words": {
-        "title": "Promi-in İlk Sözləri",
-        "description": "İlk promptunu yazaraq Promi-ə başa düşməyə kömək et"
+        "title": "Peromfu-in İlk Sözləri",
+        "description": "İlk promptunu yazaraq Peromfu-ə başa düşməyə kömək et"
       },
       "1_3_being_clear": {
         "title": "Aydın Ol",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Uşaqlar üçün Prompt Yazma: Süni İntellektlə Danışmağı Öyrən",
-      "description": "Uşaqların süni intellektlə danışmağı oyun oynayaraq öyrəndiyi pulsuz bir yol. Robot Promi ilə Prompt Diyarında macəraya çıx və əla promptlar yazmağı öyrən."
+      "description": "Uşaqların süni intellektlə danışmağı oyun oynayaraq öyrəndiyi pulsuz bir yol. Robot Peromfu ilə Prompt Diyarında macəraya çıx və əla promptlar yazmağı öyrən."
     }
   }
 }

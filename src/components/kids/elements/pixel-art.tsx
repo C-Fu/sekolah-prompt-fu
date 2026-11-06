@@ -155,16 +155,16 @@ export function PixelStar({ className, filled = false }: { className?: string; f
   );
 }
 
-// Pixel Art Robot (Promi) with mood support
-type PromiMood = "happy" | "thinking" | "excited" | "confused" | "celebrating";
+// Pixel Art Robot (Peromfu) with mood support
+type PeromfuMood = "happy" | "thinking" | "excited" | "confused" | "celebrating";
 
 interface PixelRobotProps {
   className?: string;
-  mood?: PromiMood;
+  mood?: PeromfuMood;
 }
 
 // Mouth shapes for different moods
-const mouthShapes: Record<PromiMood, { x: number; y: number; width: number; height: number; fill: string }[]> = {
+const mouthShapes: Record<PeromfuMood, { x: number; y: number; width: number; height: number; fill: string }[]> = {
   happy: [
     { x: 6, y: 10, width: 4, height: 1, fill: "#333" },
     { x: 5, y: 9, width: 1, height: 1, fill: "#333" },
@@ -188,7 +188,7 @@ const mouthShapes: Record<PromiMood, { x: number; y: number; width: number; heig
 };
 
 // Eye variations for moods
-const eyeVariations: Record<PromiMood, { leftPupil: { x: number; y: number }; rightPupil: { x: number; y: number }; extra?: { x: number; y: number; width: number; height: number; fill: string }[] }> = {
+const eyeVariations: Record<PeromfuMood, { leftPupil: { x: number; y: number }; rightPupil: { x: number; y: number }; extra?: { x: number; y: number; width: number; height: number; fill: string }[] }> = {
   happy: { leftPupil: { x: 5, y: 7 }, rightPupil: { x: 10, y: 7 } },
   thinking: { leftPupil: { x: 6, y: 6 }, rightPupil: { x: 11, y: 6 } },
   excited: { 

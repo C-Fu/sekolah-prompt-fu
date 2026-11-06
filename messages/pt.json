@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Escola de Prompts do Promi",
+      "title": "Escola de Prompts do Peromfu",
       "levels": "níveis",
       "home": "Início",
       "map": "Mapa",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Aprendizado para Crianças",
       "title": "Aprenda a Falar com IA!",
-      "subtitle": "Junte-se ao robô Promi em uma aventura divertida para aprender a escrever prompts incríveis!",
-      "promiIntro": {
-        "greeting": "Oi, eu sou o Promi! 🤖",
+      "subtitle": "Junte-se ao robô Peromfu em uma aventura divertida para aprender a escrever prompts incríveis!",
+      "peromfuIntro": {
+        "greeting": "Oi, eu sou o Peromfu! 🤖",
         "message": "Sou um robô amigável que precisa da SUA ajuda! Você me ajuda a entender melhor os prompts?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Histórias Legais",
-          "description": "Siga o Promi em aventuras emocionantes"
+          "description": "Siga o Peromfu em aventuras emocionantes"
         },
         "stars": {
           "title": "Ganhe Estrelas",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Conheça o Promi!",
+      "1_1_meet_peromfu": {
+        "title": "Conheça o Peromfu!",
         "description": "Diga olá ao seu amigo robô e aprenda o que é IA"
       },
       "1_2_first_words": {
-        "title": "As Primeiras Palavras do Promi",
-        "description": "Ajude o Promi a entender escrevendo seu primeiro prompt"
+        "title": "As Primeiras Palavras do Peromfu",
+        "description": "Ajude o Peromfu a entender escrevendo seu primeiro prompt"
       },
       "1_3_being_clear": {
         "title": "Sendo Claro",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Prompting para crianças: aprenda a conversar com a IA",
-      "description": "Um jogo gratuito para as crianças aprenderem a conversar com a IA. Viaje com o robô Promi pela Terra dos Prompts e aprenda a escrever prompts incríveis."
+      "description": "Um jogo gratuito para as crianças aprenderem a conversar com a IA. Viaje com o robô Peromfu pela Terra dos Prompts e aprenda a escrever prompts incríveis."
     }
   }
 }

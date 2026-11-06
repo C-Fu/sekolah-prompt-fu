@@ -12,7 +12,7 @@ interface PromptVsMistakeProps {
   good: string;
   bad: string;
   explanation?: string;
-  promiMessage?: string;
+  peromfuMessage?: string;
 }
 
 interface SavedState {
@@ -26,7 +26,7 @@ export function PromptVsMistake({
   good,
   bad,
   explanation,
-  promiMessage,
+  peromfuMessage,
 }: PromptVsMistakeProps) {
   const t = useTranslations("kids.quiz");
   const levelSlug = useLevelSlug();
@@ -110,7 +110,7 @@ export function PromptVsMistake({
 
   return (
     <div className="my-2">
-      {/* Question card with Promi */}
+      {/* Question card with Peromfu */}
       <div className="flex items-center gap-2 mb-2">
         <div className="shrink-0">
           <PixelRobot className="w-8 h-10" />
@@ -220,13 +220,13 @@ export function PromptVsMistake({
           {explanation && (
             <p className="text-sm text-[#5D4037] m-0 mt-2">{explanation}</p>
           )}
-          {promiMessage && (
+          {peromfuMessage && (
             <div 
               className="flex items-center justify-center gap-2 mt-3 bg-white/60 p-2"
               style={{ clipPath: smallPixelClipPath }}
             >
               <PixelRobot className="w-6 h-7 shrink-0" />
-              <p className="text-sm text-[#5D4037] m-0">{promiMessage}</p>
+              <p className="text-sm text-[#5D4037] m-0">{peromfuMessage}</p>
             </div>
           )}
           {!isCorrect && (

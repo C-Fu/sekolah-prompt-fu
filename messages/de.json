@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promis Prompt-Schule",
+      "title": "Peromfus Prompt-Schule",
       "levels": "Level",
       "home": "Start",
       "map": "Karte",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "Lernen für Kinder",
       "title": "Lerne mit KI zu sprechen!",
-      "subtitle": "Begleite den Roboter Promi auf einem lustigen Abenteuer und lerne, tolle Prompts zu schreiben!",
-      "promiIntro": {
-        "greeting": "Hallo, ich bin Promi! 🤖",
+      "subtitle": "Begleite den Roboter Peromfu auf einem lustigen Abenteuer und lerne, tolle Prompts zu schreiben!",
+      "peromfuIntro": {
+        "greeting": "Hallo, ich bin Peromfu! 🤖",
         "message": "Ich bin ein freundlicher Roboter, der DEINE Hilfe braucht! Hilfst du mir, Prompts besser zu verstehen?"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "Coole Geschichten",
-          "description": "Folge Promi auf spannenden Abenteuern"
+          "description": "Folge Peromfu auf spannenden Abenteuern"
         },
         "stars": {
           "title": "Sterne sammeln",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "Triff Promi!",
+      "1_1_meet_peromfu": {
+        "title": "Triff Peromfu!",
         "description": "Sag Hallo zu deinem Roboterfreund und lerne, was KI ist"
       },
       "1_2_first_words": {
-        "title": "Promis erste Worte",
-        "description": "Hilf Promi zu verstehen, indem du deinen ersten Prompt schreibst"
+        "title": "Peromfus erste Worte",
+        "description": "Hilf Peromfu zu verstehen, indem du deinen ersten Prompt schreibst"
       },
       "1_3_being_clear": {
         "title": "Klar sein",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "Prompting für Kinder: Lerne, mit KI zu sprechen",
-      "description": "Ein kostenloses Lernspiel, mit dem Kinder lernen, mit KI zu sprechen. Begleite den Roboter Promi durch das Prompt-Land und lerne, tolle Prompts zu schreiben."
+      "description": "Ein kostenloses Lernspiel, mit dem Kinder lernen, mit KI zu sprechen. Begleite den Roboter Peromfu durch das Prompt-Land und lerne, tolle Prompts zu schreiben."
     }
   }
 }

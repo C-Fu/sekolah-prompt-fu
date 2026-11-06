@@ -57,7 +57,7 @@
   },
   "kids": {
     "header": {
-      "title": "Promi的提示词学校",
+      "title": "Peromfu的提示词学校",
       "levels": "关卡",
       "home": "首页",
       "map": "地图",
@@ -66,9 +66,9 @@
     "home": {
       "badge": "儿童学习",
       "title": "学习与AI对话！",
-      "subtitle": "和机器人Promi一起踏上有趣的冒险，学习如何写出精彩的提示词！",
-      "promiIntro": {
-        "greeting": "你好，我是Promi！🤖",
+      "subtitle": "和机器人Peromfu一起踏上有趣的冒险，学习如何写出精彩的提示词！",
+      "peromfuIntro": {
+        "greeting": "你好，我是Peromfu！🤖",
         "message": "我是一个需要你帮助的友好机器人！你愿意帮我更好地理解提示词吗？"
       },
       "features": {
@@ -78,7 +78,7 @@
         },
         "stories": {
           "title": "精彩故事",
-          "description": "跟随Promi经历激动人心的冒险"
+          "description": "跟随Peromfu经历激动人心的冒险"
         },
         "stars": {
           "title": "赚取星星",
@@ -121,13 +121,13 @@
       }
     },
     "levels": {
-      "1_1_meet_promi": {
-        "title": "认识Promi！",
+      "1_1_meet_peromfu": {
+        "title": "认识Peromfu！",
         "description": "和你的机器人朋友打招呼，了解什么是AI"
       },
       "1_2_first_words": {
-        "title": "Promi的第一句话",
-        "description": "写下你的第一个提示词来帮助Promi理解"
+        "title": "Peromfu的第一句话",
+        "description": "写下你的第一个提示词来帮助Peromfu理解"
       },
       "1_3_being_clear": {
         "title": "表达清晰",
@@ -316,7 +316,7 @@
   "seo": {
     "kids": {
       "title": "儿童提示词课堂：学会与AI对话",
-      "description": "一款免费的游戏化课程，让孩子在玩乐中学会与AI对话。跟着机器人Promi一起闯荡提示词王国，一步步学会写出精彩的提示词。"
+      "description": "一款免费的游戏化课程，让孩子在玩乐中学会与AI对话。跟着机器人Peromfu一起闯荡提示词王国，一步步学会写出精彩的提示词。"
     }
   }
 }
