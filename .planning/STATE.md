@@ -18,12 +18,24 @@ current_phase_name: "Address tech debt: stale kids import-closure guard + wire m
 
 # Project State
 
+## Scope
+
+**Milestone:** v1.0 — Kids Prompting Game Standalone & GitHub Pages (SHIPPED 2026-11-07)
+**Next milestone:** v1.1 — Tech Debt Cleanup (Phase 04.1)
+
 ## Current Position
 
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
 Last activity: 2026-11-07 — Milestone v1.0 completed and archived
+
+## Project Reference
+
+See: .planning/PROJECT.md (updated 2026-11-07 after v1.0)
+
+**Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support.
+**Current focus:** Planning next milestone (v1.1 tech-debt cleanup) or closing the v1.1 `04.1` phase.
 
 ## Status
 - **Current Phase:** Phase 04.1 (Address tech debt: stale kids import-closure guard + wire ms vocabulary guard into CI)
