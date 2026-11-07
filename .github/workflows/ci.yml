@@ -35,7 +35,7 @@ jobs:
         run: npm run check:closure
 
       - name: Check `ms` vocabulary guard
-        run: npm run check:vocab
+        run: npm run lint:ms
 
       - name: Run verification script
         run: npm run verify -- --gates-only
