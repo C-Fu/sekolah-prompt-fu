@@ -1,0 +1,57 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Utarid (Planet Pendidikan Moral)**! 🟣 Dalam kelas Moral Tahun 1, kita belajar nilai kasih sayang, saling menghormati dan tolong-menolong sesama rakan!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Kadangkala rakan kita berdepan masalah di dalam kelas, contohnya pensel warna terjatuh berterabur. Bagaimana kita boleh membimbing AI mencadangkan tindakan yang prihatin dan bersopan santun?
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Doktor Prompt — Nasihat Moral Yang Prihatin 🩺
+
+Peromfu mahu bertanya kepada AI: *"Apa patut saya buat bila pensel kawan jatuh?"*. Bantu Peromfu membaiki arahan ini supaya AI mencadangkan tindakan tolong-menolong yang ikhlas dan beradab sopan.
+
+<PromptDoctor
+  title="Rawat Prompt Peromfu!"
+  instruction="Pilih arahan yang paling menerapkan nilai murni tolong-menolong:"
+  badPrompt="Beri saya nasihat pasal pensel kawan yang jatuh."
+  options={[
+    {
+      text: "Bertindak sebagai rakan sekelas yang prihatin. Cadangkan 2 tindakan sopan dan segera untuk menolong rakan mengutip pensel warnanya yang terjatuh di lantai kelas.",
+      isCorrect: true,
+      feedback: "Sangat baik! Menyatakan nilai prihatin dan kesopanan membimbing AI mencadangkan tindakan empati yang murni!"
+    },
+    {
+      text: "Suruh rakan itu kutip sendiri penselnya.",
+      isCorrect: false,
+      feedback: "Ini menunjukkan sikap tidak peduli dan bertentangan dengan nilai saling membantu!"
+    },
+    {
+      text: "Pensel warna itu berwarna merah dan kuning.",
+      isCorrect: false,
+      feedback: "Ini hanya keterangan warna, tidak menyelesaikan situasi rakan yang memerlukan bantuan!"
+    }
+  ]}
+  explanation="Pendidikan Moral mengajar kita peka terhadap kesusahan rakan. Meminta AI memberi cadangan berasaskan empati dan adab sopan mengukuhkan akhlak terpuji."
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Prompt vs Kesilapan — Bantuan Ikhlas 🤝
+
+Arahan manakah yang membimbing AI menghasilkan kata-kata semangat yang menyejukkan hati rakan yang cemas?
+
+<PromptVsMistake
+  title="Pilih Nada Bahasa Yang Positif"
+  instruction="Pilih arahan yang memastikan nada AI berhemah dan menenangkan hati rakan:"
+  promptA="Tulis ucapan yang kasar dan bising dalam kelas."
+  promptB="Tulis satu ayat sokongan yang lembut dan menenangkan untuk menenteramkan rakan sekelas: 'Jangan bimbang kawan, mari kita kutip bersama-sama.'"
+  correct="B"
+  explanation="Prompt B menetapkan nada emosi yang lembut, positif dan mengutamakan semangat kerjasama berpasukan."
+  successMessage="Syabas! Anda dan Peromfu kini sahabat teladan yang berakhlak mulia!"
+/>
+</Section>

@@ -1,0 +1,48 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Welcome to the **Moon (Bahasa Melayu Planet)**! 🌕 I am **Peromfu**, your Year 1 classmate. Our teacher asked us to write sentences describing our favorite pets!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Did you know? To guide an AI to generate an exciting story or picture, we must provide specific **Action Verbs**, not just vague words!
+</Panel>
+</Section>
+
+<Section>
+## Challenge 1: Choose the Right Action Verb 🐾
+
+Peromfu wants the AI to illustrate an energetic kitten playing in the living room. Which action verb should we prompt?
+
+<WordPredictor
+  title="Help Peromfu Pick the Action Verb!"
+  instruction="Complete this prompt with the most vivid action verb:"
+  sentence="Draw a playful kitten ____ to catch a rolling ball of red yarn."
+  options={["jumping", "table", "purple", "sitting still"]}
+  correctAnswer="jumping"
+  explanation="'Jumping' is a vivid action verb showing movement. Nouns like 'table' or colors like 'purple' do not describe actions!"
+  aiThinking="The action verb 'jumping' helps me visualize the dynamic motion of the kitten in the air!"
+  successMessage="Spot on! The AI now understands the exact action to illustrate!"
+/>
+</Section>
+
+<Section>
+## Challenge 2: Build a Complete Story Prompt 📝
+
+Let's help Peromfu assemble a structured prompt: **[Character] + [Action] + [Setting]**.
+
+<DragDropPrompt
+  title="Assemble the Story Prompt"
+  instruction="Drag the fragments to build a complete instruction for the AI:"
+  fragments={[
+    { id: "1", text: "Whiskers the kitten", type: "subject" },
+    { id: "2", text: "runs happily", type: "action" },
+    { id: "3", text: "across the green lawn", type: "detail" }
+  ]}
+  correctOrder={["1", "2", "3"]}
+  targetPrompt="Whiskers the kitten runs happily across the green lawn"
+  explanation="Arranging [Subject] + [Action] + [Setting] gives AI all the necessary context to generate a vivid scene!"
+  successMessage="Awesome job! Peromfu and the AI now have the complete picture!"
+/>
+</Section>

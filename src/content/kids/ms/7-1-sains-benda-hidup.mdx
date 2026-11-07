@@ -1,0 +1,60 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Bumi (Planet Sains)**! 🌍 Hari ini dalam kelas Sains Tahun 1, cikgu minta kita senaraikan benda hidup di taman sekolah!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Peromfu cuba meminta bantuan AI tadi, tetapi AI memberikan senarai yang mengandungi batu dan bangku kayu! Mengapa AI tersilap? Kerana arahan Peromfu terlalu umum!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Doktor Prompt — Rawat Arahan Yang Lemah 🩺
+
+Peromfu menulis: *"Senaraikan benda yang ada di taman."* Akibatnya, AI memasukkan batu! Bantu Peromfu membetulkan arahan dengan menetapkan syarat khusus bagi **benda hidup**.
+
+<PromptDoctor
+  title="Baiki Prompt Peromfu!"
+  instruction="Pilih pembaikan terbaik untuk memastikan AI hanya menyenaraikan benda hidup:"
+  badPrompt="Senaraikan 3 benda yang ada di taman."
+  options={[
+    {
+      text: "Senaraikan 3 benda HIDUP di taman yang bernafas dan memerlukan air (contohnya: rama-rama, burung, pokok bunga).",
+      isCorrect: true,
+      feedback: "Syabas! Menjelaskan ciri-ciri saintifik (bernafas, perlukan air) membimbing AI mengelaskan benda hidup dengan tepat!"
+    },
+    {
+      text: "Senaraikan apa sahaja yang berwarna kelabu di taman.",
+      isCorrect: false,
+      feedback: "Warna kelabu bukan ciri sains untuk benda hidup; AI masih akan memilih batu kelabu!"
+    },
+    {
+      text: "Taman ini sangat besar dan cantik.",
+      isCorrect: false,
+      feedback: "Ini cuma ayat penyata, bukan arahan yang jelas untuk AI!"
+    }
+  ]}
+  explanation="Benda hidup mempunyai ciri khas: bernafas, memerlukan makanan dan air, serta membiak. Memberi syarat saintifik ini mengelakkan AI daripada keliru."
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Padankan Benda Hidup vs Bukan Hidup 🔍
+
+Bantu Peromfu menguji sama ada AI faham peraturan sains dengan memilih contoh yang betul:
+
+<ExampleMatcher
+  title="Pengelasan Saintifik"
+  instruction="Pilih kumpulan yang SEMUANYA merupakan benda hidup:"
+  targetDescription="Benda yang bernafas, membesar dan memerlukan makanan"
+  examples={[
+    { text: "Kucing, pokok rambutan, semut", isMatch: true },
+    { text: "Batu, basikal, bola sepak", isMatch: false },
+    { text: "Kereta, rama-rama, kerusi", isMatch: false }
+  ]}
+  explanation="Kucing, pokok dan semut semuanya bernafas, membesar dan membiak. Kereta dan batu tidak bernafas!"
+  successMessage="Cemerlang! Anda dan Peromfu kini pakar sains benda hidup!"
+/>
+</Section>

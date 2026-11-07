@@ -1,0 +1,48 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Bulan (Planet Bahasa Melayu)**! 🌕 Saya **Peromfu**, rakan sekelas anda di Tahun 1. Cikgu suruh kita buat latihan bina ayat tentang haiwan peliharaan!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Tahukah anda? Untuk mengarahkan AI melukis atau menceritakan aksi yang menarik, kita perlukan **Kata Kerja** yang tepat, bukan kata yang umum!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Pilih Kata Kerja Yang Hebat 🐾
+
+Peromfu mahu AI melukis seekor kucing comel yang lincah dan bertenaga di ruang tamu. Kata kerja apa yang paling sesuai?
+
+<WordPredictor
+  title="Bantu Peromfu Memilih Kata Kerja!"
+  instruction="Lengkapkan arahan prompt ini dengan kata kerja pergerakan yang tepat:"
+  sentence="Lukis seekor anak kucing comel sedang ____ menangkap bola benang merah."
+  options={["melompat", "meja", "ungu", "duduk diam"]}
+  correctAnswer="melompat"
+  explanation="'Melompat' ialah kata kerja pergerakan aktif yang menerangkan aksi kucing menangkap bola. Kata nama seperti 'meja' atau kata sifat seperti 'ungu' tidak menerangkan aksi!"
+  aiThinking="Kata kerja aktif 'melompat' membantu saya membayangkan pergerakan dinamik kucing di udara!"
+  successMessage="Tepat sekali! AI kini tahu aksi sebenar yang perlu dilukis!"
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Bina Prompt Penuh Cerita Kucing 📝
+
+Sekarang mari bantu Peromfu menyusun prompt lengkap mengikut susunan: **[Watak] + [Aksi / Kata Kerja] + [Tempat]**.
+
+<DragDropPrompt
+  title="Susun Arahan Lengkap untuk AI"
+  instruction="Susun blok perkataan untuk menghasilkan arahan yang lengkap:"
+  fragments={[
+    { id: "1", text: "Si Comel", type: "subject" },
+    { id: "2", text: "berlari riang", type: "action" },
+    { id: "3", text: "di atas rumput hijau", type: "detail" }
+  ]}
+  correctOrder={["1", "2", "3"]}
+  targetPrompt="Si Comel berlari riang di atas rumput hijau"
+  explanation="Susunan [Watak] + [Kata Kerja] + [Tempat] memberikan konteks lengkap kepada AI untuk menghasilkan cerita atau gambar yang hidup!"
+  successMessage="Hebat! Peromfu dan AI kini faham cerita lengkap Si Comel!"
+/>
+</Section>

@@ -1,0 +1,48 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Zuhrah (Planet English)**! 🟡 Dalam kelas English Tahun 1, kita belajar cara meminta barang dengan sopan dan menerangkan warna mainan kegemaran!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Apabila bercakap dengan AI dalam English, kita boleh memberikan **Peranan (Role)** kepada AI, contohnya sebagai pembantu kedai mainan yang peramah!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Pilih Kata Kunci Warna & Objek 🎨
+
+Bantu Peromfu melengkapkan permintaan sopan untuk meminta krayon berwarna biru di kedai alat tulis:
+
+<WordPredictor
+  title="Lengkapkan Permintaan Sopan"
+  instruction="Pilih perkataan yang paling sopan dan tepat untuk meminta alat tulis:"
+  sentence="Please show me the ____ crayons."
+  options={["blue", "loud", "yesterday", "sleep"]}
+  correctAnswer="blue"
+  explanation="'Blue' ialah kata sifat warna (adjective) yang menerangkan objek 'crayons'. Perkataan seperti 'yesterday' atau 'loud' tidak sesuai menerangkan warna krayon!"
+  aiThinking="Kata 'blue' memberitahu saya dengan tepat warna krayon yang dicari oleh Peromfu!"
+  successMessage="Bagus! Peromfu berjaya menyatakan warna dengan jelas!"
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Bina Prompt Peranan Pembantu Kedai 🧸
+
+Mari bina prompt lengkap: **[Peranan AI] + [Tindakan] + [Syarat Kesopanan]**.
+
+<DragDropPrompt
+  title="Susun Prompt Peranan & Kesopanan"
+  instruction="Susun blok perkataan dalam English untuk mengarahkan bot kedai mainan:"
+  fragments={[
+    { id: "1", text: "Act as a friendly shopkeeper,", type: "subject" },
+    { id: "2", text: "show me three green toy cars,", type: "action" },
+    { id: "3", text: "and speak politely in one short sentence.", type: "detail" }
+  ]}
+  correctOrder={["1", "2", "3"]}
+  targetPrompt="Act as a friendly shopkeeper, show me three green toy cars, and speak politely in one short sentence."
+  explanation="Memberi peranan (shopkeeper) dan had ayat (one short sentence) menjadikan lakonan perbualan AI sangat realistik dan mudah difahami murid Tahun 1!"
+  successMessage="Superb! AI kini memegang peranan pembantu kedai mainan yang sangat sopan!"
+/>
+</Section>

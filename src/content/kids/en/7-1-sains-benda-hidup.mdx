@@ -1,0 +1,60 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Welcome to **Earth (Science Planet)**! 🌍 Today in Year 1 Science, our teacher asked us to investigate living things in the school garden!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Peromfu tried asking an AI earlier, but the AI included a heavy rock and a wooden bench! Why did it make that mistake? Because Peromfu's prompt was too vague!
+</Panel>
+</Section>
+
+<Section>
+## Challenge 1: Prompt Doctor — Fix the Weak Prompt 🩺
+
+Peromfu wrote: *"List things in the garden."* Because of that, the AI picked a rock! Help Peromfu heal this prompt by adding clear scientific constraints for **living things**.
+
+<PromptDoctor
+  title="Fix Peromfu's Prompt!"
+  instruction="Choose the best improved prompt so AI lists only living organisms:"
+  badPrompt="List 3 things in the garden."
+  options={[
+    {
+      text: "List 3 LIVING things in the garden that breathe, grow, and need water (e.g., butterfly, bird, flowering plant).",
+      isCorrect: true,
+      feedback: "Brilliant! Specifying scientific characteristics (breathing, needing water) guides the AI to classify living things accurately!"
+    },
+    {
+      text: "List whatever is grey in the garden.",
+      isCorrect: false,
+      feedback: "Color is not a scientific condition for living things; the AI will still pick a grey rock!"
+    },
+    {
+      text: "The garden is very big and pretty.",
+      isCorrect: false,
+      feedback: "This is just an observation, not an actionable instruction for AI!"
+    }
+  ]}
+  explanation="Living things breathe, grow, need food and water, and reproduce. Giving these criteria prevents AI confusion."
+/>
+</Section>
+
+<Section>
+## Challenge 2: Match Living Things 🔍
+
+Help Peromfu test if the AI truly understands the classification rules:
+
+<ExampleMatcher
+  title="Scientific Classification"
+  instruction="Select the group where ALL items are living things:"
+  targetDescription="Things that breathe, grow, and need water & food"
+  examples={[
+    { text: "Cat, apple tree, ant", isMatch: true },
+    { text: "Rock, bicycle, soccer ball", isMatch: false },
+    { text: "Car, butterfly, wooden chair", isMatch: false }
+  ]}
+  explanation="Cats, trees, and ants all breathe and grow. Cars and rocks do not!"
+  successMessage="Excellent! You and Peromfu are now real living-thing science detectives!"
+/>
+</Section>

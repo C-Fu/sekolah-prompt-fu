@@ -1,0 +1,45 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Marikh (Planet Matematik)**! 🔴 Peromfu dan rakan-rakan sedang menyelesaikan tugasan operasi tambah asas dalam lingkungan 20!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Apabila kita meminta AI mengira, AI suka bercakap panjang lebar! Dalam matematik, kita perlukan **Kekangan Format** supaya jawapannya ringkas, tepat dan menunjukkan ayat matematik!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Kira Bintang Langkah Demi Langkah 🌟
+
+Ada **7 bintang kuning** dan **5 bintang merah** di langit Marikh. Mari latih AI mengira secara langkah demi langkah!
+
+<StepByStep
+  title="Kira Langkah Demi Langkah"
+  instruction="Susun langkah pengiraan matematik yang betul untuk AI ikuti:"
+  steps={[
+    { id: "1", text: "Kira bintang kuning: ada 7 bintang", order: 1 },
+    { id: "2", text: "Kira bintang merah: ada 5 bintang", order: 2 },
+    { id: "3", text: "Jumlahkan: 7 + 5 = 12 bintang", order: 3 }
+  ]}
+  explanation="Mengarahkan AI berfikir langkah demi langkah (Step-by-step reasoning) memastikan pengiraan matematik sentiasa tepat dan tidak tersilap!"
+  successMessage="Hebat! 7 ditambah 5 bersamaan 12 bintang!"
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Prompt vs Kesilapan — Tetapkan Format Jawapan 🎯
+
+Peromfu hanya mahu ayat matematik ringkas, contohnya `7 + 5 = 12`. Arahan manakah yang memberikan kekangan format paling tepat?
+
+<PromptVsMistake
+  title="Pilih Arahan dengan Kekangan Format"
+  instruction="Pilih arahan yang mengekang AI supaya memberikan format ayat matematik sahaja:"
+  promptA="Tolong kira 7 tambah 5 dan sembanglah dengan saya pasal bintang."
+  promptB="Berapakah 7 tambah 5? Berikan jawapan dalam bentuk ayat matematik sahaja (contoh: 7 + 5 = 12) tanpa sebarang ayat lain."
+  correct="B"
+  explanation="Prompt B menetapkan kekangan yang sangat jelas: 'dalam bentuk ayat matematik sahaja' serta memberikan contoh. Ini menjamin jawapan AI bersih dan kemas!"
+  successMessage="Tepat sekali! Menetapkan format jawapan menjadikan AI pembantu matematik yang cekap!"
+/>
+</Section>

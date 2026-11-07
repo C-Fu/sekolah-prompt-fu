@@ -1,0 +1,48 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Welcome to **Venus (English Language Planet)**! 🟡 In Year 1 English, we learn how to make polite requests and describe our favorite colorful toys!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+When talking to an AI, we can assign it a **Role / Persona**, such as a friendly shop assistant who helps us find what we need!
+</Panel>
+</Section>
+
+<Section>
+## Challenge 1: Choose the Color Adjective 🎨
+
+Help Peromfu complete a polite request for blue crayons at the classroom stationery counter:
+
+<WordPredictor
+  title="Complete the Polite Request"
+  instruction="Select the correct color word to describe the stationery:"
+  sentence="Please show me the ____ crayons."
+  options={["blue", "loud", "yesterday", "sleep"]}
+  correctAnswer="blue"
+  explanation="'Blue' is a descriptive color adjective for crayons. Words like 'yesterday' or 'loud' do not describe color!"
+  aiThinking="The word 'blue' clearly specifies the exact item Peromfu is looking for!"
+  successMessage="Great job! Peromfu described the item clearly and politely!"
+/>
+</Section>
+
+<Section>
+## Challenge 2: Build a Toy Shop Role-Play Prompt 🧸
+
+Let's build a complete prompt: **[AI Role] + [Action / Request] + [Politeness & Length Constraint]**.
+
+<DragDropPrompt
+  title="Assemble the Role-Play Prompt"
+  instruction="Drag the fragments in order to instruct the toy shop AI bot:"
+  fragments={[
+    { id: "1", text: "Act as a friendly shopkeeper,", type: "subject" },
+    { id: "2", text: "show me three green toy cars,", type: "action" },
+    { id: "3", text: "and speak politely in one short sentence.", type: "detail" }
+  ]}
+  correctOrder={["1", "2", "3"]}
+  targetPrompt="Act as a friendly shopkeeper, show me three green toy cars, and speak politely in one short sentence."
+  explanation="Setting a persona ('shopkeeper') and a length limit ('one short sentence') keeps the conversation friendly, focused, and easy for Year 1 learners!"
+  successMessage="Superb! The AI is now ready to role-play as a polite shopkeeper!"
+/>
+</Section>

@@ -1,0 +1,45 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Welcome to **Mars (Mathematics Planet)**! 🔴 Peromfu and friends are solving Year 1 addition math problems within 20!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+When we ask AI to do math, it often writes a whole essay! In math, we need **Format Constraints** so the answer is concise, accurate, and shows the exact math equation!
+</Panel>
+</Section>
+
+<Section>
+## Challenge 1: Count Stars Step by Step 🌟
+
+There are **7 golden stars** and **5 red stars** in the Martian sky. Let's guide the AI to count step-by-step!
+
+<StepByStep
+  title="Count Step by Step"
+  instruction="Order the calculation steps for the AI to follow:"
+  steps={[
+    { id: "1", text: "Count the yellow stars: there are 7 stars", order: 1 },
+    { id: "2", text: "Count the red stars: there are 5 stars", order: 2 },
+    { id: "3", text: "Add them together: 7 + 5 = 12 stars", order: 3 }
+  ]}
+  explanation="Directing an AI to break problems into sequential steps guarantees reliable math answers without skipping numbers!"
+  successMessage="Awesome! 7 plus 5 equals 12 stars!"
+/>
+</Section>
+
+<Section>
+## Challenge 2: Prompt vs Mistake — Constrain Output Format 🎯
+
+Peromfu only wants a clean math sentence, like `7 + 5 = 12`. Which prompt enforces strict format constraints?
+
+<PromptVsMistake
+  title="Choose the Formatted Prompt"
+  instruction="Pick the prompt that constrains AI to output only the math sentence:"
+  promptA="Please calculate 7 plus 5 and tell me a story about space."
+  promptB="What is 7 plus 5? Answer with only the mathematical equation (e.g. 7 + 5 = 12) without any extra conversational text."
+  correct="B"
+  explanation="Prompt B gives an unambiguous format constraint and provides an example. This guarantees the AI gives a clean output!"
+  successMessage="Spot on! Format constraints make AI a reliable math assistant!"
+/>
+</Section>

@@ -1,0 +1,57 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Welcome to **Mercury (Moral Education Planet)**! 🟣 In Year 1 Moral Education, we learn the core values of caring, respect, and helping friends in need!
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Sometimes our classmates run into mishaps in the classroom, like accidentally dropping all their colored pencils on the floor. How can we prompt an AI to suggest kind, respectful actions?
+</Panel>
+</Section>
+
+<Section>
+## Challenge 1: Prompt Doctor — Empathetic Advice 🩺
+
+Peromfu wants to ask AI: *"What should I do about a friend's dropped pencils?"*. Help Peromfu improve this prompt so the AI suggests helpful and polite peer actions.
+
+<PromptDoctor
+  title="Improve Peromfu's Prompt!"
+  instruction="Choose the prompt that best reflects the values of kindness and mutual assistance:"
+  badPrompt="Give me advice about dropped pencils."
+  options={[
+    {
+      text: "Act as a caring classmate. Suggest 2 immediate, polite ways to help a friend pick up their colored pencils that spilled across the classroom floor.",
+      isCorrect: true,
+      feedback: "Wonderful! Stating the value of empathy and politeness guides the AI to recommend compassionate actions!"
+    },
+    {
+      text: "Tell the classmate to pick them up alone.",
+      isCorrect: false,
+      feedback: "This is indifferent and contradicts the value of mutual support!"
+    },
+    {
+      text: "The pencils are red and yellow.",
+      isCorrect: false,
+      feedback: "This only describes colors; it doesn't offer help to a classmate in need!"
+    }
+  ]}
+  explanation="Moral education teaches empathy. Instructing the AI with caring intentions produces supportive, community-building responses."
+/>
+</Section>
+
+<Section>
+## Challenge 2: Prompt vs Mistake — Sincere Encouragement 🤝
+
+Which prompt guides the AI to generate a comforting, supportive phrase for a flustered friend?
+
+<PromptVsMistake
+  title="Select the Encouraging Tone"
+  instruction="Select the prompt that ensures a gentle, calming tone:"
+  promptA="Write something loud and rude in class."
+  promptB="Write one gentle sentence of encouragement to soothe a worried friend: 'Don't worry friend, let's pick them up together!'"
+  correct="B"
+  explanation="Prompt B explicitly specifies a comforting tone and shows teamwork."
+  successMessage="Awesome! You and Peromfu are exemplary, caring friends!"
+/>
+</Section>
