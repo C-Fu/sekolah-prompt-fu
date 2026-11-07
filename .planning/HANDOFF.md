@@ -1,4 +1,4 @@
-# HANDOFF — Prompts.chat Kids (Learn Prompting for Kids)
+# HANDOFF — Sekolah Prompt-Fu (Learn Prompting for Kids)
 
 **Verdict:** **PASS.** The standalone kids prompting game is static-first, self-contained, and GitHub Pages-ready. The certified gates reproduce cleanly — `npx tsc --noEmit` → 0, Vitest → 94/94, `npm run build` emits a static `out/` export, and `npm run verify` re-certifies all of it with one command. Two pre-existing, non-blocking advisories (WR-04, IN-03) are handed off, unfixed, to a future phase.
 
