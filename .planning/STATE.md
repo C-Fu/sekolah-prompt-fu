@@ -1,32 +1,34 @@
 ---
 gsd_state_version: "1.0"
-current_plan: Not started
-status: complete
+status: Awaiting next milestone
 stopped_at: Phase 04 complete — all phases complete
-last_updated: "2026-11-06T10:48:04.644Z"
-state_head: dfe97fcdcc4f65e86b5e7fc35c40cfdd289f6908
+last_updated: "2026-11-07T02:49:26.597Z"
+last_activity: 2026-11-07
+last_activity_desc: Milestone v1.0 completed and archived
+state_head: f6ca41c776d16f9dd25eacc6b3c64807b99106ce
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 4
   total_plans: 27
   completed_plans: 27
-  percent: 100
-current_phase: 4
-current_phase_name: Verification, Testing & Polish
+  percent: 80
+current_phase: "04.1"
+current_phase_name: "Address tech debt: stale kids import-closure guard + wire ms vocabulary guard into CI"
 ---
 
 # Project State
 
 ## Current Position
 
-Current Plan: Not started
-Total Plans in Phase: 3
-- **Current Phase:** Phase 4 (Verification, Testing & Polish)
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-11-07 — Milestone v1.0 completed and archived
 
 ## Status
-- **Current Phase:** Phase 4 (Verification, Testing & Polish)
+- **Current Phase:** Phase 04.1 (Address tech debt: stale kids import-closure guard + wire ms vocabulary guard into CI)
 - **Status:** Phase 4 complete & verified — all 4 phases done. 04-01 delivered the NFR-2 certification source of truth (`scripts/verify-project.js` + `npm run verify` + `ci.yml` hardened with tsc + verify steps; `deploy.yml` untouched); 04-02 delivered `.planning/HANDOFF.md` and certified NFR-2 satisfied; 04-03 closed the CI gap (CR-01/WR-01/WR-02) with `--gates-only` mode, a finite gate timeout and an aggregated absent-`out/` verdict. `04-VERIFICATION.md` = passed (12/12 must-haves); `04-UAT.md` = complete (2/2 passed); `04-SECURITY.md` threats_open 0.
-- **Next Command:** none — milestone fully complete. See `/gsd-complete-milestone` to archive.
+- **Next Command:** `/gsd-plan-phase 04.1` — urgent tech-debt insertion (Phase 04.1). Milestone 04 remains complete.
 
 ## Key Decisions
 - Pure client-side static site architecture for GitHub Pages deployment.
@@ -99,3 +101,25 @@ Total Plans in Phase: 3
 | Date | Slug | Description | Commit |
 |------|------|-------------|--------|
 | 2026-11-06 | rename-promi-peromfu | Character rename Promi→Peromfu app-wide (18 locales, slug `1-1-meet-peromfu`, i18n keys, component API, SEO, svgs, localStorage slug migration) + ms 1-1 "dahulu" duplication fix | 304aa078 |
+
+## Accumulated Context
+
+### Roadmap Evolution
+
+- Phase 04.1 inserted after Phase 04: Address tech debt: stale kids import-closure guard + wire ms vocabulary guard into CI (URGENT)
+
+## Deferred Items
+
+Items acknowledged and deferred at milestone close, most recent first:
+
+| Category | Item | Status | Deferred At | Milestone |
+|----------|------|--------|-------------|-----------|
+| debug_sessions | ms-1-1-wordpredictor-english | diagnosed | 2026-11-07 | v1.0 |
+| debug_sessions | ms-rare-vocabulary-bodil | diagnosed | 2026-11-07 | v1.0 |
+| deferred_items | 01/deferred-items.md: From 01-08 (component-family pruning) — broken import left in dead non-kids code | acknowledged | 2026-11-07 | v1.0 |
+| deferred_items | 01/deferred-items.md: From 01-09 (shared dependency pruning) — dangling `@/data/type-definitions` import left in dead non-kids code | acknowledged | 2026-11-07 | v1.0 |
+| deferred_items | 01/deferred-items.md: From 01-12 (non-kids `src/lib` domain-tree pruning) — dangling `@/lib/bots` import left in dead non-kids helper | acknowledged | 2026-11-07 | v1.0 |
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

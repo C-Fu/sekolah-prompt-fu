@@ -32,21 +32,33 @@ In addition, full support for **Bahasa Melayu (`ms`)** will be added alongside e
 ## Requirements
 
 ### Validated
-- ✓ 19 gamified interactive prompting levels with interactive widgets (`src/content/kids/en/*.mdx`) — Phase 3 (19 registered slugs; the "17" figure in the vision prose is stale)
-- ✓ Client-side progress tracking via `localStorage` (`src/lib/kids/progress.ts`)
-- ✓ Audio effects and background music engine (`src/components/kids/layout/background-music.tsx`)
-- ✓ Pixel-art themed game UI and responsive map
-- ✓ Bahasa Melayu (`ms`) locale fully selectable, with a complete 212-key UI message bundle (`messages/ms.json`) and all 19 interactive MDX levels localized under `src/content/kids/ms/`; no silent English fallback — Phase 3
-- ✓ Kids game promoted to the root experience (`/`, `/map`, `/level/[slug]`) with a static `out/` export and a GitHub Pages deploy workflow — Phase 2
-- ✓ NFR-2 certified end-to-end via a committed, rerunnable verification script (`scripts/verify-project.js` / `npm run verify`) and a CI job enforcing the same gate set — Phase 4
-- ✓ Onboarding handoff (`.planning/HANDOFF.md`) documenting architecture, gate commands, deploy process, and known non-blocking advisories — Phase 4
+- ✓ Repository purged to a kids-only surface: Prisma/NextAuth/non-kids routes and component families removed, npm lockfile cut from 1,492 → 826 packages, community prompt datasets deleted — v1.0
+- ✓ 19 gamified interactive prompting levels with interactive widgets (`src/content/kids/en/*.mdx`); client-side progress (`localStorage`), audio/background-music engine, and pixel-art UI retained — v1.0 (19 registered slugs; the "17" figure in the vision prose is stale)
+- ✓ Kids game promoted to the root experience (`/`, `/map`, `/level/[slug]`) as a 100% static `out/` export with a GitHub Pages deploy workflow and locally-bundled music — v1.0
+- ✓ Bahasa Melayu (`ms`) locale fully selectable, with a complete 212-key UI message bundle (`messages/ms.json`) and all 19 interactive MDX levels localized under `src/content/kids/ms/`; no silent English fallback — v1.0
+- ✓ NFR-2 certified end-to-end via a committed, rerunnable verification script (`scripts/verify-project.js` / `npm run verify`) and a CI job enforcing the same gate set (`--gates-only`, bounded gate timeout) — v1.0
+- ✓ Onboarding handoff (`.planning/HANDOFF.md`) documenting architecture, gate commands, deploy process, and known non-blocking advisories — v1.0
+- ✓ Milestone audit: 6/6 requirements satisfied, 4/4 phases verified, 6/6 cross-phase integrations wired, 5/5 E2E flows complete — no critical blockers (`tech_debt` only) — v1.0
 
 ### Active
-- (none — all four roadmap phases complete)
+- (none yet — next milestone requirements defined via `/gsd-new-milestone`)
 
 ### Out of Scope
-- Backend database / server-side user accounts (progress will be browser-local).
+- Backend database / server-side user accounts (progress is browser-local).
 - Live LLM calls via secret server keys (game relies on pre-programmed interactive feedback and simulations).
 
+## Context
+
+Shipped **v1.0** on 2026-11-07 (Phases 1-4; 27 plans, 51 tasks). Stack: Next.js (App Router, `output: 'export'`), TypeScript, next-intl (en + ms), Vitest, GitHub Actions → GitHub Pages. Test suite is 119/119; `npm run verify` re-certifies tsc + Vitest + `out/` inspection.
+
+**Known technical debt (non-blocking, carried into v1.1):**
+- `scripts/check-kids-import-closure.js` entry-point list still targets removed `src/app/kids/*` paths → exits 2 after the Phase-2 root promotion (WARNING, dormant).
+- `scripts/check-ms-vocabulary.js` is committed and self-failing but not wired into any npm script or CI workflow (WR-02).
+- Locale-list drift: `settings-modal.tsx` hard-codes a third locale list that drifts from `supportedLocales` (`he` absent); duplicated locale literal arrays across `prompts.config.ts` and `src/lib/i18n/config.ts` (WR-04/IN-03).
+- Doc/test-count drift: `HANDOFF.md` still cites 94/94 tests and an unflagged `npm run verify` (current: 119/119, `--gates-only` in CI).
+- Residual non-kids media in `public/`; vestigial empty `public/sounds/`; stale `prisma/**` ignore in `eslint.config.mjs`; unused `next/headers` test stub in `vitest.setup.ts`.
+
+See `.planning/v1-MILESTONE-AUDIT.md` for the full aggregated list (~15 items, 1 WARNING).
+
 ---
-*Last updated: 2026-11-06 after Phase 4*
+*Last updated: 2026-11-07 after v1.0 milestone*
