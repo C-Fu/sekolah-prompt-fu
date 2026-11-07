@@ -33,9 +33,9 @@ These are the **certified gates**. Run them before any change lands. The claim s
 | Unit tests | `npm test` | Vitest suite (`vitest run`) — currently **124/124** passing. |
 | Closure check | `npm run check:closure` | Proves all repo-local module imports in the kids app resolve. |
 | Vocabulary check | `npm run check:vocab` | Validates Bahasa Melayu terms and rules in all level MDX files. |
-| Static build | `npm run build` | Next.js static export → emits the `out/` tree (`/`, `/map`, 19 level routes, bundled media). |
+| Static build | `npm run build` | Next.js static export → emits the `out/` tree (`/`, `/map`, 24 level routes, bundled media). |
 | CI gates | `npm run verify -- --gates-only` | Runs tsc + vitest without requiring `out/` (used in CI). |
-| Re-certify | `npm run verify` | Runs `npx tsc --noEmit` + `npm test` **and** inspects the built `out/` tree, then prints a PASS/FAIL verdict (`✅`/`❌`, exit 0/1). |
+| Re-certify | `npm run verify` | Runs `npx tsc --noEmit` + `npm test` **and** inspects the built `out/` tree (24 level routes), then prints a PASS/FAIL verdict (`✅`/`❌`, exit 0/1). |
 
 ### Ordering note (important)
 

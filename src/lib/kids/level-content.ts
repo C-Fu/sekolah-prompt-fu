@@ -126,6 +126,11 @@ const L_en__5_1_perfect_prompt = () => import("@/content/kids/en/5-1-perfect-pro
 const L_en__5_2_fix_it_up = () => import("@/content/kids/en/5-2-fix-it-up.mdx");
 const L_en__5_3_prompt_remix = () => import("@/content/kids/en/5-3-prompt-remix.mdx");
 const L_en__5_4_graduation_day = () => import("@/content/kids/en/5-4-graduation-day.mdx");
+const L_en__6_1_bm_kucing_peromfu = () => import("@/content/kids/en/6-1-bm-kucing-peromfu.mdx");
+const L_en__7_1_sains_benda_hidup = () => import("@/content/kids/en/7-1-sains-benda-hidup.mdx");
+const L_en__8_1_matematik_tambah_bintang = () => import("@/content/kids/en/8-1-matematik-tambah-bintang.mdx");
+const L_en__9_1_english_colorful_toys = () => import("@/content/kids/en/9-1-english-colorful-toys.mdx");
+const L_en__10_1_moral_sahabat_prihatin = () => import("@/content/kids/en/10-1-moral-sahabat-prihatin.mdx");
 const L_es__1_1_meet_peromfu = () => import("@/content/kids/es/1-1-meet-peromfu.mdx");
 const L_es__1_2_first_words = () => import("@/content/kids/es/1-2-first-words.mdx");
 const L_es__1_3_being_clear = () => import("@/content/kids/es/1-3-being-clear.mdx");
@@ -354,6 +359,11 @@ const L_ms__5_1_perfect_prompt = () => import("@/content/kids/ms/5-1-perfect-pro
 const L_ms__5_2_fix_it_up = () => import("@/content/kids/ms/5-2-fix-it-up.mdx");
 const L_ms__5_3_prompt_remix = () => import("@/content/kids/ms/5-3-prompt-remix.mdx");
 const L_ms__5_4_graduation_day = () => import("@/content/kids/ms/5-4-graduation-day.mdx");
+const L_ms__6_1_bm_kucing_peromfu = () => import("@/content/kids/ms/6-1-bm-kucing-peromfu.mdx");
+const L_ms__7_1_sains_benda_hidup = () => import("@/content/kids/ms/7-1-sains-benda-hidup.mdx");
+const L_ms__8_1_matematik_tambah_bintang = () => import("@/content/kids/ms/8-1-matematik-tambah-bintang.mdx");
+const L_ms__9_1_english_colorful_toys = () => import("@/content/kids/ms/9-1-english-colorful-toys.mdx");
+const L_ms__10_1_moral_sahabat_prihatin = () => import("@/content/kids/ms/10-1-moral-sahabat-prihatin.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -460,6 +470,11 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-2-fix-it-up": L_en__5_2_fix_it_up,
     "5-3-prompt-remix": L_en__5_3_prompt_remix,
     "5-4-graduation-day": L_en__5_4_graduation_day,
+    "6-1-bm-kucing-peromfu": L_en__6_1_bm_kucing_peromfu,
+    "7-1-sains-benda-hidup": L_en__7_1_sains_benda_hidup,
+    "8-1-matematik-tambah-bintang": L_en__8_1_matematik_tambah_bintang,
+    "9-1-english-colorful-toys": L_en__9_1_english_colorful_toys,
+    "10-1-moral-sahabat-prihatin": L_en__10_1_moral_sahabat_prihatin,
   },
   es: {
     "1-1-meet-peromfu": L_es__1_1_meet_peromfu,
@@ -712,6 +727,11 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "5-2-fix-it-up": L_ms__5_2_fix_it_up,
     "5-3-prompt-remix": L_ms__5_3_prompt_remix,
     "5-4-graduation-day": L_ms__5_4_graduation_day,
+    "6-1-bm-kucing-peromfu": L_ms__6_1_bm_kucing_peromfu,
+    "7-1-sains-benda-hidup": L_ms__7_1_sains_benda_hidup,
+    "8-1-matematik-tambah-bintang": L_ms__8_1_matematik_tambah_bintang,
+    "9-1-english-colorful-toys": L_ms__9_1_english_colorful_toys,
+    "10-1-moral-sahabat-prihatin": L_ms__10_1_moral_sahabat_prihatin,
   },
 };
 
