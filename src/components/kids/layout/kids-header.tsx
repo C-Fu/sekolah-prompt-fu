@@ -8,6 +8,7 @@ import { getTotalLevels, getLevelBySlug } from "@/lib/kids/levels";
 import { PixelStar, PixelRobot } from "@/components/kids/elements/pixel-art";
 import { MusicButton } from "./background-music";
 import { SettingsButton } from "./settings-modal";
+import { LanguageToggle } from "./language-toggle";
 import { useLevelSlug } from "@/components/kids/providers/level-context";
 
 export function KidsHeader() {
@@ -76,6 +77,7 @@ export function KidsHeader() {
 
           {/* Nav buttons - desktop */}
           <div className="hidden sm:flex items-center gap-2">
+            <LanguageToggle />
             <MusicButton />
             <SettingsButton />
             <Link 
@@ -119,6 +121,7 @@ export function KidsHeader() {
                   </div>
                   
                   <div className="flex items-center justify-center gap-2">
+                    <LanguageToggle />
                     <MusicButton />
                     <SettingsButton />
                   </div>
