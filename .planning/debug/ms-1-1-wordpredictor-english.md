@@ -3,6 +3,10 @@ status: diagnosed
 trigger: "re-localize both lines to Malay"
 created: 2026-11-05T14:00:00Z
 updated: 2026-11-05T14:10:00Z
+audit_acknowledged:
+  milestone: v1.0
+  at: 2026-11-07
+  status: diagnosed
 ---
 
 ## Current Focus

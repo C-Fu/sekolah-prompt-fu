@@ -3,6 +3,10 @@ status: diagnosed
 trigger: "replace bodil with lawak. any rarely used words like bodil should be replaced with a more common variant"
 created: 2026-11-05T00:00:00Z
 updated: 2026-11-05T14:30:00Z
+audit_acknowledged:
+  milestone: v1.0
+  at: 2026-11-07
+  status: diagnosed
 ---
 
 ## Current Focus

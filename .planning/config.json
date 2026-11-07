@@ -4,7 +4,7 @@
   "parallelization": true,
   "subagent_timeout": 300000,
   "workflow": {
-    "_auto_chain_active": true
+    "_auto_chain_active": false
   },
   "git": {
     "allow_default_branch_commits": true
