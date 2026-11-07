@@ -1,4 +1,5 @@
 import { defineConfig } from "@/lib/config";
+import { supportedLocales, defaultLocale } from "@/lib/i18n/config";
 
 /**
  * Kids-only application configuration.
@@ -33,9 +34,9 @@ export default defineConfig({
     },
   },
 
-  // Internationalization - keep in sync with src/lib/i18n/config.ts.
+  // Internationalization - single source of truth from src/lib/i18n/config.ts.
   i18n: {
-    locales: ["en", "tr", "es", "zh", "ja", "ar", "pt", "fr", "it", "de", "nl", "ko", "ru", "he", "el", "fa", "az", "ms"],
-    defaultLocale: "en",
+    locales: supportedLocales,
+    defaultLocale: defaultLocale,
   },
 });

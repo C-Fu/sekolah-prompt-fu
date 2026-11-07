@@ -35,22 +35,6 @@ vi.mock("next/navigation", () => ({
   notFound: vi.fn(),
 }));
 
-// Mock next/headers
-vi.mock("next/headers", () => {
-  const getCookieMock = vi.fn().mockReturnValue(null);
-  const setCookieMock = vi.fn();
-  const deleteCookieMock = vi.fn();
-
-  return {
-    cookies: () => ({
-      get: getCookieMock,
-      set: setCookieMock,
-      delete: deleteCookieMock,
-    }),
-    headers: () => new Headers(),
-  };
-});
-
 // Mock next-intl
 vi.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key,

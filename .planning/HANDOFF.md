@@ -1,6 +1,6 @@
 # HANDOFF — Sekolah Prompt-Fu (Learn Prompting for Kids)
 
-**Verdict:** **PASS.** The standalone kids prompting game is static-first, self-contained, and GitHub Pages-ready. The certified gates reproduce cleanly — `npx tsc --noEmit` → 0, Vitest → 94/94, `npm run build` emits a static `out/` export, and `npm run verify` re-certifies all of it with one command. Two pre-existing, non-blocking advisories (WR-04, IN-03) are handed off, unfixed, to a future phase.
+**Verdict:** **PASS.** The standalone kids prompting game is static-first, self-contained, and GitHub Pages-ready. The certified gates reproduce cleanly — `npx tsc --noEmit` → 0, Vitest → 124/124, `npm run build` emits a static `out/` export, and `npm run verify` re-certifies all of it with one command. Two pre-existing, non-blocking advisories (WR-04, IN-03) have been addressed in v1.1.
 
 This is the single onboarding/handoff document for the next owner (human or agent). It covers, in order: the **architecture recap**, the **gate commands**, the **GitHub Pages deploy process**, and the **known non-blocking advisories**.
 
@@ -30,8 +30,11 @@ These are the **certified gates**. Run them before any change lands. The claim s
 | Gate | Command | What it proves |
 |------|---------|----------------|
 | Type check | `npx tsc --noEmit` | TypeScript types are sound (exit 0). |
-| Unit tests | `npm test` | Vitest suite (`vitest run`) — currently **94/94** passing. |
+| Unit tests | `npm test` | Vitest suite (`vitest run`) — currently **124/124** passing. |
+| Closure check | `npm run check:closure` | Proves all repo-local module imports in the kids app resolve. |
+| Vocabulary check | `npm run check:vocab` | Validates Bahasa Melayu terms and rules in all level MDX files. |
 | Static build | `npm run build` | Next.js static export → emits the `out/` tree (`/`, `/map`, 19 level routes, bundled media). |
+| CI gates | `npm run verify -- --gates-only` | Runs tsc + vitest without requiring `out/` (used in CI). |
 | Re-certify | `npm run verify` | Runs `npx tsc --noEmit` + `npm test` **and** inspects the built `out/` tree, then prints a PASS/FAIL verdict (`✅`/`❌`, exit 0/1). |
 
 ### Ordering note (important)

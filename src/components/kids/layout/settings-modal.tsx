@@ -7,28 +7,11 @@ import { cn } from "@/lib/utils";
 import { clearAllProgress, getTotalStars, getCompletedLevelsCount } from "@/lib/kids/progress";
 import { useLocalePreference } from "@/components/providers";
 import { analyticsKids } from "@/lib/analytics";
+import { LOCALE_OPTIONS } from "@/lib/i18n/config";
 import { Settings, X, Globe, Trash2, Check, Volume2 } from "lucide-react";
 import { MusicVolumeSlider } from "./background-music";
 
-const SUPPORTED_LOCALES = [
-  { code: "en", label: "English", flag: "🇺🇸" },
-  { code: "ms", label: "Bahasa Melayu", flag: "🇲🇾" },
-  { code: "zh", label: "中文", flag: "🇨🇳" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "pt", label: "Português", flag: "🇧🇷" },
-  { code: "fr", label: "Français", flag: "🇫🇷" },
-  { code: "de", label: "Deutsch", flag: "🇩🇪" },
-  { code: "nl", label: "Dutch", flag: "🇳🇱" },
-  { code: "it", label: "Italiano", flag: "🇮🇹" },
-  { code: "ja", label: "日本語", flag: "🇯🇵" },
-  { code: "tr", label: "Türkçe", flag: "🇹🇷" },
-  { code: "az", label: "Azərbaycan", flag: "🇦🇿" },
-  { code: "ko", label: "한국어", flag: "🇰🇷" },
-  { code: "ar", label: "العربية", flag: "🇸🇦" },
-  { code: "fa", label: "فارسی", flag: "🇮🇷" },
-  { code: "ru", label: "Русский", flag: "🇷🇺" },
-  { code: "el", label: "Ελληνικά", flag: "🇬🇷" },
-];
+const SUPPORTED_LOCALES = LOCALE_OPTIONS;
 
 export function SettingsButton() {
   const [isOpen, setIsOpen] = useState(false);
