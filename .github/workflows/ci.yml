@@ -31,8 +31,11 @@ jobs:
       - name: Run linter
         run: npm run lint
 
+      - name: Check kids import closure
+        run: npm run check:closure
+
       - name: Check `ms` vocabulary guard
-        run: npm run lint:ms
+        run: npm run check:vocab
 
       - name: Run verification script
         run: npm run verify -- --gates-only

@@ -71,13 +71,12 @@ const KIDS_EN_CONTENT_DIR = path.join(ROOT, "src", "content", "kids", "en");
 const ENTRY_PATHS = [
   // Retained app route/layout/error files that the kids game renders through.
   "src/app/layout.tsx",
+  "src/app/page.tsx",
   "src/app/error.tsx",
   "src/app/global-error.tsx",
   "src/app/not-found.tsx",
-  "src/app/kids/layout.tsx",
-  "src/app/kids/page.tsx",
-  "src/app/kids/map/page.tsx",
-  "src/app/kids/level/[slug]/page.tsx",
+  "src/app/map/page.tsx",
+  "src/app/level/[slug]/page.tsx",
   // Kids components themselves.
   "src/components/kids",
   // Shared provider shell retained for the kids game.
