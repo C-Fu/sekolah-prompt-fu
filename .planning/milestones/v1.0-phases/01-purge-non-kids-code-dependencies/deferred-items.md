@@ -17,6 +17,7 @@ Out-of-scope discoveries logged during plan execution (not fixed, per executor s
   - **Action:** leave as-is in 01-08 (would expand scope beyond the declared `<files>`);
     resolver in 01-06/01-12 should delete the widget plugin subtree, which removes the
     dangling import.
+  status: acknowledged
 
 ## From 01-09 (shared dependency pruning)
 
@@ -60,6 +61,7 @@ Out-of-scope discoveries logged during plan execution (not fixed, per executor s
     (`masonry` et al.) were likewise referenced only from stale legacy tests / already-deleted
     non-kids families.
   - **Action:** leave as-is; 01-13 retires the stale tests.
+  status: acknowledged
 
 ## From 01-12 (non-kids `src/lib` domain-tree pruning)
 
@@ -93,3 +95,4 @@ Out-of-scope discoveries logged during plan execution (not fixed, per executor s
   `trending.ts`, `urls.ts`, `variable-detection.ts`, `works-best-with.ts`. `slug.ts`'s only live
   importer is `scripts/convert-pairings-to-teams.ts`; `seo.ts` is now kids-only (preserve).
   - **Action:** recorded for 01-13's inventory; nothing modified here.
+  status: acknowledged
