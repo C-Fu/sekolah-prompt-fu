@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Geological Cartography</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #030712; /* Deep space black/blue */
+            font-family: 'Inter', sans-serif;
+            color: #f8fafc;
+            user-select: none;
+        }
+
+        /* Glassmorphism UI */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+
+        /* Region Button Transitions */
+        .region-btn {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .region-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid rgba(255, 255, 255, 0.5);
+        }
+        .region-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid #38bdf8; /* Cyan accent */
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+        
+        .color-swatch {
+            width: 12px; height: 12px; border-radius: 50%;
+            display: inline-block; margin-right: 12px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="flex h-screen w-screen overflow-hidden text-sm">
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container" class="absolute inset-0 z-0"></div>
+
+    <!-- UI Overlay: Glass Sidebar -->
+    <div class="absolute left-0 top-0 bottom-0 w-full sm:w-80 p-4 sm:p-6 z-10 flex flex-col pointer-events-none">
+        
+        <div class="glass-panel rounded-2xl flex flex-col h-full pointer-events-auto">
+            
+            <!-- Header -->
+            <div class="p-6 border-b border-white/10">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h1 class="text-xl font-bold tracking-wide text-white">LUNAR ARCHIVE</h1>
+                </div>
+                <p class="text-xs text-slate-400 font-light leading-relaxed">
+                    GEOLOGICAL TOPOGRAPHY MAP<br>
+                    SELECT A REGION TO INITIALIZE ORBITAL ALIGNMENT.
+                </p>
+            </div>
+
+            <!-- Regions List -->
+            <div id="btn-container" class="flex-1 overflow-y-auto p-4 space-y-1">
+                <!-- Buttons injected by JS -->
+            </div>
+
+            <!-- Footer Info -->
+            <div class="p-4 border-t border-white/10 text-xs text-slate-500 font-light flex justify-between items-center bg-black/20 rounded-b-2xl">
+                <span>NASA/JPL DATA RELAY</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ONLINE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Overlay -->
+    <div class="absolute bottom-6 right-6 z-10 pointer-events-none hidden sm:block">
+        <div class="glass-panel px-4 py-2 rounded-full text-xs text-slate-400 flex items-center gap-3 shadow-lg">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+            Click and drag to rotate. Scroll to zoom.
+        </div>
+    </div>
+
+    <script>
+        // --- DATA DEFINITION ---
+        const lunarRegions = [
+            {
+                id: "OP-01",
+                name: "Oceanus Procellarum",
+                color: "#475569", // slate blue
+                colorName: "Slate Blue",
+                lat: 10,
+                lon: -50,
+                size: 0.15, // relative size for procedural gen
+                desc: "The largest single feature on the Moon. A vast volcanic plain on the western edge."
+            },
+            {
+                id: "IM-02",
+                name: "Imbrium Basin",
+                color: "#06b6d4", // cyan
+                colorName: "Cyan",
+                lat: 35,
+                lon: -15,
+                size: 0.08,
+                desc: "Massive northern circular impact basin. Rich in basaltic lava flows."
+            },
+            {
+                id: "EM-03",
+                name: "Eastern Maria",
+                color: "#14b8a6", // teal
+                colorName: "Teal",
+                lat: 10,
+                lon: 30,
+                size: 0.12,
+                desc: "Network of dark plains including Tranquillitatis and Serenitatis."
+            },
+            {
+                id: "SH-04",
+                name: "Southern Highlands",
+                color: "#d1d5db", // light gray
+                colorName: "Light Gray",
+                lat: -40,
+                lon: 0,
+                size: 0.18,
+                desc: "Rugged, heavily cratered ancient terrain with ancient visible crust."
+            },
+            {
+                id: "NH-05",
+                name: "Northern Highlands",
+                color: "#9ca3af", // silver
+                colorName: "Silver",
+                lat: 60,
+                lon: 0,
+                size: 0.1,
+                desc: "Band of ancient, battered crust isolating northern mare regions."
+            },
+            {
+                id: "FH-06",
+                name: "Far-Side Highlands",
+                color: "#334155", // dark slate
+                colorName: "Dark Slate",
+                lat: 0,
+                lon: 180,
+                size: 0.25,
+                desc: "Massive expanse of overlapping craters. Devoid of large mare."
+            },
+            {
+                id: "SP-07",
+                name: "South Pole-Aitken",
+                color: "#6b21a8", // deep purple
+                colorName: "Deep Purple",
+                lat: -50,
+                lon: 180,
+                size: 0.14,
+                desc: "One of the largest, deepest impact craters in the solar system."
+            }
+        ];
+
+        // --- PROCEDURAL TEXTURE GENERATION ---
+        function generateProceduralTextures() {
+            const width = 2048;
+            const height = 1024;
+            
+            // Color Map Canvas
+            const colorCanvas = document.createElement('canvas');
+            colorCanvas.width = width;
+            colorCanvas.height = height;
+            const ctx = colorCanvas.getContext('2d', { alpha: false });
+
+            // Bump Map Canvas
+            const bumpCanvas = document.createElement('canvas');
+            bumpCanvas.width = width;
+            bumpCanvas.height = height;
+            const bCtx = bumpCanvas.getContext('2d', { alpha: false });
+
+            // 1. Base Backgrounds
+            ctx.fillStyle = '#1e293b'; // Base dark crust color
+            ctx.fillRect(0, 0, width, height);
+
+            // Generate noise for bump map background
+            const imgData = bCtx.createImageData(width, height);
+            for(let i=0; i<imgData.data.length; i+=4) {
+                // Mix of fine and coarse noise
+                const noise = (Math.random() * 0.4 + 0.3) * 255; 
+                imgData.data[i] = noise;     // R
+                imgData.data[i+1] = noise;   // G
+                imgData.data[i+2] = noise;   // B
+                imgData.data[i+3] = 255;     // A
+            }
+            bCtx.putImageData(imgData, 0, 0);
+
+            // Apply a slight blur/softness to bump map using canvas filter
+            bCtx.fillStyle = 'rgba(128,128,128,0.2)';
+            bCtx.fillRect(0,0,width,height);
+
+            // 2. Draw Regions (Organic Blobs)
+            lunarRegions.forEach((region, i) => {
+                // Map Lat/Lon to Canvas X/Y (Equirectangular Projection)
+                const cx = ((region.lon + 180) / 360) * width;
+                const cy = ((90 - region.lat) / 180) * height;
+                
+                // Adjust radius based on latitude to counteract polar distortion slightly
+                const distortionFactor = Math.cos(region.lat * Math.PI / 180);
+                const baseRadiusX = region.size * width * 0.6;
+                const baseRadiusY = region.size * width * 0.6 * distortionFactor;
+
+                // Function to draw an organic blob
+                const drawBlob = (context, isBump) => {
+                    context.beginPath();
+                    const segments = 40;
+                    for(let a = 0; a <= Math.PI * 2.1; a += (Math.PI*2)/segments) {
+                        // Procedural noise for blob edges based on region index and angle
+                        const noise = Math.sin(a * 6 + i) * 0.15 + Math.cos(a * 3 - i) * 0.1;
+                        const rx = baseRadiusX * (1 + noise);
+                        const ry = baseRadiusY * (1 + noise);
+                        
+                        const px = cx + Math.cos(a) * rx;
+                        const py = cy + Math.sin(a) * ry;
+                        
+                        if (a === 0) context.moveTo(px, py);
+                        else context.lineTo(px, py);
+                    }
+                    context.closePath();
+                    context.fill();
+                    
+                    // Wrap-around logic for features crossing the -180/180 longitude line
+                    if (cx - baseRadiusX < 0 || cx + baseRadiusX > width) {
+                        const offsetX = cx < width/2 ? width : -width;
+                        context.translate(offsetX, 0);
+                        context.fill();
+                        context.translate(-offsetX, 0);
+                    }
+                };
+
+                // Draw Color
+                ctx.fillStyle = region.color;
+                // Add soft glow/blend
+                ctx.shadowColor = region.color;
+                ctx.shadowBlur = 40;
+                drawBlob(ctx, false);
+                ctx.shadowBlur = 0; // reset
+
+                // Draw Bump (make regions slightly elevated/different texture)
+                bCtx.fillStyle = `rgb(${150 + i*15}, ${150 + i*15}, ${150 + i*15})`; 
+                bCtx.shadowColor = 'rgba(255,255,255,0.5)';
+                bCtx.shadowBlur = 20;
+                drawBlob(bCtx, true);
+                bCtx.shadowBlur = 0;
+            });
+
+            // Add craters to bump map
+            for(let i=0; i<300; i++) {
+                const cx = Math.random() * width;
+                const cy = Math.random() * height;
+                const r = Math.random() * 15 + 2;
+                
+                bCtx.beginPath();
+                bCtx.arc(cx, cy, r, 0, Math.PI*2);
+                const gradient = bCtx.createRadialGradient(cx, cy, r*0.2, cx, cy, r);
+                gradient.addColorStop(0, 'rgba(50,50,50,0.8)'); // Deep center
+                gradient.addColorStop(0.8, 'rgba(200,200,200,0.5)'); // Rim
+                gradient.addColorStop(1, 'rgba(128,128,128,0)'); // Fade
+                bCtx.fillStyle = gradient;
+                bCtx.fill();
+            }
+
+            const colorTex = new THREE.CanvasTexture(colorCanvas);
+            const bumpTex = new THREE.CanvasTexture(bumpCanvas);
+            
+            // Texture wrapping settings
+            colorTex.wrapS = THREE.RepeatWrapping;
+            bumpTex.wrapS = THREE.RepeatWrapping;
+
+            return { colorMap: colorTex, bumpMap: bumpTex };
+        }
+
+        // --- THREE.JS SETUP ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x030712);
+        
+        // Add subtle space fog
+        scene.fog = new THREE.FogExp2(0x030712, 0.02);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 20);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // OrbitControls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.enablePan = false;
+        controls.minDistance = 8;
+        controls.maxDistance = 40;
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.05); // Very dark ambient
+        scene.add(ambientLight);
+
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        sunLight.position.set(15, 5, 10);
+        scene.add(sunLight);
+        
+        const rimLight = new THREE.DirectionalLight(0x38bdf8, 0.3); // Slight cyan rim light
+        rimLight.position.set(-15, 0, -10);
+        scene.add(rimLight);
+
+        // --- THE MOON MESH ---
+        const textures = generateProceduralTextures();
+        const moonRadius = 6;
+        const sphereGeo = new THREE.SphereGeometry(moonRadius, 128, 128); // High poly for good bump mapping
+        
+        const sphereMat = new THREE.MeshStandardMaterial({
+            map: textures.colorMap,
+            bumpMap: textures.bumpMap,
+            bumpScale: 0.15, // Topographical depth
+            roughness: 0.8,
+            metalness: 0.1
+        });
+
+        const moonMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        // Rotate sphere to align textures correctly (Three.js spheres map textures a bit differently)
+        moonMesh.rotation.y = -Math.PI / 2;
+        scene.add(moonMesh);
+
+        // --- STARS BACKGROUND ---
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 2000;
+        const posArray = new Float32Array(starsCount * 3);
+        
+        for(let i = 0; i < starsCount * 3; i++) {
+            // Distribute stars in a large sphere
+            posArray[i] = (Math.random() - 0.5) * 200;
+        }
+        
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const starsMaterial = new THREE.PointsMaterial({
+            size: 0.15,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const starMesh = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starMesh);
+
+        // --- INTERACTION & UI ---
+        const btnContainer = document.getElementById('btn-container');
+        let activeIndex = -1;
+        
+        // Animation variables
+        let isAnimatingCamera = false;
+        let targetCameraPos = new THREE.Vector3();
+        let animationProgress = 0;
+        let startCameraPos = new THREE.Vector3();
+
+        // Utility: Lat/Lon to Vector3
+        function latLonToVector3(lat, lon, radius) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lon) * (Math.PI / 180); // Adjusted for texture alignment
+
+            const x = -(radius * Math.sin(phi) * Math.cos(theta));
+            const y = radius * Math.cos(phi);
+            const z = radius * Math.sin(phi) * Math.sin(theta);
+            
+            return new THREE.Vector3(x, y, z);
+        }
+
+        // Create UI
+        lunarRegions.forEach((region, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'region-btn w-full p-4 text-left rounded-lg group focus:outline-none';
+            btn.innerHTML = `
+                <div class="flex items-center justify-between mb-1">
+                    <span class="font-semibold text-white tracking-wide flex items-center">
+                        <span class="color-swatch" style="background-color: ${region.color};"></span>
+                        ${region.name}
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-500 group-hover:text-cyan-400 transition-colors">${region.id}</span>
+                </div>
+                <p class="text-xs text-slate-400 pl-6 leading-tight">${region.desc}</p>
+            `;
+            
+            btn.addEventListener('click', () => {
+                selectRegion(index);
+            });
+            btnContainer.appendChild(btn);
+        });
+
+        const buttons = document.querySelectorAll('.region-btn');
+
+        function selectRegion(index) {
+            activeIndex = index;
+            const region = lunarRegions[index];
+
+            // Update UI
+            buttons.forEach((b, i) => {
+                if(i === index) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+
+            // Calculate Target Position for Camera
+            const surfacePos = latLonToVector3(region.lat, region.lon, moonRadius);
+            
+            // Move camera to look at the region, spaced out
+            const cameraDistance = 16; 
+            targetCameraPos.copy(surfacePos).normalize().multiplyScalar(cameraDistance);
+            
+            startCameraPos.copy(camera.position);
+            animationProgress = 0;
+            isAnimatingCamera = true;
+        }
+
+        // --- RENDER LOOP ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            // Smooth Camera Interpolation when a region is clicked
+            if (isAnimatingCamera) {
+                animationProgress += delta * 1.5; // Animation speed
+                
+                if (animationProgress >= 1) {
+                    animationProgress = 1;
+                    isAnimatingCamera = false;
+                }
+                
+                // Ease out cubic
+                const t = 1 - Math.pow(1 - animationProgress, 3);
+                
+                camera.position.lerpVectors(startCameraPos, targetCameraPos, t);
+                camera.lookAt(scene.position);
+                
+                // Keep orbit controls in sync
+                controls.target.set(0, 0, 0); 
+                controls.update(); 
+            } else {
+                // Regular orbit controls
+                controls.update();
+                
+                // Very slow idle rotation if no region selected yet
+                if (activeIndex === -1) {
+                    moonMesh.rotation.y += 0.05 * delta;
+                }
+            }
+
+            // Slowly rotate stars for dynamic background
+            starMesh.rotation.y += 0.02 * delta;
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Start Loop
+        animate();
+
+    </script>
+</body>
+</html>

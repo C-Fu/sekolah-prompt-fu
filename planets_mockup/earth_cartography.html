@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrestrial Observation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #010409;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #f8fafc;
+            user-select: none;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Glassmorphism UI */
+        .glass-panel {
+            background: rgba(7, 12, 24, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.25); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.5); }
+
+        /* Region Button Transitions */
+        .continent-btn {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 2px solid transparent;
+        }
+        .continent-btn:hover {
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 2px solid rgba(56, 189, 248, 0.6);
+            transform: translateX(2px);
+        }
+        .continent-btn.active {
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.2) 0%, rgba(14, 165, 233, 0.02) 100%);
+            border-left: 2px solid #38bdf8;
+            box-shadow: inset 0 0 24px rgba(56, 189, 248, 0.15);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 34px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+        .toggle-switch.active {
+            background: #0284c7;
+        }
+        .toggle-dot {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 14px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 9999px;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .toggle-switch.active .toggle-dot {
+            transform: translateX(16px);
+        }
+    </style>
+</head>
+<body class="flex h-screen w-screen overflow-hidden text-sm">
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#010409] transition-opacity duration-700">
+        <div class="relative w-16 h-16 mb-4">
+            <div class="absolute inset-0 border-2 border-cyan-500/20 rounded-full"></div>
+            <div class="absolute inset-0 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-3 border border-sky-300/40 border-b-transparent rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+        </div>
+        <div class="font-mono text-cyan-400 tracking-[0.25em] text-xs font-semibold">SYNCHRONIZING ORBITAL TELEMETRY</div>
+        <div id="load-status" class="font-mono text-slate-500 text-[10px] mt-2 tracking-wider">ALIGNING GEODETIC VECTORS 0.0° OFFSET</div>
+    </div>
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container" class="absolute inset-0 z-0"></div>
+
+    <!-- UI Overlay: Left Sidebar Navigation & Telemetry -->
+    <div class="absolute left-0 top-0 bottom-0 w-full sm:w-96 p-3 sm:p-5 z-10 flex flex-col pointer-events-none">
+        <div class="glass-panel rounded-2xl flex flex-col h-full pointer-events-auto overflow-hidden">
+            
+            <!-- Header -->
+            <div class="p-5 border-b border-white/10 bg-slate-900/30">
+                <div class="flex items-center justify-between mb-1.5">
+                    <div class="flex items-center gap-2.5">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                        </span>
+                        <h1 class="text-sm font-bold tracking-[0.15em] text-white uppercase font-mono">TERRA CARTOGRAPHY</h1>
+                    </div>
+                    <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">WGS-84 SYNC</span>
+                </div>
+                <p class="text-[11px] text-slate-400 font-light leading-relaxed">
+                    1:1 True-Scale Topographical Alignment with high-precision vector border projection.
+                </p>
+            </div>
+
+            <!-- Continents Directory -->
+            <div class="px-5 pt-3 pb-1 text-[10px] font-mono tracking-wider text-slate-500 uppercase flex justify-between">
+                <span>Continental Plates (7)</span>
+                <span>Coordinates</span>
+            </div>
+            
+            <div id="btn-container" class="flex-1 overflow-y-auto px-3 py-1 space-y-1">
+                <!-- Buttons injected by JS -->
+            </div>
+
+            <!-- Selected Telemetry Card -->
+            <div id="telemetry-panel" class="p-4 border-t border-b border-white/10 bg-slate-950/40">
+                <div class="flex items-center justify-between mb-2">
+                    <span id="tele-name" class="font-bold text-white text-sm tracking-wide">Global Overview</span>
+                    <span id="tele-code" class="font-mono text-[10px] text-cyan-400">PLANET EARTH</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                    <div class="bg-white/5 p-2 rounded border border-white/5">
+                        <span class="text-slate-500 block text-[9px] uppercase">Surface Area</span>
+                        <span id="tele-area" class="text-slate-200 font-medium">510,072,000 km²</span>
+                    </div>
+                    <div class="bg-white/5 p-2 rounded border border-white/5">
+                        <span class="text-slate-500 block text-[9px] uppercase">Est. Population</span>
+                        <span id="tele-pop" class="text-slate-200 font-medium">8.05 Billion</span>
+                    </div>
+                    <div class="bg-white/5 p-2 rounded border border-white/5 col-span-2 flex justify-between items-center">
+                        <div>
+                            <span class="text-slate-500 block text-[9px] uppercase">Elevation Extremes</span>
+                            <span id="tele-elev" class="text-slate-200 font-medium text-[10px]">+8,848m (Everest) / -428m (Dead Sea)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer Toggles -->
+            <div class="p-4 bg-slate-900/40 border-t border-white/5 space-y-2.5">
+                <div class="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-2">Display Layers</div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="text-slate-300 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Vector Boundaries
+                    </span>
+                    <div id="toggle-borders" class="toggle-switch active"><div class="toggle-dot"></div></div>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="text-slate-300 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span> Cloud Atmosphere
+                    </span>
+                    <div id="toggle-clouds" class="toggle-switch active"><div class="toggle-dot"></div></div>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="text-slate-300 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-300"></span> Night Lights
+                    </span>
+                    <div id="toggle-night" class="toggle-switch active"><div class="toggle-dot"></div></div>
+                </div>
+            </div>
+
+            <!-- Footer Status -->
+            <div class="px-5 py-3 text-[10px] font-mono text-slate-500 flex justify-between items-center bg-black/40">
+                <span class="flex items-center gap-2">
+                    <span id="status-pulse" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="rot-status">ROTATION AUTO</span>
+                </span>
+                <button id="reset-cam" class="hover:text-cyan-400 transition-colors underline decoration-dotted">RESET ORBIT</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation Compass Overlay -->
+    <div class="absolute bottom-5 right-5 z-10 pointer-events-none hidden sm:flex items-center gap-3">
+        <div class="glass-panel px-4 py-2.5 rounded-xl font-mono text-[11px] text-slate-300 flex items-center gap-3 shadow-2xl pointer-events-auto">
+            <span class="text-cyan-400 font-bold">LAT/LON</span>
+            <span id="coords-hud" class="text-slate-400">0.00° N, 0.00° E</span>
+            <div class="h-3 w-px bg-white/20"></div>
+            <span class="text-slate-500 text-[10px]">DRAG TO ROTATE • SCROLL TO ZOOM</span>
+        </div>
+    </div>
+
+    <script>
+        // --- 7 CONTINENTS GEOGRAPHICAL & TELEMETRIC DATA ---
+        const continents = [
+            {
+                id: 'AF',
+                name: "Africa",
+                lat: 2.0,
+                lon: 21.0,
+                color: "#38bdf8",
+                area: "30,370,000 km²",
+                population: "1.46 Billion",
+                elevation: "+5,895m (Kilimanjaro) / -155m (Lake Assal)",
+                desc: "Second largest continent, characterized by the Great Rift Valley and vast equatorial plateaus."
+            },
+            {
+                id: 'AN',
+                name: "Antarctica",
+                lat: -82.0,
+                lon: 0.0,
+                color: "#e2e8f0",
+                area: "14,200,000 km²",
+                population: "~1,000 - 5,000",
+                elevation: "+4,892m (Vinson) / -50m (Deep Lake)",
+                desc: "Earth's southernmost continent, encapsulated by a permanent ice sheet holding 70% of Earth's fresh water."
+            },
+            {
+                id: 'AS',
+                name: "Asia",
+                lat: 34.0,
+                lon: 95.0,
+                color: "#2dd4bf",
+                area: "44,579,000 km²",
+                population: "4.75 Billion",
+                elevation: "+8,848m (Everest) / -428m (Dead Sea)",
+                desc: "Most massive continental mass, hosting Earth's highest orogenies and highest population density."
+            },
+            {
+                id: 'AU',
+                name: "Australia / Oceania",
+                lat: -24.0,
+                lon: 134.0,
+                color: "#fb923c",
+                area: "8,600,000 km²",
+                population: "45 Million",
+                elevation: "+2,228m (Kosciuszko) / -15m (Lake Eyre)",
+                desc: "The lowest, flattest, and oldest continental landmass on Earth, isolated from other continents for millions of years."
+            },
+            {
+                id: 'EU',
+                name: "Europe",
+                lat: 53.0,
+                lon: 18.0,
+                color: "#a78bfa",
+                area: "10,180,000 km²",
+                population: "742 Million",
+                elevation: "+5,642m (Elbrus) / -28m (Caspian Sea)",
+                desc: "Western peninsula of Eurasia bounded by the Arctic Ocean, the Atlantic, and the Ural Mountains."
+            },
+            {
+                id: 'NA',
+                name: "North America",
+                lat: 44.0,
+                lon: -100.0,
+                color: "#f43f5e",
+                area: "24,709,000 km²",
+                population: "592 Million",
+                elevation: "+6,190m (Denali) / -86m (Death Valley)",
+                desc: "Extends from the Canadian Arctic Archipelago to the Isthmus of Tehuantepec, flanked by the Pacific and Atlantic."
+            },
+            {
+                id: 'SA',
+                name: "South America",
+                lat: -14.0,
+                lon: -58.0,
+                color: "#4ade80",
+                area: "17,840,000 km²",
+                population: "434 Million",
+                elevation: "+6,961m (Aconcagua) / -105m (Laguna del Carbón)",
+                desc: "Dominated by the longest continental mountain range (Andes) and the greatest river drainage basin (Amazon)."
+            }
+        ];
+
+        // --- THREE.JS SCENE CONFIGURATION ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x010409);
+
+        const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 4, 22);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.1;
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.06;
+        controls.enablePan = false;
+        controls.minDistance = 6.2;
+        controls.maxDistance = 45;
+        controls.rotateSpeed = 0.8;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        scene.add(ambientLight);
+
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1.8);
+        sunLight.position.set(40, 20, 30);
+        scene.add(sunLight);
+
+        // Soft celestial rim light
+        const rimLight = new THREE.DirectionalLight(0x38bdf8, 0.45);
+        rimLight.position.set(-35, -15, -30);
+        scene.add(rimLight);
+
+        // --- COORDINATE MATHEMATICAL SYNCHRONIZATION ---
+        //
+        // In standard Three.js SphereGeometry(radius, ...):
+        // UV u ranges from 0 to 1 as theta wraps around the sphere.
+        // Equirectangular maps have -180 deg (Antimeridian) at u=0, and 0 deg (Prime Meridian) at u=0.5.
+        // For UV u=0.5 to land at x = +radius, z = 0, the standard parametric formula is:
+        //   theta = (lon + 180) * (PI / 180)
+        //   phi   = (90 - lat) * (PI / 180)
+        //   x     = - (radius * sin(phi) * cos(theta))
+        //   z     = (radius * sin(phi) * sin(theta))
+        //   y     = (radius * cos(phi))
+        //
+        // Both the Earth texture and the GeoJSON vector lines will be children of `earthGroup`
+        // without any arbitrary 90-degree rotational compensations, ensuring 100% 1:1 overlay.
+
+        const earthRadius = 5.0;
+        const earthGroup = new THREE.Group();
+        scene.add(earthGroup);
+
+        function latLonToVector3(lat, lon, radius) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lon + 180) * (Math.PI / 180);
+
+            const x = -(radius * Math.sin(phi) * Math.cos(theta));
+            const y = radius * Math.cos(phi);
+            const z = radius * Math.sin(phi) * Math.sin(theta);
+
+            return new THREE.Vector3(x, y, z);
+        }
+
+        // Texture Loader
+        const loadingManager = new THREE.LoadingManager();
+        loadingManager.onLoad = () => {
+            const loaderElem = document.getElementById('loading');
+            loaderElem.classList.add('opacity-0');
+            setTimeout(() => loaderElem.style.display = 'none', 700);
+        };
+
+        const textureLoader = new THREE.TextureLoader(loadingManager);
+
+        // Standard Equirectangular NASA Blue Marble & Night lights
+        const dayMap = textureLoader.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-blue-marble.jpg');
+        const bumpMap = textureLoader.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-topology.png');
+        const nightMap = textureLoader.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-night-clouds.png');
+        const cloudsMap = textureLoader.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-clouds.png');
+
+        // Earth Base Mesh
+        const earthGeo = new THREE.SphereGeometry(earthRadius, 128, 64);
+        const earthMat = new THREE.MeshStandardMaterial({
+            map: dayMap,
+            bumpMap: bumpMap,
+            bumpScale: 0.08,
+            roughness: 0.65,
+            metalness: 0.1
+        });
+        const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+        earthGroup.add(earthMesh);
+
+        // Night Lights Mesh (Additive glow for urban centers)
+        const nightMat = new THREE.MeshBasicMaterial({
+            map: nightMap,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            opacity: 0.55
+        });
+        const nightMesh = new THREE.Mesh(earthGeo, nightMat);
+        earthGroup.add(nightMesh);
+
+        // Cloud Atmosphere Shell
+        const cloudGeo = new THREE.SphereGeometry(earthRadius + 0.045, 96, 48);
+        const cloudMat = new THREE.MeshStandardMaterial({
+            map: cloudsMap,
+            transparent: true,
+            opacity: 0.38,
+            blending: THREE.NormalBlending,
+            depthWrite: false
+        });
+        const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+        earthGroup.add(cloudMesh);
+
+        // Atmospheric Glow Shader Rim
+        const atmosphereVertexShader = `
+            varying vec3 vNormal;
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+        const atmosphereFragmentShader = `
+            varying vec3 vNormal;
+            void main() {
+                float intensity = pow(0.65 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.2);
+                gl_FragColor = vec4(0.2, 0.7, 1.0, 1.0) * intensity * 1.4;
+            }
+        `;
+        const atmosphereMat = new THREE.ShaderMaterial({
+            vertexShader: atmosphereVertexShader,
+            fragmentShader: atmosphereFragmentShader,
+            blending: THREE.AdditiveBlending,
+            side: THREE.BackSide,
+            transparent: true
+        });
+        const atmosphereMesh = new THREE.Mesh(
+            new THREE.SphereGeometry(earthRadius * 1.15, 64, 32),
+            atmosphereMat
+        );
+        scene.add(atmosphereMesh);
+
+        // --- PRECISE GEOJSON CONTINENTAL VECTOR LINES ---
+        const bordersGroup = new THREE.Group();
+        earthGroup.add(bordersGroup);
+
+        const borderMaterial = new THREE.LineBasicMaterial({
+            color: 0x38bdf8, // High-contrast neon cyan
+            transparent: true,
+            opacity: 0.85,
+            linewidth: 1
+        });
+
+        // Elevated slightly (0.015) above the surface to prevent Z-fighting with bump topography
+        const vectorElevationRadius = earthRadius + 0.015;
+
+        function addLineString(coordinates) {
+            const points = [];
+            for (let i = 0; i < coordinates.length; i++) {
+                const lon = coordinates[i][0];
+                const lat = coordinates[i][1];
+                points.push(latLonToVector3(lat, lon, vectorElevationRadius));
+            }
+            if (points.length > 1) {
+                const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
+                const line = new THREE.Line(lineGeo, borderMaterial);
+                bordersGroup.add(line);
+            }
+        }
+
+        // Fetch high-fidelity continent & country border coordinates
+        fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
+            .then(res => res.json())
+            .then(data => {
+                data.features.forEach(feature => {
+                    const geom = feature.geometry;
+                    if (!geom) return;
+                    if (geom.type === 'Polygon') {
+                        geom.coordinates.forEach(ring => addLineString(ring));
+                    } else if (geom.type === 'MultiPolygon') {
+                        geom.coordinates.forEach(polygon => {
+                            polygon.forEach(ring => addLineString(ring));
+                        });
+                    }
+                });
+            })
+            .catch(err => {
+                console.warn("External GeoJSON load fallback triggered:", err);
+            });
+
+        // --- STARFIELD ---
+        const starCount = 3500;
+        const starGeo = new THREE.BufferGeometry();
+        const starPos = new Float32Array(starCount * 3);
+        const starColors = new Float32Array(starCount * 3);
+
+        for (let i = 0; i < starCount; i++) {
+            const i3 = i * 3;
+            // Distribute on sphere shell
+            const radius = 250 + Math.random() * 200;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+
+            starPos[i3] = radius * Math.sin(phi) * Math.cos(theta);
+            starPos[i3 + 1] = radius * Math.cos(phi);
+            starPos[i3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
+
+            // Subtle color tint
+            const tint = 0.8 + Math.random() * 0.2;
+            starColors[i3] = tint;
+            starColors[i3 + 1] = tint * (0.9 + Math.random() * 0.1);
+            starColors[i3 + 2] = 1.0;
+        }
+
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+        const starMat = new THREE.PointsMaterial({
+            size: 1.2,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.85
+        });
+        const starMesh = new THREE.Points(starGeo, starMat);
+        scene.add(starMesh);
+
+        // --- UI & CONTINENT SELECTION ---
+        const btnContainer = document.getElementById('btn-container');
+        let activeContinentIndex = -1;
+        let isUserInteracting = false;
+        let autoRotate = true;
+
+        // Camera animation state
+        let isNavigating = false;
+        let startCameraPos = new THREE.Vector3();
+        let targetCameraPos = new THREE.Vector3();
+        let animProgress = 0;
+
+        continents.forEach((continent, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'continent-btn w-full p-2.5 text-left rounded-lg group focus:outline-none flex items-center justify-between';
+            btn.innerHTML = `
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background-color: ${continent.color}; box-shadow: 0 0 8px ${continent.color}88;"></span>
+                    <div class="truncate">
+                        <div class="font-medium text-white text-xs group-hover:text-cyan-300 transition-colors truncate">${continent.name}</div>
+                        <div class="text-[10px] text-slate-400 font-mono">${Math.abs(continent.lat)}°${continent.lat >= 0 ? 'N' : 'S'}, ${Math.abs(continent.lon)}°${continent.lon >= 0 ? 'E' : 'W'}</div>
+                    </div>
+                </div>
+                <span class="text-[10px] font-mono text-slate-500 group-hover:text-cyan-400 pl-2">${continent.id}</span>
+            `;
+
+            btn.addEventListener('click', () => selectContinent(index));
+            btnContainer.appendChild(btn);
+        });
+
+        const buttons = document.querySelectorAll('.continent-btn');
+
+        function updateTelemetry(index) {
+            const data = continents[index];
+            document.getElementById('tele-name').textContent = data.name;
+            document.getElementById('tele-code').textContent = `REGION // ${data.id}-GEO`;
+            document.getElementById('tele-area').textContent = data.area;
+            document.getElementById('tele-pop').textContent = data.population;
+            document.getElementById('tele-elev').textContent = data.elevation;
+        }
+
+        function selectContinent(index) {
+            activeContinentIndex = index;
+            const continent = continents[index];
+
+            buttons.forEach((b, i) => {
+                if (i === index) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+
+            updateTelemetry(index);
+
+            // Compute target position in world space
+            const continentLocalPos = latLonToVector3(continent.lat, continent.lon, earthRadius);
+            const continentWorldPos = continentLocalPos.clone().applyMatrix4(earthGroup.matrixWorld);
+
+            // Zoom distance relative to region size
+            const camDistance = continent.id === 'AS' ? 14.5 : (continent.id === 'AU' || continent.id === 'EU' ? 11.5 : 13.0);
+            targetCameraPos.copy(continentWorldPos).normalize().multiplyScalar(camDistance);
+
+            startCameraPos.copy(camera.position);
+            animProgress = 0;
+            isNavigating = true;
+            autoRotate = false;
+            updateRotationStatus();
+        }
+
+        // Reset Orbit Button
+        document.getElementById('reset-cam').addEventListener('click', () => {
+            activeContinentIndex = -1;
+            buttons.forEach(b => b.classList.remove('active'));
+            document.getElementById('tele-name').textContent = "Global Overview";
+            document.getElementById('tele-code').textContent = "PLANET EARTH";
+            document.getElementById('tele-area').textContent = "510,072,000 km²";
+            document.getElementById('tele-pop').textContent = "8.05 Billion";
+            document.getElementById('tele-elev').textContent = "+8,848m (Everest) / -428m (Dead Sea)";
+
+            targetCameraPos.set(0, 4, 22);
+            startCameraPos.copy(camera.position);
+            animProgress = 0;
+            isNavigating = true;
+            autoRotate = true;
+            updateRotationStatus();
+        });
+
+        // Layer Toggles
+        function bindToggle(id, onToggle) {
+            const el = document.getElementById(id);
+            el.addEventListener('click', () => {
+                const isActive = el.classList.toggle('active');
+                onToggle(isActive);
+            });
+        }
+
+        bindToggle('toggle-borders', active => { bordersGroup.visible = active; });
+        bindToggle('toggle-clouds', active => { cloudMesh.visible = active; });
+        bindToggle('toggle-night', active => { nightMesh.visible = active; });
+
+        function updateRotationStatus() {
+            const rotElem = document.getElementById('rot-status');
+            const pulseElem = document.getElementById('status-pulse');
+            if (autoRotate) {
+                rotElem.textContent = "ROTATION AUTO";
+                pulseElem.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse";
+            } else {
+                rotElem.textContent = "TRACKING LOCKED";
+                pulseElem.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
+            }
+        }
+
+        // Pause auto-rotation on user drag
+        controls.addEventListener('start', () => {
+            isUserInteracting = true;
+            isNavigating = false;
+            autoRotate = false;
+            updateRotationStatus();
+        });
+
+        controls.addEventListener('end', () => {
+            isUserInteracting = false;
+        });
+
+        // --- HUD COORDINATES FROM CAMERA POSITION ---
+        const coordsHud = document.getElementById('coords-hud');
+        function updateHudCoordinates() {
+            // Compute coordinate currently facing camera
+            const lookVector = camera.position.clone().applyQuaternion(earthGroup.quaternion.clone().invert()).normalize();
+            const lat = 90 - (Math.acos(lookVector.y) * 180 / Math.PI);
+            let lon = (Math.atan2(lookVector.z, -lookVector.x) * 180 / Math.PI) - 180;
+            if (lon < -180) lon += 360;
+            if (lon > 180) lon -= 360;
+
+            const latDir = lat >= 0 ? 'N' : 'S';
+            const lonDir = lon >= 0 ? 'E' : 'W';
+            coordsHud.textContent = `${Math.abs(lat).toFixed(2)}° ${latDir}, ${Math.abs(lon).toFixed(2)}° ${lonDir}`;
+        }
+
+        // --- ANIMATION & RENDER LOOP ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            // Independent cloud drifting
+            cloudMesh.rotation.y += 0.015 * delta;
+
+            // Idle earth planetary spin
+            if (autoRotate && !isNavigating) {
+                earthGroup.rotation.y += 0.035 * delta;
+            }
+
+            // Smooth Camera Interpolation
+            if (isNavigating) {
+                animProgress += delta * 1.4;
+                if (animProgress >= 1.0) {
+                    animProgress = 1.0;
+                    isNavigating = false;
+                }
+
+                // Cubic ease-out
+                const t = 1 - Math.pow(1 - animProgress, 3);
+                camera.position.lerpVectors(startCameraPos, targetCameraPos, t);
+                controls.target.set(0, 0, 0);
+                controls.update();
+            } else {
+                controls.update();
+            }
+
+            // Subtle parallax on deep stars
+            starMesh.rotation.y -= 0.003 * delta;
+
+            updateHudCoordinates();
+            renderer.render(scene, camera);
+        }
+
+        // Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Start
+        animate();
+    </script>
+</body>
+</html>

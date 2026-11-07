@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mars Geological Cartography & Observation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #050303;
+      font-family: 'Inter', sans-serif;
+      color: #fed7aa;
+      user-select: none;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    canvas#webgl {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+    }
+    .hud-panel {
+      background: rgba(18, 10, 8, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(239, 68, 68, 0.28);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.85);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(239, 68, 68, 0.4);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(239, 68, 68, 0.7);
+    }
+    .btn-feat {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-feat:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.6);
+      transform: translateY(-1px);
+    }
+    .btn-feat.active {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.35) 0%, rgba(185, 28, 28, 0.2) 100%);
+      border-color: #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.35);
+    }
+  </style>
+</head>
+<body class="relative w-screen h-screen">
+
+  <canvas id="webgl"></canvas>
+
+  <!-- UI HUD Overlay -->
+  <div class="relative z-10 w-full h-full flex flex-col justify-between p-4 sm:p-6 pointer-events-none">
+    
+    <!-- Top Header & Controls -->
+    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+      <div class="hud-panel p-4 rounded-2xl pointer-events-auto max-w-md">
+        <div class="flex items-center space-x-2.5">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+          </span>
+          <h1 class="text-sm font-bold tracking-[0.18em] text-red-200 uppercase font-mono">MARS // MOLA CARTOGRAPHY</h1>
+          <span class="text-[10px] font-mono text-red-400 border border-red-500/40 px-2 py-0.5 rounded bg-red-950/40">7 PROVINCES</span>
+        </div>
+        <p class="text-xs text-orange-200/70 mt-1 font-light leading-relaxed">
+          Topographic & albedo surface synchronization aligned to 7 macro-geological Martian provinces.
+        </p>
+      </div>
+
+      <!-- Surface / Boundary Opacity Slider -->
+      <div class="hud-panel px-4 py-2.5 rounded-2xl pointer-events-auto flex items-center space-x-3">
+        <label for="boundaryOpacity" class="text-xs uppercase font-mono tracking-wider text-orange-300 font-semibold flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Boundary Alpha
+        </label>
+        <input id="boundaryOpacity" type="range" min="0" max="1" step="0.05" value="0.85" 
+               class="w-28 sm:w-36 accent-red-500 cursor-pointer">
+        <span id="opacityVal" class="text-xs font-mono text-red-400">85%</span>
+      </div>
+    </header>
+
+    <!-- Bottom Controls & Landmark Inspector -->
+    <footer class="flex flex-col md:flex-row gap-4 items-end justify-between">
+      
+      <!-- Landmark Description Card -->
+      <div id="infoCard" class="hud-panel p-5 rounded-2xl pointer-events-auto max-w-lg w-full transition-all duration-300">
+        <div class="flex justify-between items-baseline mb-1">
+          <h2 id="featureName" class="text-base sm:text-lg font-bold text-red-100 tracking-wide">Mars Overview</h2>
+          <span id="featureCoords" class="text-xs font-mono text-red-400">LAT: 00.0°N | LON: 000.0°E</span>
+        </div>
+        <div id="featureType" class="text-xs uppercase font-mono tracking-widest text-red-400 font-semibold mb-2">GLOBAL PROVINCE</div>
+        <p id="featureDesc" class="text-xs text-orange-100/80 leading-relaxed max-h-24 overflow-y-auto pr-1 custom-scrollbar">
+          The Red Planet is defined by a colossal crustal dichotomy: ancient, heavily cratered southern highlands contrasted against smooth, young northern lowlands, shaped by massive volcanism and deep tectonic rifting.
+        </p>
+      </div>
+
+      <!-- Feature Selector Buttons -->
+      <div class="hud-panel p-3 rounded-2xl pointer-events-auto flex flex-wrap gap-1.5 max-w-xl justify-start md:justify-end">
+        <button onclick="focusFeature(0)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Olympus Mons</button>
+        <button onclick="focusFeature(1)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Tharsis Rise</button>
+        <button onclick="focusFeature(2)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Valles Marineris</button>
+        <button onclick="focusFeature(3)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Hellas Planitia</button>
+        <button onclick="focusFeature(4)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Elysium Planitia</button>
+        <button onclick="focusFeature(5)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Arabia Terra</button>
+        <button onclick="focusFeature(6)" class="btn-feat px-2.5 py-1.5 text-xs rounded-lg border border-red-500/30 bg-red-950/40 text-red-200">Utopia Planitia</button>
+      </div>
+
+    </footer>
+  </div>
+
+  <script>
+    // --- 7 MAJOR GEOLOGICAL PROVINCES OF MARS ---
+    // Coordinates standard: Lat [-90..90], Lon [-180..180]
+    // 226.2°E -> -133.8°W, 250°E -> -110°W, 290°E -> -70°W
+    const FEATURES = [
+      {
+        name: "Olympus Mons",
+        type: "Shield Volcano / Caldera",
+        coords: "18.65°N, 133.80°W",
+        center: { lat: 18.65, lon: -133.8 },
+        radiusDeg: 6.5, // ~600 km diameter
+        color: 0xf97316,
+        desc: "The largest volcano and tallest planetary mountain in the Solar System, towering ~21.9 km above the Martian datum. Ringed by a basal cliff up to 8 km high and a complex six-nested caldera."
+      },
+      {
+        name: "Tharsis Rise",
+        type: "Volcanic Bulge / Crustal Swell",
+        coords: "0.00°N, 110.00°W",
+        center: { lat: 0.0, lon: -110.0 },
+        radiusDeg: 24.0, // Vast continental-scale swell
+        color: 0xef4444,
+        desc: "A gargantuan volcanic plateau spanning ~5,000 km and rising 10 km above the surrounding terrain. Home to the Tharsis Montes shield trio (Ascraeus, Pavonis, Arsia) whose weight depressed the entire lithosphere."
+      },
+      {
+        name: "Valles Marineris",
+        type: "Tectonic Rift Canyon System",
+        coords: "14.00°S, 70.00°W",
+        center: { lat: -14.0, lon: -70.0 },
+        radiusDeg: 16.0, // Over 4,000 km long
+        color: 0xf59e0b,
+        desc: "The Grand Canyon of Mars, stretching over 4,000 km along the equator, reaching up to 200 km wide and 7 km deep. Opened as a tectonic fracture system during the uplift of the adjacent Tharsis bulge."
+      },
+      {
+        name: "Hellas Planitia",
+        type: "Impact Basin (Southern Highlands)",
+        coords: "42.50°S, 70.00°E",
+        center: { lat: -42.5, lon: 70.0 },
+        radiusDeg: 14.0, // ~2,300 km diameter
+        color: 0x38bdf8,
+        desc: "One of the largest recognized impact basins in the Solar System (~2,300 km across) and the lowest elevation on Mars (-7.15 km). Its floor regularly fills with dense dust storms and frost clouds."
+      },
+      {
+        name: "Elysium Planitia",
+        type: "Volcanic Province & Shield",
+        coords: "25.00°N, 147.00°E",
+        center: { lat: 25.0, lon: 147.0 },
+        radiusDeg: 12.0,
+        color: 0xfbbf24,
+        desc: "Mars's second-largest volcanic province, crowned by Elysium Mons (14 km elevation). Surrounded by vast, flood-basalt plains and recent fissure vents in Cerberus Fossae that hosted young volcanic and water outflows."
+      },
+      {
+        name: "Arabia Terra",
+        type: "Ancient Cratering Highland",
+        coords: "20.00°N, 30.00°E",
+        center: { lat: 20.0, lon: 30.0 },
+        radiusDeg: 18.0,
+        color: 0xa855f7,
+        desc: "A vast upland region in the northern hemisphere, densely cratered and heavily eroded. Represents some of the oldest Noachian crust on Mars, with evidence of ancient explosive supervolcano calderas."
+      },
+      {
+        name: "Utopia Planitia",
+        type: "Northern Lowland Impact Basin",
+        coords: "46.00°N, 110.00°E",
+        center: { lat: 46.0, lon: 110.0 },
+        radiusDeg: 17.0, // ~3,300 km diameter
+        color: 0x2dd4bf,
+        desc: "The largest recognized impact basin on Mars and in the Solar System (~3,300 km diameter). Paved with smooth sedimentary and volcanic infill, concealing vast subsurface deposits of water ice (landed by Viking 2 & Zhurong)."
+      }
+    ];
+
+    // --- PROCEDURAL HIGH-FIDELITY MOLA / ALBEDO MARS TEXTURE GENERATOR ---
+    function createMarsTextures() {
+      const w = 2048, h = 1024;
+      const colorCanvas = document.createElement('canvas');
+      colorCanvas.width = w;
+      colorCanvas.height = h;
+      const ctx = colorCanvas.getContext('2d');
+
+      const bumpCanvas = document.createElement('canvas');
+      bumpCanvas.width = w;
+      bumpCanvas.height = h;
+      const bCtx = bumpCanvas.getContext('2d');
+
+      // 1. Base Martian ochre/red iron oxide crust
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+      bgGrad.addColorStop(0, '#c75d38');
+      bgGrad.addColorStop(0.3, '#b84928');
+      bgGrad.addColorStop(0.7, '#8f3319');
+      bgGrad.addColorStop(1, '#a33e22');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Mid-elevation bump base
+      bCtx.fillStyle = '#808080';
+      bCtx.fillRect(0, 0, w, h);
+
+      // 2. Crustal noise & dust albedo variations
+      const imgData = ctx.getImageData(0, 0, w, h);
+      const bumpData = bCtx.getImageData(0, 0, w, h);
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        const noise = (Math.random() - 0.5) * 22;
+        imgData.data[i] = Math.min(255, Math.max(0, imgData.data[i] + noise * 1.5));
+        imgData.data[i + 1] = Math.min(255, Math.max(0, imgData.data[i + 1] + noise * 0.9));
+        imgData.data[i + 2] = Math.min(255, Math.max(0, imgData.data[i + 2] + noise * 0.5));
+
+        const bNoise = 128 + (Math.random() - 0.5) * 24;
+        bumpData.data[i] = bNoise;
+        bumpData.data[i + 1] = bNoise;
+        bumpData.data[i + 2] = bNoise;
+      }
+      ctx.putImageData(imgData, 0, 0);
+      bCtx.putImageData(bumpData, 0, 0);
+
+      // Helper function to draw equirectangular geographic shapes with edge wrap
+      function drawFeature(lon, lat, rxDeg, ryDeg, color0, color1, bumpHeight) {
+        const cx = ((lon + 180) / 360) * w;
+        const cy = ((90 - lat) / 180) * h;
+        const rx = (rxDeg / 360) * w;
+        const ry = (ryDeg / 180) * h;
+
+        const render = (x) => {
+          // Color canvas
+          ctx.save();
+          ctx.beginPath();
+          ctx.ellipse(x, cy, rx, ry, 0, 0, Math.PI * 2);
+          const grad = ctx.createRadialGradient(x, cy, 0, x, cy, Math.max(rx, ry));
+          grad.addColorStop(0, color0);
+          grad.addColorStop(0.75, color1);
+          grad.addColorStop(1, 'transparent');
+          ctx.fillStyle = grad;
+          ctx.fill();
+          ctx.restore();
+
+          // Bump canvas
+          bCtx.save();
+          bCtx.beginPath();
+          bCtx.ellipse(x, cy, rx, ry, 0, 0, Math.PI * 2);
+          const bGrad = bCtx.createRadialGradient(x, cy, 0, x, cy, Math.max(rx, ry));
+          bGrad.addColorStop(0, bumpHeight);
+          bGrad.addColorStop(1, 'rgba(128, 128, 128, 0)');
+          bCtx.fillStyle = bGrad;
+          bCtx.fill();
+          bCtx.restore();
+        };
+
+        render(cx);
+        if (cx - rx < 0) render(cx + w);
+        if (cx + rx > w) render(cx - w);
+      }
+
+      // Syrtis Major & Acidalia Dark Basalt Lowlands
+      drawFeature(65, 10, 20, 24, 'rgba(40, 24, 18, 0.85)', 'rgba(65, 35, 25, 0.4)', 'rgba(70, 70, 70, 0.6)');
+      drawFeature(-35, 48, 28, 22, 'rgba(45, 26, 20, 0.8)', 'rgba(70, 40, 30, 0.35)', 'rgba(60, 60, 60, 0.6)');
+
+      // 1. Olympus Mons (High elevation peak, white frost tint caldera)
+      drawFeature(-133.8, 18.65, 7.5, 7.5, 'rgba(240, 185, 160, 0.95)', 'rgba(190, 75, 45, 0.6)', 'rgba(255, 255, 255, 0.95)');
+      drawFeature(-133.8, 18.65, 2.2, 2.2, 'rgba(255, 250, 245, 0.98)', 'rgba(215, 125, 95, 0.7)', 'rgba(255, 255, 255, 1.0)');
+
+      // 2. Tharsis Rise Bulge & Tharsis Montes chain
+      drawFeature(-110, 0, 26, 26, 'rgba(205, 95, 55, 0.85)', 'rgba(150, 50, 30, 0.45)', 'rgba(235, 235, 235, 0.85)');
+      // Arsia, Pavonis, Ascraeus volcanic caldera nodes
+      drawFeature(-120, -9, 3.5, 3.5, '#fde047', 'transparent', 'rgba(250, 250, 250, 0.9)');
+      drawFeature(-113, 0, 3.5, 3.5, '#fde047', 'transparent', 'rgba(250, 250, 250, 0.9)');
+      drawFeature(-104, 11, 3.5, 3.5, '#fde047', 'transparent', 'rgba(250, 250, 250, 0.9)');
+
+      // 3. Valles Marineris Canyon Gash (Dark, deep rift depression)
+      drawFeature(-70, -14, 22, 6.5, 'rgba(25, 12, 10, 0.95)', 'rgba(55, 22, 15, 0.5)', 'rgba(10, 10, 10, 0.9)');
+
+      // 4. Hellas Planitia (Massive circular, light-tinted deep impact basin)
+      drawFeature(70, -42.5, 16, 16, 'rgba(195, 130, 95, 0.9)', 'rgba(145, 65, 40, 0.5)', 'rgba(20, 20, 20, 0.95)');
+
+      // 5. Elysium Planitia & Elysium Mons peak
+      drawFeature(147, 25, 14, 14, 'rgba(215, 105, 65, 0.85)', 'rgba(165, 60, 35, 0.4)', 'rgba(220, 220, 220, 0.85)');
+      drawFeature(147, 25, 3, 3, 'rgba(255, 245, 235, 0.95)', 'transparent', 'rgba(255, 255, 255, 0.95)');
+
+      // 6. Arabia Terra (Old, heavily cratered upland plateau)
+      drawFeature(30, 20, 20, 16, 'rgba(180, 85, 50, 0.85)', 'rgba(135, 50, 30, 0.4)', 'rgba(175, 175, 175, 0.7)');
+
+      // 7. Utopia Planitia (Northern smooth circular depression)
+      drawFeature(110, 46, 20, 18, 'rgba(125, 55, 35, 0.85)', 'rgba(155, 75, 45, 0.4)', 'rgba(50, 50, 50, 0.8)');
+
+      // Polar Ice Caps (Water/CO2 ice crystals)
+      // North Pole (Planum Boreum)
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(w / 2, 0, w * 0.085, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.restore();
+
+      // South Pole (Planum Australe)
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(w / 2, h, w * 0.065, 0, Math.PI * 2);
+      ctx.fillStyle = '#f8fafc';
+      ctx.fill();
+      ctx.restore();
+
+      const colorMap = new THREE.CanvasTexture(colorCanvas);
+      const bumpMap = new THREE.CanvasTexture(bumpCanvas);
+      colorMap.wrapS = THREE.RepeatWrapping;
+      bumpMap.wrapS = THREE.RepeatWrapping;
+
+      return { colorMap, bumpMap };
+    }
+
+    // --- EXACT THREE.JS SPHERICAL TRIGONOMETRY ENGINE ---
+    // Coordinates mathematically synchronized with equirectangular UV mapping
+    const planetRadius = 4.8;
+    function latLonToVector3(lat, lon, radius = planetRadius) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const y = radius * Math.cos(phi);
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+
+      return new THREE.Vector3(x, y, z);
+    }
+
+    // --- SCENE, CAMERA & RENDERER SETUP ---
+    const canvas = document.getElementById('webgl');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x050303);
+
+    const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 3, 17.5);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 6.2;
+    controls.maxDistance = 35.0;
+    controls.rotateSpeed = 0.8;
+
+    // Lighting (Direct solar illumination & ambient space glow)
+    const ambientLight = new THREE.AmbientLight(0xffedd5, 0.3);
+    scene.add(ambientLight);
+
+    const sunLight = new THREE.DirectionalLight(0xfff7ed, 1.85);
+    sunLight.position.set(35, 15, 25);
+    scene.add(sunLight);
+
+    const rimLight = new THREE.DirectionalLight(0xef4444, 0.55);
+    rimLight.position.set(-30, -10, -25);
+    scene.add(rimLight);
+
+    // Planet Group
+    const planetGroup = new THREE.Group();
+    scene.add(planetGroup);
+
+    // Planet Sphere & Materials
+    const { colorMap, bumpMap } = createMarsTextures();
+    const marsGeo = new THREE.SphereGeometry(planetRadius, 128, 64);
+    const marsMat = new THREE.MeshStandardMaterial({
+      map: colorMap,
+      bumpMap: bumpMap,
+      bumpScale: 0.16,
+      roughness: 0.85,
+      metalness: 0.08
+    });
+    const marsMesh = new THREE.Mesh(marsGeo, marsMat);
+    planetGroup.add(marsMesh);
+
+    // Atmospheric Dust Haze Rim Shader
+    const atmosphereGeo = new THREE.SphereGeometry(planetRadius * 1.045, 64, 32);
+    const atmosphereMat = new THREE.ShaderMaterial({
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vNormal;
+        void main() {
+          float intensity = pow(0.68 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.5);
+          gl_FragColor = vec4(0.95, 0.42, 0.25, 1.0) * intensity * 1.35;
+        }
+      `,
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
+      transparent: true
+    });
+    const atmosphereMesh = new THREE.Mesh(atmosphereGeo, atmosphereMat);
+    scene.add(atmosphereMesh);
+
+    // --- VECTOR BOUNDARY LINES & TARGET MARKERS ---
+    const boundariesGroup = new THREE.Group();
+    planetGroup.add(boundariesGroup);
+
+    const boundaryMaterials = [];
+    const boundaryLines = [];
+    const boundaryElevation = planetRadius + 0.015;
+
+    function createRegionBoundary(centerLat, centerLon, radiusDeg, colorHex) {
+      const segments = 90;
+      const points = [];
+
+      const dRad = radiusDeg * (Math.PI / 180);
+      const lat1 = centerLat * (Math.PI / 180);
+      const lon1 = centerLon * (Math.PI / 180);
+
+      for (let i = 0; i <= segments; i++) {
+        const bearing = (i / segments) * Math.PI * 2;
+        // Subtle organic scarp fractal perturbation
+        const jitter = 1 + (Math.sin(bearing * 6) * 0.04 + Math.cos(bearing * 9) * 0.03);
+        const currentDist = dRad * jitter;
+
+        const sinLat = Math.sin(lat1) * Math.cos(currentDist) + Math.cos(lat1) * Math.sin(currentDist) * Math.cos(bearing);
+        const lat2 = Math.asin(Math.max(-1, Math.min(1, sinLat)));
+        const lon2 = lon1 + Math.atan2(Math.sin(bearing) * Math.sin(currentDist) * Math.cos(lat1), Math.cos(currentDist) - Math.sin(lat1) * Math.sin(lat2));
+
+        const degLat = lat2 * (180 / Math.PI);
+        const degLon = lon2 * (180 / Math.PI);
+
+        points.push(latLonToVector3(degLat, degLon, boundaryElevation));
+      }
+
+      const geo = new THREE.BufferGeometry().setFromPoints(points);
+      const mat = new THREE.LineBasicMaterial({
+        color: new THREE.Color(colorHex),
+        transparent: true,
+        opacity: 0.85,
+        linewidth: 2
+      });
+      boundaryMaterials.push(mat);
+
+      const line = new THREE.Line(geo, mat);
+      boundariesGroup.add(line);
+      boundaryLines.push(line);
+
+      // Central Province Beacon Dot
+      const centerPos = latLonToVector3(centerLat, centerLon, boundaryElevation);
+      const dotGeo = new THREE.SphereGeometry(0.045, 12, 12);
+      const dotMat = new THREE.MeshBasicMaterial({ color: colorHex });
+      const dotMesh = new THREE.Mesh(dotGeo, dotMat);
+      dotMesh.position.copy(centerPos);
+      boundariesGroup.add(dotMesh);
+    }
+
+    FEATURES.forEach(feat => {
+      createRegionBoundary(feat.center.lat, feat.center.lon, feat.radiusDeg, feat.color);
+    });
+
+    // --- BACKGROUND STARFIELD ---
+    const starCount = 2200;
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i++) {
+      starPos[i] = (Math.random() - 0.5) * 350;
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({ size: 1.0, color: 0xfecdd3, transparent: true, opacity: 0.75 });
+    const starMesh = new THREE.Points(starGeo, starMat);
+    scene.add(starMesh);
+
+    // --- OPACITY SLIDER CONTROLS ---
+    const opacitySlider = document.getElementById('boundaryOpacity');
+    const opacityVal = document.getElementById('opacityVal');
+    opacitySlider.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      opacityVal.textContent = `${Math.round(val * 100)}%`;
+      boundaryMaterials.forEach(m => m.opacity = val);
+    });
+
+    // --- FEATURE SELECTION & SMOOTH CAMERA GLIDE ---
+    let activeFeatureIndex = -1;
+    let isTransitioning = false;
+    let startCamPos = new THREE.Vector3();
+    let targetCamPos = new THREE.Vector3();
+    let animProgress = 0;
+
+    const featureButtons = document.querySelectorAll('.btn-feat');
+    const featureNameElem = document.getElementById('featureName');
+    const featureCoordsElem = document.getElementById('featureCoords');
+    const featureTypeElem = document.getElementById('featureType');
+    const featureDescElem = document.getElementById('featureDesc');
+
+    function focusFeature(idx) {
+      activeFeatureIndex = idx;
+      const feat = FEATURES[idx];
+
+      featureButtons.forEach((b, i) => {
+        if (i === idx) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+
+      // Update Card
+      featureNameElem.textContent = feat.name;
+      featureCoordsElem.textContent = feat.coords;
+      featureTypeElem.textContent = feat.type;
+      featureTypeElem.style.color = `#${feat.color.toString(16)}`;
+      featureDescElem.textContent = feat.desc;
+
+      // Highlight selected boundary
+      boundaryLines.forEach((line, i) => {
+        line.material.opacity = (i === idx) ? 1.0 : parseFloat(opacitySlider.value) * 0.4;
+      });
+
+      // Compute camera target position
+      const surfacePos = latLonToVector3(feat.center.lat, feat.center.lon, planetRadius);
+      const worldPos = surfacePos.clone().applyMatrix4(planetGroup.matrixWorld);
+      
+      const zoomDist = feat.radiusDeg > 18 ? 13.5 : (feat.radiusDeg < 8 ? 9.5 : 11.2);
+      targetCamPos.copy(worldPos).normalize().multiplyScalar(zoomDist);
+
+      startCamPos.copy(camera.position);
+      animProgress = 0;
+      isTransitioning = true;
+    }
+
+    controls.addEventListener('start', () => {
+      isTransitioning = false;
+    });
+
+    // --- ANIMATION & RENDER LOOP ---
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+
+      if (isTransitioning) {
+        animProgress += delta * 1.5;
+        if (animProgress >= 1.0) {
+          animProgress = 1.0;
+          isTransitioning = false;
+        }
+        // Smooth cubic ease-out
+        const t = 1 - Math.pow(1 - animProgress, 3);
+        camera.position.lerpVectors(startCamPos, targetCamPos, t);
+        controls.target.set(0, 0, 0);
+        controls.update();
+      } else {
+        controls.update();
+        // Gentle rotation when idle
+        if (activeFeatureIndex === -1) {
+          planetGroup.rotation.y += 0.03 * delta;
+        }
+      }
+
+      starMesh.rotation.y -= 0.003 * delta;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
