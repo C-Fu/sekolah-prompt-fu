@@ -32,8 +32,8 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 - [x] **FLOW-03**: Implement interactive Rocket animation/button at the conclusion of Earth lessons (and throughout lesson headers) that flies back to the Planetary Explorer.
 
 ### 4. Planet-Themed Lesson Aesthetics & Pedagogy
-- [ ] **THEME-01**: Adapt lesson background styling to mirror the aesthetic of the active planet (Earth greens/blues, Moon slate/silver, Mars oxidized red, Venus amber/sulfur, Mercury basalt gray).
-- [ ] **PEDAG-01**: Provide KSSR/KBAT prompt structuring tasks tailored to the respective subjects (BM sentence building prompts, English descriptive prompts, Math logic & constraint prompts, Science observation prompts).
+- [x] **THEME-01**: Adapt lesson background styling to mirror the aesthetic of the active planet (Earth greens/blues, Moon slate/silver, Mars oxidized red, Venus amber/sulfur, Mercury basalt gray).
+- [x] **PEDAG-01**: Provide KSSR/KBAT prompt structuring tasks tailored to the respective subjects (BM sentence building prompts, English descriptive prompts, Math logic & constraint prompts, Science observation prompts).
 - [ ] **PEDAG-02**: Enforce a minimum of 7 interactive stages/sections (`<Section>`) per lesson (e.g. Tahun 1 Bahasa Melayu) covering introduction, concept demonstration, interactive prompt challenges, formative checks, and mastery challenge.
 
 ### 5. Quality & Static Certification
@@ -66,8 +66,8 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 | FLOW-01 | Phase 11 | Complete |
 | FLOW-02 | Phase 11 | Complete |
 | FLOW-03 | Phase 11 | Complete |
-| THEME-01 | Phase 12 | Pending |
-| PEDAG-01 | Phase 12 | Pending |
+| THEME-01 | Phase 12 | Complete |
+| PEDAG-01 | Phase 12 | Complete |
 | PEDAG-02 | Phase 12 | Pending |
 | GATE-01 | Phase 13 | Pending |
 | GATE-02 | Phase 13 | Pending |
