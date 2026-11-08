@@ -712,12 +712,11 @@ export function PlanetaryHud({
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Standalone Route vs Integrated Modal:**
-   - *What we know:* Phase 10 builds the component; Phase 11 connects Title screen navigation.
-   - *What's unclear:* Should Phase 10 introduce a standalone `/planets` page route immediately?
-   - *Recommendation:* Create `src/app/planets/page.tsx` as a full-page client route that renders `PlanetaryExplorer`. This allows instant isolated UAT, verification during Phase 10, and seamless linking in Phase 11.
+   - *Status:* RESOLVED.
+   - *Resolution:* Create `src/app/planets/page.tsx` as a full-page client route that renders `PlanetaryExplorer`. This allows instant isolated UAT, verification during Phase 10, and seamless linking in Phase 11.
 
 ---
 
