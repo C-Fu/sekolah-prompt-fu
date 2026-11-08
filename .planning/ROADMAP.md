@@ -28,8 +28,8 @@
 ### Phase 11: Game Flow & Rocket Navigation
 **Goal:** Connect the title screen to the 3D Planetary Explorer, establish Earth as foundational prompting world, and implement rocket transition animations back to the planetary hub.
 - **Plans:** 2 plans
-  - [ ] 11-01-PLAN.md — Pixel Rocket Component, Rocket Launch Overlay & Earth Graduation Integration (`FLOW-03`).
-  - [ ] 11-02-PLAN.md — Title Screen Dual Entry, Header & Map Navigation Harmonization, and Planetary Feature Mission Routing (`FLOW-01`, `FLOW-02`).
+  - [x] 11-01-PLAN.md — Pixel Rocket Component, Rocket Launch Overlay & Earth Graduation Integration (`FLOW-03`).
+  - [x] 11-02-PLAN.md — Title Screen Dual Entry, Header & Map Navigation Harmonization, and Planetary Feature Mission Routing (`FLOW-01`, `FLOW-02`).
 - **Requirements Covered:** FLOW-01, FLOW-02, FLOW-03
 
 ### Phase 12: Planet-Themed Lesson Aesthetics & Subject Prompt Lessons

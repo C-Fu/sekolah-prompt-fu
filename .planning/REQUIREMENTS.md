@@ -27,8 +27,8 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 - [x] **THREE-04**: Build planetary detail view showing the 7 continent/basin/volcano features mapped to Tahun 1-6 with interactive region selection.
 
 ### 3. Game Flow & Navigation
-- [ ] **FLOW-01**: Greet users from Title screen with option to enter the 3D Planetary System directly or start at Earth.
-- [ ] **FLOW-02**: Earth serves as the starting world for foundational prompting lessons.
+- [x] **FLOW-01**: Greet users from Title screen with option to enter the 3D Planetary System directly or start at Earth.
+- [x] **FLOW-02**: Earth serves as the starting world for foundational prompting lessons.
 - [x] **FLOW-03**: Implement interactive Rocket animation/button at the conclusion of Earth lessons (and throughout lesson headers) that flies back to the Planetary Explorer.
 
 ### 4. Planet-Themed Lesson Aesthetics & Pedagogy
@@ -63,9 +63,9 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 | THREE-02 | Phase 10 | Complete |
 | THREE-03 | Phase 10 | Complete |
 | THREE-04 | Phase 10 | Complete |
-| FLOW-01 | Phase 11 | Pending |
-| FLOW-02 | Phase 11 | Pending |
-| FLOW-03 | Phase 11 | Pending |
+| FLOW-01 | Phase 11 | Complete |
+| FLOW-02 | Phase 11 | Complete |
+| FLOW-03 | Phase 11 | Complete |
 | THEME-01 | Phase 12 | Pending |
 | PEDAG-01 | Phase 12 | Pending |
 | PEDAG-02 | Phase 12 | Pending |

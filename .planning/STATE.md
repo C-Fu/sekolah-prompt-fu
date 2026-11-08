@@ -2,21 +2,21 @@
 gsd_state_version: "1.0"
 milestone: v1.2
 milestone_name: 3D Planetary Hub, Subject Cartography & Rocket Return
-current_phase: 10
-current_phase_name: 3D Planetary Explorer Component
-current_plan: 4 of 4
+current_phase: 11
+current_phase_name: Game Flow & Rocket Navigation
+current_plan: 2 of 2
 status: completed
-stopped_at: Completed 10-04-PLAN.md
-last_updated: "2026-11-08T06:27:00.000Z"
+stopped_at: Completed 11-02-PLAN.md
+last_updated: "2026-11-08T11:38:00.000Z"
 last_activity: 2026-11-08
-last_activity_desc: Completed Phase 10 Plan 04 — root PlanetaryExplorer, /planets route, and static export certification
-state_head: a5644ac16b2cfd0653f588aa4da5cfa169cb8e9a
+last_activity_desc: Completed Phase 11 Plan 02 — title screen dual entry, header rocket nav, space portal banner, and planetary mission routing
+state_head: cbe1231a7c6e48f53c123551a1e602ab1e0c8cfa
 progress:
   total_phases: 5
-  completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
-  percent: 40
+  completed_phases: 3
+  total_plans: 8
+  completed_plans: 8
+  percent: 60
 ---
 
 # Project State
@@ -28,23 +28,23 @@ progress:
 
 ## Current Position
 
-Phase: Phase 10 (3D Planetary Explorer Component) — COMPLETED
-Current Plan: 4 of 4 (Phase 10 complete, ready for Phase 11)
+Phase: Phase 11 (Game Flow & Rocket Navigation) — COMPLETED
+Current Plan: 2 of 2 (Phase 11 complete, ready for Phase 12)
 Status: Completed
-Last activity: 2026-11-08 — Completed 10-04-PLAN.md (PlanetaryExplorer orchestrator, /planets route & static export certification)
+Last activity: 2026-11-08 — Completed 11-02-PLAN.md (Harmonized navigation across title screen, header, map, and planetary missions)
 
 ## Project Reference
 
 See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.
-**Current focus:** Phase 11 — Game Flow & Rocket Navigation.
+**Current focus:** Phase 12 — Planet-Themed Lesson Aesthetics & Subject Prompt Lessons.
 
 ## Phases in Milestone v1.2
 - **Phase 09:** Planetary Schema & Subject Alignment (Completed: 2026-11-08)
 - **Phase 10:** 3D Planetary Explorer Component (Three.js) (Completed: 2026-11-08)
-- **Phase 11:** Game Flow & Rocket Navigation (Next)
-- **Phase 12:** Planet-Themed Lesson Aesthetics & Subject Prompt Lessons
+- **Phase 11:** Game Flow & Rocket Navigation (Completed: 2026-11-08)
+- **Phase 12:** Planet-Themed Lesson Aesthetics & Subject Prompt Lessons (Next)
 - **Phase 13:** Static Export & Quality Gate Certification
 
 ## Performance Metrics
@@ -55,6 +55,8 @@ See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 | Phase 10 P02 | 9m | 2 tasks | 3 files |
 | Phase 10 P03 | 10m | 2 tasks | 3 files |
 | Phase 10 P04 | 10m | 2 tasks | 4 files |
+| Phase 11 P01 | 10m | 2 tasks | 8 files |
+| Phase 11 P02 | 14m | 3 tasks | 12 files |
 
 ## Decisions
 
