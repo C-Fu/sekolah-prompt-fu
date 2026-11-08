@@ -34,11 +34,11 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 ### 4. Planet-Themed Lesson Aesthetics & Pedagogy
 - [x] **THEME-01**: Adapt lesson background styling to mirror the aesthetic of the active planet (Earth greens/blues, Moon slate/silver, Mars oxidized red, Venus amber/sulfur, Mercury basalt gray).
 - [x] **PEDAG-01**: Provide KSSR/KBAT prompt structuring tasks tailored to the respective subjects (BM sentence building prompts, English descriptive prompts, Math logic & constraint prompts, Science observation prompts).
-- [ ] **PEDAG-02**: Enforce a minimum of 7 interactive stages/sections (`<Section>`) per lesson (e.g. Tahun 1 Bahasa Melayu) covering introduction, concept demonstration, interactive prompt challenges, formative checks, and mastery challenge.
+- [x] **PEDAG-02**: Enforce a minimum of 7 interactive stages/sections (`<Section>`) per lesson (e.g. Tahun 1 Bahasa Melayu) covering introduction, concept demonstration, interactive prompt challenges, formative checks, and mastery challenge.
 
 ### 5. Quality & Static Certification
-- [ ] **GATE-01**: Ensure all new components, packages, and routes pass type checking (`tsc --noEmit`), unit tests (`npm test`), import closure (`npm run check:closure`), and vocabulary checks (`npm run check:vocab`).
-- [ ] **GATE-02**: Certify 100% static export (`npm run build` and `npm run verify`) for GitHub Pages with zero regression.
+- [x] **GATE-01**: Ensure all new components, packages, and routes pass type checking (`tsc --noEmit`), unit tests (`npm test`), import closure (`npm run check:closure`), and vocabulary checks (`npm run check:vocab`).
+- [x] **GATE-02**: Certify 100% static export (`npm run build` and `npm run verify`) for GitHub Pages with zero regression.
 
 ---
 
@@ -68,6 +68,6 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 | FLOW-03 | Phase 11 | Complete |
 | THEME-01 | Phase 12 | Complete |
 | PEDAG-01 | Phase 12 | Complete |
-| PEDAG-02 | Phase 12 | Pending |
-| GATE-01 | Phase 13 | Pending |
-| GATE-02 | Phase 13 | Pending |
+| PEDAG-02 | Phase 12 | Complete |
+| GATE-01 | Phase 12 | Complete |
+| GATE-02 | Phase 12 | Complete |

@@ -32,12 +32,12 @@
   - [x] 11-02-PLAN.md — Title Screen Dual Entry, Header & Map Navigation Harmonization, and Planetary Feature Mission Routing (`FLOW-01`, `FLOW-02`).
 - **Requirements Covered:** FLOW-01, FLOW-02, FLOW-03 (All Satisfied)
 
-### Phase 12: Planet-Themed Lesson Aesthetics & Subject Prompt Lessons
+### Phase 12: Planet-Themed Lesson Aesthetics & Subject Prompt Lessons (Completed: 2026-11-08)
 **Goal:** Implement dynamic planet-themed backgrounds for lesson views and wire subject-specific prompt engineering tasks for KSSR/KBAT standards with a minimum of 7 interactive stages per lesson.
 - **Plans:** 2 plans
   - [x] 12-01-PLAN.md — Dynamic Planet-Themed Lesson Background & Curriculum Realignment (`THEME-01`, `PEDAG-01`).
-  - [ ] 12-02-PLAN.md — 7-Stage Interactive MDX Subject Lessons & Full Static Certification (`PEDAG-01`, `PEDAG-02`, `GATE-01`, `GATE-02`).
-- **Requirements Covered:** THEME-01, PEDAG-01, PEDAG-02, GATE-01, GATE-02
+  - [x] 12-02-PLAN.md — 7-Stage Interactive MDX Subject Lessons & Full Static Certification (`PEDAG-01`, `PEDAG-02`, `GATE-01`, `GATE-02`).
+- **Requirements Covered:** THEME-01, PEDAG-01, PEDAG-02, GATE-01, GATE-02 (All Satisfied)
 
 ### Phase 13: Static Export & Quality Gate Certification
 **Goal:** Certify the entire application end-to-end with zero regressions, strict type safety, import closure, and 100% static GitHub Pages export.
