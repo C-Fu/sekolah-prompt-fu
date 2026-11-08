@@ -11,6 +11,7 @@ import {
   useSetLevelSlug,
 } from "@/components/kids/providers/level-context";
 import { getLevelBySlug } from "@/lib/kids/levels";
+import { getThemeForLevelSlug, PLANET_THEMES } from "@/components/kids/layout/planet-background";
 import { analyticsKids } from "@/lib/analytics";
 import type { CompiledLevelContent } from "@/lib/kids/level-content";
 
@@ -208,6 +209,7 @@ export function LevelContentWrapper({
           onPrev={goToPrev}
           onNext={goToNext}
           onDotClick={handleDotClick}
+          accentColor={PLANET_THEMES[getThemeForLevelSlug(levelSlug)].accentColor}
           labels={{
             back: t("navigation.back"),
             next: t("navigation.next"),
@@ -257,6 +259,7 @@ interface NavigationFooterProps {
   onPrev: () => void;
   onNext: () => void;
   onDotClick: (target: number) => void;
+  accentColor?: string;
   labels: { back: string; next: string; map: string; completeFirst: string };
 }
 
@@ -271,10 +274,14 @@ function NavigationFooter({
   onPrev,
   onNext,
   onDotClick,
+  accentColor,
   labels,
 }: NavigationFooterProps) {
   return (
-    <div className="shrink-0 bg-[#2C1810] border-t-4 border-[#8B4513]">
+    <div
+      className="shrink-0 bg-[#2C1810] border-t-4 transition-colors duration-500"
+      style={{ borderTopColor: accentColor || "#8B4513" }}
+    >
       <div className="max-w-2xl mx-auto py-3 px-4 flex flex-col gap-3 sm:gap-0">
         <div className="flex items-center justify-between">
           <button
