@@ -802,3 +802,42 @@
   padding: 0;
 }
 
+/* Rocket launch and thruster animations */
+@keyframes rocket-thrust {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scaleY(1.3) scaleX(0.95);
+    opacity: 1;
+  }
+}
+
+@keyframes rocket-liftoff {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(4px);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  70% {
+    transform: translateY(-120px) scale(1.05);
+  }
+  100% {
+    transform: translateY(-700px) scale(0.9);
+    opacity: 0.8;
+  }
+}
+
+.animate-rocket-thrust {
+  animation: rocket-thrust 0.12s ease-in-out infinite;
+}
+
+.animate-rocket-liftoff {
+  animation: rocket-liftoff 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+

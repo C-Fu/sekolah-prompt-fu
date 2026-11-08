@@ -612,3 +612,67 @@ export function PixelPlaneWithBanner({ className, bannerText = "LEARN AI!" }: { 
     </div>
   );
 }
+
+// Pixel Art Rocket (16-bit retro style matching Peromfu aesthetic)
+export function PixelRocket({ 
+  className,
+  thrusting = true,
+}: { 
+  className?: string;
+  thrusting?: boolean;
+}) {
+  return (
+    <svg 
+      viewBox="0 0 32 48" 
+      className={cn("w-12 h-18", className)}
+      style={{ imageRendering: "pixelated" }}
+      aria-label="Pixel Rocket"
+    >
+      {/* Nose cone (red) */}
+      <rect x="14" y="2" width="4" height="2" fill="#EF4444" />
+      <rect x="12" y="4" width="8" height="2" fill="#EF4444" />
+      <rect x="10" y="6" width="12" height="4" fill="#DC2626" />
+      
+      {/* Fuselage (white/cream body with subtle shading) */}
+      <rect x="8" y="10" width="16" height="18" fill="#F8FAFC" />
+      <rect x="8" y="10" width="2" height="18" fill="#E2E8F0" />
+      <rect x="22" y="10" width="2" height="18" fill="#CBD5E1" />
+      
+      {/* Cockpit Window (Cyan glass with dark frame & Peromfu silhouette) */}
+      <rect x="12" y="14" width="8" height="8" fill="#1E293B" />
+      <rect x="13" y="15" width="6" height="6" fill="#38BDF8" />
+      <rect x="14" y="16" width="2" height="2" fill="#BAE6FD" />
+      {/* Peromfu visor/ears inside cockpit */}
+      <rect x="15" y="17" width="2" height="2" fill="#10B981" />
+      
+      {/* Side Fins (Left & Right - Red) */}
+      {/* Left Fin */}
+      <rect x="4" y="22" width="4" height="6" fill="#DC2626" />
+      <rect x="2" y="26" width="4" height="4" fill="#B91C1C" />
+      <rect x="0" y="28" width="4" height="4" fill="#991B1B" />
+      {/* Right Fin */}
+      <rect x="24" y="22" width="4" height="6" fill="#DC2626" />
+      <rect x="26" y="26" width="4" height="4" fill="#B91C1C" />
+      <rect x="28" y="28" width="4" height="4" fill="#991B1B" />
+      
+      {/* Engine Nozzle (Dark slate/metallic) */}
+      <rect x="10" y="28" width="12" height="2" fill="#64748B" />
+      <rect x="11" y="30" width="10" height="3" fill="#334155" />
+      
+      {/* Animated Thruster Flame */}
+      {thrusting && (
+        <g data-testid="rocket-flame" className="animate-rocket-thrust origin-top">
+          {/* Outer yellow flame */}
+          <rect x="12" y="33" width="8" height="4" fill="#FBBF24" />
+          <rect x="13" y="37" width="6" height="4" fill="#F59E0B" />
+          <rect x="14" y="41" width="4" height="4" fill="#EA580C" />
+          <rect x="15" y="45" width="2" height="3" fill="#DC2626" />
+          
+          {/* Inner white-hot core */}
+          <rect x="14" y="33" width="4" height="3" fill="#FEF08A" />
+          <rect x="15" y="36" width="2" height="2" fill="#FFFFFF" />
+        </g>
+      )}
+    </svg>
+  );
+}

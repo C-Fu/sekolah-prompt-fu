@@ -245,7 +245,17 @@
       "title": "Level Complete!",
       "nextLevel": "Next Level",
       "backToMap": "Back to Map",
-      "allDone": "Back to Map"
+      "allDone": "Back to Map",
+      "graduationTitle": "Academy Graduate!",
+      "graduationMessage": "You mastered all prompting basics on Earth! The Solar System awaits you!"
+    },
+    "rocketLaunch": {
+      "countdown": "{count}...",
+      "blastOff": "BLAST OFF!",
+      "heading": "Destination: Planetary Explorer!",
+      "subheading": "Leaving Earth to explore subject missions...",
+      "skip": "Skip Launch",
+      "launchButton": "Launch Rocket to Space!"
     },
     "quiz": {
       "goodLabel": "Great prompt!",

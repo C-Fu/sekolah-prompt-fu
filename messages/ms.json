@@ -245,7 +245,17 @@
       "title": "Tahap Selesai!",
       "nextLevel": "Tahap Seterusnya",
       "backToMap": "Kembali ke Peta",
-      "allDone": "Kembali ke Peta"
+      "allDone": "Kembali ke Peta",
+      "graduationTitle": "Graduan Akademi!",
+      "graduationMessage": "Tahniah! Anda telah menguasai asas prompt di Bumi! Sistem Suria kini menanti anda!"
+    },
+    "rocketLaunch": {
+      "countdown": "{count}...",
+      "blastOff": "MELUNCUR!",
+      "heading": "Destinasi: Peneroka Planet!",
+      "subheading": "Meninggalkan Bumi untuk meneroka misi...",
+      "skip": "Langkau Pelancaran",
+      "launchButton": "Lancar Roket ke Angkasa!"
     },
     "quiz": {
       "goodLabel": "Prompt yang bagus!",
