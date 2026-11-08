@@ -52,7 +52,6 @@ export function DragDropPrompt({
   const dragStateRef = useRef<{ startY: number; draggedIndex: number } | null>(null);
   const targetIndexRef = useRef<number | null>(null); // Ref to access current target in event handlers
   const containerRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const itemHeight = useRef(0);
 
   // Load saved state on mount

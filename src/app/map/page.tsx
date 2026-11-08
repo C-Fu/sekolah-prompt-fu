@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { ProgressMap } from "@/components/kids/elements/progress-map";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
@@ -9,9 +8,7 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/map",
 });
 
-export default async function KidsMapPage() {
-  const t = await getTranslations("kids");
-
+export default function KidsMapPage() {
   return (
     <div className="h-full flex flex-col overflow-hidden">
       <ProgressMap />

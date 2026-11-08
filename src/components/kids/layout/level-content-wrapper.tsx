@@ -50,6 +50,7 @@ export function LevelContentWrapper({
   levelNumber: _levelNumber,
   loadContent,
 }: LevelContentWrapperProps) {
+  void _levelNumber;
   const t = useTranslations("kids");
   const tCommon = useTranslations("common");
   const locale = useLocale();

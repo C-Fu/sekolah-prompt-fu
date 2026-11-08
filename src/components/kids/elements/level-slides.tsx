@@ -89,6 +89,7 @@ interface LevelSlidesProps {
 }
 
 export function LevelSlides({ children, levelSlug: _levelSlug }: LevelSlidesProps) {
+  void _levelSlug;
   const t = useTranslations("kids");
   const [currentSection, setCurrentSection] = useState(0);
 

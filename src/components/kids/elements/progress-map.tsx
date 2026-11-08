@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { worlds, type Level, getAllLevels } from "@/lib/kids/levels";
 import { getProgress, isLevelUnlocked, type KidsProgress } from "@/lib/kids/progress";
 import { analyticsKids } from "@/lib/analytics";
-import { Button } from "@/components/ui/button";
 import { 
   PixelTree, 
   PixelBush, 
@@ -16,7 +15,6 @@ import {
   PixelMountain, 
   PixelFlower, 
   PixelStar,
-  PixelRobot,
   PixelLevelNode,
   PixelPlaneWithBanner,
   PixelLake,
