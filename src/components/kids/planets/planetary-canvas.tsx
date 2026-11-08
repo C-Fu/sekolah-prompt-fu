@@ -117,13 +117,15 @@ export function PlanetaryCanvas({
 
     const cleanupInit = onInitRef.current?.(ctx);
 
-    // 5. requestAnimationFrame render loop with THREE.Clock
+    // 5. requestAnimationFrame render loop
     let animationFrameId: number;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
+      const currentTime = performance.now();
+      const delta = Math.min((currentTime - lastTime) / 1000, 0.1);
+      lastTime = currentTime;
 
       controls.update();
       onRenderFrameRef.current?.(ctx, delta);
