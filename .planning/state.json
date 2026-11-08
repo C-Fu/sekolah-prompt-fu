@@ -1,12 +1,12 @@
 {
   "contract": "1.0.0",
   "flavor": "core",
-  "milestone": "v1.1",
+  "milestone": "v1.2 — 3D Planetary Hub, Subject Cartography & Rocket Return",
   "phases": [],
   "next": {
-    "command": "/gsd-discuss-phase",
-    "label": "Discuss the first phase",
-    "reason": "Project initialized — plan your first phase"
+    "command": "/gsd-progress --next",
+    "label": "Advance to the next step",
+    "reason": "Phase 2 of 5 · 0% · executing"
   },
-  "updated_at": "2026-11-07T08:18:17.452Z"
+  "updated_at": "2026-11-08T06:13:06.902Z"
 }
