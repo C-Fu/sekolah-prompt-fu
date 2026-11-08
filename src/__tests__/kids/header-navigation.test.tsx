@@ -5,7 +5,11 @@ import { ProgressMap } from "@/components/kids/elements/progress-map";
 
 // Mock next/link
 vi.mock("next/link", () => ({
-  default: ({ href, children, ...props }: any) => (
+  default: ({
+    href,
+    children,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string; children?: React.ReactNode }) => (
     <a href={href} {...props}>
       {children}
     </a>
@@ -14,7 +18,7 @@ vi.mock("next/link", () => ({
 
 // Mock next-intl translations
 vi.mock("next-intl", () => ({
-  useTranslations: () => (key: string, params?: any) => {
+  useTranslations: () => (key: string, params?: Record<string, unknown>) => {
     const messages: Record<string, string> = {
       "header.title": "Peromfu's Prompt School",
       "header.home": "Home",

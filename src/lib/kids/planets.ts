@@ -970,7 +970,7 @@ export function getFeaturesByPlanet(planetId: string): PlanetFeature[] {
  * Resolves destination route URL for feature missions (FLOW-02, D-06, T-11-03).
  * Mitigates open redirects by returning only strict, hardcoded internal routes.
  */
-export function resolveMissionRoute(planetId: PlanetId | string, _feature?: PlanetFeature): string {
+export function resolveMissionRoute(planetId: PlanetId | string): string {
   switch (planetId) {
     case 'earth-prompting':
       return '/map';

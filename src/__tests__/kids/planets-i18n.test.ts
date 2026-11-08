@@ -3,17 +3,46 @@ import enMessages from "../../../messages/en.json";
 import msMessages from "../../../messages/ms.json";
 import { PLANET_WORLDS, PlanetId } from "@/lib/kids/planets";
 
+interface WorldEntry {
+  title: string;
+  tagline: string;
+}
+
+interface PlanetsNamespace {
+  title: string;
+  subtitle: string;
+  hubTitle: string;
+  explorePlanet: string;
+  viewCartography: string;
+  yearBadge: string;
+  capstoneBadge: string;
+  backToOrbit: string;
+  launchMission: string;
+  lockedFeature: string;
+  telemetry: Record<string, string>;
+  worlds: Record<string, WorldEntry>;
+}
+
+interface MessagesStructure {
+  kids: {
+    planets: PlanetsNamespace;
+  };
+}
+
+const typedEnMessages = enMessages as unknown as MessagesStructure;
+const typedMsMessages = msMessages as unknown as MessagesStructure;
+
 describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
   it("defines kids.planets namespace in both messages/en.json and messages/ms.json", () => {
     expect(enMessages).toHaveProperty("kids.planets");
     expect(msMessages).toHaveProperty("kids.planets");
-    expect(typeof (enMessages as any).kids.planets).toBe("object");
-    expect(typeof (msMessages as any).kids.planets).toBe("object");
+    expect(typeof typedEnMessages.kids.planets).toBe("object");
+    expect(typeof typedMsMessages.kids.planets).toBe("object");
   });
 
   it("mirrors top-level keys symmetrically between en and ms under kids.planets", () => {
-    const enPlanets = (enMessages as any).kids.planets;
-    const msPlanets = (msMessages as any).kids.planets;
+    const enPlanets = typedEnMessages.kids.planets;
+    const msPlanets = typedMsMessages.kids.planets;
 
     const expectedKeys = [
       "title",
@@ -40,8 +69,8 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
   });
 
   it("has matching telemetry keys under kids.planets.telemetry", () => {
-    const enTelemetry = (enMessages as any).kids.planets.telemetry;
-    const msTelemetry = (msMessages as any).kids.planets.telemetry;
+    const enTelemetry = typedEnMessages.kids.planets.telemetry;
+    const msTelemetry = typedMsMessages.kids.planets.telemetry;
 
     const expectedTelemetryKeys = [
       "coordinates",
@@ -63,8 +92,8 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
   });
 
   it("contains all 5 planetary worlds with non-empty localized title and tagline in en and ms", () => {
-    const enWorlds = (enMessages as any).kids.planets.worlds;
-    const msWorlds = (msMessages as any).kids.planets.worlds;
+    const enWorlds = typedEnMessages.kids.planets.worlds;
+    const msWorlds = typedMsMessages.kids.planets.worlds;
 
     const expectedWorldIds: PlanetId[] = [
       "earth-prompting",
@@ -104,7 +133,7 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
   });
 
   it("uses authentic Malay names for planetary bodies in ms.json", () => {
-    const msWorlds = (msMessages as any).kids.planets.worlds;
+    const msWorlds = typedMsMessages.kids.planets.worlds;
 
     expect(msWorlds["earth-prompting"].title).toContain("Bumi");
     expect(msWorlds["moon-bm"].title).toContain("Bulan");

@@ -97,7 +97,7 @@ describe('PlanetaryHud Component (THREE-03)', () => {
     expect(planet.features).toHaveLength(7);
 
     // Each feature button should be rendered
-    planet.features.forEach((feat, idx) => {
+    planet.features.forEach((feat) => {
       const btn = screen.getByTestId(`feature-button-${feat.id}`);
       expect(btn).toBeInTheDocument();
       expect(btn).toHaveTextContent(feat.name);

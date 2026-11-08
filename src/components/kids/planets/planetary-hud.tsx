@@ -86,7 +86,7 @@ export function PlanetaryHud({
               aria-hidden="true"
             />
             <span className="text-xs font-bold font-mono uppercase tracking-wider text-white">
-              {celestialName} // {planetTitle}
+              {celestialName}{" // "}{planetTitle}
             </span>
           </div>
         </div>

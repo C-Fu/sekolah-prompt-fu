@@ -5,7 +5,12 @@ import * as analyticsModule from "@/lib/analytics";
 
 // Mock next/link to render anchor tag
 vi.mock("next/link", () => ({
-  default: ({ href, children, onClick, ...props }: any) => (
+  default: ({
+    href,
+    children,
+    onClick,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string; children?: React.ReactNode }) => (
     <a href={href} onClick={onClick} {...props}>
       {children}
     </a>
