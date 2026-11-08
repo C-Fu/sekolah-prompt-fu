@@ -132,15 +132,12 @@
         "title": "Bulan: Bahasa Melayu"
       },
       "7": {
-        "title": "Bumi: Sains"
+        "title": "Marikh: Bahasa Inggeris"
       },
       "8": {
-        "title": "Marikh: Matematik"
+        "title": "Zuhrah: Matematik"
       },
       "9": {
-        "title": "Zuhrah: English"
-      },
-      "10": {
         "title": "Utarid: Pendidikan Moral"
       }
     },
@@ -225,19 +222,15 @@
         "title": "Kucing Comel Peromfu",
         "description": "Bantu Peromfu memilih kata kerja untuk melukis aksi kucing comel"
       },
-      "7_1_sains_benda_hidup": {
-        "title": "Penyiasat Benda Hidup",
-        "description": "Baiki prompt supaya AI mengelaskan benda hidup dengan ciri sains yang tepat"
-      },
-      "8_1_matematik_tambah_bintang": {
-        "title": "Kira Bintang di Marikh",
-        "description": "Bimbing AI mengira langkah demi langkah dan tetapkan format ayat matematik"
-      },
-      "9_1_english_colorful_toys": {
+      "7_1_english_colorful_toys": {
         "title": "Mainan Berwarna-warni",
         "description": "Buat permintaan sopan dan lakonan dengan pembantu kedai mainan AI"
       },
-      "10_1_moral_sahabat_prihatin": {
+      "8_1_matematik_tambah_bintang": {
+        "title": "Kira Bintang di Zuhrah",
+        "description": "Bimbing AI mengira langkah demi langkah dan tetapkan format ayat matematik"
+      },
+      "9_1_moral_sahabat_prihatin": {
         "title": "Sahabat Prihatin",
         "description": "Bimbing AI memberikan nasihat yang empati dan tolong-menolong rakan sekelas"
       }

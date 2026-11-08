@@ -132,15 +132,12 @@
         "title": "Moon: Bahasa Melayu"
       },
       "7": {
-        "title": "Earth: Science"
+        "title": "Mars: English"
       },
       "8": {
-        "title": "Mars: Mathematics"
+        "title": "Venus: Mathematics"
       },
       "9": {
-        "title": "Venus: English"
-      },
-      "10": {
         "title": "Mercury: Moral Education"
       }
     },
@@ -225,19 +222,15 @@
         "title": "Peromfu's Cute Cat",
         "description": "Help Peromfu pick action verbs to prompt an illustration of a playful kitten"
       },
-      "7_1_sains_benda_hidup": {
-        "title": "Living Things Detective",
-        "description": "Fix prompts so AI accurately classifies living organisms using scientific criteria"
-      },
-      "8_1_matematik_tambah_bintang": {
-        "title": "Counting Stars on Mars",
-        "description": "Guide AI step by step and enforce mathematical equation formats"
-      },
-      "9_1_english_colorful_toys": {
+      "7_1_english_colorful_toys": {
         "title": "Colorful Toys",
         "description": "Make polite requests and role-play with a toy shop assistant AI"
       },
-      "10_1_moral_sahabat_prihatin": {
+      "8_1_matematik_tambah_bintang": {
+        "title": "Counting Stars on Venus",
+        "description": "Guide AI step by step and enforce mathematical equation formats"
+      },
+      "9_1_moral_sahabat_prihatin": {
         "title": "A Caring Friend",
         "description": "Prompt AI to provide empathetic, respectful advice to help a classmate"
       }

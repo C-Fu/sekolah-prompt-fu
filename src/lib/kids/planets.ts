@@ -979,9 +979,9 @@ export function resolveMissionRoute(planetId: PlanetId | string, _feature?: Plan
     case 'venus-matematik':
       return '/level/8-1-matematik-tambah-bintang';
     case 'mars-english':
-      return '/level/9-1-english-colorful-toys';
+      return '/level/7-1-english-colorful-toys';
     case 'mercury-moral':
-      return '/level/10-1-moral-sahabat-prihatin';
+      return '/level/9-1-moral-sahabat-prihatin';
     default:
       return '/map';
   }
