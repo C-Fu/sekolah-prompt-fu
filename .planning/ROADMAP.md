@@ -10,10 +10,10 @@
 ## Milestone v1.2: 3D Planetary Hub, Subject Cartography & Rocket Return
 
 ### Phase 09: Planetary Schema & Subject Alignment
-**Goal:** Align planetary world schema with user requirements (Earth = Prompting, Moon = BM, Mars = English, Venus = Matematik, Mercury = Sains/Moral) and map 7 geological features to Tahun 1-6 with full bilingual metadata.
-- **Plans:**
-  - 09-01: Update `src/lib/kids/planets.ts` with revised subject mappings and 7 geological features per planet from `planets_mockup/planets_features_descriptions.md`.
-  - 09-02: Update bilingual translation bundles (`messages/en.json`, `messages/ms.json`) with planetary facts, feature names, and curriculum badges.
+**Goal:** Align planetary world schema with user requirements (Earth = Prompting, Moon = BM, Mars = English, Venus = Matematik, Mercury = Moral) and map 7 geological features to Tahun 1-6 with full bilingual metadata.
+- **Plans:** 2 plans
+  - [ ] 09-01-PLAN.md — Update `src/lib/kids/planets.ts` with updated types, math helpers (`latLonToVector3`), 5 planetary worlds, 35 geological features, and unit tests in `src/__tests__/kids/planets.test.ts`.
+  - [ ] 09-02-PLAN.md — Update bilingual message bundles (`messages/en.json`, `messages/ms.json`) with planetary facts, badges, and run verification.
 - **Requirements Covered:** SCHEMA-01, SCHEMA-02, SCHEMA-03
 
 ### Phase 10: 3D Planetary Explorer Component (Three.js)
