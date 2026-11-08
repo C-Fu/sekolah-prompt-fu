@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils";
 import { completeLevel, getLevelProgress } from "@/lib/kids/progress";
 import { getAdjacentLevels, getLevelBySlug } from "@/lib/kids/levels";
 import { analyticsKids } from "@/lib/analytics";
-import { PixelRobot, PixelStar } from "./pixel-art";
+import { PixelRobot, PixelStar, PixelRocket } from "./pixel-art";
+import { RocketLaunchOverlay } from "./rocket-launch-overlay";
 
 interface LevelCompleteProps {
   levelSlug: string;
@@ -23,7 +24,10 @@ export function LevelComplete({
   const t = useTranslations("kids");
   const [showConfetti, setShowConfetti] = useState(false);
   const [savedStars, setSavedStars] = useState(0);
+  const [isRocketModalOpen, setIsRocketModalOpen] = useState(false);
   const { next } = getAdjacentLevels(levelSlug);
+
+  const isGraduationCapstone = levelSlug === "5-4-graduation-day";
 
   useEffect(() => {
     const existingProgress = getLevelProgress(levelSlug);
@@ -72,13 +76,19 @@ export function LevelComplete({
         {/* Header */}
         <div className="p-6 text-center">
           <div className="flex justify-center mb-4">
-            <PixelRobot className="w-16 h-20 animate-bounce-slow" />
+            {isGraduationCapstone ? (
+              <PixelRocket className="w-20 h-28 animate-bounce-slow" thrusting={true} />
+            ) : (
+              <PixelRobot className="w-16 h-20 animate-bounce-slow" />
+            )}
           </div>
           
           <h2 className="text-4xl font-bold mb-3 text-[#2C1810] pixel-text-shadow">
-            {t("levelComplete.title")}
+            {isGraduationCapstone ? t("levelComplete.graduationTitle") : t("levelComplete.title")}
           </h2>
-          <p className="text-xl text-[#5D4037] m-0">{message}</p>
+          <p className="text-xl text-[#5D4037] m-0 max-w-lg mx-auto">
+            {isGraduationCapstone ? t("levelComplete.graduationMessage") : message}
+          </p>
         </div>
 
         {/* Pixel Stars */}
@@ -99,7 +109,18 @@ export function LevelComplete({
 
         {/* Actions - pixel style */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center p-4 bg-[#4A3728] border-t-4 border-[#8B4513]">
-          {next ? (
+          {isGraduationCapstone ? (
+            <button
+              type="button"
+              onClick={() => setIsRocketModalOpen(true)}
+              className="pixel-btn pixel-btn-green px-8 py-3 text-xl text-center"
+            >
+              <span className="flex items-center justify-center gap-3">
+                <PixelRocket className="w-6 h-8 -my-1" thrusting={true} />
+                {t("rocketLaunch.launchButton")}
+              </span>
+            </button>
+          ) : next ? (
             <Link 
               href={`/level/${next.slug}`}
               className="pixel-btn pixel-btn-green px-8 py-3 text-xl text-center"
@@ -129,6 +150,15 @@ export function LevelComplete({
           </Link>
         </div>
       </div>
+
+      {/* Graduation Rocket Launch Countdown Overlay */}
+      {isGraduationCapstone && (
+        <RocketLaunchOverlay
+          isOpen={isRocketModalOpen}
+          onClose={() => setIsRocketModalOpen(false)}
+          destination="/planets"
+        />
+      )}
     </div>
   );
 }
