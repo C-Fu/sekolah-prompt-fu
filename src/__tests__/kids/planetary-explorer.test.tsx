@@ -257,7 +257,7 @@ describe('Standalone /planets Page Route (D-04, THREE-04)', () => {
     const { container } = render(<PlanetsPage />);
     const main = container.querySelector('main');
     expect(main).toBeInTheDocument();
-    expect(main?.className).toContain('w-screen h-screen overflow-hidden bg-slate-950');
+    expect(main?.className).toContain('w-full h-full overflow-hidden bg-slate-950');
     expect(screen.getByTestId('planetary-explorer-root')).toBeInTheDocument();
   });
 });

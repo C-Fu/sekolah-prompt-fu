@@ -236,23 +236,6 @@ export function ProgressMap() {
   );
 }
 
-function generatePathD(positions: { x: number; y: number }[]): string {
-  if (positions.length === 0) return "";
-  
-  let d = `M ${positions[0].x} ${positions[0].y}`;
-  
-  for (let i = 1; i < positions.length; i++) {
-    const prev = positions[i - 1];
-    const curr = positions[i];
-    const midX = (prev.x + curr.x) / 2;
-    // Create smooth curves
-    d += ` Q ${midX} ${prev.y}, ${midX} ${(prev.y + curr.y) / 2}`;
-    d += ` Q ${midX} ${curr.y}, ${curr.x} ${curr.y}`;
-  }
-  
-  return d;
-}
-
 // Generate pixelated path using straight line segments (stair-step pattern)
 function generatePixelPathD(positions: { x: number; y: number }[]): string {
   if (positions.length === 0) return "";

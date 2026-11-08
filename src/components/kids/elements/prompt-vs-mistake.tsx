@@ -191,7 +191,7 @@ export function PromptVsMistake({
                     style={{ clipPath: smallPixelClipPath }}
                   >
                     <p className="text-sm text-[#2C1810] m-0 whitespace-pre-wrap leading-tight">
-                      "{text}"
+                      &ldquo;{text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -288,36 +288,6 @@ function PixelRefreshIcon() {
       <rect x="6" y="13" width="4" height="2" fill="currentColor" />
       <rect x="12" y="3" width="3" height="2" fill="currentColor" />
       <rect x="1" y="11" width="3" height="2" fill="currentColor" />
-    </svg>
-  );
-}
-
-function PixelThinkingIcon() {
-  return (
-    <svg viewBox="0 0 32 32" className="w-12 h-12" style={{ imageRendering: "pixelated" }}>
-      {/* Face circle */}
-      <rect x="10" y="4" width="12" height="2" fill="#F59E0B" />
-      <rect x="8" y="6" width="2" height="2" fill="#F59E0B" />
-      <rect x="22" y="6" width="2" height="2" fill="#F59E0B" />
-      <rect x="6" y="8" width="2" height="4" fill="#F59E0B" />
-      <rect x="24" y="8" width="2" height="4" fill="#F59E0B" />
-      <rect x="6" y="12" width="2" height="4" fill="#F59E0B" />
-      <rect x="24" y="12" width="2" height="4" fill="#F59E0B" />
-      <rect x="8" y="16" width="2" height="2" fill="#F59E0B" />
-      <rect x="22" y="16" width="2" height="2" fill="#F59E0B" />
-      <rect x="10" y="18" width="12" height="2" fill="#F59E0B" />
-      {/* Fill */}
-      <rect x="8" y="8" width="16" height="8" fill="#FEF3C7" />
-      <rect x="10" y="6" width="12" height="2" fill="#FEF3C7" />
-      <rect x="10" y="16" width="12" height="2" fill="#FEF3C7" />
-      {/* Eyes */}
-      <rect x="10" y="10" width="2" height="2" fill="#2C1810" />
-      <rect x="20" y="10" width="2" height="2" fill="#2C1810" />
-      {/* Thinking mouth */}
-      <rect x="14" y="14" width="4" height="2" fill="#2C1810" />
-      {/* Thought bubbles */}
-      <rect x="26" y="4" width="2" height="2" fill="#8B7355" />
-      <rect x="28" y="2" width="3" height="3" fill="#8B7355" />
     </svg>
   );
 }

@@ -137,7 +137,7 @@ export function StepByStep({
             <span className="text-lg font-bold text-[#7C3AED]">{t("addMagicWords")}</span>
             <span className="text-2xl group-hover:animate-bounce">✨</span>
           </div>
-          <div className="text-[#8B5CF6] font-medium mt-1">"{magicWords}"</div>
+          <div className="text-[#8B5CF6] font-medium mt-1">&ldquo;{magicWords}&rdquo;</div>
         </button>
       )}
 
@@ -149,7 +149,7 @@ export function StepByStep({
               <span className="text-xl">✨</span>
               <span className="font-bold text-[#7C3AED]">{t("magicWordsActive")}</span>
             </div>
-            <p className="text-[#8B5CF6] m-0">"{magicWords}"</p>
+            <p className="text-[#8B5CF6] m-0">&ldquo;{magicWords}&rdquo;</p>
           </div>
 
           {/* Steps */}

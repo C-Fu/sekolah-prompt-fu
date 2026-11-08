@@ -158,7 +158,6 @@ export function MusicButton() {
   const localAudioRef = useRef<HTMLAudioElement | null>(null);
   
   const isPlaying = context?.isPlaying ?? localPlaying;
-  const setIsPlaying = context?.setIsPlaying ?? setLocalPlaying;
 
   const toggleMusic = useCallback(() => {
     if (context) {

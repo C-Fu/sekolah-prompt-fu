@@ -100,15 +100,6 @@ export function PromptDoctor({
   const getCurrentPrompt = () => {
     if (isHealed) return healedPrompt;
     
-    let currentPrompt = brokenPrompt;
-    // Apply fixes in order
-    problems.forEach((problem, index) => {
-      if (fixedProblems.includes(index)) {
-        // This is simplified - in reality you'd need smarter text manipulation
-        currentPrompt = problem.fix;
-      }
-    });
-    
     // Return the last applied fix or broken prompt
     if (fixedProblems.length > 0) {
       return problems[fixedProblems[fixedProblems.length - 1]].fix;
@@ -163,7 +154,7 @@ export function PromptDoctor({
           </span>
         </div>
         <p className="text-lg font-medium text-[#2C1810] m-0">
-          "{getCurrentPrompt()}"
+          &ldquo;{getCurrentPrompt()}&rdquo;
         </p>
       </div>
 

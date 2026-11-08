@@ -142,7 +142,7 @@ export function PromptLab({
       <div className="bg-white/80 rounded-lg p-4 mb-4 border-2 border-[#10B981]">
         <div className="text-sm font-medium text-[#047857] mb-2">{t("yourPrompt")}</div>
         <p className="text-lg font-medium text-[#2C1810] m-0">
-          "{getCurrentPrompt()}"
+          &ldquo;{getCurrentPrompt()}&rdquo;
         </p>
       </div>
 
@@ -162,7 +162,7 @@ export function PromptLab({
             {t("aiSays")}
           </span>
         </div>
-        <p className="text-[#5D4037] m-0 italic">"{getCurrentResponse()}"</p>
+        <p className="text-[#5D4037] m-0 italic">&ldquo;{getCurrentResponse()}&rdquo;</p>
       </div>
 
       {/* Improvement buttons */}
