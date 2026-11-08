@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { analyticsKids } from "@/lib/analytics";
-import { PixelRobot, PixelStar, PixelTree, PixelCastle } from "@/components/kids/elements/pixel-art";
+import { PixelRobot, PixelStar, PixelTree, PixelCastle, PixelRocket } from "@/components/kids/elements/pixel-art";
 
 export function KidsHomeContent() {
   const t = useTranslations("kids");
@@ -102,22 +102,68 @@ export function KidsHomeContent() {
                 {t("home.readyTitle")}
               </h2>
               
-              <p className="text-xl md:text-2xl text-[#5D4037] mb-8">
+              <p className="text-xl md:text-2xl text-[#5D4037] mb-6">
                 {t("home.readyMessage")}
               </p>
 
-              <Link 
-                href="/map"
-                onClick={() => analyticsKids.startGame()}
-                className="inline-block pixel-btn pixel-btn-green text-xl md:text-2xl px-8 py-4"
-              >
-                <span className="flex items-center gap-2">
-                  <PixelPlayIcon />
-                  {t("home.startButton")}
-                </span>
-              </Link>
+              {/* Dual entry cards per D-01, D-02 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-xl mx-auto mb-6">
+                {/* Earth: Foundational Prompting Academy */}
+                <Link
+                  href="/map"
+                  onClick={() => analyticsKids.startGame()}
+                  className="pixel-panel pixel-panel-green p-4 flex flex-col justify-between hover:scale-[1.02] transition-transform group cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#ffffff] border-2 border-[#16A34A] pixel-border-sm text-[#16A34A] font-bold text-xs uppercase tracking-wide">
+                        <PixelStar filled className="w-3 h-3" />
+                        {t("home.earthFoundationalBadge")}
+                      </span>
+                      <PixelPlayIcon className="w-5 h-5 text-[#16A34A] group-hover:translate-x-1 transition-transform" />
+                    </div>
+                    <h3 className="font-bold text-xl md:text-2xl text-[#2C1810] mb-1">
+                      {t("home.startEarthTitle")}
+                    </h3>
+                    <p className="text-sm md:text-base text-[#5D4037]">
+                      {t("home.startEarthDesc")}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t-2 border-[#16A34A]/20 flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#16A34A] uppercase">{t("home.startButton")}</span>
+                    <span className="text-xs text-[#5D4037]">5 Worlds</span>
+                  </div>
+                </Link>
 
-              <p className="mt-6 text-lg text-[#8B7355]">
+                {/* Solar System: 3D Subject Explorations */}
+                <Link
+                  href="/planets"
+                  onClick={() => analyticsKids.exploreSolarSystem()}
+                  className="pixel-panel pixel-panel-blue p-4 flex flex-col justify-between hover:scale-[1.02] transition-transform group cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#ffffff] border-2 border-[#2563EB] pixel-border-sm text-[#2563EB] font-bold text-xs uppercase tracking-wide">
+                        <PixelStar filled className="w-3 h-3" />
+                        {t("home.cosmosBadge")}
+                      </span>
+                      <PixelRocket className="w-4 h-6 text-[#2563EB] group-hover:-translate-y-1 transition-transform" />
+                    </div>
+                    <h3 className="font-bold text-xl md:text-2xl text-[#2C1810] mb-1">
+                      {t("home.explorePlanetsTitle")}
+                    </h3>
+                    <p className="text-sm md:text-base text-[#5D4037]">
+                      {t("home.explorePlanetsDesc")}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t-2 border-[#2563EB]/20 flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#2563EB] uppercase">{t("header.planets") || "3D Space"}</span>
+                    <span className="text-xs text-[#5D4037]">5 Planets</span>
+                  </div>
+                </Link>
+              </div>
+
+              <p className="mt-4 text-lg text-[#8B7355]">
                 {t("home.ageNote")}
               </p>
             </div>

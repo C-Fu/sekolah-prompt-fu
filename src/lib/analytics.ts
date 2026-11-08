@@ -111,4 +111,11 @@ export const analyticsKids = {
       category: "kids",
     });
   },
+
+  exploreSolarSystem: () => {
+    trackEvent({
+      action: "kids_explore_solar_system",
+      category: "kids",
+    });
+  },
 };

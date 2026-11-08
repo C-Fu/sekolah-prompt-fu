@@ -86,6 +86,12 @@
         }
       },
       "startButton": "Start Playing!",
+      "startEarthTitle": "Start on Earth (Prompting 101)",
+      "startEarthDesc": "Learn foundational AI prompting skills across 5 worlds",
+      "explorePlanetsTitle": "Explore Solar System (3D)",
+      "explorePlanetsDesc": "Fly through space to discover BM, Math, English & Moral missions",
+      "earthFoundationalBadge": "Foundational Academy",
+      "cosmosBadge": "Cosmic Missions",
       "ageNote": "Best for kids ages 8-14 who can read and write",
       "whatYouLearn": "What You'll Learn",
       "readyTitle": "Ready to Start?",
