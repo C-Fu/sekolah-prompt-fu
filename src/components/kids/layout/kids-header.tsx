@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState, useRef } from "react";
 import { getTotalStars, getCompletedLevelsCount } from "@/lib/kids/progress";
 import { getTotalLevels, getLevelBySlug } from "@/lib/kids/levels";
-import { PixelStar, PixelRobot } from "@/components/kids/elements/pixel-art";
+import { PixelStar, PixelRobot, PixelRocket } from "@/components/kids/elements/pixel-art";
 import { MusicButton } from "./background-music";
 import { SettingsButton } from "./settings-modal";
 import { LanguageToggle } from "./language-toggle";
@@ -92,6 +92,14 @@ export function KidsHeader() {
             >
               <PixelMapIcon />
             </Link>
+            <Link 
+              href="/planets" 
+              className="pixel-btn pixel-btn-blue px-3 py-1.5 text-sm h-8 flex items-center gap-1"
+              title={t("header.planets")}
+              aria-label={t("header.planets")}
+            >
+              <PixelRocket className="w-4 h-4" />
+            </Link>
             {/* Back to main site */}
             <Link 
               href="/" 
@@ -141,6 +149,14 @@ export function KidsHeader() {
                   >
                     <PixelMapIcon />
                     {t("level.map")}
+                  </Link>
+                  <Link 
+                    href="/planets" 
+                    className="pixel-btn pixel-btn-blue px-3 py-2 text-sm flex items-center justify-center gap-2"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <PixelRocket className="w-4 h-4" />
+                    {t("header.planets")}
                   </Link>
                   <Link 
                     href="/" 

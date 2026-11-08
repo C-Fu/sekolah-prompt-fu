@@ -61,6 +61,7 @@
       "levels": "levels",
       "home": "Home",
       "map": "Map",
+      "planets": "Solar System",
       "mainSite": "Main Site"
     },
     "home": {
@@ -107,7 +108,9 @@
       "subtitle": "Choose a level and start your adventure!",
       "worldLevels": "{count} levels",
       "levelNumber": "Level {number}",
-      "locked": "Complete previous level to unlock"
+      "locked": "Complete previous level to unlock",
+      "toPlanetsBanner": "Fly to Solar System",
+      "toPlanetsSub": "Explore 3D planets & subject adventures!"
     },
     "worlds": {
       "1": {

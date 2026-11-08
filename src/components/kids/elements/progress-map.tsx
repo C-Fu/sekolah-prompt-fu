@@ -23,7 +23,8 @@ import {
   PixelPond,
   PixelCar,
   PixelOldCar,
-  PixelVan 
+  PixelVan,
+  PixelRocket
 } from "./pixel-art";
 
 export function ProgressMap() {
@@ -60,6 +61,25 @@ export function ProgressMap() {
 
   return (
     <div className="relative h-full flex flex-col">
+      {/* Space portal floating banner per FLOW-02 & D-05 */}
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+        <Link
+          href="/planets"
+          className="pixel-btn pixel-btn-blue inline-flex items-center gap-2.5 px-4 py-2 text-sm sm:text-base shadow-xl hover:scale-105 transition-transform"
+          title={t("map.toPlanetsSub")}
+        >
+          <PixelRocket className="w-5 h-7" />
+          <div className="text-left leading-tight">
+            <span className="block font-bold text-white text-xs sm:text-sm tracking-wide">
+              {t("map.toPlanetsBanner")}
+            </span>
+            <span className="block text-[10px] sm:text-xs text-sky-200 opacity-90 hidden sm:block">
+              {t("map.toPlanetsSub")}
+            </span>
+          </div>
+        </Link>
+      </div>
+
       {/* Scroll controls for desktop */}
       <div className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20">
         <button 

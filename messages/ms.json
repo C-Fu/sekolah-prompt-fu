@@ -61,6 +61,7 @@
       "levels": "tahap",
       "home": "Utama",
       "map": "Peta",
+      "planets": "Sistem Suria",
       "mainSite": "Laman Utama"
     },
     "home": {
@@ -107,7 +108,9 @@
       "subtitle": "Pilih satu tahap dan mulakan pengembaraan anda!",
       "worldLevels": "{count} tahap",
       "levelNumber": "Tahap {number}",
-      "locked": "Siapkan tahap sebelumnya untuk membuka kunci"
+      "locked": "Siapkan tahap sebelumnya untuk membuka kunci",
+      "toPlanetsBanner": "Terbang ke Sistem Suria",
+      "toPlanetsSub": "Terokai planet 3D & pengembaraan subjek!"
     },
     "worlds": {
       "1": {
