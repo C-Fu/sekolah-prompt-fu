@@ -346,6 +346,46 @@
       "resetConfirm": "Ya, Set Semula Semuanya",
       "resetComplete": "Kemajuan diset semula! Memuatkan semula...",
       "cancel": "Batal"
+    },
+    "planets": {
+      "title": "Peneroka Sistem Suria",
+      "subtitle": "Pilih dunia cakerawala untuk meneroka subjek dan bentuk muka bumi!",
+      "hubTitle": "Sistem Planet",
+      "explorePlanet": "Periksa Planet",
+      "viewCartography": "Kartografi Geologi",
+      "yearBadge": "Tahun {year}",
+      "capstoneBadge": "Cabaran Unggul",
+      "backToOrbit": "Kembali ke Orbit",
+      "launchMission": "Mula Misi",
+      "lockedFeature": "Selesaikan tahap Tahun sebelumnya untuk buka",
+      "telemetry": {
+        "coordinates": "Koordinat",
+        "elevation": "Ketinggian / Kedalaman",
+        "geology": "Profil Geologi",
+        "objective": "Objektif Pembelajaran"
+      },
+      "worlds": {
+        "earth-prompting": {
+          "title": "Bumi: Asas Prompting",
+          "tagline": "Pusat kecerdasan dan penguasaan teknik binaan arahan AI."
+        },
+        "moon-bm": {
+          "title": "Bulan: Bahasa Melayu",
+          "tagline": "Lautan lava purba menyemarakkan keindahan bahasa dan sastera Melayu."
+        },
+        "mars-english": {
+          "title": "Marikh: Bahasa Inggeris",
+          "tagline": "Lembah raksasa membina keyakinan bertutur dan berkarya dalam bahasa Inggeris."
+        },
+        "venus-matematik": {
+          "title": "Zuhrah: Matematik",
+          "tagline": "Kabut keemasan merungkai ketertiban logik dan kejituan nombor."
+        },
+        "mercury-moral": {
+          "title": "Utarid: Pendidikan Moral",
+          "tagline": "Kawah basalt membina keteguhan integriti, empati dan keperibadian mulia."
+        }
+      }
     }
   },
   "seo": {

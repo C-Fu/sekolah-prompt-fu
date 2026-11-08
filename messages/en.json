@@ -346,6 +346,46 @@
       "resetConfirm": "Yes, Reset Everything",
       "resetComplete": "Progress reset! Reloading...",
       "cancel": "Cancel"
+    },
+    "planets": {
+      "title": "Solar System Explorer",
+      "subtitle": "Select a celestial world to explore subjects and geological features!",
+      "hubTitle": "Planetary System",
+      "explorePlanet": "Inspect Planet",
+      "viewCartography": "Geological Cartography",
+      "yearBadge": "Tahun {year}",
+      "capstoneBadge": "Capstone Boss",
+      "backToOrbit": "Return to Orbit",
+      "launchMission": "Start Mission",
+      "lockedFeature": "Unlock prior Year features to enter",
+      "telemetry": {
+        "coordinates": "Coordinates",
+        "elevation": "Elevation / Depth",
+        "geology": "Geological Profile",
+        "objective": "Learning Objective"
+      },
+      "worlds": {
+        "earth-prompting": {
+          "title": "Earth: Foundational Prompting",
+          "tagline": "The cradle of intelligence and prompt crafting mastery."
+        },
+        "moon-bm": {
+          "title": "Moon: Bahasa Melayu",
+          "tagline": "Ancient volcanic maria inspiring eloquence and rich Malay prose."
+        },
+        "mars-english": {
+          "title": "Mars: English Language",
+          "tagline": "Vast canyons and soaring volcanoes fueling bold English expression."
+        },
+        "venus-matematik": {
+          "title": "Venus: Mathematics",
+          "tagline": "Golden clouds concealing geometric order and numerical logic."
+        },
+        "mercury-moral": {
+          "title": "Mercury: Moral Education",
+          "tagline": "Sun-scorched basalt craters forged in integrity, empathy, and courage."
+        }
+      }
     }
   },
   "seo": {

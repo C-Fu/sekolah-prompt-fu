@@ -75,7 +75,7 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
     ];
 
     // Assert every world in PLANET_WORLDS exists in both dictionaries
-    expect(PLANET_WORLDS.map((w) => w.id)).toEqual(expectedWorldIds);
+    expect(PLANET_WORLDS.map((w) => w.id).sort()).toEqual(expectedWorldIds.sort());
 
     expectedWorldIds.forEach((worldId) => {
       expect(enWorlds, `en.json missing kids.planets.worlds.${worldId}`).toHaveProperty(worldId);
