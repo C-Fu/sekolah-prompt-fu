@@ -31,11 +31,11 @@
 - **Requirements Covered:** FLOW-01, FLOW-02, FLOW-03
 
 ### Phase 12: Planet-Themed Lesson Aesthetics & Subject Prompt Lessons
-**Goal:** Implement dynamic planet-themed backgrounds for lesson views and wire subject-specific prompt engineering tasks for KSSR/KBAT standards.
+**Goal:** Implement dynamic planet-themed backgrounds for lesson views and wire subject-specific prompt engineering tasks for KSSR/KBAT standards with a minimum of 7 interactive stages per lesson.
 - **Plans:**
   - 12-01: Dynamic lesson page theming (background gradients, starry sky, crust palettes) matching the active planet world.
-  - 12-02: Ensure subject prompt lessons teach effective prompt structuring based on subject constraints.
-- **Requirements Covered:** THEME-01, PEDAG-01
+  - 12-02: Ensure subject prompt lessons teach effective prompt structuring based on subject constraints, authoring at least 7 stages per lesson.
+- **Requirements Covered:** THEME-01, PEDAG-01, PEDAG-02
 
 ### Phase 13: Static Export & Quality Gate Certification
 **Goal:** Certify the entire application end-to-end with zero regressions, strict type safety, import closure, and 100% static GitHub Pages export.

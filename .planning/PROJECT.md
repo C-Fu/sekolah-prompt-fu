@@ -61,6 +61,7 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - [ ] **FLOW-01**: Update Title Screen flow to seamlessly transition into the 3D Planetary Explorer.
 - [ ] **FLOW-02**: Implement animated Rocket return from Earth/lesson completion back to the Planetary Explorer screen.
 - [ ] **CURR-01**: Align subject-specific prompt lessons across Moon (BM), Mars (EN), Venus (Math), Mercury (Sains/Moral) to teach effective prompt structuring for kids following KSSR/KBAT principles.
+- [ ] **CURR-02**: Enforce a minimum of 7 interactive stages/sections per lesson (e.g. Tahun 1 Bahasa Melayu) to ensure deep pedagogical progression and mastery.
 - [ ] **GATE-01**: All new pages, components, and routes pass `npm run verify` (`tsc`, `vitest`, `npm run check:closure`, `npm run check:vocab`, and static `out/` export inspection).
 
 ### Out of Scope
