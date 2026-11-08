@@ -1,12 +1,12 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Selamat datang ke **Marikh (Planet English)**! 🔴 Dalam kelas English Tahun 1, kita belajar cara meminta barang dengan sopan dan menerangkan warna mainan kegemaran!
+Selamat datang ke **Marikh (Planet English)**! 🔴 Dalam kelas English Tahun 1, kita belajar cara meminta barang dengan sopan dan menerangkan warna mainan kegemaran! Kita kini berada di dataran Elysium Planitia!
 </Panel>
 </Section>
 
 <Section>
 <Panel character="peromfu" mood="thinking">
-Apabila bercakap dengan AI dalam English, kita boleh memberikan **Peranan (Role)** kepada AI, contohnya sebagai pembantu kedai mainan yang peramah!
+Apabila bercakap dengan AI dalam English, kita boleh memberikan **Peranan (Role)** kepada AI, contohnya sebagai pembantu kedai mainan yang peramah! Ucapan sopan menjadikan perbualan sangat menyenangkan.
 </Panel>
 </Section>
 
@@ -35,14 +35,61 @@ Mari bina prompt lengkap: **[Peranan AI] + [Tindakan] + [Syarat Kesopanan]**.
 <DragDropPrompt
   title="Susun Prompt Peranan & Kesopanan"
   instruction="Susun blok perkataan dalam English untuk mengarahkan bot kedai mainan:"
-  fragments={[
-    { id: "1", text: "Act as a friendly shopkeeper,", type: "subject" },
-    { id: "2", text: "show me three green toy cars,", type: "action" },
-    { id: "3", text: "and speak politely in one short sentence.", type: "detail" }
+  pieces={[
+    "Act as a friendly shopkeeper,",
+    "show me three green toy cars,",
+    "and speak politely in one short sentence."
   ]}
-  correctOrder={["1", "2", "3"]}
-  targetPrompt="Act as a friendly shopkeeper, show me three green toy cars, and speak politely in one short sentence."
-  explanation="Memberi peranan (shopkeeper) dan had ayat (one short sentence) menjadikan lakonan perbualan AI sangat realistik dan mudah difahami murid Tahun 1!"
+  correctOrder={[0, 1, 2]}
   successMessage="Superb! AI kini memegang peranan pembantu kedai mainan yang sangat sopan!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Kata Ajaib — Perbualan Di Kedai Mainan 🚀
+
+Kini cipta permintaan membeli mainan dengan gabungan warna, jenis mainan dan ucapan berhemah!
+
+<MagicWords
+  title="Bina Dialog Bersopan Santun"
+  sentence="Hello! Please help me find a ___ ___ for my ___."
+  blanks={[
+    { hint: "🎨 warna mainan", answers: ["bright red", "shiny blue", "cheerful yellow", "cool green", "gleaming purple"] },
+    { hint: "🧸 mainan idaman", answers: ["racing car", "teddy bear", "spinning top", "flying kite", "toy robot"] },
+    { hint: "🎁 penerima hadiah", answers: ["little brother", "best friend", "cousin", "school desk", "toy collection"] }
+  ]}
+  successMessage="Syabas! Anda menghasilkan permintaan mainan yang jelas dan sopan!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Doktor Prompt — Baiki Arahan Mainan 🩺
+
+Peromfu terdengar arahan yang kasar dan kabur: *"Give toys"*. Mari rawat prompt ini supaya AI pembantu kedai faham dengan mesra!
+
+<PromptDoctor
+  title="Rawat Prompt Mainan"
+  brokenPrompt="Give toys"
+  problems={[
+    { issue: "Tiada Kesopanan", symptom: "Tiada ucapan salam atau kata 'please'", fix: "Please show me toys" },
+    { issue: "Tiada Butiran Mainan", symptom: "Mainan jenis apa yang diingini?", fix: "Please show me two wooden puzzle toys" },
+    { issue: "Tiada Peranan & Format", symptom: "Siapakah AI ini dan bagaimana ia patut menjawab?", fix: "Act as a friendly toy store guide. Please recommend two colorful wooden puzzle toys in one short, polite sentence." }
+  ]}
+  healedPrompt="Act as a friendly toy store guide. Please recommend two colorful wooden puzzle toys in one short, polite sentence."
+  successMessage="Hebat! Anda merawat prompt menjadi dialog yang sangat beradab sopan!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Jaguh Dialog English! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Hebat sekali penjelajahan anda di Marikh! Anda kini mahir menggunakan ucapan sopan, peranan AI, dan kata sifat warna dalam English!
+</Panel>
+
+<LevelComplete
+  levelSlug="7-1-english-colorful-toys"
+  stars={3}
+  message="Tahniah! Anda menguasai dialog sopan dan mainan di Planet Marikh!"
 />
 </Section>

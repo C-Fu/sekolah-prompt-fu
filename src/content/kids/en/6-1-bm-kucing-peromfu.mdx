@@ -1,12 +1,12 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Welcome to the **Moon (Bahasa Melayu Planet)**! 🌕 I am **Peromfu**, your Year 1 classmate. Our teacher asked us to write sentences describing our favorite pets!
+Welcome to the **Moon (Bahasa Melayu Planet)**! 🌕 I am **Peromfu**, your Year 1 classmate. We have landed near the Ocean of Storms (Oceanus Procellarum)! Today, our teacher wants us to write vivid sentences describing our favorite pets.
 </Panel>
 </Section>
 
 <Section>
 <Panel character="peromfu" mood="thinking">
-Did you know? To guide an AI to generate an exciting story or picture, we must provide specific **Action Verbs**, not just vague words!
+Did you know? To guide an AI to generate an exciting story or picture, we must provide specific **Action Verbs**, not just vague words! Action verbs bring characters to life.
 </Panel>
 </Section>
 
@@ -35,14 +35,61 @@ Let's help Peromfu assemble a structured prompt: **[Character] + [Action] + [Set
 <DragDropPrompt
   title="Assemble the Story Prompt"
   instruction="Drag the fragments to build a complete instruction for the AI:"
-  fragments={[
-    { id: "1", text: "Whiskers the kitten", type: "subject" },
-    { id: "2", text: "runs happily", type: "action" },
-    { id: "3", text: "across the green lawn", type: "detail" }
+  pieces={[
+    "Whiskers the kitten",
+    "runs happily",
+    "across the green lawn"
   ]}
-  correctOrder={["1", "2", "3"]}
-  targetPrompt="Whiskers the kitten runs happily across the green lawn"
-  explanation="Arranging [Subject] + [Action] + [Setting] gives AI all the necessary context to generate a vivid scene!"
+  correctOrder={[0, 1, 2]}
   successMessage="Awesome job! Peromfu and the AI now have the complete picture!"
+/>
+</Section>
+
+<Section>
+## Challenge 3: Add Magical Describing Words ✨
+
+Now let's enhance our kitten story with colorful adjectives so the AI can imagine every detail!
+
+<MagicWords
+  title="Enrich the Story Details"
+  sentence="Please write a story about a ___ kitten who loves to ___ in the ___."
+  blanks={[
+    { hint: "🐱 kitten appearance", answers: ["fluffy white", "playful calico", "curious tabby", "tiny striped", "silky black"] },
+    { hint: "⭐ favorite action", answers: ["chase butterflies", "leap over cushions", "roll in yarn", "pounce softly", "nap peacefully"] },
+    { hint: "🏡 cozy setting", answers: ["sunny garden", "warm living room", "flower courtyard", "green backyard", "spacious patio"] }
+  ]}
+  successMessage="Splendid! Describing words make the scene vivid and full of imagination!"
+/>
+</Section>
+
+<Section>
+## Challenge 4: Prompt Doctor — Fix the Kitten Prompt 🩺
+
+Peromfu saw a friend write a very weak prompt: *"Draw kitten"*. Let's heal it so the AI knows what to illustrate!
+
+<PromptDoctor
+  title="Heal the Kitten Prompt"
+  brokenPrompt="Draw kitten"
+  problems={[
+    { issue: "Too Vague", symptom: "What is the kitten doing? What does it look like?", fix: "Draw a playful kitten" },
+    { issue: "Missing Action", symptom: "Is the kitten sleeping or running?", fix: "Draw a playful kitten chasing a colorful ball" },
+    { issue: "Missing Setting", symptom: "Where is this happening?", fix: "Draw a playful white kitten jumping to catch a colorful ball on a sunny grass field" }
+  ]}
+  healedPrompt="Draw a playful white kitten jumping to catch a colorful ball on a sunny grass field"
+  successMessage="You healed the prompt! The AI can now illustrate a complete, lively scene!"
+/>
+</Section>
+
+<Section>
+## Mastery Boss Challenge: You Are a Prompt Master! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Fantastic work, space cadet! You conquered the Moon's Bahasa Melayu challenges by mastering action verbs, descriptive details, and prompt structure!
+</Panel>
+
+<LevelComplete
+  levelSlug="6-1-bm-kucing-peromfu"
+  stars={3}
+  message="You mastered action verbs and story prompts on the Moon!"
 />
 </Section>

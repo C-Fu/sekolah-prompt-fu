@@ -1,12 +1,12 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Welcome to **Mars (English Language Planet)**! 🔴 In Year 1 English, we learn how to make polite requests and describe our favorite colorful toys!
+Welcome to **Mars (English Language Planet)**! 🔴 In Year 1 English, we learn how to make polite requests and describe our favorite colorful toys! We are standing right here on the vast plains of Elysium Planitia!
 </Panel>
 </Section>
 
 <Section>
 <Panel character="peromfu" mood="thinking">
-When talking to an AI, we can assign it a **Role / Persona**, such as a friendly shop assistant who helps us find what we need!
+When talking to an AI, we can assign it a **Role / Persona**, such as a friendly shop assistant who helps us find what we need! Polite words make conversations pleasant and helpful.
 </Panel>
 </Section>
 
@@ -35,14 +35,61 @@ Let's build a complete prompt: **[AI Role] + [Action / Request] + [Politeness & 
 <DragDropPrompt
   title="Assemble the Role-Play Prompt"
   instruction="Drag the fragments in order to instruct the toy shop AI bot:"
-  fragments={[
-    { id: "1", text: "Act as a friendly shopkeeper,", type: "subject" },
-    { id: "2", text: "show me three green toy cars,", type: "action" },
-    { id: "3", text: "and speak politely in one short sentence.", type: "detail" }
+  pieces={[
+    "Act as a friendly shopkeeper,",
+    "show me three green toy cars,",
+    "and speak politely in one short sentence."
   ]}
-  correctOrder={["1", "2", "3"]}
-  targetPrompt="Act as a friendly shopkeeper, show me three green toy cars, and speak politely in one short sentence."
-  explanation="Setting a persona ('shopkeeper') and a length limit ('one short sentence') keeps the conversation friendly, focused, and easy for Year 1 learners!"
+  correctOrder={[0, 1, 2]}
   successMessage="Superb! The AI is now ready to role-play as a polite shopkeeper!"
+/>
+</Section>
+
+<Section>
+## Challenge 3: Magic Words — Toy Explorer Dialogue 🚀
+
+Now craft your toy shopping request with custom adjectives, toy types, and polite greetings!
+
+<MagicWords
+  title="Craft the Polite Dialogue"
+  sentence="Hello! Please help me find a ___ ___ for my ___."
+  blanks={[
+    { hint: "🎨 color adjective", answers: ["bright red", "shiny blue", "cheerful yellow", "cool green", "gleaming purple"] },
+    { hint: "🧸 favorite toy", answers: ["racing car", "teddy bear", "spinning top", "flying kite", "toy robot"] },
+    { hint: "🎁 recipient", answers: ["little brother", "best friend", "cousin", "school desk", "toy collection"] }
+  ]}
+  successMessage="Splendid! You made a clear, polite toy request!"
+/>
+</Section>
+
+<Section>
+## Challenge 4: Prompt Doctor — Fix the Toy Request 🩺
+
+Peromfu heard an impolite, confusing command: *"Give toys"*. Let's heal it so the AI shopkeeper can understand and respond politely!
+
+<PromptDoctor
+  title="Heal the Toy Prompt"
+  brokenPrompt="Give toys"
+  problems={[
+    { issue: "Impolite Tone", symptom: "No greeting or magic polite words like 'please'", fix: "Please show me toys" },
+    { issue: "No Item Details", symptom: "What kind of toys are you looking for?", fix: "Please show me two wooden puzzle toys" },
+    { issue: "Missing Persona & Format", symptom: "Who is AI pretending to be and how should it reply?", fix: "Act as a friendly toy store guide. Please recommend two colorful wooden puzzle toys in one short, polite sentence." }
+  ]}
+  healedPrompt="Act as a friendly toy store guide. Please recommend two colorful wooden puzzle toys in one short, polite sentence."
+  successMessage="You healed the prompt! The toy shopkeeper AI can now serve you with cheerful smiles!"
+/>
+</Section>
+
+<Section>
+## Mastery Boss Challenge: Master of English Dialogue! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Brilliant work on Mars! You mastered polite phrasing, color descriptions, and persona prompts in English. You are ready to explore the rest of the cosmos!
+</Panel>
+
+<LevelComplete
+  levelSlug="7-1-english-colorful-toys"
+  stars={3}
+  message="You mastered polite English toy requests on Mars!"
 />
 </Section>

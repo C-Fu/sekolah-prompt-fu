@@ -1,12 +1,12 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Selamat datang ke **Bulan (Planet Bahasa Melayu)**! 🌕 Saya **Peromfu**, rakan sekelas anda di Tahun 1. Cikgu suruh kita buat latihan bina ayat tentang haiwan peliharaan!
+Selamat datang ke **Bulan (Planet Bahasa Melayu)**! 🌕 Saya **Peromfu**, rakan sekelas anda di Tahun 1. Kita telah mendarat berhampiran Lautan Ribut (Oceanus Procellarum)! Hari ini cikgu meminta kita membina ayat tentang aksi haiwan peliharaan kesayangan.
 </Panel>
 </Section>
 
 <Section>
 <Panel character="peromfu" mood="thinking">
-Tahukah anda? Untuk mengarahkan AI melukis atau menceritakan aksi yang menarik, kita perlukan **Kata Kerja** yang tepat, bukan kata yang umum!
+Tahukah anda? Untuk mengarahkan AI melukis atau menceritakan aksi yang menarik, kita perlukan **Kata Kerja** yang tepat, bukan kata yang umum! Kata kerja menghidupkan watak cerita kita.
 </Panel>
 </Section>
 
@@ -35,14 +35,61 @@ Sekarang mari bantu Peromfu menyusun prompt lengkap mengikut susunan: **[Watak] 
 <DragDropPrompt
   title="Susun Arahan Lengkap untuk AI"
   instruction="Susun blok perkataan untuk menghasilkan arahan yang lengkap:"
-  fragments={[
-    { id: "1", text: "Si Comel", type: "subject" },
-    { id: "2", text: "berlari riang", type: "action" },
-    { id: "3", text: "di atas rumput hijau", type: "detail" }
+  pieces={[
+    "Si Comel",
+    "berlari riang",
+    "di atas rumput hijau"
   ]}
-  correctOrder={["1", "2", "3"]}
-  targetPrompt="Si Comel berlari riang di atas rumput hijau"
-  explanation="Susunan [Watak] + [Kata Kerja] + [Tempat] memberikan konteks lengkap kepada AI untuk menghasilkan cerita atau gambar yang hidup!"
+  correctOrder={[0, 1, 2]}
   successMessage="Hebat! Peromfu dan AI kini faham cerita lengkap Si Comel!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Tambah Kata Sifat Ajaib ✨
+
+Sekarang mari kita kembangkan cerita Si Comel dengan kata adjektif dan suasana yang indah supaya AI dapat membayangkan lukisan dengan lebih teliti!
+
+<MagicWords
+  title="Perincikan Butiran Cerita"
+  sentence="Sila tulis cerita tentang anak kucing yang berbulu ___ dan suka ___ di kawasan ___."
+  blanks={[
+    { hint: "🐱 rupa kucing", answers: ["putih gebu", "lebat bersinar", "kelabu lembut", "kuning belang", "hitam manis"] },
+    { hint: "⭐ aksi kegemaran", answers: ["mengejar rama-rama", "melompat riang", "bermain bebola", "meneroka taman", "berguling manja"] },
+    { hint: "🏡 suasana tempat", answers: ["taman bunga", "halaman rumah", "padang luas", "ruang tamu", "sudut bilik"] }
+  ]}
+  successMessage="Syabas! Kata sifat yang berwarna-warni menjadikan cerita sungguh hidup!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Doktor Prompt — Rawat Arahan Lemah 🩺
+
+Peromfu melihat rakan menulis prompt yang sangat ringkas: *"Lukis kucing"*. Mari kita rawat prompt ini supaya AI faham rupa dan aksinya!
+
+<PromptDoctor
+  title="Rawat Prompt Kucing"
+  brokenPrompt="Lukis kucing"
+  problems={[
+    { issue: "Terlalu Kabur", symptom: "Kucing rupa bagaimana? Apa yang sedang dilakukannya?", fix: "Lukis seekor anak kucing comel" },
+    { issue: "Tiada Aksi", symptom: "Kucing itu tidur atau melompat?", fix: "Lukis seekor anak kucing comel sedang melompat riang" },
+    { issue: "Tiada Tempat", symptom: "Di manakah kucing ini berada?", fix: "Lukis seekor anak kucing putih gebu melompat riang menangkap bola benang merah di atas rumput hijau" }
+  ]}
+  healedPrompt="Lukis seekor anak kucing putih gebu melompat riang menangkap bola benang merah di atas rumput hijau"
+  successMessage="Hebat! Anda berjaya merawat prompt menjadi arahan yang sangat lengkap dan jelas!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Anda Jaguh Bahasa & Prompt! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Cemerlang sekali, angkasawan cilik! Anda telah menakluki cabaran Bahasa Melayu di Bulan dengan menguasai kata kerja aktif, kata adjektif, dan struktur prompt yang sempurna!
+</Panel>
+
+<LevelComplete
+  levelSlug="6-1-bm-kucing-peromfu"
+  stars={3}
+  message="Tahniah! Anda menguasai kata kerja dan prompt cerita kucing di Bulan!"
 />
 </Section>
