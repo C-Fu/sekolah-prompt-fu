@@ -17,8 +17,8 @@ export const metadata: Metadata = buildPageMetadata({
  */
 export default function PlanetsPage() {
   return (
-    <main className="relative w-screen h-screen overflow-hidden bg-slate-950">
+    <div className="relative w-full h-full overflow-hidden bg-slate-950">
       <PlanetaryExplorer />
-    </main>
+    </div>
   );
 }
