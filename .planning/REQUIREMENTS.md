@@ -29,7 +29,7 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 ### 3. Game Flow & Navigation
 - [ ] **FLOW-01**: Greet users from Title screen with option to enter the 3D Planetary System directly or start at Earth.
 - [ ] **FLOW-02**: Earth serves as the starting world for foundational prompting lessons.
-- [ ] **FLOW-03**: Implement interactive Rocket animation/button at the conclusion of Earth lessons (and throughout lesson headers) that flies back to the Planetary Explorer.
+- [x] **FLOW-03**: Implement interactive Rocket animation/button at the conclusion of Earth lessons (and throughout lesson headers) that flies back to the Planetary Explorer.
 
 ### 4. Planet-Themed Lesson Aesthetics & Pedagogy
 - [ ] **THEME-01**: Adapt lesson background styling to mirror the aesthetic of the active planet (Earth greens/blues, Moon slate/silver, Mars oxidized red, Venus amber/sulfur, Mercury basalt gray).
