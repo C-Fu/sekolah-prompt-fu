@@ -69,5 +69,5 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 | THEME-01 | Phase 12 | Complete |
 | PEDAG-01 | Phase 12 | Complete |
 | PEDAG-02 | Phase 12 | Complete |
-| GATE-01 | Phase 12 | Complete |
-| GATE-02 | Phase 12 | Complete |
+| GATE-01 | Phase 13 | Satisfied |
+| GATE-02 | Phase 13 | Satisfied |
