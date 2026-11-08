@@ -15,13 +15,13 @@ The application is built 100% static (`output: 'export'`) with client-side persi
      * **Moon (Bulan)**: Bahasa Melayu
      * **Mars (Marikh)**: English Language
      * **Venus (Zuhrah)**: Matematik
-     * **Mercury (Utarid)**: Sains / Pendidikan Moral
-   - On each celestial world, 7 distinct geological features/regions correspond to Tahun 1 to Tahun 6 (and final boss/mastery challenge).
+     * **Mercury (Utarid)**: Pendidikan Moral
+   - On each celestial world, 7 distinct geological features/regions correspond to Tahun 1 to Tahun 6 (with feature 7 as Capstone Boss / Mastery Arena).
 
 2. **3D Planetary Navigation & Interactive Cartography:**
    - From the title screen, users can enter a 3D Planetary Explorer powered by Three.js (interactive orbit, rotation, lighting, and planetary cards with basic info).
    - Clicking a planet zooms/selects that celestial body and presents its 7 cartographic regions (Tahun 1-6).
-   - Earth is the starting point for foundational prompt lessons. Completing lessons or choosing to return launches a rocket animation that transitions back to the planetary system view.
+   - Earth is the starting point for foundational prompt lessons. Completing lessons triggers a rocket launch sequence returning to the planetary hub.
 
 3. **Static-First Architecture (GitHub Pages Ready):**
    - Next.js `output: 'export'` with `images: { unoptimized: true }`.
@@ -35,7 +35,7 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 
 5. **Quality Gates & Clean Imports:**
    - Dedicated scripts for import closure (`npm run check:closure`) and vocabulary checks (`npm run check:vocab`) wired into CI.
-   - Verified zero regression with `npm run verify` across all level routes and static assets.
+   - Verified zero regression with `npm run verify` across all 23 level routes, `/`, `/map`, `/planets`, and static assets.
 
 ## Requirements
 
@@ -51,26 +51,23 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - ✓ Header quick toggle button ("BM | EN") for 1-click language switching — v1.1
 - ✓ Researched and designed KSSR Semakan Year 1 prompt-learning pedagogy and initial planetary schema (`src/lib/kids/planets.ts`) — v1.1
 - ✓ Authored and registered pilot KSSR levels with static export certification — v1.1
+- ✓ Symmetrically mapped 5 celestial worlds to core subjects (Earth = Prompting, Moon = BM, Mars = English, Venus = Matematik, Mercury = Moral) and 35 authentic geological features with spherical math (`latLonToVector3`) — v1.2
+- ✓ SSR-safe Three.js canvas, bundled 7 equirectangular NASA textures (< 750 KB) with CC-BY-4.0 attribution, interactive solar system view with drag filter, deep planet cartography with beacon pins, and glassmorphic telemetry HUD — v1.2
+- ✓ Title Screen dual entry paths (`/map` vs `/planets`), retro pixel rocket sprite, and full-screen 3.. 2.. 1.. BLAST OFF! countdown animation on Earth graduation (`5-4-graduation-day`) transitioning to `/planets` — v1.2
+- ✓ Reactive `PlanetBackground` component adapting ambient sky, dust, clouds, and stars per planet, with accent-tinted lesson navigation borders — v1.2
+- ✓ Realigned curriculum to 23 levels across Worlds 1–9 and authored 4 subject lessons with minimum 7 interactive `<Section>` stages and `<LevelComplete>` celebration — v1.2
+- ✓ Added explicit inspection for `out/planets/index.html` to `scripts/verify-project.js`, eliminated all ESLint errors (0 errors), passed Malay vocabulary guard on 23 MDX files, verified 406 modules in closure, and certified 245/245 tests green with 100% static export — v1.2
 
-### Active (v1.2: 3D Planetary Hub, Subject Cartography & Rocket Return)
-- [ ] **PLANET-01**: Install Three.js & OrbitControls integration compatible with Next.js client-side rendering and static export.
-- [ ] **PLANET-02**: Build 3D Planetary Explorer component allowing 3D visualization, interactive orbit/spin, and basic planetary info inspection for Earth, Moon, Mars, Venus, and Mercury.
-- [ ] **PLANET-03**: Align planetary subject mapping: Earth (Foundational Prompt Lessons), Moon (Bahasa Melayu), Mars (English), Venus (Matematik), Mercury (Sains / Moral) with 7 geological features mapped to Tahun 1-6.
-- [ ] **PLANET-04**: Implement Planet Detail / Cartography Screen showing the 7 macro features/regions (Tahun 1-6) per planet with bilingual descriptions and lesson route triggers.
-- [ ] **PLANET-05**: Style lesson page backgrounds with dynamic planet-themed aesthetics (crust colors, stars, ambient glow) matching the active planet world.
-- [ ] **FLOW-01**: Update Title Screen flow to seamlessly transition into the 3D Planetary Explorer.
-- [ ] **FLOW-02**: Implement animated Rocket return from Earth/lesson completion back to the Planetary Explorer screen.
-- [ ] **CURR-01**: Align subject-specific prompt lessons across Moon (BM), Mars (EN), Venus (Math), Mercury (Sains/Moral) to teach effective prompt structuring for kids following KSSR/KBAT principles.
-- [ ] **CURR-02**: Enforce a minimum of 7 interactive stages/sections per lesson (e.g. Tahun 1 Bahasa Melayu) to ensure deep pedagogical progression and mastery.
-- [ ] **GATE-01**: All new pages, components, and routes pass `npm run verify` (`tsc`, `vitest`, `npm run check:closure`, `npm run check:vocab`, and static `out/` export inspection).
+### Active
+- (none — run `/gsd-new-milestone` to start v1.3)
 
 ### Out of Scope
 - Real-time online multiplayer or backend user accounts.
 - Live paid LLM API calls with real API keys during gameplay (game uses pre-computed interactive simulations, validator heuristics, and feedback).
-- Photorealistic high-poly NASA 8K textures that blow up static bundle size (procedural Three.js shaders/bump/specular or lightweight textures optimized for fast web loading).
+- Photorealistic high-poly NASA 8K textures that blow up static bundle size.
 
 ## Context
-Shipped **v1.1** on 2026-11-07. Entering **v1.2** to implement the 3D Planetary System hub, subject-specific cartography (7 features per planet for Tahun 1-6), planet-themed lesson aesthetics, and rocket navigation flow.
+Shipped **v1.2** on 2026-11-09 (Phases 09–13; 11 plans, 23 tasks). Total test suite is 245/245; `npm run verify` certifies TypeScript, Vitest, and static export inspection across 31 routes including `/planets`, `/`, `/map`, and 23 level routes.
 
 ---
-*Last updated: 2026-11-08 (Milestone v1.2 initiation)*
+*Last updated: 2026-11-09 (Milestone v1.2 completion)*

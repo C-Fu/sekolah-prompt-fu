@@ -1,11 +1,17 @@
 # Milestones
 
-## v1.1 v1.1 (Shipped: 2026-11-07)
+## v1.2 3D Planetary Hub, Subject Cartography & Rocket Return (Shipped: 2026-11-09)
 
-**Phases completed:** 4 phases, 8 plans, 0 tasks
+**Phases completed:** 5 phases (Phases 09–13), 11 plans, 23 tasks  
+**Code Changes:** 122 files changed, 14,050 insertions(+), 974 deletions(-)
 
 **Key accomplishments:**
-- (none recorded)
+- **Planetary Cartographic Alignment:** Symmetrically mapped 5 celestial worlds to core subjects (Earth = Prompting Academy, Moon = BM, Mars = English, Venus = Matematik, Mercury = Moral) and established 35 authentic geological features (Tahun 1–6 + Capstone Boss "Cabaran Unggul") with spherical coordinate math (`latLonToVector3`).
+- **3D Solar System & Planetary Explorer (Three.js):** Integrated SSR-safe Three.js canvas, bundled 7 equirectangular NASA textures (< 750 KB total) with CC-BY-4.0 attribution, interactive solar system view with OrbitControls drag disambiguation, deep planet cartography with pulsing beacon pins, and glassmorphic telemetry HUD.
+- **Game Flow & Grand Rocket Launch:** Implemented Title Screen dual entry paths (`/map` vs `/planets`), retro pixel rocket sprite, and full-screen 3.. 2.. 1.. BLAST OFF! countdown animation triggered on Earth graduation (`5-4-graduation-day`) transitioning cadets to `/planets`.
+- **Dynamic Celestial Theming:** Reactive `PlanetBackground` component adapting ambient sky, dust, clouds, and stars per planet, with accent-tinted lesson navigation borders.
+- **7-Stage Interactive Subject Curriculum:** Authored all 4 primary subject lessons across at least 7 structured `<Section>` stages with rich interactive widgets (`WordPredictor`, `DragDropPrompt`, `MagicWords`, `PromptDoctor`, `StepByStep`) and `<LevelComplete>` celebration.
+- **NFR-2 Quality & Route Certification:** Added explicit inspection for `out/planets/index.html` to `scripts/verify-project.js`, eliminated all ESLint errors (0 errors), passed Malay vocabulary guard on 23 MDX files, verified 406 modules in import closure, and certified 245/245 tests green with 100% static export.
 
 ---
 
