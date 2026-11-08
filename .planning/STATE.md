@@ -2,21 +2,21 @@
 gsd_state_version: "1.0"
 milestone: v1.2
 milestone_name: 3D Planetary Hub, Subject Cartography & Rocket Return
-current_phase: 12
-current_phase_name: Planet-Themed Lesson Aesthetics & Subject Prompt Lessons
-current_plan: 2 of 2
+current_phase: 13
+current_phase_name: Static Export & Quality Gate Certification
+current_plan: 1 of 1
 status: completed
-stopped_at: Completed 12-02-PLAN.md
-last_updated: "2026-11-08T14:15:00.000Z"
+stopped_at: Completed 13-01-PLAN.md
+last_updated: "2026-11-08T17:20:00.000Z"
 last_activity: 2026-11-08
-last_activity_desc: Completed Phase 12 Plan 02 — 7-stage interactive MDX subject lessons and full static certification
-state_head: 17c13bd2d58ee93fbe36d73baf2d3a4f122dcfc7
+last_activity_desc: Completed Phase 13 Plan 01 — Route verification expansion, ESLint cleanup & full end-to-end milestone certification
+state_head: 539fa36d1cf797ad3e7f8c60a4834598d281d5fc
 progress:
   total_phases: 5
-  completed_phases: 4
-  total_plans: 10
-  completed_plans: 10
-  percent: 80
+  completed_phases: 5
+  total_plans: 11
+  completed_plans: 11
+  percent: 100
 ---
 
 # Project State
@@ -28,24 +28,24 @@ progress:
 
 ## Current Position
 
-Phase: Phase 12 (Planet-Themed Lesson Aesthetics & Subject Prompt Lessons) — COMPLETED
-Current Plan: 2 of 2 (Phase 12 complete, ready for Phase 13)
-Status: Phase complete — ready for Phase 13
-Last activity: 2026-11-08 — Completed 12-02-PLAN.md (Authored 7-stage interactive lessons for BM, English, Matematik, and Moral, certified quality gates)
+Phase: Phase 13 (Static Export & Quality Gate Certification) — COMPLETED
+Current Plan: 1 of 1 (Milestone v1.2 fully complete and certified)
+Status: Milestone complete — 100% static export verified
+Last activity: 2026-11-08 — Completed 13-01-PLAN.md (hardened scripts/verify-project.js, resolved all 13 ESLint errors, passed full suite tsc/vitest/closure/vocab/lint/build/verify)
 
 ## Project Reference
 
 See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.
-**Current focus:** Phase 13 — Static Export & Quality Gate Certification.
+**Current focus:** Milestone v1.2 certified and complete.
 
 ## Phases in Milestone v1.2
 - **Phase 09:** Planetary Schema & Subject Alignment (Completed: 2026-11-08)
 - **Phase 10:** 3D Planetary Explorer Component (Three.js) (Completed: 2026-11-08)
 - **Phase 11:** Game Flow & Rocket Navigation (Completed: 2026-11-08)
 - **Phase 12:** Planet-Themed Lesson Aesthetics & Subject Prompt Lessons (Completed: 2026-11-08)
-- **Phase 13:** Static Export & Quality Gate Certification (Next)
+- **Phase 13:** Static Export & Quality Gate Certification (Completed: 2026-11-08)
 
 ## Performance Metrics
 
@@ -59,16 +59,16 @@ See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 | Phase 11 P02 | 14m | 3 tasks | 12 files |
 | Phase 12 P01 | 9m | 2 tasks | 18 files |
 | Phase 12 P02 | 25m | 3 tasks | 9 files |
+| Phase 13 P01 | 19m | 3 tasks | 8 files |
 
 ## Decisions
 
+- [Phase 13]: Asserted out/planets/index.html route in scripts/verify-project.js to guarantee 3D planetary hub presence in static export
+- [Phase 13]: Eliminated all 13 ESLint errors and warnings across components and tests without suppressions
+- [Phase 13]: Configured vitest testTimeout to 15s in vitest.config.ts to prevent parallel suite timeouts on heavy MDX tests
 - [Phase 12]: Authored 7 distinct interactive stages across all 4 subject prompt engineering lessons (6-1 BM, 7-1 English, 8-1 Matematik, 9-1 Moral) ending in <LevelComplete levelSlug={slug} stars={3} />
 - [Phase 12]: Used 'English' instead of 'Bahasa Inggeris' in Malay lessons to comply with scripts/check-ms-vocabulary.js anti-residual rules
 - [Phase 12]: Integrated authentic interactive components matching pedagogical requirements: WordPredictor, DragDropPrompt, MagicWords, StepByStep, PromptVsMistake, and PromptDoctor
-
-
-## Decisions
-
 - [Phase 10]: Installed Three.js and @types/three at version 0.187.0
 - [Phase 10]: Encapsulated WebGL lifecycle in client-safe PlanetaryCanvas with unmount GPU buffer disposal
 - [Phase 10]: Bundled 7 authentic NASA equirectangular textures (< 750 KB) with CC-BY-4.0 attribution
@@ -82,6 +82,6 @@ See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 
 ## Session
 
-**Last session:** 2026-11-08T13:48:59.535Z
-**Stopped at:** Completed 12-01-PLAN.md
+**Last session:** 2026-11-08T17:21:40.000Z
+**Stopped at:** Completed 13-01-PLAN.md
 **Resume file:** None

@@ -3,7 +3,7 @@
 ## Milestones
 - **[v1.0](milestones/v1.0-ROADMAP.md)** Kids Prompting Game Standalone & GitHub Pages (Shipped 2026-11-07)
 - **[v1.1](milestones/v1.1-ROADMAP.md)** Rebrand, Tech Debt, & KSSR Tahun 1 Integration (Shipped 2026-11-07)
-- **v1.2** 3D Planetary Hub, Subject Cartography & Rocket Return (In Progress)
+- **v1.2** 3D Planetary Hub, Subject Cartography & Rocket Return (Complete: 2026-11-08)
 
 ---
 
@@ -39,8 +39,8 @@
   - [x] 12-02-PLAN.md — 7-Stage Interactive MDX Subject Lessons & Full Static Certification (`PEDAG-01`, `PEDAG-02`, `GATE-01`, `GATE-02`).
 - **Requirements Covered:** THEME-01, PEDAG-01, PEDAG-02, GATE-01, GATE-02 (All Satisfied)
 
-### Phase 13: Static Export & Quality Gate Certification
+### Phase 13: Static Export & Quality Gate Certification (Completed: 2026-11-08)
 **Goal:** Certify the entire application end-to-end with zero regressions, strict type safety, import closure, and 100% static GitHub Pages export.
 - **Plans:** 1 plan
-  - [ ] 13-01-PLAN.md — Route verification expansion, ESLint cleanup & full end-to-end milestone certification.
-- **Requirements Covered:** GATE-01, GATE-02
+  - [x] 13-01-PLAN.md — Route verification expansion, ESLint cleanup & full end-to-end milestone certification.
+- **Requirements Covered:** GATE-01, GATE-02 (All Satisfied)
