@@ -11,14 +11,14 @@
 Requirements for milestone v1.2. Each maps to roadmap phases.
 
 ### 1. Planetary Schema & Subject Alignment
-- [ ] **SCHEMA-01**: Update `src/lib/kids/planets.ts` and data structures to reflect user-defined subject mappings:
+- [x] **SCHEMA-01**: Update `src/lib/kids/planets.ts` and data structures to reflect user-defined subject mappings:
   - **Earth (Bumi)**: Foundational Prompting (the 19 core prompt lessons)
   - **Moon (Bulan)**: Bahasa Melayu
   - **Mars (Marikh)**: English Language
   - **Venus (Zuhrah)**: Matematik
   - **Mercury (Utarid)**: Sains / Pendidikan Moral
-- [ ] **SCHEMA-02**: Ensure all planets define 7 distinct geological features/regions (from `planets_mockup/planets_features_descriptions.md`) mapped to Tahun 1 to Tahun 6 (with feature 7 as mastery/final boss).
-- [ ] **SCHEMA-03**: Full bilingual support (`en` and `ms`) for planet names, descriptions, and feature details.
+- [x] **SCHEMA-02**: Ensure all planets define 7 distinct geological features/regions (from `planets_mockup/planets_features_descriptions.md`) mapped to Tahun 1 to Tahun 6 (with feature 7 as mastery/final boss).
+- [x] **SCHEMA-03**: Full bilingual support (`en` and `ms`) for planet names, descriptions, and feature details.
 
 ### 2. 3D Planetary Explorer (Three.js)
 - [ ] **THREE-01**: Integrate Three.js (and OrbitControls) into the Next.js static client bundle with zero SSR breakdown (dynamic client-side canvas).
@@ -56,9 +56,9 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCHEMA-01 | Phase 09 | Pending |
-| SCHEMA-02 | Phase 09 | Pending |
-| SCHEMA-03 | Phase 09 | Pending |
+| SCHEMA-01 | Phase 09 | Satisfied |
+| SCHEMA-02 | Phase 09 | Satisfied |
+| SCHEMA-03 | Phase 09 | Satisfied |
 | THREE-01 | Phase 10 | Pending |
 | THREE-02 | Phase 10 | Pending |
 | THREE-03 | Phase 10 | Pending |
