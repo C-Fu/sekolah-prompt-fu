@@ -24,7 +24,7 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 - [x] **THREE-01**: Integrate Three.js (and OrbitControls) into the Next.js static client bundle with zero SSR breakdown (dynamic client-side canvas).
 - [x] **THREE-02**: Build interactive 3D Planetary System screen (`/planets` or integrated into navigation) allowing kids to rotate, inspect, and select planets.
 - [x] **THREE-03**: Display rich planet info cards (celestial body details, subject title, feature count, progress overview) matching the `planets_mockup` cartography aesthetic.
-- [ ] **THREE-04**: Build planetary detail view showing the 7 continent/basin/volcano features mapped to Tahun 1-6 with interactive region selection.
+- [x] **THREE-04**: Build planetary detail view showing the 7 continent/basin/volcano features mapped to Tahun 1-6 with interactive region selection.
 
 ### 3. Game Flow & Navigation
 - [ ] **FLOW-01**: Greet users from Title screen with option to enter the 3D Planetary System directly or start at Earth.
@@ -62,7 +62,7 @@ Requirements for milestone v1.2. Each maps to roadmap phases.
 | THREE-01 | Phase 10 | Complete |
 | THREE-02 | Phase 10 | Complete |
 | THREE-03 | Phase 10 | Complete |
-| THREE-04 | Phase 10 | Pending |
+| THREE-04 | Phase 10 | Complete |
 | FLOW-01 | Phase 11 | Pending |
 | FLOW-02 | Phase 11 | Pending |
 | FLOW-03 | Phase 11 | Pending |

@@ -4,19 +4,19 @@ milestone: v1.2
 milestone_name: 3D Planetary Hub, Subject Cartography & Rocket Return
 current_phase: 10
 current_phase_name: 3D Planetary Explorer Component
-current_plan: 3 of 4
-status: executing
-stopped_at: Completed 10-03-PLAN.md
-last_updated: "2026-11-08T06:13:56.191Z"
+current_plan: 4 of 4
+status: completed
+stopped_at: Completed 10-04-PLAN.md
+last_updated: "2026-11-08T06:27:00.000Z"
 last_activity: 2026-11-08
-last_activity_desc: Milestone v1.2 initialized — 3D Planetary Hub, Subject Cartography & Rocket Return
-state_head: 175a3abfaa55228075ecf037b334dba22213f865
+last_activity_desc: Completed Phase 10 Plan 04 — root PlanetaryExplorer, /planets route, and static export certification
+state_head: a5644ac16b2cfd0653f588aa4da5cfa169cb8e9a
 progress:
   total_phases: 5
-  completed_phases: 0
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
-  percent: 0
+  completed_plans: 6
+  percent: 40
 ---
 
 # Project State
@@ -28,22 +28,22 @@ progress:
 
 ## Current Position
 
-Phase: Phase 10 (3D Planetary Explorer Component)
-Current Plan: 3 of 4
-Status: Ready to execute
-Last activity: 2026-11-08 — Completed 10-01-PLAN.md (Three.js bedrock, spherical math & textures)
+Phase: Phase 10 (3D Planetary Explorer Component) — COMPLETED
+Current Plan: 4 of 4 (Phase 10 complete, ready for Phase 11)
+Status: Completed
+Last activity: 2026-11-08 — Completed 10-04-PLAN.md (PlanetaryExplorer orchestrator, /planets route & static export certification)
 
 ## Project Reference
 
 See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.
-**Current focus:** Phase 10 — Three.js 3D Planetary Explorer Component & Cartography View.
+**Current focus:** Phase 11 — Game Flow & Rocket Navigation.
 
 ## Phases in Milestone v1.2
 - **Phase 09:** Planetary Schema & Subject Alignment (Completed: 2026-11-08)
-- **Phase 10:** 3D Planetary Explorer Component (Three.js) (Next)
-- **Phase 11:** Game Flow & Rocket Navigation
+- **Phase 10:** 3D Planetary Explorer Component (Three.js) (Completed: 2026-11-08)
+- **Phase 11:** Game Flow & Rocket Navigation (Next)
 - **Phase 12:** Planet-Themed Lesson Aesthetics & Subject Prompt Lessons
 - **Phase 13:** Static Export & Quality Gate Certification
 
@@ -54,6 +54,7 @@ See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 | Phase 10 P01 | 10m | 3 tasks | 15 files |
 | Phase 10 P02 | 9m | 2 tasks | 3 files |
 | Phase 10 P03 | 10m | 2 tasks | 3 files |
+| Phase 10 P04 | 10m | 2 tasks | 4 files |
 
 ## Decisions
 
@@ -64,9 +65,12 @@ See: `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`
 - [Phase 10]: Filtered OrbitControls gestures from clicks using setupDragFilter (<5px, <300ms) and raycasting against planet meshes (D-03)
 - [Phase 10]: Rendered detailed planetary cartography globe with 7 authentic geological boundary rings and beacon pins for any selected world
 - [Phase 10]: Designed glassmorphic HUD overlay with responsive province sidebar (Tahun 1-6 & Capstone Boss badges) and 2x2 telemetry card with cubic ease-out camera glide
+- [Phase 10]: Orchestrated seamless two-level navigation flow between Solar System Overview and Deep Planet Cartography with automatic camera glide (D-01)
+- [Phase 10]: Unified symmetrical dual selection between 3D pin raycasting on the globe and HUD sidebar button clicks (D-03)
+- [Phase 10]: Enforced SSR safety in PlanetaryExplorer and /planets route with mounted hydration guard guaranteeing zero ReferenceErrors during static export (D-04)
 
 ## Session
 
-**Last session:** 2026-11-08T06:13:55.631Z
-**Stopped at:** Completed 10-03-PLAN.md
+**Last session:** 2026-11-08T06:27:00.000Z
+**Stopped at:** Completed 10-04-PLAN.md
 **Resume file:** None

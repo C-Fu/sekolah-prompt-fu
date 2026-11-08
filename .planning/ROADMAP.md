@@ -16,14 +16,14 @@
   - [x] 09-02-PLAN.md — Update bilingual message bundles (`messages/en.json`, `messages/ms.json`) with planetary facts, badges, and run verification.
 - **Requirements Covered:** SCHEMA-01, SCHEMA-02, SCHEMA-03 (All Satisfied)
 
-### Phase 10: 3D Planetary Explorer Component (Three.js)
+### Phase 10: 3D Planetary Explorer Component (Three.js) (Completed: 2026-11-08)
 **Goal:** Integrate Three.js with client-side Next.js compatibility and construct the interactive 3D Planetary Explorer with orbital controls, planet selection, and cartographic detail view based on `planets_mockup/`.
 - **Plans:** 4 plans
   - [x] 10-01-PLAN.md — Three.js & @types/three installation, NASA texture pipeline (< 800 KB, ATTRIBUTION.md), and SSR-safe PlanetaryCanvas wrapper.
   - [x] 10-02-PLAN.md — Interactive 3D Solar System scene with Sun, 5 orbits, textured planet meshes, starfield, and raycasting selection.
   - [x] 10-03-PLAN.md — 3D Planet Cartography scene with 7 boundary rings, pulsing beacon pins, camera glide lerp, and glassmorphic telemetry HUD.
-  - [ ] 10-04-PLAN.md — Dedicated /planets client route integration, root PlanetaryExplorer orchestrator, and static export certification.
-- **Requirements Covered:** THREE-01, THREE-02, THREE-03, THREE-04
+  - [x] 10-04-PLAN.md — Dedicated /planets client route integration, root PlanetaryExplorer orchestrator, and static export certification.
+- **Requirements Covered:** THREE-01, THREE-02, THREE-03, THREE-04 (All Satisfied)
 
 ### Phase 11: Game Flow & Rocket Navigation
 **Goal:** Connect the title screen to the 3D Planetary Explorer, establish Earth as foundational prompting world, and implement rocket transition animations back to the planetary hub.
