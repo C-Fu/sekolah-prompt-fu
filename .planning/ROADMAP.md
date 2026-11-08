@@ -41,6 +41,6 @@
 
 ### Phase 13: Static Export & Quality Gate Certification
 **Goal:** Certify the entire application end-to-end with zero regressions, strict type safety, import closure, and 100% static GitHub Pages export.
-- **Plans:**
-  - 13-01: Run full verification suite (`tsc`, Vitest, `check:closure`, `check:vocab`, and static `out/` route crawler).
+- **Plans:** 1 plan
+  - [ ] 13-01-PLAN.md — Route verification expansion, ESLint cleanup & full end-to-end milestone certification.
 - **Requirements Covered:** GATE-01, GATE-02
