@@ -257,9 +257,9 @@ export function KidsHomeContent() {
 }
 
 // Pixel art icons
-function PixelPlayIcon() {
+function PixelPlayIcon({ className }: { className?: string } = {}) {
   return (
-    <svg viewBox="0 0 12 12" className="w-4 h-4" style={{ imageRendering: "pixelated" }}>
+    <svg viewBox="0 0 12 12" className={cn("w-4 h-4", className)} style={{ imageRendering: "pixelated" }}>
       <rect x="2" y="1" width="2" height="10" fill="currentColor" />
       <rect x="4" y="3" width="2" height="6" fill="currentColor" />
       <rect x="6" y="4" width="2" height="4" fill="currentColor" />

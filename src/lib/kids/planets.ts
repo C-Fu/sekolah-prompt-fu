@@ -965,3 +965,24 @@ export function getFeaturesByPlanet(planetId: string): PlanetFeature[] {
   const planet = getPlanetWorld(planetId);
   return planet ? planet.features : [];
 }
+
+/**
+ * Resolves destination route URL for feature missions (FLOW-02, D-06, T-11-03).
+ * Mitigates open redirects by returning only strict, hardcoded internal routes.
+ */
+export function resolveMissionRoute(planetId: PlanetId | string, _feature?: PlanetFeature): string {
+  switch (planetId) {
+    case 'earth-prompting':
+      return '/map';
+    case 'moon-bm':
+      return '/level/6-1-bm-kucing-peromfu';
+    case 'venus-matematik':
+      return '/level/8-1-matematik-tambah-bintang';
+    case 'mars-english':
+      return '/level/9-1-english-colorful-toys';
+    case 'mercury-moral':
+      return '/level/10-1-moral-sahabat-prihatin';
+    default:
+      return '/map';
+  }
+}

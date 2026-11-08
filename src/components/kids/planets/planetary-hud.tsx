@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import type { Planet, PlanetFeature } from '@/lib/kids/planets';
 
@@ -65,15 +66,29 @@ export function PlanetaryHud({
           <span className="font-semibold">{t('backToOrbit')}</span>
         </button>
 
-        <div className="px-4 py-2 rounded-xl bg-slate-900/85 backdrop-blur-xl border border-white/10 flex items-center gap-2.5 shadow-lg">
-          <span
-            className="w-2.5 h-2.5 rounded-full animate-ping"
-            style={{ backgroundColor: planet.accentColor }}
-            aria-hidden="true"
-          />
-          <span className="text-xs font-bold font-mono uppercase tracking-wider text-white">
-            {celestialName} // {planetTitle}
-          </span>
+        <div className="flex items-center gap-2">
+          {planet.id === 'earth-prompting' && (
+            <Link
+              href="/map"
+              data-testid="hud-to-earth-map-btn"
+              aria-label={isMs ? 'Ke Peta Bumi' : 'To Earth Map'}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-950/80 border border-emerald-500/40 hover:border-emerald-400 text-xs font-mono text-emerald-300 transition-all shadow-lg hover:shadow-emerald-500/20 cursor-pointer active:scale-95"
+            >
+              <span aria-hidden="true" className="text-sm">🗺️</span>
+              <span className="font-semibold hidden sm:inline">{isMs ? 'Ke Peta Bumi' : 'To Earth Map'}</span>
+            </Link>
+          )}
+
+          <div className="px-4 py-2 rounded-xl bg-slate-900/85 backdrop-blur-xl border border-white/10 flex items-center gap-2.5 shadow-lg">
+            <span
+              className="w-2.5 h-2.5 rounded-full animate-ping"
+              style={{ backgroundColor: planet.accentColor }}
+              aria-hidden="true"
+            />
+            <span className="text-xs font-bold font-mono uppercase tracking-wider text-white">
+              {celestialName} // {planetTitle}
+            </span>
+          </div>
         </div>
       </header>
 

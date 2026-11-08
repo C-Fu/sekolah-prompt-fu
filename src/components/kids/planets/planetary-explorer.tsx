@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import {
   PLANET_WORLDS,
   getPlanetWorld,
+  resolveMissionRoute,
   type Planet,
   type PlanetId,
   type PlanetFeature,
@@ -51,6 +53,7 @@ export function PlanetaryExplorer({
   const t = useTranslations('kids.planets');
   const locale = useLocale();
   const isMs = locale === 'ms';
+  const router = useRouter();
 
   // Navigation and selection state
   const [mode, setMode] = useState<ExplorerMode>(initialMode);
@@ -102,13 +105,11 @@ export function PlanetaryExplorer({
       if (onLaunchMission) {
         onLaunchMission(activePlanet, feature);
       } else {
-        // Fallback default: log or emit event for downstream Phase 11 gameplay
-        if (typeof window !== 'undefined') {
-          console.info(`[PlanetaryExplorer] Launch mission: ${activePlanet.id} / ${feature.id}`);
-        }
+        const destRoute = resolveMissionRoute(activePlanet.id, feature);
+        router.push(destRoute);
       }
     },
-    [activePlanet, onLaunchMission]
+    [activePlanet, onLaunchMission, router]
   );
 
   // SSR hydration fallback: render dark placeholder without executing Three.js or DOM refs

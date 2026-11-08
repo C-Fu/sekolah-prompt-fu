@@ -42,6 +42,14 @@ vi.mock('next-intl', () => {
   };
 });
 
+// Mock next/navigation useRouter
+const pushMock = vi.fn();
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
+}));
+
 // Mock Three.js WebGLRenderer and OrbitControls for Node/JSDOM testing environment per D-04
 vi.mock('three', async (importOriginal) => {
   const actual = await importOriginal<typeof import('three')>();
@@ -206,6 +214,34 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
 
     expect(handleLaunch).toHaveBeenCalledTimes(1);
     expect(handleLaunch).toHaveBeenCalledWith(marsWorld, activeFeat);
+  });
+
+  it('routes to the corresponding subject lesson when onLaunchMission is not provided (default router)', () => {
+    pushMock.mockClear();
+    render(
+      <PlanetaryExplorer
+        initialMode="planet-cartography"
+        initialPlanetId="moon-bm"
+      />
+    );
+
+    const launchBtn = screen.getByRole('button', { name: /start mission/i });
+    fireEvent.click(launchBtn);
+
+    expect(pushMock).toHaveBeenCalledWith('/level/6-1-bm-kucing-peromfu');
+  });
+
+  it('renders quick action link to Earth Map in HUD when inspecting Earth', () => {
+    render(
+      <PlanetaryExplorer
+        initialMode="planet-cartography"
+        initialPlanetId="earth-prompting"
+      />
+    );
+
+    const earthMapBtn = screen.getByTestId('hud-to-earth-map-btn');
+    expect(earthMapBtn).toBeInTheDocument();
+    expect(earthMapBtn).toHaveAttribute('href', '/map');
   });
 });
 
