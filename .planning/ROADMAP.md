@@ -18,9 +18,11 @@
 
 ### Phase 10: 3D Planetary Explorer Component (Three.js)
 **Goal:** Integrate Three.js with client-side Next.js compatibility and construct the interactive 3D Planetary Explorer with orbital controls, planet selection, and cartographic detail view based on `planets_mockup/`.
-- **Plans:**
-  - 10-01: Install `three` & `@types/three` and build SSR-safe 3D Canvas component (`PlanetaryCanvas`) with lighting, procedural starfield, and procedural planet spheres.
-  - 10-02: Build 3D Planet detail inspector with 7 feature hotspots/markers and cartographic information panel.
+- **Plans:** 4 plans
+  - [ ] 10-01-PLAN.md — Three.js & @types/three installation, NASA texture pipeline (< 800 KB, ATTRIBUTION.md), and SSR-safe PlanetaryCanvas wrapper.
+  - [ ] 10-02-PLAN.md — Interactive 3D Solar System scene with Sun, 5 orbits, textured planet meshes, starfield, and raycasting selection.
+  - [ ] 10-03-PLAN.md — 3D Planet Cartography scene with 7 boundary rings, pulsing beacon pins, camera glide lerp, and glassmorphic telemetry HUD.
+  - [ ] 10-04-PLAN.md — Dedicated /planets client route integration, root PlanetaryExplorer orchestrator, and static export certification.
 - **Requirements Covered:** THREE-01, THREE-02, THREE-03, THREE-04
 
 ### Phase 11: Game Flow & Rocket Navigation
