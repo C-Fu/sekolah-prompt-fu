@@ -47,7 +47,7 @@ export function KidsHeader() {
       <div className="container flex h-14 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <PixelRobot className="w-8 h-10" />
+          <PixelRobot className="w-8 h-10 animate-peromfu-idle" />
           <span className="text-[#FFD700] font-bold text-2xl pixel-text-shadow hidden sm:block">
             {t("header.title")}
           </span>
@@ -65,19 +65,23 @@ export function KidsHeader() {
           )}
 
           {/* Stars counter */}
-          <div className="flex items-center gap-1 px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
+          <div className="flex items-center gap-1 px-2.5 sm:px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
             <PixelStar filled className="w-4 h-4" />
             <span className="text-white text-sm">{stars}</span>
           </div>
 
-          {/* Progress */}
-          <div className="hidden sm:flex items-center gap-1 px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
-            <span className="text-[#22C55E] text-sm">{completed}/{total}</span>
+          {/* Progress (3/23) - visible on mobile and desktop */}
+          <div className="flex items-center gap-1 px-2.5 sm:px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
+            <span className="text-[#22C55E] text-xs sm:text-sm font-mono font-bold">{completed}/{total}</span>
+          </div>
+
+          {/* Language Toggle - visible on mobile and desktop */}
+          <div className="flex items-center">
+            <LanguageToggle />
           </div>
 
           {/* Nav buttons - desktop */}
           <div className="hidden sm:flex items-center gap-2">
-            <LanguageToggle />
             <MusicButton />
             <SettingsButton />
             <Link 

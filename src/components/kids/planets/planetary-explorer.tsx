@@ -207,7 +207,7 @@ export function PlanetaryExplorer({
           <nav
             data-testid="planet-selector-bar"
             aria-label={t('hubTitle')}
-            className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl pointer-events-auto max-w-[96vw]"
+            className="absolute bottom-2 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl pointer-events-auto max-w-[96vw] overflow-x-auto scrollbar-none"
           >
             {PLANET_WORLDS.map((planet) => {
               const displayName = isMs ? planet.celestialBodyMs : planet.celestialBody;
@@ -220,7 +220,7 @@ export function PlanetaryExplorer({
                   type="button"
                   onClick={() => handleSelectPlanet(planet.id)}
                   data-testid={`planet-pill-${planet.id}`}
-                  className="px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-2 border bg-white/5 border-white/10 text-slate-200 hover:bg-white/15 hover:border-cyan-400 hover:text-white cursor-pointer active:scale-95 shadow-md"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 sm:gap-2 border bg-white/5 border-white/10 text-slate-200 hover:bg-white/15 hover:border-cyan-400 hover:text-white cursor-pointer active:scale-95 shadow-md shrink-0 whitespace-nowrap"
                 >
                   <span
                     className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm"

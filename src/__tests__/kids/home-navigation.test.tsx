@@ -42,7 +42,7 @@ vi.mock("next-intl", () => ({
       "home.explorePlanetsDesc": "Fly through space to discover BM, Math, English & Moral missions",
       "home.earthFoundationalBadge": "Foundational Academy",
       "home.cosmosBadge": "Cosmic Missions",
-      "home.ageNote": "Best for kids ages 8-14",
+      "home.ageNote": "Best for kids ages 6-17",
       "navigation.back": "Back",
       "navigation.next": "Next",
       "navigation.stepIndicator": "Step {current} of {total}",

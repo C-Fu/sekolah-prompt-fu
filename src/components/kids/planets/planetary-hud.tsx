@@ -52,15 +52,15 @@ export function PlanetaryHud({
   return (
     <div
       data-testid="planetary-hud-root"
-      className={`absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-4 sm:p-6 overflow-hidden ${className}`}
+      className={`absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-3 sm:p-5 overflow-hidden ${className}`}
     >
       {/* Top Header */}
-      <header className="flex justify-between items-center pointer-events-auto gap-3">
+      <header className="flex justify-between items-center pointer-events-auto gap-2 sm:gap-3 shrink-0">
         <button
           type="button"
           onClick={onBackToOrbit}
           aria-label={t('backToOrbit')}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/85 backdrop-blur-xl border border-white/10 hover:border-cyan-400 text-xs font-mono text-cyan-300 transition-all shadow-lg hover:shadow-cyan-500/20 cursor-pointer active:scale-95"
+          className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-900/85 backdrop-blur-xl border border-white/10 hover:border-cyan-400 text-xs font-mono text-cyan-300 transition-all shadow-lg hover:shadow-cyan-500/20 cursor-pointer active:scale-95"
         >
           <span aria-hidden="true" className="text-sm leading-none">←</span>
           <span className="font-semibold">{t('backToOrbit')}</span>
@@ -79,13 +79,13 @@ export function PlanetaryHud({
             </Link>
           )}
 
-          <div className="px-4 py-2 rounded-xl bg-slate-900/85 backdrop-blur-xl border border-white/10 flex items-center gap-2.5 shadow-lg">
+          <div className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-slate-900/85 backdrop-blur-xl border border-white/10 flex items-center gap-2 sm:gap-2.5 shadow-lg">
             <span
               className="w-2.5 h-2.5 rounded-full animate-ping"
               style={{ backgroundColor: planet.accentColor }}
               aria-hidden="true"
             />
-            <span className="text-xs font-bold font-mono uppercase tracking-wider text-white">
+            <span className="text-[11px] sm:text-xs font-bold font-mono uppercase tracking-wider text-white">
               {celestialName}{" // "}{planetTitle}
             </span>
           </div>
@@ -93,11 +93,11 @@ export function PlanetaryHud({
       </header>
 
       {/* Main Bottom Section: Province Sidebar & Selected Telemetry Card */}
-      <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-end justify-between pointer-events-auto w-full max-h-[75vh] md:max-h-none overflow-y-auto md:overflow-visible">
+      <div className="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-end justify-between pointer-events-auto w-full max-h-[calc(100vh-80px)] sm:max-h-[calc(100vh-90px)] overflow-hidden">
         {/* Province Sidebar (7 geological features) */}
         <div
           data-testid="province-sidebar"
-          className="w-full md:w-80 max-h-48 md:max-h-80 overflow-y-auto p-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl space-y-1.5"
+          className="w-full md:w-80 max-h-36 sm:max-h-48 md:max-h-80 overflow-y-auto p-2 sm:p-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl space-y-1 sm:space-y-1.5 shrink-0"
         >
           {planet.features.map((feat, idx) => {
             const isActive = feat.id === activeFeature.id;
@@ -113,7 +113,7 @@ export function PlanetaryHud({
                 type="button"
                 onClick={() => onSelectFeature(feat, idx)}
                 data-testid={`feature-button-${feat.id}`}
-                className={`w-full text-left p-2.5 rounded-xl text-xs transition-all flex items-center justify-between gap-2 border cursor-pointer ${
+                className={`w-full text-left p-2 sm:p-2.5 rounded-xl text-xs transition-all flex items-center justify-between gap-2 border cursor-pointer ${
                   isActive
                     ? 'bg-white/15 border-cyan-400 text-white font-semibold shadow-md ring-1 ring-cyan-400/40'
                     : 'bg-white/5 border-transparent text-slate-300 hover:bg-white/10 hover:border-white/10'
@@ -142,76 +142,78 @@ export function PlanetaryHud({
         {/* Selected Telemetry Card */}
         <div
           data-testid="telemetry-card"
-          className="w-full md:max-w-lg p-5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-2xl text-white space-y-3.5"
+          className="w-full md:max-w-lg max-h-64 sm:max-h-80 md:max-h-[380px] p-3.5 sm:p-5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-2xl text-white flex flex-col justify-between overflow-hidden"
         >
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <h2 className="text-base font-bold tracking-wide text-white">
-                {featureName}
-              </h2>
-              <p className="text-xs text-cyan-300 font-mono mt-0.5">
-                {featureBadge}
-              </p>
+          <div className="overflow-y-auto pr-1 space-y-2 sm:space-y-3">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="text-sm sm:text-base font-bold tracking-wide text-white">
+                  {featureName}
+                </h2>
+                <p className="text-[11px] sm:text-xs text-cyan-300 font-mono mt-0.5">
+                  {featureBadge}
+                </p>
+              </div>
+              <span
+                className={`text-[9px] sm:text-[10px] font-mono px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shrink-0 ${
+                  activeFeature.isFinalBoss
+                    ? 'bg-amber-500/25 text-amber-300 border border-amber-500/40 font-bold'
+                    : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold'
+                }`}
+              >
+                {activeFeature.isFinalBoss
+                  ? t('capstoneBadge')
+                  : t('yearBadge', { year: activeFeature.year })}
+              </span>
             </div>
-            <span
-              className={`text-[10px] font-mono px-2.5 py-1 rounded-full shrink-0 ${
-                activeFeature.isFinalBoss
-                  ? 'bg-amber-500/25 text-amber-300 border border-amber-500/40 font-bold'
-                  : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold'
-              }`}
-            >
-              {activeFeature.isFinalBoss
-                ? t('capstoneBadge')
-                : t('yearBadge', { year: activeFeature.year })}
-            </span>
+
+            {/* 2x2 Telemetry Grid */}
+            <div className="grid grid-cols-2 gap-2 text-[10px] sm:text-[11px] font-mono bg-white/5 p-2 sm:p-2.5 rounded-xl border border-white/10">
+              <div>
+                <span className="text-slate-400 block text-[8px] sm:text-[9px] uppercase tracking-wider">
+                  {t('telemetry.coordinates')}
+                </span>
+                <span className="text-slate-200 font-medium">
+                  {coordDisplay}
+                </span>
+              </div>
+              <div>
+                <span className="text-slate-400 block text-[8px] sm:text-[9px] uppercase tracking-wider">
+                  {t('telemetry.elevation')}
+                </span>
+                <span className="text-slate-200 font-medium truncate block">
+                  {elevationDisplay}
+                </span>
+              </div>
+              <div>
+                <span className="text-slate-400 block text-[8px] sm:text-[9px] uppercase tracking-wider">
+                  {t('telemetry.geology')}
+                </span>
+                <span className="text-slate-200 line-clamp-1 sm:line-clamp-2">
+                  {featureGeo}
+                </span>
+              </div>
+              <div>
+                <span className="text-slate-400 block text-[8px] sm:text-[9px] uppercase tracking-wider">
+                  {t('telemetry.objective')}
+                </span>
+                <span className="text-slate-200 line-clamp-1 sm:line-clamp-2">
+                  {featureBadge}
+                </span>
+              </div>
+            </div>
+
+            {/* Description Paragraph */}
+            <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-light line-clamp-2 sm:line-clamp-3">
+              {featureDesc}
+            </p>
           </div>
 
-          {/* 2x2 Telemetry Grid */}
-          <div className="grid grid-cols-2 gap-2.5 text-[11px] font-mono bg-white/5 p-3 rounded-xl border border-white/10">
-            <div>
-              <span className="text-slate-400 block text-[9px] uppercase tracking-wider">
-                {t('telemetry.coordinates')}
-              </span>
-              <span className="text-slate-200 font-medium">
-                {coordDisplay}
-              </span>
-            </div>
-            <div>
-              <span className="text-slate-400 block text-[9px] uppercase tracking-wider">
-                {t('telemetry.elevation')}
-              </span>
-              <span className="text-slate-200 font-medium truncate block">
-                {elevationDisplay}
-              </span>
-            </div>
-            <div>
-              <span className="text-slate-400 block text-[9px] uppercase tracking-wider">
-                {t('telemetry.geology')}
-              </span>
-              <span className="text-slate-200 line-clamp-2">
-                {featureGeo}
-              </span>
-            </div>
-            <div>
-              <span className="text-slate-400 block text-[9px] uppercase tracking-wider">
-                {t('telemetry.objective')}
-              </span>
-              <span className="text-slate-200 line-clamp-2">
-                {featureBadge}
-              </span>
-            </div>
-          </div>
-
-          {/* Description Paragraph */}
-          <p className="text-xs text-slate-300 leading-relaxed font-light">
-            {featureDesc}
-          </p>
-
-          {/* Start Mission Action Button */}
+          {/* Start Mission Action Button (always pinned at the bottom of the card) */}
           <button
             type="button"
             onClick={() => onLaunchMission(activeFeature)}
-            className="w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider text-slate-950 transition-all shadow-lg hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+            className="w-full mt-2.5 py-2 sm:py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider text-slate-950 transition-all shadow-lg hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] shrink-0"
             style={{ backgroundColor: activeFeature.accentColor || planet.accentColor }}
           >
             <span aria-hidden="true">🚀</span>

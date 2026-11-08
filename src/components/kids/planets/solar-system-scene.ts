@@ -114,10 +114,10 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
 
   // 3. Planet configurations
   const primaryConfigs: PlanetOrbitConfig[] = [
-    { id: 'mercury-moral', radius: 0.45, dist: 6.0, tex: 'mercury.jpg', speed: 1.2 },
-    { id: 'venus-matematik', radius: 0.75, dist: 9.5, tex: 'venus_surface.jpg', speed: 0.9 },
-    { id: 'earth-prompting', radius: 0.85, dist: 14.5, tex: 'earth.jpg', speed: 0.7 },
-    { id: 'mars-english', radius: 0.60, dist: 20.0, tex: 'mars.jpg', speed: 0.5 },
+    { id: 'mercury-moral', radius: 0.45, dist: 6.0, tex: 'mercury.jpg', speed: 0.4 },
+    { id: 'venus-matematik', radius: 0.75, dist: 9.5, tex: 'venus_surface.jpg', speed: 0.3 },
+    { id: 'earth-prompting', radius: 0.85, dist: 14.5, tex: 'earth.jpg', speed: 0.22 },
+    { id: 'mars-english', radius: 0.60, dist: 20.0, tex: 'mars.jpg', speed: 0.16 },
   ];
 
   // Map to store world metadata for theme colors
@@ -177,7 +177,7 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
 
       // Moon mesh
       const moonWorld = worldMap.get('moon-bm');
-      const moonGeo = new THREE.SphereGeometry(0.28, 24, 18);
+      const moonGeo = new THREE.SphereGeometry(0.38, 24, 18);
       const moonTex = loadTextureSafe('/images/planets/moon.jpg', trackedTextures);
       const moonMat = new THREE.MeshStandardMaterial({
         map: moonTex,
@@ -187,12 +187,20 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
       moonMesh = new THREE.Mesh(moonGeo, moonMat);
       moonMesh.name = 'planet-moon-bm';
 
+      // Invisible hit target mesh for easier clicking on mobile/desktop
+      const moonHitGeo = new THREE.SphereGeometry(0.85, 12, 12);
+      const moonHitMat = new THREE.MeshBasicMaterial({ visible: false });
+      const moonHitTarget = new THREE.Mesh(moonHitGeo, moonHitMat);
+      moonHitTarget.name = 'hit-target-moon-bm';
+      moonHitTarget.userData = { planetId: 'moon-bm' };
+      moonMesh.add(moonHitTarget);
+
       const moonInitialAngle = 0;
       moonMesh.userData = {
         planetId: 'moon-bm',
         dist: moonDist,
         distFromEarth: moonDist,
-        speed: 2.5,
+        speed: 0.7,
         angle: moonInitialAngle,
       };
       moonMesh.position.set(
@@ -233,7 +241,7 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
     const dt = Math.min(Math.max(0, delta), 0.1);
 
     // Slowly rotate the Sun
-    sunMesh.rotation.y += 0.2 * dt;
+    sunMesh.rotation.y += 0.08 * dt;
 
     // Update primary planetary orbits
     planetMeshes.forEach((mesh) => {
@@ -246,17 +254,17 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
           earthGroup.position.x = Math.cos(data.angle) * data.dist;
           earthGroup.position.z = Math.sin(data.angle) * data.dist;
         }
-        mesh.rotation.y += 0.8 * dt;
+        mesh.rotation.y += 0.3 * dt;
       } else if (data.planetId === 'moon-bm') {
         data.angle = (data.angle + data.speed * dt * 0.4) % (Math.PI * 2);
         mesh.position.x = Math.cos(data.angle) * data.dist;
         mesh.position.z = Math.sin(data.angle) * data.dist;
-        mesh.rotation.y += 0.5 * dt;
+        mesh.rotation.y += 0.2 * dt;
       } else {
         data.angle = (data.angle + data.speed * dt * 0.4) % (Math.PI * 2);
         mesh.position.x = Math.cos(data.angle) * data.dist;
         mesh.position.z = Math.sin(data.angle) * data.dist;
-        mesh.rotation.y += 0.8 * dt;
+        mesh.rotation.y += 0.3 * dt;
       }
     });
 

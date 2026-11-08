@@ -613,6 +613,20 @@
 }
 
 /* Pixel Art Styles for Kids Game */
+@keyframes peromfuFlip {
+  0%, 49.9% {
+    transform: scaleX(1);
+  }
+  50%, 100% {
+    transform: scaleX(-1);
+  }
+}
+
+.animate-peromfu-idle {
+  animation: peromfuFlip 2s steps(1) infinite;
+  transform-origin: center;
+}
+
 .pixel-font {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;

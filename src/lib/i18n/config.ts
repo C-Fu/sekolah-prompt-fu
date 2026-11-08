@@ -32,7 +32,7 @@ export const LOCALE_OPTIONS: LocaleOption[] = [
 
 // Supported locale codes derived from the canonical list
 export const supportedLocales = LOCALE_OPTIONS.map((l) => l.code);
-export const defaultLocale = "en";
+export const defaultLocale = "ms";
 
 // RTL locales
 export const rtlLocales = ["ar", "he", "fa"];

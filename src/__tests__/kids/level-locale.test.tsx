@@ -121,19 +121,19 @@ describe("level-content locale/slug selection", () => {
     expect(supportedLocales.includes("ms")).toBe(true);
   });
 
-  it("falls back to English when the requested locale module is absent", async () => {
+  it("falls back to default locale (ms) when the requested locale module is absent", async () => {
     // 'he' is a supported locale (i18n config) with no content directory.
     const he = await loadLevelContent("he", "1-1-meet-peromfu");
-    const en = await loadLevelContent("en", "1-1-meet-peromfu");
-    expect(he?.effectiveLocale).toBe("en");
-    expect(he?.Component).toBe(en?.Component);
+    const ms = await loadLevelContent("ms", "1-1-meet-peromfu");
+    expect(he?.effectiveLocale).toBe("ms");
+    expect(he?.Component).toBe(ms?.Component);
   });
 
-  it("defaults an unsupported locale to English without touching the import path", async () => {
+  it("defaults an unsupported locale to default locale (ms) without touching the import path", async () => {
     const bogus = await loadLevelContent("../evil", "1-1-meet-peromfu");
-    const en = await loadLevelContent("en", "1-1-meet-peromfu");
-    expect(bogus?.effectiveLocale).toBe("en");
-    expect(bogus?.Component).toBe(en?.Component);
+    const ms = await loadLevelContent("ms", "1-1-meet-peromfu");
+    expect(bogus?.effectiveLocale).toBe("ms");
+    expect(bogus?.Component).toBe(ms?.Component);
   });
 
   it("returns null for a slug outside the registry without attempting an import", async () => {
@@ -995,12 +995,13 @@ describe("client locale preference drives compiled MDX (01-17 task 1)", () => {
   it("loads a bounded, locale-specific message bundle (never a request-time locale)", async () => {
     const en = await loadMessages("en");
     const es = await loadMessages("es");
+    const ms = await loadMessages("ms");
     expect((en.common as { loading: string }).loading).toBe("Loading...");
     expect((es.common as { loading: string }).loading).not.toBe("Loading...");
-    // Unsupported candidates resolve to the deterministic default, never an ad-hoc path.
+    // Unsupported candidates resolve to the deterministic default (ms), never an ad-hoc path.
     const bogus = await loadMessages("../evil");
     expect((bogus.common as { loading: string }).loading).toBe(
-      (en.common as { loading: string }).loading
+      (ms.common as { loading: string }).loading
     );
   });
 
@@ -1040,12 +1041,12 @@ describe("client locale preference drives compiled MDX (01-17 task 1)", () => {
     expect(indexes).toEqual([0, 1, 2, 3, 4, 5, 6]);
   });
 
-  it("shows the English fallback MDX for a supported locale with no translated module", async () => {
+  it("shows the default locale (ms) fallback MDX for a supported locale with no translated module", async () => {
     // 'he' is supported by i18n config but has no kids content directory.
     const he = await loadLevelContent("he", SLUG);
-    const en = await loadLevelContent("en", SLUG);
-    expect(he?.effectiveLocale).toBe("en");
-    expect(he?.Component).toBe(en?.Component);
+    const ms = await loadLevelContent("ms", SLUG);
+    expect(he?.effectiveLocale).toBe("ms");
+    expect(he?.Component).toBe(ms?.Component);
   });
 
   it("reads a persisted preference only when it is a supported locale", () => {
@@ -1091,8 +1092,8 @@ describe("client locale preference drives compiled MDX (01-17 task 1)", () => {
   it("resolves an unsupported target to the default locale via transition", () => {
     const result = transitionLocale("../evil", "es");
     expect(result.ok).toBe(true);
-    expect(result.locale).toBe("en");
-    expect(readPersistedLocale()).toBe("en");
+    expect(result.locale).toBe("ms");
+    expect(readPersistedLocale()).toBe("ms");
   });
 
   it("fails closed and retains the current locale when invalidation is denied", () => {
