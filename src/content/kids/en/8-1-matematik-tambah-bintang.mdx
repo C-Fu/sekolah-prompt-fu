@@ -1,6 +1,6 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Welcome to **Venus (Mathematics Planet)**! 🟡 Peromfu and friends are solving Year 1 addition math problems within 20!
+Welcome to **Venus (Mathematics Planet)**! 🟡 Peromfu and friends are exploring the golden misty plains of Sedna Planitia, solving Year 1 addition math problems within 20!
 </Panel>
 </Section>
 
@@ -13,18 +13,20 @@ When we ask AI to do math, it often writes a whole essay! In math, we need **For
 <Section>
 ## Challenge 1: Count Stars Step by Step 🌟
 
-There are **7 golden stars** and **5 red stars** in the Martian sky. Let's guide the AI to count step-by-step!
+There are **7 golden stars** and **5 red stars** in the Venusian sky. Let's guide the AI to count step-by-step!
 
 <StepByStep
-  title="Count Step by Step"
-  instruction="Order the calculation steps for the AI to follow:"
+  title="Step-by-Step Star Counting"
+  problem="There are 7 golden stars and 5 red stars. How many stars are there altogether?"
+  wrongAnswer="12 stars (AI guessed the answer without showing any working steps!)"
   steps={[
-    { id: "1", text: "Count the yellow stars: there are 7 stars", order: 1 },
-    { id: "2", text: "Count the red stars: there are 5 stars", order: 2 },
-    { id: "3", text: "Add them together: 7 + 5 = 12 stars", order: 3 }
+    "Step 1: Count the golden stars (7 stars)",
+    "Step 2: Count the red stars (5 stars)",
+    "Step 3: Add them together: 7 + 5 = 12 stars"
   ]}
-  explanation="Directing an AI to break problems into sequential steps guarantees reliable math answers without skipping numbers!"
-  successMessage="Awesome! 7 plus 5 equals 12 stars!"
+  rightAnswer="7 + 5 = 12 stars in total! Step-by-step reasoning ensures zero calculation mistakes!"
+  magicWords="Let's think step by step"
+  successMessage="Awesome! Step-by-step instructions guarantee reliable math calculation!"
 />
 </Section>
 
@@ -34,12 +36,60 @@ There are **7 golden stars** and **5 red stars** in the Martian sky. Let's guide
 Peromfu only wants a clean math sentence, like `7 + 5 = 12`. Which prompt enforces strict format constraints?
 
 <PromptVsMistake
-  title="Choose the Formatted Prompt"
-  instruction="Pick the prompt that constrains AI to output only the math sentence:"
-  promptA="Please calculate 7 plus 5 and tell me a story about space."
-  promptB="What is 7 plus 5? Answer with only the mathematical equation (e.g. 7 + 5 = 12) without any extra conversational text."
-  correct="B"
-  explanation="Prompt B gives an unambiguous format constraint and provides an example. This guarantees the AI gives a clean output!"
-  successMessage="Spot on! Format constraints make AI a reliable math assistant!"
+  question="Which prompt constrains AI to output only the clean math equation?"
+  good="What is 7 plus 5? Answer with only the mathematical equation (e.g. 7 + 5 = 12) without any extra conversational text."
+  bad="Please calculate 7 plus 5 and tell me a long story about space stars."
+  explanation="The first prompt specifies an exact format constraint ('only the mathematical equation') and includes an example, preventing unwanted chattiness!"
+  peromfuMessage="Format constraints make AI a reliable and concise math assistant!"
+/>
+</Section>
+
+<Section>
+## Challenge 3: Assemble the Math Instruction 🧩
+
+Let's assemble a complete, structured math prompt: **[Math Problem] + [Step Constraint] + [Format Constraint]**.
+
+<DragDropPrompt
+  title="Build the Math Prompt"
+  instruction="Arrange the instructions in order to guide the math AI:"
+  pieces={[
+    "Calculate the sum of 8 blue stars and 6 yellow stars.",
+    "Show your reasoning step-by-step,",
+    "and output the final answer as an equation: 8 + 6 = 14."
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Superb! The AI now has clear instructions, step reasoning, and format constraints!"
+/>
+</Section>
+
+<Section>
+## Challenge 4: Prompt Doctor — Fix the Vague Math Prompt 🩺
+
+Peromfu noticed a confusing math prompt: *"Count stars"*. Let's heal it so the AI knows the exact numbers and desired format!
+
+<PromptDoctor
+  title="Heal the Math Prompt"
+  brokenPrompt="Count stars"
+  problems={[
+    { issue: "Missing Numbers", symptom: "Which numbers are we adding?", fix: "Add 9 green stars and 4 purple stars" },
+    { issue: "Missing Method", symptom: "AI might guess without showing steps", fix: "Add 9 green stars and 4 purple stars step-by-step" },
+    { issue: "No Format Constraint", symptom: "AI writes long conversational paragraphs", fix: "Add 9 green stars and 4 purple stars step-by-step and write only the final equation: 9 + 4 = 13" }
+  ]}
+  healedPrompt="Add 9 green stars and 4 purple stars step-by-step and write only the final equation: 9 + 4 = 13"
+  successMessage="You healed the prompt! The AI is now a razor-sharp mathematics assistant!"
+/>
+</Section>
+
+<Section>
+## Mastery Boss Challenge: Cosmic Math Champion! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Stellar job! You conquered Venus by mastering step-by-step reasoning and mathematical format constraints! You are a true cosmic math pro!
+</Panel>
+
+<LevelComplete
+  levelSlug="8-1-matematik-tambah-bintang"
+  stars={3}
+  message="You mastered math addition and format constraints on Venus!"
 />
 </Section>

@@ -1,42 +1,30 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Welcome to **Mercury (Moral Education Planet)**! 🟣 In Year 1 Moral Education, we learn the core values of caring, respect, and helping friends in need!
+Welcome to **Mercury (Moral Education Planet)**! 🟣 In Year 1 Moral Education, we learn the core values of caring, respect, and helping friends in need! We have landed upon the vast craters of Borealis Planitia.
 </Panel>
 </Section>
 
 <Section>
 <Panel character="peromfu" mood="thinking">
-Sometimes our classmates run into mishaps in the classroom, like accidentally dropping all their colored pencils on the floor. How can we prompt an AI to suggest kind, respectful actions?
+Sometimes our classmates run into mishaps in the classroom, like accidentally dropping all their colored pencils on the floor. How can we prompt an AI to suggest kind, respectful actions? By setting a kind role and caring tone!
 </Panel>
 </Section>
 
 <Section>
 ## Challenge 1: Prompt Doctor — Empathetic Advice 🩺
 
-Peromfu wants to ask AI: *"What should I do about a friend's dropped pencils?"*. Help Peromfu improve this prompt so the AI suggests helpful and polite peer actions.
+Peromfu wants to heal an indifferent prompt: *"Give advice about dropped pencils"*. Let's make it reflect genuine kindness and active helping!
 
 <PromptDoctor
-  title="Improve Peromfu's Prompt!"
-  instruction="Choose the prompt that best reflects the values of kindness and mutual assistance:"
-  badPrompt="Give me advice about dropped pencils."
-  options={[
-    {
-      text: "Act as a caring classmate. Suggest 2 immediate, polite ways to help a friend pick up their colored pencils that spilled across the classroom floor.",
-      isCorrect: true,
-      feedback: "Wonderful! Stating the value of empathy and politeness guides the AI to recommend compassionate actions!"
-    },
-    {
-      text: "Tell the classmate to pick them up alone.",
-      isCorrect: false,
-      feedback: "This is indifferent and contradicts the value of mutual support!"
-    },
-    {
-      text: "The pencils are red and yellow.",
-      isCorrect: false,
-      feedback: "This only describes colors; it doesn't offer help to a classmate in need!"
-    }
+  title="Heal the Moral Advice Prompt"
+  brokenPrompt="Give advice about dropped pencils"
+  problems={[
+    { issue: "Indifferent Tone", symptom: "No care or empathy for the flustered friend", fix: "Act as a caring classmate" },
+    { issue: "Missing Action", symptom: "What concrete help is offered?", fix: "Act as a caring classmate and suggest 2 polite ways to help pick up dropped pencils" },
+    { issue: "Missing Respectful Tone", symptom: "How should words sound to soothe the friend?", fix: "Act as a caring classmate. Suggest 2 polite ways to help pick up dropped pencils and speak in a gentle, comforting tone." }
   ]}
-  explanation="Moral education teaches empathy. Instructing the AI with caring intentions produces supportive, community-building responses."
+  healedPrompt="Act as a caring classmate. Suggest 2 polite ways to help pick up dropped pencils and speak in a gentle, comforting tone."
+  successMessage="Wonderful! You guided the AI to give compassionate and respectful peer advice!"
 />
 </Section>
 
@@ -46,12 +34,59 @@ Peromfu wants to ask AI: *"What should I do about a friend's dropped pencils?"*.
 Which prompt guides the AI to generate a comforting, supportive phrase for a flustered friend?
 
 <PromptVsMistake
-  title="Select the Encouraging Tone"
-  instruction="Select the prompt that ensures a gentle, calming tone:"
-  promptA="Write something loud and rude in class."
-  promptB="Write one gentle sentence of encouragement to soothe a worried friend: 'Don't worry friend, let's pick them up together!'"
-  correct="B"
-  explanation="Prompt B explicitly specifies a comforting tone and shows teamwork."
-  successMessage="Awesome! You and Peromfu are exemplary, caring friends!"
+  question="Which prompt ensures a gentle, calming tone of encouragement?"
+  good="Write one gentle sentence of encouragement to soothe a worried friend: 'Don't worry friend, let's pick them up together!'"
+  bad="Write something loud and rude in class."
+  explanation="The first prompt explicitly specifies a comforting tone and demonstrates active teamwork and empathy!"
+  peromfuMessage="Gentle words bring warmth and friendship to everyone in class!"
+/>
+</Section>
+
+<Section>
+## Challenge 3: Assemble the Caring Support Prompt 🧩
+
+Let's build a complete peer support prompt: **[Gentle Greeting] + [Offer of Help] + [Cooperative Action]**.
+
+<DragDropPrompt
+  title="Assemble the Caring Prompt"
+  instruction="Arrange the steps in order to instruct the AI to compose a kind message:"
+  pieces={[
+    "Greet your classmate with a friendly smile,",
+    "offer immediate help to gather the spilled items,",
+    "and say: 'We can put them back in the pencil case together!'"
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Splendid! You constructed a heartfelt, cooperative message!"
+/>
+</Section>
+
+<Section>
+## Challenge 4: Magic Words — Words of Encouragement ✨
+
+Help Peromfu craft thoughtful words of encouragement that inspire kindness across our school!
+
+<MagicWords
+  title="Cultivate Caring Words"
+  sentence="Whenever a friend feels ___, I will offer to ___ and share my ___."
+  blanks={[
+    { hint: "💙 friend's feeling", answers: ["worried", "sad", "flustered", "upset", "nervous"] },
+    { hint: "🤝 kind action", answers: ["help them patiently", "listen gently", "lend a hand", "clean up together", "comfort them"] },
+    { hint: "🌟 positive virtue", answers: ["bright smile", "kind words", "stationery tools", "heartfelt support", "caring friendship"] }
+  ]}
+  successMessage="Superb! Your kind words make the classroom a joyful, caring place!"
+/>
+</Section>
+
+<Section>
+## Mastery Boss Challenge: Ambassador of Caring Values! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Magnificent achievement! On Planet Mercury, you mastered moral values, empathy, and caring prompts. You are a true role model for peers!
+</Panel>
+
+<LevelComplete
+  levelSlug="9-1-moral-sahabat-prihatin"
+  stars={3}
+  message="You mastered empathetic values and caring prompts on Mercury!"
 />
 </Section>

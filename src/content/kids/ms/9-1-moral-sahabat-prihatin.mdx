@@ -1,42 +1,30 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Selamat datang ke **Utarid (Planet Pendidikan Moral)**! 🟣 Dalam kelas Moral Tahun 1, kita belajar nilai kasih sayang, saling menghormati dan tolong-menolong sesama rakan!
+Selamat datang ke **Utarid (Planet Pendidikan Moral)**! 🟣 Dalam kelas Moral Tahun 1, kita belajar nilai kasih sayang, saling menghormati dan tolong-menolong sesama rakan! Kita kini berada di dataran kawah Borealis Planitia.
 </Panel>
 </Section>
 
 <Section>
 <Panel character="peromfu" mood="thinking">
-Kadangkala rakan kita berdepan masalah di dalam kelas, contohnya pensel warna terjatuh berterabur. Bagaimana kita boleh membimbing AI mencadangkan tindakan yang prihatin dan bersopan santun?
+Kadangkala rakan kita berdepan masalah di dalam kelas, contohnya pensel warna terjatuh berterabur di lantai. Bagaimana kita boleh membimbing AI mencadangkan tindakan yang prihatin dan bersopan santun? Dengan menetapkan peranan sahabat prihatin dan nada yang lemah lembut!
 </Panel>
 </Section>
 
 <Section>
 ## Cabaran 1: Doktor Prompt — Nasihat Moral Yang Prihatin 🩺
 
-Peromfu mahu bertanya kepada AI: *"Apa patut saya buat bila pensel kawan jatuh?"*. Bantu Peromfu membaiki arahan ini supaya AI mencadangkan tindakan tolong-menolong yang ikhlas dan beradab sopan.
+Peromfu mahu merawat arahan yang acuh tak acuh: *"Beri nasihat pasal pensel kawan yang jatuh"*. Mari kita bimbing AI supaya memberi cadangan tolong-menolong yang ikhlas dan beradab sopan!
 
 <PromptDoctor
-  title="Rawat Prompt Peromfu!"
-  instruction="Pilih arahan yang paling menerapkan nilai murni tolong-menolong:"
-  badPrompt="Beri saya nasihat pasal pensel kawan yang jatuh."
-  options={[
-    {
-      text: "Bertindak sebagai rakan sekelas yang prihatin. Cadangkan 2 tindakan sopan dan segera untuk menolong rakan mengutip pensel warnanya yang terjatuh di lantai kelas.",
-      isCorrect: true,
-      feedback: "Sangat baik! Menyatakan nilai prihatin dan kesopanan membimbing AI mencadangkan tindakan empati yang murni!"
-    },
-    {
-      text: "Suruh rakan itu kutip sendiri penselnya.",
-      isCorrect: false,
-      feedback: "Ini menunjukkan sikap tidak peduli dan bertentangan dengan nilai saling membantu!"
-    },
-    {
-      text: "Pensel warna itu berwarna merah dan kuning.",
-      isCorrect: false,
-      feedback: "Ini hanya keterangan warna, tidak menyelesaikan situasi rakan yang memerlukan bantuan!"
-    }
+  title="Rawat Prompt Sahabat Prihatin"
+  brokenPrompt="Beri nasihat pasal pensel kawan yang jatuh"
+  problems={[
+    { issue: "Tiada Sikap Prihatin", symptom: "Tiada rasa empati terhadap kesusahan rakan", fix: "Bertindak sebagai rakan sekelas yang prihatin" },
+    { issue: "Tiada Bantuan Nyata", symptom: "Apakah tindakan pertolongan yang ditawarkan?", fix: "Bertindak sebagai rakan sekelas yang prihatin dan cadangkan 2 cara sopan untuk menolong mengutip pensel warna" },
+    { issue: "Tiada Nada Santun", symptom: "Bagaimanakah tutur kata untuk menenangkan hati kawan?", fix: "Bertindak sebagai rakan sekelas yang prihatin. Cadangkan 2 cara sopan untuk menolong mengutip pensel warna dengan nada suara yang lembut dan menenangkan." }
   ]}
-  explanation="Pendidikan Moral mengajar kita peka terhadap kesusahan rakan. Meminta AI memberi cadangan berasaskan empati dan adab sopan mengukuhkan akhlak terpuji."
+  healedPrompt="Bertindak sebagai rakan sekelas yang prihatin. Cadangkan 2 cara sopan untuk menolong mengutip pensel warna dengan nada suara yang lembut dan menenangkan."
+  successMessage="Hebat! Anda membimbing AI mencadangkan tindakan moral yang murni dan beradab sopan!"
 />
 </Section>
 
@@ -46,12 +34,59 @@ Peromfu mahu bertanya kepada AI: *"Apa patut saya buat bila pensel kawan jatuh?"
 Arahan manakah yang membimbing AI menghasilkan kata-kata semangat yang menyejukkan hati rakan yang cemas?
 
 <PromptVsMistake
-  title="Pilih Nada Bahasa Yang Positif"
-  instruction="Pilih arahan yang memastikan nada AI berhemah dan menenangkan hati rakan:"
-  promptA="Tulis ucapan yang kasar dan bising dalam kelas."
-  promptB="Tulis satu ayat sokongan yang lembut dan menenangkan untuk menenteramkan rakan sekelas: 'Jangan bimbang kawan, mari kita kutip bersama-sama.'"
-  correct="B"
-  explanation="Prompt B menetapkan nada emosi yang lembut, positif dan mengutamakan semangat kerjasama berpasukan."
-  successMessage="Syabas! Anda dan Peromfu kini sahabat teladan yang berakhlak mulia!"
+  question="Arahan manakah yang memastikan nada AI berhemah dan menenangkan hati rakan?"
+  good="Tulis satu ayat sokongan yang lembut dan menenangkan untuk menenteramkan rakan sekelas: 'Jangan bimbang kawan, mari kita kutip bersama-sama.'"
+  bad="Tulis ucapan yang kasar dan bising dalam kelas."
+  explanation="Arahan pertama menetapkan nada emosi yang lembut, positif dan mengutamakan semangat kerjasama berpasukan serta empati!"
+  peromfuMessage="Tutur kata yang sopan dan prihatin menceriakan suasana bilik darjah kita!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Susun Prompt Tindakan Prihatin 🧩
+
+Mari bina arahan sokongan rakan sebaya yang lengkap: **[Sapaan Lembut] + [Tawaran Bantuan] + [Tindakan Bersama]**.
+
+<DragDropPrompt
+  title="Susun Nasihat Berhemah"
+  instruction="Susun langkah-langkah mengikut urutan yang terbaik untuk panduan AI:"
+  pieces={[
+    "Hampiri rakan dengan senyuman mesra,",
+    "hulurkan bantuan segera untuk mengutip barang yang terjatuh,",
+    "dan ucapkan: 'Mari kita susun semula ke dalam kotak pensel bersama-sama!'"
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Syabas! Anda menghasilkan pesanan kerjasama yang sangat menghangatkan hati rakan!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Kata Ajaib — Amalan Nilai Murni ✨
+
+Bantu Peromfu menjana kata-kata semangat dan adab tolong-menolong di sekolah!
+
+<MagicWords
+  title="Terapkan Nilai Murni"
+  sentence="Setiap kali rakan berasa ___, saya akan bersedia ___ dan berkongsi ___."
+  blanks={[
+    { hint: "💙 perasaan rakan", answers: ["cemas", "sedih", "bingung", "kecewa", "risau"] },
+    { hint: "🤝 tindakan murni", answers: ["menolong dengan sabar", "mendengar keluhan", "menghulurkan tangan", "mengemas bersama", "menenangkan hatinya"] },
+    { hint: "🌟 budi pekerti", answers: ["senyuman manis", "kata-kata semangat", "alatan belajar", "bantuan ikhlas", "kasih sayang"] }
+  ]}
+  successMessage="Cemerlang! Kata-kata prihatin anda menjadikan suasana persekolahan penuh kasih sayang!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Duta Sahabat Prihatin! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Kejayaan luar biasa di Utarid! Anda telah menguasai nilai murni, empati, dan arahan prihatin yang membina keharmonian sesama rakan sekelas!
+</Panel>
+
+<LevelComplete
+  levelSlug="9-1-moral-sahabat-prihatin"
+  stars={3}
+  message="Tahniah! Anda menguasai nilai empati dan sahabat prihatin di Planet Utarid!"
 />
 </Section>

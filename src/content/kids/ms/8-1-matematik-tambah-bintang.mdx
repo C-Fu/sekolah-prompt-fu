@@ -1,6 +1,6 @@
 <Section>
 <Panel character="peromfu" mood="excited">
-Selamat datang ke **Zuhrah (Planet Matematik)**! 🟡 Peromfu dan rakan-rakan sedang menyelesaikan tugasan operasi tambah asas dalam lingkungan 20!
+Selamat datang ke **Zuhrah (Planet Matematik)**! 🟡 Peromfu dan rakan-rakan sedang meneroka kabut emas Dataran Sedna, menyelesaikan operasi tambah asas Tahun 1 dalam lingkungan 20!
 </Panel>
 </Section>
 
@@ -13,18 +13,20 @@ Apabila kita meminta AI mengira, AI suka bercakap panjang lebar! Dalam matematik
 <Section>
 ## Cabaran 1: Kira Bintang Langkah Demi Langkah 🌟
 
-Ada **7 bintang kuning** dan **5 bintang merah** di langit Marikh. Mari latih AI mengira secara langkah demi langkah!
+Ada **7 bintang kuning** dan **5 bintang merah** di langit Zuhrah. Mari latih AI mengira secara langkah demi langkah!
 
 <StepByStep
   title="Kira Langkah Demi Langkah"
-  instruction="Susun langkah pengiraan matematik yang betul untuk AI ikuti:"
+  problem="Ada 7 bintang kuning dan 5 bintang merah. Berapakah jumlah bintang semuanya?"
+  wrongAnswer="12 bintang (AI terus meneka tanpa menunjukkan jalan pengiraan!)"
   steps={[
-    { id: "1", text: "Kira bintang kuning: ada 7 bintang", order: 1 },
-    { id: "2", text: "Kira bintang merah: ada 5 bintang", order: 2 },
-    { id: "3", text: "Jumlahkan: 7 + 5 = 12 bintang", order: 3 }
+    "Langkah 1: Kira bintang kuning (7 bintang)",
+    "Langkah 2: Kira bintang merah (5 bintang)",
+    "Langkah 3: Jumlahkan kedua-duanya: 7 + 5 = 12 bintang"
   ]}
-  explanation="Mengarahkan AI berfikir langkah demi langkah (Step-by-step reasoning) memastikan pengiraan matematik sentiasa tepat dan tidak tersilap!"
-  successMessage="Hebat! 7 ditambah 5 bersamaan 12 bintang!"
+  rightAnswer="7 + 5 = 12 bintang! Pemikiran langkah demi langkah menjamin tiada kesilapan mengira!"
+  magicWords="Mari fikir langkah demi langkah"
+  successMessage="Hebat! Mengarahkan AI berfikir langkah demi langkah menjamin jawapan matematik tepat!"
 />
 </Section>
 
@@ -34,12 +36,60 @@ Ada **7 bintang kuning** dan **5 bintang merah** di langit Marikh. Mari latih AI
 Peromfu hanya mahu ayat matematik ringkas, contohnya `7 + 5 = 12`. Arahan manakah yang memberikan kekangan format paling tepat?
 
 <PromptVsMistake
-  title="Pilih Arahan dengan Kekangan Format"
-  instruction="Pilih arahan yang mengekang AI supaya memberikan format ayat matematik sahaja:"
-  promptA="Tolong kira 7 tambah 5 dan sembanglah dengan saya pasal bintang."
-  promptB="Berapakah 7 tambah 5? Berikan jawapan dalam bentuk ayat matematik sahaja (contoh: 7 + 5 = 12) tanpa sebarang ayat lain."
-  correct="B"
-  explanation="Prompt B menetapkan kekangan yang sangat jelas: 'dalam bentuk ayat matematik sahaja' serta memberikan contoh. Ini menjamin jawapan AI bersih dan kemas!"
-  successMessage="Tepat sekali! Menetapkan format jawapan menjadikan AI pembantu matematik yang cekap!"
+  question="Arahan manakah yang mengekang AI supaya memberikan format ayat matematik sahaja?"
+  good="Berapakah 7 tambah 5? Berikan jawapan dalam bentuk ayat matematik sahaja (contoh: 7 + 5 = 12) tanpa sebarang ayat lain."
+  bad="Tolong kira 7 tambah 5 dan sembang panjang lebar tentang bintang di angkasa."
+  explanation="Arahan pertama menetapkan kekangan yang sangat jelas: 'dalam bentuk ayat matematik sahaja' serta memberikan contoh. Ini menjamin jawapan AI bersih dan kemas!"
+  peromfuMessage="Menetapkan format jawapan menjadikan AI pembantu matematik yang cekap dan kemas!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Susun Formula Prompt Matematik 🧩
+
+Mari susun arahan lengkap: **[Masalah Pengiraan] + [Langkah Pengiraan] + [Format Jawapan]**.
+
+<DragDropPrompt
+  title="Susun Prompt Pengiraan"
+  instruction="Susun bahagian arahan mengikut urutan yang paling teratur untuk AI:"
+  pieces={[
+    "Kira hasil tambah 8 bintang biru dan 6 bintang kuning.",
+    "Tunjukkan jalan pengiraan secara langkah demi langkah,",
+    "dan tulis jawapan akhir dalam bentuk ayat matematik: 8 + 6 = 14."
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Hebat! AI kini mempunyai soalan jelas, langkah pengiraan dan kekangan format jawapan!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Doktor Prompt — Rawat Prompt Matematik Kabur 🩺
+
+Peromfu melihat arahan mengira yang kabur: *"Kira bintang"*. Mari kita rawat arahan ini dengan angka tepat dan format jawapan!
+
+<PromptDoctor
+  title="Rawat Prompt Matematik"
+  brokenPrompt="Kira bintang"
+  problems={[
+    { issue: "Tiada Angka", symptom: "Nombor apa yang perlu ditambah?", fix: "Tambah 9 bintang hijau dan 4 bintang ungu" },
+    { issue: "Tiada Kaedah", symptom: "AI mungkin meneka tanpa jalan kira", fix: "Tambah 9 bintang hijau dan 4 bintang ungu langkah demi langkah" },
+    { issue: "Tiada Kekangan Format", symptom: "AI bercakap berleter", fix: "Tambah 9 bintang hijau dan 4 bintang ungu langkah demi langkah dan berikan jawapan akhir dalam ayat matematik: 9 + 4 = 13" }
+  ]}
+  healedPrompt="Tambah 9 bintang hijau dan 4 bintang ungu langkah demi langkah dan berikan jawapan akhir dalam ayat matematik: 9 + 4 = 13"
+  successMessage="Hebat! Anda merawat prompt menjadi arahan matematik yang sangat jitu!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Jaguh Matematik Angkasa! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Syabas angkasawan pintar! Anda telah menakluki Zuhrah dengan menguasai langkah pengiraan teliti dan kekangan format jawapan matematik!
+</Panel>
+
+<LevelComplete
+  levelSlug="8-1-matematik-tambah-bintang"
+  stars={3}
+  message="Tahniah! Anda menguasai operasi tambah dan kekangan format matematik di Zuhrah!"
 />
 </Section>
