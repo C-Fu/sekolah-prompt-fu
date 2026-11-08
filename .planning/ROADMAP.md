@@ -21,7 +21,7 @@
 - **Plans:** 4 plans
   - [x] 10-01-PLAN.md — Three.js & @types/three installation, NASA texture pipeline (< 800 KB, ATTRIBUTION.md), and SSR-safe PlanetaryCanvas wrapper.
   - [x] 10-02-PLAN.md — Interactive 3D Solar System scene with Sun, 5 orbits, textured planet meshes, starfield, and raycasting selection.
-  - [ ] 10-03-PLAN.md — 3D Planet Cartography scene with 7 boundary rings, pulsing beacon pins, camera glide lerp, and glassmorphic telemetry HUD.
+  - [x] 10-03-PLAN.md — 3D Planet Cartography scene with 7 boundary rings, pulsing beacon pins, camera glide lerp, and glassmorphic telemetry HUD.
   - [ ] 10-04-PLAN.md — Dedicated /planets client route integration, root PlanetaryExplorer orchestrator, and static export certification.
 - **Requirements Covered:** THREE-01, THREE-02, THREE-03, THREE-04
 
