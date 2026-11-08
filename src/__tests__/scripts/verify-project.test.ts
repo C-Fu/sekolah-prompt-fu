@@ -24,7 +24,7 @@
  *     both failures, and short-circuiting would change the certified-gate reporting
  *     contract.
  */
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { describe, it, expect, afterAll } from "vitest";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
@@ -40,6 +40,7 @@ function makeSandbox(name: string, opts: {
   withOut?: boolean;
   rootIndex?: boolean;
   mapIndex?: boolean;
+  planetsIndex?: boolean;
   music?: boolean;
   emittedSlugs?: string[];
 }): string {
@@ -49,6 +50,7 @@ function makeSandbox(name: string, opts: {
     withOut = true,
     rootIndex = true,
     mapIndex = true,
+    planetsIndex = true,
     music = true,
     emittedSlugs = slugs,
   } = opts;
@@ -75,6 +77,10 @@ function makeSandbox(name: string, opts: {
     if (mapIndex) {
       fs.mkdirSync(path.join(out, "map"), { recursive: true });
       fs.writeFileSync(path.join(out, "map", "index.html"), "x");
+    }
+    if (planetsIndex) {
+      fs.mkdirSync(path.join(out, "planets"), { recursive: true });
+      fs.writeFileSync(path.join(out, "planets", "index.html"), "x");
     }
     if (music) fs.writeFileSync(path.join(out, "kids-music.mp3"), "x");
     for (const s of emittedSlugs) {
@@ -191,6 +197,17 @@ describe("scripts/verify-project.js — artifact inspection", () => {
     const { code, output } = runVerify(base);
     expect(code).toBe(1);
     expect(output).toContain("missing artifact: out/map/index.html");
+    expect(output).not.toContain("✅ NFR-2 certified");
+  });
+
+  it("reports a missing /planets route", () => {
+    const base = sandbox("noplanets", {
+      slugs: ["1-1-meet-peromfu"],
+      planetsIndex: false,
+    });
+    const { code, output } = runVerify(base);
+    expect(code).toBe(1);
+    expect(output).toContain("missing artifact: out/planets/index.html");
     expect(output).not.toContain("✅ NFR-2 certified");
   });
 

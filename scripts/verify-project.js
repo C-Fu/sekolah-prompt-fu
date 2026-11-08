@@ -164,9 +164,10 @@ function main() {
         }
       };
 
-      // Root `/` and `/map`.
+      // Root `/`, `/map`, and `/planets`.
       requireArtifact("index.html", "root / route");
       requireArtifact("map/index.html", "/map route");
+      requireArtifact("planets/index.html", "/planets route");
 
       // One emitted index.html per registered level slug.
       slugs = deriveLevelSlugs();
@@ -216,7 +217,7 @@ function main() {
   // claim level-route/media counts it did not inspect.
   const verdict = GATES_ONLY
     ? "✅ NFR-2 certified: tsc pass, vitest pass (gates-only — out/ not inspected)."
-    : `✅ NFR-2 certified: tsc pass, vitest pass, ${slugs.length} level routes, / and /map, bundled media (full — out/ inspected).`;
+    : `✅ NFR-2 certified: tsc pass, vitest pass, ${slugs.length} level routes, /, /map, and /planets, bundled media (full — out/ inspected).`;
   console.log(`\n${verdict}`);
   process.exit(0);
 }
