@@ -85,6 +85,12 @@ export function PlanetaryExplorer({
   // SSR-safe client mount guard per D-04
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
+  // WebGL renderer failure state (D-08, E3 error)
+  const [webglError, setWebglError] = useState<boolean>(false);
+  const handleRendererError = useCallback((_err: unknown) => {
+    setWebglError(true);
+  }, []);
+
   // 3D scene instance references
   const solarSystemRef = useRef<SolarSystemSceneResult | null>(null);
   const cartographyRef = useRef<PlanetCartographyScene | null>(null);
@@ -189,6 +195,7 @@ export function PlanetaryExplorer({
           <PlanetaryCanvas
             key="solar-system-canvas"
             mode="solar-system"
+            onError={handleRendererError}
             onInit={(ctx) => {
               // Set cinematic perspective for solar system overview
               ctx.camera.position.set(0, 22, 32);
@@ -233,6 +240,7 @@ export function PlanetaryExplorer({
             key={`cartography-canvas-${activePlanet.id}`}
             mode="planet-cartography"
             planetId={activePlanet.id}
+            onError={handleRendererError}
             onInit={(ctx) => {
               // Position camera for globe inspection
               ctx.camera.position.set(0, 0, 16);
@@ -373,6 +381,28 @@ export function PlanetaryExplorer({
       >
         {statusMessage}
       </div>
+
+      {/* WebGL Unavailable Fallback Guidance (D-08, E3 error) */}
+      {webglError && (
+        <div
+          data-testid="webgl-unavailable-notice"
+          role="status"
+          aria-live="polite"
+          className={`absolute left-1/2 -translate-x-1/2 z-20 pointer-events-auto max-w-md w-[92vw] sm:w-auto px-4 py-2.5 sm:py-3 rounded-2xl bg-slate-900/95 border border-amber-400/40 text-amber-200 text-xs sm:text-sm text-center shadow-2xl backdrop-blur-md ${
+            mode === 'solar-system'
+              ? 'top-28 sm:top-32'
+              : 'top-32 sm:top-36'
+          }`}
+        >
+          <div className="flex items-center justify-center gap-1.5 font-bold text-amber-300 text-xs sm:text-sm mb-1">
+            <span aria-hidden="true">⚠️</span>
+            <span>{isMs ? 'Paparan 3D Tidak Tersedia' : '3D View Unavailable'}</span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-200 leading-relaxed font-normal">
+            {t('webglUnavailable')}
+          </p>
+        </div>
+      )}
 
       {/* Glassmorphic Telemetry HUD Overlay in Cartography mode */}
       {mode === 'planet-cartography' && (

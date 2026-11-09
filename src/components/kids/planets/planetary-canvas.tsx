@@ -21,6 +21,7 @@ export interface PlanetaryCanvasProps {
   onSelectFeature?: (featureIndex: number) => void;
   onInit?: (ctx: PlanetaryCanvasContext) => (() => void) | void;
   onRenderFrame?: (ctx: PlanetaryCanvasContext, delta: number) => void;
+  onError?: (error: unknown) => void;
   className?: string;
   children?: React.ReactNode;
 }
@@ -36,12 +37,14 @@ export function PlanetaryCanvas({
   planetId,
   onInit,
   onRenderFrame,
+  onError,
   className = '',
   children,
 }: PlanetaryCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onInitRef = useRef(onInit);
   const onRenderFrameRef = useRef(onRenderFrame);
+  const onErrorRef = useRef(onError);
 
   // Keep callback refs updated across re-renders
   useEffect(() => {
@@ -51,6 +54,10 @@ export function PlanetaryCanvas({
   useEffect(() => {
     onRenderFrameRef.current = onRenderFrame;
   }, [onRenderFrame]);
+
+  useEffect(() => {
+    onErrorRef.current = onError;
+  }, [onError]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -73,26 +80,27 @@ export function PlanetaryCanvas({
 
     // 2. WebGLRenderer with defensive creation for headless / test environments
     let renderer: THREE.WebGLRenderer;
+    let controls: OrbitControls;
     try {
       renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: false,
         powerPreference: 'high-performance',
       });
+      renderer.setPixelRatio(Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 2));
+      renderer.setSize(initialWidth, initialHeight);
+      container.appendChild(renderer.domElement);
+
+      // 3. OrbitControls with smooth damping
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
     } catch (err) {
       // In SSR or environments without WebGL support, fail gracefully without crashing
       console.warn('PlanetaryCanvas: WebGL context creation failed or unavailable', err);
+      onErrorRef.current?.(err);
       return;
     }
-
-    renderer.setPixelRatio(Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 2));
-    renderer.setSize(initialWidth, initialHeight);
-    container.appendChild(renderer.domElement);
-
-    // 3. OrbitControls with smooth damping
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
 
     // 4. Responsive ResizeObserver
     const resizeObserver = new ResizeObserver((entries) => {
@@ -115,7 +123,13 @@ export function PlanetaryCanvas({
       container,
     };
 
-    const cleanupInit = onInitRef.current?.(ctx);
+    let cleanupInit: (() => void) | void;
+    try {
+      cleanupInit = onInitRef.current?.(ctx);
+    } catch (err) {
+      console.warn('PlanetaryCanvas: onInit failed or unavailable', err);
+      onErrorRef.current?.(err);
+    }
 
     // 5. requestAnimationFrame render loop
     let animationFrameId: number;
@@ -142,7 +156,7 @@ export function PlanetaryCanvas({
         cleanupInit();
       }
 
-      controls.dispose();
+      controls?.dispose();
 
       // Traverse scene to dispose geometries, materials, and textures
       scene.traverse((obj) => {
@@ -163,9 +177,9 @@ export function PlanetaryCanvas({
         }
       });
 
-      renderer.dispose();
+      renderer?.dispose();
 
-      if (container.contains(renderer.domElement)) {
+      if (renderer?.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
     };

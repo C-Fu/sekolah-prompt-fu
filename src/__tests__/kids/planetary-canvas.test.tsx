@@ -4,6 +4,11 @@ import { render, screen, cleanup } from '@testing-library/react';
 import fs from 'fs';
 import path from 'path';
 
+// Dynamic mock state for Three.js WebGLRenderer testing
+const threeMockState = vi.hoisted(() => ({
+  shouldThrow: false,
+}));
+
 // Mock Three.js WebGLRenderer and OrbitControls for Node/JSDOM testing environment per D-04
 vi.mock('three', async (importOriginal) => {
   const actual = await importOriginal<typeof import('three')>();
@@ -13,6 +18,11 @@ vi.mock('three', async (importOriginal) => {
     setPixelRatio = vi.fn();
     render = vi.fn();
     dispose = vi.fn();
+    constructor() {
+      if (threeMockState.shouldThrow) {
+        throw new Error('WebGL creation failed');
+      }
+    }
   }
   return {
     ...actual,
@@ -147,5 +157,40 @@ describe('PlanetaryCanvas Component (D-04)', () => {
     expect(ctx.camera).toBeDefined();
     expect(ctx.renderer).toBeDefined();
     expect(ctx.controls).toBeDefined();
+  });
+
+  it('notifies onError callback when WebGLRenderer construction throws and unmounts cleanly (D-08, E3 error)', () => {
+    const onError = vi.fn();
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    threeMockState.shouldThrow = true;
+
+    try {
+      const { unmount } = render(
+        <PlanetaryCanvas mode="solar-system" onError={onError}>
+          <div data-testid="fallback-child">Still Visible Child</div>
+        </PlanetaryCanvas>
+      );
+
+      expect(onError).toHaveBeenCalledTimes(1);
+      expect(onError.mock.calls[0][0]).toBeInstanceOf(Error);
+      expect(screen.getByTestId('fallback-child')).toBeInTheDocument();
+
+      expect(() => unmount()).not.toThrow();
+    } finally {
+      threeMockState.shouldThrow = false;
+      consoleWarnSpy.mockRestore();
+    }
+  });
+
+  it('handles absent or delayed onInit cleanly without throwing or crashing (D-05, E3 loading)', () => {
+    // When onInit is not passed or undefined
+    const { unmount } = render(
+      <PlanetaryCanvas mode="solar-system">
+        <div data-testid="child-no-init">Child without onInit</div>
+      </PlanetaryCanvas>
+    );
+
+    expect(screen.getByTestId('child-no-init')).toBeInTheDocument();
+    expect(() => unmount()).not.toThrow();
   });
 });

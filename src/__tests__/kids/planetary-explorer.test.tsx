@@ -50,6 +50,11 @@ vi.mock('next/navigation', () => ({
   }),
 }));
 
+// Dynamic mock state for Three.js WebGLRenderer testing
+const threeMockState = vi.hoisted(() => ({
+  shouldThrow: false,
+}));
+
 // Mock Three.js WebGLRenderer and OrbitControls for Node/JSDOM testing environment per D-04
 vi.mock('three', async (importOriginal) => {
   const actual = await importOriginal<typeof import('three')>();
@@ -59,6 +64,11 @@ vi.mock('three', async (importOriginal) => {
     setPixelRatio = vi.fn();
     render = vi.fn();
     dispose = vi.fn();
+    constructor() {
+      if (threeMockState.shouldThrow) {
+        throw new Error('WebGL creation failed');
+      }
+    }
   }
   return {
     ...actual,
@@ -427,6 +437,91 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
     const venusLaunchBtn = screen.getByRole('button', { name: /start mission/i });
     fireEvent.click(venusLaunchBtn);
     expect(pushMock).toHaveBeenCalledWith('/level/8-1-matematik-tambah-bintang?origin=planets');
+  });
+
+  it('renders localized unavailable guidance and completes text journey when WebGLRenderer throws (D-08, E3 error)', () => {
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    threeMockState.shouldThrow = true;
+
+    try {
+      pushMock.mockClear();
+      render(<PlanetaryExplorer />);
+
+      // Unavailable guidance should be visible
+      const notice = screen.getByTestId('webgl-unavailable-notice');
+      expect(notice).toBeInTheDocument();
+      expect(notice).toHaveTextContent(/Planet view is unavailable/i);
+
+      // Planet selector bar is fully functional
+      const marsPill = screen.getByTestId('planet-pill-mars-english');
+      expect(marsPill).toBeInTheDocument();
+      marsPill.focus();
+      fireEvent.click(marsPill);
+
+      // Enters cartography HUD
+      expect(screen.getByTestId('planetary-hud-root')).toBeInTheDocument();
+      expect(marsPill).toHaveAttribute('aria-pressed', 'true');
+
+      // Region selection works
+      const marsWorld = PLANET_WORLDS.find((p) => p.id === 'mars-english')!;
+      const featBtn = screen.getByTestId(`feature-button-${marsWorld.features[0].id}`);
+      fireEvent.click(featBtn);
+      expect(featBtn).toHaveAttribute('aria-pressed', 'true');
+
+      // Launch mission works and is not rerouted
+      const launchBtn = screen.getByRole('button', { name: /start mission/i });
+      fireEvent.click(launchBtn);
+      expect(pushMock).toHaveBeenCalledWith('/level/7-1-english-colorful-toys?origin=planets');
+    } finally {
+      threeMockState.shouldThrow = false;
+      consoleWarnSpy.mockRestore();
+    }
+  });
+
+  it('renders bilingual WebGL unavailable guidance in Bahasa Melayu (D-08, E3 error, A11Y-04)', () => {
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    threeMockState.shouldThrow = true;
+
+    intlState.locale = 'ms';
+    try {
+      pushMock.mockClear();
+      render(<PlanetaryExplorer />);
+
+      const notice = screen.getByTestId('webgl-unavailable-notice');
+      expect(notice).toBeInTheDocument();
+      expect(notice).toHaveTextContent(/Paparan planet tidak tersedia/i);
+
+      const moonPill = screen.getByTestId('planet-pill-moon-bm');
+      fireEvent.click(moonPill);
+
+      const moonWorld = PLANET_WORLDS.find((p) => p.id === 'moon-bm')!;
+      const featBtn = screen.getByTestId(`feature-button-${moonWorld.features[0].id}`);
+      fireEvent.click(featBtn);
+
+      const launchBtn = screen.getByRole('button', { name: /mula misi/i });
+      fireEvent.click(launchBtn);
+      expect(pushMock).toHaveBeenCalledWith('/level/6-1-bm-kucing-peromfu?origin=planets');
+    } finally {
+      threeMockState.shouldThrow = false;
+      consoleWarnSpy.mockRestore();
+    }
+  });
+
+  it('does not gate text navigation with a scene spinner when scene initialization is delayed or slow (D-05, E3 loading)', () => {
+    // When onInit has not run or is delayed, no loading spinner blocks the selector
+    render(<PlanetaryExplorer />);
+
+    // Explorer root is mounted immediately after hydration, not gating text controls with a scene spinner
+    expect(screen.getByTestId('planetary-explorer-root')).toBeInTheDocument();
+    expect(screen.queryByTestId('planetary-explorer-loading')).toBeNull();
+
+    // Text controls are instantly operable
+    const venusPill = screen.getByTestId('planet-pill-venus-matematik');
+    expect(venusPill).toBeInTheDocument();
+    fireEvent.click(venusPill);
+
+    expect(screen.getByTestId('planetary-hud-root')).toBeInTheDocument();
+    expect(venusPill).toHaveAttribute('aria-pressed', 'true');
   });
 });
 
