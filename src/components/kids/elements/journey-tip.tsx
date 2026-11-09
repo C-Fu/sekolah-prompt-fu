@@ -52,7 +52,7 @@ export function JourneyTip({
       <button
         type="button"
         onClick={handleDismiss}
-        className="px-2.5 py-1 rounded-lg bg-[#FFD700] hover:bg-[#FFC000] text-[#2C1810] font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer shrink-0 active:scale-95"
+        className="px-2.5 py-1 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg bg-[#FFD700] hover:bg-[#FFC000] text-[#2C1810] font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer shrink-0 active:scale-95"
       >
         {dismissLabel}
       </button>

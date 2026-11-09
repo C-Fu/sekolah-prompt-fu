@@ -198,4 +198,76 @@ describe("ProgressMap Hub Navigation and Empty State", () => {
 
     spy.mockRestore();
   });
+
+  it("provides a keyboard-scrollable local region and accessible scroll controls with minimum hitboxes (E2 overflow/touch targets)", () => {
+    render(<ProgressMap />);
+
+    // Local scroll region must advertise role and label, and be keyboard scrollable
+    const scrollRegion = screen.getByRole("region", { name: "Earth map scroll area" });
+    expect(scrollRegion).toBeInTheDocument();
+    expect(scrollRegion).toHaveAttribute("tabindex", "0");
+
+    // Keyboard scrolling via Arrow keys
+    fireEvent.keyDown(scrollRegion, { key: "ArrowRight" });
+    fireEvent.keyDown(scrollRegion, { key: "ArrowLeft" });
+
+    // Left and Right controls with min 44px hitboxes
+    const leftBtn = screen.getByRole("button", { name: "Scroll left" });
+    const rightBtn = screen.getByRole("button", { name: "Scroll right" });
+    expect(leftBtn.className).toContain("min-h-[44px]");
+    expect(leftBtn.className).toContain("min-w-[44px]");
+    expect(rightBtn.className).toContain("min-h-[44px]");
+    expect(rightBtn.className).toContain("min-w-[44px]");
+
+    // Portal link has min 44px hitbox
+    const portalLink = screen.getByRole("link", { name: /Fly to Solar System/i });
+    expect(portalLink.className).toContain("min-h-[44px]");
+  });
+
+  it("exposes named level links for unlocked nodes and keeps locked nodes non-activating with buildLessonUrl (E2 zero/one/many)", () => {
+    // Test 1: Single unlocked level (zero completed, one unlocked)
+    const unlockSpy = vi.spyOn(progressModule, "isLevelUnlocked").mockImplementation((slug) => slug === "1-1-meet-peromfu");
+
+    render(<ProgressMap />);
+
+    // Level 1-1 is unlocked and reachable via buildLessonUrl with map origin
+    const unlockedLink = screen.getByRole("link", { name: /Meet Peromfu/i });
+    expect(unlockedLink).toBeInTheDocument();
+    expect(unlockedLink).toHaveAttribute("href", "/level/1-1-meet-peromfu?origin=map");
+    expect(unlockedLink.className).toContain("min-h-[44px]");
+
+    // Level 1-2 is locked, so no link exists for it
+    expect(screen.queryByRole("link", { name: /Peromfu's First Words/i })).not.toBeInTheDocument();
+    // But its title text remains visible
+    expect(screen.getByText("Peromfu's First Words")).toBeInTheDocument();
+
+    // Test 2: Multiple unlocked levels
+    unlockSpy.mockImplementation((slug) => slug === "1-1-meet-peromfu" || slug === "1-2-first-words");
+    const { unmount } = render(<ProgressMap />);
+    const link1 = screen.getAllByRole("link", { name: /Meet Peromfu/i })[0];
+    const link2 = screen.getByRole("link", { name: /Peromfu's First Words/i });
+    expect(link1).toHaveAttribute("href", "/level/1-1-meet-peromfu?origin=map");
+    expect(link2).toHaveAttribute("href", "/level/1-2-first-words?origin=map");
+
+    unmount();
+    unlockSpy.mockRestore();
+  });
+
+  it("renders full Bahasa Melayu labels across map controls, portal banner, and level titles (E2 long-text/BM)", () => {
+    currentLocale = "ms";
+    render(<ProgressMap />);
+
+    // BM portal banner
+    expect(screen.getByRole("link", { name: /Terbang ke Sistem Suria/i })).toHaveAttribute("href", "/planets");
+
+    // BM local scroll region
+    expect(screen.getByRole("region", { name: "Kawasan tatal peta Bumi" })).toBeInTheDocument();
+
+    // BM scroll controls
+    expect(screen.getByRole("button", { name: "Tatal kiri" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Tatal kanan" })).toBeInTheDocument();
+
+    // BM unlocked level title
+    expect(screen.getByRole("link", { name: /Berjumpa Peromfu/i })).toHaveAttribute("href", "/level/1-1-meet-peromfu?origin=map");
+  });
 });

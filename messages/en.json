@@ -137,6 +137,9 @@
       "locked": "Complete previous level to unlock",
       "toPlanetsBanner": "Fly to Solar System",
       "toPlanetsSub": "Explore 3D planets & subject adventures!",
+      "scrollLeft": "Scroll left",
+      "scrollRight": "Scroll right",
+      "scrollRegionLabel": "Earth map scroll area",
       "emptyHeading": "No levels here yet",
       "emptyBody": "No levels are available yet. Explore the planets instead.",
       "explorePlanetsAction": "Explore planets"

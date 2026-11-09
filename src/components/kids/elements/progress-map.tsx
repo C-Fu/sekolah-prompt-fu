@@ -53,11 +53,23 @@ export function ProgressMap() {
   const mapWidth = Math.max(calculatedWidth, 800);
 
   const scrollLeft = () => {
-    scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+    if (typeof scrollRef.current?.scrollBy === "function") {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
   };
 
   const scrollRight = () => {
-    scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+    if (typeof scrollRef.current?.scrollBy === "function") {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      scrollLeft();
+    } else if (e.key === "ArrowRight") {
+      scrollRight();
+    }
   };
 
   return (
@@ -66,10 +78,10 @@ export function ProgressMap() {
       <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex flex-col items-center gap-2">
         <Link
           href="/planets"
-          className="pixel-btn pixel-btn-blue inline-flex items-center gap-2.5 px-4 py-2 text-sm sm:text-base shadow-xl hover:scale-105 transition-transform"
+          className="pixel-btn pixel-btn-blue inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm sm:text-base shadow-xl hover:scale-105 transition-transform"
           title={t("map.toPlanetsSub")}
         >
-          <PixelRocket className="w-5 h-7" />
+          <PixelRocket className="w-5 h-7 shrink-0" />
           <div className="text-left leading-tight">
             <span className="block font-bold text-white text-xs sm:text-sm tracking-wide">
               {t("map.toPlanetsBanner")}
@@ -88,36 +100,42 @@ export function ProgressMap() {
         />
       </div>
 
-      {/* Scroll controls for desktop */}
+      {/* Scroll controls for desktop with min 44px hitboxes and visible labels */}
       <div className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20">
         <button 
           onClick={scrollLeft} 
-          className="w-10 h-10 bg-[#FFD700] border-3 border-[#DAA520] flex items-center justify-center hover:bg-[#FFC000] transition-colors shadow-lg"
+          className="min-w-[44px] min-h-[44px] px-2.5 py-1 bg-[#FFD700] border-3 border-[#DAA520] flex items-center justify-center gap-1 hover:bg-[#FFC000] transition-colors shadow-lg"
           style={{ clipPath: "polygon(0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px))" }}
-          aria-label="Scroll left"
+          aria-label={t("map.scrollLeft")}
         >
-          <ChevronLeft className="h-5 w-5 text-[#8B4513]" />
+          <ChevronLeft className="h-5 w-5 text-[#8B4513] shrink-0" />
+          <span className="text-xs font-bold text-[#8B4513] hidden lg:inline">{t("map.scrollLeft")}</span>
         </button>
       </div>
       <div className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20">
         <button 
           onClick={scrollRight} 
-          className="w-10 h-10 bg-[#FFD700] border-3 border-[#DAA520] flex items-center justify-center hover:bg-[#FFC000] transition-colors shadow-lg"
+          className="min-w-[44px] min-h-[44px] px-2.5 py-1 bg-[#FFD700] border-3 border-[#DAA520] flex items-center justify-center gap-1 hover:bg-[#FFC000] transition-colors shadow-lg"
           style={{ clipPath: "polygon(0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px))" }}
-          aria-label="Scroll right"
+          aria-label={t("map.scrollRight")}
         >
-          <ChevronRight className="h-5 w-5 text-[#8B4513]" />
+          <span className="text-xs font-bold text-[#8B4513] hidden lg:inline">{t("map.scrollRight")}</span>
+          <ChevronRight className="h-5 w-5 text-[#8B4513] shrink-0" />
         </button>
       </div>
 
-      {/* Horizontal scrolling map container */}
+      {/* Horizontal scrolling map container with accessible label and keyboard scrolling */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide flex justify-center"
+        tabIndex={0}
+        role="region"
+        aria-label={t("map.scrollRegionLabel")}
+        onKeyDown={handleKeyDown}
+        className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide flex justify-start sm:justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <div 
-          className="relative h-full min-h-[400px] min-w-full"
+          className="relative h-full min-h-[400px] shrink-0"
           style={{ width: `${mapWidth}px`, imageRendering: "pixelated" }}
         >
           {/* Pixel art ground layers - use full width */}
@@ -183,7 +201,7 @@ export function ProgressMap() {
                 style={{ left: `${pos.x - 50}px`, top: "12px" }}
               >
                 <div 
-                  className="px-4 py-2 bg-[#FFD700] border-3 border-[#DAA520] text-base font-bold text-[#8B4513] whitespace-nowrap"
+                  className="px-4 py-2 bg-[#FFD700] border-3 border-[#DAA520] text-base font-bold text-[#8B4513] max-w-[220px] text-center break-words"
                   style={{ 
                     clipPath: "polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px)",
                   }}
@@ -524,7 +542,7 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
       )}
       
       <div 
-        className="absolute top-full mt-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-2 text-base font-bold bg-amber-100 dark:bg-amber-900 border-2 border-amber-400"
+        className="absolute top-full mt-6 left-1/2 -translate-x-1/2 px-3 py-2 text-base font-bold bg-amber-100 dark:bg-amber-900 border-2 border-amber-400 max-w-[180px] text-center break-words"
         style={{ 
           clipPath: "polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px)",
         }}
@@ -535,11 +553,25 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
   );
 
   if (!unlocked) {
-    return <div className="group cursor-not-allowed">{nodeContent}</div>;
+    return (
+      <div 
+        className="group cursor-not-allowed select-none"
+        aria-disabled="true"
+        title={t("map.locked")}
+      >
+        {nodeContent}
+      </div>
+    );
   }
 
+  const localizedTitle = t(`levels.${level.slug.replace(/-/g, "_")}.title`);
+
   return (
-    <Link href={buildLessonUrl(level.slug, "map")} className="group cursor-pointer">
+    <Link 
+      href={buildLessonUrl(level.slug, "map")} 
+      className="group cursor-pointer min-h-[44px] min-w-[44px]"
+      aria-label={`${localizedTitle} (${level.world}.${level.levelNumber})`}
+    >
       {nodeContent}
     </Link>
   );
