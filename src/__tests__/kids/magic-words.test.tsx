@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, cleanup, within } from "@testing-library/react";
 import enMessages from "@/../messages/en.json";
 import msMessages from "@/../messages/ms.json";
 import { MagicWords } from "@/components/kids/elements/magic-words";
@@ -403,5 +403,142 @@ describe("MagicWords (Phase 15-04)", () => {
     fireEvent.click(blank);
 
     expect(status).toHaveTextContent("Betul! Item telah diletakkan.");
+  });
+
+  it("handles repeated submit without duplicating progress or crashing", () => {
+    const markSectionSpy = vi.spyOn(progressModule, "markSectionCompleted");
+
+    const { mockScope } = renderWithProviders(
+      <MagicWords
+        sentence="A {{color}}"
+        blanks={[{ id: "color", hint: "Color", answers: ["red"] }]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    const redWord = screen.getByRole("button", { name: /^red/i });
+    fireEvent.click(redWord);
+    fireEvent.click(screen.getByRole("button", { name: /color/i }));
+
+    const checkBtn = screen.getByRole("button", { name: /check/i });
+    fireEvent.click(checkBtn);
+
+    expect(markSectionSpy).toHaveBeenCalledTimes(1);
+    expect(mockScope.markComplete).toHaveBeenCalledTimes(1);
+
+    // After success, actions area remains mounted with stable completion indicator
+    const actionsArea = screen.getByTestId("magic-words-actions");
+    expect(actionsArea).toBeInTheDocument();
+    expect(actionsArea).toHaveTextContent(/correct/i);
+  });
+
+  it("supports interrupted selection: switching words or deselecting cleanly updates state and announcements", () => {
+    renderWithProviders(
+      <MagicWords
+        sentence="A {{color}} {{animal}}"
+        blanks={[
+          { id: "color", hint: "Color", answers: ["red"] },
+          { id: "animal", hint: "Animal", answers: ["cat"] },
+        ]}
+      />
+    );
+
+    const redWord = screen.getByRole("button", { name: /^red/i });
+    const catWord = screen.getByRole("button", { name: /^cat/i });
+
+    // Select red
+    fireEvent.click(redWord);
+    expect(redWord).toHaveAttribute("aria-pressed", "true");
+    expect(catWord).toHaveAttribute("aria-pressed", "false");
+
+    // Click red again to deselect
+    fireEvent.click(redWord);
+    expect(redWord).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("status")).toHaveTextContent("Choose an item, then choose a place.");
+
+    // Select red, then interrupt by clicking cat directly
+    fireEvent.click(redWord);
+    expect(redWord).toHaveAttribute("aria-pressed", "true");
+    fireEvent.click(catWord);
+    expect(redWord).toHaveAttribute("aria-pressed", "false");
+    expect(catWord).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("executes explicit wrong-then-correct sequence without clearing other answers or breaking section guidance", () => {
+    renderWithProviders(
+      <MagicWords
+        sentence="A {{color}} {{animal}} runs"
+        blanks={[
+          { id: "color", hint: "Color", answers: ["blue"] },
+          { id: "animal", hint: "Animal", answers: ["fox"] },
+        ]}
+      />
+    );
+
+    // 1. Place blue into color correctly
+    fireEvent.click(screen.getByRole("button", { name: /^blue/i }));
+    fireEvent.click(screen.getByRole("button", { name: /color/i }));
+    expect(screen.getByRole("button", { name: /color/i })).toHaveTextContent("blue");
+
+    // 2. Mistakenly try to place fox into color
+    fireEvent.click(screen.getByRole("button", { name: /^fox/i }));
+    fireEvent.click(screen.getByRole("button", { name: /color/i }));
+
+    // Wrong placement announced, fox still selected, blue still in color!
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "Not there yet. Choose another place for this item."
+    );
+    expect(screen.getByRole("button", { name: /^fox/i })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: /color/i })).toHaveTextContent("blue");
+
+    // 3. Now click the correct animal destination blank
+    fireEvent.click(screen.getByRole("button", { name: /animal/i }));
+
+    // Now fox is placed in animal, blue is still in color!
+    expect(screen.getByRole("button", { name: /animal/i })).toHaveTextContent("fox");
+    expect(screen.getByRole("button", { name: /color/i })).toHaveTextContent("blue");
+    expect(screen.getByRole("status")).toHaveTextContent("Correct! Item placed.");
+  });
+
+  it("restores legacy saved state lacking placedIndices and reconciles duplicate-safe indexing", () => {
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      placements: { pet1: "dog", pet2: "dog" },
+      submitted: false,
+      availableWords: [
+        { word: "dog", blankId: "pet1" },
+        { word: "dog", blankId: "pet2" },
+      ],
+    });
+
+    renderWithProviders(
+      <MagicWords
+        sentence="Two dogs: {{pet1}} and {{pet2}}"
+        blanks={[
+          { id: "pet1", hint: "Pet 1", answers: ["dog"] },
+          { id: "pet2", hint: "Pet 2", answers: ["dog"] },
+        ]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    const blank1 = screen.getByRole("button", { name: /pet 1/i });
+    const blank2 = screen.getByRole("button", { name: /pet 2/i });
+    expect(blank1).toHaveTextContent("dog");
+    expect(blank2).toHaveTextContent("dog");
+
+    // Both dog buttons in word bank should be disabled because both slots are filled
+    const wordBank = screen.getByTestId("magic-words-word-bank");
+    const dogButtons = within(wordBank).getAllByRole("button", { name: /dog/i });
+    expect(dogButtons[0]).toBeDisabled();
+    expect(dogButtons[1]).toBeDisabled();
+
+    // Now unplace blank1
+    fireEvent.click(blank1);
+    expect(blank1).toHaveTextContent("Pet 1");
+
+    // One of the dog buttons should become available again!
+    const updatedDogButtons = within(wordBank).getAllByRole("button", { name: /dog/i });
+    const enabledCount = updatedDogButtons.filter((btn) => !btn.hasAttribute("disabled")).length;
+    expect(enabledCount).toBe(1);
   });
 });

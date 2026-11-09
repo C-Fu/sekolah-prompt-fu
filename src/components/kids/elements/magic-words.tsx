@@ -258,10 +258,12 @@ export function MagicWords({
 
   const handleSubmit = () => {
     setSubmitted(true);
-    // Guard exact correctness: require all blanks to be correct before completing section
-    const areAllBlanksCorrect = blanksWithIds.every((blank) =>
-      checkAnswer(blank.id, placements[blank.id] || "")
-    );
+    // Guard exact correctness: require all blanks to be non-empty and correct before completing section
+    const areAllBlanksCorrect =
+      blanksWithIds.length > 0 &&
+      blanksWithIds.every((blank) =>
+        Boolean(placements[blank.id]) && checkAnswer(blank.id, placements[blank.id] || "")
+      );
     if (areAllBlanksCorrect && levelSlug && scope) {
       const index = scope.getIndex();
       if (index !== null) {
@@ -352,7 +354,7 @@ export function MagicWords({
         </div>
 
         {/* Word bank */}
-        <div className="p-4 bg-purple-100" style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}>
+        <div data-testid="magic-words-word-bank" className="p-4 bg-purple-100" style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}>
           <p className="text-lg font-medium text-purple-700 mb-3 m-0">
             {t("dragOrTap")}
           </p>
@@ -375,16 +377,22 @@ export function MagicWords({
                     "flex items-center gap-2 px-4 py-3 border-2 min-h-[44px] text-xl font-medium transition-all text-[#2C1810]",
                     !isUsed && !submitted && !isSelected && "bg-white border-purple-300 hover:border-purple-500 hover:shadow-md cursor-pointer",
                     isSelected && "bg-purple-100 border-purple-600 ring-2 ring-purple-500 font-bold shadow-sm",
-                    isUsed && "bg-gray-100 border-gray-300 text-gray-400 opacity-50 cursor-not-allowed",
+                    isUsed && "bg-gray-100 border-gray-400 text-gray-500 opacity-60 cursor-not-allowed border-dashed",
                     submitted && "cursor-default"
                   )}
                   style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}
                 >
                   {!submitted && !isUsed && <GripVertical className="h-5 w-5 text-purple-400 shrink-0" />}
+                  {isUsed && <Check className="h-5 w-5 text-gray-500 shrink-0" />}
                   <span>{word}</span>
                   {isSelected && (
                     <span className="text-xs bg-purple-600 text-white font-bold px-1.5 py-0.5 rounded ml-1">
                       ✓ {tActivity("selected")}
+                    </span>
+                  )}
+                  {isUsed && (
+                    <span className="text-xs bg-gray-200 border border-gray-400 text-gray-700 font-bold px-1.5 py-0.5 rounded ml-1">
+                      ✓
                     </span>
                   )}
                 </button>
@@ -426,22 +434,27 @@ export function MagicWords({
         )}
 
         {/* Actions */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 min-h-[48px] items-center" data-testid="magic-words-actions">
           {!submitted ? (
             <Button 
               onClick={handleSubmit} 
-              className="rounded-full h-12 text-xl px-6"
+              className="rounded-full h-12 text-xl px-6 font-bold"
               disabled={Object.keys(placements).length < blanksWithIds.length}
             >
               <Check className="h-5 w-5 mr-2" />
               {t("check")}
             </Button>
           ) : !allCorrect ? (
-            <Button onClick={handleReset} variant="outline" className="rounded-full h-12 text-xl px-6">
+            <Button onClick={handleReset} variant="outline" className="rounded-full h-12 text-xl px-6 font-bold">
               <RefreshCw className="h-5 w-5 mr-2" />
               {t("retry")}
             </Button>
-          ) : null}
+          ) : (
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-100 border-2 border-green-600 rounded-full text-green-800 font-bold text-lg">
+              <Check className="h-5 w-5 text-green-700" />
+              <span>{tActivity("correctPlacement")}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
