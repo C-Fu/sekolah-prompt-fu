@@ -318,7 +318,11 @@
       "retry": "Cuba lagi",
       "success": "Sempurna! Anda membina prompt yang hebat!",
       "almost": "Hampir betul! Terus susun semula.",
-      "tapToSwap": "Ketik kepingan lain untuk menukar kedudukan!"
+      "tapToSwap": "Ketik kepingan lain untuk menukar kedudukan!",
+      "moveUp": "Gerak ke atas",
+      "moveDown": "Gerak ke bawah",
+      "position": "Kedudukan {position}",
+      "moveToPosition": "Pindah ke kedudukan {position}"
     },
     "promptParts": {
       "title": "Susun Bahagian Prompt!",

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useId, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronUp, ChevronDown } from "lucide-react";
+import { ChevronUp, ChevronDown, GripVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
@@ -29,6 +29,7 @@ export function DragDropPrompt({
   successMessage,
 }: DragDropPromptProps) {
   const t = useTranslations("kids.dragDrop");
+  const tActivity = useTranslations("kids.activity");
   const levelSlug = useLevelSlug();
   const scope = useSectionIdentity();
   const componentId = useId();
@@ -46,6 +47,9 @@ export function DragDropPrompt({
   const [currentOrder, setCurrentOrder] = useState<number[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [selectedPieceIndex, setSelectedPieceIndex] = useState<number | null>(null);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState(0); // Y offset for dragged item
   const [targetIndex, setTargetIndex] = useState<number | null>(null); // Where item will drop
@@ -98,6 +102,28 @@ export function DragDropPrompt({
     });
   }, [levelSlug, componentId, currentOrder, submitted, shuffledPieces, isLoaded]);
 
+  // Shared move operation for select-destination, arrows, and dragging
+  const reorderPosition = useCallback((fromIndex: number, toIndex: number) => {
+    if (
+      fromIndex === toIndex ||
+      fromIndex < 0 ||
+      toIndex < 0 ||
+      fromIndex >= currentOrder.length ||
+      toIndex >= currentOrder.length
+    ) {
+      return;
+    }
+
+    setCurrentOrder((prev) => {
+      const newOrder = [...prev];
+      const [movedItem] = newOrder.splice(fromIndex, 1);
+      newOrder.splice(toIndex, 0, movedItem);
+      return newOrder;
+    });
+    setStatusMessage(tActivity("correctPlacement"));
+    setSubmitted(false);
+  }, [currentOrder.length, tActivity]);
+
   // Shared drag move handler for both touch and mouse
   const handleDragMove = useCallback((currentY: number) => {
     const state = dragStateRef.current;
@@ -109,7 +135,7 @@ export function DragDropPrompt({
     setDragOffset(deltaY);
     
     // Calculate target position based on how far we've dragged
-    const positionShift = Math.round(deltaY / itemHeight.current);
+    const positionShift = Math.round(deltaY / (itemHeight.current || 56));
     const newTargetIndex = Math.max(0, Math.min(pieces.length - 1, state.draggedIndex + positionShift));
     setTargetIndex(newTargetIndex);
     targetIndexRef.current = newTargetIndex; // Keep ref in sync
@@ -118,7 +144,7 @@ export function DragDropPrompt({
   // Event listeners for drag movement (touch and mouse)
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || submitted || !isLoaded) return;
+    if (!container || (submitted && isCorrect()) || !isLoaded) return;
 
     const onTouchMove = (e: TouchEvent) => {
       if (!dragStateRef.current) return;
@@ -132,18 +158,18 @@ export function DragDropPrompt({
       handleDragMove(e.clientY);
     };
 
-    container.addEventListener('touchmove', onTouchMove, { passive: false });
-    document.addEventListener('mousemove', onMouseMove);
+    container.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.addEventListener("mousemove", onMouseMove);
     
     return () => {
-      container.removeEventListener('touchmove', onTouchMove);
-      document.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("mousemove", onMouseMove);
     };
   }, [submitted, isLoaded, handleDragMove]);
 
   // Unified drag start handler for both touch and mouse
   const handlePointerStart = useCallback((position: number, clientY: number, element: HTMLDivElement | null) => {
-    if (submitted || !element) return;
+    if ((submitted && isCorrect()) || !element) return;
     const rect = element.getBoundingClientRect();
     itemHeight.current = rect.height + 8; // height + gap
     setDraggedIndex(position);
@@ -162,12 +188,7 @@ export function DragDropPrompt({
       
       // Apply the reorder if target changed
       if (target !== null && state.draggedIndex !== target) {
-        setCurrentOrder(prev => {
-          const newOrder = [...prev];
-          const [draggedItem] = newOrder.splice(state.draggedIndex, 1);
-          newOrder.splice(target, 0, draggedItem);
-          return newOrder;
-        });
+        reorderPosition(state.draggedIndex, target);
       }
       
       setDraggedIndex(null);
@@ -177,43 +198,33 @@ export function DragDropPrompt({
       targetIndexRef.current = null;
     };
     
-    document.addEventListener('mouseup', onMouseUp);
-    return () => document.removeEventListener('mouseup', onMouseUp);
-  }, []);
+    document.addEventListener("mouseup", onMouseUp);
+    return () => document.removeEventListener("mouseup", onMouseUp);
+  }, [reorderPosition]);
 
-  // Don't render until loaded to prevent hydration mismatch
-  if (!isLoaded) return null;
-
-  const isCorrect = () => {
+  const isCorrect = useCallback(() => {
+    if (currentOrder.length !== correctOrder.length || currentOrder.length === 0) return false;
     return currentOrder.every((pieceIndex, position) => pieceIndex === correctOrder[position]);
-  };
+  }, [currentOrder, correctOrder]);
+
+  const correct = isCorrect();
 
   // Move piece up (swap with previous)
   const moveUp = (position: number) => {
-    if (submitted || position === 0) return;
-    const newOrder = [...currentOrder];
-    [newOrder[position - 1], newOrder[position]] = [newOrder[position], newOrder[position - 1]];
-    setCurrentOrder(newOrder);
+    if (position === 0) return;
+    reorderPosition(position, position - 1);
   };
 
   // Move piece down (swap with next)
   const moveDown = (position: number) => {
-    if (submitted || position === currentOrder.length - 1) return;
-    const newOrder = [...currentOrder];
-    [newOrder[position], newOrder[position + 1]] = [newOrder[position + 1], newOrder[position]];
-    setCurrentOrder(newOrder);
+    if (position === currentOrder.length - 1) return;
+    reorderPosition(position, position + 1);
   };
 
   // Unified drag end handler (for touch)
   const handlePointerEnd = () => {
-    // Apply the reorder if target changed
     if (draggedIndex !== null && targetIndex !== null && draggedIndex !== targetIndex) {
-      setCurrentOrder(prev => {
-        const newOrder = [...prev];
-        const [draggedItem] = newOrder.splice(draggedIndex, 1);
-        newOrder.splice(targetIndex, 0, draggedItem);
-        return newOrder;
-      });
+      reorderPosition(draggedIndex, targetIndex);
     }
     setDraggedIndex(null);
     setTargetIndex(null);
@@ -221,23 +232,59 @@ export function DragDropPrompt({
     dragStateRef.current = null;
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    // Mark the containing Section complete only on the correct order, binding the
-    // persisted and in-memory completion to its resolved Section index.
-    if (isCorrect() && levelSlug && scope) {
-      const index = scope.getIndex();
-      if (index !== null) markSectionCompleted(levelSlug, index);
-      scope.markComplete();
+  // Native button piece selection
+  const handlePieceClick = (pieceIndex: number) => {
+    if (selectedPieceIndex === pieceIndex) {
+      setSelectedPieceIndex(null);
+      setStatusMessage(tActivity("itemDestinationPrompt"));
+    } else {
+      setSelectedPieceIndex(pieceIndex);
+      setStatusMessage(`${tActivity("selected")}: ${pieces[pieceIndex]}`);
     }
   };
 
-  const handleReset = () => {
-    setCurrentOrder(shuffledPieces);
-    setSubmitted(false);
+  // Native button destination position selection
+  const handleDestinationClick = (destPos: number) => {
+    if (selectedPieceIndex !== null) {
+      const fromPos = currentOrder.indexOf(selectedPieceIndex);
+      if (fromPos !== -1) {
+        reorderPosition(fromPos, destPos);
+      }
+      setSelectedPieceIndex(null);
+    } else {
+      setStatusMessage(tActivity("itemDestinationPrompt"));
+    }
   };
 
-  const correct = isCorrect();
+  const handleSubmit = () => {
+    setSubmitted(true);
+    // Mark the containing Section complete only on the exact correct order, binding the
+    // persisted and in-memory completion to its resolved Section index.
+    if (isCorrect() && levelSlug && scope) {
+      const index = scope.getIndex();
+      if (index !== null) {
+        markSectionCompleted(levelSlug, index);
+        scope.markComplete();
+      }
+    }
+  };
+
+  const currentStatusText = () => {
+    if (submitted) {
+      if (correct) {
+        return `🎉 ${successMessage || t("success")}`;
+      } else {
+        return t("almost");
+      }
+    }
+    if (selectedPieceIndex !== null) {
+      return `${tActivity("selected")}: ${pieces[selectedPieceIndex]}`;
+    }
+    return statusMessage || tActivity("itemDestinationPrompt");
+  };
+
+  // Don't render until loaded to prevent hydration mismatch
+  if (!isLoaded) return null;
 
   return (
     <div className="my-4 p-4 pixel-panel">
@@ -248,26 +295,35 @@ export function DragDropPrompt({
       </div>
       <p className="text-lg text-[#8B7355] mb-4 m-0">{displayInstruction}</p>
 
-      {/* Pieces with up/down arrow controls */}
+      {/* Accessible live status announcer */}
+      <div
+        data-testid="drag-drop-status"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="text-lg font-medium px-4 py-2 bg-[#FEF3C7] border border-[#D97706]/40 rounded-md text-[#2C1810] mb-4"
+      >
+        {currentStatusText()}
+      </div>
+
+      {/* Pieces with native destination buttons, piece select buttons, and up/down arrow controls */}
       <div ref={containerRef} className="space-y-2 mb-4">
         {currentOrder.map((pieceIndex, position) => {
           const isCorrectPiece = submitted && pieceIndex === correctOrder[position];
           const isWrongPiece = submitted && pieceIndex !== correctOrder[position];
           const isDragging = draggedIndex === position;
+          const isSelected = selectedPieceIndex === pieceIndex;
           
           // Calculate transform for visual drag feedback
-          let transform = '';
+          let transform = "";
           if (draggedIndex !== null && targetIndex !== null) {
             if (isDragging) {
-              // Dragged item follows the finger
               transform = `translateY(${dragOffset}px) scale(1.02)`;
             } else if (draggedIndex < targetIndex) {
-              // Items between original and target shift up
               if (position > draggedIndex && position <= targetIndex) {
                 transform = `translateY(-${itemHeight.current}px)`;
               }
             } else if (draggedIndex > targetIndex) {
-              // Items between target and original shift down
               if (position >= targetIndex && position < draggedIndex) {
                 transform = `translateY(${itemHeight.current}px)`;
               }
@@ -276,47 +332,91 @@ export function DragDropPrompt({
           
           return (
             <div
-              key={`${pieceIndex}-${position}`}
+              key={pieceIndex}
+              data-testid={`drag-drop-row-${position}`}
               onMouseDown={(e) => {
+                if ((e.target as HTMLElement).closest("button")) return;
                 e.preventDefault();
                 handlePointerStart(position, e.clientY, e.currentTarget as HTMLDivElement);
               }}
-              onTouchStart={(e) => handlePointerStart(position, e.touches[0].clientY, e.currentTarget as HTMLDivElement)}
+              onTouchStart={(e) => {
+                if ((e.target as HTMLElement).closest("button")) return;
+                handlePointerStart(position, e.touches[0].clientY, e.currentTarget as HTMLDivElement);
+              }}
               onTouchEnd={handlePointerEnd}
               className={cn(
                 "flex items-center gap-2 p-2 border-2 select-none",
-                !submitted && "bg-white border-[#D97706] hover:bg-[#FEF3C7] cursor-grab active:cursor-grabbing touch-none",
+                (!submitted || !correct) && "bg-white border-[#D97706] hover:bg-[#FEF3C7]",
                 isDragging && "z-10 shadow-lg border-[#3B82F6] bg-[#EFF6FF]",
                 !isDragging && draggedIndex !== null && "transition-transform duration-150",
                 isCorrectPiece && "bg-[#DCFCE7] border-[#16A34A]",
-                isWrongPiece && "bg-[#FEE2E2] border-[#DC2626]"
+                isWrongPiece && "bg-[#FEE2E2] border-[#DC2626]",
+                isSelected && "ring-2 ring-blue-500 border-blue-500"
               )}
               style={{ 
                 clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)",
                 transform: transform || undefined,
               }}
             >
-              {/* Position number */}
-              <span className="w-8 h-8 flex items-center justify-center bg-[#D97706] text-white font-bold rounded-md text-lg shrink-0">
-                {position + 1}
-              </span>
-              
-              {/* Piece content */}
-              <div className="flex-1 px-4 py-3 text-xl font-medium text-left">
-                <span className="text-[#2C1810]">{pieces[pieceIndex]}</span>
+              {/* Drag Grip Cue */}
+              <div className="shrink-0 text-[#D97706] cursor-grab active:cursor-grabbing p-1 touch-none" aria-hidden="true">
+                <GripVertical className="w-5 h-5" />
               </div>
+
+              {/* Destination position button */}
+              <button
+                type="button"
+                onClick={() => handleDestinationClick(position)}
+                aria-label={t("position", { position: position + 1 })}
+                title={t("position", { position: position + 1 })}
+                className={cn(
+                  "w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center font-bold rounded-md text-lg shrink-0 transition-all cursor-pointer",
+                  selectedPieceIndex !== null
+                    ? "bg-[#D97706] text-white hover:bg-[#B45309] ring-2 ring-[#D97706]/50"
+                    : "bg-[#D97706] text-white"
+                )}
+              >
+                {position + 1}
+              </button>
+              
+              {/* Piece select button */}
+              <button
+                type="button"
+                onClick={() => handlePieceClick(pieceIndex)}
+                aria-pressed={isSelected}
+                className={cn(
+                  "flex-1 px-4 py-3 min-h-[44px] text-xl font-medium text-left border-2 rounded transition-all cursor-pointer",
+                  isSelected
+                    ? "bg-blue-50 border-blue-600 ring-2 ring-blue-500 font-bold"
+                    : "bg-white border-amber-300 hover:border-amber-500 hover:bg-amber-50/50",
+                  isCorrectPiece && "bg-[#DCFCE7] border-[#16A34A]",
+                  isWrongPiece && "bg-[#FEE2E2] border-[#DC2626]"
+                )}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[#2C1810]">{pieces[pieceIndex]}</span>
+                  {isSelected && (
+                    <span className="text-xs bg-blue-600 text-white font-bold px-2 py-1 rounded shrink-0">
+                      ✓ {tActivity("selected")}
+                    </span>
+                  )}
+                </div>
+              </button>
               
               {/* Up/Down arrows */}
               <div className="flex flex-col gap-1 shrink-0">
                 {/* Up arrow */}
                 <button
+                  type="button"
                   onClick={() => moveUp(position)}
-                  disabled={submitted || position === 0}
+                  disabled={position === 0 || (submitted && correct)}
+                  aria-label={t("moveUp")}
+                  title={t("moveUp")}
                   className={cn(
-                    "w-10 h-8 flex items-center justify-center border-2 transition-all",
-                    position === 0 || submitted
-                      ? "bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed"
-                      : "bg-[#FEF3C7] border-[#D97706] text-[#D97706] hover:bg-[#D97706] hover:text-white active:scale-95"
+                    "w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center border-2 transition-all",
+                    position === 0 || (submitted && correct)
+                      ? "bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed border-dashed"
+                      : "bg-[#FEF3C7] border-[#D97706] text-[#D97706] hover:bg-[#D97706] hover:text-white active:scale-95 cursor-pointer"
                   )}
                   style={{ clipPath: "polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px)" }}
                 >
@@ -325,13 +425,16 @@ export function DragDropPrompt({
                 
                 {/* Down arrow */}
                 <button
+                  type="button"
                   onClick={() => moveDown(position)}
-                  disabled={submitted || position === currentOrder.length - 1}
+                  disabled={position === currentOrder.length - 1 || (submitted && correct)}
+                  aria-label={t("moveDown")}
+                  title={t("moveDown")}
                   className={cn(
-                    "w-10 h-8 flex items-center justify-center border-2 transition-all",
-                    position === currentOrder.length - 1 || submitted
-                      ? "bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed"
-                      : "bg-[#FEF3C7] border-[#D97706] text-[#D97706] hover:bg-[#D97706] hover:text-white active:scale-95"
+                    "w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center border-2 transition-all",
+                    position === currentOrder.length - 1 || (submitted && correct)
+                      ? "bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed border-dashed"
+                      : "bg-[#FEF3C7] border-[#D97706] text-[#D97706] hover:bg-[#D97706] hover:text-white active:scale-95 cursor-pointer"
                   )}
                   style={{ clipPath: "polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px)" }}
                 >
@@ -341,7 +444,7 @@ export function DragDropPrompt({
               
               {/* Status indicator */}
               {submitted && (
-                <span className="w-8 h-8 flex items-center justify-center text-xl shrink-0">
+                <span className="w-8 h-8 flex items-center justify-center text-xl shrink-0" aria-hidden="true">
                   {isCorrectPiece ? "✓" : "✗"}
                 </span>
               )}
@@ -351,14 +454,18 @@ export function DragDropPrompt({
       </div>
 
       {/* Preview */}
-      <div className="bg-[#FEF3C7]/50 p-4 mb-4 border-2 border-[#D97706]/30" style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}>
+      <div 
+        data-testid="drag-drop-result-preview" 
+        className="bg-[#FEF3C7]/50 p-4 mb-4 border-2 border-[#D97706]/30" 
+        style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}
+      >
         <span className="text-lg text-[#8B7355]">{t("result")}: </span>
         <span className="text-xl text-[#2C1810]">
           {currentOrder.map((i) => pieces[i]).join(" ")}
         </span>
       </div>
 
-      {/* Result feedback */}
+      {/* Result feedback banner */}
       {submitted && (
         <div 
           className={cn(
@@ -377,23 +484,20 @@ export function DragDropPrompt({
 
       {/* Actions */}
       <div className="flex gap-3">
-        {!submitted ? (
+        {!submitted || !correct ? (
           <button 
+            type="button"
             onClick={handleSubmit} 
-            className="px-6 py-3 bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold text-xl transition-colors"
+            className="px-6 py-3 min-h-[44px] bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold text-xl transition-colors cursor-pointer"
             style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}
           >
             {t("check")}
           </button>
-        ) : !correct ? (
-          <button 
-            onClick={handleReset} 
-            className="px-6 py-3 bg-[#8B4513] hover:bg-[#A0522D] text-white font-bold text-xl transition-colors"
-            style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}
-          >
-            {t("retry")}
-          </button>
-        ) : null}
+        ) : (
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-100 border-2 border-green-600 rounded-full text-green-800 font-bold text-lg">
+            <span>✓ {successMessage || t("success")}</span>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -318,7 +318,11 @@
       "retry": "Retry",
       "success": "Perfect! You built a great prompt!",
       "almost": "Almost! Keep reordering.",
-      "tapToSwap": "Tap another piece to swap positions!"
+      "tapToSwap": "Tap another piece to swap positions!",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "position": "Position {position}",
+      "moveToPosition": "Move to position {position}"
     },
     "promptParts": {
       "title": "Sort the Prompt Parts!",
