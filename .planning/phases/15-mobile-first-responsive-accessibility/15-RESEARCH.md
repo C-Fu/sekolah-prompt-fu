@@ -196,12 +196,12 @@ W3C describes two-color focus indication for variable backgrounds; these specifi
 |---|-------|---------|---------------|
 | A1 | [ASSUMED] Targeting 44×44 CSS px for important controls is the best project comfort threshold; it is advisory, not mandated by A11Y-02 or WCAG AA. | Pitfalls | Smaller/larger design guidance may be preferred by project owner. |
 | A2 | [ASSUMED] A compact in-flow lesson footer can remain visible at *every* short-height/zoom setting without a separate footer scroll region. | Architecture | Short landscape/zoom may require an additional adaptive layout; test before locking. |
-| A3 | [ASSUMED] Real-browser/device manual checkpoint will be available during implementation despite no browser executable detected here. | Validation | Cannot fully validate A11Y-01/02/04 visually without one. |
+| A3 | [RESOLVED — user commitment] Chrome desktop and Playwright are available to the user for rendered acceptance during execution; this does not establish a locally installed browser or runner. | Validation | If the executor cannot access the user's browser or a trusted runner, hand off the prepared matrix for user-run inspection and block sign-off until evidence returns. |
 
 ## Open Questions
 
-1. **Which actual device/browser will serve as the rendered acceptance checkpoint?** No local Chromium/Playwright executable appeared in `command -v` probes. Assign a manual/device run or provision a trusted browser runner; do not treat jsdom as proof of layout.
-2. **How should selection focus survive transition into cartography?** Keep a chooser mounted across modes; decide exact markup while preserving Phase 14 labels, and test no-WebGL and slow-WebGL cases. [VERIFIED: src/components/kids/planets/planetary-explorer.tsx:141-301]
+1. **RESOLVED — rendered acceptance browser/runner:** User confirmed Chrome desktop and Playwright are available to them during execution. Use Chrome desktop responsive emulation, keyboard and touch input, with Playwright measurements only if a trusted runner is actually accessible; otherwise the human performs the equivalent Chrome checks and returns recorded measurements/screenshots. No new package install is authorized by this availability statement. The no-local-CLI probe below remains a research-time snapshot; availability is not completion evidence. Phase sign-off waits for rendered results, not jsdom/build.
+2. **RESOLVED — chooser focus across cartography:** Per 15-01 tracer, mount the persistent named planet chooser outside the keyed `PlanetaryCanvas` across overview/cartography modes; preserve the same button node/focus on selection. Put named region chooser, readable details and mission next in DOM order and update persistent visible polite status after selection; test when scene is absent or delayed (D-05–D-08). [VERIFIED: src/components/kids/planets/planetary-explorer.tsx:141-301]
 
 ## Environment Availability
 
@@ -210,10 +210,10 @@ W3C describes two-color focus indication for variable backgrounds; these specifi
 | Node | Build/tests | ✓ | v24.15.0 (shell probe); manifest says `"node": "24.x"` [VERIFIED: package.json:64-66] | — |
 | npm | Build/tests | ✓ | 11.12.1 (shell probe) | — |
 | local Vitest / Next binaries | Existing test and static build | ✓ | Manifest constraints above; executables present in `node_modules/.bin` (shell probe) | — |
-| Browser / Playwright CLI | Rendered mobile, zoom, contrast, focus checks | ✗ in command lookup | — | Human browser/device checkpoint; provision trusted runner only if needed. |
+| Browser / Playwright CLI | Rendered mobile, zoom, contrast, focus checks | ✗ in research-time local command lookup; user confirms Chrome desktop + Playwright available to them at execution | — | Human Chrome checkpoint or trusted Playwright runner if accessible; no dependency install without audit. |
 | WebGL | Optional visualization | Not probed in this shell | — | Text chooser → detail → mission path. [VERIFIED: src/components/kids/planets/planetary-canvas.tsx:74-86] |
 
-**Missing dependencies with no fallback:** None for code and tests. Visual acceptance needs an actual browser/device; do not mark complete on jsdom-only evidence. [VERIFIED: vitest.config.ts:30-38]
+**Missing dependencies with no fallback:** None for code and tests. Visual acceptance needs actual Chrome/browser evidence; user availability alone does not pass the gate. If the runner cannot be used locally, escalate the prepared Chrome inspection to the user and keep phase sign-off blocked until results arrive. [VERIFIED: vitest.config.ts:30-38]
 
 ## Validation Architecture
 

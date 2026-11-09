@@ -18,7 +18,7 @@ created: "2026-11-09"
 
 | Property | Value |
 |----------|-------|
-| **Framework** | Existing Vitest 2 + jsdom + Testing Library; rendered browser/device checkpoint for geometry, contrast and focus |
+| **Framework** | Existing Vitest 2 + jsdom + Testing Library for semantics; required Chrome desktop rendered acceptance (user confirmed Chrome desktop and Playwright available to them, not locally installed or already run) |
 | **Config file** | `vitest.config.ts` |
 | **Quick run command** | `npm test -- src/__tests__/kids/home-navigation.test.tsx src/__tests__/kids/header-navigation.test.tsx src/__tests__/kids/planetary-explorer.test.tsx src/__tests__/kids/planetary-hud.test.tsx` (existing tests; add new targeted lesson tests during execution) |
 | **Full suite command** | `npm run verify -- --gates-only`; static-export gate: `npm run build && npm run verify` (verify does not build) |
@@ -30,7 +30,7 @@ created: "2026-11-09"
 
 - **After every task commit:** Run `npm test -- <changed kids test file(s)>`; run the quick command above when navigation/planetary paths change.
 - **After every plan wave:** Run `npm run verify -- --gates-only` and a rendered viewport review after layout waves.
-- **Before `/gsd-verify-work`:** Run `npm run build && npm run verify` plus the rendered BM/EN and keyboard/touch matrix.
+- **Before `/gsd-verify-work`:** Run `npm run build && npm run verify` plus the required Chrome desktop BM/EN keyboard/touch matrix; missing/failed rendered evidence prevents Phase 15 sign-off even with green automation.
 - **Max feedback latency:** Target under 60 seconds for focused tests; capture actual runtime during execution.
 
 ---
@@ -55,7 +55,7 @@ Plan/task IDs and waves will be assigned by the planner; executor must update th
 - [ ] Add keyboard/touch item-then-destination assertions for `MagicWords` and `DragDropPrompt`, covering wrong placement, retry, duplicate words, saved state and scoped completion.
 - [ ] Extend planetary integration assertions for absent/delayed WebGL, focus, BM/EN region names, detail and mission parity.
 - [ ] Extend lesson footer/feedback tests for locked reason, non-bypass and visible/announced status.
-- [ ] Arrange a real browser/device checkpoint; do not add a browser dependency by default or treat jsdom as visual evidence.
+- [ ] Execute the blocking Chrome desktop rendered gate in Plan 15-09 (trusted Playwright runner if accessible, otherwise user-run Chrome responsive emulation with returned evidence); do not install a browser dependency without audit or treat jsdom as visual evidence. User-confirmed availability is not evidence.
 
 Existing infrastructure covers test running; these are coverage gaps rather than requests to install a framework.
 
@@ -65,12 +65,14 @@ Existing infrastructure covers test running; these are coverage gaps rather than
 
 | Behavior | Requirement | Why Manual | Test Instructions |
 |----------|-------------|-------------------|
-| No clipped controls/page overflow; local map scroll; short footer clearance with BM and EN | A11Y-01 | jsdom does not render geometry | In real browser at 320×568, 375×667, 667×375, 1280×800 and 200% zoom, inspect title, map, planetary/cartography, and representative lesson in both locales. Record viewport/device and failures. |
-| Comfort-sized targets and visible focus, pressed, hover and disabled states | A11Y-02 | Requires computed hit rectangles and rendered state | Measure primary targets; Tab and pointer/touch through all screens, inspect focus visibility and occlusion. |
-| Full keyboard/touch journeys without WebGL or drag | A11Y-03 | Browser input and canvas failure need realistic interaction | Disable/fail WebGL; navigate planet → region → mission and complete a lesson with keyboard and single-pointer select-then-destination; verify focus and status. |
-| Contrast and non-color/non-motion meaning against themed artwork | A11Y-04 | Requires rendered foreground/background inspection | Check text and controls on actual image/scrim backgrounds; inspect BM/EN instructions, errors and progress without color/sound/motion cues. |
+| No clipped controls/page overflow; local map scroll; short footer clearance with BM and EN | A11Y-01 | jsdom does not render geometry | In Chrome desktop at 320×568, 375×667, 667×375, 1280×800 and 200% zoom inspect title, map, planetary/cartography, section footer and every modified lesson family named below in both locales. Record route, viewport, Chrome version, measurements, screenshots/observations and failures. |
+| Comfort-sized targets and visible focus, pressed, hover and disabled states | A11Y-02 | Requires computed hit rectangles and rendered state | Measure ≥44×44 CSS px primary target rectangles and local overflow; Tab and pointer/touch through all screens and nine lesson families, inspect focus visibility and occlusion on actual art. |
+| Full keyboard/touch journeys without WebGL or drag | A11Y-03 | Browser input and canvas failure need realistic interaction | Disable/fail WebGL; navigate planet → region → mission and traverse each named modified lesson family with Tab/Enter/Space and touch (native or emulated); check focus, status, retry and locked Next. |
+| Contrast and non-color/non-motion meaning against themed artwork | A11Y-04 | Requires rendered foreground/background inspection | Check effective colors on actual image/scrim backgrounds for ≥4.5:1 normal text, ≥3:1 large text and interactive focus/boundaries; inspect BM/EN instruction/status, errors and progress without color/sound/motion cues across all named families. |
 
-If a browser/device is unavailable, record these as **unverified**, not certified or passed.
+**Required rendered family census (one actual lesson URL/section per family, every locale/viewport above):** MagicWords (`magic-words.tsx`), DragDropPrompt (`drag-drop-prompt.tsx`), PromptParts (`prompt-parts.tsx`), ExampleMatcher (`example-matcher.tsx`), WordPredictor (`word-predictor.tsx`), PromptVsMistake (`prompt-vs-mistake.tsx`), PromptDoctor (`prompt-doctor.tsx`), PromptLab (`prompt-lab.tsx`) and StepByStep (`step-by-step.tsx`). Record initial/answer/result states, focus, nearby translated status, contrast, hit rectangles and overflow for each. Preserve the 34 E1–E5 UI-state considerations; inspect relevant empty/loading/error/partial/overflow/long-text examples on title, map, planet, lesson and footer. No family may be represented by another family's measurements.
+
+If the executor cannot access a trusted Playwright runner or Chrome, hand off app URL and matrix for the user's confirmed Chrome desktop; record rows as **unverified** and pause/ escalate until evidence arrives. Failed rows require correction and rerun. Neither status permits Task 15-09-2 or Phase 15 sign-off; the Plan 15-09 blocking-human checkpoint requires explicit corroboration, never auto-approval. No formal WCAG certification is implied.
 
 ---
 
@@ -81,7 +83,8 @@ If a browser/device is unavailable, record these as **unverified**, not certifie
 - [ ] Wave 0 covers all MISSING references
 - [ ] No watch-mode flags
 - [ ] Feedback latency measured against target
-- [ ] Real-browser/device evidence captured or explicitly marked unverified
+- [ ] Passing Chrome rendered evidence captured across both locales, all five viewport conditions, all nine lesson families and other phase surfaces; no failed/unverified row remains
+- [ ] Blocking-human verification gate in 15-09 explicitly approved on that evidence
 - [ ] `nyquist_compliant: true` set in frontmatter only after validation
 
 **Approval:** pending
