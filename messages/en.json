@@ -115,8 +115,9 @@
     },
     "navigation": {
       "back": "Back",
-      "next": "Next",
-      "completeFirst": "Complete the activity first to continue"
+      "next": "Continue",
+      "stepOrdinal": "Step {current} of {total}",
+      "completeFirst": "Complete the activity first to continue."
     },
     "map": {
       "title": "Earth map",

@@ -15,6 +15,7 @@ import { getThemeForLevelSlug, PLANET_THEMES } from "@/components/kids/layout/pl
 import { analyticsKids } from "@/lib/analytics";
 import type { CompiledLevelContent } from "@/lib/kids/level-content";
 import { LessonOriginProvider, useLessonOrigin } from "@/components/kids/providers/lesson-origin-context";
+import { getSectionTitle } from "@/lib/kids/section-titles";
 
 interface LevelContentWrapperProps {
   levelSlug: string;
@@ -207,10 +208,30 @@ function LevelContentInner({
     );
   }
 
+  const currentSectionTitle = getSectionTitle(locale, levelSlug, currentSection);
+  const stepOrdinal = totalSections > 0
+    ? t("navigation.stepOrdinal", { current: currentSection + 1, total: totalSections })
+    : "";
+
   return (
     <div className="h-full flex flex-col">
       {/* Content area — all Sections stay mounted; the active one is visible. */}
-      <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center p-4">
+      <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center p-4">
+        {/* Active Section Context Header per D-07 & D-11 (No breadcrumbs) */}
+        {currentSectionTitle && (
+          <div
+            data-testid="active-section-context"
+            className="w-full max-w-2xl mb-4 px-3 py-2 bg-slate-900/80 border-2 border-[#DAA520] pixel-border-sm flex items-center justify-between text-xs sm:text-sm shadow-md"
+          >
+            <span className="font-bold text-[#FFD700] truncate">
+              {currentSectionTitle}
+            </span>
+            <span className="font-mono text-[#FEF3C7] shrink-0 ml-2">
+              {stepOrdinal}
+            </span>
+          </div>
+        )}
+
         <div className="w-full max-w-2xl my-auto prose max-w-none kids-prose-pixel">
           {/* Keyed by locale + slug so a locale/slug change remounts a fresh Section tree. */}
           <state.Component key={`${locale}/${levelSlug}`} components={components} />
@@ -340,23 +361,33 @@ function NavigationFooter({
           </div>
 
           {!isLastSection ? (
-            <button
-              onClick={onNext}
-              disabled={!currentComplete}
-              className={cn(
-                "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl",
-                currentComplete
-                  ? "pixel-btn-green"
-                  : "opacity-50 cursor-not-allowed bg-[#4A3728] border-[#8B4513]"
+            <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-3">
+              {!currentComplete && (
+                <span
+                  data-testid="locked-next-explanation"
+                  className="text-xs text-[#FEF3C7] font-semibold text-right max-w-[200px] leading-tight"
+                >
+                  {labels.completeFirst}
+                </span>
               )}
-              title={!currentComplete ? labels.completeFirst : undefined}
-            >
-              <span className="flex items-center gap-1">
-                {!currentComplete && <PixelLockIcon />}
-                {labels.next}
-                <PixelArrowRight />
-              </span>
-            </button>
+              <button
+                onClick={onNext}
+                disabled={!currentComplete}
+                className={cn(
+                  "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl",
+                  currentComplete
+                    ? "pixel-btn-green"
+                    : "opacity-50 cursor-not-allowed bg-[#4A3728] border-[#8B4513]"
+                )}
+                title={!currentComplete ? labels.completeFirst : undefined}
+              >
+                <span className="flex items-center gap-1">
+                  {!currentComplete && <PixelLockIcon />}
+                  {labels.next}
+                  <PixelArrowRight />
+                </span>
+              </button>
+            </div>
           ) : (
             <Link
               href={returnRoute}

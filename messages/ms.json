@@ -115,8 +115,9 @@
     },
     "navigation": {
       "back": "Kembali",
-      "next": "Seterusnya",
-      "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan"
+      "next": "Teruskan",
+      "stepOrdinal": "Langkah {current} daripada {total}",
+      "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan."
     },
     "map": {
       "title": "Peta Bumi",
