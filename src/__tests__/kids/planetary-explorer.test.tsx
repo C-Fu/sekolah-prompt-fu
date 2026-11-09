@@ -333,6 +333,101 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
 
     expect(pushMock).toHaveBeenCalledWith('/level/6-1-bm-kucing-peromfu?origin=planets');
   });
+
+  it('preserves focus and state across repeated chooser clicks, neighboring feature selections, and Return to Orbit (D-07, A11Y-03)', () => {
+    pushMock.mockClear();
+    render(<PlanetaryExplorer />);
+
+    const marsPill = screen.getByTestId('planet-pill-mars-english');
+    marsPill.focus();
+    fireEvent.click(marsPill);
+
+    // Initial Mars selection
+    expect(document.activeElement).toBe(marsPill);
+    expect(marsPill).toHaveAttribute('aria-pressed', 'true');
+    const status = screen.getByTestId('planetary-status-announcer');
+    expect(status).toHaveTextContent('Selected: Mars. Choose a region.');
+
+    // Repeated click on the same planet pill
+    fireEvent.click(marsPill);
+    expect(document.activeElement).toBe(marsPill);
+    expect(marsPill).toHaveAttribute('aria-pressed', 'true');
+    expect(status).toHaveTextContent('Selected: Mars. Choose a region.');
+
+    // Select neighboring features in quick succession
+    const marsWorld = PLANET_WORLDS.find((p) => p.id === 'mars-english')!;
+    const feat0 = marsWorld.features[0];
+    const feat1 = marsWorld.features[1];
+    const feat2 = marsWorld.features[2];
+
+    const btn0 = screen.getByTestId(`feature-button-${feat0.id}`);
+    const btn1 = screen.getByTestId(`feature-button-${feat1.id}`);
+    const btn2 = screen.getByTestId(`feature-button-${feat2.id}`);
+
+    // Click feat 0
+    btn0.focus();
+    fireEvent.click(btn0);
+    expect(document.activeElement).toBe(btn0);
+    expect(btn0).toHaveAttribute('aria-pressed', 'true');
+    expect(btn1).toHaveAttribute('aria-pressed', 'false');
+
+    // Click neighboring feat 1
+    btn1.focus();
+    fireEvent.click(btn1);
+    expect(document.activeElement).toBe(btn1);
+    expect(btn0).toHaveAttribute('aria-pressed', 'false');
+    expect(btn1).toHaveAttribute('aria-pressed', 'true');
+    expect(btn2).toHaveAttribute('aria-pressed', 'false');
+
+    // Click neighboring feat 2
+    btn2.focus();
+    fireEvent.click(btn2);
+    expect(document.activeElement).toBe(btn2);
+    expect(btn1).toHaveAttribute('aria-pressed', 'false');
+    expect(btn2).toHaveAttribute('aria-pressed', 'true');
+    expect(status).toHaveTextContent(`Selected: ${feat2.name}. Read the details, then start a mission.`);
+
+    // Launch mission from last selected feature (feat 2)
+    const launchBtn = screen.getByRole('button', { name: /start mission/i });
+    fireEvent.click(launchBtn);
+    expect(pushMock).toHaveBeenCalledTimes(1);
+    expect(pushMock).toHaveBeenCalledWith('/level/7-1-english-colorful-toys?origin=planets');
+
+    // Click Return to Orbit
+    const backBtn = screen.getByRole('button', { name: /return to orbit/i });
+    fireEvent.click(backBtn);
+
+    // Verify back in Solar System mode
+    expect(screen.getByTestId('solar-system-header')).toBeInTheDocument();
+    expect(screen.getByTestId('back-to-map-link')).toBeInTheDocument();
+    expect(screen.queryByTestId('planetary-hud-root')).toBeNull();
+
+    // Verify all pills reset aria-pressed to false
+    PLANET_WORLDS.forEach((world) => {
+      expect(screen.getByTestId(`planet-pill-${world.id}`)).toHaveAttribute('aria-pressed', 'false');
+    });
+
+    // Select another planet from orbit
+    pushMock.mockClear();
+    const venusPill = screen.getByTestId('planet-pill-venus-matematik');
+    venusPill.focus();
+    fireEvent.click(venusPill);
+
+    expect(document.activeElement).toBe(venusPill);
+    expect(venusPill).toHaveAttribute('aria-pressed', 'true');
+    expect(marsPill).toHaveAttribute('aria-pressed', 'false');
+    expect(status).toHaveTextContent('Selected: Venus. Choose a region.');
+
+    const venusWorld = PLANET_WORLDS.find((p) => p.id === 'venus-matematik')!;
+    const venusFeat0 = venusWorld.features[0];
+    const venusBtn0 = screen.getByTestId(`feature-button-${venusFeat0.id}`);
+    venusBtn0.focus();
+    fireEvent.click(venusBtn0);
+
+    const venusLaunchBtn = screen.getByRole('button', { name: /start mission/i });
+    fireEvent.click(venusLaunchBtn);
+    expect(pushMock).toHaveBeenCalledWith('/level/8-1-matematik-tambah-bintang?origin=planets');
+  });
 });
 
 describe('Standalone /planets Page Route (D-04, THREE-04)', () => {
