@@ -306,27 +306,23 @@ This phase is in-repository UI and client-side behavior using already installed 
 | A4 | Direct lesson route with absent/invalid origin likely defaults to `/map`, but no explicit product decision is present. | Pattern 1 | Direct opens may return to a different hub than expected. |
 | A5 | Map/planet navigation can preserve saved progress without a write because the current durable progress is localStorage-backed and independent of ephemeral hub mode. | Summary / Validation | Any implementation that remounts/resets provider or modifies storage may invalidate that assumption. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **How should lesson origin survive navigation while retaining the exact public lesson route?**
-   - What we know: map entries directly link to `/level/${level.slug}`; planet launch resolves lesson routes; return/completion links currently target `/map`. [VERIFIED: src/components/kids/elements/progress-map.tsx:534-542; src/components/kids/planets/planetary-explorer.tsx:102-112; src/components/kids/elements/level-complete.tsx:123-150]
-   - What's unclear: Query parameter vs session-scoped preference vs another explicit mechanism, invalid/direct-entry behavior, and whether return should restore a selected planet.
-   - Recommendation: Lock an allowlisted origin enum and test direct URLs, malformed values, route reload, locale change, footer, completion and coming-soon before implementation.
+1. **How should lesson origin survive navigation while retaining the exact public lesson route? — RESOLVED**
+    - What we know: map entries directly link to `/level/${level.slug}`; planet launch resolves lesson routes; return/completion links currently target `/map`. [VERIFIED: src/components/kids/elements/progress-map.tsx:534-542; src/components/kids/planets/planetary-explorer.tsx:102-112; src/components/kids/elements/level-complete.tsx:123-150]
+    - Resolution: Preserve the public `/level/[slug]` pathname and carry only an allowlisted `origin=map|planets` query value. Direct, missing, malformed, and unknown values resolve to `/map`; never accept a `returnTo` URL. Return to the originating hub, but do not add selected-planet restoration in this phase. Preserve the origin through next-level lesson progression. These are implementation decisions in the Phase 14 plans, consistent with D-08/D-09 and the static-route boundary. [RESOLVED: 14-04-PLAN.md, 14-05-PLAN.md]
 
-2. **What is the source of each localized section title?**
-   - What we know: section order/count are available, but Section only accepts children; at least the opening sampled sections have no visible heading. [VERIFIED: src/components/kids/elements/level-slides.tsx:25-40; src/components/kids/providers/level-context.tsx:52-70; src/content/kids/en/1-1-meet-peromfu.mdx:1-17]
-   - What's unclear: Add title metadata to all lesson sections or infer a heading with fallback; extent of content edits across BM/EN.
-   - Recommendation: Choose explicit metadata and consistency checks if title display is required for every step; estimate content updates before splitting tasks.
+2. **What is the source of each localized section title? — RESOLVED**
+    - What we know: section order/count are available, but Section only accepts children; at least the opening sampled sections have no visible heading. [VERIFIED: src/components/kids/elements/level-slides.tsx:25-40; src/components/kids/providers/level-context.tsx:52-70; src/content/kids/en/1-1-meet-peromfu.mdx:1-17]
+    - Resolution: Use a typed, explicitly authored locale/slug/section-index title inventory with exact source order and corpus count/parity tests across all registered lessons. Unknown selectors are explicit missing results; do not infer from rendered DOM or silently fall back to English. [RESOLVED: 14-06-PLAN.md, 14-08-PLAN.md, 14-09-PLAN.md]
 
-3. **What persistence lifetime counts as “first visit” for tips?**
-   - What we know: dismissal is independent by screen; no tip-dismissal store was found in inspected UI. [VERIFIED: CONTEXT D-12 at 14-CONTEXT.md:29-37; inspected `src/components/kids/`]
-   - What's unclear: session vs persistent device dismissal; behavior if localStorage is blocked; whether Settings reset also clears hints.
-   - Recommendation: Specify lifetime and failure behavior, store separately from progress, and use separate keys/flags for map and planetary tips.
+3. **What persistence lifetime counts as “first visit” for tips? — RESOLVED**
+    - What we know: dismissal is independent by screen; no tip-dismissal store was found in inspected UI. [VERIFIED: CONTEXT D-12 at 14-CONTEXT.md:29-37; inspected `src/components/kids/`]
+    - Resolution: Persist dismissal per browser in separate namespaced `map` and `planets` preference state, not in `kids-progress`. Read storage only after mount; on malformed or unavailable storage, keep the screen usable and show the tip again. No Settings-reset integration is added because none is in phase scope. [RESOLVED: 14-03-PLAN.md]
 
-4. **Do per-screen tips persist only on `/map` and solar-system `/planets`, or also inside planet cartography?**
-   - What we know: context says one tip on each “map and planetary screens”; `/planets` has solar-system and cartography modes. [VERIFIED: CONTEXT D-12 at 14-CONTEXT.md:29-37; src/components/kids/planets/planetary-explorer.tsx:58-61,132-290]
-   - What's unclear: Whether cartography shares a planetary tip or has distinct first-visit state.
-   - Recommendation: Treat `/planets` as one screen unless design review identifies a separate interaction needing its own cue; keep dismiss-per-screen semantics explicit. [ASSUMED]
+4. **Do per-screen tips persist only on `/map` and solar-system `/planets`, or also inside planet cartography? — RESOLVED**
+    - What we know: context says one tip on each “map and planetary screens”; `/planets` has solar-system and cartography modes. [VERIFIED: CONTEXT D-12 at 14-CONTEXT.md:29-37; src/components/kids/planets/planetary-explorer.tsx:58-61,132-290]
+    - Resolution: Solar-system and cartography modes share the single `/planets` tip and dismissal flag. The two first-visit tips are for `/map` and `/planets`, as required by D-12; no separate cartography tip is introduced. [RESOLVED: 14-03-PLAN.md]
 
 ## Sources
 

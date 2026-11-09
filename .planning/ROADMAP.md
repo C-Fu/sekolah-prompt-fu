@@ -29,14 +29,25 @@ v1.3 refines the existing title → map/planet hub → lesson → completion jou
   3. Children can identify their current location and return to the appropriate previous hub from core screens without losing locally saved progress.
 **Plans**: 9 plans
 Plans:
+**Wave 1**
 - [ ] 14-01-PLAN.md — Deliver the two-step title welcome and equal destination choices
-- [ ] 14-02-PLAN.md — Add visible shared and hub navigation labels
-- [ ] 14-03-PLAN.md — Add independent localized map and planetary tips
-- [ ] 14-04-PLAN.md — Define and propagate allowlisted lesson origins
-- [ ] 14-05-PLAN.md — Route lesson return, recovery, and completion to the originating hub
 - [ ] 14-06-PLAN.md — Show localized lesson section context and locked-next guidance
 - [ ] 14-07-PLAN.md — Create bounded offline typography comparison artifacts
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 14-02-PLAN.md — Add visible shared and hub navigation labels
 - [ ] 14-08-PLAN.md — Complete bilingual section-title source for the remaining lessons
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 14-03-PLAN.md — Add independent localized map and planetary tips
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 14-04-PLAN.md — Define and propagate allowlisted lesson origins
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [ ] 14-05-PLAN.md — Route lesson return, recovery, and completion to the originating hub
+
+**Wave 6** *(blocked on Wave 5 completion)*
 - [ ] 14-09-PLAN.md — Wire lesson section titles, ordinals, and visible lock guidance
 **UI hint**: yes
 
