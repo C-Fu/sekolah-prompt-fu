@@ -44,6 +44,7 @@ import {
   PromptParts,
   PromptLab,
   PromptDoctor,
+  WordPredictor,
 } from "@/components/kids/elements";
 import { LevelContentWrapper } from "@/components/kids/layout/level-content-wrapper";
 
@@ -1406,3 +1407,158 @@ describe("accessible choice and matcher answer interactions (Plan 15-07 Task 1)"
     expect(msAct.incorrect).toBe("Salah");
   });
 });
+
+/**
+ * Plan 15-07 Task 2:
+ * Keep predictor answer control and feedback coherent after wrong answer.
+ * Sized >=44x44 CSS px, focus at answering control or stable replacement, opaque feedback,
+ * visible success/retry words, polite status announcer, and wrong -> retry -> correct without
+ * cross-section contamination.
+ */
+describe("accessible predictor answer control and retry interaction (Plan 15-07 Task 2)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("WordPredictor handles wrong -> retry -> correct with focus stability and polite status", async () => {
+    function ControlledPredictor() {
+      return (
+        <Section>
+          <WordPredictor
+            sentence="The cat sat on the ___"
+            options={["mat", "cloud"]}
+            correctAnswer="mat"
+            explanation="Cats love sleeping on mats!"
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledPredictor);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const wrongOption = screen.getByRole("button", { name: "cloud" });
+    const correctOption = screen.getByRole("button", { name: "mat" });
+    const checkBtn = screen.getByRole("button", { name: "check" });
+
+    // Target sizes >=44x44
+    expect(wrongOption.className).toContain("min-h-[44px]");
+    expect(wrongOption.className).toContain("min-w-[44px]");
+    expect(correctOption.className).toContain("min-h-[44px]");
+    expect(correctOption.className).toContain("min-w-[44px]");
+    expect(checkBtn.className).toContain("min-h-[44px]");
+
+    // Select wrong answer
+    wrongOption.focus();
+    fireEvent.click(wrongOption);
+    expect(wrongOption).toHaveAttribute("aria-pressed", "true");
+
+    const statusEl = screen.getByTestId("word-predictor-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl).toHaveAttribute("aria-live", "polite");
+    expect(statusEl.textContent).toContain("cloud");
+
+    // Submit wrong answer
+    checkBtn.focus();
+    fireEvent.click(checkBtn);
+
+    // Section is NOT completed
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Focus is preserved, not dropped to document.body
+    expect(document.activeElement).not.toBe(document.body);
+
+    // Distinguishable outcome word and border on wrong option
+    expect(wrongOption.textContent).toContain("✗");
+    expect(wrongOption.textContent).toContain("incorrect");
+    expect(wrongOption.className).toContain("border-red-500");
+    expect(statusEl.textContent).toContain("tryAgain");
+
+    // Click retry to reset
+    const retryBtn = screen.getByRole("button", { name: "retry" });
+    expect(retryBtn.className).toContain("min-h-[44px]");
+    fireEvent.click(retryBtn);
+    expect(document.activeElement).not.toBe(document.body);
+
+    // Now select correct answer and submit
+    fireEvent.click(correctOption);
+    const recheckBtn = screen.getByRole("button", { name: "check" });
+    fireEvent.click(recheckBtn);
+
+    // Focus retained, outcome word visible, section complete
+    expect(document.activeElement).not.toBe(document.body);
+    expect(correctOption.textContent).toContain("✓");
+    expect(correctOption.textContent).toContain("correct");
+    expect(correctOption.className).toContain("border-green-600");
+    expect(statusEl.textContent).toContain("correct");
+    expect(isSectionCompleted(SLUG, 0)).toBe(true);
+  });
+
+  it("repeated predictor action marks only its own containing Section", async () => {
+    function RepeatedPredictors() {
+      return (
+        <>
+          <Section>
+            <WordPredictor
+              sentence="I like ___"
+              options={["apples", "rocks"]}
+              correctAnswer="apples"
+              explanation="Apples are fruit."
+            />
+          </Section>
+          <Section>
+            <WordPredictor
+              sentence="Birds can ___"
+              options={["fly", "bark"]}
+              correctAnswer="fly"
+              explanation="Birds have wings to fly."
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(RepeatedPredictors);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    const root0 = document.querySelector('section[data-section-index="0"]') as HTMLElement;
+    const root1 = document.querySelector('section[data-section-index="1"]') as HTMLElement;
+
+    // Solve section 0
+    fireEvent.click(within(root0).getByRole("button", { name: "apples" }));
+    fireEvent.click(within(root0).getByRole("button", { name: "check" }));
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 0)).toBe(true);
+    });
+    // Section 1 remains untouched
+    expect(isSectionCompleted(SLUG, 1)).toBe(false);
+
+    // Section 1 answer is not affected
+    expect(within(root1).getByRole("button", { name: "fly", hidden: true })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("BM and EN translation bundles define full Unicode strings for word-predictor", async () => {
+    const en = await loadMessages("en");
+    const ms = await loadMessages("ms");
+
+    const enWP = (en.kids as { wordPredictor: Record<string, string> }).wordPredictor;
+    const msWP = (ms.kids as { wordPredictor: Record<string, string> }).wordPredictor;
+
+    expect(enWP.title).toBe("How AI Thinks");
+    expect(msWP.title).toBe("Bagaimana AI Berfikir");
+    expect(enWP.check).toBe("Check My Guess!");
+    expect(msWP.check).toBe("Semak Tekaan Saya!");
+    expect(enWP.correct).toContain("You think like AI!");
+    expect(msWP.correct).toContain("Anda berfikir seperti AI!");
+    expect(enWP.tryAgain).toContain("Not quite!");
+    expect(msWP.tryAgain).toContain("Belum tepat!");
+    expect(enWP.retry).toBe("Try Again");
+    expect(msWP.retry).toBe("Cuba Lagi");
+  });
+});
+
