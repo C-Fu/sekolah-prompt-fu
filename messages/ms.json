@@ -68,6 +68,14 @@
       "badge": "Pembelajaran untuk Kanak-kanak",
       "title": "Belajar Bercakap dengan AI!",
       "subtitle": "Sertai Peromfu si robot dalam pengembaraan menyeronokkan untuk belajar menulis prompt yang hebat!",
+      "promise": "Belajar menulis prompt yang jelas melalui permainan, cerita dan misi.",
+      "stepIndicator": "Langkah {current} daripada {total}",
+      "step1Of2": "Langkah 1 daripada 2",
+      "step2Of2": "Langkah 2 daripada 2",
+      "earthAction": "Mula belajar",
+      "earthExplanation": "Pelajari asas menulis prompt di Bumi.",
+      "planetsAction": "Terokai planet",
+      "planetsExplanation": "Lawati planet dan pilih misi subjek.",
       "peromfuIntro": {
         "greeting": "Hai, saya Peromfu! 🤖",
         "message": "Saya robot yang mesra dan perlukan BANTUAN anda! Mahukah anda mengajar saya memahami prompt dengan lebih baik?"

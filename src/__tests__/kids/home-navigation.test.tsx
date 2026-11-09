@@ -2,6 +2,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { KidsHomeContent } from "@/components/kids/layout/kids-home-content";
 import * as analyticsModule from "@/lib/analytics";
+import enMessages from "../../../messages/en.json";
+import msMessages from "../../../messages/ms.json";
 
 // Mock next/link to render anchor tag
 vi.mock("next/link", () => ({
@@ -17,76 +19,113 @@ vi.mock("next/link", () => ({
   ),
 }));
 
-// Mock next-intl translations
+// Configurable mock for next-intl translations supporting EN and MS bundles
+let currentLocale = "en";
+
 vi.mock("next-intl", () => ({
-  useTranslations: () => (key: string) => {
-    const messages: Record<string, string> = {
-      "home.badge": "Learning for Kids",
-      "home.title": "Learn to Talk to AI!",
-      "home.subtitle": "Join Peromfu the robot on a fun adventure!",
-      "home.peromfuIntro.greeting": "Hi, I'm Peromfu! 🤖",
-      "home.peromfuIntro.message": "Teach me how to understand prompts better!",
-      "home.whatYouLearn": "What You'll Learn",
-      "home.features.games.title": "Fun Games",
-      "home.features.games.description": "Learn by playing",
-      "home.features.stories.title": "Cool Stories",
-      "home.features.stories.description": "Exciting adventures",
-      "home.features.stars.title": "Earn Stars",
-      "home.features.stars.description": "Collect stars",
-      "home.readyTitle": "Ready to Start?",
-      "home.readyMessage": "Choose where to begin your journey!",
-      "home.startButton": "Start Playing!",
-      "home.startEarthTitle": "Start on Earth (Prompting 101)",
-      "home.startEarthDesc": "Learn foundational AI prompting skills across 5 worlds",
-      "home.explorePlanetsTitle": "Explore Solar System (3D)",
-      "home.explorePlanetsDesc": "Fly through space to discover BM, Math, English & Moral missions",
-      "home.earthFoundationalBadge": "Foundational Academy",
-      "home.cosmosBadge": "Cosmic Missions",
-      "home.ageNote": "Best for kids ages 6-17",
-      "navigation.back": "Back",
-      "navigation.next": "Next",
-      "navigation.stepIndicator": "Step {current} of {total}",
+  useTranslations: () => {
+    return (key: string) => {
+      const bundle: Record<string, any> = currentLocale === "ms" ? msMessages : enMessages;
+      const parts = key.split(".");
+      let val: any = bundle.kids;
+      for (const p of parts) {
+        val = val?.[p];
+      }
+      return val ?? key;
     };
-    return messages[key] || key;
   },
 }));
 
-describe("KidsHomeContent Step 2 Navigation", () => {
+describe("KidsHomeContent Two-Step Title Navigation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    currentLocale = "en";
   });
 
-  it("navigates to Step 2 and renders dual CTAs for Earth and Solar System", () => {
+  it("renders Step 1 with learning promise and step indicator, without Back control", () => {
     render(<KidsHomeContent />);
 
-    // Click Next twice to reach step 2
-    const nextBtn = screen.getByRole("button", { name: /Next/i });
-    fireEvent.click(nextBtn); // step 1
-    fireEvent.click(nextBtn); // step 2
+    // Step 1 title & promise
+    expect(screen.getByText("Learn to Talk to AI!")).toBeInTheDocument();
+    expect(screen.getByText("Learn to write clear prompts through games, stories, and missions.")).toBeInTheDocument();
+    expect(screen.getByText("Step 1 of 2")).toBeInTheDocument();
 
-    // Check dual CTA buttons
-    const earthLink = screen.getByRole("link", { name: /Start on Earth/i });
-    const planetsLink = screen.getByRole("link", { name: /Explore Solar System/i });
+    // Next is visible, Back is absent
+    expect(screen.getByRole("button", { name: /Next/i })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Back/i })).not.toBeInTheDocument();
+  });
+
+  it("navigates to Step 2 upon clicking Next and presents exactly two equal destinations", () => {
+    render(<KidsHomeContent />);
+
+    const nextBtn = screen.getByRole("button", { name: /Next/i });
+    fireEvent.click(nextBtn);
+
+    // Step indicator updates
+    expect(screen.getByText("Step 2 of 2")).toBeInTheDocument();
+
+    // Check two destination links and exact routes
+    const links = screen.getAllByRole("link");
+    expect(links).toHaveLength(2);
+
+    const earthLink = screen.getByRole("link", { name: /Start learning/i });
+    const planetsLink = screen.getByRole("link", { name: /Explore planets/i });
 
     expect(earthLink).toBeInTheDocument();
     expect(earthLink).toHaveAttribute("href", "/map");
+    expect(screen.getByText("Learn the basics of writing prompts on Earth.")).toBeInTheDocument();
 
     expect(planetsLink).toBeInTheDocument();
     expect(planetsLink).toHaveAttribute("href", "/planets");
+    expect(screen.getByText("Visit planets and choose a subject mission.")).toBeInTheDocument();
+
+    // Back control is available on step 2
+    const backBtn = screen.getByRole("button", { name: /Back/i });
+    expect(backBtn).toBeInTheDocument();
+
+    // No competing third Start CTA
+    expect(screen.queryByRole("button", { name: /Next/i })).not.toBeInTheDocument();
   });
 
-  it("renders the educational badge highlighting Earth as foundational academy", () => {
+  it("can navigate Back from Step 2 to Step 1 without introducing unexpected states", () => {
     render(<KidsHomeContent />);
 
     const nextBtn = screen.getByRole("button", { name: /Next/i });
     fireEvent.click(nextBtn);
-    fireEvent.click(nextBtn);
+    expect(screen.getByText("Step 2 of 2")).toBeInTheDocument();
 
-    expect(screen.getByText("Foundational Academy")).toBeInTheDocument();
-    expect(screen.getByText("Cosmic Missions")).toBeInTheDocument();
+    const backBtn = screen.getByRole("button", { name: /Back/i });
+    fireEvent.click(backBtn);
+
+    expect(screen.getByText("Step 1 of 2")).toBeInTheDocument();
+    expect(screen.getByText("Learn to write clear prompts through games, stories, and missions.")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Back/i })).not.toBeInTheDocument();
   });
 
-  it("triggers analytics events when clicking the CTA buttons", () => {
+  it("renders full Bahasa Melayu copy with canonical UI-SPEC copy on both steps", () => {
+    currentLocale = "ms";
+    render(<KidsHomeContent />);
+
+    // Step 1 BM
+    expect(screen.getByText("Belajar Bercakap dengan AI!")).toBeInTheDocument();
+    expect(screen.getByText("Belajar menulis prompt yang jelas melalui permainan, cerita dan misi.")).toBeInTheDocument();
+    expect(screen.getByText("Langkah 1 daripada 2")).toBeInTheDocument();
+
+    const nextBtn = screen.getByRole("button", { name: /Seterusnya/i });
+    fireEvent.click(nextBtn);
+
+    // Step 2 BM
+    expect(screen.getByText("Langkah 2 daripada 2")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Mula belajar/i })).toHaveAttribute("href", "/map");
+    expect(screen.getByText("Pelajari asas menulis prompt di Bumi.")).toBeInTheDocument();
+
+    expect(screen.getByRole("link", { name: /Terokai planet/i })).toHaveAttribute("href", "/planets");
+    expect(screen.getByText("Lawati planet dan pilih misi subjek.")).toBeInTheDocument();
+
+    expect(screen.getByRole("button", { name: /Kembali/i })).toBeInTheDocument();
+  });
+
+  it("triggers analytics events when clicking the destination choices", () => {
     const startGameSpy = vi.spyOn(analyticsModule.analyticsKids, "startGame");
     const exploreSolarSystemSpy = vi.spyOn(analyticsModule.analyticsKids, "exploreSolarSystem");
 
@@ -94,14 +133,13 @@ describe("KidsHomeContent Step 2 Navigation", () => {
 
     const nextBtn = screen.getByRole("button", { name: /Next/i });
     fireEvent.click(nextBtn);
-    fireEvent.click(nextBtn);
 
-    const earthLink = screen.getByRole("link", { name: /Start on Earth/i });
+    const earthLink = screen.getByRole("link", { name: /Start learning/i });
     fireEvent.click(earthLink);
-    expect(startGameSpy).toHaveBeenCalled();
+    expect(startGameSpy).toHaveBeenCalledTimes(1);
 
-    const planetsLink = screen.getByRole("link", { name: /Explore Solar System/i });
+    const planetsLink = screen.getByRole("link", { name: /Explore planets/i });
     fireEvent.click(planetsLink);
-    expect(exploreSolarSystemSpy).toHaveBeenCalled();
+    expect(exploreSolarSystemSpy).toHaveBeenCalledTimes(1);
   });
 });

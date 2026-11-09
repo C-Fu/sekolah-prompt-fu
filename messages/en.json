@@ -68,6 +68,14 @@
       "badge": "Learning for Kids",
       "title": "Learn to Talk to AI!",
       "subtitle": "Join Peromfu the robot on a fun adventure to learn how to write awesome prompts!",
+      "promise": "Learn to write clear prompts through games, stories, and missions.",
+      "stepIndicator": "Step {current} of {total}",
+      "step1Of2": "Step 1 of 2",
+      "step2Of2": "Step 2 of 2",
+      "earthAction": "Start learning",
+      "earthExplanation": "Learn the basics of writing prompts on Earth.",
+      "planetsAction": "Explore planets",
+      "planetsExplanation": "Visit planets and choose a subject mission.",
       "peromfuIntro": {
         "greeting": "Hi, I'm Peromfu! 🤖",
         "message": "I'm a friendly robot who needs YOUR help! Will you teach me how to understand prompts better?"
