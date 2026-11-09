@@ -483,7 +483,7 @@ export function DragDropPrompt({
       )}
 
       {/* Actions */}
-      <div className="flex gap-3">
+      <div data-testid="drag-drop-actions" className="flex gap-3">
         {!submitted || !correct ? (
           <button 
             type="button"

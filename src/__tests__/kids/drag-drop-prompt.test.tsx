@@ -349,4 +349,194 @@ describe("DragDropPrompt (Phase 15-05)", () => {
 
     expect(piece).toHaveTextContent(/dipilih/i);
   });
+
+  it("reports wrong order on submit in persistent role=status without resetting currentOrder, keeping controls operable", () => {
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      currentOrder: [1, 0], // Wrong order (correct is [0, 1])
+      shuffledPieces: [1, 0],
+      submitted: false,
+    });
+
+    renderWithProviders(
+      <DragDropPrompt
+        pieces={["Step One", "Step Two"]}
+        correctOrder={[0, 1]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    const checkBtn = screen.getByRole("button", { name: /check/i });
+    fireEvent.click(checkBtn);
+
+    // Status reports almost / retry in persistent role=status
+    const status = screen.getByRole("status");
+    expect(status).toHaveTextContent("Almost! Keep reordering.");
+
+    // currentOrder is NOT reset or shuffled!
+    const preview = screen.getByTestId("drag-drop-result-preview");
+    expect(preview).toHaveTextContent("Step Two Step One");
+
+    // Controls remain operable
+    const pieceOne = screen.getByRole("button", { name: /step one/i });
+    const pos1Btn = screen.getByRole("button", { name: /position 1/i });
+    expect(pieceOne).toBeEnabled();
+    expect(pos1Btn).toBeEnabled();
+  });
+
+  it("allows correcting a wrong order in place and resubmitting until exact correctOrder completes section", () => {
+    const markSectionSpy = vi.spyOn(progressModule, "markSectionCompleted");
+
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      currentOrder: [1, 0], // Wrong
+      shuffledPieces: [1, 0],
+      submitted: false,
+    });
+
+    const { mockScope } = renderWithProviders(
+      <DragDropPrompt
+        pieces={["Step One", "Step Two"]}
+        correctOrder={[0, 1]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    // 1. Submit wrong order
+    const checkBtn = screen.getByRole("button", { name: /check/i });
+    fireEvent.click(checkBtn);
+
+    expect(screen.getByRole("status")).toHaveTextContent("Almost! Keep reordering.");
+    expect(markSectionSpy).not.toHaveBeenCalled();
+    expect(mockScope.markComplete).not.toHaveBeenCalled();
+
+    // 2. Correct the order in place: select Step One and place at Position 1
+    const stepOne = screen.getByRole("button", { name: /step one/i });
+    fireEvent.click(stepOne);
+    const pos1Btn = screen.getByRole("button", { name: /position 1/i });
+    fireEvent.click(pos1Btn);
+
+    const preview = screen.getByTestId("drag-drop-result-preview");
+    expect(preview).toHaveTextContent("Step One Step Two");
+
+    // 3. Resubmit
+    fireEvent.click(checkBtn);
+
+    expect(markSectionSpy).toHaveBeenCalledWith("level-1", 1);
+    expect(mockScope.markComplete).toHaveBeenCalled();
+    expect(screen.getByRole("status")).toHaveTextContent(/perfect/i);
+  });
+
+  it("guards section completion: requires exact correctOrder and non-null scope.getIndex()", () => {
+    const markSectionSpy = vi.spyOn(progressModule, "markSectionCompleted");
+
+    const { mockScope } = renderWithProviders(
+      <DragDropPrompt
+        pieces={["A", "B", "C"]}
+        correctOrder={[0, 1, 2]}
+      />,
+      {
+        levelSlug: "level-1",
+        scopeValue: { getIndex: vi.fn(() => null) },
+      }
+    );
+
+    // Force correct order via component state
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      currentOrder: [0, 1, 2],
+      shuffledPieces: [0, 1, 2],
+      submitted: false,
+    });
+
+    // Even if check is clicked on correct order, null getIndex fails closed
+    const checkBtn = screen.getByRole("button", { name: /check/i });
+    fireEvent.click(checkBtn);
+
+    expect(markSectionSpy).not.toHaveBeenCalled();
+    expect(mockScope.markComplete).not.toHaveBeenCalled();
+  });
+
+  it("keeps focused submit element stable across wrong submission", () => {
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      currentOrder: [1, 0], // Wrong
+      shuffledPieces: [1, 0],
+      submitted: false,
+    });
+
+    renderWithProviders(
+      <DragDropPrompt
+        pieces={["First", "Second"]}
+        correctOrder={[0, 1]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    const checkBtn = screen.getByRole("button", { name: /check/i });
+    checkBtn.focus();
+    expect(document.activeElement).toBe(checkBtn);
+
+    fireEvent.click(checkBtn);
+
+    // The Check button remains mounted and focused!
+    expect(document.activeElement).toBe(checkBtn);
+    expect(checkBtn).toBeInTheDocument();
+  });
+
+  it("handles repeated Check clicks idempotently without duplicating completion", () => {
+    const markSectionSpy = vi.spyOn(progressModule, "markSectionCompleted");
+
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      currentOrder: [0, 1], // Correct
+      shuffledPieces: [0, 1],
+      submitted: false,
+    });
+
+    const { mockScope } = renderWithProviders(
+      <DragDropPrompt
+        pieces={["A", "B"]}
+        correctOrder={[0, 1]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    const checkBtn = screen.getByRole("button", { name: /check/i });
+    fireEvent.click(checkBtn);
+
+    expect(markSectionSpy).toHaveBeenCalledTimes(1);
+    expect(mockScope.markComplete).toHaveBeenCalledTimes(1);
+
+    // Actions area displays completion indicator
+    const actionsArea = screen.getByTestId("drag-drop-actions");
+    expect(actionsArea).toBeInTheDocument();
+    expect(actionsArea).toHaveTextContent(/perfect/i);
+  });
+
+  it("restores saved state compatibility preserving currentOrder and allowing in-place edits", () => {
+    vi.spyOn(progressModule, "getComponentState").mockReturnValue({
+      currentOrder: [1, 0],
+      shuffledPieces: [1, 0],
+      submitted: true,
+    });
+
+    renderWithProviders(
+      <DragDropPrompt
+        pieces={["Part 1", "Part 2"]}
+        correctOrder={[0, 1]}
+      />,
+      { levelSlug: "level-1" }
+    );
+
+    // Restores saved currentOrder
+    const preview = screen.getByTestId("drag-drop-result-preview");
+    expect(preview).toHaveTextContent("Part 2 Part 1");
+
+    // Order is wrong, so controls and Check button remain operable
+    const part1 = screen.getByRole("button", { name: /part 1/i });
+    expect(part1).toBeEnabled();
+
+    // Reorder in place
+    fireEvent.click(part1);
+    const pos1 = screen.getByRole("button", { name: /position 1/i });
+    fireEvent.click(pos1);
+
+    expect(preview).toHaveTextContent("Part 1 Part 2");
+  });
 });
