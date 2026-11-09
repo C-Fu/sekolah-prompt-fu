@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phase 14 Typography Comparison Specimen (Local-Only Prototype)</title>
+  <style>
+    :root {
+      --font-schoolbell: 'Schoolbell', cursive, sans-serif;
+      --font-bubble-sans: 'Bubble Sans', sans-serif;
+      --font-comic-neue: 'Comic Neue', cursive, sans-serif;
+      --color-ink: #2C1810;
+      --color-muted: #5D4037;
+      --color-accent-green: #16A34A;
+      --color-accent-blue: #2563EB;
+      --color-gold: #DAA520;
+      --color-paper: #FEF3C7;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background-color: #FDFBF7;
+      color: var(--color-ink);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    h1.specimen-header {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .preset-controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding: 12px;
+      background: #eee;
+      border-radius: 6px;
+    }
+
+    .preset-btn {
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .specimen-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      transition: max-width 0.3s ease;
+    }
+
+    /* Viewport preset classes */
+    .viewport-narrow {
+      max-width: 390px;
+      grid-template-columns: 1fr;
+    }
+
+    .viewport-wide {
+      max-width: 1200px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .candidate-card {
+      background: #ffffff;
+      border: 2px solid #D1D5DB;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .candidate-title {
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid #E5E7EB;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status-tag {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .status-available {
+      background: #DCFCE7;
+      color: #16A34A;
+    }
+
+    .status-unavailable {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+
+    /* Font classes holding declared UI-SPEC conditions */
+    .font-schoolbell { font-family: var(--font-schoolbell); }
+    .font-bubble-sans { font-family: var(--font-bubble-sans); }
+    .font-comic-neue { font-family: var(--font-comic-neue); }
+
+    /* UI-SPEC Typography Roles */
+    .role-display {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .role-heading {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .role-label {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .role-body {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .sample-block {
+      background: var(--color-paper);
+      border: 2px solid #8B4513;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .sample-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .nav-bar-sample {
+      display: flex;
+      gap: 12px;
+      background: #2C1810;
+      color: #FEF3C7;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="specimen-header">Phase 14 — Typography Comparison Specimen (Local-Only)</h1>
+  <p>Bounded evaluation of candidate fonts using identical BM/EN strings and fixed UI-SPEC typography conditions.</p>
+
+  <div class="preset-controls">
+    <button class="preset-btn" onclick="setPreset('wide')">Wide Viewport Preset (1200px)</button>
+    <button class="preset-btn" onclick="setPreset('narrow')">Narrow Viewport Preset (390px)</button>
+  </div>
+
+  <div id="specimen" class="specimen-container viewport-wide">
+    <!-- CANDIDATE 1: Schoolbell (Production Font) -->
+    <div class="candidate-card font-schoolbell">
+      <div class="candidate-title">
+        <span>Schoolbell</span>
+        <span class="status-tag status-available">Production</span>
+      </div>
+
+      <div class="sample-block">
+        <div class="sample-label">English Samples (EN)</div>
+        <div class="role-display">Learn to Talk to AI!</div>
+        <div class="role-heading">Start Learning on Earth</div>
+        <div class="nav-bar-sample">
+          <span>Home</span> • <span>Earth map</span> • <span>Planets</span>
+        </div>
+        <div class="role-label">Choose a level on the map to start learning.</div>
+        <div class="role-body">Learn to write clear prompts through games, stories, and missions. Follow Peromfu the robot on an exciting adventure!</div>
+      </div>
+
+      <div class="sample-block">
+        <div class="sample-label">Bahasa Melayu Samples (BM)</div>
+        <div class="role-display">Belajar Bercakap dengan AI!</div>
+        <div class="role-heading">Mula Belajar di Bumi</div>
+        <div class="nav-bar-sample">
+          <span>Utama</span> • <span>Peta Bumi</span> • <span>Planet</span>
+        </div>
+        <div class="role-label">Pilih satu tahap pada peta untuk mula belajar.</div>
+        <div class="role-body">Belajar menulis prompt yang jelas melalui permainan, cerita dan misi. Ikuti Peromfu si robot dalam pengembaraan yang menyeronokkan!</div>
+      </div>
+    </div>
+
+    <!-- CANDIDATE 2: Bubble Sans -->
+    <div class="candidate-card font-bubble-sans">
+      <div class="candidate-title">
+        <span>Bubble Sans</span>
+        <span class="status-tag status-unavailable">Unavailable Locally</span>
+      </div>
+      <p style="font-size: 14px; color: #DC2626; font-weight: bold;">
+        Local font asset not installed in repository/system. Rendered using CSS fallback.
+      </p>
+
+      <div class="sample-block">
+        <div class="sample-label">English Samples (EN)</div>
+        <div class="role-display">Learn to Talk to AI!</div>
+        <div class="role-heading">Start Learning on Earth</div>
+        <div class="nav-bar-sample">
+          <span>Home</span> • <span>Earth map</span> • <span>Planets</span>
+        </div>
+        <div class="role-label">Choose a level on the map to start learning.</div>
+        <div class="role-body">Learn to write clear prompts through games, stories, and missions. Follow Peromfu the robot on an exciting adventure!</div>
+      </div>
+
+      <div class="sample-block">
+        <div class="sample-label">Bahasa Melayu Samples (BM)</div>
+        <div class="role-display">Belajar Bercakap dengan AI!</div>
+        <div class="role-heading">Mula Belajar di Bumi</div>
+        <div class="nav-bar-sample">
+          <span>Utama</span> • <span>Peta Bumi</span> • <span>Planet</span>
+        </div>
+        <div class="role-label">Pilih satu tahap pada peta untuk mula belajar.</div>
+        <div class="role-body">Belajar menulis prompt yang jelas melalui permainan, cerita dan misi. Ikuti Peromfu si robot dalam pengembaraan yang menyeronokkan!</div>
+      </div>
+    </div>
+
+    <!-- CANDIDATE 3: Comic Neue -->
+    <div class="candidate-card font-comic-neue">
+      <div class="candidate-title">
+        <span>Comic Neue</span>
+        <span class="status-tag status-unavailable">Unavailable Locally</span>
+      </div>
+      <p style="font-size: 14px; color: #DC2626; font-weight: bold;">
+        Local font asset not installed in repository/system. Rendered using CSS fallback.
+      </p>
+
+      <div class="sample-block">
+        <div class="sample-label">English Samples (EN)</div>
+        <div class="role-display">Learn to Talk to AI!</div>
+        <div class="role-heading">Start Learning on Earth</div>
+        <div class="nav-bar-sample">
+          <span>Home</span> • <span>Earth map</span> • <span>Planets</span>
+        </div>
+        <div class="role-label">Choose a level on the map to start learning.</div>
+        <div class="role-body">Learn to write clear prompts through games, stories, and missions. Follow Peromfu the robot on an exciting adventure!</div>
+      </div>
+
+      <div class="sample-block">
+        <div class="sample-label">Bahasa Melayu Samples (BM)</div>
+        <div class="role-display">Belajar Bercakap dengan AI!</div>
+        <div class="role-heading">Mula Belajar di Bumi</div>
+        <div class="nav-bar-sample">
+          <span>Utama</span> • <span>Peta Bumi</span> • <span>Planet</span>
+        </div>
+        <div class="role-label">Pilih satu tahap pada peta untuk mula belajar.</div>
+        <div class="role-body">Belajar menulis prompt yang jelas melalui permainan, cerita dan misi. Ikuti Peromfu si robot dalam pengembaraan yang menyeronokkan!</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setPreset(mode) {
+      const container = document.getElementById('specimen');
+      if (mode === 'narrow') {
+        container.classList.remove('viewport-wide');
+        container.classList.add('viewport-narrow');
+      } else {
+        container.classList.remove('viewport-narrow');
+        container.classList.add('viewport-wide');
+      }
+    }
+  </script>
+</body>
+</html>
