@@ -60,16 +60,16 @@ Plans:
   2. Primary controls are comfortably touch-sized and expose understandable hover, pressed, disabled, and keyboard-focus states where applicable.
   3. A learner can complete core navigation and lesson interactions with a keyboard, following a logical focus order with a visible focus indicator.
   4. Text and controls remain legible on themed backgrounds, and essential instructions and status remain understandable without relying on color, sound, or motion.
-**Plans**: 1/9 plans executed
+**Plans**: 6/9 plans executed
 Plans:
 **Wave 1**
 - [x] 15-01-PLAN.md — Prove text-only planet → region → mission tracer
 **Wave 2**
-- [ ] 15-02-PLAN.md — Reflow title, header and Earth map
-- [ ] 15-03-PLAN.md — Keep planetary journey usable without WebGL and on short screens
-- [ ] 15-04-PLAN.md — Word item → destination and scoped retry
-- [ ] 15-05-PLAN.md — Order item → position and non-resetting retry
-- [ ] 15-06-PLAN.md — Scroll-safe lesson footer and keyboard-readable lock
+- [x] 15-02-PLAN.md — Reflow title, header and Earth map
+- [x] 15-03-PLAN.md — Keep planetary journey usable without WebGL and on short screens
+- [x] 15-04-PLAN.md — Word item → destination and scoped retry
+- [x] 15-05-PLAN.md — Order item → position and non-resetting retry
+- [x] 15-06-PLAN.md — Scroll-safe lesson footer and keyboard-readable lock
 **Wave 3**
 - [ ] 15-07-PLAN.md — Accessible prompt parts, matcher and predictor answers
 **Wave 4**
@@ -108,6 +108,6 @@ Phases execute in numeric order: 14 → 15 → 16 → 17.
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 14. Journey Clarity & Shared Interaction Language | 9/9 | Completed | 2026-11-09 |
-| 15. Mobile-First Responsive Accessibility | 1/9 | In Progress | - |
+| 15. Mobile-First Responsive Accessibility | 6/9 | In Progress | - |
 | 16. Proportional, Reduced-Motion-Safe Game Feel | 0/TBD | Not started | - |
 | 17. Visual Audit & Release Certification | 0/TBD | Not started | - |
