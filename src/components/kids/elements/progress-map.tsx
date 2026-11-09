@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { type Level, earthWorlds, getEarthLevels } from "@/lib/kids/levels";
 import { getProgress, isLevelUnlocked, type KidsProgress } from "@/lib/kids/progress";
 import { analyticsKids } from "@/lib/analytics";
+import { JourneyTip } from "./journey-tip";
 import { 
   PixelTree, 
   PixelBush, 
@@ -61,7 +62,7 @@ export function ProgressMap() {
   return (
     <div className="relative h-full flex flex-col">
       {/* Space portal floating banner per FLOW-02 & D-05 */}
-      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex flex-col items-center gap-2">
         <Link
           href="/planets"
           className="pixel-btn pixel-btn-blue inline-flex items-center gap-2.5 px-4 py-2 text-sm sm:text-base shadow-xl hover:scale-105 transition-transform"
@@ -77,6 +78,13 @@ export function ProgressMap() {
             </span>
           </div>
         </Link>
+
+        {/* First-visit guidance tip (D-12, UI-SPEC): Unobstructed inline position, independent dismissal */}
+        <JourneyTip
+          screenId="map"
+          message={t("tips.map")}
+          dismissLabel={t("tips.dismiss")}
+        />
       </div>
 
       {/* Scroll controls for desktop */}

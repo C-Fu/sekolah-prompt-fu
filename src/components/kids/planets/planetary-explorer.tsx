@@ -24,6 +24,7 @@ import {
   setupDragFilter,
   raycastSolarSystem,
 } from './planetary-interaction';
+import { JourneyTip } from '@/components/kids/elements/journey-tip';
 
 export interface PlanetaryExplorerProps {
   initialMode?: ExplorerMode;
@@ -51,6 +52,7 @@ export function PlanetaryExplorer({
   className = '',
 }: PlanetaryExplorerProps) {
   const t = useTranslations('kids.planets');
+  const tKids = useTranslations('kids');
   const locale = useLocale();
   const isMs = locale === 'ms';
   const router = useRouter();
@@ -193,7 +195,7 @@ export function PlanetaryExplorer({
           {/* Top Center Glassmorphic Header Banner */}
           <header
             data-testid="solar-system-header"
-            className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-auto px-5 sm:px-7 py-2.5 sm:py-3 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl max-w-[90vw] sm:max-w-md mx-auto"
+            className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-auto px-5 sm:px-7 py-2.5 sm:py-3 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl max-w-[90vw] sm:max-w-md mx-auto flex flex-col items-center gap-2"
           >
             <h1 className="text-base sm:text-lg font-bold tracking-wide text-white">
               {t('title')}
@@ -201,6 +203,13 @@ export function PlanetaryExplorer({
             <p className="text-[11px] sm:text-xs text-slate-300 mt-0.5 font-light">
               {t('subtitle')}
             </p>
+            {/* First-visit guidance tip (D-12, UI-SPEC): Shares dismissal across Solar System & Cartography */}
+            <JourneyTip
+              screenId="planets"
+              message={tKids("tips.planets")}
+              dismissLabel={tKids("tips.dismiss")}
+              className="mt-1"
+            />
           </header>
 
           {/* Bottom Quick-Switch Planet Selector Bar */}

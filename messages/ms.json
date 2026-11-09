@@ -56,6 +56,11 @@
     "createPrompt": "Cipta Prompt"
   },
   "kids": {
+    "tips": {
+      "map": "Pilih satu tahap pada peta untuk mula belajar.",
+      "planets": "Pilih planet untuk menerokai misi subjeknya.",
+      "dismiss": "Faham"
+    },
     "header": {
       "title": "Sekolah Prompt Peromfu",
       "levels": "tahap",

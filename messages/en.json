@@ -56,6 +56,11 @@
     "createPrompt": "Create Prompt"
   },
   "kids": {
+    "tips": {
+      "map": "Choose a level on the map to start learning.",
+      "planets": "Choose a planet to explore its subject missions.",
+      "dismiss": "Got it"
+    },
     "header": {
       "title": "Peromfu's Prompt School",
       "levels": "levels",
