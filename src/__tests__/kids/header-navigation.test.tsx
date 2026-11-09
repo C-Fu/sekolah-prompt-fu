@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { KidsHeader } from "@/components/kids/layout/kids-header";
 import { ProgressMap } from "@/components/kids/elements/progress-map";
 import * as levelsModule from "@/lib/kids/levels";
+import * as progressModule from "@/lib/kids/progress";
 import enMessages from "../../../messages/en.json";
 import msMessages from "../../../messages/ms.json";
 
@@ -117,6 +118,56 @@ describe("KidsHeader Visible Route Navigation (D-06)", () => {
     const menuBtn = screen.getByRole("button", { name: "Buka menu" });
     fireEvent.click(menuBtn);
     expect(screen.getByRole("button", { name: "Tutup menu" })).toBeInTheDocument();
+  });
+
+  it("manages keyboard operability with aria-expanded and Escape key dismissal", () => {
+    render(<KidsHeader />);
+
+    const menuBtn = screen.getByRole("button", { name: "Open menu" });
+    expect(menuBtn).toHaveAttribute("aria-expanded", "false");
+    expect(menuBtn).toHaveAttribute("aria-haspopup", "true");
+
+    // Open menu via click (or keyboard activation)
+    fireEvent.click(menuBtn);
+    expect(menuBtn).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("button", { name: "Close menu" })).toBeInTheDocument();
+
+    // Escape closes the menu and returns focus
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(menuBtn).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("button", { name: "Close menu" })).not.toBeInTheDocument();
+  });
+
+  it("preserves named routes when progress reading throws an exception (E2 error/loading)", () => {
+    const starsSpy = vi.spyOn(progressModule, "getTotalStars").mockImplementation(() => {
+      throw new Error("Simulated storage read error");
+    });
+
+    render(<KidsHeader />);
+
+    // Named routes must remain present and functional
+    expect(screen.getByRole("link", { name: /^Home$/i })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: /^Earth map$/i })).toHaveAttribute("href", "/map");
+    expect(screen.getByRole("link", { name: /^Solar System$/i })).toHaveAttribute("href", "/planets");
+
+    starsSpy.mockRestore();
+  });
+
+  it("ensures menu trigger and nav actions meet minimum 44px hitboxes (D-13)", () => {
+    render(<KidsHeader />);
+
+    const menuBtn = screen.getByRole("button", { name: "Open menu" });
+    expect(menuBtn.className).toContain("min-h-[44px]");
+    expect(menuBtn.className).toContain("min-w-[44px]");
+
+    const desktopHome = screen.getByRole("link", { name: /^Home$/i });
+    expect(desktopHome.className).toContain("min-h-[44px]");
+
+    // Open mobile menu to verify mobile links
+    fireEvent.click(menuBtn);
+    const mobileLinks = screen.getAllByRole("link");
+    const mobileHome = mobileLinks.find((l) => l.textContent?.includes("Home") && l.getAttribute("href") === "/");
+    expect(mobileHome?.className).toContain("min-h-[44px]");
   });
 });
 

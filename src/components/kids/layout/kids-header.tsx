@@ -17,6 +17,7 @@ export function KidsHeader() {
   const [completed, setCompleted] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const total = getTotalLevels();
   
   // Get current level from context (will be empty if not in a level)
@@ -25,8 +26,13 @@ export function KidsHeader() {
   const levelNumber = currentLevel ? `${currentLevel.world}.${currentLevel.levelNumber}` : null;
 
   useEffect(() => {
-    setStars(getTotalStars());
-    setCompleted(getCompletedLevelsCount());
+    try {
+      setStars(getTotalStars());
+      setCompleted(getCompletedLevelsCount());
+    } catch {
+      setStars(0);
+      setCompleted(0);
+    }
   }, []);
 
   // Close menu when clicking outside
@@ -42,11 +48,25 @@ export function KidsHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menuOpen]);
 
+  // Keyboard navigation: Escape key dismisses mobile menu and restores focus (D-13)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    if (menuOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   return (
     <header className="shrink-0 z-50 w-full bg-[#2C1810] border-b-4 border-[#8B4513]">
-      <div className="container flex h-14 items-center justify-between px-4">
+      <div className="container flex min-h-[56px] items-center justify-between px-2 sm:px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 min-h-[44px] min-w-[44px]">
           <PixelRobot className="w-8 h-10 animate-peromfu-idle" />
           <span className="text-[#FFD700] font-bold text-2xl pixel-text-shadow hidden sm:block">
             {t("header.title")}
@@ -54,10 +74,10 @@ export function KidsHeader() {
         </Link>
 
         {/* Stats & Nav */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {/* Current level indicator */}
           {levelNumber && (
-            <div className="flex items-center gap-1 px-3 h-8 bg-[#FFD700] border-2 border-[#DAA520] pixel-border-sm">
+            <div className="hidden md:flex items-center gap-1 px-3 h-8 bg-[#FFD700] border-2 border-[#DAA520] pixel-border-sm">
               <span className="text-[#8B4513] text-sm font-bold">
                 {t("level.levelLabel", { number: levelNumber })}
               </span>
@@ -65,13 +85,13 @@ export function KidsHeader() {
           )}
 
           {/* Stars counter */}
-          <div className="flex items-center gap-1 px-2.5 sm:px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
+          <div className="flex items-center gap-1 px-2 sm:px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
             <PixelStar filled className="w-4 h-4" />
             <span className="text-white text-sm">{stars}</span>
           </div>
 
           {/* Progress (3/23) - visible on mobile and desktop */}
-          <div className="flex items-center gap-1 px-2.5 sm:px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
+          <div className="flex items-center gap-1 px-2 sm:px-3 h-8 bg-[#4A3728] border-2 border-[#8B4513] pixel-border-sm">
             <span className="text-[#22C55E] text-xs sm:text-sm font-mono font-bold">{completed}/{total}</span>
           </div>
 
@@ -86,21 +106,21 @@ export function KidsHeader() {
             <SettingsButton />
             <Link 
               href="/" 
-              className="pixel-btn px-3 py-1.5 text-sm h-8 flex items-center gap-1.5"
+              className="pixel-btn px-3 py-1.5 text-sm min-h-[44px] flex items-center gap-1.5"
             >
               <PixelHomeIcon />
               <span>{t("header.home")}</span>
             </Link>
             <Link 
               href="/map" 
-              className="pixel-btn pixel-btn-green px-3 py-1.5 text-sm h-8 flex items-center gap-1.5"
+              className="pixel-btn pixel-btn-green px-3 py-1.5 text-sm min-h-[44px] flex items-center gap-1.5"
             >
               <PixelMapIcon />
               <span>{t("header.map")}</span>
             </Link>
             <Link 
               href="/planets" 
-              className="pixel-btn pixel-btn-blue px-3 py-1.5 text-sm h-8 flex items-center gap-1.5"
+              className="pixel-btn pixel-btn-blue px-3 py-1.5 text-sm min-h-[44px] flex items-center gap-1.5"
               title={t("header.planets")}
               aria-label={t("header.planets")}
             >
@@ -109,12 +129,15 @@ export function KidsHeader() {
             </Link>
           </div>
 
-          {/* Mobile menu button with localized accessible name */}
+          {/* Mobile menu button with localized accessible name and min 44px hitbox */}
           <div className="sm:hidden relative" ref={menuRef}>
             <button
+              ref={menuButtonRef}
               onClick={() => setMenuOpen(!menuOpen)}
-              className="pixel-btn px-3 py-1.5 h-8 flex items-center"
+              className="pixel-btn px-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label={menuOpen ? t("header.closeMenu") : t("header.openMenu")}
+              aria-expanded={menuOpen}
+              aria-haspopup="true"
             >
               <PixelMenuIcon />
             </button>
@@ -136,7 +159,7 @@ export function KidsHeader() {
                   
                   <Link 
                     href="/" 
-                    className="pixel-btn px-3 py-2 text-sm flex items-center justify-center gap-2"
+                    className="pixel-btn px-3 py-2 text-sm min-h-[44px] flex items-center justify-center gap-2"
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelHomeIcon />
@@ -144,7 +167,7 @@ export function KidsHeader() {
                   </Link>
                   <Link 
                     href="/map" 
-                    className="pixel-btn pixel-btn-green px-3 py-2 text-sm flex items-center justify-center gap-2"
+                    className="pixel-btn pixel-btn-green px-3 py-2 text-sm min-h-[44px] flex items-center justify-center gap-2"
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelMapIcon />
@@ -152,7 +175,7 @@ export function KidsHeader() {
                   </Link>
                   <Link 
                     href="/planets" 
-                    className="pixel-btn pixel-btn-blue px-3 py-2 text-sm flex items-center justify-center gap-2"
+                    className="pixel-btn pixel-btn-blue px-3 py-2 text-sm min-h-[44px] flex items-center justify-center gap-2"
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelRocket className="w-4 h-4" />

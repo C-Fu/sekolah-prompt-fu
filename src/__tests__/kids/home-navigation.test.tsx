@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { KidsHomeContent } from "@/components/kids/layout/kids-home-content";
 import * as analyticsModule from "@/lib/analytics";
+import * as progressModule from "@/lib/kids/progress";
 import enMessages from "../../../messages/en.json";
 import msMessages from "../../../messages/ms.json";
 
@@ -141,5 +142,59 @@ describe("KidsHomeContent Two-Step Title Navigation", () => {
     const planetsLink = screen.getByRole("link", { name: /Explore planets/i });
     fireEvent.click(planetsLink);
     expect(exploreSolarSystemSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("survives progress errors and partial progress without invoking progress reset (E1 empty/loading/error/partial)", () => {
+    const clearSpy = vi.spyOn(progressModule, "clearAllProgress");
+
+    // Simulate corrupted localStorage
+    const getItemSpy = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new Error("Simulated localStorage read failure");
+    });
+
+    render(<KidsHomeContent />);
+
+    // Advance to destination step
+    const nextBtn = screen.getByRole("button", { name: /Next/i });
+    fireEvent.click(nextBtn);
+
+    // Both destination links remain present and operable
+    const links = screen.getAllByRole("link");
+    expect(links).toHaveLength(2);
+
+    const earthLink = screen.getByRole("link", { name: /Start learning/i });
+    const planetsLink = screen.getByRole("link", { name: /Explore planets/i });
+    expect(earthLink).toHaveAttribute("href", "/map");
+    expect(planetsLink).toHaveAttribute("href", "/planets");
+
+    // Descriptions remain fully visible
+    expect(screen.getByText("Learn the basics of writing prompts on Earth.")).toBeInTheDocument();
+    expect(screen.getByText("Visit planets and choose a subject mission.")).toBeInTheDocument();
+
+    // No progress reset was invoked
+    expect(clearSpy).not.toHaveBeenCalled();
+
+    getItemSpy.mockRestore();
+  });
+
+  it("maintains min-w-0 and touch-friendly hit areas for small-screen reflow (E1 overflow/long-text)", () => {
+    const { container } = render(<KidsHomeContent />);
+
+    // Advance to Step 2
+    const nextBtn = screen.getByRole("button", { name: /Next/i });
+    expect(nextBtn.className).toContain("min-h-[44px]");
+    fireEvent.click(nextBtn);
+
+    const backBtn = screen.getByRole("button", { name: /Back/i });
+    expect(backBtn.className).toContain("min-h-[44px]");
+
+    // Container and links must have min-w-0 for flex/grid wrapping at narrow widths
+    const contentWrapper = container.querySelector(".min-w-0");
+    expect(contentWrapper).toBeInTheDocument();
+
+    const earthLink = screen.getByRole("link", { name: /Start learning/i });
+    const planetsLink = screen.getByRole("link", { name: /Explore planets/i });
+    expect(earthLink.className).toContain("min-w-0");
+    expect(planetsLink.className).toContain("min-w-0");
   });
 });

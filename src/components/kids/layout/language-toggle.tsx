@@ -25,7 +25,7 @@ export function LanguageToggle({ className }: LanguageToggleProps) {
       role="group"
       aria-label="Language selection"
       className={cn(
-        "flex items-center h-8 bg-[#2C1810] border-2 border-[#8B4513] pixel-border-sm p-0.5 rounded gap-0.5 text-xs font-bold font-mono select-none",
+        "flex items-center min-h-[44px] bg-[#2C1810] border-2 border-[#8B4513] pixel-border-sm p-0.5 rounded gap-0.5 text-xs font-bold font-mono select-none",
         isSwitching && "opacity-75 pointer-events-none",
         className
       )}
@@ -36,7 +36,7 @@ export function LanguageToggle({ className }: LanguageToggleProps) {
         aria-pressed={isBM}
         aria-label="Tukar ke Bahasa Melayu"
         className={cn(
-          "px-2 py-0.5 rounded transition-colors flex items-center gap-1",
+          "min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] px-2 py-1 rounded transition-colors flex items-center justify-center gap-1",
           isBM
             ? "bg-[#FFD700] text-[#8B4513] shadow-sm font-extrabold"
             : "text-[#D2B48C] hover:text-white hover:bg-[#4A3728]"
@@ -53,7 +53,7 @@ export function LanguageToggle({ className }: LanguageToggleProps) {
         aria-pressed={!isBM}
         aria-label="Switch to English"
         className={cn(
-          "px-2 py-0.5 rounded transition-colors flex items-center gap-1",
+          "min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] px-2 py-1 rounded transition-colors flex items-center justify-center gap-1",
           !isBM
             ? "bg-[#FFD700] text-[#8B4513] shadow-sm font-extrabold"
             : "text-[#D2B48C] hover:text-white hover:bg-[#4A3728]"

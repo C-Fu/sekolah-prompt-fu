@@ -18,42 +18,42 @@ export function KidsHomeContent() {
   return (
     <div className="h-full flex flex-col">
       {/* Main content area */}
-      <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center p-4">
-        <div className="w-full max-w-2xl my-auto">
+      <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center px-4 py-4 sm:p-6">
+        <div className="w-full max-w-2xl my-auto min-w-0">
           {/* Step 0: Welcome + Learning Promise (D-03, D-04) */}
           {step === 0 && (
-            <div className="text-center animate-in fade-in slide-in-from-right-4 duration-300">
+            <div className="text-center animate-in fade-in slide-in-from-right-4 duration-300 min-w-0">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#ffffff] border-2 border-[#DAA520] pixel-border-sm text-[#8B4513] text-lg mb-4">
                 <PixelStar filled className="w-4 h-4" />
                 {t("home.badge")}
               </div>
 
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 text-[#2C1810] pixel-text-shadow">
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 text-[#2C1810] pixel-text-shadow break-words">
                 {t("home.title")}
               </h1>
 
               {/* Learning Promise */}
-              <p className="text-2xl md:text-3xl font-bold text-[#16A34A] mb-6">
+              <p className="text-2xl md:text-3xl font-bold text-[#16A34A] mb-6 break-words">
                 {t("home.promise")}
               </p>
 
-              <div className="pixel-panel p-4 md:p-6 mb-6">
-                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+              <div className="pixel-panel p-4 md:p-6 mb-6 min-w-0">
+                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 min-w-0">
                   <div className="shrink-0">
                     <PixelRobot className="w-16 h-20" />
                   </div>
-                  <div className="text-center sm:text-left">
-                    <p className="text-2xl md:text-3xl font-bold text-[#2C1810] mb-2">
+                  <div className="text-center sm:text-left min-w-0 flex-1">
+                    <p className="text-2xl md:text-3xl font-bold text-[#2C1810] mb-2 break-words">
                       {t("home.peromfuIntro.greeting")}
                     </p>
-                    <p className="text-xl md:text-2xl text-[#5D4037]">
+                    <p className="text-xl md:text-2xl text-[#5D4037] break-words">
                       {t("home.peromfuIntro.message")}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <p className="text-base md:text-lg text-[#8B7355]">
+              <p className="text-base md:text-lg text-[#8B7355] break-words">
                 {t("home.ageNote")}
               </p>
             </div>
@@ -61,35 +61,35 @@ export function KidsHomeContent() {
 
           {/* Step 1: Destination Choices (D-01, D-02) */}
           {step === 1 && (
-            <div className="text-center animate-in fade-in slide-in-from-right-4 duration-300">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#2C1810] pixel-text-shadow">
+            <div className="text-center animate-in fade-in slide-in-from-right-4 duration-300 min-w-0">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#2C1810] pixel-text-shadow break-words">
                 {t("home.readyTitle")}
               </h2>
 
-              <p className="text-xl md:text-2xl text-[#5D4037] mb-8">
+              <p className="text-xl md:text-2xl text-[#5D4037] mb-8 break-words">
                 {t("home.readyMessage")}
               </p>
 
               {/* Dual entry cards per D-01, D-02: Equal weight, direct action labels, concise explanations */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-xl mx-auto mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-xl mx-auto mb-6 w-full min-w-0">
                 {/* Earth: Foundational Prompting */}
                 <Link
                   href="/map"
                   onClick={() => analyticsKids.startGame()}
-                  className="pixel-panel pixel-panel-green p-5 flex flex-col justify-between hover:scale-[1.02] transition-transform group cursor-pointer"
+                  className="pixel-panel pixel-panel-green p-5 flex flex-col justify-between hover:scale-[1.02] transition-transform group cursor-pointer w-full min-w-0 min-h-[44px]"
                 >
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center justify-between mb-3">
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#ffffff] border-2 border-[#16A34A] pixel-border-sm text-[#16A34A] font-bold text-xs uppercase tracking-wide">
                         <PixelStar filled className="w-3.5 h-3.5" />
                         {t("home.earthFoundationalBadge")}
                       </span>
-                      <PixelPlayIcon className="w-5 h-5 text-[#16A34A] group-hover:translate-x-1 transition-transform" />
+                      <PixelPlayIcon className="w-5 h-5 text-[#16A34A] group-hover:translate-x-1 transition-transform shrink-0" />
                     </div>
-                    <h3 className="font-bold text-2xl text-[#2C1810] mb-2">
+                    <h3 className="font-bold text-2xl text-[#2C1810] mb-2 break-words">
                       {t("home.earthAction")}
                     </h3>
-                    <p className="text-base text-[#5D4037] leading-relaxed">
+                    <p className="text-base text-[#5D4037] leading-relaxed break-words">
                       {t("home.earthExplanation")}
                     </p>
                   </div>
@@ -105,20 +105,20 @@ export function KidsHomeContent() {
                 <Link
                   href="/planets"
                   onClick={() => analyticsKids.exploreSolarSystem()}
-                  className="pixel-panel pixel-panel-blue p-5 flex flex-col justify-between hover:scale-[1.02] transition-transform group cursor-pointer"
+                  className="pixel-panel pixel-panel-blue p-5 flex flex-col justify-between hover:scale-[1.02] transition-transform group cursor-pointer w-full min-w-0 min-h-[44px]"
                 >
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center justify-between mb-3">
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#ffffff] border-2 border-[#2563EB] pixel-border-sm text-[#2563EB] font-bold text-xs uppercase tracking-wide">
                         <PixelStar filled className="w-3.5 h-3.5" />
                         {t("home.cosmosBadge")}
                       </span>
-                      <PixelRocket className="w-4 h-6 text-[#2563EB] group-hover:-translate-y-1 transition-transform" />
+                      <PixelRocket className="w-4 h-6 text-[#2563EB] group-hover:-translate-y-1 transition-transform shrink-0" />
                     </div>
-                    <h3 className="font-bold text-2xl text-[#2C1810] mb-2">
+                    <h3 className="font-bold text-2xl text-[#2C1810] mb-2 break-words">
                       {t("home.planetsAction")}
                     </h3>
-                    <p className="text-base text-[#5D4037] leading-relaxed">
+                    <p className="text-base text-[#5D4037] leading-relaxed break-words">
                       {t("home.planetsExplanation")}
                     </p>
                   </div>
@@ -131,7 +131,7 @@ export function KidsHomeContent() {
                 </Link>
               </div>
 
-              <p className="mt-4 text-base text-[#8B7355]">
+              <p className="mt-4 text-base text-[#8B7355] break-words">
                 {t("home.ageNote")}
               </p>
             </div>
@@ -141,13 +141,13 @@ export function KidsHomeContent() {
 
       {/* Navigation footer - pixel art style */}
       <div className="shrink-0 bg-[#2C1810] border-t-4 border-[#8B4513]">
-        <div className="container py-3 flex flex-col gap-3 sm:gap-0">
+        <div className="container px-4 py-3 flex flex-col gap-3 sm:gap-0">
           <div className="flex items-center justify-between">
             {/* Back button (absent/disabled on step 0 without layout shift) */}
             {step > 0 ? (
               <button
                 onClick={prevStep}
-                className="pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg"
+                className="pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 <span className="flex items-center gap-1">
                   <PixelArrowLeft />
@@ -167,7 +167,7 @@ export function KidsHomeContent() {
             {step < totalSteps - 1 ? (
               <button
                 onClick={nextStep}
-                className="pixel-btn pixel-btn-green px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg"
+                className="pixel-btn pixel-btn-green px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 <span className="flex items-center gap-1">
                   {t("navigation.next")}
