@@ -1,5 +1,13 @@
 # Milestones
 
+## v1.3 Kid-Friendly UX, Game Feel & Visual Polish (In Progress)
+
+**Milestone goal:** Make the existing learning journey clearer and more satisfying for primary-school students while improving visual consistency across the core screens.
+**Phase range:** Phases 14–17 (roadmap: `.planning/ROADMAP.md`)
+**Requirements:** 12 v1.3 requirements, all mapped to exactly one phase.
+
+---
+
 ## v1.2 3D Planetary Hub, Subject Cartography & Rocket Return (Shipped: 2026-11-09)
 
 **Phases completed:** 5 phases (Phases 09–13), 11 plans, 23 tasks  

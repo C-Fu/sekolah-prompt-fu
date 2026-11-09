@@ -48,24 +48,24 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CLAR-01 | Pending roadmap | Pending |
-| CLAR-02 | Pending roadmap | Pending |
-| CLAR-03 | Pending roadmap | Pending |
-| FEEL-01 | Pending roadmap | Pending |
-| FEEL-02 | Pending roadmap | Pending |
-| FEEL-03 | Pending roadmap | Pending |
-| A11Y-01 | Pending roadmap | Pending |
-| A11Y-02 | Pending roadmap | Pending |
-| A11Y-03 | Pending roadmap | Pending |
-| A11Y-04 | Pending roadmap | Pending |
-| VIS-01 | Pending roadmap | Pending |
-| VIS-02 | Pending roadmap | Pending |
+| CLAR-01 | Phase 14 | Pending |
+| CLAR-02 | Phase 14 | Pending |
+| CLAR-03 | Phase 14 | Pending |
+| FEEL-01 | Phase 16 | Pending |
+| FEEL-02 | Phase 16 | Pending |
+| FEEL-03 | Phase 16 | Pending |
+| A11Y-01 | Phase 15 | Pending |
+| A11Y-02 | Phase 15 | Pending |
+| A11Y-03 | Phase 15 | Pending |
+| A11Y-04 | Phase 15 | Pending |
+| VIS-01 | Phase 17 | Pending |
+| VIS-02 | Phase 17 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12 (roadmap pending)
+- Mapped to phases: 12
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-11-09*  
-*Last updated: 2026-11-09 after milestone v1.3 scope confirmation*
+*Last updated: 2026-11-09 after v1.3 roadmap creation*
