@@ -1,12 +1,33 @@
 {
   "contract": "1.0.0",
   "flavor": "core",
-  "milestone": "v1.2 — 3D Planetary Hub, Subject Cartography & Rocket Return",
-  "phases": [],
+  "milestone": "v1.3 — Kid-Friendly UX, Game Feel & Visual Polish",
+  "phases": [
+    {
+      "number": "14",
+      "name": "Journey Clarity & Shared Interaction Language",
+      "status": "pending"
+    },
+    {
+      "number": "15",
+      "name": "Mobile-First Responsive Accessibility",
+      "status": "pending"
+    },
+    {
+      "number": "16",
+      "name": "Proportional, Reduced-Motion-Safe Game Feel",
+      "status": "pending"
+    },
+    {
+      "number": "17",
+      "name": "Visual Audit & Release Certification",
+      "status": "pending"
+    }
+  ],
   "next": {
     "command": "/gsd-progress --next",
-    "label": "Advance to the next step (verify)",
-    "reason": "Phase 3 of 5 · 60% · ready to verify"
+    "label": "Advance to the next step",
+    "reason": "Phase 1 of 4 · executing"
   },
-  "updated_at": "2026-11-08T13:48:56.687Z"
+  "updated_at": "2026-11-09T09:14:34.101Z"
 }
