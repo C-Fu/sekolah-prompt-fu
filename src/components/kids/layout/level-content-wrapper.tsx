@@ -14,6 +14,7 @@ import { getLevelBySlug } from "@/lib/kids/levels";
 import { getThemeForLevelSlug, PLANET_THEMES } from "@/components/kids/layout/planet-background";
 import { analyticsKids } from "@/lib/analytics";
 import type { CompiledLevelContent } from "@/lib/kids/level-content";
+import { LessonOriginProvider } from "@/components/kids/providers/lesson-origin-context";
 
 interface LevelContentWrapperProps {
   levelSlug: string;
@@ -171,55 +172,63 @@ export function LevelContentWrapper({
   // Loading: show translated loading indicator, never wrong-locale MDX.
   if (state.status === "loading") {
     return (
-      <div className="h-full flex items-center justify-center">
-        <p role="status" className="text-[#5D4037] pixel-panel p-6">
-          {tCommon("loading")}
-        </p>
-      </div>
+      <LessonOriginProvider>
+        <div className="h-full flex items-center justify-center">
+          <p role="status" className="text-[#5D4037] pixel-panel p-6">
+            {tCommon("loading")}
+          </p>
+        </div>
+      </LessonOriginProvider>
     );
   }
 
   // Absent (unregistered slug) or error → comingSoon panel with a map link.
   if (state.status === "absent" || state.status === "error") {
-    return <ComingSoon label={t("level.comingSoon")} backLabel={t("level.backToMap")} />;
+    return (
+      <LessonOriginProvider>
+        <ComingSoon label={t("level.comingSoon")} backLabel={t("level.backToMap")} />
+      </LessonOriginProvider>
+    );
   }
 
   return (
-    <div className="h-full flex flex-col">
-      {/* Content area — all Sections stay mounted; the active one is visible. */}
-      <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center p-4">
-        <div className="w-full max-w-2xl my-auto prose max-w-none kids-prose-pixel">
-          {/* Keyed by locale + slug so a locale/slug change remounts a fresh Section tree. */}
-          <state.Component key={`${locale}/${levelSlug}`} components={components} />
+    <LessonOriginProvider>
+      <div className="h-full flex flex-col">
+        {/* Content area — all Sections stay mounted; the active one is visible. */}
+        <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center p-4">
+          <div className="w-full max-w-2xl my-auto prose max-w-none kids-prose-pixel">
+            {/* Keyed by locale + slug so a locale/slug change remounts a fresh Section tree. */}
+            <state.Component key={`${locale}/${levelSlug}`} components={components} />
+          </div>
         </div>
-      </div>
 
-      {contentCommitted && !hasSections ? (
-        <div className="shrink-0 p-4">
-          <ComingSoon label={t("level.comingSoon")} backLabel={t("level.backToMap")} />
-        </div>
-      ) : (
-        <NavigationFooter
-          totalSections={totalSections}
-          currentSection={currentSection}
-          isFirstSection={isFirstSection}
-          isLastSection={isLastSection}
-          highestVisitedSection={highestVisitedSection}
-          currentComplete={currentComplete}
-          canNavigateToSection={canNavigateToSection}
-          onPrev={goToPrev}
-          onNext={goToNext}
-          onDotClick={handleDotClick}
-          accentColor={PLANET_THEMES[getThemeForLevelSlug(levelSlug)].accentColor}
-          labels={{
-            back: t("navigation.back"),
-            next: t("navigation.next"),
-            map: t("level.map"),
-            completeFirst: t("navigation.completeFirst"),
-          }}
-        />
-      )}
-    </div>
+        {contentCommitted && !hasSections ? (
+          <div className="shrink-0 p-4">
+            <ComingSoon label={t("level.comingSoon")} backLabel={t("level.backToMap")} />
+          </div>
+        ) : (
+          <NavigationFooter
+            totalSections={totalSections}
+            currentSection={currentSection}
+            isFirstSection={isFirstSection}
+            isLastSection={isLastSection}
+            highestVisitedSection={highestVisitedSection}
+            currentComplete={currentComplete}
+            canNavigateToSection={canNavigateToSection}
+            onPrev={goToPrev}
+            onNext={goToNext}
+            onDotClick={handleDotClick}
+            accentColor={PLANET_THEMES[getThemeForLevelSlug(levelSlug)].accentColor}
+            labels={{
+              back: t("navigation.back"),
+              next: t("navigation.next"),
+              map: t("level.map"),
+              completeFirst: t("navigation.completeFirst"),
+            }}
+          />
+        )}
+      </div>
+    </LessonOriginProvider>
   );
 }
 

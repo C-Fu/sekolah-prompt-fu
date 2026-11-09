@@ -12,6 +12,7 @@ import {
   type PlanetId,
   type PlanetFeature,
 } from '@/lib/kids/planets';
+import { attachOriginToRoute } from '@/lib/kids/lesson-origin';
 import type { ExplorerMode } from './planetary-types';
 import { PlanetaryCanvas } from './planetary-canvas';
 import { PlanetaryHud } from './planetary-hud';
@@ -108,7 +109,8 @@ export function PlanetaryExplorer({
         onLaunchMission(activePlanet, feature);
       } else {
         const destRoute = resolveMissionRoute(activePlanet.id, feature);
-        router.push(destRoute);
+        // Attach allowlisted planets origin per D-08, CLAR-03
+        router.push(attachOriginToRoute(destRoute, 'planets'));
       }
     },
     [activePlanet, onLaunchMission, router]

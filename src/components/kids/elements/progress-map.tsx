@@ -9,6 +9,7 @@ import { type Level, earthWorlds, getEarthLevels } from "@/lib/kids/levels";
 import { getProgress, isLevelUnlocked, type KidsProgress } from "@/lib/kids/progress";
 import { analyticsKids } from "@/lib/analytics";
 import { JourneyTip } from "./journey-tip";
+import { buildLessonUrl } from "@/lib/kids/lesson-origin";
 import { 
   PixelTree, 
   PixelBush, 
@@ -538,7 +539,7 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
   }
 
   return (
-    <Link href={`/level/${level.slug}`} className="group cursor-pointer">
+    <Link href={buildLessonUrl(level.slug, "map")} className="group cursor-pointer">
       {nodeContent}
     </Link>
   );

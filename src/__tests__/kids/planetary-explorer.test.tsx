@@ -216,7 +216,7 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
     expect(handleLaunch).toHaveBeenCalledWith(marsWorld, activeFeat);
   });
 
-  it('routes to the corresponding subject lesson when onLaunchMission is not provided (default router)', () => {
+  it('routes to the corresponding subject lesson with planets origin when onLaunchMission is not provided (default router)', () => {
     pushMock.mockClear();
     render(
       <PlanetaryExplorer
@@ -228,7 +228,7 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
     const launchBtn = screen.getByRole('button', { name: /start mission/i });
     fireEvent.click(launchBtn);
 
-    expect(pushMock).toHaveBeenCalledWith('/level/6-1-bm-kucing-peromfu');
+    expect(pushMock).toHaveBeenCalledWith('/level/6-1-bm-kucing-peromfu?origin=planets');
   });
 
   it('renders quick action link to Earth Map in HUD when inspecting Earth', () => {
