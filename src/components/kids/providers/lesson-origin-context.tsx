@@ -11,11 +11,13 @@ import {
 export interface LessonOriginContextValue {
   origin: LessonOrigin;
   returnRoute: string;
+  hubLabelKey: "level.map" | "level.planets";
 }
 
 const LessonOriginContext = createContext<LessonOriginContextValue>({
   origin: DEFAULT_LESSON_ORIGIN,
   returnRoute: resolveOriginRoute(DEFAULT_LESSON_ORIGIN),
+  hubLabelKey: "level.map",
 });
 
 export interface LessonOriginProviderProps {
@@ -44,6 +46,7 @@ export function LessonOriginProvider({
   const value: LessonOriginContextValue = {
     origin,
     returnRoute: resolveOriginRoute(origin),
+    hubLabelKey: origin === "planets" ? "level.planets" : "level.map",
   };
 
   return (

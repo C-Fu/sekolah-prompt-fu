@@ -255,17 +255,21 @@
     },
     "level": {
       "backToMap": "Back to Map",
+      "returnToHub": "Return to {hub}",
       "levelLabel": "Level {number}",
-      "comingSoon": "This level is coming soon!",
+      "comingSoon": "Lesson coming soon",
+      "loadError": "This lesson could not load. Return to {hub} and choose it again.",
       "previous": "Previous",
       "next": "Next",
-      "map": "Map"
+      "map": "Earth map",
+      "planets": "Planets"
     },
     "levelComplete": {
       "title": "Level Complete!",
       "nextLevel": "Next Level",
       "backToMap": "Back to Map",
-      "allDone": "Back to Map",
+      "returnToHub": "Return to {hub}",
+      "allDone": "Return to {hub}",
       "graduationTitle": "Academy Graduate!",
       "graduationMessage": "You mastered all prompting basics on Earth! The Solar System awaits you!"
     },

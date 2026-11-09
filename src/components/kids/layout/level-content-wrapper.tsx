@@ -14,7 +14,7 @@ import { getLevelBySlug } from "@/lib/kids/levels";
 import { getThemeForLevelSlug, PLANET_THEMES } from "@/components/kids/layout/planet-background";
 import { analyticsKids } from "@/lib/analytics";
 import type { CompiledLevelContent } from "@/lib/kids/level-content";
-import { LessonOriginProvider } from "@/components/kids/providers/lesson-origin-context";
+import { LessonOriginProvider, useLessonOrigin } from "@/components/kids/providers/lesson-origin-context";
 
 interface LevelContentWrapperProps {
   levelSlug: string;
@@ -46,7 +46,15 @@ type LoadState =
  * until its own requirement is resolved and complete. Legacy cursor writes cannot
  * unlock it (until 01-16 migrates the nine consumers to identity completion).
  */
-export function LevelContentWrapper({
+export function LevelContentWrapper(props: LevelContentWrapperProps) {
+  return (
+    <LessonOriginProvider>
+      <LevelContentInner {...props} />
+    </LessonOriginProvider>
+  );
+}
+
+function LevelContentInner({
   levelSlug,
   levelNumber: _levelNumber,
   loadContent,
@@ -57,6 +65,11 @@ export function LevelContentWrapper({
   const locale = useLocale();
   const components = useMDXComponents({});
   const setLevelSlug = useSetLevelSlug();
+  const { origin, returnRoute, hubLabelKey } = useLessonOrigin();
+  const hubName = t(hubLabelKey);
+  // Support both key-echoing test mocks and real translation bundles
+  const returnToHubResolved = t("level.returnToHub", { hub: hubName });
+  const returnLabel = returnToHubResolved === "level.returnToHub" ? t(hubLabelKey) : returnToHubResolved;
   const { currentSection, setCurrentSection, totalSections } = useSectionNavigation();
 
   // Keep the (optional) injected loader in a ref so the selection effect depends only on
@@ -172,63 +185,69 @@ export function LevelContentWrapper({
   // Loading: show translated loading indicator, never wrong-locale MDX.
   if (state.status === "loading") {
     return (
-      <LessonOriginProvider>
-        <div className="h-full flex items-center justify-center">
-          <p role="status" className="text-[#5D4037] pixel-panel p-6">
-            {tCommon("loading")}
-          </p>
-        </div>
-      </LessonOriginProvider>
+      <div className="h-full flex items-center justify-center">
+        <p role="status" className="text-[#5D4037] pixel-panel p-6">
+          {tCommon("loading")}
+        </p>
+      </div>
     );
   }
 
-  // Absent (unregistered slug) or error → comingSoon panel with a map link.
+  // Absent (unregistered slug) or load error → comingSoon/error panel with origin-aware return link.
   if (state.status === "absent" || state.status === "error") {
+    const errorText = state.status === "error"
+      ? t("level.loadError", { hub: hubName })
+      : t("level.comingSoon");
     return (
-      <LessonOriginProvider>
-        <ComingSoon label={t("level.comingSoon")} backLabel={t("level.backToMap")} />
-      </LessonOriginProvider>
+      <ComingSoon
+        label={errorText}
+        backLabel={returnLabel}
+        returnRoute={returnRoute}
+      />
     );
   }
 
   return (
-    <LessonOriginProvider>
-      <div className="h-full flex flex-col">
-        {/* Content area — all Sections stay mounted; the active one is visible. */}
-        <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl my-auto prose max-w-none kids-prose-pixel">
-            {/* Keyed by locale + slug so a locale/slug change remounts a fresh Section tree. */}
-            <state.Component key={`${locale}/${levelSlug}`} components={components} />
-          </div>
+    <div className="h-full flex flex-col">
+      {/* Content area — all Sections stay mounted; the active one is visible. */}
+      <div className="flex-1 min-h-0 overflow-y-auto flex items-center justify-center p-4">
+        <div className="w-full max-w-2xl my-auto prose max-w-none kids-prose-pixel">
+          {/* Keyed by locale + slug so a locale/slug change remounts a fresh Section tree. */}
+          <state.Component key={`${locale}/${levelSlug}`} components={components} />
         </div>
-
-        {contentCommitted && !hasSections ? (
-          <div className="shrink-0 p-4">
-            <ComingSoon label={t("level.comingSoon")} backLabel={t("level.backToMap")} />
-          </div>
-        ) : (
-          <NavigationFooter
-            totalSections={totalSections}
-            currentSection={currentSection}
-            isFirstSection={isFirstSection}
-            isLastSection={isLastSection}
-            highestVisitedSection={highestVisitedSection}
-            currentComplete={currentComplete}
-            canNavigateToSection={canNavigateToSection}
-            onPrev={goToPrev}
-            onNext={goToNext}
-            onDotClick={handleDotClick}
-            accentColor={PLANET_THEMES[getThemeForLevelSlug(levelSlug)].accentColor}
-            labels={{
-              back: t("navigation.back"),
-              next: t("navigation.next"),
-              map: t("level.map"),
-              completeFirst: t("navigation.completeFirst"),
-            }}
-          />
-        )}
       </div>
-    </LessonOriginProvider>
+
+      {contentCommitted && !hasSections ? (
+        <div className="shrink-0 p-4">
+          <ComingSoon
+            label={t("level.comingSoon")}
+            backLabel={returnLabel}
+            returnRoute={returnRoute}
+          />
+        </div>
+      ) : (
+        <NavigationFooter
+          totalSections={totalSections}
+          currentSection={currentSection}
+          isFirstSection={isFirstSection}
+          isLastSection={isLastSection}
+          highestVisitedSection={highestVisitedSection}
+          currentComplete={currentComplete}
+          canNavigateToSection={canNavigateToSection}
+          onPrev={goToPrev}
+          onNext={goToNext}
+          onDotClick={handleDotClick}
+          accentColor={PLANET_THEMES[getThemeForLevelSlug(levelSlug)].accentColor}
+          returnRoute={returnRoute}
+          labels={{
+            back: t("navigation.back"),
+            next: t("navigation.next"),
+            map: returnLabel,
+            completeFirst: t("navigation.completeFirst"),
+          }}
+        />
+      )}
+    </div>
   );
 }
 
@@ -270,6 +289,7 @@ interface NavigationFooterProps {
   onNext: () => void;
   onDotClick: (target: number) => void;
   accentColor?: string;
+  returnRoute?: string;
   labels: { back: string; next: string; map: string; completeFirst: string };
 }
 
@@ -285,6 +305,7 @@ function NavigationFooter({
   onNext,
   onDotClick,
   accentColor,
+  returnRoute = "/map",
   labels,
 }: NavigationFooterProps) {
   return (
@@ -338,7 +359,7 @@ function NavigationFooter({
             </button>
           ) : (
             <Link
-              href="/map"
+              href={returnRoute}
               className="pixel-btn pixel-btn-amber px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl"
             >
               <span className="flex items-center gap-1">
@@ -407,13 +428,21 @@ function SectionDots({
   );
 }
 
-function ComingSoon({ label, backLabel }: { label: string; backLabel: string }) {
+function ComingSoon({
+  label,
+  backLabel,
+  returnRoute = "/map",
+}: {
+  label: string;
+  backLabel: string;
+  returnRoute?: string;
+}) {
   return (
     <div className="h-full flex items-center justify-center">
       <div className="text-center pixel-panel p-6">
         <p className="text-[#5D4037] mb-4">{label}</p>
         <Link
-          href="/map"
+          href={returnRoute}
           className="pixel-btn pixel-btn-green px-4 py-2 inline-flex items-center gap-2"
         >
           <PixelMapIcon />

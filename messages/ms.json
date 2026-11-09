@@ -255,17 +255,21 @@
     },
     "level": {
       "backToMap": "Kembali ke Peta",
+      "returnToHub": "Kembali ke {hub}",
       "levelLabel": "Tahap {number}",
-      "comingSoon": "Tahap ini akan datang tidak lama lagi!",
+      "comingSoon": "Pelajaran akan datang",
+      "loadError": "Pelajaran ini tidak dapat dibuka. Kembali ke {hub} dan pilih sekali lagi.",
       "previous": "Sebelumnya",
       "next": "Seterusnya",
-      "map": "Peta"
+      "map": "Peta Bumi",
+      "planets": "Planet"
     },
     "levelComplete": {
       "title": "Tahap Selesai!",
       "nextLevel": "Tahap Seterusnya",
       "backToMap": "Kembali ke Peta",
-      "allDone": "Kembali ke Peta",
+      "returnToHub": "Kembali ke {hub}",
+      "allDone": "Kembali ke {hub}",
       "graduationTitle": "Graduan Akademi!",
       "graduationMessage": "Tahniah! Anda telah menguasai asas prompt di Bumi! Sistem Suria kini menanti anda!"
     },

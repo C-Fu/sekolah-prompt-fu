@@ -9,6 +9,8 @@ import { getAdjacentLevels, getLevelBySlug } from "@/lib/kids/levels";
 import { analyticsKids } from "@/lib/analytics";
 import { PixelRobot, PixelStar, PixelRocket } from "./pixel-art";
 import { RocketLaunchOverlay } from "./rocket-launch-overlay";
+import { useLessonOrigin } from "@/components/kids/providers/lesson-origin-context";
+import { buildLessonUrl } from "@/lib/kids/lesson-origin";
 
 interface LevelCompleteProps {
   levelSlug: string;
@@ -26,6 +28,12 @@ export function LevelComplete({
   const [savedStars, setSavedStars] = useState(0);
   const [isRocketModalOpen, setIsRocketModalOpen] = useState(false);
   const { next } = getAdjacentLevels(levelSlug);
+  const { origin, returnRoute, hubLabelKey } = useLessonOrigin();
+  const hubName = t(hubLabelKey);
+  const resolvedReturn = t("levelComplete.returnToHub", { hub: hubName });
+  const returnLabel = resolvedReturn === "levelComplete.returnToHub"
+    ? t("levelComplete.backToMap")
+    : resolvedReturn;
 
   const isGraduationCapstone = levelSlug === "5-4-graduation-day";
 
@@ -122,7 +130,7 @@ export function LevelComplete({
             </button>
           ) : next ? (
             <Link 
-              href={`/level/${next.slug}`}
+              href={buildLessonUrl(next.slug, origin)}
               className="pixel-btn pixel-btn-green px-8 py-3 text-xl text-center"
             >
               <span className="flex items-center justify-center gap-2">
@@ -132,20 +140,20 @@ export function LevelComplete({
             </Link>
           ) : (
             <Link 
-              href="/map"
+              href={returnRoute}
               className="pixel-btn pixel-btn-green px-8 py-3 text-xl text-center"
             >
-              {t("levelComplete.allDone")}
+              {returnLabel}
             </Link>
           )}
           
           <Link 
-            href="/map"
+            href={returnRoute}
             className="pixel-btn pixel-btn-amber px-8 py-3 text-xl text-center"
           >
             <span className="flex items-center justify-center gap-2">
               <PixelMapIcon />
-              {t("levelComplete.backToMap")}
+              {returnLabel}
             </span>
           </Link>
         </div>
