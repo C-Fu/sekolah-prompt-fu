@@ -60,7 +60,22 @@ Plans:
   2. Primary controls are comfortably touch-sized and expose understandable hover, pressed, disabled, and keyboard-focus states where applicable.
   3. A learner can complete core navigation and lesson interactions with a keyboard, following a logical focus order with a visible focus indicator.
   4. Text and controls remain legible on themed backgrounds, and essential instructions and status remain understandable without relying on color, sound, or motion.
-**Plans**: TBD
+**Plans**: 9 plans
+Plans:
+**Wave 1**
+- [ ] 15-01-PLAN.md — Prove text-only planet → region → mission tracer
+**Wave 2**
+- [ ] 15-02-PLAN.md — Reflow title, header and Earth map
+- [ ] 15-03-PLAN.md — Keep planetary journey usable without WebGL and on short screens
+- [ ] 15-04-PLAN.md — Word item → destination and scoped retry
+- [ ] 15-05-PLAN.md — Order item → position and non-resetting retry
+- [ ] 15-06-PLAN.md — Scroll-safe lesson footer and keyboard-readable lock
+**Wave 3**
+- [ ] 15-07-PLAN.md — Accessible prompt parts, matcher and predictor answers
+**Wave 4**
+- [ ] 15-08-PLAN.md — Accessible remaining lesson activity families
+**Wave 5**
+- [ ] 15-09-PLAN.md — Two-tone focus, static-export gate and rendered evidence
 **UI hint**: yes
 
 ### Phase 16: Proportional, Reduced-Motion-Safe Game Feel
