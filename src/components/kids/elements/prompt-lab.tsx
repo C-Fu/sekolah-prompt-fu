@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
@@ -35,10 +35,14 @@ export function PromptLab({
   successMessage,
 }: PromptLabProps) {
   const t = useTranslations("kids.promptLab");
+  const tActivity = useTranslations("kids.activity");
   const levelSlug = useLevelSlug();
   const scope = useSectionIdentity();
   const componentId = useId();
   
+  const improvementButtonsRef = useRef<Record<number, HTMLButtonElement | null>>({});
+  const retryButtonRef = useRef<HTMLButtonElement | null>(null);
+
   // Register that this Section has an interactive element requiring completion,
   // routed through the Section scope so it binds to the containing Section.
   useEffect(() => {
@@ -74,8 +78,6 @@ export function PromptLab({
     });
   }, [levelSlug, componentId, appliedImprovements, completed, isLoaded]);
 
-  if (!isLoaded) return null;
-
   const handleApplyImprovement = (index: number) => {
     if (appliedImprovements.includes(index) || completed) return;
     
@@ -86,8 +88,8 @@ export function PromptLab({
       setCompleted(true);
       // Mark the containing Section complete, keyed by its resolved index.
       if (levelSlug && scope) {
-        const index = scope.getIndex();
-        if (index !== null) markSectionCompleted(levelSlug, index);
+        const idx = scope.getIndex();
+        if (idx !== null) markSectionCompleted(levelSlug, idx);
         scope.markComplete();
       }
     }
@@ -96,6 +98,9 @@ export function PromptLab({
   const handleReset = () => {
     setAppliedImprovements([]);
     setCompleted(false);
+    setTimeout(() => {
+      improvementButtonsRef.current[0]?.focus();
+    }, 0);
   };
 
   // Get current prompt based on applied improvements
@@ -114,7 +119,19 @@ export function PromptLab({
     return improvements[maxApplied].response;
   };
 
-  const progressPercentage = (appliedImprovements.length / improvements.length) * 100;
+  const progressPercentage = improvements.length > 0 ? (appliedImprovements.length / improvements.length) * 100 : 0;
+
+  const currentStatusText = useCallback((): string => {
+    if (completed) {
+      return `🎉 ${successMessage || t("success")}`;
+    }
+    if (appliedImprovements.length > 0) {
+      return `🔬 ${t("progress")}: ${appliedImprovements.length}/${improvements.length}. ${t("addDetails")}`;
+    }
+    return `🔬 ${displayTitle}. ${t("addDetails")}`;
+  }, [completed, appliedImprovements.length, improvements.length, successMessage, t, displayTitle]);
+
+  if (!isLoaded) return null;
 
   return (
     <div className="my-4 p-4 bg-gradient-to-br from-[#D1FAE5] to-[#A7F3D0] border-4 border-[#10B981] rounded-xl">
@@ -123,6 +140,17 @@ export function PromptLab({
         🔬 {displayTitle}
       </h3>
       <p className="text-[#5D4037] mb-4 m-0">{scenario}</p>
+
+      {/* Accessible live status announcer */}
+      <div
+        data-testid="prompt-lab-status"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="text-base font-medium px-4 py-2 bg-white/95 border-2 border-emerald-300 rounded-lg text-[#047857] mb-4"
+      >
+        {currentStatusText()}
+      </div>
 
       {/* Progress bar */}
       <div className="mb-4">
@@ -139,7 +167,7 @@ export function PromptLab({
       </div>
 
       {/* Current prompt */}
-      <div className="bg-white/80 rounded-lg p-4 mb-4 border-2 border-[#10B981]">
+      <div className="bg-white/90 rounded-lg p-4 mb-4 border-2 border-[#10B981]">
         <div className="text-sm font-medium text-[#047857] mb-2">{t("yourPrompt")}</div>
         <p className="text-lg font-medium text-[#2C1810] m-0">
           &ldquo;{getCurrentPrompt()}&rdquo;
@@ -154,7 +182,7 @@ export function PromptLab({
           : "bg-gray-50 border-gray-300"
       )}>
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xl">🤖</span>
+          <span className="text-xl" aria-hidden="true">🤖</span>
           <span className={cn(
             "font-medium text-sm",
             completed ? "text-green-700" : "text-gray-600"
@@ -166,32 +194,41 @@ export function PromptLab({
       </div>
 
       {/* Improvement buttons */}
-      {!completed && (
-        <div className="space-y-2 mb-4">
-          <div className="text-sm font-medium text-[#047857]">{t("addDetails")}</div>
-          {improvements.map((improvement, index) => {
-            const isApplied = appliedImprovements.includes(index);
-            return (
-              <button
-                key={index}
-                onClick={() => handleApplyImprovement(index)}
-                disabled={isApplied}
-                className={cn(
-                  "w-full p-3 rounded-lg border-2 text-left transition-all",
-                  isApplied
-                    ? "bg-green-100 border-green-400 opacity-60"
-                    : "bg-white border-[#10B981] hover:bg-green-50 cursor-pointer"
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">{isApplied ? "✅" : "➕"}</span>
-                  <div className="font-bold text-[#047857]">{improvement.label}</div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      )}
+      <div className="space-y-2 mb-4">
+        <div className="text-sm font-bold text-[#047857] mb-2">{t("addDetails")}</div>
+        {improvements.map((improvement, index) => {
+          const isApplied = appliedImprovements.includes(index);
+          return (
+            <button
+              key={index}
+              ref={(el) => {
+                improvementButtonsRef.current[index] = el;
+              }}
+              type="button"
+              onClick={() => handleApplyImprovement(index)}
+              aria-pressed={isApplied}
+              aria-disabled={isApplied || completed ? "true" : undefined}
+              className={cn(
+                "w-full min-h-[44px] p-3 rounded-lg border-2 text-left transition-all flex items-center justify-between gap-3",
+                "focus:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2",
+                isApplied
+                  ? "bg-emerald-100 border-emerald-600 border-solid"
+                  : "bg-white border-[#10B981] border-dashed hover:bg-emerald-50 cursor-pointer"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl shrink-0" aria-hidden="true">{isApplied ? "✅" : "➕"}</span>
+                <div className="font-bold text-base text-[#047857]">{improvement.label}</div>
+              </div>
+              {isApplied && (
+                <span className="text-xs font-bold text-emerald-800 bg-emerald-200/80 px-2 py-0.5 rounded border border-emerald-400 shrink-0">
+                  ✓ {tActivity("correct")}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
 
       {/* Success message */}
       {completed && (
@@ -205,8 +242,10 @@ export function PromptLab({
       {/* Reset button */}
       {(completed || appliedImprovements.length > 0) && (
         <button
+          ref={retryButtonRef}
+          type="button"
           onClick={handleReset}
-          className="px-6 py-2 rounded-lg font-bold bg-[#047857] hover:bg-[#065F46] text-white"
+          className="min-h-[44px] min-w-[44px] px-6 py-2.5 rounded-lg font-bold bg-[#047857] hover:bg-[#065F46] text-white cursor-pointer transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2"
         >
           {t("retry")}
         </button>

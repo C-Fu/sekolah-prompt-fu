@@ -1779,4 +1779,267 @@ describe("accessible comparison and correction answer interactions (Plan 15-08 T
   });
 });
 
+/**
+ * Plan 15-08 Task 2:
+ * Make lab and step-by-step interactions independently keyboard operable.
+ * Retain native buttons, size primary controls to >=44x44 CSS px, add visible status words,
+ * shape/border change, and polite announcements per D-12/D-16.
+ * Test one/many choices, repeated action across sections, and BM/EN translations.
+ */
+describe("accessible lab and step-by-step answer interactions (Plan 15-08 Task 2)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("PromptLab improvement buttons maintain focus, update status, and complete section only when all applied", async () => {
+    function ControlledLab() {
+      return (
+        <Section>
+          <PromptLab
+            scenario="Make the dragon prompt better"
+            basePrompt="draw a dragon"
+            baseResponse="Here is a dragon"
+            improvements={[
+              { label: "Add color", prompt: "draw a red dragon", response: "Here is a red dragon" },
+              { label: "Add wings", prompt: "draw a red dragon with golden wings", response: "Here is a red dragon with golden wings" },
+            ]}
+            successMessage="Your dragon prompt is awesome!"
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledLab);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const imp1 = screen.getByRole("button", { name: /Add color/ });
+    const imp2 = screen.getByRole("button", { name: /Add wings/ });
+
+    // Target sizes >=44x44 CSS px
+    expect(imp1.className).toContain("min-h-[44px]");
+    expect(imp2.className).toContain("min-h-[44px]");
+
+    // Status announcer is present
+    const statusEl = screen.getByTestId("prompt-lab-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl).toHaveAttribute("aria-live", "polite");
+    expect(statusEl.textContent).toContain("addDetails");
+
+    // Keyboard path 1: focus and apply first improvement
+    imp1.focus();
+    expect(document.activeElement).toBe(imp1);
+    fireEvent.click(imp1);
+
+    // Improvement 1 shows pressed state, correct outcome word, and solid border
+    expect(imp1).toHaveAttribute("aria-pressed", "true");
+    expect(imp1.textContent).toContain("✓");
+    expect(imp1.textContent).toContain("correct");
+    expect(imp1.className).toContain("border-emerald-600");
+    expect(imp1.className).toContain("border-solid");
+
+    // Focus stays on the button, not dropped to document.body
+    expect(document.activeElement).toBe(imp1);
+
+    // Section is NOT completed yet
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Status updates with progress
+    expect(statusEl.textContent).toContain("1/2");
+
+    // Keyboard path 2: focus and apply second improvement
+    imp2.focus();
+    expect(document.activeElement).toBe(imp2);
+    fireEvent.click(imp2);
+
+    // Improvement 2 is also applied
+    expect(imp2).toHaveAttribute("aria-pressed", "true");
+    expect(imp2.textContent).toContain("✓");
+    expect(imp2.textContent).toContain("correct");
+
+    // Focus remains in DOM
+    expect(document.activeElement).toBe(imp2);
+
+    // Status announces success
+    expect(statusEl.textContent).toContain("Your dragon prompt is awesome!");
+
+    // Section completes when all improvements applied
+    expect(isSectionCompleted(SLUG, 0)).toBe(true);
+
+    // Retry button has >=44x44 hitbox
+    const retryBtn = screen.getByRole("button", { name: /retry/ });
+    expect(retryBtn.className).toContain("min-h-[44px]");
+    expect(retryBtn.className).toContain("min-w-[44px]");
+  });
+
+  it("StepByStep magic words and next-step buttons maintain focus, update status, and complete section", async () => {
+    function ControlledStep() {
+      return (
+        <Section>
+          <StepByStep
+            problem="How many legs do 3 spiders have?"
+            wrongAnswer="20 legs"
+            steps={[
+              "1 spider has 8 legs",
+              "2 spiders have 16 legs",
+              "3 spiders have 24 legs",
+            ]}
+            rightAnswer="24 legs"
+            magicWords="Think step by step"
+            successMessage="Math solved with prompt power!"
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledStep);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const magicBtn = screen.getByRole("button", { name: /addMagicWords/ });
+    expect(magicBtn.className).toContain("min-h-[44px]");
+
+    // Status announcer is present
+    const statusEl = screen.getByTestId("step-by-step-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl).toHaveAttribute("aria-live", "polite");
+    expect(statusEl.textContent).toContain("addMagicWords");
+
+    // Step 1: focus and activate magic words button
+    magicBtn.focus();
+    expect(document.activeElement).toBe(magicBtn);
+    fireEvent.click(magicBtn);
+
+    // Magic words button stays mounted with aria-pressed and visible selected badge
+    expect(magicBtn).toHaveAttribute("aria-pressed", "true");
+    expect(magicBtn.textContent).toContain("magicWordsActive");
+    expect(magicBtn.textContent).toContain("selected");
+    expect(document.activeElement).toBe(magicBtn);
+
+    // Reveal Next Step button appears with >=44x44 hitbox
+    const nextStepBtn = screen.getByRole("button", { name: /nextStep/ });
+    expect(nextStepBtn.className).toContain("min-h-[44px]");
+
+    // Reveal step 1
+    nextStepBtn.focus();
+    expect(document.activeElement).toBe(nextStepBtn);
+    fireEvent.click(nextStepBtn);
+    expect(statusEl.textContent).toContain("(1/3)");
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Reveal step 2
+    fireEvent.click(nextStepBtn);
+    expect(statusEl.textContent).toContain("(2/3)");
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Reveal step 3 (final)
+    fireEvent.click(nextStepBtn);
+
+    // Focus is preserved on the button
+    expect(document.activeElement).toBe(nextStepBtn);
+
+    // Next step button updates to completed state with aria-disabled
+    expect(nextStepBtn).toHaveAttribute("aria-disabled", "true");
+    expect(nextStepBtn.textContent).toContain("correct");
+
+    // Status announces success and answer
+    expect(statusEl.textContent).toContain("24 legs");
+
+    // Section completes
+    expect(isSectionCompleted(SLUG, 0)).toBe(true);
+
+    // Reset button has >=44x44 hitbox
+    const retryBtn = screen.getByRole("button", { name: /retry/ });
+    expect(retryBtn.className).toContain("min-h-[44px]");
+    expect(retryBtn.className).toContain("min-w-[44px]");
+  });
+
+  it("repeated lab and step-by-step actions isolate completion to their containing Section", async () => {
+    function RepeatedActivities() {
+      return (
+        <>
+          <Section>
+            <PromptLab
+              scenario="scenario 1"
+              basePrompt="prompt 1"
+              baseResponse="response 1"
+              improvements={[{ label: "Imp 1", prompt: "p1", response: "r1" }]}
+            />
+          </Section>
+          <Section>
+            <StepByStep
+              problem="problem 2"
+              wrongAnswer="wrong 2"
+              steps={["step 1"]}
+              rightAnswer="right 2"
+            />
+          </Section>
+        </>
+      );
+    }
+
+    await renderControlled(RepeatedActivities);
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    const root0 = document.querySelector('section[data-section-index="0"]') as HTMLElement;
+    const root1 = document.querySelector('section[data-section-index="1"]') as HTMLElement;
+
+    // Complete activity in Section 0
+    fireEvent.click(within(root0).getByRole("button", { name: /Imp 1/ }));
+
+    await waitFor(() => {
+      expect(isSectionCompleted(SLUG, 0)).toBe(true);
+    });
+
+    // Section 1 remains untouched and incomplete
+    expect(isSectionCompleted(SLUG, 1)).toBe(false);
+    expect(within(root1).getByRole("button", { name: /addMagicWords/, hidden: true })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("BM and EN translation bundles define full Unicode strings for promptLab and stepByStep", async () => {
+    const en = await loadMessages("en");
+    const ms = await loadMessages("ms");
+
+    const enLab = (en.kids as { promptLab: Record<string, string> }).promptLab;
+    const msLab = (ms.kids as { promptLab: Record<string, string> }).promptLab;
+    expect(enLab.title).toBe("Prompt Lab");
+    expect(msLab.title).toBe("Makmal Prompt");
+    expect(enLab.progress).toBe("Improvements");
+    expect(msLab.progress).toBe("Penambahbaikan");
+    expect(enLab.yourPrompt).toBe("Your Prompt:");
+    expect(msLab.yourPrompt).toBe("Prompt Anda:");
+    expect(enLab.aiSays).toBe("AI Response:");
+    expect(msLab.aiSays).toBe("Respons AI:");
+    expect(enLab.addDetails).toBe("Add improvements:");
+    expect(msLab.addDetails).toBe("Tambah penambahbaikan:");
+    expect(enLab.success).toBe("Your prompt is now super specific!");
+    expect(msLab.success).toBe("Prompt anda kini sangat khusus!");
+    expect(enLab.retry).toBe("Start Over");
+    expect(msLab.retry).toBe("Mula Semula");
+
+    const enStep = (en.kids as { stepByStep: Record<string, string> }).stepByStep;
+    const msStep = (ms.kids as { stepByStep: Record<string, string> }).stepByStep;
+    expect(enStep.title).toBe("Think Step by Step");
+    expect(msStep.title).toBe("Fikir Langkah demi Langkah");
+    expect(enStep.problem).toBe("The Problem:");
+    expect(msStep.problem).toBe("Masalahnya:");
+    expect(enStep.withoutMagic).toBe("Without magic words:");
+    expect(msStep.withoutMagic).toBe("Tanpa kata ajaib:");
+    expect(enStep.addMagicWords).toBe("Add the Magic Words!");
+    expect(msStep.addMagicWords).toBe("Tambah Kata Ajaib!");
+    expect(enStep.magicWordsActive).toBe("Magic words added!");
+    expect(msStep.magicWordsActive).toBe("Kata ajaib ditambah!");
+    expect(enStep.nextStep).toBe("Reveal Next Step");
+    expect(msStep.nextStep).toBe("Tunjuk Langkah Seterusnya");
+    expect(enStep.withMagic).toBe("With step-by-step thinking:");
+    expect(msStep.withMagic).toBe("Dengan pemikiran langkah demi langkah:");
+    expect(enStep.retry).toBe("Try Again");
+    expect(msStep.retry).toBe("Cuba Lagi");
+  });
+});
+
 
