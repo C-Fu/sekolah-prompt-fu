@@ -21,7 +21,7 @@ created: "2026-11-09"
 | Preset | `new-york`, Radix base, CSS variables enabled; no custom preset code |
 | Component library | Radix primitives are installed (`@radix-ui/react-slot`); existing kids surfaces use project-owned React/Tailwind components |
 | Icon library | `lucide-react` is installed; retain existing pixel-art icons where used. Icons supplement, never replace, visible navigation/action text |
-| Font | Schoolbell (loaded via `next/font/google` as `--font-kids`, weight 400); preserve this playful display identity and existing pixel-art type treatment |
+| Font | Production remains Schoolbell (loaded via `next/font/google` as `--font-kids`, weight 400) unless it meets the typography evaluation rule below and is explicitly approved. Preserve the playful display identity and existing pixel-art treatment; comparison is a bounded prototype, not a redesign. |
 
 **Phase boundary:** Refine the existing title → `/map` or `/planets` → `/level/[slug]` journey. Keep BM/EN, the pixel-art and planetary identity, the two equal title destinations, static export, and client-side local progress. Do not add routes, curriculum, progression systems, onboarding framework, backend, dependency, or a global breadcrumb. Existing planetary themes remain distinct within the shared visual language.
 
@@ -86,7 +86,7 @@ Exceptions: Existing pixel borders/clip-path cuts may use 2px or 3px for crisp e
 
 ## Typography
 
-Use exactly these four sizes for the journey contract; roles may scale down responsively only when needed to prevent clipping. Retain the current Schoolbell face, warm high-contrast ink, and pixel text shadow on display headings. Keep long translated content at full readable line-height.
+Use exactly these four sizes for the journey contract; roles may scale down responsively only when needed to prevent clipping. Keep the current Schoolbell production face, warm high-contrast ink, and pixel text shadow on display headings while the comparison below is evaluated. Keep long translated content at full readable line-height. Typography exploration must preserve the app's pixel-art/planetary identity and must not trigger a broad visual redesign.
 
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
@@ -96,6 +96,13 @@ Use exactly these four sizes for the journey contract; roles may scale down resp
 | Display | 48px | 700 bold | 1.1 |
 
 Weights: 400 regular and 700 bold only. The app currently loads Schoolbell at 400; use the established CSS bold treatment for emphasis rather than adding another font family. Do not shrink instructions or nav text into decorative microcopy.
+
+### Bounded font comparison (prototype only; no production switch by default)
+
+- Compare the current Schoolbell rendering with **Bubble Sans** and **Comic Neue** using the same existing BM/EN headings, navigation labels, instructions, tips, and lesson-content excerpts. Add another candidate only if a documented technical incompatibility makes both named candidates unusable.
+- Evaluate character/glyph coverage and legibility for children in both locales, including BM/EN diacritics and punctuation, at narrow mobile and large desktop widths. Keep the four declared sizes, two weights, existing line heights, colors, and component layouts constant so the comparison isolates typography. Record representative screenshots and any clipping/wrapping differences.
+- Check that font assets can be bundled/self-hosted and that a clean static export succeeds without runtime font-network requests. Retain and test the existing Schoolbell-to-system fallback behavior; a fallback must render every comparison string legibly if a preferred font is unavailable.
+- **Decision rule:** Schoolbell remains the production font unless a candidate has complete tested glyph coverage, improves measured child-reading results over Schoolbell on the same BM/EN specimen (fewer reading errors or higher correct-reading rate, with no locale/viewport regression), passes the static-export/fallback checks, and receives explicit user approval. If child-reading evidence cannot be collected or results are inconclusive, keep Schoolbell. The planner should add a small prototype/comparison task if feasible; do not silently change the production font or add a font dependency as part of the comparison.
 
 ---
 
@@ -150,20 +157,67 @@ Empty/error handling: there is normally no empty title-choice state because the 
 
 ## UI Considerations
 
-Applicable state considerations resolved: 31 covered, 0 backstop, 0 unresolved. The probe maps six described journey surfaces to their applicable UI states; repeated category rows are deliberate because each surface has its own behavior contract.
+Applicable state considerations: **40 closed (39 explicit resolutions, 1 reasoned dismissal), 0 backstop, 0 unresolved.** The probe maps the eight listed UI elements to their applicable states; repeated category rows are deliberate because distinct elements have distinct behavior contracts.
 
-| Category | Element(s) | Status | Resolution / Reason |
-|----------|------------|--------|---------------------|
-| empty | Map level collection | ✅ covered | If the level collection is empty, show the bilingual empty heading/body above with a route back to the map choice context; do not render an unexplained blank map. The title's two fixed destination links remain present. |
-| loading | Lesson content / route | ✅ covered | Keep the existing centered localized loading status visible until lesson content resolves; do not show wrong-locale MDX or prematurely expose stale lesson actions. |
-| error | Lesson content and return navigation | ✅ covered | On lesson load failure, show the bilingual error copy and labeled return link to the validated originating hub; malformed or absent origin resolves to Earth map. Error recovery never clears local progress. |
-| populated | Title choices, map, planet hub, lesson | ✅ covered | Render exactly two equally prominent title links; map levels and planetary destinations have visible names/actions; lesson shows level, localized section title/ordinal, and fixed-footer next/return action. |
-| partial | Lesson origin / section metadata | ✅ covered | Missing/invalid origin uses the documented Earth-map fallback. A missing localized section title must use an explicit localized fallback title, never a blank heading or an English title in BM. Keep the ordinal tied to the existing section registry. |
-| overflow | Navigation, destination cards, lesson footer | ✅ covered | BM/EN labels and tips wrap naturally; cards/footer may grow or reflow, with no important-text truncation, clipped CTA, or horizontal page overflow. No tooltip-only instruction. |
-| zero-one-many | Map levels / planetary choices / lesson steps | ✅ covered | Zero map levels uses the empty state; one level remains a clearly actionable card/node; many levels remain in the existing scrollable map collection. Planet choices retain their labels and existing scroll affordance. Lesson ordinal uses “Step n of m” / “Langkah n daripada m” for any section count. |
-| long-text | Static content, interactive labels, BM/EN copy | ✅ covered | Long translated card descriptions, section titles, and helper text wrap within the card/footer/callout. Preserve full copy and both equal destination actions; size/reflow the layout rather than clipping or ellipsizing essential text. |
+Element inventory for probe classification (existing kinds remain in scope):
 
-Probe coverage was confirmed against the six UI-SPEC surfaces: title welcome, title destinations, shared navigation, Earth map, planetary hub, and lesson. Their explicit state resolutions inherit the surface contracts above; the populated, empty, partial, overflow, zero-one-many, and long-text rows specify the relevant behavior. Loading and error handling use the localized lesson loading/error contracts. No consideration remains unresolved or backstopped.
+| Element | Classification | State contract anchor |
+|---------|----------------|-----------------------|
+| Title welcome | `static-content`, `interactive-control` | Two-step welcome, learning promise, progress and Next action above. |
+| Title destination choices | `list-collection`, `nav`, `static-content` | Equal `/map` and `/planets` links with localized labels and explanations above. |
+| Shared route navigation and controls | `nav`, `interactive-control`, `static-content` | Visible BM/EN Home, Earth map, and Planets labels; current routes remain unchanged. |
+| Earth map controls and level collection | `list-collection`, `interactive-control`, `nav`, `static-content` | Map levels/portal remain labeled actions; dismissible tip does not cover controls. |
+| Earth map visuals | `media` | Bundled pixel map remains visible independently of level data. |
+| Planetary controls and localized copy | `nav`, `interactive-control`, `static-content` | Solar-system/cartography remain one `/planets` surface; controls retain their distinct planetary identity. |
+| Planetary scene | `media` | Preserve the existing client-rendered 3D scene and loading/error fallbacks. |
+| Lesson content and fixed footer | `nav`, `interactive-control`, `static-content` | Localized section title/ordinal, lesson copy, completion gating, and footer behaviors above. |
+
+The four explicitly added element categories are **Earth map visuals (`media`)**, **planetary scene (`media`)**, **localized static copy—including headings, instructions, and tips (`static-content`)**, and **lesson content (`static-content`)**. These are additional element classifications alongside the already listed list, navigation, and interactive-control kinds; they do not alter the locked destinations, BM/EN behavior, or existing routes.
+
+| Element | Applicable category | Status | Resolution / reason |
+|---------|---------------------|--------|---------------------|
+| Title welcome | loading | ✅ covered | Welcome content and its localized Next control render together; no asynchronous title data is required, so the existing route shell remains the loading surface. |
+| Title welcome | error | ✅ covered | The welcome has no submit/load operation; if a route-level failure occurs, retain the shared localized shell/error recovery instead of presenting a dead Next action. |
+| Title welcome | overflow | ✅ covered | Localized promise, step count, and Next label wrap/reflow; do not clip or truncate them. |
+| Title welcome | long-text | ✅ covered | Longer BM/EN promise text wraps in the welcome panel and the panel grows while keeping Next visible. |
+| Title destination choices | empty | ✅ covered | Both destinations are fixed routes and remain present; no empty choice state is rendered. |
+| Title destination choices | loading | ✅ covered | The two fixed destination links are available with the title shell; do not gate either behind data loading. |
+| Title destination choices | error | ✅ covered | If a route is unavailable, preserve the other destination and present the localized route-level recovery; never replace the pair with a blank screen. |
+| Title destination choices | populated | ✅ covered | Render exactly two equally prominent `/map` and `/planets` links with direct action labels and one explanation each. |
+| Title destination choices | partial | ✅ covered | If copy is incomplete in one locale, do not render a mixed-language card; require paired BM/EN strings and keep both route actions labeled. |
+| Title destination choices | overflow | ✅ covered | Cards grow/reflow and labels wrap at narrow widths; preserve both visible actions without horizontal page overflow. |
+| Title destination choices | zero-one-many | ✅ covered | Exactly two fixed choices are rendered; no data-driven zero/one/many variation is applied to this pair. |
+| Title destination choices | long-text | ✅ covered | Long explanations wrap inside equal-size-at-comfortable-width cards; stacked cards may grow to fit full copy. |
+| Shared navigation | loading | ✅ covered | Route labels are static and available with the shared shell; navigation remains visible while route content loads. |
+| Shared navigation | error | ✅ covered | A failed destination does not remove the shared route links; each remains a semantic link to its known internal route. |
+| Shared navigation | overflow | ✅ covered | Desktop labels remain readable and mobile menu labels wrap/reflow without truncation or horizontal overflow. |
+| Shared navigation | long-text | ✅ covered | Localized route labels wrap or the menu reflows; visible text is not replaced by tooltip-only labels. |
+| Earth map controls and level collection | empty | ✅ covered | With zero levels, show the bilingual empty heading/body and labeled Planets alternative; do not show an unexplained blank map. |
+| Earth map controls and level collection | loading | ✅ covered | Keep the existing map shell/controls visible; do not disable the independent Planets route while level progress initializes. |
+| Earth map controls and level collection | error | ✅ covered | If progress cannot be read, keep labeled map/planet navigation available and fail gracefully without clearing stored progress. |
+| Earth map controls and level collection | populated | ✅ covered | Each available level and the planetary portal retain an explicit visible action label and existing lock/progress distinction. |
+| Earth map controls and level collection | partial | ✅ covered | A level with incomplete progress metadata retains its title/action and uses the existing safe locked/unlocked presentation; never render an unlabeled node. |
+| Earth map controls and level collection | overflow | ✅ covered | Keep levels in the existing scroll surface; labels wrap and the planetary portal/tip never covers tappable nodes. |
+| Earth map controls and level collection | zero-one-many | ✅ covered | Zero uses the empty state; one remains a labeled actionable level; many use the existing scrollable collection. |
+| Earth map controls and level collection | long-text | ✅ covered | Long localized level and tip text wraps/reflows without clipping the action or covering map controls. |
+| Earth map visuals | empty | ✅ covered | Bundled artwork remains visible independently of level data; the collection's empty state is shown alongside it. |
+| Earth map visuals | loading | ✅ covered | Pixel/SVG/CSS artwork is bundled and has no separate media-loading phase or spinner. |
+| Earth map visuals | error | ✅ covered | Artwork has no remote media failure path; preserve the local illustration and independent labeled controls. |
+| Earth map visuals | populated | ✅ covered | Preserve the existing illustrated pixel map and its planetary portal; do not substitute generic cards. |
+| Planetary controls and localized copy | loading | ✅ covered | Keep route labels and controls visible while the scene initializes; the existing loading placeholder identifies the current location. |
+| Planetary controls and localized copy | error | ✅ covered | If scene initialization fails, retain visible textual route/HUD recovery controls; do not strand the learner without navigation. |
+| Planetary controls and localized copy | overflow | ✅ covered | Localized planet, orbit, mission and tip text wraps/reflows within the HUD without covering primary controls. |
+| Planetary controls and localized copy | long-text | ✅ covered | Longer BM/EN headings, instructions and action labels wrap; preserve orbit/map/mission controls. |
+| Planetary scene | empty | ✅ dismissed | Not applicable: the scene is a deterministic bundled solar-system visualization, not a data collection that can have zero media items. |
+| Planetary scene | loading | ✅ covered | Show the existing dark localized “Loading Solar System” / “Memuatkan Sistem Suria” placeholder during client scene initialization. |
+| Planetary scene | error | ✅ covered | If WebGL creation is unavailable, retain the dark scene surface and visible textual route/HUD controls rather than a blank or blocking spinner. |
+| Planetary scene | populated | ✅ covered | Preserve the current planetary scene and distinct visual identity; keep labeled controls available alongside it. |
+| Lesson content and fixed footer | loading | ✅ covered | Keep the existing localized loading status until lesson content resolves; do not show wrong-locale MDX or stale lesson actions. |
+| Lesson content and fixed footer | error | ✅ covered | Show localized load-error copy and a labeled allowlisted originating-hub return; absent/invalid origin goes to Earth map without clearing progress. |
+| Lesson content and fixed footer | overflow | ✅ covered | Lesson text scrolls above the fixed footer; footer rows wrap/stack without hiding Next or its visible locked explanation. |
+| Lesson content and fixed footer | long-text | ✅ covered | Long localized lesson passages and section titles wrap/reflow; retain full copy and reserve space above the footer. |
+
+The approved expanded probe inventory above was re-run and validated: 40 applicable considerations, 39 resolved explicitly, 1 reasoned dismissal (planetary-scene empty state), 0 backstop, and 0 unresolved. Every applicable element/category pair has an explicit resolution or reasoned dismissal.
 
 Additional interaction states: first visit shows one short tip per map/planet screen; its “Got it” / “Faham” button dismisses only that screen's tip. Persist each dismissal independently in a namespaced client preference separate from `kids-progress`; recommended lifetime is per browser/device across reloads, and storage read/write failure must leave the tip usable (shown again rather than blocking the screen). Keyboard focus, hover, active/pressed, disabled, and open/closed menu states remain visually distinct within the existing pixel-art treatment. A locked Next control remains visible and communicates the reason in inline text adjacent to it. Dismissal does not navigate, reset progress, or dismiss the other screen's tip.
 
@@ -191,3 +245,5 @@ The existing local shadcn components are already in the repository; no new regis
 - [ ] Dimension 7 Inventory Provenance: PASS
 
 **Approval:** pending
+
+## UI-SPEC COMPLETE
