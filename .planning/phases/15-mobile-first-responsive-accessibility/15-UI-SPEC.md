@@ -130,7 +130,7 @@ New/changed strings go into `messages/en.json` and `messages/ms.json` via `next-
 | Empty state body | Choose another planet to see its regions. | Pilih planet lain untuk melihat kawasannya. |
 | Error / WebGL failure | Planet view is unavailable. Use the planet and region buttons to start a mission. | Paparan planet tidak tersedia. Gunakan butang planet dan kawasan untuk mula misi. |
 | Error / lesson load | This lesson could not load. Return to {hub} and choose it again. | Pelajaran ini tidak dapat dibuka. Kembali ke {hub} dan pilih sekali lagi. |
-| Existing destructive reset | Reset All Progress? This will delete your stars and progress. Cancel / Yes, Reset Everything. | Set Semula Semua Kemajuan? Ini akan memadamkan bintang dan kemajuan anda. Batal / Ya, Set Semula Semuanya. |
+| Existing destructive reset | Reset All Progress? This will delete your stars and progress. Keep My Progress / Yes, Reset Everything. | Set Semula Semua Kemajuan? Ini akan memadamkan bintang dan kemajuan anda. Kekalkan Kemajuan Saya / Ya, Set Semula Semuanya. |
 
 No new destructive action or modal in Phase 15; preserve existing reset confirmation if it appears. Empty regions are a defensive no-data state, not a new destination. Keep title's two fixed cards, map empty copy, location/return wording and incomplete reason from Phase 14; keep first-visit map/planet tips unobstructed and dismissible. Do not interrupt the child after each answer with a toast, alert dialog or focus jump.
 
@@ -138,36 +138,46 @@ No new destructive action or modal in Phase 15; preserve existing reset confirma
 
 ## UI Considerations
 
-Applicable state considerations resolved: 24 covered, 0 backstop, 0 unresolved. Element kinds: destination/planet/region/level collections (`list-collection, nav`); Earth/space visualization (`media`); activity placement (`form, interactive-control`); lesson/footer/header (`nav, interactive-control, static-content`). Rendering validation is a required acceptance checkpoint, not an unverified assertion.
+The post-verification UI-state probe classified the five surfaces below as navigation, collection, media, form, interactive controls and static content (as applicable). The user confirmed the kinds and chose **Specify** for every applicable state. These are **acceptance criteria**, not claims that current implementation passes. Empty/error copy is defined in `## Copywriting Contract`; the rows below define state behavior. Rendered checks remain necessary; jsdom cannot prove clipping, contrast or hit areas.
 
-| Category | Element(s) | Status | Resolution / Reason |
-|----------|------------|--------|---------------------|
-| empty | Fixed title destinations | ✅ covered | Exactly two fixed named routes exist; never hide either as a no-data state. |
-| loading | Title/nav/map | ✅ covered | Route labels and map/planet alternatives remain visible without waiting for client progress. |
-| error | Title/nav/map | ✅ covered | Preserve named route alternatives on failed client progress; do not clear saved progress. |
-| populated | Title cards/map levels | ✅ covered | Both equally prominent cards and all existing named levels remain available. |
-| partial | Progress/map | ✅ covered | Incomplete local progress leaves existing lock/level labels readable, not misleadingly unlocked. |
-| overflow | Title/nav/map | ✅ covered | Card labels wrap; map scroll confined to map; document never scrolls horizontally. |
-| zero-one-many | Map level/region collection | ✅ covered | Zero shows documented empty copy; one stays labeled; many scroll locally with reachable controls. |
-| long-text | Title/nav/map/section titles | ✅ covered | Full BM/EN wraps and grows vertically; no `truncate` or `line-clamp` on essential content. |
-| empty | Planetary scene | ✅ covered | Bundled scene is optional; text chooser, regions and mission remain available even with no drawable scene. |
-| loading | Planetary scene and controls | ✅ covered | Text controls present while WebGL loads; optional scene may show loading but cannot gate actions. |
-| error | Planetary scene | ✅ covered | Show documented WebGL error text and intact chooser → details → mission path. |
-| populated | Planetary scene | ✅ covered | Canvas may show 3D planet; named textual controls remain equally functional. |
-| loading | Planet/region chooser | ✅ covered | Planet and region data is bundled; names and selectable controls do not wait for WebGL init. |
-| error | Planet/region chooser | ✅ covered | Renderer error does not remove controls; empty data uses copy row instead of broken mission. |
-| partial | Planet/region chooser | ✅ covered | A selection without mission availability retains named details and visible locked reason; no dead unlabeled CTA. |
-| overflow | Planet/region chooser/details | ✅ covered | Persistent chooser remains reachable while details/actions scroll and labels wrap. |
-| long-text | Planet/region/details/mission | ✅ covered | Full localized names, descriptions and button labels reflow with >=16px essential text. |
-| empty | Activity input | ✅ covered | Unfilled answer shows item/destination prompt, empty slots and visible incomplete Next reason. |
-| loading | Activity input | ✅ covered | Lesson loading uses existing localized loading state; do not present phantom answer controls. |
-| error | Activity input | ✅ covered | Wrong placement retains item and documented retry status; lesson load error offers allowlisted hub return. |
-| partial | Activity input | ✅ covered | Completed slots remain filled, next item is selectable, unfinished activity keeps Next locked. |
-| overflow | Activity/lesson/footer | ✅ covered | Answers and footer reachable at short height; scroll padding prevents focused answers being covered. |
-| long-text | Feedback/answer/locked reason | ✅ covered | Translated status wraps on readable backing; lock reason can be read with keyboard. |
-| loading/error | Lesson footer/section nav | ✅ covered | Pending content keeps existing loading state and no misleading progression; load error provides hub return. |
+| Element | Category | Resolution | Explicit acceptance criterion |
+|---------|----------|------------|-------------------------------|
+| E1 — Title destinations | empty | resolved / explicit | Both existing title destinations remain present; do not replace them with an empty-state carousel. |
+| E1 — Title destinations | loading | resolved / explicit | Both destination links remain labeled and operable while client-side progress loads. |
+| E1 — Title destinations | error | resolved / explicit | If progress storage fails, both destination links remain operable without clearing saved progress. |
+| E1 — Title destinations | populated | resolved / explicit | Both equally prominent title cards display action label and short explanation. |
+| E1 — Title destinations | partial | resolved / explicit | If one destination lacks progress, both links retain equal weight and neither loses its description. |
+| E1 — Title destinations | overflow | resolved / explicit | At 320 CSS px the two cards stack and the page has no horizontal overflow. |
+| E1 — Title destinations | zero-one-many | resolved / explicit | Title has exactly two destinations; neither is hidden or elevated as a recommended route. |
+| E1 — Title destinations | long-text | resolved / explicit | BM and EN card labels and explanations wrap without truncation, clipping or reducing essential font size. |
+| E2 — Header / Earth map | empty | resolved / explicit | When no saved progress exists, named map levels and the planet portal remain reachable. |
+| E2 — Header / Earth map | loading | resolved / explicit | Header navigation and map/portal labels remain reachable while client progress loads. |
+| E2 — Header / Earth map | error | resolved / explicit | If client progress cannot load, labeled Home, Earth map and Planets links remain reachable. |
+| E2 — Header / Earth map | populated | resolved / explicit | Existing level links, map controls, and planet portal have visible labels. |
+| E2 — Header / Earth map | partial | resolved / explicit | Incomplete progress keeps level and locked-state labels readable without unlocking unavailable levels. |
+| E2 — Header / Earth map | overflow | resolved / explicit | Map may scroll horizontally inside its own region; page and header do not scroll horizontally. |
+| E2 — Header / Earth map | zero-one-many | resolved / explicit | With zero, one, or many unlocked levels, every available level action remains labeled and reachable. |
+| E2 — Header / Earth map | long-text | resolved / explicit | BM/EN navigation and level names wrap or scroll locally; no essential name uses line clamp. |
+| E3 — Planet / regions / scene | empty | resolved / explicit | With no drawable scene or regions, show localized empty-state copy and keep planet chooser available. |
+| E3 — Planet / regions / scene | loading | resolved / explicit | Planet strip and text region/mission path remain operable while WebGL loads. |
+| E3 — Planet / regions / scene | error | resolved / explicit | When WebGL fails, display localized unavailable-view guidance; planet → region → mission text path still works. |
+| E3 — Planet / regions / scene | populated | resolved / explicit | Selected planet has a named region chooser, readable details and mission action without canvas interaction. |
+| E3 — Planet / regions / scene | partial | resolved / explicit | If selected region has no mission, keep details visible and give a text reason rather than a dead CTA. |
+| E3 — Planet / regions / scene | overflow | resolved / explicit | Orbit return and planet chooser stay reachable; region details and mission scroll without clipping. |
+| E3 — Planet / regions / scene | zero-one-many | resolved / explicit | Zero regions show empty-state copy; one or many regions display named selections with keyboard reachability. |
+| E3 — Planet / regions / scene | long-text | resolved / explicit | BM/EN planet, region, detail and mission text wraps without truncation on mobile. |
+| E4 — Lesson activity | empty | resolved / explicit | Unanswered activity presents item/destination instruction and visible incomplete-Next reason. |
+| E4 — Lesson activity | loading | resolved / explicit | Before lesson content loads, use localized loading copy rather than phantom answer buttons. |
+| E4 — Lesson activity | error | resolved / explicit | Incorrect placement retains the item for retry and shows/announces nearby explanatory text; load failure offers originating-hub return. |
+| E4 — Lesson activity | partial | resolved / explicit | Placed answers remain placed while remaining items stay selectable; incomplete Next cannot activate. |
+| E4 — Lesson activity | overflow | resolved / explicit | At short height, activity content scrolls above the footer with its final answer reachable and unobscured. |
+| E4 — Lesson activity | long-text | resolved / explicit | BM/EN instruction, feedback and lock reason wrap on readable backing at narrow width. |
+| E5 — Lesson footer / sections | loading | resolved / explicit | While a lesson section loads, footer never offers misleading Next progression. |
+| E5 — Lesson footer / sections | error | resolved / explicit | On failed lesson loading show localized originating-hub return without losing progress. |
+| E5 — Lesson footer / sections | overflow | resolved / explicit | At 667×375 and 200% zoom, footer actions stay reachable while activity scrolls above with bottom clearance. |
+| E5 — Lesson footer / sections | long-text | resolved / explicit | Back, Continue and incomplete reason wrap without clipping or covering focused answers. |
 
-Acceptance: exercise keyboard + touch on 320×568, 375×667, 667×375, 1280×800 and at 200% zoom, BM/EN, including no-WebGL/slow-WebGL. Measure hitboxes and contrast on rendered pixels/surfaces, inspect Tab focus and no horizontal page overflow; jsdom unit tests alone do not prove layout. Confirm focused controls never disappear/are obscured and answer status is announced without focus change. If no browser/device checkpoint is available, record visual criteria as unverified rather than claim certification. Source: 15-RESEARCH.md validation architecture.
+Probe result: 34 applicable, 34 resolved with explicit verification, 0 backstop, 0 unresolved. Check BM/EN at 320×568, 375×667, 667×375, 1280×800 and 200% zoom, plus WebGL unavailable. If a browser/device is unavailable, mark rendered criteria **unverified** rather than claiming certification.
 
 ---
 
