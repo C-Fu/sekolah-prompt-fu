@@ -265,6 +265,8 @@ function LevelContentInner({
             next: t("navigation.next"),
             map: returnLabel,
             completeFirst: t("navigation.completeFirst"),
+            sectionDot: (num: number) => t("navigation.sectionDot", { number: num }),
+            sectionDotLocked: (num: number) => t("navigation.sectionDotLocked", { number: num }),
           }}
         />
       )}
@@ -311,7 +313,14 @@ interface NavigationFooterProps {
   onDotClick: (target: number) => void;
   accentColor?: string;
   returnRoute?: string;
-  labels: { back: string; next: string; map: string; completeFirst: string };
+  labels: {
+    back: string;
+    next: string;
+    map: string;
+    completeFirst: string;
+    sectionDot?: (num: number) => string;
+    sectionDotLocked?: (num: number) => string;
+  };
 }
 
 function NavigationFooter({
@@ -357,6 +366,7 @@ function NavigationFooter({
               highestVisitedSection={highestVisitedSection}
               canNavigateToSection={canNavigateToSection}
               onDotClick={onDotClick}
+              labels={labels}
             />
           </div>
 
@@ -372,13 +382,20 @@ function NavigationFooter({
                 </span>
               )}
               <button
-                onClick={onNext}
-                disabled={!currentComplete}
+                type="button"
+                onClick={currentComplete ? onNext : undefined}
+                onKeyDown={(e) => {
+                  if (!currentComplete && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                  }
+                }}
+                aria-disabled={!currentComplete ? "true" : undefined}
+                aria-describedby={!currentComplete ? "locked-next-explanation" : undefined}
                 className={cn(
-                  "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl shrink-0",
+                  "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl shrink-0 min-h-[44px] min-w-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]",
                   currentComplete
                     ? "pixel-btn-green"
-                    : "opacity-50 cursor-not-allowed bg-[#4A3728] border-[#8B4513]"
+                    : "cursor-not-allowed bg-[#4A3728] border-2 border-[#8B4513] text-[#FEF3C7]"
                 )}
                 title={!currentComplete ? labels.completeFirst : undefined}
               >
@@ -409,6 +426,7 @@ function NavigationFooter({
             highestVisitedSection={highestVisitedSection}
             canNavigateToSection={canNavigateToSection}
             onDotClick={onDotClick}
+            labels={labels}
           />
         </div>
       </div>
@@ -422,12 +440,17 @@ function SectionDots({
   highestVisitedSection,
   canNavigateToSection,
   onDotClick,
+  labels,
 }: {
   totalSections: number;
   currentSection: number;
   highestVisitedSection: number;
   canNavigateToSection: (target: number) => boolean;
   onDotClick: (target: number) => void;
+  labels?: {
+    sectionDot?: (num: number) => string;
+    sectionDotLocked?: (num: number) => string;
+  };
 }) {
   return (
     <>
@@ -435,25 +458,45 @@ function SectionDots({
         const canNavigate = canNavigateToSection(i);
         const isVisited = i <= highestVisitedSection;
         const isCurrent = i === currentSection;
+        const rawLabel = canNavigate
+          ? labels?.sectionDot?.(i + 1)
+          : labels?.sectionDotLocked?.(i + 1);
+        const dotLabel =
+          rawLabel && !rawLabel.startsWith("navigation.")
+            ? rawLabel
+            : `Go to section ${i + 1}${!canNavigate ? " (locked)" : ""}`;
+
         return (
           <button
             key={i}
+            type="button"
+            data-testid={`section-dot-${i}`}
             onClick={() => onDotClick(i)}
             disabled={!canNavigate}
+            tabIndex={canNavigate ? 0 : -1}
+            aria-disabled={!canNavigate ? "true" : undefined}
+            aria-label={dotLabel}
             className={cn(
-              "w-4 h-4 border-2 transition-all",
-              isCurrent
-                ? "bg-[#22C55E] border-[#16A34A]"
-                : isVisited && i < currentSection
-                ? "bg-[#3B82F6] border-[#2563EB]"
-                : "bg-[#2C1810] border-[#4A3728] opacity-50 cursor-not-allowed"
+              "w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center p-1 bg-transparent border-0 rounded-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]",
+              canNavigate ? "cursor-pointer" : "cursor-not-allowed"
             )}
-            style={{
-              clipPath:
-                "polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px)",
-            }}
-            aria-label={`Go to section ${i + 1}${!canNavigate ? " (locked)" : ""}`}
-          />
+          >
+            <span
+              aria-hidden="true"
+              className={cn(
+                "w-4 h-4 border-2 transition-all block",
+                isCurrent
+                  ? "bg-[#22C55E] border-[#16A34A]"
+                  : isVisited && i < currentSection
+                  ? "bg-[#3B82F6] border-[#2563EB]"
+                  : "bg-[#2C1810] border-[#4A3728] opacity-50"
+              )}
+              style={{
+                clipPath:
+                  "polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px)",
+              }}
+            />
+          </button>
         );
       })}
     </>

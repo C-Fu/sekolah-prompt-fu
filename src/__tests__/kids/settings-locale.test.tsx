@@ -262,7 +262,7 @@ describe("SettingsButton language selection preserves progress and invalidates i
     // The es WordPredictor Section requires completion and is locked — the en completion at
     // the old index 1 did not unlock it (its completion was invalidated).
     await waitFor(() => {
-      expect(nextButton("Siguiente")).toBeDisabled();
+      expect(nextButton("Siguiente")).toHaveAttribute("aria-disabled", "true");
     });
     expect(isSectionCompleted(SLUG, 1)).toBe(false);
 

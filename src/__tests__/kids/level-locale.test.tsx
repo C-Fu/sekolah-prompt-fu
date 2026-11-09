@@ -318,7 +318,7 @@ describe("mounted MDX Section registry", () => {
     // Active section 0 requires completion and is incomplete → Next locked.
     await waitFor(() => {
       const next = screen.getByRole("button", { name: "navigation.next" });
-      expect(next).toBeDisabled();
+      expect(next).toHaveAttribute("aria-disabled", "true");
     });
   });
 
@@ -414,7 +414,7 @@ describe("mounted MDX Section registry", () => {
     for (let i = 0; i < 9; i++) {
       const next = screen.queryByRole("button", { name: "navigation.next" });
       if (!next) break; // reached the final Section (map link)
-      if ((next as HTMLButtonElement).disabled) {
+      if (next.getAttribute("aria-disabled") === "true") {
         lockedSeen = true;
         break;
       }
@@ -596,7 +596,7 @@ describe("interactive consumers bind to their containing Section (01-16 task 1)"
     });
 
     await advance(1); // into Section 1 (the interactive one) → Next locked
-    expect(await nextButton()).toBeDisabled();
+    expect(await nextButton()).toHaveAttribute("aria-disabled", "true");
     expect(isSectionCompleted(SLUG, 1)).toBe(false);
 
     // Correct answer.
@@ -886,7 +886,7 @@ describe("real compiled MDX: repeated adjacent challenges lock independently (01
       "3"
     );
     // Section 3 requires completion and is incomplete → locked.
-    expect(await nextButton()).toBeDisabled();
+    expect(await nextButton()).toHaveAttribute("aria-disabled", "true");
 
     await solveWordPredictor(3, "mat");
     await waitFor(() => {
@@ -904,7 +904,7 @@ describe("real compiled MDX: repeated adjacent challenges lock independently (01
         "4"
       );
     });
-    expect(await nextButton()).toBeDisabled();
+    expect(await nextButton()).toHaveAttribute("aria-disabled", "true");
 
     await solveWordPredictor(4, "time");
     await waitFor(() => {
@@ -936,7 +936,7 @@ describe("real compiled MDX: repeated adjacent challenges lock independently (01
       "data-section-index",
       "7"
     );
-    expect(await nextButton()).toBeDisabled();
+    expect(await nextButton()).toHaveAttribute("aria-disabled", "true");
 
     solvePromptVsMistake(7, /friendly dragon/);
     await waitFor(() => {
@@ -951,7 +951,7 @@ describe("real compiled MDX: repeated adjacent challenges lock independently (01
         "8"
       );
     });
-    expect(await nextButton()).toBeDisabled();
+    expect(await nextButton()).toHaveAttribute("aria-disabled", "true");
 
     solvePromptVsMistake(8, /poem about the ocean/);
     await waitFor(() => {
@@ -1110,5 +1110,136 @@ describe("client locale preference drives compiled MDX (01-17 task 1)", () => {
     // Current effective locale retained, and the target was never persisted.
     expect(result.locale).toBe("en");
     expect(readPersistedLocale()).toBeNull();
+  });
+});
+
+describe("discoverable locked Next and accessible section dots (Plan 15-06 Task 2)", () => {
+  it("keeps locked Next focusable with aria-disabled and aria-describedby referencing explanation", async () => {
+    function InteractiveFirst() {
+      return (
+        <>
+          <Section>
+            <LegacyRequirementProbe />
+          </Section>
+          <Section>
+            <span>plain second</span>
+          </Section>
+        </>
+      );
+    }
+
+    render(
+      <LevelProvider levelSlug="1-1-meet-peromfu">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-peromfu"
+          levelNumber="1-1"
+          loadContent={async () => ({ Component: InteractiveFirst, effectiveLocale: "en" })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    const next = await screen.findByRole("button", { name: "navigation.next" });
+    expect(next).toHaveAttribute("aria-disabled", "true");
+    expect(next).toHaveAttribute("aria-describedby", "locked-next-explanation");
+
+    // Discoverable by keyboard tab
+    next.focus();
+    expect(document.activeElement).toBe(next);
+
+    // Linked explanation has matching ID
+    const explanation = screen.getByTestId("locked-next-explanation");
+    expect(explanation).toHaveAttribute("id", "locked-next-explanation");
+    expect(explanation).toHaveTextContent("navigation.completeFirst");
+  });
+
+  it("prevents Enter, Space, or Click from advancing when Next is locked", async () => {
+    function InteractiveFirst() {
+      return (
+        <>
+          <Section>
+            <LegacyRequirementProbe />
+          </Section>
+          <Section>
+            <span>plain second</span>
+          </Section>
+        </>
+      );
+    }
+
+    render(
+      <LevelProvider levelSlug="1-1-meet-peromfu">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-peromfu"
+          levelNumber="1-1"
+          loadContent={async () => ({ Component: InteractiveFirst, effectiveLocale: "en" })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    const next = await screen.findByRole("button", { name: "navigation.next" });
+    expect(next).toHaveAttribute("aria-disabled", "true");
+
+    // Click must not advance
+    fireEvent.click(next);
+    expect(document.querySelector('section[data-section-index="0"]:not([hidden])')).not.toBeNull();
+
+    // Enter must not advance
+    fireEvent.keyDown(next, { key: "Enter", code: "Enter" });
+    expect(document.querySelector('section[data-section-index="0"]:not([hidden])')).not.toBeNull();
+
+    // Space must not advance
+    fireEvent.keyDown(next, { key: " ", code: "Space" });
+    expect(document.querySelector('section[data-section-index="0"]:not([hidden])')).not.toBeNull();
+  });
+
+  it("removes unavailable future section dots from tab order while giving available dots >=44px hitboxes", async () => {
+    function InteractiveFirst() {
+      return (
+        <>
+          <Section>
+            <LegacyRequirementProbe />
+          </Section>
+          <Section>
+            <span>plain second</span>
+          </Section>
+        </>
+      );
+    }
+
+    render(
+      <LevelProvider levelSlug="1-1-meet-peromfu">
+        <LevelContentWrapper
+          levelSlug="1-1-meet-peromfu"
+          levelNumber="1-1"
+          loadContent={async () => ({ Component: InteractiveFirst, effectiveLocale: "en" })}
+        />
+      </LevelProvider>
+    );
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("section[data-section-index]").length).toBe(2);
+    });
+
+    const dot0 = screen.getAllByTestId("section-dot-0")[0];
+    const dot1 = screen.getAllByTestId("section-dot-1")[0];
+
+    // Dot 0 is available: tabIndex=0, not disabled, generous touch area (min 44px)
+    expect(dot0).toHaveAttribute("tabindex", "0");
+    expect(dot0).not.toBeDisabled();
+    expect(dot0.className).toContain("min-w-[44px]");
+    expect(dot0.className).toContain("min-h-[44px]");
+
+    // Dot 1 is locked: tabIndex=-1, disabled, cannot receive focus
+    expect(dot1).toHaveAttribute("tabindex", "-1");
+    expect(dot1).toBeDisabled();
+    expect(dot1).toHaveAttribute("aria-disabled", "true");
   });
 });
