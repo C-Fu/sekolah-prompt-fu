@@ -115,7 +115,8 @@
     },
     "navigation": {
       "back": "Back",
-      "next": "Continue",
+      "next": "Next",
+      "continue": "Continue",
       "stepOrdinal": "Step {current} of {total}",
       "completeFirst": "Complete the activity first to continue."
     },

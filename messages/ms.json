@@ -115,7 +115,8 @@
     },
     "navigation": {
       "back": "Kembali",
-      "next": "Teruskan",
+      "next": "Seterusnya",
+      "continue": "Teruskan",
       "stepOrdinal": "Langkah {current} daripada {total}",
       "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan."
     },
