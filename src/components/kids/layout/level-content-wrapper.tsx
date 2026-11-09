@@ -216,17 +216,17 @@ function LevelContentInner({
   return (
     <div className="h-full flex flex-col">
       {/* Content area — all Sections stay mounted; the active one is visible. */}
-      <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center p-4">
+      <div className="flex-1 min-h-0 overflow-y-auto scroll-pb-20 sm:scroll-pb-24 flex flex-col items-center justify-center p-4">
         {/* Active Section Context Header per D-07 & D-11 (No breadcrumbs) */}
         {currentSectionTitle && (
           <div
             data-testid="active-section-context"
-            className="w-full max-w-2xl mb-4 px-3 py-2 bg-slate-900/80 border-2 border-[#DAA520] pixel-border-sm flex items-center justify-between text-xs sm:text-sm shadow-md"
+            className="w-full max-w-2xl mb-4 px-3 py-2 bg-[#0F172A] border-2 border-[#DAA520] pixel-border-sm flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm shadow-md"
           >
-            <span className="font-bold text-[#FFD700] truncate">
+            <span className="font-bold text-[#FFD700] break-words">
               {currentSectionTitle}
             </span>
-            <span className="font-mono text-[#FEF3C7] shrink-0 ml-2">
+            <span className="font-mono text-[#FEF3C7] shrink-0 ml-auto sm:ml-2">
               {stepOrdinal}
             </span>
           </div>
@@ -330,17 +330,17 @@ function NavigationFooter({
   labels,
 }: NavigationFooterProps) {
   return (
-    <div
-      className="shrink-0 bg-[#2C1810] border-t-4 transition-colors duration-500"
+    <footer
+      className="shrink-0 bg-[#2C1810] border-t-4 transition-colors duration-500 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
       style={{ borderTopColor: accentColor || "#8B4513" }}
     >
-      <div className="max-w-2xl mx-auto py-3 px-4 flex flex-col gap-3 sm:gap-0">
-        <div className="flex items-center justify-between">
+      <div className="max-w-2xl mx-auto py-3 px-4 flex flex-col gap-3 sm:gap-0 max-h-[40vh] overflow-y-auto">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <button
             onClick={onPrev}
             disabled={isFirstSection}
             className={cn(
-              "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl",
+              "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl shrink-0",
               isFirstSection && "opacity-0 pointer-events-none"
             )}
           >
@@ -350,7 +350,7 @@ function NavigationFooter({
             </span>
           </button>
 
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2 flex-wrap">
             <SectionDots
               totalSections={totalSections}
               currentSection={currentSection}
@@ -361,11 +361,12 @@ function NavigationFooter({
           </div>
 
           {!isLastSection ? (
-            <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap items-end sm:items-center gap-1 sm:gap-3">
               {!currentComplete && (
                 <span
                   data-testid="locked-next-explanation"
-                  className="text-xs text-[#FEF3C7] font-semibold text-right max-w-[200px] leading-tight"
+                  id="locked-next-explanation"
+                  className="text-xs text-[#FEF3C7] font-semibold text-right max-w-[200px] leading-tight break-words"
                 >
                   {labels.completeFirst}
                 </span>
@@ -374,7 +375,7 @@ function NavigationFooter({
                 onClick={onNext}
                 disabled={!currentComplete}
                 className={cn(
-                  "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl",
+                  "pixel-btn px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl shrink-0",
                   currentComplete
                     ? "pixel-btn-green"
                     : "opacity-50 cursor-not-allowed bg-[#4A3728] border-[#8B4513]"
@@ -391,7 +392,7 @@ function NavigationFooter({
           ) : (
             <Link
               href={returnRoute}
-              className="pixel-btn pixel-btn-amber px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl"
+              className="pixel-btn pixel-btn-amber px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-xl shrink-0"
             >
               <span className="flex items-center gap-1">
                 <PixelMapIcon />
@@ -401,7 +402,7 @@ function NavigationFooter({
           )}
         </div>
 
-        <div className="flex sm:hidden items-center justify-center gap-2">
+        <div className="flex sm:hidden items-center justify-center gap-2 flex-wrap">
           <SectionDots
             totalSections={totalSections}
             currentSection={currentSection}
@@ -411,7 +412,7 @@ function NavigationFooter({
           />
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 
