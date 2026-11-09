@@ -5,6 +5,7 @@
  * Rules:
  * - Specific, natural titles derived from lesson headings, activities, and pedagogical flow.
  * - Indexed in exact source Section order (0-based) for both locales.
+ * - Covers all 23 registered lesson slugs across Earth (Worlds 1-5) and Planets (Worlds 6-9).
  * - Missing/unknown locale, slug, or index returns undefined (no silent fallback).
  */
 
@@ -13,8 +14,10 @@ export interface SectionTitleLookup {
   ms: string[];
 }
 
-export const WORLD_1_TO_3_SECTION_TITLES: Record<string, SectionTitleLookup> = {
-  // --- WORLD 1 ---
+export const ALL_LESSON_SECTION_TITLES: Record<string, SectionTitleLookup> = {
+  // ==========================================
+  // WORLD 1 — Meet Peromfu & Prompting Basics
+  // ==========================================
   "1-1-meet-peromfu": {
     en: [
       "Meet Peromfu",
@@ -86,7 +89,9 @@ export const WORLD_1_TO_3_SECTION_TITLES: Record<string, SectionTitleLookup> = {
     ],
   },
 
-  // --- WORLD 2 ---
+  // ==========================================
+  // WORLD 2 — Clarity Castle & Details
+  // ==========================================
   "2-1-missing-details": {
     en: [
       "Welcome to Clarity Castle",
@@ -182,7 +187,9 @@ export const WORLD_1_TO_3_SECTION_TITLES: Record<string, SectionTitleLookup> = {
     ],
   },
 
-  // --- WORLD 3 ---
+  // ==========================================
+  // WORLD 3 — Context Caves
+  // ==========================================
   "3-1-setting-the-scene": {
     en: [
       "Welcome to Context Caves",
@@ -271,7 +278,284 @@ export const WORLD_1_TO_3_SECTION_TITLES: Record<string, SectionTitleLookup> = {
       "Tahniah Jaguh",
     ],
   },
+
+  // ==========================================
+  // WORLD 4 — Creation Canyon
+  // ==========================================
+  "4-1-pretend-time": {
+    en: [
+      "Welcome to Creation Canyon",
+      "What is Role-Play?",
+      "Why Role-Play Sparks Imagination",
+      "See Role-Play in Action",
+      "Choose Your Character",
+      "Create a Role-Play Prompt",
+      "Build Your Own Role-Play",
+      "Role-Play Master",
+    ],
+    ms: [
+      "Selamat Datang ke Gaung Penciptaan",
+      "Apa Itu Main Peranan?",
+      "Kenapa Main Peranan Mencetus Imaginasi",
+      "Lihat Main Peranan Beraksi",
+      "Pilih Watak Anda",
+      "Cipta Prompt Main Peranan",
+      "Bina Main Peranan Anda Sendiri",
+      "Pakar Main Peranan",
+    ],
+  },
+  "4-2-story-starters": {
+    en: [
+      "Welcome Back to Creation Canyon",
+      "AI as Your Co-Author",
+      "The Formula for Story Starters",
+      "Story Starters That Work",
+      "Continue the Adventure",
+      "Start Your Story",
+      "Create Your Story Prompt",
+      "Story Creator",
+    ],
+    ms: [
+      "Selamat Kembali ke Gaung Penciptaan",
+      "AI Sebagai Penulis Bersama",
+      "Formula Pembuka Cerita",
+      "Pembuka Cerita Yang Berkesan",
+      "Teruskan Pengembaraan",
+      "Mulakan Cerita Anda",
+      "Cipta Prompt Cerita Anda",
+      "Pencipta Cerita",
+    ],
+  },
+  "4-3-character-creator": {
+    en: [
+      "Personality Powers",
+      "Give AI a Personality",
+      "Why Personality Matters",
+      "Personality Makes a Difference",
+      "Match the Mood",
+      "Create a Character",
+      "Design Your AI Personality",
+      "Personality Master",
+    ],
+    ms: [
+      "Kuasa Personaliti",
+      "Beri AI Personaliti",
+      "Kenapa Personaliti Penting",
+      "Personaliti Membuat Perbezaan",
+      "Padankan Mood",
+      "Cipta Satu Watak",
+      "Reka Personaliti AI Anda",
+      "Pakar Personaliti",
+    ],
+  },
+  "4-4-world-builder": {
+    en: [
+      "Welcome to World Building",
+      "Building Imaginary Worlds",
+      "Rules of Your World",
+      "World Building in Action",
+      "Expand Your World",
+      "Create Your World Prompt",
+      "Design Your World",
+      "Master World Builder",
+    ],
+    ms: [
+      "Selamat Datang ke Pembinaan Dunia",
+      "Membina Dunia Imaginasi",
+      "Peraturan Dunia Anda",
+      "Pembinaan Dunia Beraksi",
+      "Kembangkan Dunia Anda",
+      "Cipta Prompt Dunia Anda",
+      "Reka Dunia Anda",
+      "Pakar Pembina Dunia",
+    ],
+  },
+
+  // ==========================================
+  // WORLD 5 — Master Mountain & Graduation
+  // ==========================================
+  "5-1-perfect-prompt": {
+    en: [
+      "Welcome to Master Mountain",
+      "The Master Checklist",
+      "Think Step by Step",
+      "Master Formula Tips",
+      "Master Challenge 1",
+      "Master Challenge 2",
+      "Build a Master Prompt",
+      "Create Your Master Prompt",
+      "Master Skills Unlocked",
+    ],
+    ms: [
+      "Selamat Datang ke Gunung Pakar",
+      "Senarai Semak Master",
+      "Fikir Langkah Demi Langkah",
+      "Tip Formula Master",
+      "Cabaran Master 1",
+      "Cabaran Master 2",
+      "Bina Prompt Master",
+      "Cipta Prompt Master Anda",
+      "Kemahiran Master Terbuka",
+    ],
+  },
+  "5-2-fix-it-up": {
+    en: [
+      "Welcome to Prompt Clinic",
+      "Spot the Problems",
+      "Be the Prompt Doctor",
+      "Why Spotting Weakness Helps",
+      "Find the Fix",
+      "Improve This Prompt",
+      "Fix the Prompt",
+      "Upgrade Challenge",
+      "Prompt Fixer",
+    ],
+    ms: [
+      "Selamat Datang ke Klinik Prompt",
+      "Kenal Pasti Masalah",
+      "Jadilah Doktor Prompt",
+      "Kenapa Membaiki Prompt Penting",
+      "Cari Pembaikan",
+      "Baiki Prompt Ini",
+      "Baiki Prompt Itu",
+      "Cabaran Penambahbaikan",
+      "Pembaiki Prompt",
+    ],
+  },
+  "5-3-prompt-remix": {
+    en: [
+      "Ready to Remix",
+      "Same Topic Different Results",
+      "Try the Prompt Lab",
+      "The Power of Remixing",
+      "See the Remix",
+      "Remix for Different Goals",
+      "Try Different Remixes",
+      "Create Your Remix",
+      "Remix Master",
+    ],
+    ms: [
+      "Sedia untuk Remix",
+      "Topik Sama Hasil Berbeza",
+      "Cuba Makmal Prompt",
+      "Kuasa Mengadun Semula",
+      "Lihat Adunan Semula",
+      "Adun Semula untuk Matlamat Berbeza",
+      "Cuba Adunan Semula Berbeza",
+      "Cipta Adunan Semula Anda",
+      "Pakar Adunan Semula",
+    ],
+  },
+  "5-4-graduation-day": {
+    en: [
+      "Welcome to Graduation Day",
+      "Look How Far You Have Come",
+      "Proud of Your Journey",
+      "Final Challenge 1",
+      "Final Challenge 2",
+      "The Ultimate Prompt Challenge",
+      "Create Your Graduation Masterpiece",
+      "You Did It",
+    ],
+    ms: [
+      "Selamat Datang ke Hari Graduasi",
+      "Lihat Betapa Jauhnya Anda Datang",
+      "Bangga dengan Perjalanan Anda",
+      "Cabaran Akhir 1",
+      "Cabaran Akhir 2",
+      "Cabaran Prompt Terunggul",
+      "Cipta Karya Graduasi Anda",
+      "Anda Berjaya",
+    ],
+  },
+
+  // ==========================================
+  // WORLDS 6-9 — Planetary Subject Missions
+  // ==========================================
+  "6-1-bm-kucing-peromfu": {
+    en: [
+      "Welcome to Mars: Malay Language Mission",
+      "The Tale of Peromfu's Cat",
+      "Challenge 1: Rhyme Words & Adjectives",
+      "Challenge 2: Action Verbs & Dialogue",
+      "Challenge 3: Magic Words of Politeness",
+      "Challenge 4: Prompt Doctor Fix",
+      "Mastery Boss: Malay Champion",
+    ],
+    ms: [
+      "Selamat Datang ke Marikh: Misi Bahasa Melayu",
+      "Kisah Kucing Peromfu",
+      "Cabaran 1: Rima Kata & Kata Sifat",
+      "Cabaran 2: Kata Kerja & Dialog Pantas",
+      "Cabaran 3: Kata Ajaib Kesantunan",
+      "Cabaran 4: Doktor Prompt Baiki Arahan",
+      "Cabaran Unggul: Jaguh Bahasa Melayu",
+    ],
+  },
+  "7-1-english-colorful-toys": {
+    en: [
+      "Welcome to Jupiter: English Language Mission",
+      "The Toy Shop Explorer",
+      "Challenge 1: Color & Object Keywords",
+      "Challenge 2: Toy Shop Role-Play Prompt",
+      "Challenge 3: Magic Words Dialogue",
+      "Challenge 4: Fix the Toy Request",
+      "Mastery Boss: English Dialogue Master",
+    ],
+    ms: [
+      "Selamat Datang ke Musytari: Misi Bahasa Inggeris",
+      "Peneroka Kedai Mainan",
+      "Cabaran 1: Kata Kunci Warna & Objek",
+      "Cabaran 2: Prompt Peranan Pembantu Kedai",
+      "Cabaran 3: Kata Ajaib Perbualan Santun",
+      "Cabaran 4: Doktor Prompt Baiki Arahan Mainan",
+      "Cabaran Unggul: Jaguh Dialog English",
+    ],
+  },
+  "8-1-matematik-tambah-bintang": {
+    en: [
+      "Welcome to Venus: Mathematics Mission",
+      "Why Math Needs Clear Steps",
+      "Challenge 1: Count Stars Step by Step",
+      "Challenge 2: Constrain Output Format",
+      "Challenge 3: Assemble Math Instructions",
+      "Challenge 4: Fix the Vague Math Prompt",
+      "Mastery Boss: Cosmic Math Champion",
+    ],
+    ms: [
+      "Selamat Datang ke Zuhrah: Misi Matematik",
+      "Kenapa Matematik Perlu Langkah Jelas",
+      "Cabaran 1: Kira Bintang Langkah Demi Langkah",
+      "Cabaran 2: Tetapkan Format Jawapan",
+      "Cabaran 3: Susun Formula Prompt Matematik",
+      "Cabaran 4: Rawat Prompt Matematik Kabur",
+      "Cabaran Unggul: Jaguh Matematik Angkasa",
+    ],
+  },
+  "9-1-moral-sahabat-prihatin": {
+    en: [
+      "Welcome to Mercury: Moral Education Mission",
+      "Supporting Our Classmates",
+      "Challenge 1: Empathetic Advice Doctor",
+      "Challenge 2: Sincere Encouragement Choice",
+      "Challenge 3: Assemble Caring Support Prompt",
+      "Challenge 4: Words of Encouragement",
+      "Mastery Boss: Ambassador of Caring Values",
+    ],
+    ms: [
+      "Selamat Datang ke Utarid: Misi Pendidikan Moral",
+      "Membantu Rakan Sekelas",
+      "Cabaran 1: Nasihat Moral Yang Prihatin",
+      "Cabaran 2: Bantuan Ikhlas vs Kesilapan",
+      "Cabaran 3: Susun Prompt Tindakan Prihatin",
+      "Cabaran 4: Kata Ajaib Nilai Murni",
+      "Cabaran Unggul: Duta Sahabat Prihatin",
+    ],
+  },
 };
+
+// Backwards-compatibility alias for Plan 06 consumer
+export const WORLD_1_TO_3_SECTION_TITLES = ALL_LESSON_SECTION_TITLES;
 
 /**
  * Returns the localized section title for a given locale, slug, and 0-based section index.
@@ -285,7 +569,7 @@ export function getSectionTitle(
   if (locale !== "en" && locale !== "ms") {
     return undefined;
   }
-  const lesson = WORLD_1_TO_3_SECTION_TITLES[slug];
+  const lesson = ALL_LESSON_SECTION_TITLES[slug];
   if (!lesson) {
     return undefined;
   }
@@ -306,7 +590,7 @@ export function getAllSectionTitles(
   if (locale !== "en" && locale !== "ms") {
     return undefined;
   }
-  const lesson = WORLD_1_TO_3_SECTION_TITLES[slug];
+  const lesson = ALL_LESSON_SECTION_TITLES[slug];
   if (!lesson) {
     return undefined;
   }

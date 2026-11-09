@@ -2,12 +2,12 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 import {
-  WORLD_1_TO_3_SECTION_TITLES,
+  ALL_LESSON_SECTION_TITLES,
   getSectionTitle,
   getAllSectionTitles,
 } from "@/lib/kids/section-titles";
 
-const WORLD_1_TO_3_SLUGS = [
+const ALL_23_LESSON_SLUGS = [
   // World 1
   "1-1-meet-peromfu",
   "1-2-first-words",
@@ -22,6 +22,21 @@ const WORLD_1_TO_3_SLUGS = [
   "3-2-show-dont-tell",
   "3-3-format-finder",
   "3-4-context-champion",
+  // World 4
+  "4-1-pretend-time",
+  "4-2-story-starters",
+  "4-3-character-creator",
+  "4-4-world-builder",
+  // World 5
+  "5-1-perfect-prompt",
+  "5-2-fix-it-up",
+  "5-3-prompt-remix",
+  "5-4-graduation-day",
+  // Worlds 6-9 (Planetary Missions)
+  "6-1-bm-kucing-peromfu",
+  "7-1-english-colorful-toys",
+  "8-1-matematik-tambah-bintang",
+  "9-1-moral-sahabat-prihatin",
 ];
 
 function countMdxSections(locale: "en" | "ms", slug: string): number {
@@ -31,15 +46,16 @@ function countMdxSections(locale: "en" | "ms", slug: string): number {
   return matches ? matches.length : 0;
 }
 
-describe("World 1-3 Section Titles Registry", () => {
-  it("covers all 11 lesson slugs in worlds 1-3", () => {
-    for (const slug of WORLD_1_TO_3_SLUGS) {
-      expect(WORLD_1_TO_3_SECTION_TITLES[slug]).toBeDefined();
+describe("Complete Lesson Section Titles Registry (Plan 14-08)", () => {
+  it("covers all 23 registered lesson slugs across Earth and Planetary missions", () => {
+    expect(ALL_23_LESSON_SLUGS).toHaveLength(23);
+    for (const slug of ALL_23_LESSON_SLUGS) {
+      expect(ALL_LESSON_SECTION_TITLES[slug]).toBeDefined();
     }
   });
 
-  it("matches MDX section count exactly for both EN and MS in all world 1-3 lessons", () => {
-    for (const slug of WORLD_1_TO_3_SLUGS) {
+  it("matches MDX section count exactly for both EN and MS in all 23 lessons", () => {
+    for (const slug of ALL_23_LESSON_SLUGS) {
       const enMdxCount = countMdxSections("en", slug);
       const msMdxCount = countMdxSections("ms", slug);
 
@@ -55,7 +71,7 @@ describe("World 1-3 Section Titles Registry", () => {
       expect(enTitles?.length).toBe(enMdxCount);
       expect(msTitles?.length).toBe(msMdxCount);
 
-      // Verify each title is non-empty and non-trivial
+      // Verify each title is non-empty, non-trivial, and matches getSectionTitle
       enTitles?.forEach((t, idx) => {
         expect(t.trim().length).toBeGreaterThan(2);
         expect(getSectionTitle("en", slug, idx)).toBe(t);
@@ -68,18 +84,18 @@ describe("World 1-3 Section Titles Registry", () => {
     }
   });
 
-  it("returns undefined for unknown locale, unknown slug, or out-of-bounds index without silent fallback", () => {
+  it("returns undefined for unknown locale, unknown slug, or out-of-bounds index without cross-locale fallback", () => {
     // Unknown locale
-    expect(getSectionTitle("fr", "1-1-meet-peromfu", 0)).toBeUndefined();
-    expect(getAllSectionTitles("de", "1-1-meet-peromfu")).toBeUndefined();
+    expect(getSectionTitle("fr", "4-1-pretend-time", 0)).toBeUndefined();
+    expect(getAllSectionTitles("de", "5-1-perfect-prompt")).toBeUndefined();
 
     // Unknown slug
-    expect(getSectionTitle("en", "non-existent-slug", 0)).toBeUndefined();
-    expect(getAllSectionTitles("ms", "non-existent-slug")).toBeUndefined();
+    expect(getSectionTitle("en", "unknown-slug-123", 0)).toBeUndefined();
+    expect(getAllSectionTitles("ms", "unknown-slug-123")).toBeUndefined();
 
     // Out of bounds index
-    expect(getSectionTitle("en", "1-1-meet-peromfu", -1)).toBeUndefined();
-    expect(getSectionTitle("en", "1-1-meet-peromfu", 999)).toBeUndefined();
-    expect(getSectionTitle("ms", "1-2-first-words", 100)).toBeUndefined();
+    expect(getSectionTitle("en", "6-1-bm-kucing-peromfu", -1)).toBeUndefined();
+    expect(getSectionTitle("en", "6-1-bm-kucing-peromfu", 999)).toBeUndefined();
+    expect(getSectionTitle("ms", "9-1-moral-sahabat-prihatin", 100)).toBeUndefined();
   });
 });
