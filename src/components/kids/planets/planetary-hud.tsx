@@ -97,8 +97,13 @@ export function PlanetaryHud({
         {/* Province Sidebar (7 geological features) */}
         <div
           data-testid="province-sidebar"
-          className="w-full md:w-80 max-h-28 sm:max-h-44 md:max-h-72 overflow-y-auto p-2 sm:p-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl space-y-1 sm:space-y-1.5 shrink-0"
+          className="w-full md:w-80 max-h-36 sm:max-h-48 md:max-h-72 overflow-y-auto p-2 sm:p-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl space-y-1 sm:space-y-1.5 shrink-0"
         >
+          <div className="px-2 py-1 flex items-center justify-between border-b border-white/10 mb-1">
+            <h2 className="text-xs font-bold text-cyan-300 uppercase tracking-wider">
+              {t('regionChooserHeading')}
+            </h2>
+          </div>
           {planet.features.map((feat, idx) => {
             const isActive = feat.id === activeFeature.id;
             const featNum = String(feat.featureNumber).padStart(2, '0');
@@ -113,10 +118,11 @@ export function PlanetaryHud({
                 type="button"
                 onClick={() => onSelectFeature(feat, idx)}
                 data-testid={`feature-button-${feat.id}`}
-                className={`w-full text-left p-2 sm:p-2.5 rounded-xl text-xs transition-all flex items-center justify-between gap-2 border cursor-pointer ${
+                aria-pressed={isActive}
+                className={`w-full text-left p-2 sm:p-2.5 rounded-xl text-xs transition-all flex items-center justify-between gap-2 border cursor-pointer active:scale-95 ${
                   isActive
-                    ? 'bg-white/15 border-cyan-400 text-white font-semibold shadow-md ring-1 ring-cyan-400/40'
-                    : 'bg-white/5 border-transparent text-slate-300 hover:bg-white/10 hover:border-white/10'
+                    ? 'bg-white/15 border-2 border-cyan-400 text-white font-semibold shadow-md ring-1 ring-cyan-400/40'
+                    : 'bg-white/5 border border-transparent text-slate-300 hover:bg-white/10 hover:border-white/10'
                 }`}
               >
                 <div className="flex items-center gap-2 truncate">
@@ -125,15 +131,22 @@ export function PlanetaryHud({
                   </span>
                   <span className="truncate">{localizedFeatName}</span>
                 </div>
-                <span
-                  className={`text-[10px] font-mono px-2 py-0.5 rounded-full shrink-0 ${
-                    feat.isFinalBoss
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold'
-                      : 'bg-white/10 text-slate-300'
-                  }`}
-                >
-                  {badgeLabel}
-                </span>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {isActive && (
+                    <span className="text-[10px] font-bold text-cyan-300 flex items-center gap-0.5">
+                      ✓ {t('selectedMarker')}
+                    </span>
+                  )}
+                  <span
+                    className={`text-[10px] font-mono px-2 py-0.5 rounded-full shrink-0 ${
+                      feat.isFinalBoss
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold'
+                        : 'bg-white/10 text-slate-300'
+                    }`}
+                  >
+                    {badgeLabel}
+                  </span>
+                </div>
               </button>
             );
           })}

@@ -63,6 +63,25 @@ export function PlanetaryExplorer({
   const [activePlanetId, setActivePlanetId] = useState<PlanetId | null>(initialPlanetId);
   const [activeFeatureIndex, setActiveFeatureIndex] = useState<number>(initialFeatureIndex);
 
+  // Accessible live status state (D-07, D-16)
+  const [selectionStatus, setSelectionStatus] = useState<{
+    type: 'planet' | 'feature';
+    nameEn: string;
+    nameMs: string;
+  } | null>(() => {
+    if (initialMode === 'planet-cartography' && initialPlanetId) {
+      const p = getPlanetWorld(initialPlanetId);
+      if (p) {
+        return {
+          type: 'planet',
+          nameEn: p.celestialBody,
+          nameMs: p.celestialBodyMs,
+        };
+      }
+    }
+    return null;
+  });
+
   // SSR-safe client mount guard per D-04
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
@@ -87,6 +106,14 @@ export function PlanetaryExplorer({
     setActivePlanetId(planetId);
     setActiveFeatureIndex(0);
     setMode('planet-cartography');
+    const p = getPlanetWorld(planetId);
+    if (p) {
+      setSelectionStatus({
+        type: 'planet',
+        nameEn: p.celestialBody,
+        nameMs: p.celestialBodyMs,
+      });
+    }
   }, []);
 
   // Return to Solar System Overview mode (D-01)
@@ -94,12 +121,18 @@ export function PlanetaryExplorer({
     setMode('solar-system');
     setActivePlanetId(null);
     setActiveFeatureIndex(0);
+    setSelectionStatus(null);
   }, []);
 
   // Symmetrical dual feature selection (HUD sidebar or 3D pin raycast) (D-03)
   const handleSelectFeature = useCallback((feature: PlanetFeature, index: number) => {
     setActiveFeatureIndex(index);
     cartographyRef.current?.focusFeature(index);
+    setSelectionStatus({
+      type: 'feature',
+      nameEn: feature.name,
+      nameMs: feature.nameMs,
+    });
   }, []);
 
   // Launch mission callback bridge
@@ -115,6 +148,18 @@ export function PlanetaryExplorer({
     },
     [activePlanet, onLaunchMission, router]
   );
+
+  // Compute polite announcer message
+  let statusMessage = '';
+  if (selectionStatus?.type === 'planet') {
+    statusMessage = t('planetSelectedStatus', {
+      name: isMs ? selectionStatus.nameMs : selectionStatus.nameEn,
+    });
+  } else if (selectionStatus?.type === 'feature') {
+    statusMessage = t('regionSelectedStatus', {
+      region: isMs ? selectionStatus.nameMs : selectionStatus.nameEn,
+    });
+  }
 
   // SSR hydration fallback: render dark placeholder without executing Three.js or DOM refs
   if (!isMounted) {
@@ -138,49 +183,100 @@ export function PlanetaryExplorer({
       data-testid="planetary-explorer-root"
       className={`relative w-full h-full overflow-hidden bg-slate-950 ${className}`}
     >
-      {mode === 'solar-system' ? (
-        <PlanetaryCanvas
-          key="solar-system-canvas"
-          mode="solar-system"
-          onInit={(ctx) => {
-            // Set cinematic perspective for solar system overview
-            ctx.camera.position.set(0, 22, 32);
-            ctx.camera.lookAt(0, 0, 0);
-            ctx.controls.target.set(0, 0, 0);
-            ctx.controls.maxDistance = 65;
-            ctx.controls.minDistance = 8;
-            ctx.controls.update();
+      {/* 3D Scene Layer (enhancement, not blocking text navigation) */}
+      <div className="absolute inset-0 z-0 pointer-events-auto">
+        {mode === 'solar-system' ? (
+          <PlanetaryCanvas
+            key="solar-system-canvas"
+            mode="solar-system"
+            onInit={(ctx) => {
+              // Set cinematic perspective for solar system overview
+              ctx.camera.position.set(0, 22, 32);
+              ctx.camera.lookAt(0, 0, 0);
+              ctx.controls.target.set(0, 0, 0);
+              ctx.controls.maxDistance = 65;
+              ctx.controls.minDistance = 8;
+              ctx.controls.update();
 
-            const solarSystem = buildSolarSystemScene();
-            ctx.scene.add(solarSystem.scene);
-            solarSystemRef.current = solarSystem;
+              const solarSystem = buildSolarSystemScene();
+              ctx.scene.add(solarSystem.scene);
+              solarSystemRef.current = solarSystem;
 
-            // Setup pointer click filter for raycast selection
-            const cleanupDrag = setupDragFilter(ctx.container, (e) => {
-              if ((e.target as HTMLElement)?.tagName !== 'CANVAS') return;
-              const hitPlanetId = raycastSolarSystem(
-                e,
-                ctx.camera,
-                solarSystem.planetMeshes,
-                ctx.container
-              );
-              if (hitPlanetId) {
-                handleSelectPlanet(hitPlanetId as PlanetId);
-              }
-            });
+              // Setup pointer click filter for raycast selection
+              const cleanupDrag = setupDragFilter(ctx.container, (e) => {
+                if ((e.target as HTMLElement)?.tagName !== 'CANVAS') return;
+                const hitPlanetId = raycastSolarSystem(
+                  e,
+                  ctx.camera,
+                  solarSystem.planetMeshes,
+                  ctx.container
+                );
+                if (hitPlanetId) {
+                  handleSelectPlanet(hitPlanetId as PlanetId);
+                }
+              });
 
-            return () => {
-              cleanupDrag();
-              solarSystemRef.current = null;
-              solarSystem.dispose();
-              ctx.scene.remove(solarSystem.scene);
-            };
-          }}
-          onRenderFrame={(_ctx, delta) => {
-            solarSystemRef.current?.updateOrbits(delta);
-          }}
-          className="w-full h-full"
-        >
+              return () => {
+                cleanupDrag();
+                solarSystemRef.current = null;
+                solarSystem.dispose();
+                ctx.scene.remove(solarSystem.scene);
+              };
+            }}
+            onRenderFrame={(_ctx, delta) => {
+              solarSystemRef.current?.updateOrbits(delta);
+            }}
+            className="w-full h-full"
+          />
+        ) : (
+          <PlanetaryCanvas
+            key={`cartography-canvas-${activePlanet.id}`}
+            mode="planet-cartography"
+            planetId={activePlanet.id}
+            onInit={(ctx) => {
+              // Position camera for globe inspection
+              ctx.camera.position.set(0, 0, 16);
+              ctx.camera.lookAt(0, 0, 0);
+              ctx.controls.target.set(0, 0, 0);
+              ctx.controls.maxDistance = 28;
+              ctx.controls.minDistance = 6.5;
+              ctx.controls.update();
+
+              const cartography = buildPlanetCartographyScene(activePlanet, ctx.camera, ctx.controls);
+              ctx.scene.add(cartography.scene);
+              cartographyRef.current = cartography;
+
+              // Automatically glide camera to selected initial feature (D-01)
+              cartography.focusFeature(activeFeatureIndex);
+
+              // Setup pointer click filter for 3D pin selection
+              const cleanupDrag = setupDragFilter(ctx.container, (e) => {
+                if ((e.target as HTMLElement)?.tagName !== 'CANVAS') return;
+                const hitIndex = cartography.raycastFeaturePins(e, ctx.container);
+                if (hitIndex !== null && hitIndex >= 0 && hitIndex < activePlanet.features.length) {
+                  handleSelectFeature(activePlanet.features[hitIndex], hitIndex);
+                }
+              });
+
+              return () => {
+                cleanupDrag();
+                cartographyRef.current = null;
+                cartography.dispose();
+                ctx.scene.remove(cartography.scene);
+              };
+            }}
+            onRenderFrame={(_ctx, delta) => {
+              elapsedTimeRef.current += delta;
+              cartographyRef.current?.updateScene(delta, elapsedTimeRef.current);
+            }}
+            className="w-full h-full"
+          />
+        )}
+      </div>
+
+      {/* Solar System Overview Mode Header & Nav */}
+      {mode === 'solar-system' && (
+        <>
           {/* Top Left Navigation Link to World Map */}
           <div className="absolute top-4 left-4 z-20 pointer-events-auto">
             <Link
@@ -213,92 +309,80 @@ export function PlanetaryExplorer({
               className="mt-1"
             />
           </header>
+        </>
+      )}
 
-          {/* Bottom Quick-Switch Planet Selector Bar */}
-          <nav
-            data-testid="planet-selector-bar"
-            aria-label={t('hubTitle')}
-            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl pointer-events-auto max-w-[96vw] overflow-x-auto scrollbar-none"
-          >
-            {PLANET_WORLDS.map((planet) => {
-              const displayName = isMs ? planet.celestialBodyMs : planet.celestialBody;
-              const subjectName = isMs ? planet.subjectTitleMs : planet.subjectTitle;
-              const accent = planet.accentColor || planet.themeColor;
+      {/* Persistent Quick-Switch Planet Selector Bar (D-05, D-06, D-07, D-08, D-16) */}
+      <nav
+        data-testid="planet-selector-bar"
+        aria-label={t('hubTitle')}
+        className={`absolute left-1/2 -translate-x-1/2 z-20 flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl pointer-events-auto max-w-[96vw] overflow-x-auto scrollbar-none transition-all ${
+          mode === 'solar-system' ? 'bottom-6 sm:bottom-8' : 'top-16 sm:top-18'
+        }`}
+      >
+        {PLANET_WORLDS.map((planet) => {
+          const displayName = isMs ? planet.celestialBodyMs : planet.celestialBody;
+          const subjectName = isMs ? planet.subjectTitleMs : planet.subjectTitle;
+          const accent = planet.accentColor || planet.themeColor;
+          const isSelected = mode === 'planet-cartography' && planet.id === activePlanet.id;
 
-              return (
-                <button
-                  key={planet.id}
-                  type="button"
-                  onClick={() => handleSelectPlanet(planet.id)}
-                  data-testid={`planet-pill-${planet.id}`}
-                  className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 sm:gap-2 border bg-white/5 border-white/10 text-slate-200 hover:bg-white/15 hover:border-cyan-400 hover:text-white cursor-pointer active:scale-95 shadow-md shrink-0 whitespace-nowrap"
-                >
-                  <span
-                    className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm"
-                    style={{ backgroundColor: accent }}
-                    aria-hidden="true"
-                  />
-                  <span className="font-semibold">{displayName}</span>
-                  <span className="hidden sm:inline text-[10px] text-slate-400 font-mono">
-                    ({subjectName})
-                  </span>
-                </button>
-              );
-            })}
-          </nav>
-        </PlanetaryCanvas>
-      ) : (
-        <PlanetaryCanvas
-          key={`cartography-canvas-${activePlanet.id}`}
-          mode="planet-cartography"
-          planetId={activePlanet.id}
-          onInit={(ctx) => {
-            // Position camera for globe inspection
-            ctx.camera.position.set(0, 0, 16);
-            ctx.camera.lookAt(0, 0, 0);
-            ctx.controls.target.set(0, 0, 0);
-            ctx.controls.maxDistance = 28;
-            ctx.controls.minDistance = 6.5;
-            ctx.controls.update();
+          return (
+            <button
+              key={planet.id}
+              type="button"
+              onClick={() => handleSelectPlanet(planet.id)}
+              data-testid={`planet-pill-${planet.id}`}
+              aria-pressed={isSelected}
+              aria-label={t('choosePlanet', { name: displayName })}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 sm:gap-2 border cursor-pointer active:scale-95 shadow-md shrink-0 whitespace-nowrap ${
+                isSelected
+                  ? 'bg-white/20 border-2 border-cyan-400 text-white font-semibold ring-1 ring-cyan-400/40'
+                  : 'bg-white/5 border border-white/10 text-slate-200 hover:bg-white/15 hover:border-cyan-400 hover:text-white'
+              }`}
+            >
+              <span
+                className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm"
+                style={{ backgroundColor: accent }}
+                aria-hidden="true"
+              />
+              <span className="font-semibold">{displayName}</span>
+              {isSelected && (
+                <span className="text-[10px] font-bold text-cyan-300 flex items-center gap-0.5">
+                  ✓ {t('selectedMarker')}
+                </span>
+              )}
+              <span className="hidden sm:inline text-[10px] text-slate-400 font-mono">
+                ({subjectName})
+              </span>
+            </button>
+          );
+        })}
+      </nav>
 
-            const cartography = buildPlanetCartographyScene(activePlanet, ctx.camera, ctx.controls);
-            ctx.scene.add(cartography.scene);
-            cartographyRef.current = cartography;
+      {/* Persistent Accessible Polite Status Region (D-07, D-16) */}
+      <div
+        data-testid="planetary-status-announcer"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className={`absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none px-4 py-1.5 rounded-full text-xs font-mono transition-opacity shadow-lg ${
+          statusMessage
+            ? 'opacity-100 bg-slate-900/90 text-cyan-300 border border-cyan-500/30'
+            : 'opacity-0 sr-only'
+        } ${mode === 'solar-system' ? 'bottom-20 sm:bottom-24' : 'top-28 sm:top-32'}`}
+      >
+        {statusMessage}
+      </div>
 
-            // Automatically glide camera to selected initial feature (D-01)
-            cartography.focusFeature(activeFeatureIndex);
-
-            // Setup pointer click filter for 3D pin selection
-            const cleanupDrag = setupDragFilter(ctx.container, (e) => {
-              if ((e.target as HTMLElement)?.tagName !== 'CANVAS') return;
-              const hitIndex = cartography.raycastFeaturePins(e, ctx.container);
-              if (hitIndex !== null && hitIndex >= 0 && hitIndex < activePlanet.features.length) {
-                handleSelectFeature(activePlanet.features[hitIndex], hitIndex);
-              }
-            });
-
-            return () => {
-              cleanupDrag();
-              cartographyRef.current = null;
-              cartography.dispose();
-              ctx.scene.remove(cartography.scene);
-            };
-          }}
-          onRenderFrame={(_ctx, delta) => {
-            elapsedTimeRef.current += delta;
-            cartographyRef.current?.updateScene(delta, elapsedTimeRef.current);
-          }}
-          className="w-full h-full"
-        >
-          {/* Glassmorphic Telemetry HUD Overlay */}
-          <PlanetaryHud
-            planet={activePlanet}
-            activeFeature={activeFeature}
-            onSelectFeature={handleSelectFeature}
-            onBackToOrbit={handleBackToOrbit}
-            onLaunchMission={handleLaunchMission}
-          />
-        </PlanetaryCanvas>
+      {/* Glassmorphic Telemetry HUD Overlay in Cartography mode */}
+      {mode === 'planet-cartography' && (
+        <PlanetaryHud
+          planet={activePlanet}
+          activeFeature={activeFeature}
+          onSelectFeature={handleSelectFeature}
+          onBackToOrbit={handleBackToOrbit}
+          onLaunchMission={handleLaunchMission}
+        />
       )}
     </div>
   );

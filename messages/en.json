@@ -118,7 +118,16 @@
       "next": "Next",
       "continue": "Continue",
       "stepOrdinal": "Step {current} of {total}",
-      "completeFirst": "Complete the activity first to continue."
+      "completeFirst": "Complete the activity first to continue.",
+      "sectionDot": "Go to section {number}",
+      "sectionDotLocked": "Go to section {number} (locked)"
+    },
+    "activity": {
+      "itemDestinationPrompt": "Choose an item, then choose a place.",
+      "correctPlacement": "Correct! Item placed.",
+      "wrongPlacement": "Not there yet. Choose another place for this item.",
+      "lessonLoadError": "This lesson could not load. Return to {hub} and choose it again.",
+      "selected": "Selected"
     },
     "map": {
       "title": "Earth map",
@@ -394,6 +403,15 @@
       "backToOrbit": "Return to Orbit",
       "launchMission": "Start Mission",
       "lockedFeature": "Unlock prior Year features to enter",
+      "choosePlanet": "Choose {name}",
+      "regionChooserHeading": "Choose a region",
+      "planetSelectedStatus": "Selected: {name}. Choose a region.",
+      "regionSelectedStatus": "Selected: {region}. Read the details, then start a mission.",
+      "selectedMarker": "Selected",
+      "emptyRegionsHeading": "No regions here yet",
+      "emptyRegionsBody": "Choose another planet to see its regions.",
+      "webglUnavailable": "Planet view is unavailable. Use the planet and region buttons to start a mission.",
+      "noMissionReason": "No mission available for this region yet.",
       "telemetry": {
         "coordinates": "Coordinates",
         "elevation": "Elevation / Depth",

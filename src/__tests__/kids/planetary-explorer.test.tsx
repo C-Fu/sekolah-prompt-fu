@@ -243,6 +243,96 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
     expect(earthMapBtn).toBeInTheDocument();
     expect(earthMapBtn).toHaveAttribute('href', '/map');
   });
+
+  it('supports end-to-end text-only planet -> region -> mission navigation without WebGL init (D-05, D-06, D-07, D-08, D-16)', () => {
+    pushMock.mockClear();
+    render(<PlanetaryExplorer />);
+
+    // 1. Selector bar is mounted initially
+    const marsPill = screen.getByTestId('planet-pill-mars-english');
+    expect(marsPill).toBeInTheDocument();
+    expect(marsPill).toHaveAttribute('aria-pressed', 'false');
+
+    // Focus and click the Mars pill
+    marsPill.focus();
+    expect(document.activeElement).toBe(marsPill);
+    fireEvent.click(marsPill);
+
+    // Chooser remains mounted and focused
+    expect(marsPill).toBeInTheDocument();
+    expect(document.activeElement).toBe(marsPill);
+    expect(marsPill).toHaveAttribute('aria-pressed', 'true');
+    expect(marsPill).toHaveTextContent(/selected/i);
+
+    // Persistent polite status announcer announces planet selection
+    const status = screen.getByTestId('planetary-status-announcer');
+    expect(status).toBeInTheDocument();
+    expect(status).toHaveAttribute('role', 'status');
+    expect(status).toHaveAttribute('aria-live', 'polite');
+    expect(status).toHaveAttribute('aria-atomic', 'true');
+    expect(status).toHaveTextContent('Selected: Mars. Choose a region.');
+
+    // Planet selector bar remains present in cartography mode
+    expect(screen.getByTestId('planet-selector-bar')).toBeInTheDocument();
+
+    // 2. Choose a region from province sidebar (rendered after chooser in DOM)
+    const marsWorld = PLANET_WORLDS.find((p) => p.id === 'mars-english')!;
+    const targetFeat = marsWorld.features[1]; // Valles Marineris
+    const featBtn = screen.getByTestId(`feature-button-${targetFeat.id}`);
+    expect(featBtn).toBeInTheDocument();
+
+    featBtn.focus();
+    expect(document.activeElement).toBe(featBtn);
+    fireEvent.click(featBtn);
+
+    // Region button has aria-pressed and visible selected indicator, focus retained
+    expect(document.activeElement).toBe(featBtn);
+    expect(featBtn).toHaveAttribute('aria-pressed', 'true');
+    expect(featBtn).toHaveTextContent(/selected/i);
+
+    // Status announcer updates for region selection without shifting focus
+    expect(status).toHaveTextContent(`Selected: ${targetFeat.name}. Read the details, then start a mission.`);
+
+    // 3. Launch mission without canvas interaction
+    const launchBtn = screen.getByRole('button', { name: /start mission/i });
+    fireEvent.click(launchBtn);
+
+    expect(pushMock).toHaveBeenCalledTimes(1);
+    expect(pushMock).toHaveBeenCalledWith('/level/7-1-english-colorful-toys?origin=planets');
+  });
+
+  it('provides bilingual polite announcements and selected words in Bahasa Melayu (D-07, D-16)', () => {
+    intlState.locale = 'ms';
+    pushMock.mockClear();
+
+    render(<PlanetaryExplorer />);
+
+    const moonPill = screen.getByTestId('planet-pill-moon-bm');
+    moonPill.focus();
+    fireEvent.click(moonPill);
+
+    expect(moonPill).toHaveAttribute('aria-pressed', 'true');
+    expect(moonPill).toHaveTextContent(/dipilih/i);
+
+    const status = screen.getByTestId('planetary-status-announcer');
+    expect(status).toHaveTextContent('Dipilih: Bulan. Pilih kawasan.');
+
+    const moonWorld = PLANET_WORLDS.find((p) => p.id === 'moon-bm')!;
+    const firstFeat = moonWorld.features[0];
+    const featBtn = screen.getByTestId(`feature-button-${firstFeat.id}`);
+
+    featBtn.focus();
+    fireEvent.click(featBtn);
+
+    expect(featBtn).toHaveAttribute('aria-pressed', 'true');
+    expect(featBtn).toHaveTextContent(/dipilih/i);
+    expect(status).toHaveTextContent(new RegExp(`Dipilih: ${firstFeat.nameMs}\\. Baca butiran, kemudian mula misi\\.`, 'i'));
+
+    const launchBtn = screen.getByRole('button', { name: /mula misi/i });
+    fireEvent.click(launchBtn);
+
+    expect(pushMock).toHaveBeenCalledWith('/level/6-1-bm-kucing-peromfu?origin=planets');
+  });
 });
 
 describe('Standalone /planets Page Route (D-04, THREE-04)', () => {

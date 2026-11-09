@@ -118,7 +118,16 @@
       "next": "Seterusnya",
       "continue": "Teruskan",
       "stepOrdinal": "Langkah {current} daripada {total}",
-      "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan."
+      "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan.",
+      "sectionDot": "Pergi ke bahagian {number}",
+      "sectionDotLocked": "Pergi ke bahagian {number} (dikunci)"
+    },
+    "activity": {
+      "itemDestinationPrompt": "Pilih satu item, kemudian pilih tempatnya.",
+      "correctPlacement": "Betul! Item telah diletakkan.",
+      "wrongPlacement": "Belum tepat. Pilih tempat lain untuk item ini.",
+      "lessonLoadError": "Pelajaran ini tidak dapat dibuka. Kembali ke {hub} dan pilih sekali lagi.",
+      "selected": "Dipilih"
     },
     "map": {
       "title": "Peta Bumi",
@@ -394,6 +403,15 @@
       "backToOrbit": "Kembali ke Orbit",
       "launchMission": "Mula Misi",
       "lockedFeature": "Selesaikan tahap Tahun sebelumnya untuk buka",
+      "choosePlanet": "Pilih {name}",
+      "regionChooserHeading": "Pilih kawasan",
+      "planetSelectedStatus": "Dipilih: {name}. Pilih kawasan.",
+      "regionSelectedStatus": "Dipilih: {region}. Baca butiran, kemudian mula misi.",
+      "selectedMarker": "Dipilih",
+      "emptyRegionsHeading": "Belum ada kawasan di sini",
+      "emptyRegionsBody": "Pilih planet lain untuk melihat kawasannya.",
+      "webglUnavailable": "Paparan planet tidak tersedia. Gunakan butang planet dan kawasan untuk mula misi.",
+      "noMissionReason": "Belum ada misi untuk kawasan ini.",
       "telemetry": {
         "coordinates": "Koordinat",
         "elevation": "Ketinggian / Kedalaman",
