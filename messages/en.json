@@ -127,7 +127,9 @@
       "correctPlacement": "Correct! Item placed.",
       "wrongPlacement": "Not there yet. Choose another place for this item.",
       "lessonLoadError": "This lesson could not load. Return to {hub} and choose it again.",
-      "selected": "Selected"
+      "selected": "Selected",
+      "correct": "Correct",
+      "incorrect": "Incorrect"
     },
     "map": {
       "title": "Earth map",

@@ -127,7 +127,9 @@
       "correctPlacement": "Betul! Item telah diletakkan.",
       "wrongPlacement": "Belum tepat. Pilih tempat lain untuk item ini.",
       "lessonLoadError": "Pelajaran ini tidak dapat dibuka. Kembali ke {hub} dan pilih sekali lagi.",
-      "selected": "Dipilih"
+      "selected": "Dipilih",
+      "correct": "Betul",
+      "incorrect": "Salah"
     },
     "map": {
       "title": "Peta Bumi",

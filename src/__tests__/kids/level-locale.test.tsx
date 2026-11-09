@@ -1243,3 +1243,166 @@ describe("discoverable locked Next and accessible section dots (Plan 15-06 Task 
     expect(dot1).toHaveAttribute("aria-disabled", "true");
   });
 });
+
+/**
+ * Plan 15-07 Task 1:
+ * Retain keyboard focus across category choice and answer submission in PromptParts and ExampleMatcher.
+ * Ensure >=44x44 CSS px hitboxes, persistent nearby polite status and visible outcome words plus icon/border.
+ */
+describe("accessible choice and matcher answer interactions (Plan 15-07 Task 1)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("PromptParts retains native buttons, preserves keyboard focus, and announces polite status", async () => {
+    function ControlledPromptParts() {
+      return (
+        <Section>
+          <PromptParts
+            parts={[
+              { text: "You are a chef", type: "role" },
+              { text: "Make soup", type: "task" },
+            ]}
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledPromptParts);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const partButton = screen.getByRole("button", { name: /You are a chef/ });
+    expect(partButton.className).toContain("min-h-[44px]");
+    expect(partButton.className).toContain("min-w-[44px]");
+
+    // Focus and select the part button
+    partButton.focus();
+    expect(document.activeElement).toBe(partButton);
+    fireEvent.click(partButton);
+    expect(partButton).toHaveAttribute("aria-pressed", "true");
+
+    // Persistent status announces selection
+    const statusEl = screen.getByTestId("prompt-parts-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl).toHaveAttribute("aria-live", "polite");
+    expect(statusEl.textContent).toContain("selected");
+    expect(statusEl.textContent).toContain("You are a chef");
+
+    // Category buttons are always mounted with >=44px hitboxes
+    const roleCategoryButton = screen.getByRole("button", { name: /types\.role/ });
+    expect(roleCategoryButton.className).toContain("min-h-[44px]");
+    expect(roleCategoryButton.className).toContain("min-w-[44px]");
+
+    // Focus and click category button
+    roleCategoryButton.focus();
+    expect(document.activeElement).toBe(roleCategoryButton);
+    fireEvent.click(roleCategoryButton);
+
+    // Active element does not drop to document.body
+    expect(document.activeElement).not.toBe(document.body);
+
+    // Visible outcome word and icon appear on the assigned part
+    expect(partButton.textContent).toContain("✓");
+    expect(partButton.textContent).toContain("correct");
+    expect(partButton.className).toContain("border-green-600");
+  });
+
+  it("ExampleMatcher maintains focus across submit/retry and presents visible outcome words", async () => {
+    function ControlledMatcher() {
+      return (
+        <Section>
+          <ExampleMatcher
+            examples={[{ input: "cat", output: "meow" }]}
+            question="dog"
+            options={["meow", "bark"]}
+            correctAnswer="bark"
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledMatcher);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const wrongOption = screen.getByRole("button", { name: "meow" });
+    const correctOption = screen.getByRole("button", { name: "bark" });
+    const checkBtn = screen.getByRole("button", { name: "check" });
+
+    expect(wrongOption.className).toContain("min-h-[44px]");
+    expect(wrongOption.className).toContain("min-w-[44px]");
+    expect(checkBtn.className).toContain("min-h-[44px]");
+    expect(checkBtn.className).toContain("min-w-[44px]");
+
+    // Select the wrong option
+    wrongOption.focus();
+    fireEvent.click(wrongOption);
+    expect(wrongOption).toHaveAttribute("aria-pressed", "true");
+
+    const statusEl = screen.getByTestId("example-matcher-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl.textContent).toContain("meow");
+
+    // Submit wrong answer
+    checkBtn.focus();
+    fireEvent.click(checkBtn);
+
+    // Focus does not drop to body; retained on retry or option
+    expect(document.activeElement).not.toBe(document.body);
+
+    // Distinguishable outcome word and border on wrong option
+    expect(wrongOption.textContent).toContain("✗");
+    expect(wrongOption.textContent).toContain("incorrect");
+    expect(wrongOption.className).toContain("border-red-500");
+    expect(statusEl.textContent).toContain("tryAgain");
+
+    // Click retry to reset
+    const retryBtn = screen.getByRole("button", { name: "retry" });
+    expect(retryBtn.className).toContain("min-h-[44px]");
+    fireEvent.click(retryBtn);
+    expect(document.activeElement).not.toBe(document.body);
+
+    // Now select correct answer and submit
+    fireEvent.click(correctOption);
+    const recheckBtn = screen.getByRole("button", { name: "check" });
+    fireEvent.click(recheckBtn);
+
+    // Focus retained, outcome word visible, section complete
+    expect(document.activeElement).not.toBe(document.body);
+    expect(correctOption.textContent).toContain("✓");
+    expect(correctOption.textContent).toContain("correct");
+    expect(statusEl.textContent).toContain("correct");
+    expect(isSectionCompleted(SLUG, 0)).toBe(true);
+  });
+
+  it("BM and EN translation bundles define full Unicode strings for prompt-parts and example-matcher", async () => {
+    const en = await loadMessages("en");
+    const ms = await loadMessages("ms");
+
+    const enPP = (en.kids as { promptParts: Record<string, unknown> }).promptParts;
+    const msPP = (ms.kids as { promptParts: Record<string, unknown> }).promptParts;
+    expect(enPP.title).toBe("Sort the Prompt Parts!");
+    expect(msPP.title).toBe("Susun Bahagian Prompt!");
+    expect((enPP.types as Record<string, string>).role).toBe("Role");
+    expect((msPP.types as Record<string, string>).role).toBe("Peranan");
+
+    const enEM = (en.kids as { exampleMatcher: Record<string, string> }).exampleMatcher;
+    const msEM = (ms.kids as { exampleMatcher: Record<string, string> }).exampleMatcher;
+    expect(enEM.title).toBe("Pattern Matcher");
+    expect(msEM.title).toBe("Pencari Padanan");
+    expect(enEM.correct).toContain("You got it!");
+    expect(msEM.correct).toContain("Betul!");
+
+    const enAct = (en.kids as { activity: Record<string, string> }).activity;
+    const msAct = (ms.kids as { activity: Record<string, string> }).activity;
+    expect(enAct.selected).toBe("Selected");
+    expect(msAct.selected).toBe("Dipilih");
+    expect(enAct.correct).toBe("Correct");
+    expect(msAct.correct).toBe("Betul");
+    expect(enAct.incorrect).toBe("Incorrect");
+    expect(msAct.incorrect).toBe("Salah");
+  });
+});
