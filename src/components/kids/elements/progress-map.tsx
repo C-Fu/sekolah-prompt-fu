@@ -85,6 +85,7 @@ export function ProgressMap() {
           onClick={scrollLeft} 
           className="w-10 h-10 bg-[#FFD700] border-3 border-[#DAA520] flex items-center justify-center hover:bg-[#FFC000] transition-colors shadow-lg"
           style={{ clipPath: "polygon(0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px))" }}
+          aria-label="Scroll left"
         >
           <ChevronLeft className="h-5 w-5 text-[#8B4513]" />
         </button>
@@ -94,6 +95,7 @@ export function ProgressMap() {
           onClick={scrollRight} 
           className="w-10 h-10 bg-[#FFD700] border-3 border-[#DAA520] flex items-center justify-center hover:bg-[#FFC000] transition-colors shadow-lg"
           style={{ clipPath: "polygon(0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px))" }}
+          aria-label="Scroll right"
         >
           <ChevronRight className="h-5 w-5 text-[#8B4513]" />
         </button>
@@ -109,9 +111,7 @@ export function ProgressMap() {
           className="relative h-full min-h-[400px] min-w-full"
           style={{ width: `${mapWidth}px`, imageRendering: "pixelated" }}
         >
-          {/* Sky is handled by kids layout - no additional background needed */}
-          
-          {/* Pixel art ground layers - use full width (max of mapWidth or 100%) */}
+          {/* Pixel art ground layers - use full width */}
           <div className="absolute bottom-0 left-0 right-0 h-12 bg-[#8B5A2B]" style={{ minWidth: `${mapWidth}px` }} />
           <div className="absolute bottom-12 left-0 right-0 h-4 bg-[#228B22]" style={{ minWidth: `${mapWidth}px` }} />
           <div className="absolute bottom-16 left-0 right-0 h-2 bg-[#32CD32]" style={{ minWidth: `${mapWidth}px` }} />
@@ -121,10 +121,8 @@ export function ProgressMap() {
             className="absolute bottom-0 left-0 right-0 h-8 bg-[#4A4A4A]" 
             style={{ minWidth: `${mapWidth}px` }}
           >
-            {/* Road edges */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-[#6B6B6B]" />
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#3A3A3A]" />
-            {/* Dashed center line */}
             <div 
               className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 bg-repeat-x"
               style={{ 
@@ -135,37 +133,37 @@ export function ProgressMap() {
           </div>
           
           {/* Pixel art path connecting all levels */}
-          <svg 
-            className="absolute inset-0 w-full h-full pointer-events-none z-0" 
-            style={{ width: `${mapWidth}px`, imageRendering: "pixelated" }}
-            preserveAspectRatio="none"
-            shapeRendering="crispEdges"
-          >
-            {/* Path border for depth */}
-            <path
-              d={generatePixelPathD(levelPositions)}
-              fill="none"
-              stroke="#8B5A2B"
-              strokeWidth="12"
-              strokeLinecap="square"
-              strokeLinejoin="miter"
-            />
-            {/* Draw path between levels - pixel style */}
-            <path
-              d={generatePixelPathD(levelPositions)}
-              fill="none"
-              stroke="#D4A574"
-              strokeWidth="8"
-              strokeLinecap="square"
-              strokeLinejoin="miter"
-            />
-          </svg>
+          {earthLevels.length > 0 && (
+            <svg 
+              className="absolute inset-0 w-full h-full pointer-events-none z-0" 
+              style={{ width: `${mapWidth}px`, imageRendering: "pixelated" }}
+              preserveAspectRatio="none"
+              shapeRendering="crispEdges"
+            >
+              <path
+                d={generatePixelPathD(levelPositions)}
+                fill="none"
+                stroke="#8B5A2B"
+                strokeWidth="12"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+              />
+              <path
+                d={generatePixelPathD(levelPositions)}
+                fill="none"
+                stroke="#D4A574"
+                strokeWidth="8"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+              />
+            </svg>
+          )}
 
-          {/* Decorative elements - rendered after path so clouds appear on top */}
+          {/* Decorative elements - artwork stays visible independently of level data */}
           <MapDecorations mapWidth={mapWidth} />
 
           {/* World labels - pixel art style for Earth Worlds 1-5 */}
-          {earthWorlds.map((world) => {
+          {earthLevels.length > 0 && earthWorlds.map((world) => {
             const firstLevelIndex = earthLevels.findIndex(l => l.world === world.number);
             if (firstLevelIndex === -1) return null;
             const pos = levelPositions[firstLevelIndex];
@@ -188,16 +186,35 @@ export function ProgressMap() {
           })}
 
           {/* Level nodes for Earth Worlds 1-5 */}
-          {earthLevels.map((level, index) => (
-            <LevelNode
-              key={level.slug}
-              level={level}
-              position={levelPositions[index]}
-              progress={progress}
-              index={index}
-              t={t}
-            />
-          ))}
+          {earthLevels.length > 0 ? (
+            earthLevels.map((level, index) => (
+              <LevelNode
+                key={level.slug}
+                level={level}
+                position={levelPositions[index]}
+                progress={progress}
+                index={index}
+                t={t}
+              />
+            ))
+          ) : (
+            /* Empty state when zero levels are selectable, preserving map artwork and offering Planets */
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pixel-panel p-6 text-center max-w-md">
+              <h3 className="text-2xl font-bold text-[#2C1810] mb-2">
+                {t("map.emptyHeading")}
+              </h3>
+              <p className="text-base text-[#5D4037] mb-4">
+                {t("map.emptyBody")}
+              </p>
+              <Link
+                href="/planets"
+                className="pixel-btn pixel-btn-blue inline-flex items-center gap-2 px-4 py-2 text-sm"
+              >
+                <PixelRocket className="w-4 h-4" />
+                <span>{t("map.explorePlanetsAction")}</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
@@ -218,12 +235,12 @@ export function ProgressMap() {
             <div 
               className="h-full bg-[#22C55E] transition-all duration-500"
               style={{ 
-                width: `${(getCompletedCount(progress, earthLevels) / earthLevels.length) * 100}%`,
+                width: earthLevels.length > 0 ? `${(getCompletedCount(progress, earthLevels) / earthLevels.length) * 100}%` : "0%",
               }}
             />
             {/* Pixel segments overlay */}
             <div className="absolute inset-0 flex">
-              {Array.from({ length: earthLevels.length }).map((_, i) => (
+              {Array.from({ length: Math.max(earthLevels.length, 1) }).map((_, i) => (
                 <div 
                   key={i} 
                   className="flex-1 border-r border-[#2C1810] last:border-r-0"
@@ -247,21 +264,19 @@ function generatePixelPathD(positions: { x: number; y: number }[]): string {
     const prev = positions[i - 1];
     const curr = positions[i];
     const midX = (prev.x + curr.x) / 2;
-    // Create stair-step pattern for pixelated look
-    d += ` H ${midX}`; // Horizontal to midpoint
-    d += ` V ${curr.y}`; // Vertical to new Y
-    d += ` H ${curr.x}`; // Horizontal to destination
+    d += ` H ${midX}`;
+    d += ` V ${curr.y}`;
+    d += ` H ${curr.x}`;
   }
   
   return d;
 }
 
 function MapDecorations({ mapWidth }: { mapWidth: number }) {
-  const [planeY, setPlaneY] = useState(15); // percentage from top
+  const [planeY, setPlaneY] = useState(15);
   const [isDragging, setIsDragging] = useState(false);
   const planeRef = useRef<HTMLDivElement>(null);
   
-  // Handle plane dragging
   useEffect(() => {
     if (!isDragging) return;
     
@@ -270,7 +285,6 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
       if (!container) return;
       const rect = container.getBoundingClientRect();
       const y = ((clientY - rect.top) / rect.height) * 100;
-      // Constrain between 8% and 35% from top
       setPlaneY(Math.max(8, Math.min(35, y)));
     };
     
@@ -291,7 +305,6 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
     };
   }, [isDragging]);
   
-  // Generate decorations along the map - using seeded positions for consistency
   const decorations = [];
   const spacing = 100;
   
@@ -318,7 +331,6 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
     );
   }
 
-// Add lakes and ponds scattered on the ground
   const lakePositions = [
     { x: 210, type: 'lake' },
     { x: 1000, type: 'pond' },
@@ -341,7 +353,6 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
     }
   });
 
-  // Add castle at the end
   decorations.push(
     <div 
       key="castle"
@@ -352,44 +363,38 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
     </div>
   );
 
-  // Add cars on the road with hover traffic light
-  // Car 1 - going left (top lane)
   decorations.push(
     <div 
       key="car1"
       className="absolute z-[2] group"
       style={{ 
         bottom: "7px",
-        transform: "scaleX(-1)", // Flip to face left
+        transform: "scaleX(-1)",
         animation: `driveLeft ${Math.max(10, mapWidth / 200)}s linear infinite`,
         ["--map-width" as string]: `${mapWidth}px`,
       }}
       onMouseEnter={(e) => e.currentTarget.style.animationPlayState = "paused"}
       onMouseLeave={(e) => e.currentTarget.style.animationPlayState = "running"}
     >
-      {/* Traffic light - appears on hover, in front of car */}
       <div className="absolute -right-8 -bottom-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center" style={{ transform: "scaleX(-1)" }}>
-        {/* Light box */}
         <div className="w-4 h-10 bg-gray-700 flex flex-col items-center justify-center gap-0.5 p-1">
           <div className="w-2 h-2 bg-red-500 shadow-[0_0_6px_#ef4444]" />
           <div className="w-2 h-2 bg-yellow-800" />
           <div className="w-2 h-2 bg-green-800" />
         </div>
-        {/* Pole */}
         <div className="w-1.5 h-8 bg-gray-500" />
       </div>
       <PixelCar color="#E74C3C" />
     </div>
   );
   
-  // Van - going left (top lane, different timing)
   decorations.push(
     <div 
       key="van1"
       className="absolute z-[2] group"
       style={{ 
         bottom: "0px",
-        transform: "scaleX(-1)", // Flip to face left
+        transform: "scaleX(-1)",
         animation: `driveLeft ${Math.max(18, mapWidth / 70)}s linear infinite`,
         animationDelay: "-8s",
         ["--map-width" as string]: `${mapWidth}px`,
@@ -397,15 +402,12 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
       onMouseEnter={(e) => e.currentTarget.style.animationPlayState = "paused"}
       onMouseLeave={(e) => e.currentTarget.style.animationPlayState = "running"}
     >
-      {/* Traffic light - appears on hover, in front of van */}
       <div className="absolute -right-8 -bottom-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center" style={{ transform: "scaleX(-1)" }}>
-        {/* Light box */}
         <div className="w-4 h-10 bg-gray-700 flex flex-col items-center justify-center gap-0.5 p-1">
           <div className="w-2 h-2 bg-red-500 shadow-[0_0_6px_#ef4444]" />
           <div className="w-2 h-2 bg-yellow-800" />
           <div className="w-2 h-2 bg-green-800" />
         </div>
-        {/* Pole */}
         <div className="w-1.5 h-8 bg-gray-500" />
       </div>
       <div style={{ animation: "engineVibrate 0.1s steps(2) infinite" }}>
@@ -414,7 +416,6 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
     </div>
   );
   
-  // Car 2 - going right (bottom lane)
   decorations.push(
     <div 
       key="car2"
@@ -427,15 +428,12 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
       onMouseEnter={(e) => e.currentTarget.style.animationPlayState = "paused"}
       onMouseLeave={(e) => e.currentTarget.style.animationPlayState = "running"}
     >
-      {/* Traffic light - appears on hover, on right side of car (going right) */}
       <div className="absolute -right-8 bottom-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center">
-        {/* Light box */}
         <div className="w-4 h-10 bg-gray-700 flex flex-col items-center justify-center gap-0.5 p-1">
           <div className="w-2 h-2 bg-red-500 shadow-[0_0_6px_#ef4444]" />
           <div className="w-2 h-2 bg-yellow-800" />
           <div className="w-2 h-2 bg-green-800" />
         </div>
-        {/* Pole */}
         <div className="w-1.5 h-8 bg-gray-500" />
       </div>
       <div style={{ animation: "engineVibrate 0.1s steps(2) infinite" }}>
@@ -444,7 +442,6 @@ function MapDecorations({ mapWidth }: { mapWidth: number }) {
     </div>
   );
 
-  // Add flying plane with banner - flies across full map width, draggable up/down
   decorations.push(
     <div 
       key="plane"
@@ -504,13 +501,11 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
         animationDelay: `${index * 100}ms`,
       }}
     >
-      {/* Pixel art level node */}
       <PixelLevelNode 
         state={state}
         levelNumber={`${level.world}.${level.levelNumber}`}
       />
       
-      {/* Stars for completed levels */}
       {isCompleted && (
         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex gap-0">
           {[1, 2, 3].map((star) => (
@@ -519,7 +514,6 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
         </div>
       )}
       
-      {/* Level title label - pixel style */}
       <div 
         className="absolute top-full mt-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-2 text-base font-bold bg-amber-100 dark:bg-amber-900 border-2 border-amber-400"
         style={{ 

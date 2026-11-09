@@ -60,9 +60,11 @@
       "title": "Peromfu's Prompt School",
       "levels": "levels",
       "home": "Home",
-      "map": "Map",
+      "map": "Earth map",
       "planets": "Solar System",
-      "mainSite": "Main Site"
+      "mainSite": "Main Site",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     },
     "home": {
       "badge": "Learning for Kids",
@@ -112,13 +114,16 @@
       "completeFirst": "Complete the activity first to continue"
     },
     "map": {
-      "title": "World Map",
-      "subtitle": "Choose a level and start your adventure!",
+      "title": "Earth map",
+      "subtitle": "Choose a level on the map to start learning.",
       "worldLevels": "{count} levels",
       "levelNumber": "Level {number}",
       "locked": "Complete previous level to unlock",
       "toPlanetsBanner": "Fly to Solar System",
-      "toPlanetsSub": "Explore 3D planets & subject adventures!"
+      "toPlanetsSub": "Explore 3D planets & subject adventures!",
+      "emptyHeading": "No levels here yet",
+      "emptyBody": "No levels are available yet. Explore the planets instead.",
+      "explorePlanetsAction": "Explore planets"
     },
     "worlds": {
       "1": {

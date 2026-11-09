@@ -80,50 +80,46 @@ export function KidsHeader() {
             <LanguageToggle />
           </div>
 
-          {/* Nav buttons - desktop */}
+          {/* Nav buttons - desktop: visible BM/EN text alongside familiar icons (D-06, no duplicate Home) */}
           <div className="hidden sm:flex items-center gap-2">
             <MusicButton />
             <SettingsButton />
             <Link 
               href="/" 
-              className="pixel-btn px-3 py-1.5 text-sm h-8 flex items-center"
+              className="pixel-btn px-3 py-1.5 text-sm h-8 flex items-center gap-1.5"
             >
               <PixelHomeIcon />
+              <span>{t("header.home")}</span>
             </Link>
             <Link 
               href="/map" 
-              className="pixel-btn pixel-btn-green px-3 py-1.5 text-sm h-8 flex items-center"
+              className="pixel-btn pixel-btn-green px-3 py-1.5 text-sm h-8 flex items-center gap-1.5"
             >
               <PixelMapIcon />
+              <span>{t("header.map")}</span>
             </Link>
             <Link 
               href="/planets" 
-              className="pixel-btn pixel-btn-blue px-3 py-1.5 text-sm h-8 flex items-center gap-1"
+              className="pixel-btn pixel-btn-blue px-3 py-1.5 text-sm h-8 flex items-center gap-1.5"
               title={t("header.planets")}
               aria-label={t("header.planets")}
             >
               <PixelRocket className="w-4 h-4" />
-            </Link>
-            {/* Back to main site */}
-            <Link 
-              href="/" 
-              className="hidden md:flex pixel-btn pixel-btn-amber px-3 py-1.5 text-sm h-8 items-center"
-            >
-              {t("header.mainSite")}
+              <span>{t("header.planets")}</span>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button with localized accessible name */}
           <div className="sm:hidden relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="pixel-btn px-3 py-1.5 h-8 flex items-center"
-              aria-label="Menu"
+              aria-label={menuOpen ? t("header.closeMenu") : t("header.openMenu")}
             >
               <PixelMenuIcon />
             </button>
 
-            {/* Mobile dropdown menu */}
+            {/* Mobile dropdown menu: visible labels and no duplicate Home link */}
             {menuOpen && (
               <div className="absolute right-0 top-full mt-2 w-48 bg-[#2C1810] border-4 border-[#8B4513] rounded-lg shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="p-2 flex flex-col gap-2">
@@ -144,7 +140,7 @@ export function KidsHeader() {
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelHomeIcon />
-                    {t("header.home")}
+                    <span>{t("header.home")}</span>
                   </Link>
                   <Link 
                     href="/map" 
@@ -152,7 +148,7 @@ export function KidsHeader() {
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelMapIcon />
-                    {t("level.map")}
+                    <span>{t("header.map")}</span>
                   </Link>
                   <Link 
                     href="/planets" 
@@ -160,14 +156,7 @@ export function KidsHeader() {
                     onClick={() => setMenuOpen(false)}
                   >
                     <PixelRocket className="w-4 h-4" />
-                    {t("header.planets")}
-                  </Link>
-                  <Link 
-                    href="/" 
-                    className="pixel-btn pixel-btn-amber px-3 py-2 text-sm flex items-center justify-center"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("header.mainSite")}
+                    <span>{t("header.planets")}</span>
                   </Link>
                 </div>
               </div>
@@ -182,7 +171,7 @@ export function KidsHeader() {
 // Pixel art home icon
 function PixelHomeIcon() {
   return (
-    <svg viewBox="0 0 16 16" className="w-5 h-5" style={{ imageRendering: "pixelated" }}>
+    <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0" style={{ imageRendering: "pixelated" }}>
       <rect x="7" y="1" width="2" height="2" fill="currentColor" />
       <rect x="5" y="3" width="6" height="2" fill="currentColor" />
       <rect x="3" y="5" width="10" height="2" fill="currentColor" />
@@ -196,7 +185,7 @@ function PixelHomeIcon() {
 // Pixel art pin/location icon
 function PixelMapIcon() {
   return (
-    <svg viewBox="0 0 16 16" className="w-5 h-5" style={{ imageRendering: "pixelated" }}>
+    <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0" style={{ imageRendering: "pixelated" }}>
       {/* Pin head - circle */}
       <rect x="5" y="1" width="6" height="2" fill="currentColor" />
       <rect x="4" y="2" width="8" height="2" fill="currentColor" />

@@ -60,9 +60,11 @@
       "title": "Sekolah Prompt Peromfu",
       "levels": "tahap",
       "home": "Utama",
-      "map": "Peta",
+      "map": "Peta Bumi",
       "planets": "Sistem Suria",
-      "mainSite": "Laman Utama"
+      "mainSite": "Laman Utama",
+      "openMenu": "Buka menu",
+      "closeMenu": "Tutup menu"
     },
     "home": {
       "badge": "Pembelajaran untuk Kanak-kanak",
@@ -112,13 +114,16 @@
       "completeFirst": "Siapkan aktiviti ini dahulu untuk teruskan"
     },
     "map": {
-      "title": "Peta Dunia",
-      "subtitle": "Pilih satu tahap dan mulakan pengembaraan anda!",
+      "title": "Peta Bumi",
+      "subtitle": "Pilih satu tahap pada peta untuk mula belajar.",
       "worldLevels": "{count} tahap",
       "levelNumber": "Tahap {number}",
       "locked": "Siapkan tahap sebelumnya untuk membuka kunci",
       "toPlanetsBanner": "Terbang ke Sistem Suria",
-      "toPlanetsSub": "Terokai planet 3D & pengembaraan subjek!"
+      "toPlanetsSub": "Terokai planet 3D & pengembaraan subjek!",
+      "emptyHeading": "Belum ada tahap di sini",
+      "emptyBody": "Belum ada tahap lagi. Terokai planet sebagai pilihan lain.",
+      "explorePlanetsAction": "Terokai planet"
     },
     "worlds": {
       "1": {
