@@ -644,8 +644,9 @@ describe("interactive consumers bind to their containing Section (01-16 task 1)"
     });
     await advance(1);
 
-    // Place the word then check.
+    // Place the word into the blank then check.
     fireEvent.click(screen.getByRole("button", { name: /cats/ }));
+    fireEvent.click(screen.getByRole("button", { name: /animal/ }));
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "check" })).toBeEnabled();
     });

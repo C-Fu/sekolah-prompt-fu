@@ -22,10 +22,16 @@ interface MagicWordsProps {
   successMessage?: string;
 }
 
+interface AvailableWord {
+  word: string;
+  blankId: string;
+}
+
 interface SavedState {
   placements: Record<string, string>;
   submitted: boolean;
-  availableWords: { word: string; blankId: string }[];
+  availableWords: AvailableWord[];
+  placedIndices?: Record<string, number>;
 }
 
 export function MagicWords({
@@ -35,6 +41,7 @@ export function MagicWords({
   successMessage,
 }: MagicWordsProps) {
   const t = useTranslations("kids.magicWords");
+  const tActivity = useTranslations("kids.activity");
   const levelSlug = useLevelSlug();
   const scope = useSectionIdentity();
   const componentId = useId();
@@ -48,10 +55,13 @@ export function MagicWords({
   }, [scope]);
   
   const [placements, setPlacements] = useState<Record<string, string>>({});
+  const [placedIndices, setPlacedIndices] = useState<Record<string, number>>({});
+  const [selectedWordIndex, setSelectedWordIndex] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [draggedWord, setDraggedWord] = useState<string | null>(null);
-  const [availableWords, setAvailableWords] = useState<{ word: string; blankId: string }[]>([]);
+  const [draggedWordIndex, setDraggedWordIndex] = useState<number | null>(null);
+  const [availableWords, setAvailableWords] = useState<AvailableWord[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   // Generate IDs for blanks if not provided
   const blanksWithIds = blanks.map((blank, index) => ({
@@ -74,6 +84,7 @@ export function MagicWords({
 
     if (!levelSlug) {
       setPlacements({});
+      setPlacedIndices({});
       setAvailableWords(shuffleWords());
       setIsLoaded(true);
       return;
@@ -84,8 +95,27 @@ export function MagicWords({
       setPlacements(saved.placements);
       setSubmitted(saved.submitted || false);
       setAvailableWords(saved.availableWords);
+
+      // Reconstruct placedIndices from saved placements and availableWords
+      if (saved.placedIndices && Object.keys(saved.placedIndices).length > 0) {
+        setPlacedIndices(saved.placedIndices);
+      } else {
+        const restoredIndices: Record<string, number> = {};
+        const usedIndices = new Set<number>();
+        for (const [blankId, word] of Object.entries(saved.placements)) {
+          const matchIdx = saved.availableWords.findIndex(
+            (item, idx) => !usedIndices.has(idx) && item.word.toLowerCase() === word.toLowerCase()
+          );
+          if (matchIdx !== -1) {
+            restoredIndices[blankId] = matchIdx;
+            usedIndices.add(matchIdx);
+          }
+        }
+        setPlacedIndices(restoredIndices);
+      }
     } else {
       setPlacements({});
+      setPlacedIndices({});
       setAvailableWords(shuffleWords());
     }
     setIsLoaded(true);
@@ -100,8 +130,9 @@ export function MagicWords({
       placements,
       submitted,
       availableWords,
+      placedIndices,
     });
-  }, [levelSlug, componentId, placements, submitted, availableWords, isLoaded]);
+  }, [levelSlug, componentId, placements, submitted, availableWords, placedIndices, isLoaded]);
 
   const checkAnswer = useCallback((blankId: string, value: string): boolean => {
     const blank = blanksWithIds.find((b) => b.id === blankId);
@@ -115,82 +146,156 @@ export function MagicWords({
   const allCorrect = submitted && blanksWithIds.every((blank) => checkAnswer(blank.id, placements[blank.id] || ""));
   const score = blanksWithIds.filter((blank) => checkAnswer(blank.id, placements[blank.id] || "")).length;
 
-  const usedWords = Object.values(placements);
+  const isWordUsed = (index: number) => {
+    return Object.values(placedIndices).includes(index);
+  };
 
-  const handleDragStart = (word: string) => {
-    setDraggedWord(word);
+  const handleWordClick = (index: number) => {
+    if (submitted || isWordUsed(index)) return;
+
+    if (selectedWordIndex === index) {
+      setSelectedWordIndex(null);
+      setStatusMessage(tActivity("itemDestinationPrompt"));
+    } else {
+      setSelectedWordIndex(index);
+      setStatusMessage(`${tActivity("selected")}: ${availableWords[index].word}`);
+    }
+  };
+
+  const handleBlankClick = (blankId: string) => {
+    if (submitted) return;
+
+    const targetBlank = blanksWithIds.find((b) => b.id === blankId);
+    if (!targetBlank) return;
+
+    // Case 1: A word is selected
+    if (selectedWordIndex !== null) {
+      const selectedItem = availableWords[selectedWordIndex];
+      if (!selectedItem) return;
+
+      const isValid = targetBlank.answers.some(
+        (answer) => answer.toLowerCase() === selectedItem.word.toLowerCase()
+      );
+
+      if (isValid) {
+        // Correct placement
+        const newPlacedIndices = { ...placedIndices };
+        const prevIndex = placedIndices[blankId];
+        if (prevIndex !== undefined) {
+          delete newPlacedIndices[blankId];
+        }
+        newPlacedIndices[blankId] = selectedWordIndex;
+        setPlacedIndices(newPlacedIndices);
+
+        const newPlacements = { ...placements, [blankId]: selectedItem.word };
+        setPlacements(newPlacements);
+
+        setSelectedWordIndex(null);
+        setStatusMessage(tActivity("correctPlacement"));
+      } else {
+        // Wrong placement - retain selected item, keep earlier placements intact
+        setStatusMessage(tActivity("wrongPlacement"));
+      }
+      return;
+    }
+
+    // Case 2: No word is selected, but blank already has a placed word
+    if (placements[blankId]) {
+      const newPlacements = { ...placements };
+      delete newPlacements[blankId];
+      setPlacements(newPlacements);
+
+      const newPlacedIndices = { ...placedIndices };
+      delete newPlacedIndices[blankId];
+      setPlacedIndices(newPlacedIndices);
+
+      setStatusMessage(tActivity("itemDestinationPrompt"));
+    }
+  };
+
+  const handleDragStart = (index: number) => {
+    if (submitted || isWordUsed(index)) return;
+    setDraggedWordIndex(index);
   };
 
   const handleDragEnd = () => {
-    setDraggedWord(null);
+    setDraggedWordIndex(null);
   };
 
   const handleDrop = (blankId: string) => {
-    if (draggedWord && !submitted) {
-      // Remove word from previous placement if it was placed somewhere
-      const newPlacements = { ...placements };
-      Object.keys(newPlacements).forEach((key) => {
-        if (newPlacements[key] === draggedWord) {
-          delete newPlacements[key];
-        }
-      });
-      newPlacements[blankId] = draggedWord;
-      setPlacements(newPlacements);
-      setDraggedWord(null);
-    }
-  };
+    if (submitted || draggedWordIndex === null) return;
 
-  const handleClickWord = (word: string) => {
-    if (submitted) return;
-    
-    // Find first empty blank
-    const emptyBlank = blanksWithIds.find((blank) => !placements[blank.id]);
-    if (emptyBlank) {
-      // Remove word from previous placement
-      const newPlacements = { ...placements };
-      Object.keys(newPlacements).forEach((key) => {
-        if (newPlacements[key] === word) {
-          delete newPlacements[key];
-        }
-      });
-      newPlacements[emptyBlank.id] = word;
-      setPlacements(newPlacements);
-    }
-  };
+    const targetBlank = blanksWithIds.find((b) => b.id === blankId);
+    if (!targetBlank) return;
 
-  const handleClickBlank = (blankId: string) => {
-    if (submitted) return;
-    // Remove word from this blank
-    const newPlacements = { ...placements };
-    delete newPlacements[blankId];
-    setPlacements(newPlacements);
+    const draggedItem = availableWords[draggedWordIndex];
+    if (!draggedItem) return;
+
+    const isValid = targetBlank.answers.some(
+      (answer) => answer.toLowerCase() === draggedItem.word.toLowerCase()
+    );
+
+    if (isValid) {
+      const newPlacedIndices = { ...placedIndices };
+      const prevIndex = placedIndices[blankId];
+      if (prevIndex !== undefined) {
+        delete newPlacedIndices[blankId];
+      }
+      newPlacedIndices[blankId] = draggedWordIndex;
+      setPlacedIndices(newPlacedIndices);
+
+      const newPlacements = { ...placements, [blankId]: draggedItem.word };
+      setPlacements(newPlacements);
+
+      setSelectedWordIndex(null);
+      setStatusMessage(tActivity("correctPlacement"));
+    } else {
+      setStatusMessage(tActivity("wrongPlacement"));
+    }
+
+    setDraggedWordIndex(null);
   };
 
   const handleSubmit = () => {
     setSubmitted(true);
-    // Check if all blanks are filled correctly; bind completion to the containing
-    // Section's resolved index (both persisted and in-memory), never the cursor.
-    const allFilled = blanksWithIds.every(blank => placements[blank.id]);
-    if (allFilled && levelSlug && scope) {
+    // Guard exact correctness: require all blanks to be correct before completing section
+    const areAllBlanksCorrect = blanksWithIds.every((blank) =>
+      checkAnswer(blank.id, placements[blank.id] || "")
+    );
+    if (areAllBlanksCorrect && levelSlug && scope) {
       const index = scope.getIndex();
-      if (index !== null) markSectionCompleted(levelSlug, index);
-      scope.markComplete();
+      if (index !== null) {
+        markSectionCompleted(levelSlug, index);
+        scope.markComplete();
+      }
     }
   };
 
   const handleReset = () => {
     setPlacements({});
+    setPlacedIndices({});
+    setSelectedWordIndex(null);
     setSubmitted(false);
+    setStatusMessage(tActivity("itemDestinationPrompt"));
   };
 
-  // Parse sentence and render with drop zones
+  const currentStatusText = () => {
+    if (submitted) {
+      if (allCorrect) {
+        return `🎉 ${successMessage || tActivity("correctPlacement")}`;
+      } else {
+        return `${score} / ${blanksWithIds.length} ${t("correct")}! ${t("tryAgain")}`;
+      }
+    }
+    return statusMessage || tActivity("itemDestinationPrompt");
+  };
+
+  // Parse sentence and render with native button drop zones
   const renderSentence = () => {
-    // Split by underscore placeholders OR {{placeholder}} syntax
     const parts = sentence.split(/(_+|\{\{[^}]+\}\})/g);
     let blankIndex = 0;
 
     return parts.map((part, index) => {
-      // Check if this is a blank placeholder (underscores or {{...}})
       if (/^_+$/.test(part) || /^\{\{[^}]+\}\}$/.test(part)) {
         const blank = blanksWithIds[blankIndex];
         if (!blank) return <span key={index}>{part}</span>;
@@ -204,22 +309,24 @@ export function MagicWords({
 
         return (
           <span key={index} className="inline-flex items-center gap-1 mx-1 my-1">
-            <span
-              onClick={() => placedWord && handleClickBlank(blankId)}
+            <button
+              type="button"
+              onClick={() => handleBlankClick(blankId)}
               onDragOver={(e) => e.preventDefault()}
               onDrop={() => handleDrop(blankId)}
+              aria-label={placedWord ? `${blank.hint}: ${placedWord}` : blank.hint}
               className={cn(
-                "px-3 py-2 border-2 border-dashed rounded-lg min-w-[100px] text-xl text-center font-medium transition-all cursor-pointer text-[#2C1810]",
-                !placedWord && "bg-white border-purple-400",
-                placedWord && !submitted && "bg-purple-100 border-purple-500 border-solid",
+                "px-3 py-2 border-2 rounded-lg min-w-[100px] min-h-[44px] text-xl text-center font-medium transition-all text-[#2C1810]",
+                !placedWord && "bg-white border-purple-400 border-dashed hover:border-purple-600 cursor-pointer",
+                placedWord && !submitted && "bg-purple-100 border-purple-500 border-solid cursor-pointer",
                 isCorrect && "border-green-500 border-solid bg-green-50",
                 isWrong && "border-red-400 border-solid bg-red-50",
-                draggedWord && !placedWord && "border-purple-500 bg-purple-50 scale-105"
+                selectedWordIndex !== null && !placedWord && "border-purple-600 ring-2 ring-purple-300"
               )}
               title={blank.hint}
             >
               {placedWord || blank.hint}
-            </span>
+            </button>
             {submitted && isCorrect && <Check className="h-6 w-6 text-green-500" />}
           </span>
         );
@@ -250,35 +357,54 @@ export function MagicWords({
             {t("dragOrTap")}
           </p>
           <div className="flex flex-wrap gap-2">
-            {availableWords.map(({ word }, index) => {
-              const isUsed = usedWords.includes(word);
+            {availableWords.map(({ word, blankId: origBlankId }, index) => {
+              const isUsed = isWordUsed(index);
+              const isSelected = selectedWordIndex === index;
               return (
                 <button
-                  key={`${word}-${index}`}
+                  key={`${origBlankId}-${index}`}
+                  type="button"
                   draggable={!submitted && !isUsed}
-                  onDragStart={() => handleDragStart(word)}
+                  onDragStart={() => handleDragStart(index)}
                   onDragEnd={handleDragEnd}
-                  onTouchStart={() => !isUsed && !submitted && handleDragStart(word)}
-                  onTouchEnd={() => handleDragEnd()}
-                  onClick={() => !isUsed && handleClickWord(word)}
+                  onClick={() => handleWordClick(index)}
                   disabled={submitted || isUsed}
+                  aria-pressed={isSelected}
+                  aria-disabled={submitted || isUsed}
                   className={cn(
-                    "flex items-center gap-2 px-4 py-3 border-2 text-xl font-medium transition-all text-[#2C1810]",
-                    !isUsed && !submitted && "bg-white border-purple-300 hover:border-purple-500 hover:shadow-md cursor-grab active:cursor-grabbing",
+                    "flex items-center gap-2 px-4 py-3 border-2 min-h-[44px] text-xl font-medium transition-all text-[#2C1810]",
+                    !isUsed && !submitted && !isSelected && "bg-white border-purple-300 hover:border-purple-500 hover:shadow-md cursor-pointer",
+                    isSelected && "bg-purple-100 border-purple-600 ring-2 ring-purple-500 font-bold shadow-sm",
                     isUsed && "bg-gray-100 border-gray-300 text-gray-400 opacity-50 cursor-not-allowed",
                     submitted && "cursor-default"
                   )}
                   style={{ clipPath: "polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)" }}
                 >
-                  {!submitted && !isUsed && <GripVertical className="h-5 w-5 text-purple-400" />}
-                  {word}
+                  {!submitted && !isUsed && <GripVertical className="h-5 w-5 text-purple-400 shrink-0" />}
+                  <span>{word}</span>
+                  {isSelected && (
+                    <span className="text-xs bg-purple-600 text-white font-bold px-1.5 py-0.5 rounded ml-1">
+                      ✓ {tActivity("selected")}
+                    </span>
+                  )}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Result */}
+        {/* Accessible live status */}
+        <div
+          data-testid="magic-words-status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className="text-lg font-medium px-4 py-2 bg-purple-50/80 border border-purple-200 rounded-md text-[#2C1810]"
+        >
+          {currentStatusText()}
+        </div>
+
+        {/* Result banner if submitted */}
         {submitted && (
           <div
             className={cn(
