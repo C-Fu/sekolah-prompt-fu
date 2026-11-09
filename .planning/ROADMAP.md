@@ -27,7 +27,17 @@ v1.3 refines the existing title → map/planet hub → lesson → completion jou
   1. On the title, map/planet hub, and lesson screens, the primary next action is identifiable from a concise text label and is not indicated by an unlabeled icon alone.
   2. Changed navigation labels and instructions are concise, concrete, and available in both Bahasa Melayu and English, with no silent fallback when changing locale.
   3. Children can identify their current location and return to the appropriate previous hub from core screens without losing locally saved progress.
-**Plans**: TBD
+**Plans**: 9 plans
+Plans:
+- [ ] 14-01-PLAN.md — Deliver the two-step title welcome and equal destination choices
+- [ ] 14-02-PLAN.md — Add visible shared and hub navigation labels
+- [ ] 14-03-PLAN.md — Add independent localized map and planetary tips
+- [ ] 14-04-PLAN.md — Define and propagate allowlisted lesson origins
+- [ ] 14-05-PLAN.md — Route lesson return, recovery, and completion to the originating hub
+- [ ] 14-06-PLAN.md — Show localized lesson section context and locked-next guidance
+- [ ] 14-07-PLAN.md — Create bounded offline typography comparison artifacts
+- [ ] 14-08-PLAN.md — Complete bilingual section-title source for the remaining lessons
+- [ ] 14-09-PLAN.md — Wire lesson section titles, ordinals, and visible lock guidance
 **UI hint**: yes
 
 ### Phase 15: Mobile-First Responsive Accessibility
@@ -71,7 +81,7 @@ Phases execute in numeric order: 14 → 15 → 16 → 17.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 14. Journey Clarity & Shared Interaction Language | 0/TBD | Not started | - |
+| 14. Journey Clarity & Shared Interaction Language | 0/9 | Not started | - |
 | 15. Mobile-First Responsive Accessibility | 0/TBD | Not started | - |
 | 16. Proportional, Reduced-Motion-Safe Game Feel | 0/TBD | Not started | - |
 | 17. Visual Audit & Release Certification | 0/TBD | Not started | - |
