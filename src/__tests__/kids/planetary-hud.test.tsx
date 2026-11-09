@@ -221,4 +221,84 @@ describe('PlanetaryHud Component (THREE-03)', () => {
     // Malay Start Mission button
     expect(screen.getByRole('button', { name: /mula misi/i })).toBeInTheDocument();
   });
+
+  it('renders localized empty-state guidance when planet has zero regions (E3 empty)', () => {
+    const emptyPlanet: Planet = {
+      ...planet,
+      features: [],
+    };
+    const handleBack = vi.fn();
+    const handleSelect = vi.fn();
+    const handleLaunch = vi.fn();
+
+    const { rerender } = render(
+      <PlanetaryHud
+        planet={emptyPlanet}
+        activeFeature={undefined}
+        onSelectFeature={handleSelect}
+        onBackToOrbit={handleBack}
+        onLaunchMission={handleLaunch}
+      />
+    );
+
+    expect(screen.getByTestId('empty-regions-notice')).toHaveTextContent('No regions here yet');
+    expect(screen.getByTestId('empty-regions-notice')).toHaveTextContent('Choose another planet to see its regions.');
+    expect(screen.getByTestId('empty-feature-card')).toHaveTextContent('No regions here yet');
+
+    // In Malay
+    intlState.locale = 'ms';
+    rerender(
+      <PlanetaryHud
+        planet={emptyPlanet}
+        activeFeature={undefined}
+        onSelectFeature={handleSelect}
+        onBackToOrbit={handleBack}
+        onLaunchMission={handleLaunch}
+      />
+    );
+
+    expect(screen.getByTestId('empty-regions-notice')).toHaveTextContent('Belum ada kawasan di sini');
+    expect(screen.getByTestId('empty-regions-notice')).toHaveTextContent('Pilih planet lain untuk melihat kawasannya.');
+  });
+
+  it('renders localized no-mission reason and prevents mission activation when feature has no mission (E3 partial)', () => {
+    const partialFeature: PlanetFeature = {
+      ...activeFeature,
+      hasMission: false,
+    };
+    const handleBack = vi.fn();
+    const handleSelect = vi.fn();
+    const handleLaunch = vi.fn();
+
+    const { rerender } = render(
+      <PlanetaryHud
+        planet={planet}
+        activeFeature={partialFeature}
+        onSelectFeature={handleSelect}
+        onBackToOrbit={handleBack}
+        onLaunchMission={handleLaunch}
+      />
+    );
+
+    // Launch button is absent, explanatory reason is displayed
+    expect(screen.queryByRole('button', { name: /start mission/i })).not.toBeInTheDocument();
+    const reasonNotice = screen.getByTestId('no-mission-reason');
+    expect(reasonNotice).toHaveTextContent('No mission available for this region yet.');
+    expect(handleLaunch).not.toHaveBeenCalled();
+
+    // In Malay
+    intlState.locale = 'ms';
+    rerender(
+      <PlanetaryHud
+        planet={planet}
+        activeFeature={partialFeature}
+        onSelectFeature={handleSelect}
+        onBackToOrbit={handleBack}
+        onLaunchMission={handleLaunch}
+      />
+    );
+
+    expect(screen.queryByRole('button', { name: /mula misi/i })).not.toBeInTheDocument();
+    expect(screen.getByTestId('no-mission-reason')).toHaveTextContent('Belum ada misi untuk kawasan ini.');
+  });
 });

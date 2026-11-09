@@ -46,6 +46,9 @@ export interface PlanetFeature {
   geologicalProfile: string; // English authentic planetary geological summary
   geologicalProfileMs: string; // Malay authentic planetary geological summary
 
+  // Mission availability (E3 partial)
+  hasMission?: boolean; // false indicates no mission available for this feature
+
   // Visual Theme
   accentColor?: string; // Feature-specific neon hotspot glow
 }

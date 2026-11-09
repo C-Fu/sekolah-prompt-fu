@@ -104,7 +104,7 @@ export function PlanetaryExplorer({
   const activePlanet: Planet =
     (activePlanetId ? getPlanetWorld(activePlanetId) : undefined) || PLANET_WORLDS[0];
 
-  const activeFeature: PlanetFeature =
+  const activeFeature: PlanetFeature | undefined =
     activePlanet.features[activeFeatureIndex] || activePlanet.features[0];
 
   // Transition from Solar System into Planet Cartography
@@ -144,6 +144,7 @@ export function PlanetaryExplorer({
   // Launch mission callback bridge
   const handleLaunchMission = useCallback(
     (feature: PlanetFeature) => {
+      if (feature.hasMission === false) return;
       if (onLaunchMission) {
         onLaunchMission(activePlanet, feature);
       } else {
