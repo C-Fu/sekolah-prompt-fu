@@ -44,6 +44,8 @@ import {
   PromptParts,
   PromptLab,
   PromptDoctor,
+  PromptVsMistake,
+  StepByStep,
   WordPredictor,
 } from "@/components/kids/elements";
 import { LevelContentWrapper } from "@/components/kids/layout/level-content-wrapper";
@@ -1561,4 +1563,220 @@ describe("accessible predictor answer control and retry interaction (Plan 15-07 
     expect(msWP.retry).toBe("Cuba Lagi");
   });
 });
+
+/**
+ * Plan 15-08 Task 1:
+ * Make comparison and correction interactions keyboard/focus safe.
+ * Inspect choice/answer flows in PromptVsMistake and PromptDoctor; replace pointer-only state
+ * changes with semantic button operation, retain existing educational checks and saved completion
+ * identity, make primary hitboxes >=44x44 CSS px, and show visible+polite text status with
+ * shape/border change instead of hue-only meaning.
+ */
+describe("accessible comparison and correction answer interactions (Plan 15-08 Task 1)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("PromptVsMistake options have >=44x44 hitboxes, preserve focus, and update polite status", async () => {
+    function ControlledComparison() {
+      return (
+        <Section>
+          <PromptVsMistake
+            question="Which prompt is clearer?"
+            good="Draw a cute green cartoon frog sitting on a lily pad"
+            bad="frog"
+            explanation="Being specific helps AI understand what you want!"
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledComparison);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const goodOption = screen.getByRole("button", { name: /Draw a cute green cartoon frog/ });
+    const badOption = screen.getByRole("button", {
+      name: (content, element) =>
+        element?.tagName.toLowerCase() === "button" &&
+        Boolean(element?.textContent?.includes("“frog”")) &&
+        !element?.textContent?.includes("cartoon"),
+    });
+
+    // Target sizes >=44x44 CSS px
+    expect(goodOption.className).toContain("min-h-[44px]");
+    expect(goodOption.className).toContain("min-w-[44px]");
+    expect(badOption.className).toContain("min-h-[44px]");
+    expect(badOption.className).toContain("min-w-[44px]");
+
+    // Status announcer is present
+    const statusEl = screen.getByTestId("prompt-vs-mistake-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl).toHaveAttribute("aria-live", "polite");
+    expect(statusEl.textContent).toContain("Which prompt is clearer?");
+
+    // Keyboard path 1: focus bad option and select
+    badOption.focus();
+    expect(document.activeElement).toBe(badOption);
+    fireEvent.click(badOption);
+
+    // Section is NOT completed on wrong answer
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Focus is preserved, not dropped to document.body
+    expect(document.activeElement).not.toBe(document.body);
+
+    // Visible outcome word, icon, and border style on bad option
+    expect(badOption.textContent).toContain("✗");
+    expect(badOption.textContent).toContain("incorrect");
+    expect(badOption.className).toContain("border-red-500");
+    expect(badOption.className).toContain("border-dashed");
+    expect(statusEl.textContent).toContain("incorrect");
+
+    // Try Again button appears with >=44x44 hitbox
+    const retryBtn = screen.getByRole("button", { name: /tryAgain/ });
+    expect(retryBtn.className).toContain("min-h-[44px]");
+    expect(retryBtn.className).toContain("min-w-[44px]");
+
+    // Click retry to reset
+    retryBtn.focus();
+    fireEvent.click(retryBtn);
+
+    // Keyboard path 2: focus good option and select
+    goodOption.focus();
+    expect(document.activeElement).toBe(goodOption);
+    fireEvent.click(goodOption);
+
+    // Focus retained, visible outcome word and icon on good option
+    expect(document.activeElement).not.toBe(document.body);
+    expect(goodOption.textContent).toContain("✓");
+    expect(goodOption.textContent).toContain("correct");
+    expect(goodOption.className).toContain("border-green-600");
+    expect(goodOption.className).toContain("border-solid");
+    expect(statusEl.textContent).toContain("correct");
+
+    // Section completed on correct answer
+    expect(isSectionCompleted(SLUG, 0)).toBe(true);
+  });
+
+  it("PromptDoctor problem buttons maintain focus, update status, and complete section only when all fixed", async () => {
+    function ControlledDoctor() {
+      return (
+        <Section>
+          <PromptDoctor
+            brokenPrompt="robot"
+            problems={[
+              { issue: "Missing role", symptom: "No identity", fix: "friendly chef robot" },
+              { issue: "Missing action", symptom: "No task", fix: "baking chocolate chip cookies" },
+            ]}
+            healedPrompt="friendly chef robot baking chocolate chip cookies"
+            successMessage="Great job doctor!"
+          />
+        </Section>
+      );
+    }
+
+    await renderControlled(ControlledDoctor);
+    await waitFor(() => {
+      expect(document.querySelector('section[data-section-index="0"]')).not.toBeNull();
+    });
+
+    const problem1 = screen.getByRole("button", { name: /Missing role/ });
+    const problem2 = screen.getByRole("button", { name: /Missing action/ });
+
+    // Target sizes >=44x44 CSS px
+    expect(problem1.className).toContain("min-h-[44px]");
+    expect(problem2.className).toContain("min-h-[44px]");
+
+    // Status announcer is present
+    const statusEl = screen.getByTestId("prompt-doctor-status");
+    expect(statusEl).toHaveAttribute("role", "status");
+    expect(statusEl).toHaveAttribute("aria-live", "polite");
+    expect(statusEl.textContent).toContain("diagnose");
+
+    // Focus and click problem 1
+    problem1.focus();
+    expect(document.activeElement).toBe(problem1);
+    fireEvent.click(problem1);
+
+    // Problem 1 is fixed with aria-pressed, visible check, correct word, and solid border
+    expect(problem1).toHaveAttribute("aria-pressed", "true");
+    expect(problem1.textContent).toContain("✓");
+    expect(problem1.textContent).toContain("correct");
+    expect(problem1.className).toContain("border-green-500");
+    expect(problem1.className).toContain("border-solid");
+
+    // Focus stays on the button, not dropped to document.body
+    expect(document.activeElement).toBe(problem1);
+
+    // Status reflects partial diagnosis and progress
+    expect(statusEl.textContent).toContain("50%");
+    expect(statusEl.textContent).toContain("(1/2)");
+
+    // Section is NOT completed yet
+    expect(isSectionCompleted(SLUG, 0)).toBe(false);
+
+    // Now focus and click problem 2
+    problem2.focus();
+    expect(document.activeElement).toBe(problem2);
+    fireEvent.click(problem2);
+
+    // Problem 2 is also fixed
+    expect(problem2).toHaveAttribute("aria-pressed", "true");
+    expect(problem2.textContent).toContain("✓");
+    expect(problem2.textContent).toContain("correct");
+
+    // Focus stays in DOM, not dropped
+    expect(document.activeElement).toBe(problem2);
+
+    // Status announces healthy and success
+    expect(statusEl.textContent).toContain("healthy");
+    expect(statusEl.textContent).toContain("Great job doctor!");
+
+    // Section completes when all problems are fixed
+    expect(isSectionCompleted(SLUG, 0)).toBe(true);
+
+    // Reset button has >=44x44 hitbox
+    const retryBtn = screen.getByRole("button", { name: /retry/ });
+    expect(retryBtn.className).toContain("min-h-[44px]");
+    expect(retryBtn.className).toContain("min-w-[44px]");
+  });
+
+  it("BM and EN translation bundles define full Unicode strings for quiz and promptDoctor", async () => {
+    const en = await loadMessages("en");
+    const ms = await loadMessages("ms");
+
+    const enQuiz = (en.kids as { quiz: Record<string, string> }).quiz;
+    const msQuiz = (ms.kids as { quiz: Record<string, string> }).quiz;
+    expect(enQuiz.goodLabel).toBe("Great prompt!");
+    expect(msQuiz.goodLabel).toBe("Prompt yang bagus!");
+    expect(enQuiz.badLabel).toBe("Not the best");
+    expect(msQuiz.badLabel).toBe("Bukan yang terbaik");
+    expect(enQuiz.correct).toBe("You got it!");
+    expect(msQuiz.correct).toBe("Betul!");
+    expect(enQuiz.incorrect).toBe("Good try!");
+    expect(msQuiz.incorrect).toBe("Cubaan yang baik!");
+    expect(enQuiz.tryAgain).toBe("Try Again");
+    expect(msQuiz.tryAgain).toBe("Cuba Lagi");
+
+    const enDoc = (en.kids as { promptDoctor: Record<string, string> }).promptDoctor;
+    const msDoc = (ms.kids as { promptDoctor: Record<string, string> }).promptDoctor;
+    expect(enDoc.title).toBe("Prompt Doctor");
+    expect(msDoc.title).toBe("Doktor Prompt");
+    expect(enDoc.health).toBe("Prompt Health");
+    expect(msDoc.health).toBe("Kesihatan Prompt");
+    expect(enDoc.sick).toBe("Sick Prompt");
+    expect(msDoc.sick).toBe("Prompt Sakit");
+    expect(enDoc.healthy).toBe("Healthy Prompt!");
+    expect(msDoc.healthy).toBe("Prompt Sihat!");
+    expect(enDoc.diagnose).toBe("Click a problem to fix it:");
+    expect(msDoc.diagnose).toBe("Klik masalah untuk membaikinya:");
+    expect(enDoc.success).toBe("The prompt is all better now!");
+    expect(msDoc.success).toBe("Prompt itu sudah pulih sepenuhnya!");
+    expect(enDoc.retry).toBe("Start Over");
+    expect(msDoc.retry).toBe("Mula Semula");
+  });
+});
+
 

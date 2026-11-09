@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
@@ -33,10 +33,14 @@ export function PromptDoctor({
   successMessage,
 }: PromptDoctorProps) {
   const t = useTranslations("kids.promptDoctor");
+  const tActivity = useTranslations("kids.activity");
   const levelSlug = useLevelSlug();
   const scope = useSectionIdentity();
   const componentId = useId();
   
+  const problemButtonsRef = useRef<Record<number, HTMLButtonElement | null>>({});
+  const retryButtonRef = useRef<HTMLButtonElement | null>(null);
+
   // Register that this Section has an interactive element requiring completion,
   // routed through the Section scope so it binds to the containing Section.
   useEffect(() => {
@@ -56,7 +60,7 @@ export function PromptDoctor({
       return;
     }
     const saved = getComponentState<SavedState>(levelSlug, componentId);
-    if (saved && saved.fixedProblems) {
+    if (saved && saved.fixedProblems && Array.isArray(saved.fixedProblems)) {
       setFixedProblems(saved.fixedProblems);
       setIsHealed(saved.isHealed || false);
     }
@@ -72,8 +76,6 @@ export function PromptDoctor({
     });
   }, [levelSlug, componentId, fixedProblems, isHealed, isLoaded]);
 
-  if (!isLoaded) return null;
-
   const handleFixProblem = (index: number) => {
     if (fixedProblems.includes(index) || isHealed) return;
     
@@ -84,8 +86,8 @@ export function PromptDoctor({
       setIsHealed(true);
       // Mark the containing Section complete, keyed by its resolved index.
       if (levelSlug && scope) {
-        const index = scope.getIndex();
-        if (index !== null) markSectionCompleted(levelSlug, index);
+        const idx = scope.getIndex();
+        if (idx !== null) markSectionCompleted(levelSlug, idx);
         scope.markComplete();
       }
     }
@@ -94,6 +96,9 @@ export function PromptDoctor({
   const handleReset = () => {
     setFixedProblems([]);
     setIsHealed(false);
+    setTimeout(() => {
+      problemButtonsRef.current[0]?.focus();
+    }, 0);
   };
 
   // Calculate current prompt based on fixes applied
@@ -107,7 +112,19 @@ export function PromptDoctor({
     return brokenPrompt;
   };
 
-  const healthPercentage = (fixedProblems.length / problems.length) * 100;
+  const healthPercentage = problems.length > 0 ? (fixedProblems.length / problems.length) * 100 : 0;
+
+  const currentStatusText = useCallback((): string => {
+    if (isHealed) {
+      return `🎉 ${t("healthy")} ${successMessage || t("success")}`;
+    }
+    if (fixedProblems.length > 0) {
+      return `💊 ${t("health")}: ${Math.round(healthPercentage)}%. (${fixedProblems.length}/${problems.length}) ${t("diagnose")}`;
+    }
+    return `🏥 ${displayTitle}. ${t("diagnose")}`;
+  }, [isHealed, fixedProblems.length, healthPercentage, problems.length, t, successMessage, displayTitle]);
+
+  if (!isLoaded) return null;
 
   return (
     <div className="my-4 p-4 bg-gradient-to-br from-[#FEE2E2] to-[#FECACA] border-4 border-[#EF4444] rounded-xl">
@@ -115,6 +132,17 @@ export function PromptDoctor({
       <h3 className="text-xl font-bold text-[#DC2626] mb-4 flex items-center gap-2">
         🏥 {displayTitle}
       </h3>
+
+      {/* Accessible live status announcer */}
+      <div
+        data-testid="prompt-doctor-status"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="text-base font-medium px-4 py-2 bg-white/95 border-2 border-red-300 rounded-lg text-[#DC2626] mb-4"
+      >
+        {currentStatusText()}
+      </div>
 
       {/* Health bar */}
       <div className="mb-4">
@@ -142,9 +170,9 @@ export function PromptDoctor({
       )}>
         <div className="flex items-center gap-2 mb-2">
           {isHealed ? (
-            <span className="text-2xl">💚</span>
+            <span className="text-2xl" aria-hidden="true">💚</span>
           ) : (
-            <span className="text-2xl animate-pulse">🤒</span>
+            <span className="text-2xl animate-pulse" aria-hidden="true">🤒</span>
           )}
           <span className={cn(
             "font-bold",
@@ -159,35 +187,51 @@ export function PromptDoctor({
       </div>
 
       {/* Problems to fix */}
-      {!isHealed && (
-        <div className="space-y-2 mb-4">
-          <div className="text-sm font-medium text-[#DC2626] mb-2">{t("diagnose")}</div>
-          {problems.map((problem, index) => {
-            const isFixed = fixedProblems.includes(index);
-            return (
-              <button
-                key={index}
-                onClick={() => handleFixProblem(index)}
-                disabled={isFixed}
-                className={cn(
-                  "w-full p-3 rounded-lg border-2 text-left transition-all",
-                  isFixed
-                    ? "bg-green-100 border-green-400 opacity-60"
-                    : "bg-white border-red-300 hover:border-red-500 hover:bg-red-50 cursor-pointer"
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">{isFixed ? "✅" : "💊"}</span>
-                  <div>
-                    <div className="font-bold text-[#DC2626]">{problem.issue}</div>
-                    <div className="text-sm text-[#5D4037]">{problem.symptom}</div>
+      <div className="space-y-2 mb-4">
+        <div className="text-sm font-bold text-[#DC2626] mb-2">{t("diagnose")}</div>
+        {problems.map((problem, index) => {
+          const isFixed = fixedProblems.includes(index);
+          return (
+            <button
+              key={index}
+              ref={(el) => {
+                problemButtonsRef.current[index] = el;
+              }}
+              type="button"
+              onClick={() => handleFixProblem(index)}
+              aria-pressed={isFixed}
+              aria-disabled={isFixed || isHealed ? "true" : undefined}
+              className={cn(
+                "w-full min-h-[44px] p-3 rounded-lg border-2 text-left transition-all flex items-center justify-between gap-3",
+                "focus:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2",
+                isFixed
+                  ? "bg-green-100 border-green-500 border-solid"
+                  : "bg-white border-red-300 border-dashed hover:border-red-500 hover:bg-red-50 cursor-pointer"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl shrink-0" aria-hidden="true">{isFixed ? "✅" : "💊"}</span>
+                <div>
+                  <div className="font-bold text-base text-[#2C1810] flex items-center gap-2">
+                    <span>{problem.issue}</span>
+                    {isFixed && (
+                      <span className="text-xs font-bold text-green-700 bg-green-200/80 px-2 py-0.5 rounded border border-green-300">
+                        ✓ {tActivity("correct")}
+                      </span>
+                    )}
                   </div>
+                  <div className="text-sm text-[#5D4037]">{problem.symptom}</div>
                 </div>
-              </button>
-            );
-          })}
-        </div>
-      )}
+              </div>
+              {isFixed && (
+                <div className="text-xs font-semibold text-green-800 bg-white/80 px-2 py-1 rounded border border-green-300 shrink-0">
+                  {problem.fix}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
 
       {/* Success message */}
       {isHealed && (
@@ -201,8 +245,10 @@ export function PromptDoctor({
       {/* Reset button */}
       {(isHealed || fixedProblems.length > 0) && (
         <button
+          ref={retryButtonRef}
+          type="button"
           onClick={handleReset}
-          className="px-6 py-2 rounded-lg font-bold bg-[#DC2626] hover:bg-[#B91C1C] text-white"
+          className="min-h-[44px] min-w-[44px] px-6 py-2.5 rounded-lg font-bold bg-[#DC2626] hover:bg-[#B91C1C] text-white cursor-pointer transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2"
         >
           {t("retry")}
         </button>
