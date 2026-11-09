@@ -52,7 +52,7 @@ export function PlanetaryHud({
   return (
     <div
       data-testid="planetary-hud-root"
-      className={`absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-3 sm:p-5 pb-6 sm:pb-8 overflow-hidden ${className}`}
+      className={`absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-3 sm:p-5 pb-16 sm:pb-8 overflow-hidden ${className}`}
     >
       {/* Top Header */}
       <header className="flex justify-between items-center pointer-events-auto gap-2 sm:gap-3 shrink-0">
@@ -93,11 +93,11 @@ export function PlanetaryHud({
       </header>
 
       {/* Main Bottom Section: Province Sidebar & Selected Telemetry Card */}
-      <div className="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-end justify-between pointer-events-auto w-full max-h-[calc(100vh-140px)] sm:max-h-[calc(100vh-120px)] overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-end justify-between pointer-events-auto w-full max-h-[calc(100vh-170px)] sm:max-h-[calc(100vh-120px)] overflow-hidden">
         {/* Province Sidebar (7 geological features) */}
         <div
           data-testid="province-sidebar"
-          className="w-full md:w-80 max-h-32 sm:max-h-44 md:max-h-72 overflow-y-auto p-2 sm:p-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl space-y-1 sm:space-y-1.5 shrink-0"
+          className="w-full md:w-80 max-h-28 sm:max-h-44 md:max-h-72 overflow-y-auto p-2 sm:p-2.5 rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 shadow-2xl space-y-1 sm:space-y-1.5 shrink-0"
         >
           {planet.features.map((feat, idx) => {
             const isActive = feat.id === activeFeature.id;
@@ -142,7 +142,7 @@ export function PlanetaryHud({
         {/* Selected Telemetry Card */}
         <div
           data-testid="telemetry-card"
-          className="w-full md:max-w-lg max-h-56 sm:max-h-72 md:max-h-[340px] p-3 sm:p-4 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-2xl text-white flex flex-col justify-between overflow-hidden"
+          className="w-full md:max-w-lg max-h-52 sm:max-h-72 md:max-h-[340px] p-2.5 sm:p-4 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-2xl text-white flex flex-col justify-between overflow-hidden"
         >
           <div className="overflow-y-auto pr-1 space-y-1.5 sm:space-y-2.5">
             <div className="flex items-start justify-between gap-3">

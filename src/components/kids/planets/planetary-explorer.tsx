@@ -207,7 +207,7 @@ export function PlanetaryExplorer({
           <nav
             data-testid="planet-selector-bar"
             aria-label={t('hubTitle')}
-            className="absolute bottom-2 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl pointer-events-auto max-w-[96vw] overflow-x-auto scrollbar-none"
+            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl pointer-events-auto max-w-[96vw] overflow-x-auto scrollbar-none"
           >
             {PLANET_WORLDS.map((planet) => {
               const displayName = isMs ? planet.celestialBodyMs : planet.celestialBody;

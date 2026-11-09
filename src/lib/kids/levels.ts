@@ -346,6 +346,17 @@ export function getAllLevels(): Level[] {
   return worlds.flatMap((world) => world.levels);
 }
 
+/**
+ * Earth-exclusive foundational prompt engineering curriculum (Worlds 1 to 5).
+ * Worlds 6-9 (Moon, Mars, Venus, Mercury) are dedicated planetary subject worlds
+ * navigated and explored via /planets 3D cartography.
+ */
+export const earthWorlds: World[] = worlds.filter((w) => w.number <= 5);
+
+export function getEarthLevels(): Level[] {
+  return earthWorlds.flatMap((world) => world.levels);
+}
+
 export function getLevelBySlug(slug: string): Level | undefined {
   return getAllLevels().find((level) => level.slug === slug);
 }

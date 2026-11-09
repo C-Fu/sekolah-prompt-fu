@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { worlds, type Level, getAllLevels } from "@/lib/kids/levels";
+import { type Level, earthWorlds, getEarthLevels } from "@/lib/kids/levels";
 import { getProgress, isLevelUnlocked, type KidsProgress } from "@/lib/kids/progress";
 import { analyticsKids } from "@/lib/analytics";
 import { 
@@ -29,15 +29,16 @@ export function ProgressMap() {
   const t = useTranslations("kids");
   const [progress, setProgress] = useState<KidsProgress | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const allLevels = getAllLevels();
+  // Earth map strictly contains Worlds 1-5 foundational prompting levels (19 levels)
+  const earthLevels = getEarthLevels();
 
   useEffect(() => {
     setProgress(getProgress());
     analyticsKids.viewMap();
   }, []);
 
-  // Calculate positions for all levels in a continuous horizontal path
-  const levelPositions = allLevels.map((_, index) => {
+  // Calculate positions for all Earth levels in a continuous horizontal path
+  const levelPositions = earthLevels.map((_, index) => {
     const spacing = 200; // pixels between levels
     const x = 120 + index * spacing;
     // Create a gentle wave pattern - centered around 55%
@@ -46,7 +47,7 @@ export function ProgressMap() {
   });
 
   // Calculate map width - ensure it fits content but also works on large screens
-  const calculatedWidth = (allLevels.length * 200) + 240;
+  const calculatedWidth = (earthLevels.length * 200) + 240;
   const mapWidth = Math.max(calculatedWidth, 800);
 
   const scrollLeft = () => {
@@ -163,9 +164,9 @@ export function ProgressMap() {
           {/* Decorative elements - rendered after path so clouds appear on top */}
           <MapDecorations mapWidth={mapWidth} />
 
-          {/* World labels - pixel art style */}
-          {worlds.map((world) => {
-            const firstLevelIndex = allLevels.findIndex(l => l.world === world.number);
+          {/* World labels - pixel art style for Earth Worlds 1-5 */}
+          {earthWorlds.map((world) => {
+            const firstLevelIndex = earthLevels.findIndex(l => l.world === world.number);
             if (firstLevelIndex === -1) return null;
             const pos = levelPositions[firstLevelIndex];
             return (
@@ -186,8 +187,8 @@ export function ProgressMap() {
             );
           })}
 
-          {/* Level nodes */}
-          {allLevels.map((level, index) => (
+          {/* Level nodes for Earth Worlds 1-5 */}
+          {earthLevels.map((level, index) => (
             <LevelNode
               key={level.slug}
               level={level}
@@ -208,7 +209,7 @@ export function ProgressMap() {
             <div className="flex items-center gap-2">
               <PixelStar filled className="w-6 h-6" />
               <span className="text-[#FFD700] font-bold text-xl">
-                {getCompletedCount(progress, allLevels)} / {allLevels.length}
+                {getCompletedCount(progress, earthLevels)} / {earthLevels.length}
               </span>
             </div>
           </div>
@@ -217,12 +218,12 @@ export function ProgressMap() {
             <div 
               className="h-full bg-[#22C55E] transition-all duration-500"
               style={{ 
-                width: `${(getCompletedCount(progress, allLevels) / allLevels.length) * 100}%`,
+                width: `${(getCompletedCount(progress, earthLevels) / earthLevels.length) * 100}%`,
               }}
             />
             {/* Pixel segments overlay */}
             <div className="absolute inset-0 flex">
-              {Array.from({ length: allLevels.length }).map((_, i) => (
+              {Array.from({ length: earthLevels.length }).map((_, i) => (
                 <div 
                   key={i} 
                   className="flex-1 border-r border-[#2C1810] last:border-r-0"
