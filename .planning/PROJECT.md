@@ -37,6 +37,15 @@ The application is built 100% static (`output: 'export'`) with client-side persi
    - Dedicated scripts for import closure (`npm run check:closure`) and vocabulary checks (`npm run check:vocab`) wired into CI.
    - Verified zero regression with `npm run verify` across all 23 level routes, `/`, `/map`, `/planets`, and static assets.
 
+## Current Milestone: v1.3 Kid-Friendly UX, Game Feel & Visual Polish
+
+**Goal:** Make the existing learning journey clearer and more satisfying for primary-school students while improving visual consistency across the core screens.
+
+**Target features:**
+- Improve kid-friendly usability and clarity across the title, planetary hub, map, and lesson experience.
+- Add purposeful, proportional game feel to meaningful actions, transitions, progress, and rewards.
+- Refine visual consistency and finish while preserving the established Sekolah Prompt-Fu identity and core flows.
+
 ## Requirements
 
 ### Validated
@@ -59,7 +68,9 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - ✓ Added explicit inspection for `out/planets/index.html` to `scripts/verify-project.js`, eliminated all ESLint errors (0 errors), passed Malay vocabulary guard on 23 MDX files, verified 406 modules in closure, and certified 245/245 tests green with 100% static export — v1.2
 
 ### Active
-- (none — run `/gsd-new-milestone` to start v1.3)
+- [ ] Make the core learning journey more intuitive and kid-friendly across all primary screens — v1.3
+- [ ] Add clear, satisfying feedback to meaningful interactions, transitions, and rewards — v1.3
+- [ ] Improve visual consistency and finish without replacing the established brand or core flows — v1.3
 
 ### Out of Scope
 - Real-time online multiplayer or backend user accounts.
@@ -70,4 +81,22 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 Shipped **v1.2** on 2026-11-09 (Phases 09–13; 11 plans, 23 tasks). Total test suite is 245/245; `npm run verify` certifies TypeScript, Vitest, and static export inspection across 31 routes including `/planets`, `/`, `/map`, and 23 level routes.
 
 ---
-*Last updated: 2026-11-09 (Milestone v1.2 completion)*
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
+---
+*Last updated: 2026-11-09 (Milestone v1.3 started)*

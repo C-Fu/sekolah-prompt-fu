@@ -1,18 +1,16 @@
 ---
 gsd_state_version: "1.0"
-milestone: v1.2
-status: Shipped
-stopped_at: Milestone v1.2 completed and archived
-last_updated: "2026-11-09T01:56:00.000Z"
+milestone: v1.3
+milestone_name: Kid-Friendly UX, Game Feel & Visual Polish
+status: planning
+last_updated: "2026-11-09T06:22:30.893Z"
 last_activity: 2026-11-09
-last_activity_desc: Milestone v1.2 completed, verified, and archived
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 11
-  completed_plans: 11
-  percent: 100
-milestone_name: 3D Planetary Hub, Subject Cartography & Rocket Return
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -24,10 +22,11 @@ milestone_name: 3D Planetary Hub, Subject Cartography & Rocket Return
 
 ## Current Position
 
-Phase: Milestone v1.2 complete
-Plan: All 11 plans complete & verified
-Status: Shipped & archived
-Last activity: 2026-11-09 — Milestone v1.2 completed and archived
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-11-09 — Milestone v1.3 started
+
 
 ## Project Reference
 
