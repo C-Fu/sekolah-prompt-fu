@@ -60,7 +60,7 @@ Plans:
   2. Primary controls are comfortably touch-sized and expose understandable hover, pressed, disabled, and keyboard-focus states where applicable.
   3. A learner can complete core navigation and lesson interactions with a keyboard, following a logical focus order with a visible focus indicator.
   4. Text and controls remain legible on themed backgrounds, and essential instructions and status remain understandable without relying on color, sound, or motion.
-**Plans**: 7/9 plans executed
+**Plans**: 8/9 plans executed
 Plans:
 **Wave 1**
 - [x] 15-01-PLAN.md — Prove text-only planet → region → mission tracer
@@ -73,7 +73,7 @@ Plans:
 **Wave 3**
 - [x] 15-07-PLAN.md — Accessible prompt parts, matcher and predictor answers
 **Wave 4**
-- [ ] 15-08-PLAN.md — Accessible remaining lesson activity families
+- [x] 15-08-PLAN.md — Accessible remaining lesson activity families
 **Wave 5**
 - [ ] 15-09-PLAN.md — Two-tone focus, static-export gate and rendered evidence
 **UI hint**: yes
@@ -108,6 +108,6 @@ Phases execute in numeric order: 14 → 15 → 16 → 17.
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 14. Journey Clarity & Shared Interaction Language | 9/9 | Completed | 2026-11-09 |
-| 15. Mobile-First Responsive Accessibility | 7/9 | In Progress | - |
+| 15. Mobile-First Responsive Accessibility | 8/9 | In Progress | - |
 | 16. Proportional, Reduced-Motion-Safe Game Feel | 0/TBD | Not started | - |
 | 17. Visual Audit & Release Certification | 0/TBD | Not started | - |
