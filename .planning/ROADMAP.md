@@ -13,7 +13,7 @@ v1.3 refines the existing title → map/planet hub → lesson → completion jou
 ## Phases
 
 - [x] **Phase 14: Journey Clarity & Shared Interaction Language** - Make the next action, current location, and return path clear in both locales. (Completed 2026-11-09)
-- [ ] **Phase 15: Mobile-First Responsive Accessibility** - Keep core screens and interactions usable across viewport sizes and input modes.
+- [x] **Phase 15: Mobile-First Responsive Accessibility** - Keep core screens and interactions usable across viewport sizes and input modes. (Completed 2026-11-16)
 - [ ] **Phase 16: Proportional, Reduced-Motion-Safe Game Feel** - Give meaningful actions immediate, accessible, non-blocking feedback.
 - [ ] **Phase 17: Visual Audit & Release Certification** - Confirm the refined experience is coherent and preserves the product's brand and release contracts.
 
@@ -60,7 +60,7 @@ Plans:
   2. Primary controls are comfortably touch-sized and expose understandable hover, pressed, disabled, and keyboard-focus states where applicable.
   3. A learner can complete core navigation and lesson interactions with a keyboard, following a logical focus order with a visible focus indicator.
   4. Text and controls remain legible on themed backgrounds, and essential instructions and status remain understandable without relying on color, sound, or motion.
-**Plans**: 8/9 plans executed
+**Plans**: 9/9 plans executed
 Plans:
 **Wave 1**
 - [x] 15-01-PLAN.md — Prove text-only planet → region → mission tracer
@@ -75,7 +75,7 @@ Plans:
 **Wave 4**
 - [x] 15-08-PLAN.md — Accessible remaining lesson activity families
 **Wave 5**
-- [ ] 15-09-PLAN.md — Two-tone focus, static-export gate and rendered evidence
+- [x] 15-09-PLAN.md — Two-tone focus, static-export gate and rendered evidence
 **UI hint**: yes
 
 ### Phase 16: Proportional, Reduced-Motion-Safe Game Feel
