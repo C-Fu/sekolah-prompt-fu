@@ -43,8 +43,8 @@ export function ProgressMap() {
   const levelPositions = earthLevels.map((_, index) => {
     const spacing = 200; // pixels between levels
     const x = 120 + index * spacing;
-    // Create a gentle wave pattern - centered around 55%
-    const y = 55 + Math.sin(index * 0.8) * 15;
+    // Create a gentle wave pattern - centered around 44% to leave room for road at bottom and banner at top
+    const y = 44 + Math.sin(index * 0.8) * 12;
     return { x, y };
   });
 
@@ -75,13 +75,13 @@ export function ProgressMap() {
   return (
     <div className="relative h-full flex flex-col">
       {/* Space portal floating banner per FLOW-02 & D-05 */}
-      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex flex-col items-center gap-2">
+      <div className="absolute top-1.5 sm:top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex flex-col items-center gap-1 sm:gap-2 max-w-[90vw]">
         <Link
           href="/planets"
-          className="pixel-btn pixel-btn-blue inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm sm:text-base shadow-xl hover:scale-105 transition-transform"
+          className="pixel-btn pixel-btn-blue inline-flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-4 sm:py-2 min-h-[44px] text-xs sm:text-base shadow-xl hover:scale-105 transition-transform"
           title={t("map.toPlanetsSub")}
         >
-          <PixelRocket className="w-5 h-7 shrink-0" />
+          <PixelRocket className="w-4 h-6 sm:w-5 sm:h-7 shrink-0" />
           <div className="text-left leading-tight">
             <span className="block font-bold text-white text-xs sm:text-sm tracking-wide">
               {t("map.toPlanetsBanner")}
@@ -97,6 +97,7 @@ export function ProgressMap() {
           screenId="map"
           message={t("tips.map")}
           dismissLabel={t("tips.dismiss")}
+          className="hidden sm:inline-flex"
         />
       </div>
 
@@ -131,11 +132,11 @@ export function ProgressMap() {
         role="region"
         aria-label={t("map.scrollRegionLabel")}
         onKeyDown={handleKeyDown}
-        className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide flex justify-start sm:justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]"
+        className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide flex justify-start focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <div 
-          className="relative h-full min-h-[400px] shrink-0"
+          className="relative h-full shrink-0"
           style={{ width: `${mapWidth}px`, imageRendering: "pixelated" }}
         >
           {/* Pixel art ground layers - use full width */}
@@ -246,19 +247,19 @@ export function ProgressMap() {
       </div>
 
       {/* Progress bar at bottom - pixel art style */}
-      <div className="shrink-0 px-4 py-3 bg-[#2C1810] border-t-4 border-[#8B4513]">
+      <div className="shrink-0 px-3 py-1.5 sm:px-4 sm:py-3 bg-[#2C1810] border-t-4 border-[#8B4513]">
         <div className="max-w-md mx-auto">
-          <div className="flex items-center justify-between text-xl mb-2">
-            <span className="font-bold text-2xl text-[#FFD700]">{t("map.title")}</span>
-            <div className="flex items-center gap-2">
-              <PixelStar filled className="w-6 h-6" />
-              <span className="text-[#FFD700] font-bold text-xl">
+          <div className="flex items-center justify-between text-base sm:text-xl mb-1 sm:mb-2">
+            <span className="font-bold text-lg sm:text-2xl text-[#FFD700]">{t("map.title")}</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <PixelStar filled className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="text-[#FFD700] font-bold text-base sm:text-xl">
                 {getCompletedCount(progress, earthLevels)} / {earthLevels.length}
               </span>
             </div>
           </div>
           {/* Pixel art progress bar */}
-          <div className="h-6 bg-[#4A3728] border-2 border-[#8B4513] relative overflow-hidden">
+          <div className="h-4 sm:h-6 bg-[#4A3728] border-2 border-[#8B4513] relative overflow-hidden">
             <div 
               className="h-full bg-[#22C55E] transition-all duration-500"
               style={{ 
@@ -542,7 +543,7 @@ function LevelNode({ level, position, progress, index, t }: LevelNodeProps) {
       )}
       
       <div 
-        className="absolute top-full mt-6 left-1/2 -translate-x-1/2 px-3 py-2 text-base font-bold bg-amber-100 dark:bg-amber-900 border-2 border-amber-400 max-w-[180px] text-center break-words"
+        className="absolute top-full mt-2 sm:mt-4 left-1/2 -translate-x-1/2 px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-base font-bold bg-amber-100 dark:bg-amber-900 border-2 border-amber-400 max-w-[140px] sm:max-w-[180px] text-center break-words"
         style={{ 
           clipPath: "polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px)",
         }}

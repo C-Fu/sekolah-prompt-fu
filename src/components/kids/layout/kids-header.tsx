@@ -66,9 +66,9 @@ export function KidsHeader() {
     <header className="shrink-0 z-50 w-full bg-[#2C1810] border-b-4 border-[#8B4513]">
       <div className="container flex min-h-[56px] items-center justify-between px-2 sm:px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 min-h-[44px] min-w-[44px]">
+        <Link href="/" className="flex items-center gap-2 min-h-[44px] min-w-[44px] shrink-0">
           <PixelRobot className="w-8 h-10 animate-peromfu-idle" />
-          <span className="text-[#FFD700] font-bold text-2xl pixel-text-shadow hidden sm:block">
+          <span className="text-[#FFD700] font-bold text-2xl pixel-text-shadow hidden md:block">
             {t("header.title")}
           </span>
         </Link>
@@ -101,7 +101,7 @@ export function KidsHeader() {
           </div>
 
           {/* Nav buttons - desktop: visible BM/EN text alongside familiar icons (D-06, no duplicate Home) */}
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             <MusicButton />
             <SettingsButton />
             <Link 
@@ -130,7 +130,7 @@ export function KidsHeader() {
           </div>
 
           {/* Mobile menu button with localized accessible name and min 44px hitbox */}
-          <div className="sm:hidden relative" ref={menuRef}>
+          <div className="lg:hidden relative" ref={menuRef}>
             <button
               ref={menuButtonRef}
               onClick={() => setMenuOpen(!menuOpen)}
