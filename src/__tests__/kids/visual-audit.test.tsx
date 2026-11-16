@@ -73,7 +73,7 @@ describe("Phase 17 Visual Audit & Consistency (VIS-01)", () => {
   });
 
   it("PlanetaryHud maintains distinct planetary theming and text-navigable mission action", () => {
-    const mars = PLANET_WORLDS.find((p) => p.id === "mars") || PLANET_WORLDS[0];
+    const mars = PLANET_WORLDS.find((p) => p.id === "mars-english") || PLANET_WORLDS[0];
     const feature = mars.features[0];
 
     render(
