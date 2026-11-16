@@ -129,7 +129,9 @@
       "lessonLoadError": "This lesson could not load. Return to {hub} and choose it again.",
       "selected": "Selected",
       "correct": "Correct",
-      "incorrect": "Incorrect"
+      "incorrect": "Incorrect",
+      "tryAgain": "Try Again",
+      "skipAnimation": "Skip Animation"
     },
     "map": {
       "title": "Earth map",

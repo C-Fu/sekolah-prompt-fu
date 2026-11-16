@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useId } from "react";
 import { useTranslations } from "next-intl";
-import { Check, RefreshCw, Sparkles, GripVertical } from "lucide-react";
+import { Check, RefreshCw, Sparkles, GripVertical, XCircle, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
@@ -318,7 +318,7 @@ export function MagicWords({
               onDrop={() => handleDrop(blankId)}
               aria-label={placedWord ? `${blank.hint}: ${placedWord}` : blank.hint}
               className={cn(
-                "px-3 py-2 border-2 rounded-lg min-w-[100px] min-h-[44px] text-xl text-center font-medium transition-all text-[#2C1810]",
+                "px-3 py-2 border-2 rounded-lg min-w-[100px] min-h-[44px] text-xl text-center font-medium transition-all text-[#2C1810] active:scale-[0.98] motion-reduce:active:scale-100",
                 !placedWord && "bg-white border-purple-400 border-dashed hover:border-purple-600 cursor-pointer",
                 placedWord && !submitted && "bg-purple-100 border-purple-500 border-solid cursor-pointer",
                 isCorrect && "border-green-500 border-solid bg-green-50",
@@ -329,7 +329,8 @@ export function MagicWords({
             >
               {placedWord || blank.hint}
             </button>
-            {submitted && isCorrect && <Check className="h-6 w-6 text-green-500" />}
+            {submitted && isCorrect && <Check className="h-6 w-6 text-green-600 shrink-0" data-testid="magic-words-check-icon" />}
+            {submitted && isWrong && <XCircle className="h-6 w-6 text-red-500 shrink-0" data-testid="magic-words-wrong-icon" />}
           </span>
         );
       }
@@ -374,7 +375,7 @@ export function MagicWords({
                   aria-pressed={isSelected}
                   aria-disabled={submitted || isUsed}
                   className={cn(
-                    "flex items-center gap-2 px-4 py-3 border-2 min-h-[44px] text-xl font-medium transition-all text-[#2C1810]",
+                    "flex items-center gap-2 px-4 py-3 border-2 min-h-[44px] text-xl font-medium transition-all text-[#2C1810] active:scale-[0.98] motion-reduce:active:scale-100",
                     !isUsed && !submitted && !isSelected && "bg-white border-purple-300 hover:border-purple-500 hover:shadow-md cursor-pointer",
                     isSelected && "bg-purple-100 border-purple-600 ring-2 ring-purple-500 font-bold shadow-sm",
                     isUsed && "bg-gray-100 border-gray-400 text-gray-500 opacity-60 cursor-not-allowed border-dashed",

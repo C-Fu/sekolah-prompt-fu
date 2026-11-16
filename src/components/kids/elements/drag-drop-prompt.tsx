@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useId, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronUp, ChevronDown, GripVertical } from "lucide-react";
+import { ChevronUp, ChevronDown, GripVertical, Check, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
@@ -345,7 +345,7 @@ export function DragDropPrompt({
               }}
               onTouchEnd={handlePointerEnd}
               className={cn(
-                "flex items-center gap-2 p-2 border-2 select-none",
+                "flex items-center gap-2 p-2 border-2 select-none active:scale-[0.99] motion-reduce:active:scale-100",
                 (!submitted || !correct) && "bg-white border-[#D97706] hover:bg-[#FEF3C7]",
                 isDragging && "z-10 shadow-lg border-[#3B82F6] bg-[#EFF6FF]",
                 !isDragging && draggedIndex !== null && "transition-transform duration-150",
@@ -444,8 +444,12 @@ export function DragDropPrompt({
               
               {/* Status indicator */}
               {submitted && (
-                <span className="w-8 h-8 flex items-center justify-center text-xl shrink-0" aria-hidden="true">
-                  {isCorrectPiece ? "✓" : "✗"}
+                <span className="w-8 h-8 flex items-center justify-center text-xl shrink-0" aria-hidden="true" data-testid={`drag-drop-status-icon-${position}`}>
+                  {isCorrectPiece ? (
+                    <Check className="w-6 h-6 text-green-600" />
+                  ) : (
+                    <XCircle className="w-6 h-6 text-red-600" />
+                  )}
                 </span>
               )}
             </div>

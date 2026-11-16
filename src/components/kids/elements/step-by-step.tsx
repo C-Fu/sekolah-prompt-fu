@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useId, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import { Sparkles, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLevelSlug, useSectionIdentity } from "@/components/kids/providers/level-context";
 import { getComponentState, saveComponentState, markSectionCompleted } from "@/lib/kids/progress";
@@ -164,7 +165,7 @@ export function StepByStep({
         aria-pressed={magicWordsAdded}
         aria-disabled={magicWordsAdded ? "true" : undefined}
         className={cn(
-          "w-full min-h-[44px] p-4 mb-4 rounded-lg border-4 transition-all text-left",
+          "w-full min-h-[44px] p-4 mb-4 rounded-lg border-4 transition-all text-left active:scale-[0.99] motion-reduce:active:scale-100",
           "focus:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2",
           magicWordsAdded
             ? "border-[#8B5CF6] border-solid bg-purple-50 cursor-default"

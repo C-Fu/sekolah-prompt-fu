@@ -129,7 +129,9 @@
       "lessonLoadError": "Pelajaran ini tidak dapat dibuka. Kembali ke {hub} dan pilih sekali lagi.",
       "selected": "Dipilih",
       "correct": "Betul",
-      "incorrect": "Salah"
+      "incorrect": "Salah",
+      "tryAgain": "Cuba Lagi",
+      "skipAnimation": "Langkau Animasi"
     },
     "map": {
       "title": "Peta Bumi",
