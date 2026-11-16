@@ -14,7 +14,7 @@ v1.3 refines the existing title → map/planet hub → lesson → completion jou
 
 - [x] **Phase 14: Journey Clarity & Shared Interaction Language** - Make the next action, current location, and return path clear in both locales. (Completed 2026-11-09)
 - [x] **Phase 15: Mobile-First Responsive Accessibility** - Keep core screens and interactions usable across viewport sizes and input modes. (Completed 2026-11-16)
-- [ ] **Phase 16: Proportional, Reduced-Motion-Safe Game Feel** - Give meaningful actions immediate, accessible, non-blocking feedback.
+- [x] **Phase 16: Proportional, Reduced-Motion-Safe Game Feel** - Give meaningful actions immediate, accessible, non-blocking feedback.
 - [ ] **Phase 17: Visual Audit & Release Certification** - Confirm the refined experience is coherent and preserves the product's brand and release contracts.
 
 ## Phase Details
@@ -91,11 +91,11 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 16-01-PLAN.md — Establish global reduced-motion infrastructure and client preference detection
+- [x] 16-01-PLAN.md — Establish global reduced-motion infrastructure and client preference detection
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 16-02-PLAN.md — Deliver immediate multi-cue visual feedback and retry affordance for lesson activities
-- [ ] 16-03-PLAN.md — Transform celebration and rocket launch flow into non-blocking, reduced-motion-safe experiences
+- [x] 16-02-PLAN.md — Deliver immediate multi-cue visual feedback and retry affordance for lesson activities
+- [x] 16-03-PLAN.md — Transform celebration and rocket launch flow into non-blocking, reduced-motion-safe experiences
 
 ### Phase 17: Visual Audit & Release Certification
 **Goal**: The title, map/planet hub, lessons, and completion experience feel like one polished Sekolah Prompt-Fu product, and the release preserves its established identity and delivery behavior.
