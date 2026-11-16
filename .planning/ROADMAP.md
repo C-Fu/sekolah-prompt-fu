@@ -15,7 +15,7 @@ v1.3 refines the existing title → map/planet hub → lesson → completion jou
 - [x] **Phase 14: Journey Clarity & Shared Interaction Language** - Make the next action, current location, and return path clear in both locales. (Completed 2026-11-09)
 - [x] **Phase 15: Mobile-First Responsive Accessibility** - Keep core screens and interactions usable across viewport sizes and input modes. (Completed 2026-11-16)
 - [x] **Phase 16: Proportional, Reduced-Motion-Safe Game Feel** - Give meaningful actions immediate, accessible, non-blocking feedback.
-- [ ] **Phase 17: Visual Audit & Release Certification** - Confirm the refined experience is coherent and preserves the product's brand and release contracts.
+- [x] **Phase 17: Visual Audit & Release Certification** - Confirm the refined experience is coherent and preserves the product's brand and release contracts.
 
 ## Phase Details
 
@@ -110,10 +110,10 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 17-01-PLAN.md — Cross-journey visual audit and consistency verification
+- [x] 17-01-PLAN.md — Cross-journey visual audit and consistency verification
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 17-02-PLAN.md — Full release build, project verification, and certification report
+- [x] 17-02-PLAN.md — Full release build, project verification, and certification report
 
 ## Progress
 
