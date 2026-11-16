@@ -86,8 +86,16 @@ Plans:
   1. Meaningful selections, lesson answers, progress changes, and completion events receive immediate visual feedback that distinguishes success, error, and neutral outcomes.
   2. High-value progress and completion moments use brief, purposeful motion and optional audio that are proportional, do not block interaction, and honor reduced-motion preferences.
   3. Learners can understand feedback and continue or retry when animation or sound is unavailable or disabled; feedback is not communicated by color alone.
-**Plans**: TBD
+**Plans**: 3 plans
 **UI hint**: yes
+
+Plans:
+**Wave 1**
+- [ ] 16-01-PLAN.md — Establish global reduced-motion infrastructure and client preference detection
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 16-02-PLAN.md — Deliver immediate multi-cue visual feedback and retry affordance for lesson activities
+- [ ] 16-03-PLAN.md — Transform celebration and rocket launch flow into non-blocking, reduced-motion-safe experiences
 
 ### Phase 17: Visual Audit & Release Certification
 **Goal**: The title, map/planet hub, lessons, and completion experience feel like one polished Sekolah Prompt-Fu product, and the release preserves its established identity and delivery behavior.
