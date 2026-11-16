@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { PixelRocket } from "./pixel-art";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export interface RocketLaunchOverlayProps {
   isOpen: boolean;
@@ -20,15 +21,39 @@ export function RocketLaunchOverlay({
 }: RocketLaunchOverlayProps) {
   const router = useRouter();
   const t = useTranslations("kids");
+  const prefersReducedMotion = useReducedMotion();
 
   // Countdown state: 3, 2, 1, 0 (BLAST OFF!)
   const [countdown, setCountdown] = useState(3);
   const [isBlastingOff, setIsBlastingOff] = useState(false);
 
+  const handleSkip = useCallback(() => {
+    onClose?.();
+    router.push(destination);
+  }, [onClose, router, destination]);
+
+  // Listen for Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleSkip();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, handleSkip]);
+
+  // Handle countdown & auto-redirect
   useEffect(() => {
     if (!isOpen) {
       setCountdown(3);
       setIsBlastingOff(false);
+      return;
+    }
+
+    // In reduced-motion mode, do not run animated countdown
+    if (prefersReducedMotion) {
       return;
     }
 
@@ -47,10 +72,10 @@ export function RocketLaunchOverlay({
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isOpen, countdown]);
+  }, [isOpen, countdown, prefersReducedMotion]);
 
   useEffect(() => {
-    if (!isOpen || !isBlastingOff) return;
+    if (!isOpen || !isBlastingOff || prefersReducedMotion) return;
 
     const navTimer = setTimeout(() => {
       if (autoRedirect) {
@@ -59,14 +84,9 @@ export function RocketLaunchOverlay({
     }, 1000);
 
     return () => clearTimeout(navTimer);
-  }, [isOpen, isBlastingOff, autoRedirect, destination, router]);
+  }, [isOpen, isBlastingOff, autoRedirect, destination, router, prefersReducedMotion]);
 
   if (!isOpen) return null;
-
-  const handleSkip = () => {
-    onClose?.();
-    router.push(destination);
-  };
 
   return (
     <div
@@ -98,62 +118,88 @@ export function RocketLaunchOverlay({
         </p>
       </div>
 
-      {/* Centerpiece: Rocket & Thrusters & Plume */}
+      {/* Centerpiece: Rocket & Thrusters & Plume or Static Ready card */}
       <div className="relative z-10 flex flex-col items-center justify-center my-auto">
-        {/* Countdown display */}
-        <div className="mb-6 h-16 flex items-center justify-center">
-          {countdown > 0 ? (
-            <div
-              key={countdown}
-              data-testid="rocket-countdown"
-              className="text-6xl sm:text-7xl font-extrabold text-white pixel-text-shadow tracking-widest animate-bounce"
+        {prefersReducedMotion ? (
+          <div className="p-6 bg-slate-900/90 border-4 border-yellow-400 rounded-lg text-center max-w-sm">
+            <PixelRocket className="w-20 h-28 mx-auto mb-4" thrusting={false} />
+            <p className="text-xl font-bold text-yellow-300 mb-2">
+              {t("rocketLaunch.heading")}
+            </p>
+            <p className="text-sm text-slate-300 mb-4">
+              {t("rocketLaunch.subheading")}
+            </p>
+            <button
+              type="button"
+              data-testid="reduced-motion-continue-btn"
+              onClick={handleSkip}
+              className="pixel-btn pixel-btn-green px-6 py-2.5 text-base font-bold w-full"
             >
-              {typeof t("rocketLaunch.countdown", { count: countdown }) === "string" &&
-              t("rocketLaunch.countdown", { count: countdown }) !== "rocketLaunch.countdown"
-                ? t("rocketLaunch.countdown", { count: countdown })
-                : `${countdown}...`}
+              {t("rocketLaunch.skip")}
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Countdown display */}
+            <div className="mb-6 h-16 flex items-center justify-center">
+              {countdown > 0 ? (
+                <div
+                  key={countdown}
+                  data-testid="rocket-countdown"
+                  className="text-6xl sm:text-7xl font-extrabold text-white pixel-text-shadow tracking-widest animate-bounce"
+                >
+                  {typeof t("rocketLaunch.countdown", { count: countdown }) === "string" &&
+                  t("rocketLaunch.countdown", { count: countdown }) !== "rocketLaunch.countdown"
+                    ? t("rocketLaunch.countdown", { count: countdown })
+                    : `${countdown}...`}
+                </div>
+              ) : (
+                <div
+                  data-testid="rocket-blastoff"
+                  className="text-5xl sm:text-6xl font-extrabold text-emerald-400 pixel-text-shadow tracking-wider animate-pulse"
+                >
+                  {t("rocketLaunch.blastOff") !== "rocketLaunch.blastOff"
+                    ? t("rocketLaunch.blastOff")
+                    : "BLAST OFF!"}
+                </div>
+              )}
             </div>
-          ) : (
+
+            {/* Rocket Sprite */}
             <div
-              data-testid="rocket-blastoff"
-              className="text-5xl sm:text-6xl font-extrabold text-emerald-400 pixel-text-shadow tracking-wider animate-pulse"
+              className={`relative transition-transform duration-1000 ${
+                isBlastingOff ? "animate-rocket-liftoff" : "animate-bounce"
+              }`}
             >
-              {t("rocketLaunch.blastOff") !== "rocketLaunch.blastOff"
-                ? t("rocketLaunch.blastOff")
-                : "BLAST OFF!"}
-            </div>
-          )}
-        </div>
+              <PixelRocket className="w-24 h-36 sm:w-32 sm:h-48" thrusting={true} />
 
-        {/* Rocket Sprite */}
-        <div
-          className={`relative transition-transform duration-1000 ${
-            isBlastingOff ? "animate-rocket-liftoff" : "animate-bounce"
-          }`}
-        >
-          <PixelRocket className="w-24 h-36 sm:w-32 sm:h-48" thrusting={true} />
-
-          {/* Launch smoke puffs */}
-          {isBlastingOff && (
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-none">
-              <div className="w-8 h-8 rounded-full bg-slate-300 opacity-70 animate-ping" />
-              <div className="w-12 h-12 rounded-full bg-slate-100 opacity-80 animate-pulse" />
-              <div className="w-8 h-8 rounded-full bg-slate-400 opacity-60 animate-ping" />
+              {/* Launch smoke puffs */}
+              {isBlastingOff && (
+                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-none">
+                  <div className="w-8 h-8 rounded-full bg-slate-300 opacity-70 animate-ping" />
+                  <div className="w-12 h-12 rounded-full bg-slate-100 opacity-80 animate-pulse" />
+                  <div className="w-8 h-8 rounded-full bg-slate-400 opacity-60 animate-ping" />
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </>
+        )}
       </div>
 
       {/* Footer controls: Skip button */}
-      <div className="relative z-10 mb-4">
-        <button
-          type="button"
-          onClick={handleSkip}
-          className="pixel-btn pixel-btn-amber px-6 py-2.5 text-base sm:text-lg font-bold"
-        >
-          {t("rocketLaunch.skip")}
-        </button>
-      </div>
+      {!prefersReducedMotion && (
+        <div className="relative z-10 mb-4">
+          <button
+            type="button"
+            data-testid="rocket-skip-button"
+            onClick={handleSkip}
+            className="pixel-btn pixel-btn-amber px-6 py-2.5 text-base sm:text-lg font-bold"
+          >
+            {t("rocketLaunch.skip")}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
+

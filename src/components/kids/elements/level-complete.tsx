@@ -11,6 +11,7 @@ import { PixelRobot, PixelStar, PixelRocket } from "./pixel-art";
 import { RocketLaunchOverlay } from "./rocket-launch-overlay";
 import { useLessonOrigin } from "@/components/kids/providers/lesson-origin-context";
 import { buildLessonUrl } from "@/lib/kids/lesson-origin";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface LevelCompleteProps {
   levelSlug: string;
@@ -24,6 +25,7 @@ export function LevelComplete({
   message = "You did it!"
 }: LevelCompleteProps) {
   const t = useTranslations("kids");
+  const prefersReducedMotion = useReducedMotion();
   const [showConfetti, setShowConfetti] = useState(false);
   const [savedStars, setSavedStars] = useState(0);
   const [isRocketModalOpen, setIsRocketModalOpen] = useState(false);
@@ -60,13 +62,13 @@ export function LevelComplete({
 
   return (
     <div className="my-8 relative">
-      {/* Pixel confetti effect */}
-      {showConfetti && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Pixel confetti effect - suppressed under reduced motion */}
+      {showConfetti && !prefersReducedMotion && (
+        <div data-testid="level-complete-confetti" className="absolute inset-0 pointer-events-none overflow-hidden">
           {Array.from({ length: 15 }).map((_, i) => (
             <div
               key={i}
-              className="absolute animate-bounce"
+              className="absolute animate-bounce motion-reduce:hidden"
               style={{
                 left: `${10 + (i * 6)}%`,
                 top: `${10 + (i % 4) * 15}%`,
