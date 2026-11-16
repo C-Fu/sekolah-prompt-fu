@@ -889,3 +889,32 @@ textarea:focus-visible,
   animation: rocket-liftoff 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-bounce-slow,
+  .animate-ping,
+  .animate-spin,
+  .animate-rocket-thrust,
+  .animate-rocket-liftoff,
+  .animate-cloud-slow,
+  .animate-cloud-medium,
+  .animate-cloud-fast,
+  .animate-peromfu-idle {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
