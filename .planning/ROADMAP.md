@@ -105,8 +105,15 @@ Plans:
   1. Across title, map/planet hub, and lesson screens, typography, spacing, controls, and card treatments share a clear hierarchy while retaining distinct planetary themes.
   2. Reviewers can verify that the polished experience retains its pixel-art/planetary identity, existing routes and learning flows, bilingual behavior, and static-export architecture.
   3. The fresh release build passes the existing project verification gates and its exported core routes and assets are present and usable.
-**Plans**: TBD
+**Plans**: 2 plans
 **UI hint**: yes
+
+Plans:
+**Wave 1**
+- [ ] 17-01-PLAN.md — Cross-journey visual audit and consistency verification
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 17-02-PLAN.md — Full release build, project verification, and certification report
 
 ## Progress
 
