@@ -3,14 +3,18 @@
  * Source: .planning/phases/09-planetary-schema-subject-alignment/09-CONTEXT.md
  */
 
-export type SubjectId = "prompting" | "bm" | "english" | "matematik" | "moral";
+export type SubjectId = "prompting" | "bm" | "english" | "matematik" | "moral" | "astronomy";
 
 export type PlanetId =
   | "earth-prompting"
   | "moon-bm"
   | "mars-english"
   | "venus-matematik"
-  | "mercury-moral";
+  | "mercury-moral"
+  | "jupiter-astronomy"
+  | "saturn-astronomy"
+  | "uranus-astronomy"
+  | "neptune-astronomy";
 
 export interface GeoCoordinates {
   lat: number; // Latitude in degrees [-90..90]
@@ -53,6 +57,21 @@ export interface PlanetFeature {
   accentColor?: string; // Feature-specific neon hotspot glow
 }
 
+
+export interface PlanetFieldNote {
+  title: string;
+  titleMs: string;
+  note: string;
+  noteMs: string;
+}
+
+export interface PlanetDistanceTelemetry {
+  big: string;
+  bigMs: string;
+  small: string;
+  smallMs: string;
+}
+
 export interface Planet {
   id: PlanetId;
   order: number; // 1 to 5 display sequence
@@ -72,6 +91,11 @@ export interface Planet {
   taglineMs: string;
   orbitalPeriodDays?: number;
   diameterKm?: number;
+  radiusKm: number;
+  primaryFact: string;
+  primaryFactMs: string;
+  distanceFromSun: PlanetDistanceTelemetry;
+  fieldNotes: PlanetFieldNote[];
 
   // The 7 Distinct Geological Features
   features: PlanetFeature[];
@@ -115,6 +139,29 @@ export const PLANET_WORLDS: Planet[] = [
     taglineMs: "Kawah basalt membina keteguhan integriti, empati dan keperibadian mulia.",
     orbitalPeriodDays: 87.97,
     diameterKm: 4879,
+    radiusKm: 2439.7,
+    primaryFact: "The smallest planet, scarred by ancient impacts and only about 40% wider than our Moon.",
+    primaryFactMs: "Planet terkecil dalam sistem suria kita, dipenuhi kawah purba dan hanya kira-kira 40% lebih lebar daripada Bulan kita.",
+    distanceFromSun: {
+      big: "58 million km",
+      bigMs: "58 juta km",
+      small: "from the Sun. Sunlight gets here in 3 minutes.",
+      smallMs: "dari Matahari. Cahaya matahari tiba di sini dalam masa 3 minit.",
+    },
+    fieldNotes: [
+      {
+        title: "Fire and ice",
+        titleMs: "Api dan ais",
+        note: "Daytime reaches 430 °C and night drops to minus 180. Craters at the poles never see the Sun and very likely hold water ice.",
+        noteMs: "Suhu waktu siang mencecah 430 °C dan malam merudum ke -180 °C. Kawah di kutubnya tidak pernah terkena cahaya matahari dan menakung ais air.",
+      },
+      {
+        title: "Long days",
+        titleMs: "Hari yang panjang",
+        note: "A year here lasts 88 Earth days. One full day, sunrise to sunrise, lasts 176.",
+        noteMs: "Satu tahun di Utarid berlangsung selama 88 hari Bumi, manakala satu hari penuh dari matahari terbit ke terbit memakan masa 176 hari Bumi.",
+      },
+    ],
     features: [
       {
         id: "borealis-planitia",
@@ -282,6 +329,29 @@ export const PLANET_WORLDS: Planet[] = [
     taglineMs: "Kabut keemasan merungkai ketertiban logik dan kejituan nombor.",
     orbitalPeriodDays: 224.7,
     diameterKm: 12104,
+    radiusKm: 6051.8,
+    primaryFact: "Almost Earth's twin in diameter, wrapped in super-rotating sulfuric clouds above a surface hot enough to melt lead.",
+    primaryFactMs: "Hampir sepadan dengan diameter Bumi, diselubungi awan asid sulfurik yang berputar pantas di atas permukaan yang cukup panas untuk meleburkan plumbum.",
+    distanceFromSun: {
+      big: "108 million km",
+      bigMs: "108 juta km",
+      small: "from the Sun. Six light-minutes.",
+      smallMs: "dari Matahari. Enam minit perjalanan cahaya.",
+    },
+    fieldNotes: [
+      {
+        title: "Backwards",
+        titleMs: "Putaran songsang",
+        note: "Venus spins the opposite way to most planets, and so slowly that one full turn takes longer than its year.",
+        noteMs: "Zuhrah berputar arah bertentangan daripada kebanyakan planet, dan sangat perlahan sehingga satu putaran penuh mengambil masa lebih lama daripada setahunnya.",
+      },
+      {
+        title: "Pressure",
+        titleMs: "Tekanan lampau",
+        note: "The air at the surface presses 92 times harder than on Earth. Like standing 900 m under the sea.",
+        noteMs: "Tekanan udara di permukaannya adalah 92 kali lebih kuat berbanding di Bumi—seperti menyelam 900 meter di dasar lautan.",
+      },
+    ],
     features: [
       {
         id: "sedna-planitia",
@@ -449,6 +519,29 @@ export const PLANET_WORLDS: Planet[] = [
     taglineMs: "Pusat kecerdasan dan penguasaan teknik binaan arahan AI.",
     orbitalPeriodDays: 365.25,
     diameterKm: 12742,
+    radiusKm: 6371,
+    primaryFact: "Every person who has ever lived, every ocean, mountain and city. All of it rests under this paper-thin blue sky.",
+    primaryFactMs: "Setiap insan yang pernah hidup, setiap lautan, gunung dan kota. Semuanya bersemadi di bawah langit biru yang senipis kertas ini.",
+    distanceFromSun: {
+      big: "150 million km",
+      bigMs: "150 juta km",
+      small: "from the Sun. Home, 8 light-minutes out.",
+      smallMs: "dari Matahari. Rumah kita, 8 minit perjalanan cahaya.",
+    },
+    fieldNotes: [
+      {
+        title: "Thin skin",
+        titleMs: "Lapisan nipis",
+        note: "Shrink Earth to the size of an apple and the air we can breathe would be thinner than the skin.",
+        noteMs: "Kecilkan Bumi menjadi sebesar epal, dan udara yang kita hirup akan lebih nipis daripada kulitnya.",
+      },
+      {
+        title: "Already moving",
+        titleMs: "Sentiasa bergerak",
+        note: "You are moving right now. Earth circles the Sun at 30 km every second.",
+        noteMs: "Anda sedang bergerak sekarang! Bumi mengorbit Matahari pada kelajuan 30 km sesaat.",
+      },
+    ],
     features: [
       {
         id: "africa-cradle",
@@ -616,6 +709,29 @@ export const PLANET_WORLDS: Planet[] = [
     taglineMs: "Lautan lava purba menyemarakkan keindahan bahasa dan sastera Melayu.",
     orbitalPeriodDays: 27.32,
     diameterKm: 3474,
+    radiusKm: 1737.4,
+    primaryFact: "With the Moon at its farthest, every other planet of the solar system would fit side by side in the gap between it and Earth.",
+    primaryFactMs: "Apabila Bulan berada pada titik terjauhnya, setiap planet lain dalam sistem suria boleh muat bersebelahan di ruang antara Bumi dan Bulan.",
+    distanceFromSun: {
+      big: "384,400 km",
+      bigMs: "384,400 km",
+      small: "from Earth. Around 1.3 light-seconds away.",
+      smallMs: "dari Bumi. Lebih kurang 1.3 saat perjalanan cahaya.",
+    },
+    fieldNotes: [
+      {
+        title: "One face",
+        titleMs: "Satu wajah",
+        note: "The Moon turns exactly once per orbit, so the same side always faces Earth. Nobody saw the far side until a Soviet probe photographed it in 1959.",
+        noteMs: "Bulan berputar tepat sekali setiap orbit, jadi sisi yang sama sentiasa menghadap Bumi. Bahagian belakangnya hanya dilihat kali pertama melalui gambar prob Soviet pada 1959.",
+      },
+      {
+        title: "Drifting away",
+        titleMs: "Menjauh perlahan-lahan",
+        note: "It moves 3.8 cm farther from Earth every year. About as fast as your fingernails grow.",
+        noteMs: "Bulan bergerak 3.8 cm lebih jauh dari Bumi setiap tahun, kira-kira sepantas kuku anda memanjang.",
+      },
+    ],
     features: [
       {
         id: "oceanus-procellarum",
@@ -783,6 +899,29 @@ export const PLANET_WORLDS: Planet[] = [
     taglineMs: "Lembah raksasa membina keyakinan bertutur dan berkarya dalam bahasa Inggeris.",
     orbitalPeriodDays: 686.98,
     diameterKm: 6779,
+    radiusKm: 3389.5,
+    primaryFact: "Half as wide as Earth, yet it holds about as much dry land as all of Earth's continents combined.",
+    primaryFactMs: "Hanya separuh saiz Bumi, tetapi Marikh memiliki keluasan daratan kering yang hampir menyamai gabungan semua benua di Bumi.",
+    distanceFromSun: {
+      big: "228 million km",
+      bigMs: "228 juta km",
+      small: "from the Sun. Sunlight needs almost 13 minutes.",
+      smallMs: "dari Matahari. Cahaya matahari memerlukan hampir 13 minit untuk sampai.",
+    },
+    fieldNotes: [
+      {
+        title: "Olympus Mons",
+        titleMs: "Olympus Mons",
+        note: "Its largest volcano is 22 km high, well over twice Mount Everest, and 600 km across.",
+        noteMs: "Gunung berapi terbesarnya setinggi 22 km—lebih dua kali ganda ketinggian Gunung Everest—dengan kelebaran 600 km.",
+      },
+      {
+        title: "Rust",
+        titleMs: "Karat merah",
+        note: "The red is iron oxide. Mars is a planet-wide desert of rust, and its sunsets are blue.",
+        noteMs: "Warna merahnya berasal dari besi oksida. Marikh adalah gurun karat yang luas, dan pemandangan matahari terbenamnya berwarna biru!",
+      },
+    ],
     features: [
       {
         id: "elysium-planitia",
@@ -933,6 +1072,170 @@ export const PLANET_WORLDS: Planet[] = [
       },
     ],
   },
+  // 6. Jupiter: Cosmic Giant (v1.4)
+  {
+    id: "jupiter-astronomy",
+    order: 6,
+    celestialBody: "Jupiter",
+    celestialBodyMs: "Musytari",
+    subjectId: "astronomy",
+    subjectTitle: "Cosmic Giant & Deep Space Observation",
+    subjectTitleMs: "Gergasi Kosmik & Cerapan Angkasa Lepas",
+    themeColor: "#D97706",
+    accentColor: "#F59E0B",
+    textureType: "shader",
+    tagline: "King of planets: massive gravity, swirling storms, and deep space telemetry.",
+    taglineMs: "Raja segala planet: graviti gergasi, ribut bergelora, dan cerapan angkasa dalam.",
+    orbitalPeriodDays: 4332.59,
+    diameterKm: 139820,
+    radiusKm: 69911,
+    primaryFact: "More than 1,300 Earths would fit inside. Its Great Red Spot alone is an anticyclone wider than our entire planet.",
+    primaryFactMs: "Lebih 1,300 buah Bumi boleh muat di dalamnya. Bintik Merah Gergasinya sahaja merupakan antisiklon yang lebih lebar daripada seluruh planet Bumi.",
+    distanceFromSun: {
+      big: "778 million km",
+      bigMs: "778 juta km",
+      small: "from the Sun. 43 light-minutes.",
+      smallMs: "dari Matahari. 43 minit perjalanan cahaya.",
+    },
+    fieldNotes: [
+      {
+        title: "Fast spin",
+        titleMs: "Putaran pantas",
+        note: "The largest planet has the shortest day, under 10 hours. That spin is what stretches its clouds into bands.",
+        noteMs: "Planet terbesar ini mempunyai hari terpendek, bawah 10 jam. Putaran laju ini meregangkan awannya menjadi jaluran berlapis.",
+      },
+      {
+        title: "Moons",
+        titleMs: "Bulan-bulan satelit",
+        note: "It has more than 100 known moons. One of them, Ganymede, is bigger than the planet Mercury.",
+        noteMs: "Musytari memiliki lebih 100 bulan. Salah satunya, Ganymede, lebih besar daripada planet Utarid.",
+      },
+    ],
+    features: [],
+  },
+  // 7. Saturn: Ringed Jewel (v1.4)
+  {
+    id: "saturn-astronomy",
+    order: 7,
+    celestialBody: "Saturn",
+    celestialBodyMs: "Zuhal",
+    subjectId: "astronomy",
+    subjectTitle: "Ringed Jewel of the Solar System",
+    subjectTitleMs: "Permata Bergelang Sistem Suria",
+    themeColor: "#EAB308",
+    accentColor: "#FDE047",
+    textureType: "shader",
+    tagline: "Spectacular icy ring system, low density, and ancient atmospheric wonders.",
+    taglineMs: "Sistem gelang ais yang menakjubkan, ketumpatan rendah, dan keajaiban atmosfera purba.",
+    orbitalPeriodDays: 10759.22,
+    diameterKm: 116460,
+    radiusKm: 58232,
+    primaryFact: "Its icy rings span over 270,000 km across, yet in most places they are barely 10 meters thick.",
+    primaryFactMs: "Gelang aisnya menjangkau lebih 270,000 km, namun di kebanyakan tempat ketebalannya hampir tidak melebihi 10 meter.",
+    distanceFromSun: {
+      big: "1.4 billion km",
+      bigMs: "1.4 bilion km",
+      small: "from the Sun. 80 light-minutes.",
+      smallMs: "dari Matahari. 80 minit perjalanan cahaya.",
+    },
+    fieldNotes: [
+      {
+        title: "It would float",
+        titleMs: "Boleh terapung",
+        note: "Saturn is less dense than water. Given an ocean big enough, it would float.",
+        noteMs: "Zuhal kurang tumpat daripada air. Jika terdapat lautan yang cukup besar, Zuhal akan terapung di atasnya!",
+      },
+      {
+        title: "The rings",
+        titleMs: "Gelang ais",
+        note: "They are almost pure water ice, in pieces from dust grains to chunks the size of a house.",
+        noteMs: "Gelang-gelang ini hampir keseluruhannya adalah ais air tulen, daripada zarah debu halus hingga bongkah sebesar rumah.",
+      },
+    ],
+    features: [],
+  },
+  // 8. Uranus: Tilted Ice Giant (v1.4)
+  {
+    id: "uranus-astronomy",
+    order: 8,
+    celestialBody: "Uranus",
+    celestialBodyMs: "Uranus",
+    subjectId: "astronomy",
+    subjectTitle: "The Tilted Ice Giant",
+    subjectTitleMs: "Gergasi Ais Terbalik",
+    themeColor: "#06B6D4",
+    accentColor: "#22D3EE",
+    textureType: "shader",
+    tagline: "Rolling ice giant with extreme axial tilt and freezing methane haze.",
+    taglineMs: "Gergasi ais yang berputar condong dengan kecondongan paksi melampau dan kabus metana sejuk.",
+    orbitalPeriodDays: 30685.4,
+    diameterKm: 50724,
+    radiusKm: 25362,
+    primaryFact: "Probably knocked onto its side by an ancient collision, it rolls around the Sun tipped over by 98 degrees.",
+    primaryFactMs: "Kemungkinan besar dilanggar objek gergasi pada zaman purba, Uranus mengorbit Matahari dengan condong terbalik sebanyak 98 darjah.",
+    distanceFromSun: {
+      big: "2.9 billion km",
+      bigMs: "2.9 bilion km",
+      small: "from the Sun. 2 hours 40 minutes at light speed.",
+      smallMs: "dari Matahari. 2 jam 40 minit pada kelajuan cahaya.",
+    },
+    fieldNotes: [
+      {
+        title: "Long seasons",
+        titleMs: "Musim yang panjang",
+        note: "Because it lies on its side, each pole gets 42 years of sunlight followed by 42 years of darkness.",
+        noteMs: "Kerana kedudukannya yang terlentang condong, setiap kutub menerima 42 tahun cahaya matahari diikuti 42 tahun kegelapan.",
+      },
+      {
+        title: "Coldest",
+        titleMs: "Paling sejuk",
+        note: "It holds the lowest temperature measured on any planet, minus 224 °C. Lower than anything recorded on Neptune, even though Uranus is closer to the Sun.",
+        noteMs: "Uranus memegang rekod suhu terendah di planet iaitu -224 °C, lebih sejuk daripada Neptun walaupun Uranus lebih dekat dengan Matahari.",
+      },
+    ],
+    features: [],
+  },
+  // 9. Neptune: Supersonic Ice Giant (v1.4)
+  {
+    id: "neptune-astronomy",
+    order: 9,
+    celestialBody: "Neptune",
+    celestialBodyMs: "Neptun",
+    subjectId: "astronomy",
+    subjectTitle: "Supersonic Winds & Deep Azure Abyss",
+    subjectTitleMs: "Angin Supersonik & Jurang Biru Angkasa",
+    themeColor: "#2563EB",
+    accentColor: "#3B82F6",
+    textureType: "shader",
+    tagline: "Distant sapphire ice giant with supersonic winds and frozen methane clouds.",
+    taglineMs: "Gergasi ais nilam yang jauh dengan angin supersonik dan awan metana beku.",
+    orbitalPeriodDays: 60189,
+    diameterKm: 49244,
+    radiusKm: 24622,
+    primaryFact: "Supersonic winds drive clouds of frozen methane at 2,000 km/h here, the fastest winds measured on any planet in the solar system.",
+    primaryFactMs: "Angin supersonik menggerakkan awan metana beku selaju 2,000 km/j di sini—angin terpantas yang pernah diukur di mana-mana planet dalam sistem suria.",
+    distanceFromSun: {
+      big: "4.5 billion km",
+      bigMs: "4.5 bilion km",
+      small: "from the Sun. Sunlight needs 4 hours to get this far.",
+      smallMs: "dari Matahari. Cahaya matahari memerlukan 4 jam untuk tiba sejauh ini.",
+    },
+    fieldNotes: [
+      {
+        title: "Found by maths",
+        titleMs: "Ditemui melalui matematik",
+        note: "Neptune was predicted on paper before anyone saw it. Astronomers noticed Uranus being tugged off course and worked out where to point the telescope.",
+        noteMs: "Neptun diramalkan di atas kertas sebelum dilihat. Ahli astronomi mendapati orbit Uranus tertarik dan mengira tepat arah teleskop perlu dihalakan.",
+      },
+      {
+        title: "One lap",
+        titleMs: "Satu pusingan lengkap",
+        note: "Its year lasts 165 Earth years. Since it was discovered in 1846 it has gone around the Sun just once.",
+        noteMs: "Satu tahunnya bersamaan 165 tahun Bumi. Sejak ditemui pada tahun 1846, Neptun baru sahaja melengkapkan satu orbit mengelilingi Matahari.",
+      },
+    ],
+    features: [],
+  }
 ];
 
 /**

@@ -12,8 +12,8 @@ import {
 
 describe("Planetary Schema & Cartography", () => {
   describe("PLANET_WORLDS Subject Alignment (D-01)", () => {
-    it("contains exactly 5 worlds with correct IDs and subject mappings", () => {
-      expect(PLANET_WORLDS).toHaveLength(5);
+    it("contains the 5 core curriculum worlds with correct IDs and subject mappings", () => {
+      expect(PLANET_WORLDS.length).toBeGreaterThanOrEqual(5);
 
       const expectedPlanets: Array<{
         id: PlanetId;
@@ -64,18 +64,19 @@ describe("Planetary Schema & Cartography", () => {
 
     it("has unique planet IDs and valid order sequences (1 to 5)", () => {
       const ids = PLANET_WORLDS.map((p) => p.id);
-      expect(new Set(ids).size).toBe(5);
+      expect(new Set(ids).size).toBe(PLANET_WORLDS.length);
 
       const orders = PLANET_WORLDS.map((p) => p.order);
-      expect(orders.sort((a, b) => a - b)).toEqual([1, 2, 3, 4, 5]);
+      expect(orders.sort((a, b) => a - b)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
   });
 
   describe("Geological Features and Year Mapping (D-03)", () => {
-    it("defines exactly 7 features for each of the 5 planets (35 features total)", () => {
+    it("defines exactly 7 features for each of the 5 core planets (35 features total)", () => {
       let totalFeatures = 0;
+      const corePlanets = PLANET_WORLDS.filter((p) => p.subjectId !== "astronomy");
 
-      for (const planet of PLANET_WORLDS) {
+      for (const planet of corePlanets) {
         expect(planet.features, `Planet ${planet.id} must have 7 features`).toHaveLength(7);
         totalFeatures += planet.features.length;
 
@@ -99,7 +100,8 @@ describe("Planetary Schema & Cartography", () => {
     });
 
     it("ensures feature slugs are unique within each planet and non-empty", () => {
-      for (const planet of PLANET_WORLDS) {
+      const corePlanets = PLANET_WORLDS.filter((p) => p.subjectId !== "astronomy");
+      for (const planet of corePlanets) {
         const slugs = planet.features.map((f) => f.id);
         expect(new Set(slugs).size).toBe(7);
 
@@ -223,6 +225,51 @@ describe("Planetary Schema & Cartography", () => {
 
       const emptyFeatures = getFeaturesByPlanet("invalid-planet");
       expect(emptyFeatures).toEqual([]);
+    });
+  });
+
+  describe('Milestone v1.4 Astronomical Telemetry and Outer Planets', () => {
+    it('contains all 9 solar system celestial bodies in PLANET_WORLDS', () => {
+      expect(PLANET_WORLDS.length).toBe(9);
+      const ids = PLANET_WORLDS.map((w) => w.id);
+      expect(ids).toContain('earth-prompting');
+      expect(ids).toContain('moon-bm');
+      expect(ids).toContain('mars-english');
+      expect(ids).toContain('venus-matematik');
+      expect(ids).toContain('mercury-moral');
+      expect(ids).toContain('jupiter-astronomy');
+      expect(ids).toContain('saturn-astronomy');
+      expect(ids).toContain('uranus-astronomy');
+      expect(ids).toContain('neptune-astronomy');
+    });
+
+    it('provides valid authentic radius, distance, and field notes for each planet', () => {
+      PLANET_WORLDS.forEach((world) => {
+        expect(world.radiusKm).toBeGreaterThan(1000);
+        expect(world.primaryFact.length).toBeGreaterThan(10);
+        expect(world.primaryFactMs.length).toBeGreaterThan(10);
+        expect(world.distanceFromSun.big.length).toBeGreaterThan(3);
+        expect(world.distanceFromSun.bigMs.length).toBeGreaterThan(3);
+        expect(world.distanceFromSun.small.length).toBeGreaterThan(5);
+        expect(world.distanceFromSun.smallMs.length).toBeGreaterThan(5);
+        expect(world.fieldNotes.length).toBe(2);
+        world.fieldNotes.forEach((fn) => {
+          expect(fn.title.length).toBeGreaterThan(0);
+          expect(fn.titleMs.length).toBeGreaterThan(0);
+          expect(fn.note.length).toBeGreaterThan(15);
+          expect(fn.noteMs.length).toBeGreaterThan(15);
+        });
+      });
+    });
+
+    it('keeps 35 curriculum features for the 5 core worlds and 0 features for outer worlds', () => {
+      const coreWorlds = PLANET_WORLDS.filter((w) => w.subjectId !== 'astronomy');
+      expect(coreWorlds.length).toBe(5);
+      coreWorlds.forEach((w) => expect(w.features.length).toBe(7));
+
+      const outerWorlds = PLANET_WORLDS.filter((w) => w.subjectId === 'astronomy');
+      expect(outerWorlds.length).toBe(4);
+      outerWorlds.forEach((w) => expect(w.features.length).toBe(0));
     });
   });
 });

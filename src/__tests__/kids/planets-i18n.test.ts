@@ -101,6 +101,10 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
       "mars-english",
       "venus-matematik",
       "mercury-moral",
+      "jupiter-astronomy",
+      "saturn-astronomy",
+      "uranus-astronomy",
+      "neptune-astronomy",
     ];
 
     // Assert every world in PLANET_WORLDS exists in both dictionaries

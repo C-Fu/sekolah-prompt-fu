@@ -449,6 +449,22 @@
         "mercury-moral": {
           "title": "Utarid: Pendidikan Moral",
           "tagline": "Kawah basalt membina keteguhan integriti, empati dan keperibadian mulia."
+        },
+        "jupiter-astronomy": {
+          "title": "Musytari: Gergasi Kosmik",
+          "tagline": "Raja segala planet: graviti gergasi, ribut bergelora, dan cerapan angkasa dalam."
+        },
+        "saturn-astronomy": {
+          "title": "Zuhal: Permata Bergelang",
+          "tagline": "Sistem gelang ais yang menakjubkan, ketumpatan rendah, dan keajaiban atmosfera purba."
+        },
+        "uranus-astronomy": {
+          "title": "Uranus: Gergasi Ais Terbalik",
+          "tagline": "Gergasi ais yang berputar condong dengan kecondongan paksi melampau dan kabus metana sejuk."
+        },
+        "neptune-astronomy": {
+          "title": "Neptun: Gergasi Ais Nilam",
+          "tagline": "Gergasi ais nilam yang jauh dengan angin supersonik dan awan metana beku."
         }
       }
     }

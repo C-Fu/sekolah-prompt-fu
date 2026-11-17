@@ -449,6 +449,22 @@
         "mercury-moral": {
           "title": "Mercury: Moral Education",
           "tagline": "Sun-scorched basalt craters forged in integrity, empathy, and courage."
+        },
+        "jupiter-astronomy": {
+          "title": "Jupiter: Cosmic Giant",
+          "tagline": "King of planets: massive gravity, swirling storms, and deep space telemetry."
+        },
+        "saturn-astronomy": {
+          "title": "Saturn: Ringed Jewel",
+          "tagline": "Spectacular icy ring system, low density, and ancient atmospheric wonders."
+        },
+        "uranus-astronomy": {
+          "title": "Uranus: Tilted Ice Giant",
+          "tagline": "Rolling ice giant with extreme axial tilt and freezing methane haze."
+        },
+        "neptune-astronomy": {
+          "title": "Neptune: Supersonic Ice Giant",
+          "tagline": "Distant sapphire ice giant with supersonic winds and frozen methane clouds."
         }
       }
     }
