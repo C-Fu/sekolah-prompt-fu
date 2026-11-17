@@ -12,7 +12,7 @@
 | 19 | Planetary Schema & Astronomical Telemetry Data | Enrich celestial data models with bilingual facts, dimensions, and field notes | `DATA-01`, `DATA-02`, `DATA-03` | [x] 3 |
 | 20 | 3D Solar System & Planetary Explorer Expansion | Expand Three.js Solar System scene with all planets, orbits, and ring structures | `EXPLR-01`, `EXPLR-02`, `EXPLR-03` | [x] 3 |
 | 21 | Telemetry HUD & Astronomical Field Notes | Update HUD with cycling "Tahukah Anda?" cards and observation mode | `HUD-01`, `HUD-02` | [x] 2 |
-| 22 | Universal Allo Typography Implementation | Fully implement Allo variable font across all UI elements and MDX lessons | `ALLO-01`, `ALLO-02` | 2 |
+| 22 | Universal Allo Typography Implementation | Fully implement Allo variable font across all UI elements and MDX lessons | `ALLO-01`, `ALLO-02` | [x] 2 |
 | 23 | Milestone Verification & Static Release Certification | Certify test suites, static build export, closure check, and zero regressions | `VERIF-01`, `VERIF-02` | 2 |
 
 ---

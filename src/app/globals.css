@@ -1,3 +1,36 @@
+/* Allo Typography: Variable Web Font (https://allo.joshpuckett.me) */
+@font-face {
+  font-family: 'Allo';
+  src: url('/fonts/allo/AlloVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Allo';
+  src: url('/fonts/allo/Allo-Oblique.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Allo';
+  src: url('/fonts/allo/Allo-MediumOblique.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Allo';
+  src: url('/fonts/allo/Allo-BoldOblique.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -7,7 +40,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: "Allo", system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-arabic: var(--font-arabic);
   --font-display: var(--font-playfair);

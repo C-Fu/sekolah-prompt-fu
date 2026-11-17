@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schoolbell } from "next/font/google";
+// Allo variable webfont loaded via globals.css
 import { getMessages, getLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
 import { isRtlLocale } from "@/lib/i18n/config";
@@ -11,11 +11,8 @@ import { LevelProvider } from "@/components/kids/providers/level-context";
 import { PlanetBackground } from "@/components/kids/layout/planet-background";
 import "./globals.css";
 
-const kidsFont = Schoolbell({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-kids",
-});
+// Kids typography uses Allo variable font defined in globals.css
+const kidsFontClass = "font-sans";
 
 
 export const metadata: Metadata = {
@@ -95,12 +92,12 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={isRtl ? "rtl" : "ltr"} suppressHydrationWarning>
-      <body className={`${kidsFont.className} antialiased`}>
+      <body className="font-sans antialiased">
         <Providers locale={locale} messages={messages}>
           <LevelProvider>
             <MusicProvider>
               <LocaleDirection
-                className={`fixed inset-0 flex flex-col text-xl light ${kidsFont.className}`}
+                className="fixed inset-0 flex flex-col text-xl light font-sans"
                 style={{ colorScheme: "light" }}
               >
                 {/* Dynamic Planet Themed Celestial Background */}
