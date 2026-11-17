@@ -12,7 +12,8 @@
 | 19 | Planetary Schema & Astronomical Telemetry Data | Enrich celestial data models with bilingual facts, dimensions, and field notes | `DATA-01`, `DATA-02`, `DATA-03` | 3 |
 | 20 | 3D Solar System & Planetary Explorer Expansion | Expand Three.js Solar System scene with all planets, orbits, and ring structures | `EXPLR-01`, `EXPLR-02`, `EXPLR-03` | 3 |
 | 21 | Telemetry HUD & Astronomical Field Notes | Update HUD with cycling "Tahukah Anda?" cards and observation mode | `HUD-01`, `HUD-02` | 2 |
-| 22 | Milestone Verification & Static Release Certification | Certify test suites, static build export, closure check, and zero regressions | `VERIF-01`, `VERIF-02` | 2 |
+| 22 | Universal Allo Typography Implementation | Fully implement Allo variable font across all UI elements and MDX lessons | `ALLO-01`, `ALLO-02` | 2 |
+| 23 | Milestone Verification & Static Release Certification | Certify test suites, static build export, closure check, and zero regressions | `VERIF-01`, `VERIF-02` | 2 |
 
 ---
 
@@ -48,7 +49,14 @@
 1. The Telemetry HUD displays authentic radius, distance, and 3 cycling field notes with interactive or timed rotation.
 2. Outer planets without active KSSR missions show an educational "Astronomical Observation" badge and status instead of broken mission buttons.
 
-### Phase 22: Milestone Verification & Static Release Certification
+### Phase 22: Universal Allo Typography Implementation
+**Goal:** Fully implement the Allo font family across all elements, components, and typography stylesheets in the app, creating a cheerful, playful, cheeky yet mature look for kids and adults.
+**Requirements:** `ALLO-01`, `ALLO-02`
+**Success Criteria:**
+1. `allo-font` variable web fonts are integrated into root layout, CSS variables, Tailwind configuration, and MDX prose styles.
+2. All buttons, headings, navigation links, HUD cards, badges, and body copy render with Allo font with balanced roundness, playfulness, and readability.
+
+### Phase 23: Milestone Verification & Static Release Certification
 **Goal:** Validate all unit and integration tests, verify TypeScript, run bundle closure and Malay vocabulary checks, and certify 100% static export.
 **Requirements:** `VERIF-01`, `VERIF-02`
 **Success Criteria:**

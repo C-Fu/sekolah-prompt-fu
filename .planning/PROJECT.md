@@ -49,15 +49,16 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 **Phases Completed:** 17 phases total across v1.0, v1.1, v1.2, and v1.3.  
 **Verification:** 31 test suites, 347/347 unit and integration tests passing; clean production build with 100% static export.
 
-## Current Milestone: v1.4 Planetary Assets, Data & Solar System Explorer Expansion
+## Current Milestone: v1.4 Planetary Assets, Data, Solar System Explorer Expansion & Allo Typography
 
-**Goal:** Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and informational telemetry with the rich astronomical textures, verified data, and field notes from `how-big-is-big`, while retaining core lesson structures.
+**Goal:** Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and informational telemetry with the rich astronomical textures, verified data, and field notes from `how-big-is-big`, and fully implement the friendly, playful Allo typeface across all app UI elements.
 
 **Target features:**
 - Asset & Texture Upgrades: Import, resize, and optimize high-fidelity planetary texture maps (Mercury, Venus, Mars, Jupiter, Saturn, Neptune) with CC-BY-4.0 Solar System Scope attribution.
 - Planetary Schema & Data Enrichment: Enrich `src/lib/kids/planets.ts` with authentic astronomical radii, distances, facts, and bilingual field notes (`LEARN`) from `how-big-is-big`.
 - Solar System & Explorer Expansion: Update 3D Solar System overview and cartography scenes to display complete, accurately textured planetary bodies, orbital paths, and rings.
 - Telemetry HUD Cosmic Facts: Display astronomical field notes ("Tahukah Anda?" / "Did You Know?") and real distance/size telemetry in `PlanetaryHud`.
+- Complete Allo Typography Integration: Replace Schoolbell/legacy fonts with Josh Puckett's Allo typeface (`allo-font` / variable web font) across all app elements, achieving a playful, cheerful, cheeky yet mature look for kids and adults.
 
 ## Requirements
 
@@ -89,6 +90,7 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - [ ] `PLANET-DATA`: Enrich planetary schemas and types with verified dimensions, astronomical facts, and bilingual field notes.
 - [ ] `PLANET-EXPLORER`: Expand 3D Solar System overview and cartography scenes to display complete celestial bodies, orbits, and ring geometry.
 - [ ] `PLANET-HUD`: Update Telemetry HUD to display authentic astronomical data cards and cycling field notes without breaking lesson launchers.
+- [ ] `TYPO-ALLO`: Fully integrate Allo font family across all components, layout, typography system, buttons, and HUD for a playful, cheerful, balanced aesthetic.
 - [ ] `PLANET-VERIFY`: Verify all test suites, static build export (`out/`), closure check, and zero regression across existing levels.
 
 ### Deferred / Backlog

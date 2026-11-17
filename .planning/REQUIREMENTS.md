@@ -23,6 +23,10 @@ Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and info
 - [ ] **HUD-01**: User sees an enhanced Telemetry HUD displaying authentic distance-from-sun, radius, and cycling field notes alongside existing provincial navigation.
 - [ ] **HUD-02**: Celestial bodies without active KSSR prompt missions (e.g., outer gas giants) clearly show an educational "Astronomical Observation / Exploration" status instead of broken mission buttons.
 
+### Complete Allo Typography Integration
+- [ ] **ALLO-01**: User experiences Josh Puckett's Allo font family (`allo-font`) rendered consistently across all application surfaces (root layout, headings, body text, buttons, HUD, game widgets, and lesson MDX content), establishing a cheerful, playful, cheeky yet mature look without looking childish or alienating adult readers.
+- [ ] **ALLO-02**: Allo font variants (weights, styles) are loaded via variable web fonts with optimal CSS font-display, zero layout shift (CLS), fallback font stacks, and zero external runtime Google Font dependencies.
+
 ### Quality, Verification & Performance
 - [ ] **VERIF-01**: All existing test suites pass (including Vitest unit/integration tests and responsive HUD specs).
 - [ ] **VERIF-02**: `npm run verify` certifies TypeScript type-checking, ESLint (0 errors), vocabulary checks, module closure, and 100% static export (`out/planets/index.html`).
@@ -47,5 +51,7 @@ Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and info
 - **EXPLR-03**: Phase 20
 - **HUD-01**: Phase 21
 - **HUD-02**: Phase 21
-- **VERIF-01**: Phase 22
-- **VERIF-02**: Phase 22*
+- **ALLO-01**: Phase 22
+- **ALLO-02**: Phase 22
+- **VERIF-01**: Phase 23
+- **VERIF-02**: Phase 23*

@@ -6,7 +6,7 @@ status: planning
 last_updated: "2026-11-17T08:00:40.178Z"
 last_activity: 2026-11-17
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -20,7 +20,7 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-11-17)
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.  
-**Current status:** Milestone v1.4 initialized with 5 phases ready for execution.
+**Current status:** Milestone v1.4 updated with 6 phases ready for execution.
 
 ## Performance Metrics
 
@@ -41,8 +41,8 @@ See: `.planning/PROJECT.md` (updated 2026-11-17)
 
 ## Session Continuity
 
-Last session: 2026-11-17T16:02:00+08:00  
-Stopped at: Milestone v1.4 initialized and roadmap committed  
+Last session: 2026-11-17T16:06:00+08:00  
+Stopped at: Milestone v1.4 scope expanded with Allo typography (6 phases)  
 Next action: Run `/gsd-plan-phase 18` to begin Phase 18 (Planetary Texture & Asset Pipeline).
 
 ## Current Position
@@ -50,4 +50,4 @@ Next action: Run `/gsd-plan-phase 18` to begin Phase 18 (Planetary Texture & Ass
 Phase: 18 - Planetary Texture & Asset Pipeline
 Plan: —
 Status: Ready to plan
-Last activity: 2026-11-17 — Milestone v1.4 roadmap created (5 phases)
+Last activity: 2026-11-17 — Milestone v1.4 roadmap updated (6 phases)
