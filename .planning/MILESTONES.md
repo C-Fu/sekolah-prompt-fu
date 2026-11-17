@@ -1,10 +1,15 @@
 # Milestones
 
-## v1.3 Kid-Friendly UX, Game Feel & Visual Polish (In Progress)
+## v1.3 Kid-Friendly UX, Game Feel & Visual Polish (Shipped: 2026-11-17)
 
-**Milestone goal:** Make the existing learning journey clearer and more satisfying for primary-school students while improving visual consistency across the core screens.
-**Phase range:** Phases 14–17 (roadmap: `.planning/ROADMAP.md`)
-**Requirements:** 12 v1.3 requirements, all mapped to exactly one phase.
+**Phases completed:** 4 phases (Phases 14–17), 23 plans, 42 tasks  
+**Code Changes:** 173 files changed, 15,150 insertions(+), 1,456 deletions(-)
+
+**Key accomplishments:**
+- **Journey Clarity & Shared Bilingual Language:** Universal `KidsHeader` providing unambiguous home navigation, language switching, and audio controls across all game modes (Story, Coding, Scratchpad); equal destination choice on Title screen with two-step welcome flow and explicit route labels; contextual section titles and ordinal progress indicators across all 23 lessons with zero silent locale fallback; bidirectional origin tracking returning cadets back to their originating hub (Earth Map vs. Planetary Explorer).
+- **Mobile-First Responsive Accessibility:** Guaranteed full operability from narrow 320px mobile viewports up to desktop without horizontal overflow or clipped controls; touch targets strictly conforming to WCAG 2.5.5 minimums (≥ 44×44px); distinct high-contrast two-tone focus outline (3px white, 3px dark ring) providing unambiguous keyboard focus indicators; full keyboard navigation and screen-reader `role="status"` live announcements across all activity types.
+- **Proportional, Reduced-Motion-Safe Game Feel:** Tactile micro-press feedback, responsive drop animations, and starburst effects on progress changes; full OS and browser `prefers-reduced-motion: reduce` compliance using the unified `useReducedMotion` hook and CSS fallbacks; non-blocking celebratory victory sequence with multi-cue sensory feedback (visual badges, sound cues, text alternatives).
+- **Visual Consistency & Release Certification:** Harmonized typography scale, pixel-art border styling, and planet palette tokens across all 5 celestial worlds; clean `npm run verify` pass: TypeScript zero errors, ESLint zero errors, import closure verified across 406 modules, Malay vocabulary verified across 23 lessons, and 100% static export inspection across all 31 routes.
 
 ---
 
@@ -48,5 +53,3 @@
 - Kids game promoted to application root (/, /map, /level/[slug]), music bundled locally, and 100% static export built for GitHub Pages.
 - Full Bahasa Melayu localization across all 19 original interactive MDX levels.
 - Committed Node-stdlib `scripts/verify-project.js` that certifies TypeScript, Vitest, and inspects `out/`.
-
----

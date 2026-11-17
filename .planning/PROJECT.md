@@ -33,18 +33,21 @@ The application is built 100% static (`output: 'export'`) with client-side persi
    - All levels authored in both BM (`src/content/kids/ms/`) and English (`src/content/kids/en/`).
    - Lesson backgrounds match each planet's aesthetic and theme colors.
 
-5. **Quality Gates & Clean Imports:**
+5. **Accessibility & Responsive Polish:**
+   - Mobile-first layouts with zero horizontal clipping down to 320px screens.
+   - Minimum 44×44px interactive hit targets conforming to WCAG 2.5.5.
+   - High-contrast two-tone keyboard focus indicators and live ARIA announcements.
+   - Reduced-motion-safe animations with full respects for user OS and browser preferences.
+
+6. **Quality Gates & Clean Imports:**
    - Dedicated scripts for import closure (`npm run check:closure`) and vocabulary checks (`npm run check:vocab`) wired into CI.
    - Verified zero regression with `npm run verify` across all 23 level routes, `/`, `/map`, `/planets`, and static assets.
 
-## Current Milestone: v1.3 Kid-Friendly UX, Game Feel & Visual Polish
+## Current State
 
-**Goal:** Make the existing learning journey clearer and more satisfying for primary-school students while improving visual consistency across the core screens.
-
-**Target features:**
-- Improve kid-friendly usability and clarity across the title, planetary hub, map, and lesson experience.
-- Add purposeful, proportional game feel to meaningful actions, transitions, progress, and rewards.
-- Refine visual consistency and finish while preserving the established Sekolah Prompt-Fu identity and core flows.
+**Shipped Version:** v1.3 (2026-11-17)  
+**Phases Completed:** 17 phases total across v1.0, v1.1, v1.2, and v1.3.  
+**Verification:** 31 test suites, 347/347 unit and integration tests passing; clean production build with 100% static export.
 
 ## Requirements
 
@@ -66,37 +69,24 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - ✓ Reactive `PlanetBackground` component adapting ambient sky, dust, clouds, and stars per planet, with accent-tinted lesson navigation borders — v1.2
 - ✓ Realigned curriculum to 23 levels across Worlds 1–9 and authored 4 subject lessons with minimum 7 interactive `<Section>` stages and `<LevelComplete>` celebration — v1.2
 - ✓ Added explicit inspection for `out/planets/index.html` to `scripts/verify-project.js`, eliminated all ESLint errors (0 errors), passed Malay vocabulary guard on 23 MDX files, verified 406 modules in closure, and certified 245/245 tests green with 100% static export — v1.2
+- ✓ Journey clarity with universal header navigation, equal destination choices, section titles and ordinal progress without silent locale fallbacks (`CLAR-01`, `CLAR-02`, `CLAR-03`) — v1.3
+- ✓ Mobile-first responsive layout (320px–428px), 44px min hit targets, high-contrast two-tone focus outline, and screen-reader accessibility (`A11Y-01`, `A11Y-02`, `A11Y-03`, `A11Y-04`) — v1.3
+- ✓ Proportional, reduced-motion-safe game feel, tactile feedback, and celebratory overlays (`FEEL-01`, `FEEL-02`, `FEEL-03`) — v1.3
+- ✓ Visual consistency audit across typography scale, pixel borders, palette harmony, and static export release certification (`VIS-01`, `VIS-02`) — v1.3
 
 ### Active
-- [ ] Make the core learning journey more intuitive and kid-friendly across all primary screens — v1.3
-- [ ] Add clear, satisfying feedback to meaningful interactions, transitions, and rewards — v1.3
-- [ ] Improve visual consistency and finish without replacing the established brand or core flows — v1.3
+*(No active requirements. Milestone v1.3 complete. Next requirements will be defined during next milestone initialization).*
+
+### Deferred / Backlog
+- `CLAR-04`: Usability testing sessions with target age group (7–12) and educators.
+- `A11Y-05`: In-app dynamic text-size preference control beyond standard browser zoom.
 
 ### Out of Scope
 - Real-time online multiplayer or backend user accounts.
 - Live paid LLM API calls with real API keys during gameplay (game uses pre-computed interactive simulations, validator heuristics, and feedback).
 - Photorealistic high-poly NASA 8K textures that blow up static bundle size.
 
+---
+
 ## Context
-Shipped **v1.2** on 2026-11-09 (Phases 09–13; 11 plans, 23 tasks). Total test suite is 245/245; `npm run verify` certifies TypeScript, Vitest, and static export inspection across 31 routes including `/planets`, `/`, `/map`, and 23 level routes.
-
----
-## Evolution
-
-This document evolves at phase transitions and milestone boundaries.
-
-**After each phase transition** (via `/gsd-transition`):
-1. Requirements invalidated? → Move to Out of Scope with reason
-2. Requirements validated? → Move to Validated with phase reference
-3. New requirements emerged? → Add to Active
-4. Decisions to log? → Add to Key Decisions
-5. "What This Is" still accurate? → Update if drifted
-
-**After each milestone** (via `/gsd-complete-milestone`):
-1. Full review of all sections
-2. Core Value check — still the right priority?
-3. Audit Out of Scope — reasons still valid?
-4. Update Context with current state
-
----
-*Last updated: 2026-11-09 (Milestone v1.3 started)*
+Shipped **v1.3** on 2026-11-17 (Phases 14–17; 23 plans, 42 tasks). Total test suite is 347/347; `npm run verify` certifies TypeScript, Vitest, and static export inspection across all routes.
