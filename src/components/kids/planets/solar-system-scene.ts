@@ -118,6 +118,10 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
     { id: 'venus-matematik', radius: 0.75, dist: 9.5, tex: 'venus_surface.jpg', speed: 0.3 },
     { id: 'earth-prompting', radius: 0.85, dist: 14.5, tex: 'earth.jpg', speed: 0.22 },
     { id: 'mars-english', radius: 0.60, dist: 20.0, tex: 'mars.jpg', speed: 0.16 },
+    { id: 'jupiter-astronomy', radius: 1.45, dist: 26.5, tex: 'jupiter.jpg', speed: 0.11 },
+    { id: 'saturn-astronomy', radius: 1.25, dist: 33.0, tex: 'saturn.jpg', speed: 0.08 },
+    { id: 'uranus-astronomy', radius: 0.95, dist: 39.5, tex: '', speed: 0.06 },
+    { id: 'neptune-astronomy', radius: 0.90, dist: 46.0, tex: 'neptune.jpg', speed: 0.05 },
   ];
 
   // Map to store world metadata for theme colors
@@ -137,7 +141,7 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
 
     const world = worldMap.get(cfg.id);
     const pGeo = new THREE.SphereGeometry(cfg.radius, 32, 24);
-    const pTex = loadTextureSafe(`/images/planets/${cfg.tex}`, trackedTextures);
+    const pTex = cfg.tex ? loadTextureSafe(`/images/planets/${cfg.tex}`, trackedTextures) : undefined;
     const pMat = new THREE.MeshStandardMaterial({
       map: pTex,
       color: pTex ? 0xffffff : new THREE.Color(world?.themeColor || 0xffffff),
@@ -145,6 +149,24 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
     });
     const pMesh = new THREE.Mesh(pGeo, pMat);
     pMesh.name = `planet-${cfg.id}`;
+
+    // Saturn ring system (lightweight, minimal CPU/GPU overhead)
+    if (cfg.id === 'saturn-astronomy') {
+      const innerR = cfg.radius * 1.35;
+      const outerR = cfg.radius * 2.35;
+      const ringGeo = new THREE.RingGeometry(innerR, outerR, 32);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0xe2c592,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.75,
+      });
+      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+      ringMesh.name = 'ring-saturn-astronomy';
+      // 26.7-degree axial tilt in radians (approx 0.466 rad) rotated on X
+      ringMesh.rotation.x = Math.PI * 0.5 + 0.466;
+      pMesh.add(ringMesh);
+    }
 
     // Initial staggered angle for visual harmony
     const initialAngle = index * (Math.PI * 0.55);

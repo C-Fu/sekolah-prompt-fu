@@ -28,6 +28,14 @@ export function getPlanetTexturePath(planet: Planet): string {
       return '/images/planets/mercury.jpg';
     case 'venus-matematik':
       return '/images/planets/venus_surface.jpg';
+    case 'jupiter-astronomy':
+      return '/images/planets/jupiter.jpg';
+    case 'saturn-astronomy':
+      return '/images/planets/saturn.jpg';
+    case 'uranus-astronomy':
+      return ''; // Procedural atmosphere
+    case 'neptune-astronomy':
+      return '/images/planets/neptune.jpg';
     default: {
       const lower = planet.celestialBody.toLowerCase();
       if (lower.includes('earth')) return '/images/planets/earth.jpg';
@@ -35,6 +43,9 @@ export function getPlanetTexturePath(planet: Planet): string {
       if (lower.includes('mars')) return '/images/planets/mars.jpg';
       if (lower.includes('mercury')) return '/images/planets/mercury.jpg';
       if (lower.includes('venus')) return '/images/planets/venus_surface.jpg';
+      if (lower.includes('jupiter')) return '/images/planets/jupiter.jpg';
+      if (lower.includes('saturn')) return '/images/planets/saturn.jpg';
+      if (lower.includes('neptune')) return '/images/planets/neptune.jpg';
       return '/images/planets/earth.jpg';
     }
   }

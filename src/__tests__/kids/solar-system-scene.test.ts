@@ -8,10 +8,10 @@ import {
 } from '@/components/kids/planets/planetary-interaction';
 
 describe('Solar System Overview Scene (solar-system-scene.ts)', () => {
-  it('buildSolarSystemScene creates exactly 5 interactive celestial meshes matching PLANET_WORLDS IDs', () => {
+  it('buildSolarSystemScene creates all 9 interactive celestial meshes matching PLANET_WORLDS IDs', () => {
     const { scene, planetMeshes } = buildSolarSystemScene();
 
-    expect(planetMeshes).toHaveLength(5);
+    expect(planetMeshes).toHaveLength(9);
 
     const planetIds = planetMeshes.map((m) => m.userData.planetId);
     expect(planetIds).toContain('mercury-moral');
@@ -19,6 +19,16 @@ describe('Solar System Overview Scene (solar-system-scene.ts)', () => {
     expect(planetIds).toContain('earth-prompting');
     expect(planetIds).toContain('moon-bm');
     expect(planetIds).toContain('mars-english');
+    expect(planetIds).toContain('jupiter-astronomy');
+    expect(planetIds).toContain('saturn-astronomy');
+    expect(planetIds).toContain('uranus-astronomy');
+    expect(planetIds).toContain('neptune-astronomy');
+
+    // Saturn ring mesh verification
+    const saturnMesh = planetMeshes.find((m) => m.userData.planetId === 'saturn-astronomy');
+    expect(saturnMesh).toBeDefined();
+    const saturnRing = saturnMesh?.children.find((c) => c.name === 'ring-saturn-astronomy');
+    expect(saturnRing).toBeDefined();
 
     // Central Sun verification
     const sunMesh = scene.getObjectByName('sun') as THREE.Mesh;
@@ -48,7 +58,7 @@ describe('Solar System Overview Scene (solar-system-scene.ts)', () => {
         orbitTracks.push(obj);
       }
     });
-    expect(orbitTracks).toHaveLength(5);
+    expect(orbitTracks).toHaveLength(9);
   });
 
   it('orbital distances follow ascending radial order (Mercury dist < Venus dist < Earth dist < Mars dist)', () => {
