@@ -45,9 +45,14 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 
 ## Current State
 
-**Shipped Version:** v1.3 (2026-11-17)  
-**Phases Completed:** 17 phases total across v1.0, v1.1, v1.2, and v1.3.  
-**Verification:** 31 test suites, 347/347 unit and integration tests passing; clean production build with 100% static export.
+**Shipped Version:** v1.4 (2026-11-17)  
+**Phases Completed:** 23 phases total across v1.0, v1.1, v1.2, v1.3, and v1.4.  
+**Verification:** 32 test suites, 354/354 unit and integration tests passing; clean production build with 100% static export.
+
+7. **Universal Allo Typography & High-Res Astronomical Pipeline (v1.4):**
+   - Self-hosted Josh Puckett's `allo-font` variable webfonts in `public/fonts/allo/` with friendly roundness (`ROND: 50`) and optical sizing for a cheerful, playful, cheeky aesthetic. Removed external Google Fonts.
+   - High-fidelity CC BY 4.0 planetary textures for Mercury, Venus surface, Mars, Jupiter, Saturn, and Neptune from `how-big-is-big` with strictly bounded bundle size (< 800 KB).
+   - Expanded 3D Solar System view to 9 celestial bodies, tilted Saturn rings, and educational "Akan Datang" placeholders for future KSSR curricula on outer worlds.
 
 ## Current Milestone: v1.4 Planetary Assets, Data, Solar System Explorer Expansion & Allo Typography
 

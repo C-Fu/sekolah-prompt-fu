@@ -1,5 +1,20 @@
 # Milestones
 
+## v1.4 Planetary Assets, Data, Solar System Explorer Expansion & Allo Typography (Shipped: 2026-11-17)
+
+**Phases completed:** 6 phases (Phases 18–23), 6 plans, 16 tasks  
+**Code Changes:** 141 files changed, 1,340 insertions(+), 87 deletions(-)
+
+**Key accomplishments:**
+- **High-Resolution Equirectangular Texture Pipeline:** Integrated high-fidelity planetary surface textures from `how-big-is-big` (Mercury, Venus surface, Mars, Jupiter, Saturn, Neptune) with CC BY 4.0 Solar System Scope attribution in `ATTRIBUTION.md`. Managed texture resolutions and compression via ffmpeg to strictly honor the < 800 KB total texture budget. Procedural atmosphere shader for Uranus.
+- **Planetary Schema & Astronomical Telemetry:** Augmented `Planet` interface with physical radii in km, distances from Sun in AU/km, and scientific telemetry. Registered all 9 Solar System bodies while preserving 100% of the 35 authentic geological features across the 5 core KSSR curriculum planets. Added human-reviewed bilingual observation facts.
+- **3D Solar System & Planetary Cartography:** Upgraded Three.js scenes to render Mercury, Venus, Earth-Moon, Mars, Jupiter, Saturn, Uranus, and Neptune with accurate relative orbits. Modeled realistic, lightweight 26.7°-inclined ring geometry for Saturn in both Solar System overview and Cartography modes.
+- **Telemetry HUD & Future Curriculum Placeholders:** Enhanced `PlanetaryHud` with telemetry metrics and primary observation facts. Outer planets display an educational "Akan Datang / Coming Soon" badge indicating future subject curriculum releases.
+- **Universal Allo Typography Integration:** Self-hosted Josh Puckett's `allo-font` variable webfonts in `public/fonts/allo/` and integrated them universally across all layout, headings, buttons, HUD, widgets, and MDX prose. Tuned friendly roundness (`ROND: 50`) and optical sizing for a playful, cheerful, cheeky yet mature look for kids and adult educators. Completely removed external Google Fonts for 100% offline static compatibility.
+- **Milestone Release Certification:** 32 test files and 354/354 unit/integration tests green. Zero TypeScript and ESLint errors. Clean Malay vocabulary guard on 23 MDX files. Module closure verified across 412 modules. Prerendered 100% static export across all 31 routes (`out/planets/index.html`).
+
+---
+
 ## v1.3 Kid-Friendly UX, Game Feel & Visual Polish (Shipped: 2026-11-17)
 
 **Phases completed:** 4 phases (Phases 14–17), 23 plans, 42 tasks  
