@@ -165,7 +165,27 @@ export function PlanetaryHud({
           data-testid="telemetry-card"
           className="w-full md:max-w-lg min-h-0 max-h-56 sm:max-h-72 md:max-h-[380px] p-3 sm:p-4 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-white/15 shadow-2xl text-white flex flex-col justify-between overflow-hidden"
         >
-          {planet.features.length === 0 || !activeFeature ? (
+          {planet.subjectId === 'astronomy' ? (
+            <div data-testid="coming-soon-card" className="p-4 text-center my-auto space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold tracking-wide">
+                <span>🚀</span>
+                <span>{t('comingSoonTitle')}</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+                {t('comingSoonDesc')}
+              </p>
+              {planet.primaryFact && (
+                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-left">
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-cyan-300 block mb-0.5">
+                    {t('comingSoonFactHeading')}
+                  </span>
+                  <p className="text-[11px] sm:text-xs text-slate-300 italic leading-relaxed">
+                    &ldquo;{isMs ? planet.primaryFactMs : planet.primaryFact}&rdquo;
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : planet.features.length === 0 || !activeFeature ? (
             <div data-testid="empty-feature-card" className="p-4 text-center my-auto">
               <h2 className="text-sm sm:text-base font-bold text-amber-300">
                 {t('emptyRegionsHeading')}

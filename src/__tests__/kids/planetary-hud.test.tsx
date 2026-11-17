@@ -301,4 +301,23 @@ describe('PlanetaryHud Component (THREE-03)', () => {
     expect(screen.queryByRole('button', { name: /mula misi/i })).not.toBeInTheDocument();
     expect(screen.getByTestId('no-mission-reason')).toHaveTextContent('Belum ada misi untuk kawasan ini.');
   });
+
+  it('renders Coming Soon card for outer worlds with zero features', () => {
+    const jupiter = PLANET_WORLDS.find((w) => w.id === 'jupiter-astronomy')!;
+    expect(jupiter).toBeDefined();
+
+    render(
+      <PlanetaryHud
+        planet={jupiter}
+        onSelectFeature={() => {}}
+        onBackToOrbit={() => {}}
+        onLaunchMission={() => {}}
+      />
+    );
+
+    const comingSoonCard = screen.getByTestId('coming-soon-card');
+    expect(comingSoonCard).toBeInTheDocument();
+    expect(screen.getByText(/Coming Soon/i)).toBeInTheDocument();
+    expect(screen.getByText(/future updates/i)).toBeInTheDocument();
+  });
 });
