@@ -137,25 +137,21 @@ export function LevelProvider({
     }
   }, [initialSlug]);
 
-  // Reset transient state when the level (mount tree) changes. Completed levels/stars
-  // live in slug-scoped kids-progress and are intentionally preserved (01-17 owns
-  // clearing locale-incompatible section completions). Skipped on the initial mount so
-  // it cannot wipe Sections that registered in their own mount-era layout effects.
+  // Reset transient cursor and completion state when the level changes.
+  // We do NOT wipe recordsRef/orderingRef/indexRef here because child <Section>
+  // components register into recordsRef in their useLayoutEffect. Wiping recordsRef
+  // here in useEffect would destroy the registrations of the newly mounted Sections!
+  // Section lifecycle (mount/unmount) is cleanly handled by registerSection and unregisterSection.
   const didMountRef = useRef(false);
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
       return;
     }
-    recordsRef.current = new Map();
-    orderingRef.current = [];
-    indexRef.current = new Map();
     completedRef.current = new Set();
-    setOrdering([]);
     setCurrentSection(0);
     setCompletedSections(new Set());
     setSectionsWithRequirements(new Set());
-    setRegistryVersion((v) => v + 1);
   }, [levelSlug]);
 
   const registerSection = useCallback(

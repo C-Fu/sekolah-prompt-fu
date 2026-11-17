@@ -81,6 +81,18 @@ function LevelContentInner({
   const [state, setState] = useState<LoadState>({ status: "loading" });
   const [highestVisitedSection, setHighestVisitedSection] = useState(0);
   const [contentCommitted, setContentCommitted] = useState(false);
+  const contentScrollRef = useRef<HTMLDivElement>(null);
+
+  // Always reset scroll to top when changing section or level
+  useEffect(() => {
+    if (contentScrollRef.current) {
+      if (typeof contentScrollRef.current.scrollTo === "function") {
+        contentScrollRef.current.scrollTo({ top: 0, behavior: "instant" });
+      } else {
+        contentScrollRef.current.scrollTop = 0;
+      }
+    }
+  }, [currentSection, levelSlug]);
 
   // Set the level slug and track the level view.
   useEffect(() => {
@@ -216,7 +228,10 @@ function LevelContentInner({
   return (
     <div className="h-full flex flex-col">
       {/* Content area — all Sections stay mounted; the active one is visible. */}
-      <div className="flex-1 min-h-0 overflow-y-auto scroll-pb-20 sm:scroll-pb-24 flex flex-col items-center justify-center p-4">
+      <div
+        ref={contentScrollRef}
+        className="flex-1 min-h-0 overflow-y-auto scroll-pb-20 sm:scroll-pb-24 flex flex-col items-center p-4"
+      >
         {/* Active Section Context Header per D-07 & D-11 (No breadcrumbs) */}
         {currentSectionTitle && (
           <div
