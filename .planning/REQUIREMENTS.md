@@ -37,4 +37,15 @@ Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and info
 - Stellar, interstellar, or galactic objects outside the Solar System (stars, nebulae, galaxies from `how-big-is-big`).
 
 ## Traceability
-*(To be filled by the roadmap)*
+- **AST-01**: Phase 18
+- **AST-02**: Phase 18
+- **DATA-01**: Phase 19
+- **DATA-02**: Phase 19
+- **DATA-03**: Phase 19
+- **EXPLR-01**: Phase 20
+- **EXPLR-02**: Phase 20
+- **EXPLR-03**: Phase 20
+- **HUD-01**: Phase 21
+- **HUD-02**: Phase 21
+- **VERIF-01**: Phase 22
+- **VERIF-02**: Phase 22*
