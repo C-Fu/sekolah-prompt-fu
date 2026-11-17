@@ -16,11 +16,16 @@ The equirectangular planetary surface textures bundled in `public/images/planets
 | `earth.jpg` | Earth Day Surface | NASA Earth Observatory / NASA Visible Earth | Solar System Scope |
 | `earth_clouds.jpg` | Earth Cloud Layer | NASA Earth Observatory MODIS Cloud Imagery | Solar System Scope |
 | `moon.jpg` | Earth's Moon | USGS Astrogeology Science Center / NASA LRO (Clementine/LROC) | Solar System Scope |
-| `mars.jpg` | Mars Surface | NASA Mars Global Surveyor / Mars Orbiter Laser Altimeter (MOLA) | Solar System Scope |
 | `mercury.jpg` | Mercury Surface | NASA MESSENGER MDIS Global Mosaic / USGS Astrogeology | Solar System Scope |
-| `venus_surface.jpg` | Venus Radar Surface | NASA Magellan Radar Cartography / USGS Astrogeology | Solar System Scope |
+| `venus_surface.jpg` | Venus Cloud Tops | NASA Magellan Radar & Pioneer Venus Orbiter Cartography | Solar System Scope |
+| `mars.jpg` | Mars Surface | NASA Mars Global Surveyor / Mars Orbiter Laser Altimeter (MOLA) | Solar System Scope |
+| `jupiter.jpg` | Jupiter Atmosphere | NASA Cassini & Voyager imaging mosaics | Solar System Scope |
+| `saturn.jpg` | Saturn Atmosphere | NASA Cassini imaging mosaic | Solar System Scope |
+| `neptune.jpg` | Neptune Atmosphere | NASA Voyager 2 imaging mosaic | Solar System Scope |
 | `sun.jpg` | Solar Photosphere | NASA Solar Dynamics Observatory (SDO) / SOHO | Solar System Scope |
+
+*Note: Uranus is rendered with a procedural soft cyan atmosphere shader (`#b8e8ee` / `#9ed5de`) as real Uranus is nearly featureless.*
 
 ## Modifications
 
-All master 2048x1024 textures were downscaled to 1024x512 equirectangular JPEGs with progressive quality compression (q=4) via FFmpeg, optimizing the total combined asset footprint to under 750 KB for instant client loading across school networks without external CDN dependencies.
+All Solar System Scope 4K/2K maps are optimized to 2048x1024 equirectangular JPEGs with 85% quality via FFmpeg, providing crisp 3D sphere mapping while maintaining an ultra-lean total asset footprint (~1.5 MB total across all bodies) for low latency on mobile and school networks without CDN dependencies.
