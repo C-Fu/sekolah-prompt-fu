@@ -49,6 +49,16 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 **Phases Completed:** 17 phases total across v1.0, v1.1, v1.2, and v1.3.  
 **Verification:** 31 test suites, 347/347 unit and integration tests passing; clean production build with 100% static export.
 
+## Current Milestone: v1.4 Planetary Assets, Data & Solar System Explorer Expansion
+
+**Goal:** Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and informational telemetry with the rich astronomical textures, verified data, and field notes from `how-big-is-big`, while retaining core lesson structures.
+
+**Target features:**
+- Asset & Texture Upgrades: Import, resize, and optimize high-fidelity planetary texture maps (Mercury, Venus, Mars, Jupiter, Saturn, Neptune) with CC-BY-4.0 Solar System Scope attribution.
+- Planetary Schema & Data Enrichment: Enrich `src/lib/kids/planets.ts` with authentic astronomical radii, distances, facts, and bilingual field notes (`LEARN`) from `how-big-is-big`.
+- Solar System & Explorer Expansion: Update 3D Solar System overview and cartography scenes to display complete, accurately textured planetary bodies, orbital paths, and rings.
+- Telemetry HUD Cosmic Facts: Display astronomical field notes ("Tahukah Anda?" / "Did You Know?") and real distance/size telemetry in `PlanetaryHud`.
+
 ## Requirements
 
 ### Validated
@@ -75,18 +85,41 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - ✓ Visual consistency audit across typography scale, pixel borders, palette harmony, and static export release certification (`VIS-01`, `VIS-02`) — v1.3
 
 ### Active
-*(No active requirements. Milestone v1.3 complete. Next requirements will be defined during next milestone initialization).*
+- [ ] `PLANET-ASSET`: Import, optimize, and bundle planetary texture assets from `how-big-is-big` with CC BY 4.0 attribution.
+- [ ] `PLANET-DATA`: Enrich planetary schemas and types with verified dimensions, astronomical facts, and bilingual field notes.
+- [ ] `PLANET-EXPLORER`: Expand 3D Solar System overview and cartography scenes to display complete celestial bodies, orbits, and ring geometry.
+- [ ] `PLANET-HUD`: Update Telemetry HUD to display authentic astronomical data cards and cycling field notes without breaking lesson launchers.
+- [ ] `PLANET-VERIFY`: Verify all test suites, static build export (`out/`), closure check, and zero regression across existing levels.
 
 ### Deferred / Backlog
 - `CLAR-04`: Usability testing sessions with target age group (7–12) and educators.
 - `A11Y-05`: In-app dynamic text-size preference control beyond standard browser zoom.
+- Additional KSSR subject curriculum levels for outer planets (Jupiter, Saturn, Uranus, Neptune).
 
 ### Out of Scope
 - Real-time online multiplayer or backend user accounts.
-- Live paid LLM API calls with real API keys during gameplay (game uses pre-computed interactive simulations, validator heuristics, and feedback).
-- Photorealistic high-poly NASA 8K textures that blow up static bundle size.
+- Live paid LLM API calls with real API keys during gameplay.
+- Uncompressed raw 8K textures that blow up static bundle size beyond web performance budget.
+- Changing core lesson structure or MDX curricula during this asset/explorer upgrade.
+
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
 
 ---
 
 ## Context
-Shipped **v1.3** on 2026-11-17 (Phases 14–17; 23 plans, 42 tasks). Total test suite is 347/347; `npm run verify` certifies TypeScript, Vitest, and static export inspection across all routes.
+Milestone **v1.4** initialized (2026-11-17). Shipped **v1.3** on 2026-11-17 with 17 phases completed, 347/347 tests passing.
