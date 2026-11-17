@@ -1,33 +1,12 @@
 {
   "contract": "1.0.0",
   "flavor": "core",
-  "milestone": "v1.3 — Kid-Friendly UX, Game Feel & Visual Polish",
-  "phases": [
-    {
-      "number": "14",
-      "name": "Journey Clarity & Shared Interaction Language",
-      "status": "pending"
-    },
-    {
-      "number": "15",
-      "name": "Mobile-First Responsive Accessibility",
-      "status": "pending"
-    },
-    {
-      "number": "16",
-      "name": "Proportional, Reduced-Motion-Safe Game Feel",
-      "status": "pending"
-    },
-    {
-      "number": "17",
-      "name": "Visual Audit & Release Certification",
-      "status": "pending"
-    }
-  ],
+  "milestone": "v1.4",
+  "phases": [],
   "next": {
-    "command": "/gsd-progress --next",
-    "label": "Advance to the next step",
-    "reason": "Phase 2 of 4 · executing"
+    "command": "/gsd-discuss-phase",
+    "label": "Discuss the first phase",
+    "reason": "Project initialized — plan your first phase"
   },
-  "updated_at": "2026-11-09T15:22:25.964Z"
+  "updated_at": "2026-11-17T08:00:40.191Z"
 }
