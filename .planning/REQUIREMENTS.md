@@ -8,27 +8,27 @@
 
 ### Journey Clarity
 
-- [ ] **CLAR-01**: A child can identify the primary next action on the title, map/planet hub, and lesson screens without relying on unlabeled icons alone.
-- [ ] **CLAR-02**: Navigation labels and instructions use concise, concrete language in both Bahasa Melayu and English, with no silent locale fallback.
-- [ ] **CLAR-03**: A child can understand the current location and return to the appropriate previous hub from core screens without losing saved progress.
+- [x] **CLAR-01**: A child can identify the primary next action on the title, map/planet hub, and lesson screens without relying on unlabeled icons alone.
+- [x] **CLAR-02**: Navigation labels and instructions use concise, concrete language in both Bahasa Melayu and English, with no silent locale fallback.
+- [x] **CLAR-03**: A child can understand the current location and return to the appropriate previous hub from core screens without losing saved progress.
 
 ### Game Feel
 
-- [ ] **FEEL-01**: Meaningful selections, lesson answers, progress changes, and completion events provide immediate visual feedback that distinguishes success, error, and neutral states.
-- [ ] **FEEL-02**: High-value progress and completion moments use short, purposeful motion/audio feedback that is proportional, does not block input, and respects reduced-motion preferences.
-- [ ] **FEEL-03**: Interaction feedback remains understandable when animation or sound is unavailable or disabled and does not rely on color alone.
+- [x] **FEEL-01**: Meaningful selections, lesson answers, progress changes, and completion events provide immediate visual feedback that distinguishes success, error, and neutral states.
+- [x] **FEEL-02**: High-value progress and completion moments use short, purposeful motion/audio feedback that is proportional, does not block input, and respects reduced-motion preferences.
+- [x] **FEEL-03**: Interaction feedback remains understandable when animation or sound is unavailable or disabled and does not rely on color alone.
 
 ### Responsive & Accessible UI
 
-- [ ] **A11Y-01**: Core screens and lesson interactions remain usable at narrow mobile and desktop viewport sizes without clipped controls or unintended horizontal overflow.
-- [ ] **A11Y-02**: Primary interactive targets are comfortably touch-friendly, and interactive controls expose clear hover, pressed, disabled, and keyboard-focus states where applicable.
-- [ ] **A11Y-03**: Core navigation and lesson interactions can be completed using a keyboard, with a visible focus indicator and logical focus order.
-- [ ] **A11Y-04**: Text and controls remain legible against themed backgrounds, and essential status is not conveyed by color, sound, or motion alone.
+- [x] **A11Y-01**: Core screens and lesson interactions remain usable at narrow mobile and desktop viewport sizes without clipped controls or unintended horizontal overflow.
+- [x] **A11Y-02**: Primary interactive targets are comfortably touch-friendly, and interactive controls expose clear hover, pressed, disabled, and keyboard-focus states where applicable.
+- [x] **A11Y-03**: Core navigation and lesson interactions can be completed using a keyboard, with a visible focus indicator and logical focus order.
+- [x] **A11Y-04**: Text and controls remain legible against themed backgrounds, and essential status is not conveyed by color, sound, or motion alone.
 
 ### Visual Consistency
 
-- [ ] **VIS-01**: Title, map/planet hub, and lesson screens use a consistent hierarchy for typography, spacing, interactive controls, and card treatments while retaining distinct planetary themes.
-- [ ] **VIS-02**: Polish preserves the existing pixel-art/planetary brand, core routes and learning flows, bilingual behavior, and static-export architecture.
+- [x] **VIS-01**: Title, map/planet hub, and lesson screens use a consistent hierarchy for typography, spacing, interactive controls, and card treatments while retaining distinct planetary themes.
+- [x] **VIS-02**: Polish preserves the existing pixel-art/planetary brand, core routes and learning flows, bilingual behavior, and static-export architecture.
 
 ## Deferred Requirements
 
@@ -48,18 +48,18 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CLAR-01 | Phase 14 | Pending |
-| CLAR-02 | Phase 14 | Pending |
-| CLAR-03 | Phase 14 | Pending |
-| FEEL-01 | Phase 16 | Pending |
-| FEEL-02 | Phase 16 | Pending |
-| FEEL-03 | Phase 16 | Pending |
-| A11Y-01 | Phase 15 | Pending |
-| A11Y-02 | Phase 15 | Pending |
-| A11Y-03 | Phase 15 | Pending |
-| A11Y-04 | Phase 15 | Pending |
-| VIS-01 | Phase 17 | Pending |
-| VIS-02 | Phase 17 | Pending |
+| CLAR-01 | Phase 14 | Complete |
+| CLAR-02 | Phase 14 | Complete |
+| CLAR-03 | Phase 14 | Complete |
+| FEEL-01 | Phase 16 | Complete |
+| FEEL-02 | Phase 16 | Complete |
+| FEEL-03 | Phase 16 | Complete |
+| A11Y-01 | Phase 15 | Complete |
+| A11Y-02 | Phase 15 | Complete |
+| A11Y-03 | Phase 15 | Complete |
+| A11Y-04 | Phase 15 | Complete |
+| VIS-01 | Phase 17 | Complete |
+| VIS-02 | Phase 17 | Complete |
 
 **Coverage:**
 - v1.3 requirements: 12 total
@@ -68,4 +68,4 @@
 
 ---
 *Requirements defined: 2026-11-09*  
-*Last updated: 2026-11-09 after v1.3 roadmap creation*
+*Last updated: 2026-11-17 after v1.3 milestone audit*
