@@ -4,17 +4,17 @@ milestone: v1.5
 milestone_name: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
 current_phase: 28
 current_plan: null
-status: in_progress
-stopped_at: Completed 28-02-PLAN.md
-last_updated: "2026-11-19T18:52:06.273Z"
-state_head: 280776a6d8b5312d3b53804d76b5fa1e697ee32f
+status: complete
+stopped_at: Completed 28-03-PLAN.md
+last_updated: "2026-11-20T03:03:00.000Z"
+state_head: 66e38432e5c5c2ef79fd83341267059f6a119693
 progress:
   total_phases: 6
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 11
-  completed_plans: 10
-  percent: 67
-last_activity: 2026-11-19
+  completed_plans: 11
+  percent: 83
+last_activity: 2026-11-20
 ---
 
 # Project State
@@ -24,7 +24,7 @@ last_activity: 2026-11-19
 See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.  
-**Current status:** Phases 24, 25, 26, and 27 completed and verified. Transitioning to Phase 28.
+**Current status:** Phases 24, 25, 26, 27, and 28 completed and verified. Transitioning to Phase 29.
 
 ## Performance Metrics
 
@@ -33,7 +33,7 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 - Phase 25: Geological Cartography & Provincial Provinces (Completed - 2/2 plans)
 - Phase 26: Jupiter (Sains) & Saturn (Sejarah) Year 1 Curriculum (Completed - 2/2 plans)
 - Phase 27: Uranus (RBT) & Neptune (PSV) Year 1 Curriculum (Completed - 2/2 plans)
-- Phase 28: Atmospheric Theming, Navigation & Routing Integration (Pending)
+- Phase 28: Atmospheric Theming, Navigation & Routing Integration (Completed - 3/3 plans)
 - Phase 29: Milestone Verification & Static Release Certification (Pending)
 
 **Per-Plan Metrics:**
@@ -49,6 +49,7 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 | Phase 27 P01 | 3m | 2 tasks | 3 files |
 | Phase 27 P02 | 4m | 2 tasks | 3 files |
 | Phase 28 P02 | 4m 30s | 3 tasks | 7 files |
+| Phase 28 P03 | 8m | 2 tasks | 3 files |
 
 ## Deferred Items
 
@@ -62,9 +63,9 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Resume file:** None
 
-Last session: 2026-11-19T18:52:05.669Z
-Stopped at: Completed 28-02-PLAN.md
-Next action: Run `/gsd-discuss-phase 28`.
+Last session: 2026-11-20T03:03:00.000Z
+Stopped at: Completed 28-03-PLAN.md
+Next action: Run `/gsd-discuss-phase 29` or `/gsd-plan-phase 29`.
 
 ## Current Position
 Phase: 28 - Atmospheric Theming, Navigation & Routing Integration
@@ -80,3 +81,4 @@ Total Plans in Phase: 3
 - [Phase 27]: Authored 12-1-rbt-bentuk-asas across 8 sections in BM and EN targeting basic 2D/3D shapes and building block constraints.
 - [Phase 27]: Authored 13-1-psv-warna-imaginasi across 8 sections in BM and EN targeting primary colors and line patterns in creative art prompts.
 - [Phase 28]: Expanded total levels dynamically from 23 to 27 by registering Worlds 10-13 and lazy dynamic MDX loaders.
+- [Phase 28]: resolveMissionRoute maps outer planets directly to pilot lesson slugs with legacy alias support.

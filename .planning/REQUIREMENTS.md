@@ -21,8 +21,8 @@ Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Satu
 - [x] **LESSON-05**: All 4 lessons are fully authored and localized in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`) with zero silent fallbacks and strict adherence to Malay vocabulary guards.
 
 ### Theming, Atmospheric Environments & Routing
-- [ ] **THEME-01**: User experiences bespoke atmospheric and celestial themes in `PlanetBackground` for Jupiter (swirling amber storms), Saturn (golden ring glow), Uranus (cyan procedural mist), and Neptune (deep azure storm winds) with matched accent navigation borders.
-- [ ] **THEME-02**: Telemetry HUD activates mission launch buttons for the newly authored Year 1 regions and safely preserves "Belum ada misi untuk kawasan ini" for unauthored future years (Tahun 2–6).
+- [x] **THEME-01**: User experiences bespoke atmospheric and celestial themes in `PlanetBackground` for Jupiter (swirling amber storms), Saturn (golden ring glow), Uranus (cyan procedural mist), and Neptune (deep azure storm winds) with matched accent navigation borders.
+- [x] **THEME-02**: Telemetry HUD activates mission launch buttons for the newly authored Year 1 regions and safely preserves "Belum ada misi untuk kawasan ini" for unauthored future years (Tahun 2–6).
 - [x] **ROUTE-01**: New levels are registered in `levels.ts`, `level-content.ts`, and `section-titles.ts`, expanding total application level count from 23 to 27 with accurate header progress counters and bidirectional origin tracking (`?origin=planets`).
 
 ### Quality, Verification & Performance
