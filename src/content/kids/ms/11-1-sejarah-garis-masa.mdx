@@ -1,0 +1,109 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Zuhal (Planet Sejarah)**! 🪐 Saya **Peromfu**, rakan sekelas anda di Tahun 1. Kita sedang terapung megah melintasi gelung ais keemasan dan Heksagon Kutub Utara (North Polar Hexagon) yang penuh rahsia! Hari ini, kita menjadi sejarawan cilik yang membimbing AI menyusun **Garis Masa Diri & Riwayat Keluarga** mengikut kronologi peristiwa sebenar.
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Tahukah anda? Sejarah Tahun 1 mengajar kita bahawa setiap peristiwa hidup berlaku mengikut urutan masa: **dahulu**, **sekarang**, **sebelum**, dan **selepas**. Peristiwa yang telah berlalu menjadi kenangan manis dan sejarah diri kita. Apabila meminta AI mereka cerita atau menyusun riwayat keluarga, kita mesti menggunakan kata penanda masa yang tepat dan bahasa temu bual yang bersopan santun!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Kata Penanda Masa Kronologi ⏳
+
+Peromfu ingin membimbing AI melengkapkan garis masa pertumbuhan diri sejak bayi hingga kini bersekolah di Tahun 1. Apakah kata penanda masa yang paling tepat bagi menceritakan keadaan ketika mula melangkah ke tadika?
+
+<WordPredictor
+  title="Bantu Peromfu Memilih Kata Masa Sejarah!"
+  instruction="Lengkapkan ayat garis masa ini dengan kata penanda masa yang betul:"
+  sentence="Bantu sejarawan cilik: ____ saya belajar berjalan semasa bayi, kemudian saya mula melangkah ke tadika pada usia lima tahun."
+  options={["Dahulu semasa", "Esok lusa", "Masa hadapan", "Bulan depan"]}
+  correctAnswer="Dahulu semasa"
+  explanation="Kata penanda masa 'Dahulu' digunakan untuk merujuk kepada peristiwa yang telah berlaku pada masa lampau, seperti ketika kita masih bayi dan kecil!"
+  aiThinking="Kata 'Dahulu semasa' membimbing saya menyusun peristiwa perkembangan diri bermula daripada masa lampau mengikut kronologi sejarah!"
+  successMessage="Tepat sekali! AI kini memahami peristiwa masa lampau dalam garis masa diri!"
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Prompt Temu Bual Santun vs Kasar 🎙️
+
+Bandingkan dua arahan temu bual sejarah keluarga di bawah. Arahan manakah yang membimbing AI merangka soalan temu bual datuk dan nenek secara tersusun dan bersopan santun?
+
+<PromptVsMistake
+  question="Arahan manakah yang menunjukkan adab bertanya riwayat keluarga mengikut urutan masa?"
+  good="Bantu saya menemubual datuk secara bersopan santun. Sila senaraikan tiga soalan mengikut urutan masa tentang tempat kelahiran, zaman persekolahan dahulu, dan pekerjaan pertama beliau."
+  bad="Tanya orang tua itu apa dia buat masa muda dulu cepat sikit."
+  explanation="Arahan pertama sangat cemerlang kerana mengamalkan nilai santun (sila, bersopan santun) dan menyusun soalan secara kronologi (tempat lahir, alam sekolah, pekerjaan pertama)!"
+  peromfuMessage="Dalam Sejarah, kita sentiasa menghormati salasilah keluarga dan orang yang lebih tua dengan pertuturan yang manis dan beradab!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Doktor Prompt — Rawat Arahan Garis Masa 🩺
+
+Peromfu mendapati seorang rakan menulis arahan sejarah yang tidak tersusun: *"Susun gambar keluarga"*. Mari kita rawat arahan ini agar menjadi panduan kronologi yang terperinci dan bersopan!
+
+<PromptDoctor
+  title="Rawat Prompt Garis Masa Keluarga"
+  brokenPrompt="Susun gambar keluarga"
+  problems={[
+    { issue: "Tiada Peranan Sejarawan", symptom: "Siapakah AI dan apakah tugasnya dalam menyusun peristiwa?", fix: "Bertindak sebagai sejarawan cilik keluarga yang teliti." },
+    { issue: "Tiada Urutan Peristiwa", symptom: "Apakah peristiwa yang ingin disusun dan bilakah ia berlaku?", fix: "Bertindak sebagai sejarawan cilik keluarga yang teliti. Susun empat gambar peristiwa: hari kelahiran, langkah pertama, masuk tadika, dan hari pertama persekolahan Tahun 1." },
+    { issue: "Tiada Penanda Masa & Adab", symptom: "Bagaimanakah urutan kronologi dan format catatan dipersembahkan?", fix: "Bertindak sebagai sejarawan cilik keluarga yang teliti. Susun empat gambar peristiwa keluarga daripada dahulu hingga sekarang menggunakan kata penanda masa (dahulu, sebelum, selepas, sekarang) dalam bentuk garis masa bertarikh yang kemas." }
+  ]}
+  healedPrompt="Bertindak sebagai sejarawan cilik keluarga yang teliti. Susun empat gambar peristiwa keluarga daripada dahulu hingga sekarang menggunakan kata penanda masa (dahulu, sebelum, selepas, sekarang) dalam bentuk garis masa bertarikh yang kemas."
+  successMessage="Syabas! Arahan telah dirawat dengan peranan sejarawan, peristiwa bermakna, dan penanda masa kronologi yang sangat jelas!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Susun Formula Prompt Kronologi 🧩
+
+Mari bantu Peromfu menyusun formula arahan sejarah yang mantap: **[Peranan Sejarawan Cilik] + [Urutan Peristiwa & Kata Masa] + [Format Senarai Bersopan]**.
+
+<DragDropPrompt
+  title="Susun Formula Arahan Sejarah"
+  instruction="Susun blok perkataan mengikut urutan terbaik untuk membimbing AI:"
+  pieces={[
+    "Sebagai sejarawan cilik yang bersopan santun,",
+    "susun riwayat hidup ibu bermula daripada zaman kanak-kanak, alam persekolahan, hingga sekarang,",
+    "kemudian bentangkan dalam bentuk garis masa bergambar berserta tahun."
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Cemerlang! Formula prompt kronologi anda tersusun rapi dan mudah difahami oleh AI!"
+/>
+</Section>
+
+<Section>
+## Cabaran 5: Kata Ajaib — Garis Masa Bermakna ✨
+
+Sekarang mari lengkapkan templat arahan garis masa peribadi dengan kata kunci peristiwa bersejarah yang bermakna agar AI dapat menghasilkan riwayat hidup yang indah!
+
+<MagicWords
+  title="Lengkapkan Kata Ajaib Sejarah"
+  sentence="Sila susun riwayat hidup saya bermula dari peristiwa ___ pada masa dahulu, kemudian ___ semasa berumur enam tahun, hingga ___ pada tahun ini."
+  blanks={[
+    { hint: "👶 peristiwa masa bayi", answers: ["dilahirkan di hospital", "mengambil langkah pertama", "menyebut perkataan pertama", "merangkak di ruang tamu", "meraikan hari lahir pertama"] },
+    { hint: "🎒 alam awal kanak-kanak", answers: ["mendaftar di tadika", "belajar melukis pelangi", "berkenalan dengan rakan sebaya", "menyertai sukaneka tadika", "membaca buku cerita pertama"] },
+    { hint: "🏫 masa sekarang", answers: ["menjejak kaki ke Tahun 1", "memakai lencana sekolah baharu", "menjadi murid Tahun 1 cemerlang", "menimba ilmu bersama kawan baharu", "menyusun garis masa di sekolah"] }
+  ]}
+  successMessage="Hebat sekali! Gabungan kata ajaib sejarah anda menghasilkan garis masa peribadi yang lengkap dan menyentuh hati!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Jaguh Sejarah Zuhal! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Kejayaan gilang-gemilang di planet Zuhal! Anda telah menguasai kemahiran menyusun urutan peristiwa dahulu dan sekarang, menemubual riwayat keluarga dengan bersopan santun, serta membina arahan garis masa sejarah yang cemerlang!
+</Panel>
+
+<LevelComplete
+  levelSlug="11-1-sejarah-garis-masa"
+  stars={3}
+  message="Tahniah! Anda menguasai garis masa sejarah diri dan adab temu bual riwayat keluarga di Planet Zuhal!"
+/>
+</Section>
