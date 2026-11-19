@@ -1,57 +1,55 @@
-# Milestone v1.4 Requirements: Planetary Assets, Data & Solar System Explorer Expansion
+# Milestone v1.5 Requirements: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
 
 ## Overview
-Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and informational telemetry with the rich astronomical textures, verified data, and field notes from `how-big-is-big`, while retaining core lesson structures and educational routes.
+Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Saturn, Uranus, and Neptune from astronomical observation placeholders into active KSSR learning worlds. Author Year 1 (Tahun 1) interactive pilot lessons with 7 structured stages for each new subject, complete with authentic geological feature mapping, thematic visual environments, bilingual content, and static export certification.
 
 ## Requirements
 
-### Asset & Texture Upgrades
-- [x] **AST-01**: User experiences high-fidelity planetary surface textures (Mercury, Venus, Mars, Jupiter, Saturn, Neptune) adapted from `how-big-is-big/maps` with CC-BY-4.0 Solar System Scope attribution.
-- [x] **AST-02**: All imported texture files are web-optimized (compressed, responsive resolutions) and integrated without exceeding static bundle constraints.
+### Outer Planets Subject Architecture & Telemetry
+- [ ] **SUBJ-01**: User sees all 4 outer planets mapped to core KSSR primary subjects: Jupiter = Sains (Science), Saturn = Sejarah (History), Uranus = Reka Bentuk & Teknologi (RBT), and Neptune = Pendidikan Seni Visual (PSV).
+- [ ] **SUBJ-02**: Celestial schemas and i18n message bundles provide authentic subject titles, taglines, and curriculum descriptions in both Bahasa Melayu (`ms`) and English (`en`).
 
-### Planetary Schema & Data Enrichment
-- [x] **DATA-01**: User can view authentic astronomical statistics for celestial bodies (radius in km, distance from Sun, light travel time) in both Bahasa Melayu and English.
-- [x] **DATA-02**: User can read curated astronomical observation facts per planetary body sourced from `how-big-is-big`.
-- [x] **DATA-03**: Existing 5 curriculum planets (Earth, Moon, Mars, Venus, Mercury) maintain all 35 authentic geological features and KSSR Year 1–6 prompt lesson linkages without regression.
+### Geological Provinces & Feature Cartography
+- [ ] **GEO-01**: User can explore 7 authentic geological or atmospheric features/regions per outer planet (28 total regions) with spherical coordinates, elevation/depth profiles, badges, and learning objectives.
+- [ ] **GEO-02**: Features 1–6 map to Tahun 1–6 curricula; Feature 7 represents the Capstone Boss ("Cabaran Unggul") with distinctive badge styling and elevated visual beacon pins.
 
-### 3D Solar System & Planetary Explorer Expansion
-- [x] **EXPLR-01**: User can view an expanded Solar System overview (`SolarSystemScene`) featuring all planetary bodies (Mercury, Venus, Earth-Moon, Mars, Jupiter with rings, Saturn with rings, Uranus, Neptune) with proportional relative orbits and rotational speeds.
-- [x] **EXPLR-02**: User can select and inspect any solar system planet in 3D orbit and cartography modes with dedicated camera framing and smooth transition curves.
-- [x] **EXPLR-03**: Saturn's icy ring plane and planetary atmospheres are rendered accurately in 3D Three.js scenes.
+### Interactive Year 1 Pilot Lessons
+- [ ] **LESSON-01**: User can play a complete Tahun 1 interactive prompt lesson for Jupiter (Sains: Benda Hidup & Benda Bukan Hidup / AI Observation Prompts) across 7 structured `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `LevelComplete`).
+- [ ] **LESSON-02**: User can play a complete Tahun 1 interactive prompt lesson for Saturn (Sejarah: Garis Masa Diri & Keluarga / Historical Chronology Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
+- [ ] **LESSON-03**: User can play a complete Tahun 1 interactive prompt lesson for Uranus (RBT: Bentuk Asas, Blok Binaan & Reka Bentuk / Geometric Prompt Engineering) across 7 structured `<Section>` stages with rich interactive widgets.
+- [ ] **LESSON-04**: User can play a complete Tahun 1 interactive prompt lesson for Neptune (PSV: Warna Asas, Garisan & Imaginasi Visual / Artistic Visual Description Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
+- [ ] **LESSON-05**: All 4 lessons are fully authored and localized in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`) with zero silent fallbacks and strict adherence to Malay vocabulary guards.
 
-### Telemetry HUD & Astronomical Fact Cards
-- [x] **HUD-01**: User sees an enhanced Telemetry HUD displaying authentic distance-from-sun, radius, and primary observation facts alongside existing provincial navigation.
-- [x] **HUD-02**: Celestial bodies without active KSSR prompt missions (e.g., outer gas giants) clearly show an educational "Astronomical Observation / Exploration" status instead of broken mission buttons.
-
-### Complete Allo Typography Integration
-- [x] **ALLO-01**: User experiences Josh Puckett's Allo font family (`allo-font`) rendered consistently across all application surfaces (root layout, headings, body text, buttons, HUD, game widgets, and lesson MDX content), establishing a cheerful, playful, cheeky yet mature look without looking childish or alienating adult readers.
-- [x] **ALLO-02**: Allo font variants (weights, styles) are loaded via variable web fonts with optimal CSS font-display, zero layout shift (CLS), fallback font stacks, and zero external runtime Google Font dependencies.
+### Theming, Atmospheric Environments & Routing
+- [ ] **THEME-01**: User experiences bespoke atmospheric and celestial themes in `PlanetBackground` for Jupiter (swirling amber storms), Saturn (golden ring glow), Uranus (cyan procedural mist), and Neptune (deep azure storm winds) with matched accent navigation borders.
+- [ ] **THEME-02**: Telemetry HUD activates mission launch buttons for the newly authored Year 1 regions and safely preserves "Belum ada misi untuk kawasan ini" for unauthored future years (Tahun 2–6).
+- [ ] **ROUTE-01**: New levels are registered in `levels.ts`, `level-content.ts`, and `section-titles.ts`, expanding total application level count from 23 to 27 with accurate header progress counters and bidirectional origin tracking (`?origin=planets`).
 
 ### Quality, Verification & Performance
-- [x] **VERIF-01**: All existing test suites pass (including Vitest unit/integration tests and responsive HUD specs).
-- [x] **VERIF-02**: `npm run verify` certifies TypeScript type-checking, ESLint (0 errors), vocabulary checks, module closure, and 100% static export (`out/planets/index.html`).
+- [ ] **VERIF-01**: All existing and new test suites pass with zero failures (including Vitest unit/integration tests and responsive HUD specs).
+- [ ] **VERIF-02**: `npm run verify` certifies TypeScript (0 errors), ESLint (0 errors), vocabulary checks (scanned across all 27 MDX files), import closure, and 100% static production build export (`out/`).
 
 ## Future Requirements
-- **FUTR-01**: Author KSSR prompt learning curriculum missions for outer gas giants (Jupiter, Saturn, Uranus, Neptune).
-- **FUTR-02**: Cosmic flight mode / slingshot flyby transitions inspired by `how-big-is-big`.
+- **FUTR-01**: Author Year 2 to Year 6 (Tahun 2–6) and Capstone Boss curriculum lessons for all 8 celestial subject worlds.
+- **FUTR-02**: Interactive 3D planetary flybys and cosmic flight transition animations.
 
 ## Out of Scope
-- Modifying core MDX prompt lessons or altering Earth foundational curriculum levels.
-- Raw uncompressed 8K textures that cause out-of-memory or high mobile load latency.
-- Stellar, interstellar, or galactic objects outside the Solar System (stars, nebulae, galaxies from `how-big-is-big`).
+- Modifying existing Earth (1.1–5.4), Moon (6.1), Mars (7.1), Venus (8.1), or Mercury (9.1) lesson content.
+- Adding server dependencies or backend progress databases (pure client-side static application).
+- Real-time online multi-player.
 
 ## Traceability
-- **AST-01**: Phase 18
-- **AST-02**: Phase 18
-- **DATA-01**: Phase 19
-- **DATA-02**: Phase 19
-- **DATA-03**: Phase 19
-- **EXPLR-01**: Phase 20
-- **EXPLR-02**: Phase 20
-- **EXPLR-03**: Phase 20
-- **HUD-01**: Phase 21
-- **HUD-02**: Phase 21
-- **ALLO-01**: Phase 22
-- **ALLO-02**: Phase 22
-- **VERIF-01**: Phase 23
-- **VERIF-02**: Phase 23*
+- **SUBJ-01**: Phase 24
+- **SUBJ-02**: Phase 24
+- **GEO-01**: Phase 25
+- **GEO-02**: Phase 25
+- **LESSON-01**: Phase 26
+- **LESSON-02**: Phase 26
+- **LESSON-03**: Phase 27
+- **LESSON-04**: Phase 27
+- **LESSON-05**: Phase 26, Phase 27
+- **THEME-01**: Phase 28
+- **THEME-02**: Phase 28
+- **ROUTE-01**: Phase 28
+- **VERIF-01**: Phase 29
+- **VERIF-02**: Phase 29

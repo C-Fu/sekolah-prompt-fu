@@ -54,16 +54,17 @@ The application is built 100% static (`output: 'export'`) with client-side persi
    - High-fidelity CC BY 4.0 planetary textures for Mercury, Venus surface, Mars, Jupiter, Saturn, and Neptune from `how-big-is-big` with strictly bounded bundle size (< 800 KB).
    - Expanded 3D Solar System view to 9 celestial bodies, tilted Saturn rings, and educational "Akan Datang" placeholders for future KSSR curricula on outer worlds.
 
-## Current Milestone: v1.4 Planetary Assets, Data, Solar System Explorer Expansion & Allo Typography
+## Current Milestone: v1.5 Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
 
-**Goal:** Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and informational telemetry with the rich astronomical textures, verified data, and field notes from `how-big-is-big`, and fully implement the friendly, playful Allo typeface across all app UI elements.
+**Goal:** Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Saturn, Uranus, and Neptune from astronomical observation placeholders into active KSSR learning worlds. Author Year 1 (Tahun 1) interactive pilot lessons with 7 structured stages for each new subject, complete with authentic geological feature mapping, thematic visual environments, bilingual content, and static export certification.
 
 **Target features:**
-- Asset & Texture Upgrades: Import, resize, and optimize high-fidelity planetary texture maps (Mercury, Venus, Mars, Jupiter, Saturn, Neptune) with CC-BY-4.0 Solar System Scope attribution.
-- Planetary Schema & Data Enrichment: Enrich `src/lib/kids/planets.ts` with authentic astronomical radii, distances, facts, and bilingual field notes (`LEARN`) from `how-big-is-big`.
-- Solar System & Explorer Expansion: Update 3D Solar System overview and cartography scenes to display complete, accurately textured planetary bodies, orbital paths, and rings.
-- Telemetry HUD Cosmic Facts: Display astronomical field notes ("Tahukah Anda?" / "Did You Know?") and real distance/size telemetry in `PlanetaryHud`.
-- Complete Allo Typography Integration: Replace Schoolbell/legacy fonts with Josh Puckett's Allo typeface (`allo-font` / variable web font) across all app elements, achieving a playful, cheerful, cheeky yet mature look for kids and adults.
+- Outer Planets Subject Architecture: Map Jupiter to Sains (Science), Saturn to Sejarah (History), Uranus to Reka Bentuk & Teknologi (RBT), and Neptune to Pendidikan Seni Visual (PSV).
+- Geological Provinces & Cartography: Define 7 authentic geological regions per outer planet in `src/lib/kids/planets.ts` with spherical coordinates, elevation, badges, and learning objectives.
+- Interactive Year 1 Pilot Lessons: Author 4 new interactive lessons in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`) across 7 structured stages featuring interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `LevelComplete`).
+- Atmospheric Theming & Dynamic Backgrounds: Add bespoke atmospheric palettes, clouds, storms, and animations for Jupiter (Bintik Merah Gergasi), Saturn (Golden Ring Haze), Uranus (Cyan Procedural Mist), and Neptune (Deep Azure Winds).
+- Curriculum Routing & Mission Activation: Wire mission launchers in `planetary-hud.tsx`, register new levels in `levels.ts` and `level-content.ts`, and update header progress tracking (expanding from 23 to 27 total levels).
+- Quality & Release Certification: 100% static export (`35/35` routes), zero TypeScript/ESLint errors, clean Malay vocabulary check, and 100% green Vitest suites.
 
 ## Requirements
 
@@ -89,25 +90,30 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 - ✓ Mobile-first responsive layout (320px–428px), 44px min hit targets, high-contrast two-tone focus outline, and screen-reader accessibility (`A11Y-01`, `A11Y-02`, `A11Y-03`, `A11Y-04`) — v1.3
 - ✓ Proportional, reduced-motion-safe game feel, tactile feedback, and celebratory overlays (`FEEL-01`, `FEEL-02`, `FEEL-03`) — v1.3
 - ✓ Visual consistency audit across typography scale, pixel borders, palette harmony, and static export release certification (`VIS-01`, `VIS-02`) — v1.3
+- ✓ High-resolution texture pipeline with CC BY 4.0 Solar System Scope attribution within 800 KB budget (`AST-01`, `AST-02`) — v1.4
+- ✓ Astronomical schema enrichment with physical radii, orbital distances, and bilingual observation facts (`DATA-01`, `DATA-02`, `DATA-03`) — v1.4
+- ✓ 3D Solar System & planetary explorer expanded to all 9 celestial bodies and tilted Saturn rings (`EXPLR-01`, `EXPLR-02`, `EXPLR-03`) — v1.4
+- ✓ Telemetry HUD enriched with authentic measurements and observation states (`HUD-01`, `HUD-02`) — v1.4
+- ✓ Self-hosted universal Allo typography implemented across all app surfaces with friendly roundness (`ALLO-01`, `ALLO-02`) — v1.4
+- ✓ Milestone v1.4 release certification with 354 tests green and 100% static export (`VERIF-01`, `VERIF-02`) — v1.4
 
 ### Active
-- [ ] `PLANET-ASSET`: Import, optimize, and bundle planetary texture assets from `how-big-is-big` with CC BY 4.0 attribution.
-- [ ] `PLANET-DATA`: Enrich planetary schemas and types with verified dimensions, astronomical facts, and bilingual field notes.
-- [ ] `PLANET-EXPLORER`: Expand 3D Solar System overview and cartography scenes to display complete celestial bodies, orbits, and ring geometry.
-- [ ] `PLANET-HUD`: Update Telemetry HUD to display authentic astronomical data cards and cycling field notes without breaking lesson launchers.
-- [ ] `TYPO-ALLO`: Fully integrate Allo font family across all components, layout, typography system, buttons, and HUD for a playful, cheerful, balanced aesthetic.
-- [ ] `PLANET-VERIFY`: Verify all test suites, static build export (`out/`), closure check, and zero regression across existing levels.
+- [ ] `OUTER-SUBJ`: Map outer planets to primary KSSR subjects (Jupiter = Sains, Saturn = Sejarah, Uranus = RBT, Neptune = Pendidikan Seni Visual) and configure `SubjectId` and metadata.
+- [ ] `OUTER-GEO`: Define 7 authentic geological / atmospheric regions per outer world (28 total regions) with spherical coordinates, elevation, badges, and learning objectives.
+- [ ] `OUTER-LESSONS`: Author 4 Year 1 (Tahun 1) interactive pilot lessons in both BM and English (`src/content/kids/ms/` and `src/content/kids/en/`) across 7 structured `<Section>` stages with rich interactive widgets.
+- [ ] `OUTER-THEME`: Implement bespoke atmospheric and celestial themes in `PlanetBackground` for Jupiter, Saturn, Uranus, and Neptune with distinct accent colors and ambient animations.
+- [ ] `OUTER-ROUTING`: Wire mission launcher buttons in `planetary-hud.tsx`, register new levels (10.1, 11.1, 12.1, 13.1) in `levels.ts`, `level-content.ts`, and `section-titles.ts`, expanding total levels from 23 to 27.
+- [ ] `OUTER-VERIFY`: Certify full test suites, import closure (all 27 lessons), Malay vocabulary checks, and 100% static production build export (`out/`).
 
 ### Deferred / Backlog
 - `CLAR-04`: Usability testing sessions with target age group (7–12) and educators.
 - `A11Y-05`: In-app dynamic text-size preference control beyond standard browser zoom.
-- Additional KSSR subject curriculum levels for outer planets (Jupiter, Saturn, Uranus, Neptune).
+- Additional KSSR subject curriculum levels for Tahun 2–6 on all 8 celestial worlds.
 
 ### Out of Scope
 - Real-time online multiplayer or backend user accounts.
 - Live paid LLM API calls with real API keys during gameplay.
-- Uncompressed raw 8K textures that blow up static bundle size beyond web performance budget.
-- Changing core lesson structure or MDX curricula during this asset/explorer upgrade.
+- Interstellar or galactic objects outside the Solar System.
 
 ## Evolution
 

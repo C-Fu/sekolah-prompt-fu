@@ -1,64 +1,65 @@
 # Roadmap: Sekolah Prompt-Fu (Learn Prompting for Kids)
 
-## Milestone v1.4: Planetary Assets, Data & Solar System Explorer Expansion
+## Milestone v1.5: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
 
-**Goal:** Upgrade Sekolah Prompt-Fu's 3D planetary explorer (`/planets`), assets, and informational telemetry with rich astronomical textures, verified data, and field notes from `how-big-is-big`, while retaining core lesson structures.
+**Goal:** Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Saturn, Uranus, and Neptune from astronomical observation placeholders into active KSSR learning worlds. Author Year 1 (Tahun 1) interactive pilot lessons with 7 structured stages for each new subject, complete with authentic geological feature mapping, thematic visual environments, bilingual content, and static export certification.
 
 ### Phases Overview
 
 | Phase | Name | Goal | Requirements | Success Criteria |
 |---|---|---|---|---|
-| 18 | Planetary Texture & Asset Pipeline | Import, optimize, and attribute textures from `how-big-is-big` | `AST-01`, `AST-02` | [x] 2 |
-| 19 | Planetary Schema & Astronomical Telemetry Data | Enrich celestial data models with bilingual facts, dimensions, and field notes | `DATA-01`, `DATA-02`, `DATA-03` | [x] 3 |
-| 20 | 3D Solar System & Planetary Explorer Expansion | Expand Three.js Solar System scene with all planets, orbits, and ring structures | `EXPLR-01`, `EXPLR-02`, `EXPLR-03` | [x] 3 |
-| 21 | Telemetry HUD & Astronomical Field Notes | Update HUD with cycling "Tahukah Anda?" cards and observation mode | `HUD-01`, `HUD-02` | [x] 2 |
-| 22 | Universal Allo Typography Implementation | Fully implement Allo variable font across all UI elements and MDX lessons | `ALLO-01`, `ALLO-02` | [x] 2 |
-| 23 | Milestone Verification & Static Release Certification | Certify test suites, static build export, closure check, and zero regressions | `VERIF-01`, `VERIF-02` | [x] 2 |
+| 24 | Outer Planets Subject Architecture & Telemetry | Map Jupiter to Sains, Saturn to Sejarah, Uranus to RBT, and Neptune to PSV with bilingual schemas and i18n | `SUBJ-01`, `SUBJ-02` | 2 |
+| 25 | Geological Cartography & Provincial Provinces | Define 28 authentic geological/atmospheric regions across outer planets with spherical coordinates and badges | `GEO-01`, `GEO-02` | 2 |
+| 26 | Jupiter (Sains) & Saturn (Sejarah) Year 1 Curriculum | Author complete 7-stage interactive lessons for Sains and Sejarah in BM and EN with interactive widgets | `LESSON-01`, `LESSON-02`, `LESSON-05` | 3 |
+| 27 | Uranus (RBT) & Neptune (PSV) Year 1 Curriculum | Author complete 7-stage interactive lessons for RBT and PSV in BM and EN with interactive widgets | `LESSON-03`, `LESSON-04`, `LESSON-05` | 3 |
+| 28 | Atmospheric Theming, Navigation & Routing Integration | Implement bespoke ambient themes, wire HUD mission launchers, and register levels 10.1–13.1 (27 total levels) | `THEME-01`, `THEME-02`, `ROUTE-01` | 3 |
+| 29 | Milestone Verification & Static Release Certification | Certify test suites, static build export, closure check, vocabulary guard, and zero regressions | `VERIF-01`, `VERIF-02` | 2 |
 
 ---
 
 ## Phase Details
 
-### Phase 18: Planetary Texture & Asset Pipeline
-**Goal:** Import, optimize, and attribute high-resolution planetary textures from `how-big-is-big/maps` into `public/images/planets/` with CC BY 4.0 attribution.
-**Requirements:** `AST-01`, `AST-02`
+### Phase 24: Outer Planets Subject Architecture & Telemetry
+**Goal:** Configure the subject identities, color palettes, and bilingual translation bundles for the 4 outer planets: Jupiter = Sains (Science), Saturn = Sejarah (History), Uranus = Reka Bentuk & Teknologi (RBT), and Neptune = Pendidikan Seni Visual (PSV).
+**Requirements:** `SUBJ-01`, `SUBJ-02`
 **Success Criteria:**
-1. Optimized texture maps for Mercury, Venus, Mars, Jupiter, Saturn, and Neptune exist in `public/images/planets/` and load smoothly without excessive bundle overhead.
-2. `ATTRIBUTION.md` in `public/images/planets/` documents Solar System Scope CC BY 4.0 licensing and NASA mission imagery origin.
+1. `SubjectId` and `Planet` structures in `src/lib/kids/planets.ts` recognize the 4 outer worlds with designated themes, accent colors, and curriculum metadata.
+2. English and Bahasa Melayu translation strings in `messages/en.json` and `messages/ms.json` are populated for all 4 new subject titles, taglines, and learning goals.
 
-### Phase 19: Planetary Schema & Astronomical Telemetry Data
-**Goal:** Enrich `src/lib/kids/planets.ts` with authentic astronomical dimensions, distances, and 3 cycling field notes per planet from `how-big-is-big` in both English and Bahasa Melayu.
-**Requirements:** `DATA-01`, `DATA-02`, `DATA-03`
+### Phase 25: Geological Cartography & Provincial Provinces
+**Goal:** Map 7 authentic geological or atmospheric features per outer world (28 total regions) with spherical coordinates, elevation/depth ranges, curriculum badges, and learning objectives.
+**Requirements:** `GEO-01`, `GEO-02`
 **Success Criteria:**
-1. Celestial data structures provide authentic radii, distance from Sun in km / AU, light travel time, and 3 curated field notes for all solar system planets.
-2. All new content is fully localized in Bahasa Melayu (`ms`) and English (`en`) with zero empty fallback fields.
-3. Existing 5 curriculum planets and their 35 geological feature mappings for KSSR prompt lessons remain 100% intact and functional.
+1. All 4 outer planets possess 7 distinct geological/atmospheric regions with spherical coordinates for 3D cartographic beacon rendering.
+2. Features 1–6 align with KSSR Standards 1–6; Feature 7 is designated as the Capstone Boss ("Cabaran Unggul") with distinctive gold badge styling.
 
-### Phase 20: 3D Solar System & Planetary Explorer Expansion
-**Goal:** Expand Three.js solar system overview and planetary cartography scenes to render full planetary bodies, orbital tracks, Saturn's rings, and smooth camera targeting.
-**Requirements:** `EXPLR-01`, `EXPLR-02`, `EXPLR-03`
+### Phase 26: Jupiter (Sains) & Saturn (Sejarah) Year 1 Curriculum
+**Goal:** Author and compile Year 1 (Tahun 1) interactive pilot lessons for Jupiter (Sains) and Saturn (Sejarah) in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`).
+**Requirements:** `LESSON-01`, `LESSON-02`, `LESSON-05`
 **Success Criteria:**
-1. The 3D Solar System view renders Mercury, Venus, Earth-Moon, Mars, Jupiter, Saturn, Uranus, and Neptune with accurate relative visual orbits and speeds.
-2. Saturn renders distinct procedural or textured ring planes inclined to its rotational axis.
-3. Users can click any planet in the solar system to orbit, inspect, and explore cartographic views with smooth camera zoom.
+1. `10-1-sains-benda-hidup.mdx` (Jupiter) authored across at least 7 `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `<LevelComplete>`).
+2. `11-1-sejarah-garis-masa.mdx` (Saturn) authored across at least 7 `<Section>` stages with rich interactive widgets focusing on historical chronology and polite interview prompts.
+3. Both lessons pass Malay vocabulary checks (`npm run check:vocab`) with zero English residuals.
 
-### Phase 21: Telemetry HUD & Astronomical Field Notes
-**Goal:** Enhance `PlanetaryHud` to present cycling "Tahukah Anda?" / "Did You Know?" field notes and authentic telemetry while supporting non-curriculum observation planets.
-**Requirements:** `HUD-01`, `HUD-02`
+### Phase 27: Uranus (RBT) & Neptune (PSV) Year 1 Curriculum
+**Goal:** Author and compile Year 1 (Tahun 1) interactive pilot lessons for Uranus (RBT) and Neptune (PSV) in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`).
+**Requirements:** `LESSON-03`, `LESSON-04`, `LESSON-05`
 **Success Criteria:**
-1. The Telemetry HUD displays authentic radius, distance, and 3 cycling field notes with interactive or timed rotation.
-2. Outer planets without active KSSR missions show an educational "Astronomical Observation" badge and status instead of broken mission buttons.
+1. `12-1-rbt-bentuk-asas.mdx` (Uranus) authored across at least 7 `<Section>` stages with interactive widgets focusing on 2D/3D shapes, basic building blocks, and design constraints.
+2. `13-1-psv-warna-imaginasi.mdx` (Neptune) authored across at least 7 `<Section>` stages with interactive widgets focusing on primary colors, line patterns, and artistic imagination prompts.
+3. Both lessons pass Malay vocabulary checks with zero English residuals.
 
-### Phase 22: Universal Allo Typography Implementation
-**Goal:** Fully implement the Allo font family across all elements, components, and typography stylesheets in the app, creating a cheerful, playful, cheeky yet mature look for kids and adults.
-**Requirements:** `ALLO-01`, `ALLO-02`
+### Phase 28: Atmospheric Theming, Navigation & Routing Integration
+**Goal:** Create bespoke ambient atmospheric backgrounds in `PlanetBackground`, wire mission launch buttons in `planetary-hud.tsx`, and integrate levels 10.1–13.1 into the app's registry and navigation systems.
+**Requirements:** `THEME-01`, `THEME-02`, `ROUTE-01`
 **Success Criteria:**
-1. `allo-font` variable web fonts are integrated into root layout, CSS variables, Tailwind configuration, and MDX prose styles.
-2. All buttons, headings, navigation links, HUD cards, badges, and body copy render with Allo font with balanced roundness, playfulness, and readability.
+1. `PlanetBackground` renders distinct atmospheric environments for Jupiter (swirling storm amber), Saturn (golden ring glow), Uranus (cyan procedural mist), and Neptune (deep azure storm winds).
+2. Telemetry HUD activates mission launch buttons for the Year 1 regions of all 4 outer planets and routes to the new lessons with `?origin=planets`.
+3. Total levels expand from 23 to 27 across `levels.ts`, `level-content.ts`, and `section-titles.ts`, with accurate progress counters (`completed / 27`).
 
-### Phase 23: Milestone Verification & Static Release Certification
+### Phase 29: Milestone Verification & Static Release Certification
 **Goal:** Validate all unit and integration tests, verify TypeScript, run bundle closure and Malay vocabulary checks, and certify 100% static export.
 **Requirements:** `VERIF-01`, `VERIF-02`
 **Success Criteria:**
-1. All unit and integration test suites pass with zero failures.
-2. `npm run verify` runs cleanly with 0 TypeScript errors, 0 ESLint errors, passing vocabulary guards, and verified static export files in `out/planets/`.
+1. All unit and integration test suites pass with zero failures (including planetary explorer, HUD, and all 27 level routes).
+2. `npm run verify` runs cleanly with 0 TypeScript errors, 0 ESLint errors, passing vocabulary guards on all 27 MDX lessons, and verified static export files in `out/`.
