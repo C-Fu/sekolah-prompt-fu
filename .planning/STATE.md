@@ -2,11 +2,11 @@
 gsd_state_version: "1.0"
 milestone: v1.5
 milestone_name: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
-current_phase: 25
+current_phase: 26
 current_plan: null
 status: in_progress
-stopped_at: Completed 25-02-PLAN.md
-last_updated: "2026-11-19T15:25:00.000Z"
+stopped_at: Phase 25 verified and completed
+last_updated: "2026-11-19T15:30:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 2
@@ -23,7 +23,7 @@ last_activity: 2026-11-19
 See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.  
-**Current status:** Phase 25 completed (2/2 plans). Ready for Phase 26.
+**Current status:** Phase 24 and Phase 25 completed and verified. Transitioning to Phase 26.
 
 ## Performance Metrics
 
@@ -40,9 +40,9 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 24 P01 | 3m | 2 tasks | 3 files |
-| Phase 24-outer-planets-subject-architecture-telemetry P02 | 7m | 2 tasks | 7 files |
-| Phase 25-geological-cartography-provincial-provinces P01 | 4m | 2 tasks | 2 files |
-| Phase 25-geological-cartography-provincial-provinces P02 | 3m | 2 tasks | 2 files |
+| Phase 24 P02 | 7m | 2 tasks | 7 files |
+| Phase 25 P01 | 4m | 2 tasks | 1 file |
+| Phase 25 P02 | 3m | 2 tasks | 2 files |
 
 ## Deferred Items
 
@@ -56,19 +56,19 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Resume file:** None
 
-Last session: 2026-11-19T23:25:00+08:00
-Stopped at: Completed 25-02-PLAN.md
-Next action: Complete Phase 25 verification or begin Phase 26 planning.
+Last session: 2026-11-19T23:30:00+08:00
+Stopped at: Phase 25 verified and completed
+Next action: Run `/gsd-discuss-phase 26`.
 
 ## Current Position
-Phase: 25 - Geological Cartography & Provincial Provinces
+Phase: 26 - Jupiter (Sains) & Saturn (Sejarah) Year 1 Curriculum
 Current Plan: null
-Total Plans in Phase: 2
+Total Plans in Phase: 0
 
 ## Decisions
 
-- [Phase 24]: Migrated outer planets to canonical KSSR subjects with backward-compatible normalization
-- [Phase 24-outer-planets-subject-architecture-telemetry]: Render Coming Soon card in PlanetaryHud when subject is astronomy or planet is an outer world (sains, sejarah, rbt, psv) with 0 features.
-- [Phase 24-outer-planets-subject-architecture-telemetry]: Assert canonical outer planet IDs across all Vitest test suites while preserving Malay localized body names.
-- [Phase 25-geological-cartography-provincial-provinces]: Populated 28 authentic geological/atmospheric features across Jupiter, Saturn, Uranus, Neptune with valid spherical coordinates, elevation ranges, and KSSR year mapping (Years 1-6 + Year 6 Capstone Boss).
-- [Phase 25-geological-cartography-provincial-provinces]: Expanded Vitest suites to validate 63 total features (35 core + 28 outer) and verified outer planet HUD telemetry rendering.
+- [Phase 24]: Migrated outer planets to canonical KSSR subjects with backward-compatible normalization.
+- [Phase 24]: Render Coming Soon card in PlanetaryHud when subject is astronomy or planet has 0 features.
+- [Phase 25]: Populated 28 authentic geological/atmospheric features across Jupiter, Saturn, Uranus, and Neptune (total 63 features).
+- [Phase 25]: Feature 1 on all outer planets has hasMission: true mapped to upcoming Year 1 pilot lessons.
+- [Phase 25]: Feature 7 on all outer planets designated as Year 6 Capstone Boss ("Cabaran Unggul") with isFinalBoss: true.
