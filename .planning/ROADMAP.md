@@ -48,6 +48,10 @@ Plans:
 ### Phase 26: Jupiter (Sains) & Saturn (Sejarah) Year 1 Curriculum
 **Goal:** Author and compile Year 1 (Tahun 1) interactive pilot lessons for Jupiter (Sains) and Saturn (Sejarah) in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`).
 **Requirements:** `LESSON-01`, `LESSON-02`, `LESSON-05`
+**Plans:** 2 plans
+Plans:
+- [ ] 26-01-PLAN.md — Author Jupiter (Sains) Year 1 lesson across 7 canonical stages with test harness and vocab check
+- [ ] 26-02-PLAN.md — Author Saturn (Sejarah) Year 1 lesson across 7 canonical stages with test harness and vocab check
 **Success Criteria:**
 1. `10-1-sains-benda-hidup.mdx` (Jupiter) authored across at least 7 `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `<LevelComplete>`).
 2. `11-1-sejarah-garis-masa.mdx` (Saturn) authored across at least 7 `<Section>` stages with rich interactive widgets focusing on historical chronology and polite interview prompts.
