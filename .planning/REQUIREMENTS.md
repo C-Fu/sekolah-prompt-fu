@@ -17,8 +17,8 @@ Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Satu
 - [x] **LESSON-01**: User can play a complete Tahun 1 interactive prompt lesson for Jupiter (Sains: Benda Hidup & Benda Bukan Hidup / AI Observation Prompts) across 7 structured `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `LevelComplete`).
 - [ ] **LESSON-02**: User can play a complete Tahun 1 interactive prompt lesson for Saturn (Sejarah: Garis Masa Diri & Keluarga / Historical Chronology Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
 - [ ] **LESSON-03**: User can play a complete Tahun 1 interactive prompt lesson for Uranus (RBT: Bentuk Asas, Blok Binaan & Reka Bentuk / Geometric Prompt Engineering) across 7 structured `<Section>` stages with rich interactive widgets.
-- [ ] **LESSON-04**: User can play a complete Tahun 1 interactive prompt lesson for Neptune (PSV: Warna Asas, Garisan & Imaginasi Visual / Artistic Visual Description Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
-- [ ] **LESSON-05**: All 4 lessons are fully authored and localized in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`) with zero silent fallbacks and strict adherence to Malay vocabulary guards.
+- [x] **LESSON-04**: User can play a complete Tahun 1 interactive prompt lesson for Neptune (PSV: Warna Asas, Garisan & Imaginasi Visual / Artistic Visual Description Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
+- [x] **LESSON-05**: All 4 lessons are fully authored and localized in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`) with zero silent fallbacks and strict adherence to Malay vocabulary guards.
 
 ### Theming, Atmospheric Environments & Routing
 - [ ] **THEME-01**: User experiences bespoke atmospheric and celestial themes in `PlanetBackground` for Jupiter (swirling amber storms), Saturn (golden ring glow), Uranus (cyan procedural mist), and Neptune (deep azure storm winds) with matched accent navigation borders.
