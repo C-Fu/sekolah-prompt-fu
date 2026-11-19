@@ -51,6 +51,30 @@ describe("Planetary Schema & Cartography", () => {
           celestialBody: "Mercury",
           celestialBodyMs: "Utarid",
         },
+        {
+          id: "jupiter-sains",
+          subjectId: "sains",
+          celestialBody: "Jupiter",
+          celestialBodyMs: "Musytari",
+        },
+        {
+          id: "saturn-sejarah",
+          subjectId: "sejarah",
+          celestialBody: "Saturn",
+          celestialBodyMs: "Zuhal",
+        },
+        {
+          id: "uranus-rbt",
+          subjectId: "rbt",
+          celestialBody: "Uranus",
+          celestialBodyMs: "Uranus",
+        },
+        {
+          id: "neptune-psv",
+          subjectId: "psv",
+          celestialBody: "Neptune",
+          celestialBodyMs: "Neptun",
+        },
       ];
 
       for (const expected of expectedPlanets) {
@@ -74,7 +98,7 @@ describe("Planetary Schema & Cartography", () => {
   describe("Geological Features and Year Mapping (D-03)", () => {
     it("defines exactly 7 features for each of the 5 core planets (35 features total)", () => {
       let totalFeatures = 0;
-      const corePlanets = PLANET_WORLDS.filter((p) => p.subjectId !== "astronomy");
+      const corePlanets = PLANET_WORLDS.filter((p) => p.features.length > 0);
 
       for (const planet of corePlanets) {
         expect(planet.features, `Planet ${planet.id} must have 7 features`).toHaveLength(7);
@@ -100,7 +124,7 @@ describe("Planetary Schema & Cartography", () => {
     });
 
     it("ensures feature slugs are unique within each planet and non-empty", () => {
-      const corePlanets = PLANET_WORLDS.filter((p) => p.subjectId !== "astronomy");
+      const corePlanets = PLANET_WORLDS.filter((p) => p.features.length > 0);
       for (const planet of corePlanets) {
         const slugs = planet.features.map((f) => f.id);
         expect(new Set(slugs).size).toBe(7);
@@ -237,10 +261,10 @@ describe("Planetary Schema & Cartography", () => {
       expect(ids).toContain('mars-english');
       expect(ids).toContain('venus-matematik');
       expect(ids).toContain('mercury-moral');
-      expect(ids).toContain('jupiter-astronomy');
-      expect(ids).toContain('saturn-astronomy');
-      expect(ids).toContain('uranus-astronomy');
-      expect(ids).toContain('neptune-astronomy');
+      expect(ids).toContain('jupiter-sains');
+      expect(ids).toContain('saturn-sejarah');
+      expect(ids).toContain('uranus-rbt');
+      expect(ids).toContain('neptune-psv');
     });
 
     it('provides valid authentic radius, distance, and field notes for each planet', () => {
@@ -263,11 +287,11 @@ describe("Planetary Schema & Cartography", () => {
     });
 
     it('keeps 35 curriculum features for the 5 core worlds and 0 features for outer worlds', () => {
-      const coreWorlds = PLANET_WORLDS.filter((w) => w.subjectId !== 'astronomy');
+      const coreWorlds = PLANET_WORLDS.filter((w) => w.features.length > 0);
       expect(coreWorlds.length).toBe(5);
       coreWorlds.forEach((w) => expect(w.features.length).toBe(7));
 
-      const outerWorlds = PLANET_WORLDS.filter((w) => w.subjectId === 'astronomy');
+      const outerWorlds = PLANET_WORLDS.filter((w) => w.features.length === 0);
       expect(outerWorlds.length).toBe(4);
       outerWorlds.forEach((w) => expect(w.features.length).toBe(0));
     });

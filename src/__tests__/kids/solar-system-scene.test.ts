@@ -19,15 +19,15 @@ describe('Solar System Overview Scene (solar-system-scene.ts)', () => {
     expect(planetIds).toContain('earth-prompting');
     expect(planetIds).toContain('moon-bm');
     expect(planetIds).toContain('mars-english');
-    expect(planetIds).toContain('jupiter-astronomy');
-    expect(planetIds).toContain('saturn-astronomy');
-    expect(planetIds).toContain('uranus-astronomy');
-    expect(planetIds).toContain('neptune-astronomy');
+    expect(planetIds).toContain('jupiter-sains');
+    expect(planetIds).toContain('saturn-sejarah');
+    expect(planetIds).toContain('uranus-rbt');
+    expect(planetIds).toContain('neptune-psv');
 
     // Saturn ring mesh verification
-    const saturnMesh = planetMeshes.find((m) => m.userData.planetId === 'saturn-astronomy');
+    const saturnMesh = planetMeshes.find((m) => m.userData.planetId === 'saturn-sejarah');
     expect(saturnMesh).toBeDefined();
-    const saturnRing = saturnMesh?.children.find((c) => c.name === 'ring-saturn-astronomy');
+    const saturnRing = saturnMesh?.children.find((c) => c.name === 'ring-saturn-sejarah');
     expect(saturnRing).toBeDefined();
 
     // Central Sun verification

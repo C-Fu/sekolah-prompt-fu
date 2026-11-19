@@ -303,7 +303,7 @@ describe('PlanetaryHud Component (THREE-03)', () => {
   });
 
   it('renders Coming Soon card for outer worlds with zero features', () => {
-    const jupiter = PLANET_WORLDS.find((w) => w.id === 'jupiter-astronomy')!;
+    const jupiter = PLANET_WORLDS.find((w) => w.id === 'jupiter-sains')!;
     expect(jupiter).toBeDefined();
 
     render(

@@ -101,10 +101,10 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
       "mars-english",
       "venus-matematik",
       "mercury-moral",
-      "jupiter-astronomy",
-      "saturn-astronomy",
-      "uranus-astronomy",
-      "neptune-astronomy",
+      "jupiter-sains",
+      "saturn-sejarah",
+      "uranus-rbt",
+      "neptune-psv",
     ];
 
     // Assert every world in PLANET_WORLDS exists in both dictionaries
@@ -144,6 +144,10 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
     expect(msWorlds["mars-english"].title).toContain("Marikh");
     expect(msWorlds["venus-matematik"].title).toContain("Zuhrah");
     expect(msWorlds["mercury-moral"].title).toContain("Utarid");
+    expect(msWorlds["jupiter-sains"].title).toContain("Musytari");
+    expect(msWorlds["saturn-sejarah"].title).toContain("Zuhal");
+    expect(msWorlds["uranus-rbt"].title).toContain("Uranus");
+    expect(msWorlds["neptune-psv"].title).toContain("Neptun");
 
     // Ensure no untranslated English body names in ms titles
     expect(msWorlds["earth-prompting"].title).not.toContain("Earth");
@@ -151,5 +155,8 @@ describe("Planetary i18n Dictionary Parity (`kids.planets`)", () => {
     expect(msWorlds["mars-english"].title).not.toContain("Mars");
     expect(msWorlds["venus-matematik"].title).not.toContain("Venus");
     expect(msWorlds["mercury-moral"].title).not.toContain("Mercury");
+    expect(msWorlds["jupiter-sains"].title).not.toContain("Jupiter");
+    expect(msWorlds["saturn-sejarah"].title).not.toContain("Saturn");
+    expect(msWorlds["neptune-psv"].title).not.toContain("Neptune");
   });
 });
