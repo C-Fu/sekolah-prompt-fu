@@ -1935,6 +1935,18 @@ export function resolveMissionRoute(planetId: PlanetId | string, feature?: Plane
       return '/level/7-1-english-colorful-toys';
     case 'mercury-moral':
       return '/level/9-1-moral-sahabat-prihatin';
+    case 'jupiter-sains':
+    case 'jupiter-astronomy':
+      return '/level/10-1-sains-benda-hidup';
+    case 'saturn-sejarah':
+    case 'saturn-astronomy':
+      return '/level/11-1-sejarah-garis-masa';
+    case 'uranus-rbt':
+    case 'uranus-astronomy':
+      return '/level/12-1-rbt-bentuk-asas';
+    case 'neptune-psv':
+    case 'neptune-astronomy':
+      return '/level/13-1-psv-warna-imaginasi';
     default:
       return '/map';
   }
