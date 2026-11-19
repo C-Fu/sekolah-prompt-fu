@@ -9,6 +9,7 @@ const SUBJECT_SLUGS = [
   "9-1-moral-sahabat-prihatin",
   "10-1-sains-benda-hidup",
   "11-1-sejarah-garis-masa",
+  "12-1-rbt-bentuk-asas",
 ];
 
 const LOCALES = ["en", "ms"];
