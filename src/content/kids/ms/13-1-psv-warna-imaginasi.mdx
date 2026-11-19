@@ -1,0 +1,109 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Neptun (Planet Pendidikan Seni Visual)**! 🪐 Saya **Peromfu**, rakan sekelas anda di Tahun 1. Kita sedang meluncur merentasi lautan gas biru di atas **Bintik Gelap Gergasi** (Great Dark Spot), ribut pusaran angkasa yang amat mengagumkan! Hari ini, kita menjadi pelukis cilik yang membimbing AI melukis karya seni hebat menggunakan **Warna Asas** dan **Corak Garisan**.
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Tahukah anda? Pendidikan Seni Visual Tahun 1 mengajar kita tentang bahasa seni visual! **Warna asas** ialah tiga warna utama yang istimewa: **merah**, **biru**, dan **kuning**. Warna-warna ini tidak boleh dihasilkan melalui campuran warna lain! Selain warna, kita juga ada pelbagai jenis **garisan** seperti garisan **lurus**, **beralun**, **zig-zag**, dan **putus-putus**. Gabungan warna asas dan garisan membolehkan AI melukis imaginasi kita dengan jelas dan hidup!
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Pilih Warna Asas dan Garisan Seni 🎨
+
+Peromfu mahu membimbing AI melukis ombak ribut lautan Neptun yang bertenaga. Apakah gabungan warna asas dan garisan yang paling tepat untuk menggambarkan ombak air yang beralun lembut?
+
+<WordPredictor
+  title="Bantu Peromfu Memilih Warna & Garisan!"
+  instruction="Lengkapkan arahan seni ini dengan gabungan warna asas dan jenis garisan yang betul:"
+  sentence="Bantu pelukis cilik: Lukis lautan bergelora menggunakan warna asas ____ dengan garisan ____ yang mengalir tenang."
+  options={["biru pekat dan garisan beralun", "kelabu gelap dan garisan kaku", "coklat pudar dan titik rawak", "hitam pekat dan garisan putus"]}
+  correctAnswer="biru pekat dan garisan beralun"
+  explanation="Warna biru ialah warna asas yang melambangkan air dan ketenangan, manakala garisan beralun menggambarkan pergerakan lembut ombak lautan!"
+  aiThinking="Pilihan 'biru pekat dan garisan beralun' menggabungkan warna asas dan unsur garisan mengikut prinsip seni visual!"
+  successMessage="Tepat sekali! AI kini memahami cara menggabungkan warna asas biru dan garisan beralun untuk melukis ombak!"
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Prompt Seni Visual vs Kesilapan Lakaran 🖌️
+
+Bandingkan dua arahan di bawah. Arahan manakah yang membimbing AI melukis karya seni angkasa dengan perincian warna asas dan corak garisan yang jelas?
+
+<PromptVsMistake
+  question="Arahan manakah yang membimbing AI melukis gambar seni dengan warna asas dan corak garisan yang tepat?"
+  good="Lukis pemandangan ribut angkasa Neptun. Gunakan warna asas biru pekat untuk latar belakang, garisan beralun kuning untuk angin ribut, dan kapal angkasa merah terang dengan garisan lurus yang teguh."
+  bad="Lukis gambar pemandangan laut cantik sekarang."
+  explanation="Arahan pertama sangat terperinci kerana menyenaraikan ketiga-tiga warna asas (biru, kuning, merah) dan jenis garisan (beralun, lurus) untuk setiap bahagian gambar!"
+  peromfuMessage="Sentiasa nyatakan warna asas dan corak garisan yang anda inginkan agar AI menghasilkan karya seni yang memukau!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Doktor Prompt — Rawat Arahan Pelukis Cilik 🩺
+
+Peromfu melihat seorang rakan menulis arahan lukisan yang terlalu umum: *"Lukis bunga angkasa"*. Mari kita rawat arahan ini menjadi panduan seni visual yang kaya dengan warna asas dan corak garisan!
+
+<PromptDoctor
+  title="Rawat Prompt Lukisan Seni Visual"
+  brokenPrompt="Lukis bunga angkasa"
+  problems={[
+    { issue: "Tiada Peranan Pelukis", symptom: "Siapakah AI dan apakah gaya lukisannya?", fix: "Bertindak sebagai pelukis cilik Tahun 1 yang penuh imaginasi." },
+    { issue: "Tiada Warna Asas", symptom: "Apakah warna utama yang menghiasi kelopak bunga?", fix: "Bertindak sebagai pelukis cilik Tahun 1 yang penuh imaginasi. Lukis bunga angkasa dengan kelopak berwarna merah terang dan kuning cerah." },
+    { issue: "Tiada Corak Garisan & Latar", symptom: "Bagaimanakah corak garisan dan latar belakang lukisan?", fix: "Bertindak sebagai pelukis cilik Tahun 1 yang penuh imaginasi. Lukis bunga angkasa dengan kelopak berwarna merah dan kuning cerah, dikelilingi daun bergarisan zig-zag serta latar belakang biru bergarisan beralun." }
+  ]}
+  healedPrompt="Bertindak sebagai pelukis cilik Tahun 1 yang penuh imaginasi. Lukis bunga angkasa dengan kelopak berwarna merah dan kuning cerah, dikelilingi daun bergarisan zig-zag serta latar belakang biru bergarisan beralun."
+  successMessage="Syabas! Arahan seni telah dirawat dengan peranan pelukis, warna asas yang harmoni, dan corak garisan yang kaya!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Susun Formula Prompt Seni Visual 🧩
+
+Mari bantu Peromfu menyusun formula arahan seni visual mengikut urutan terbaik: **[Peranan Pelukis Seni] + [Subjek & Warna Asas] + [Corak Garisan & Suasana]**.
+
+<DragDropPrompt
+  title="Susun Formula Arahan Seni Visual"
+  instruction="Susun blok perkataan mengikut urutan terbaik untuk membimbing AI melukis:"
+  pieces={[
+    "Sebagai pelukis cilik Tahun 1 yang berbakat,",
+    "lukis sebuah istana kristal berwarna kuning keemasan dan merah menyala,",
+    "hiasi latar langit dengan garisan beralun biru pekat serta bintang bergarisan lurus."
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Cemerlang! Formula prompt seni anda tersusun rapi dan membimbing AI melukis dengan penuh keindahan!"
+/>
+</Section>
+
+<Section>
+## Cabaran 5: Kata Ajaib — Kanvas Ribut Neptun ✨
+
+Sekarang mari lengkapkan templat arahan lukisan Bintik Gelap Gergasi dengan kata ajaib seni visual agar AI menghasilkan lukisan pemandangan planet yang mempesonakan!
+
+<MagicWords
+  title="Lengkapkan Kata Ajaib Seni Visual"
+  sentence="Sila lukis pemandangan ribut angkasa dengan latar langit ___, pusaran angin berbentuk ___, dan kilatan tenaga berwarna ___."
+  blanks={[
+    { hint: "🎨 warna asas langit lautan", answers: ["warna asas biru pekat", "warna biru nila berkabus", "latar biru laut dalam", "lapisan biru langit cerah"] },
+    { hint: "〰️ corak garisan pusaran", answers: ["garisan beralun lembut", "garisan pusaran melengkung", "garisan lingkaran dinamik", "alunan ombak berpusar"] },
+    { hint: "⚡ warna tenaga kilat", answers: ["kuning cerah bercahaya", "merah menyala bertenaga", "kuning keemasan terang", "merah jingga bersinar"] }
+  ]}
+  successMessage="Hebat sekali! Gabungan kata ajaib warna asas dan corak garisan anda menghasilkan karya seni yang menakjubkan!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Jaguh Seni Neptun! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Kejayaan gilang-gemilang di Neptun! Anda telah menguasai kemahiran mengenal pasti warna asas merah, biru, dan kuning, membezakan corak garisan lurus, beralun, dan zig-zag, serta membimbing AI menghasilkan karya seni yang hidup dan penuh imaginasi!
+</Panel>
+
+<LevelComplete
+  levelSlug="13-1-psv-warna-imaginasi"
+  stars={3}
+  message="Tahniah! Anda menguasai warna asas dan garisan seni visual di Planet Neptun!"
+/>
+</Section>
