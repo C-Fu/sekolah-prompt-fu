@@ -50,7 +50,7 @@ Plans:
 **Requirements:** `LESSON-01`, `LESSON-02`, `LESSON-05`
 **Plans:** 2 plans
 Plans:
-- [ ] 26-01-PLAN.md — Author Jupiter (Sains) Year 1 lesson across 7 canonical stages with test harness and vocab check
+- [x] 26-01-PLAN.md — Author Jupiter (Sains) Year 1 lesson across 7 canonical stages with test harness and vocab check
 - [ ] 26-02-PLAN.md — Author Saturn (Sejarah) Year 1 lesson across 7 canonical stages with test harness and vocab check
 **Success Criteria:**
 1. `10-1-sains-benda-hidup.mdx` (Jupiter) authored across at least 7 `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `<LevelComplete>`).

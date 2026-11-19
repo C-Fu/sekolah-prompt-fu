@@ -14,7 +14,7 @@ Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Satu
 - [x] **GEO-02**: Features 1–6 map to Tahun 1–6 curricula; Feature 7 represents the Capstone Boss ("Cabaran Unggul") with distinctive badge styling and elevated visual beacon pins.
 
 ### Interactive Year 1 Pilot Lessons
-- [ ] **LESSON-01**: User can play a complete Tahun 1 interactive prompt lesson for Jupiter (Sains: Benda Hidup & Benda Bukan Hidup / AI Observation Prompts) across 7 structured `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `LevelComplete`).
+- [x] **LESSON-01**: User can play a complete Tahun 1 interactive prompt lesson for Jupiter (Sains: Benda Hidup & Benda Bukan Hidup / AI Observation Prompts) across 7 structured `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `LevelComplete`).
 - [ ] **LESSON-02**: User can play a complete Tahun 1 interactive prompt lesson for Saturn (Sejarah: Garis Masa Diri & Keluarga / Historical Chronology Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
 - [ ] **LESSON-03**: User can play a complete Tahun 1 interactive prompt lesson for Uranus (RBT: Bentuk Asas, Blok Binaan & Reka Bentuk / Geometric Prompt Engineering) across 7 structured `<Section>` stages with rich interactive widgets.
 - [ ] **LESSON-04**: User can play a complete Tahun 1 interactive prompt lesson for Neptune (PSV: Warna Asas, Garisan & Imaginasi Visual / Artistic Visual Description Prompts) across 7 structured `<Section>` stages with rich interactive widgets.
