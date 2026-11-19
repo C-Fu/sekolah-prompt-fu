@@ -74,6 +74,13 @@ Plans:
 ### Phase 28: Atmospheric Theming, Navigation & Routing Integration
 **Goal:** Create bespoke ambient atmospheric backgrounds in `PlanetBackground`, wire mission launch buttons in `planetary-hud.tsx`, and integrate levels 10.1–13.1 into the app's registry and navigation systems.
 **Requirements:** `THEME-01`, `THEME-02`, `ROUTE-01`
+**Plans:** 3 plans
+
+Plans:
+- [ ] 28-01-PLAN.md — Configure bespoke atmospheric and celestial themes in PlanetBackground for Jupiter, Saturn, Uranus, and Neptune
+- [ ] 28-02-PLAN.md — Register levels 10.1–13.1 across levels.ts, level-content.ts, section-titles.ts, and i18n message bundles (27 total levels)
+- [ ] 28-03-PLAN.md — Wire Planetary HUD Mission Launcher and route resolution for outer planets with ?origin=planets
+
 **Success Criteria:**
 1. `PlanetBackground` renders distinct atmospheric environments for Jupiter (swirling storm amber), Saturn (golden ring glow), Uranus (cyan procedural mist), and Neptune (deep azure storm winds).
 2. Telemetry HUD activates mission launch buttons for the Year 1 regions of all 4 outer planets and routes to the new lessons with `?origin=planets`.
