@@ -60,7 +60,7 @@ Plans:
 ### Phase 27: Uranus (RBT) & Neptune (PSV) Year 1 Curriculum
 **Goal:** Author and compile Year 1 (Tahun 1) interactive pilot lessons for Uranus (RBT) and Neptune (PSV) in both Bahasa Melayu (`src/content/kids/ms/`) and English (`src/content/kids/en/`).
 **Requirements:** `LESSON-03`, `LESSON-04`, `LESSON-05`
-**Plans:** 2/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 27-01-PLAN.md — Author Uranus (RBT) Year 1 lesson across 7 canonical stages with test harness and vocab check
