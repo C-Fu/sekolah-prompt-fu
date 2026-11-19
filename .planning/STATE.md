@@ -3,15 +3,16 @@ gsd_state_version: "1.0"
 milestone: v1.5
 milestone_name: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
 current_phase: 24
+current_plan: 2
 status: ready_to_execute
-stopped_at: Completed 24-01-PLAN.md
-last_updated: "2026-11-19T14:42:55.363Z"
-state_head: 5ddc87f594075b70b16d27e8437374c5c3f24d32
+stopped_at: Completed 24-02-PLAN.md
+last_updated: "2026-11-19T14:51:54.080Z"
+state_head: e31e241add1f5896d4abfeb99375d212688b673e
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 2
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 last_activity: 2026-11-19
 ---
@@ -40,6 +41,7 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 24 P01 | 3m | 2 tasks | 3 files |
+| Phase 24-outer-planets-subject-architecture-telemetry P02 | 7m | 2 tasks | 7 files |
 
 ## Deferred Items
 
@@ -53,8 +55,8 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Resume file:** None
 
-Last session: 2026-11-19T14:42:55.327Z
-Stopped at: Completed 24-01-PLAN.md
+Last session: 2026-11-19T14:51:54.044Z
+Stopped at: Completed 24-02-PLAN.md
 Next action: Run `/gsd-execute-phase 24`.
 
 ## Current Position
@@ -65,3 +67,5 @@ Total Plans in Phase: 2
 ## Decisions
 
 - [Phase 24]: Migrated outer planets to canonical KSSR subjects with backward-compatible normalization
+- [Phase 24-outer-planets-subject-architecture-telemetry]: Render Coming Soon card in PlanetaryHud when subject is astronomy or planet is an outer world (sains, sejarah, rbt, psv) with 0 features.
+- [Phase 24-outer-planets-subject-architecture-telemetry]: Assert canonical outer planet IDs across all Vitest test suites while preserving Malay localized body names.
