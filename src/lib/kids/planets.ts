@@ -3,18 +3,41 @@
  * Source: .planning/phases/09-planetary-schema-subject-alignment/09-CONTEXT.md
  */
 
-export type SubjectId = "prompting" | "bm" | "english" | "matematik" | "moral" | "astronomy";
+export type SubjectId = "prompting" | "bm" | "english" | "matematik" | "moral" | "sains" | "sejarah" | "rbt" | "psv" | "astronomy";
 
-export type PlanetId =
+export type CanonicalPlanetId =
   | "earth-prompting"
   | "moon-bm"
   | "mars-english"
   | "venus-matematik"
   | "mercury-moral"
+  | "jupiter-sains"
+  | "saturn-sejarah"
+  | "uranus-rbt"
+  | "neptune-psv";
+
+export type LegacyPlanetId =
   | "jupiter-astronomy"
   | "saturn-astronomy"
   | "uranus-astronomy"
   | "neptune-astronomy";
+
+export type PlanetId = CanonicalPlanetId | LegacyPlanetId;
+
+export function normalizePlanetId(id: PlanetId | string): CanonicalPlanetId | string {
+  switch (id) {
+    case "jupiter-astronomy":
+      return "jupiter-sains";
+    case "saturn-astronomy":
+      return "saturn-sejarah";
+    case "uranus-astronomy":
+      return "uranus-rbt";
+    case "neptune-astronomy":
+      return "neptune-psv";
+    default:
+      return id;
+  }
+}
 
 export interface GeoCoordinates {
   lat: number; // Latitude in degrees [-90..90]
@@ -1072,20 +1095,20 @@ export const PLANET_WORLDS: Planet[] = [
       },
     ],
   },
-  // 6. Jupiter: Cosmic Giant (v1.4)
+  // 6. Jupiter: Sains (Musytari) - D-01, D-02, D-03
   {
-    id: "jupiter-astronomy",
+    id: "jupiter-sains",
     order: 6,
     celestialBody: "Jupiter",
     celestialBodyMs: "Musytari",
-    subjectId: "astronomy",
-    subjectTitle: "Cosmic Giant & Deep Space Observation",
-    subjectTitleMs: "Gergasi Kosmik & Cerapan Angkasa Lepas",
+    subjectId: "sains",
+    subjectTitle: "Science & Empirical Inquiry",
+    subjectTitleMs: "Sains & Penerokaan Saintifik",
     themeColor: "#D97706",
     accentColor: "#F59E0B",
     textureType: "shader",
-    tagline: "King of planets: massive gravity, swirling storms, and deep space telemetry.",
-    taglineMs: "Raja segala planet: graviti gergasi, ribut bergelora, dan cerapan angkasa dalam.",
+    tagline: "Swirling giant unlocks the secrets of scientific observation, living wonders, and nature hypotheses.",
+    taglineMs: "Gergasi bergelora membuka rahsia pemerhatian saintifik, benda hidup, dan hipotesis alam.",
     orbitalPeriodDays: 4332.59,
     diameterKm: 139820,
     radiusKm: 69911,
@@ -1113,20 +1136,20 @@ export const PLANET_WORLDS: Planet[] = [
     ],
     features: [],
   },
-  // 7. Saturn: Ringed Jewel (v1.4)
+  // 7. Saturn: Sejarah (Zuhal) - D-01, D-02, D-03
   {
-    id: "saturn-astronomy",
+    id: "saturn-sejarah",
     order: 7,
     celestialBody: "Saturn",
     celestialBodyMs: "Zuhal",
-    subjectId: "astronomy",
-    subjectTitle: "Ringed Jewel of the Solar System",
-    subjectTitleMs: "Permata Bergelang Sistem Suria",
+    subjectId: "sejarah",
+    subjectTitle: "History & Chronology",
+    subjectTitleMs: "Sejarah & Garis Masa",
     themeColor: "#EAB308",
     accentColor: "#FDE047",
     textureType: "shader",
-    tagline: "Spectacular icy ring system, low density, and ancient atmospheric wonders.",
-    taglineMs: "Sistem gelang ais yang menakjubkan, ketumpatan rendah, dan keajaiban atmosfera purba.",
+    tagline: "Ancient cosmic rings guiding event timelines, personal history, and family chronicles.",
+    taglineMs: "Gelung masa purba membimbing kronologi peristiwa, sejarah diri, dan riwayat keluarga.",
     orbitalPeriodDays: 10759.22,
     diameterKm: 116460,
     radiusKm: 58232,
@@ -1154,20 +1177,20 @@ export const PLANET_WORLDS: Planet[] = [
     ],
     features: [],
   },
-  // 8. Uranus: Tilted Ice Giant (v1.4)
+  // 8. Uranus: RBT (Uranus) - D-01, D-02, D-03
   {
-    id: "uranus-astronomy",
+    id: "uranus-rbt",
     order: 8,
     celestialBody: "Uranus",
     celestialBodyMs: "Uranus",
-    subjectId: "astronomy",
-    subjectTitle: "The Tilted Ice Giant",
-    subjectTitleMs: "Gergasi Ais Terbalik",
+    subjectId: "rbt",
+    subjectTitle: "Design & Technology (RBT)",
+    subjectTitleMs: "Reka Bentuk & Teknologi",
     themeColor: "#06B6D4",
     accentColor: "#22D3EE",
     textureType: "shader",
-    tagline: "Rolling ice giant with extreme axial tilt and freezing methane haze.",
-    taglineMs: "Gergasi ais yang berputar condong dengan kecondongan paksi melampau dan kabus metana sejuk.",
+    tagline: "Tilted axis challenging creative basic shapes, 2D/3D blocks, and structural constraints.",
+    taglineMs: "Paksi condong menguji kreativiti bentuk asas, blok binaan 2D/3D, dan batas rekaan.",
     orbitalPeriodDays: 30685.4,
     diameterKm: 50724,
     radiusKm: 25362,
@@ -1195,20 +1218,20 @@ export const PLANET_WORLDS: Planet[] = [
     ],
     features: [],
   },
-  // 9. Neptune: Supersonic Ice Giant (v1.4)
+  // 9. Neptune: PSV (Neptun) - D-01, D-02, D-03
   {
-    id: "neptune-astronomy",
+    id: "neptune-psv",
     order: 9,
     celestialBody: "Neptune",
     celestialBodyMs: "Neptun",
-    subjectId: "astronomy",
-    subjectTitle: "Supersonic Winds & Deep Azure Abyss",
-    subjectTitleMs: "Angin Supersonik & Jurang Biru Angkasa",
+    subjectId: "psv",
+    subjectTitle: "Visual Arts (PSV)",
+    subjectTitleMs: "Pendidikan Seni Visual",
     themeColor: "#2563EB",
     accentColor: "#3B82F6",
     textureType: "shader",
-    tagline: "Distant sapphire ice giant with supersonic winds and frozen methane clouds.",
-    taglineMs: "Gergasi ais nilam yang jauh dengan angin supersonik dan awan metana beku.",
+    tagline: "Deep azure abyss inspiring primary color harmony, line patterns, and artistic imagination.",
+    taglineMs: "Jurang biru kosmik menyemarakkan harmoni warna asas, corak garisan, dan imaginasi seni.",
     orbitalPeriodDays: 60189,
     diameterKm: 49244,
     radiusKm: 24622,
@@ -1240,9 +1263,11 @@ export const PLANET_WORLDS: Planet[] = [
 
 /**
  * Helper to retrieve a Planet by its PlanetId.
+ * Supports both CanonicalPlanetId and LegacyPlanetId.
  */
-export function getPlanetWorld(id: string): Planet | undefined {
-  return PLANET_WORLDS.find((planet) => planet.id === id);
+export function getPlanetWorld(id: PlanetId | string): Planet | undefined {
+  const normalizedId = normalizePlanetId(id);
+  return PLANET_WORLDS.find((planet) => planet.id === normalizedId);
 }
 
 /**
