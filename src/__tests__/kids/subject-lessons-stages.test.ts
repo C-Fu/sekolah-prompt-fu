@@ -7,6 +7,7 @@ const SUBJECT_SLUGS = [
   "7-1-english-colorful-toys",
   "8-1-matematik-tambah-bintang",
   "9-1-moral-sahabat-prihatin",
+  "10-1-sains-benda-hidup",
 ];
 
 const LOCALES = ["en", "ms"];
