@@ -175,6 +175,18 @@
       },
       "9": {
         "title": "Mercury: Moral Education"
+      },
+      "10": {
+        "title": "Jupiter: Science"
+      },
+      "11": {
+        "title": "Saturn: History"
+      },
+      "12": {
+        "title": "Uranus: Design & Technology"
+      },
+      "13": {
+        "title": "Neptune: Visual Arts"
       }
     },
     "levels": {
@@ -269,6 +281,22 @@
       "9_1_moral_sahabat_prihatin": {
         "title": "A Caring Friend",
         "description": "Prompt AI to provide empathetic, respectful advice to help a classmate"
+      },
+      "10_1_sains_benda_hidup": {
+        "title": "Living vs Non-Living Things",
+        "description": "Guide AI to observe and distinguish biological characteristics of living and non-living things"
+      },
+      "11_1_sejarah_garis_masa": {
+        "title": "Personal Timeline & Family History",
+        "description": "Guide AI to sequence past chronological events and conduct courteous family interviews"
+      },
+      "12_1_rbt_bentuk_asas": {
+        "title": "Basic Shapes & Building Blocks",
+        "description": "Guide AI to design sturdy structures using basic shapes and 3D geometric blocks"
+      },
+      "13_1_psv_warna_imaginasi": {
+        "title": "Primary Colors & Imagination Lines",
+        "description": "Guide AI to create artwork using primary colors and expressive line patterns"
       }
     },
     "level": {

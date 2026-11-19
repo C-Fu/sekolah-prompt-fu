@@ -175,6 +175,18 @@
       },
       "9": {
         "title": "Utarid: Pendidikan Moral"
+      },
+      "10": {
+        "title": "Musytari: Sains"
+      },
+      "11": {
+        "title": "Zuhal: Sejarah"
+      },
+      "12": {
+        "title": "Uranus: Reka Bentuk & Teknologi"
+      },
+      "13": {
+        "title": "Neptun: Pendidikan Seni Visual"
       }
     },
     "levels": {
@@ -269,6 +281,22 @@
       "9_1_moral_sahabat_prihatin": {
         "title": "Sahabat Prihatin",
         "description": "Bimbing AI memberikan nasihat yang empati dan tolong-menolong rakan sekelas"
+      },
+      "10_1_sains_benda_hidup": {
+        "title": "Benda Hidup & Benda Bukan Hidup",
+        "description": "Bimbing AI memerhati dan membezakan ciri biologi benda hidup serta benda bukan hidup"
+      },
+      "11_1_sejarah_garis_masa": {
+        "title": "Garis Masa Diri & Riwayat Keluarga",
+        "description": "Bimbing AI menyusun kronologi peristiwa masa lampau dan temu bual keluarga yang bersopan"
+      },
+      "12_1_rbt_bentuk_asas": {
+        "title": "Bentuk Asas & Blok Binaan",
+        "description": "Bimbing AI mereka bentuk struktur kukuh menggunakan bentuk asas dan blok geometri 3D"
+      },
+      "13_1_psv_warna_imaginasi": {
+        "title": "Warna Asas & Garisan Imaginasi",
+        "description": "Bimbing AI menghasilkan karya kreatif menggunakan warna primer dan corak garisan ekspresif"
       }
     },
     "level": {
