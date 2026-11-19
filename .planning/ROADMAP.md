@@ -35,11 +35,11 @@ Plans:
 ### Phase 25: Geological Cartography & Provincial Provinces
 **Goal:** Map 7 authentic geological or atmospheric features per outer world (28 total regions) with spherical coordinates, elevation/depth ranges, curriculum badges, and learning objectives.
 **Requirements:** `GEO-01`, `GEO-02`
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 25-01-PLAN.md — Populate 28 Authentic Geological and Atmospheric Features for Outer Planets
-- [ ] 25-02-PLAN.md — Synchronize and Expand Vitest Suites for 63 Total Planetary Features
+- [x] 25-01-PLAN.md — Populate 28 Authentic Geological and Atmospheric Features for Outer Planets
+- [x] 25-02-PLAN.md — Synchronize and Expand Vitest Suites for 63 Total Planetary Features
 
 **Success Criteria:**
 1. All 4 outer planets possess 7 distinct geological/atmospheric regions with spherical coordinates for 3D cartographic beacon rendering.

@@ -10,8 +10,8 @@ Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Satu
 - [x] **SUBJ-02**: Celestial schemas and i18n message bundles provide authentic subject titles, taglines, and curriculum descriptions in both Bahasa Melayu (`ms`) and English (`en`).
 
 ### Geological Provinces & Feature Cartography
-- [ ] **GEO-01**: User can explore 7 authentic geological or atmospheric features/regions per outer planet (28 total regions) with spherical coordinates, elevation/depth profiles, badges, and learning objectives.
-- [ ] **GEO-02**: Features 1–6 map to Tahun 1–6 curricula; Feature 7 represents the Capstone Boss ("Cabaran Unggul") with distinctive badge styling and elevated visual beacon pins.
+- [x] **GEO-01**: User can explore 7 authentic geological or atmospheric features/regions per outer planet (28 total regions) with spherical coordinates, elevation/depth profiles, badges, and learning objectives.
+- [x] **GEO-02**: Features 1–6 map to Tahun 1–6 curricula; Feature 7 represents the Capstone Boss ("Cabaran Unggul") with distinctive badge styling and elevated visual beacon pins.
 
 ### Interactive Year 1 Pilot Lessons
 - [ ] **LESSON-01**: User can play a complete Tahun 1 interactive prompt lesson for Jupiter (Sains: Benda Hidup & Benda Bukan Hidup / AI Observation Prompts) across 7 structured `<Section>` stages with rich interactive widgets (`WordPredictor`, `PromptDoctor`, `PromptVsMistake`, `DragDropPrompt`, `MagicWords`, `LevelComplete`).
