@@ -60,11 +60,11 @@ import { LevelContentWrapper } from "@/components/kids/layout/level-content-wrap
  */
 
 describe("level-content locale/slug selection", () => {
-  it("keeps all 23 registered slugs in generateStaticParams", async () => {
+  it("keeps all 27 registered slugs in generateStaticParams", async () => {
     const params = await generateStaticParams();
     const slugs = params.map((p) => p.slug).sort();
-    expect(slugs).toHaveLength(23);
-    expect(new Set(slugs).size).toBe(23);
+    expect(slugs).toHaveLength(27);
+    expect(new Set(slugs).size).toBe(27);
     expect(slugs).toEqual(getAllLevels().map((l) => l.slug).sort());
   });
 
@@ -97,10 +97,10 @@ describe("level-content locale/slug selection", () => {
     expect(ms?.Component).not.toBe(en?.Component);
   });
 
-  it("resolves effectiveLocale 'ms' for every one of the 23 registered slugs", async () => {
+  it("resolves effectiveLocale 'ms' for every one of the 27 registered slugs", async () => {
     const levels = getAllLevels();
-    // The corpus must cover exactly the 23-slug registry.
-    expect(levels).toHaveLength(23);
+    // The corpus must cover exactly the 27-slug registry.
+    expect(levels).toHaveLength(27);
     for (const { slug } of levels) {
       const ms = await loadLevelContent("ms", slug);
       const en = await loadLevelContent("en", slug);

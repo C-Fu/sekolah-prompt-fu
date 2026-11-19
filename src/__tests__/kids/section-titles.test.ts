@@ -7,7 +7,7 @@ import {
   getAllSectionTitles,
 } from "@/lib/kids/section-titles";
 
-const ALL_23_LESSON_SLUGS = [
+const ALL_27_LESSON_SLUGS = [
   // World 1
   "1-1-meet-peromfu",
   "1-2-first-words",
@@ -37,6 +37,11 @@ const ALL_23_LESSON_SLUGS = [
   "7-1-english-colorful-toys",
   "8-1-matematik-tambah-bintang",
   "9-1-moral-sahabat-prihatin",
+  // Worlds 10-13 (Outer Planet Missions)
+  "10-1-sains-benda-hidup",
+  "11-1-sejarah-garis-masa",
+  "12-1-rbt-bentuk-asas",
+  "13-1-psv-warna-imaginasi",
 ];
 
 function countMdxSections(locale: "en" | "ms", slug: string): number {
@@ -46,16 +51,16 @@ function countMdxSections(locale: "en" | "ms", slug: string): number {
   return matches ? matches.length : 0;
 }
 
-describe("Complete Lesson Section Titles Registry (Plan 14-08)", () => {
-  it("covers all 23 registered lesson slugs across Earth and Planetary missions", () => {
-    expect(ALL_23_LESSON_SLUGS).toHaveLength(23);
-    for (const slug of ALL_23_LESSON_SLUGS) {
+describe("Complete Lesson Section Titles Registry (Plan 14-08 & 28-02)", () => {
+  it("covers all 27 registered lesson slugs across Earth and Planetary missions", () => {
+    expect(ALL_27_LESSON_SLUGS).toHaveLength(27);
+    for (const slug of ALL_27_LESSON_SLUGS) {
       expect(ALL_LESSON_SECTION_TITLES[slug]).toBeDefined();
     }
   });
 
-  it("matches MDX section count exactly for both EN and MS in all 23 lessons", () => {
-    for (const slug of ALL_23_LESSON_SLUGS) {
+  it("matches MDX section count exactly for both EN and MS in all 27 lessons", () => {
+    for (const slug of ALL_27_LESSON_SLUGS) {
       const enMdxCount = countMdxSections("en", slug);
       const msMdxCount = countMdxSections("ms", slug);
 
