@@ -306,9 +306,14 @@ describe('PlanetaryHud Component (THREE-03)', () => {
     const jupiter = PLANET_WORLDS.find((w) => w.id === 'jupiter-sains')!;
     expect(jupiter).toBeDefined();
 
+    const emptyOuterPlanet: Planet = {
+      ...jupiter,
+      features: [],
+    };
+
     render(
       <PlanetaryHud
-        planet={jupiter}
+        planet={emptyOuterPlanet}
         onSelectFeature={() => {}}
         onBackToOrbit={() => {}}
         onLaunchMission={() => {}}
@@ -319,5 +324,109 @@ describe('PlanetaryHud Component (THREE-03)', () => {
     expect(comingSoonCard).toBeInTheDocument();
     expect(screen.getByText(/Coming Soon/i)).toBeInTheDocument();
     expect(screen.getByText(/future updates/i)).toBeInTheDocument();
+  });
+
+  describe('Outer Planet Telemetry & Mission Availability (GEO-01, GEO-02)', () => {
+    const jupiter = PLANET_WORLDS.find((w) => w.id === 'jupiter-sains')!;
+
+    it('renders 7 province buttons and active telemetry card without Coming Soon fallback', () => {
+      expect(jupiter).toBeDefined();
+      expect(jupiter.features).toHaveLength(7);
+
+      const activeFeat = jupiter.features[0];
+      const handleSelect = vi.fn();
+      const handleBack = vi.fn();
+      const handleLaunch = vi.fn();
+
+      render(
+        <PlanetaryHud
+          planet={jupiter}
+          activeFeature={activeFeat}
+          onSelectFeature={handleSelect}
+          onBackToOrbit={handleBack}
+          onLaunchMission={handleLaunch}
+        />
+      );
+
+      // Coming soon card is NOT rendered
+      expect(screen.queryByTestId('coming-soon-card')).not.toBeInTheDocument();
+
+      // All 7 province buttons rendered in the sidebar
+      jupiter.features.forEach((feat) => {
+        const btn = screen.getByTestId(`feature-button-${feat.id}`);
+        expect(btn).toBeInTheDocument();
+        expect(btn).toHaveTextContent(feat.name);
+      });
+
+      // Telemetry card renders active feature coordinates & profile
+      const telemetryCard = screen.getByTestId('telemetry-card');
+      expect(telemetryCard).toBeInTheDocument();
+      expect(telemetryCard).toHaveTextContent(activeFeat.name);
+      expect(telemetryCard).toHaveTextContent(activeFeat.badge);
+    });
+
+    it('renders Start Mission button for Feature 1 (hasMission: true) and triggers onLaunchMission', () => {
+      const activeFeat = jupiter.features[0]; // great-red-spot, hasMission: true
+      expect(activeFeat.hasMission).toBe(true);
+
+      const handleLaunch = vi.fn();
+
+      render(
+        <PlanetaryHud
+          planet={jupiter}
+          activeFeature={activeFeat}
+          onSelectFeature={() => {}}
+          onBackToOrbit={() => {}}
+          onLaunchMission={handleLaunch}
+        />
+      );
+
+      const launchButton = screen.getByRole('button', { name: /start mission/i });
+      expect(launchButton).toBeInTheDocument();
+      expect(screen.queryByTestId('no-mission-reason')).not.toBeInTheDocument();
+
+      fireEvent.click(launchButton);
+      expect(handleLaunch).toHaveBeenCalledTimes(1);
+      expect(handleLaunch).toHaveBeenCalledWith(activeFeat);
+    });
+
+    it('renders exploratory notice ("Belum ada misi untuk kawasan ini") for Features 2-7 (hasMission: false)', () => {
+      // Features 2-7 have hasMission: false
+      const unmappedFeature = jupiter.features[1]; // oval-ba, hasMission: false
+      expect(unmappedFeature.hasMission).toBe(false);
+
+      const handleLaunch = vi.fn();
+
+      const { rerender } = render(
+        <PlanetaryHud
+          planet={jupiter}
+          activeFeature={unmappedFeature}
+          onSelectFeature={() => {}}
+          onBackToOrbit={() => {}}
+          onLaunchMission={handleLaunch}
+        />
+      );
+
+      // Start mission button absent, reason notice displayed in English
+      expect(screen.queryByRole('button', { name: /start mission/i })).not.toBeInTheDocument();
+      const reasonNotice = screen.getByTestId('no-mission-reason');
+      expect(reasonNotice).toBeInTheDocument();
+      expect(reasonNotice).toHaveTextContent('No mission available for this region yet.');
+
+      // Check Bahasa Melayu localization
+      intlState.locale = 'ms';
+      rerender(
+        <PlanetaryHud
+          planet={jupiter}
+          activeFeature={unmappedFeature}
+          onSelectFeature={() => {}}
+          onBackToOrbit={() => {}}
+          onLaunchMission={handleLaunch}
+        />
+      );
+
+      expect(screen.queryByRole('button', { name: /mula misi/i })).not.toBeInTheDocument();
+      expect(screen.getByTestId('no-mission-reason')).toHaveTextContent('Belum ada misi untuk kawasan ini.');
+    });
   });
 });
