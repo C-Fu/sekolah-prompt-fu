@@ -450,21 +450,37 @@
           "title": "Mercury: Moral Education",
           "tagline": "Sun-scorched basalt craters forged in integrity, empathy, and courage."
         },
+        "jupiter-sains": {
+          "title": "Jupiter: Science & Empirical Inquiry",
+          "tagline": "Swirling giant unlocks the secrets of scientific observation, living wonders, and nature hypotheses."
+        },
+        "saturn-sejarah": {
+          "title": "Saturn: History & Chronology",
+          "tagline": "Ancient cosmic rings guiding event timelines, personal history, and family chronicles."
+        },
+        "uranus-rbt": {
+          "title": "Uranus: Design & Technology (RBT)",
+          "tagline": "Tilted axis challenging creative basic shapes, 2D/3D blocks, and structural constraints."
+        },
+        "neptune-psv": {
+          "title": "Neptune: Visual Arts (PSV)",
+          "tagline": "Deep azure abyss inspiring primary color harmony, line patterns, and artistic imagination."
+        },
         "jupiter-astronomy": {
-          "title": "Jupiter: Cosmic Giant",
-          "tagline": "King of planets: massive gravity, swirling storms, and deep space telemetry."
+          "title": "Jupiter: Science & Empirical Inquiry",
+          "tagline": "Swirling giant unlocks the secrets of scientific observation, living wonders, and nature hypotheses."
         },
         "saturn-astronomy": {
-          "title": "Saturn: Ringed Jewel",
-          "tagline": "Spectacular icy ring system, low density, and ancient atmospheric wonders."
+          "title": "Saturn: History & Chronology",
+          "tagline": "Ancient cosmic rings guiding event timelines, personal history, and family chronicles."
         },
         "uranus-astronomy": {
-          "title": "Uranus: Tilted Ice Giant",
-          "tagline": "Rolling ice giant with extreme axial tilt and freezing methane haze."
+          "title": "Uranus: Design & Technology (RBT)",
+          "tagline": "Tilted axis challenging creative basic shapes, 2D/3D blocks, and structural constraints."
         },
         "neptune-astronomy": {
-          "title": "Neptune: Supersonic Ice Giant",
-          "tagline": "Distant sapphire ice giant with supersonic winds and frozen methane clouds."
+          "title": "Neptune: Visual Arts (PSV)",
+          "tagline": "Deep azure abyss inspiring primary color harmony, line patterns, and artistic imagination."
         }
       },
       "comingSoonTitle": "Coming Soon",

@@ -450,21 +450,37 @@
           "title": "Utarid: Pendidikan Moral",
           "tagline": "Kawah basalt membina keteguhan integriti, empati dan keperibadian mulia."
         },
+        "jupiter-sains": {
+          "title": "Musytari: Sains & Penerokaan Saintifik",
+          "tagline": "Gergasi bergelora membuka rahsia pemerhatian saintifik, benda hidup, dan hipotesis alam."
+        },
+        "saturn-sejarah": {
+          "title": "Zuhal: Sejarah & Garis Masa",
+          "tagline": "Gelung masa purba membimbing kronologi peristiwa, sejarah diri, dan riwayat keluarga."
+        },
+        "uranus-rbt": {
+          "title": "Uranus: Reka Bentuk & Teknologi",
+          "tagline": "Paksi condong menguji kreativiti bentuk asas, blok binaan 2D/3D, dan batas rekaan."
+        },
+        "neptune-psv": {
+          "title": "Neptun: Pendidikan Seni Visual",
+          "tagline": "Jurang biru kosmik menyemarakkan harmoni warna asas, corak garisan, dan imaginasi seni."
+        },
         "jupiter-astronomy": {
-          "title": "Musytari: Gergasi Kosmik",
-          "tagline": "Raja segala planet: graviti gergasi, ribut bergelora, dan cerapan angkasa dalam."
+          "title": "Musytari: Sains & Penerokaan Saintifik",
+          "tagline": "Gergasi bergelora membuka rahsia pemerhatian saintifik, benda hidup, dan hipotesis alam."
         },
         "saturn-astronomy": {
-          "title": "Zuhal: Permata Bergelang",
-          "tagline": "Sistem gelang ais yang menakjubkan, ketumpatan rendah, dan keajaiban atmosfera purba."
+          "title": "Zuhal: Sejarah & Garis Masa",
+          "tagline": "Gelung masa purba membimbing kronologi peristiwa, sejarah diri, dan riwayat keluarga."
         },
         "uranus-astronomy": {
-          "title": "Uranus: Gergasi Ais Terbalik",
-          "tagline": "Gergasi ais yang berputar condong dengan kecondongan paksi melampau dan kabus metana sejuk."
+          "title": "Uranus: Reka Bentuk & Teknologi",
+          "tagline": "Paksi condong menguji kreativiti bentuk asas, blok binaan 2D/3D, dan batas rekaan."
         },
         "neptune-astronomy": {
-          "title": "Neptun: Gergasi Ais Nilam",
-          "tagline": "Gergasi ais nilam yang jauh dengan angin supersonik dan awan metana beku."
+          "title": "Neptun: Pendidikan Seni Visual",
+          "tagline": "Jurang biru kosmik menyemarakkan harmoni warna asas, corak garisan, dan imaginasi seni."
         }
       },
       "comingSoonTitle": "Akan Datang",
