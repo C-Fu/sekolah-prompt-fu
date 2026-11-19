@@ -2,19 +2,17 @@
 gsd_state_version: "1.0"
 milestone: v1.5
 milestone_name: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
-current_phase: 27
-current_phase_name: RBT
+current_phase: 28
 current_plan: null
 status: in_progress
-stopped_at: Completed 27-02-PLAN.md
-last_updated: "2026-11-19T18:17:48.582Z"
-state_head: 16fd7595769f32f6e467259a5c67fb97446d6759
+stopped_at: Phase 27 verified and completed
+last_updated: "2026-11-19T18:22:00.000Z"
 progress:
   total_phases: 6
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 8
   completed_plans: 8
-  percent: 50
+  percent: 67
 last_activity: 2026-11-19
 ---
 
@@ -25,7 +23,7 @@ last_activity: 2026-11-19
 See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Core value:** A lightweight, standalone, gamified kids app for learning prompt engineering — pure client-side, 100% static (GitHub Pages), with full Bahasa Melayu support and KSSR/KBAT alignment.  
-**Current status:** Phases 24, 25, and 26 completed and verified. Transitioning to Phase 27.
+**Current status:** Phases 24, 25, 26, and 27 completed and verified. Transitioning to Phase 28.
 
 ## Performance Metrics
 
@@ -33,7 +31,7 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 - Phase 24: Outer Planets Subject Architecture & Telemetry (Completed - 2/2 plans)
 - Phase 25: Geological Cartography & Provincial Provinces (Completed - 2/2 plans)
 - Phase 26: Jupiter (Sains) & Saturn (Sejarah) Year 1 Curriculum (Completed - 2/2 plans)
-- Phase 27: Uranus (RBT) & Neptune (PSV) Year 1 Curriculum (Pending)
+- Phase 27: Uranus (RBT) & Neptune (PSV) Year 1 Curriculum (Completed - 2/2 plans)
 - Phase 28: Atmospheric Theming, Navigation & Routing Integration (Pending)
 - Phase 29: Milestone Verification & Static Release Certification (Pending)
 
@@ -47,6 +45,7 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 | Phase 25 P02 | 3m | 2 tasks | 2 files |
 | Phase 26 P01 | 5m | 2 tasks | 3 files |
 | Phase 26 P02 | 4m | 2 tasks | 3 files |
+| Phase 27 P01 | 3m | 2 tasks | 3 files |
 | Phase 27 P02 | 4m | 2 tasks | 3 files |
 
 ## Deferred Items
@@ -61,14 +60,14 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Resume file:** None
 
-Last session: 2026-11-19T18:17:47.989Z
-Stopped at: Completed 27-02-PLAN.md
-Next action: Run `/gsd-discuss-phase 27`.
+Last session: 2026-11-20T02:22:00+08:00
+Stopped at: Phase 27 verified and completed
+Next action: Run `/gsd-discuss-phase 28`.
 
 ## Current Position
-Phase: 27 - Uranus (RBT) & Neptune (PSV) Year 1 Curriculum
-Current Plan: 2
-Total Plans in Phase: 2
+Phase: 28 - Atmospheric Theming, Navigation & Routing Integration
+Current Plan: null
+Total Plans in Phase: 0
 
 ## Decisions
 
@@ -76,4 +75,5 @@ Total Plans in Phase: 2
 - [Phase 25]: Populated 28 authentic geological/atmospheric features across Jupiter, Saturn, Uranus, and Neptune (total 63 features).
 - [Phase 26]: Authored 10-1-sains-benda-hidup across 8 sections in BM and EN targeting living/non-living biological characteristics.
 - [Phase 26]: Authored 11-1-sejarah-garis-masa across 8 sections in BM and EN targeting personal timeline chronology and polite interview inquiry.
-- [Phase 27]: Authored 13-1-psv-warna-imaginasi across 8 sections in BM and EN targeting visual art primary color harmonies and line patterns
+- [Phase 27]: Authored 12-1-rbt-bentuk-asas across 8 sections in BM and EN targeting basic 2D/3D shapes and building block constraints.
+- [Phase 27]: Authored 13-1-psv-warna-imaginasi across 8 sections in BM and EN targeting primary colors and line patterns in creative art prompts.
