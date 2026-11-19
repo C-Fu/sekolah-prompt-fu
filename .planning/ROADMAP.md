@@ -22,6 +22,12 @@
 ### Phase 24: Outer Planets Subject Architecture & Telemetry
 **Goal:** Configure the subject identities, color palettes, and bilingual translation bundles for the 4 outer planets: Jupiter = Sains (Science), Saturn = Sejarah (History), Uranus = Reka Bentuk & Teknologi (RBT), and Neptune = Pendidikan Seni Visual (PSV).
 **Requirements:** `SUBJ-01`, `SUBJ-02`
+**Plans:** 2 plans
+
+Plans:
+- [ ] 24-01-PLAN.md — Migrate Subject & World Type Architecture and Bilingual i18n Dictionaries
+- [ ] 24-02-PLAN.md — Align 3D Scenes, Planetary HUD Consumer & Synchronize Test Suites
+
 **Success Criteria:**
 1. `SubjectId` and `Planet` structures in `src/lib/kids/planets.ts` recognize the 4 outer worlds with designated themes, accent colors, and curriculum metadata.
 2. English and Bahasa Melayu translation strings in `messages/en.json` and `messages/ms.json` are populated for all 4 new subject titles, taglines, and learning goals.
