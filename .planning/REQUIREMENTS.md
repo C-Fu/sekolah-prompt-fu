@@ -6,8 +6,8 @@ Expand Sekolah Prompt-Fu to the outer solar system by transforming Jupiter, Satu
 ## Requirements
 
 ### Outer Planets Subject Architecture & Telemetry
-- [ ] **SUBJ-01**: User sees all 4 outer planets mapped to core KSSR primary subjects: Jupiter = Sains (Science), Saturn = Sejarah (History), Uranus = Reka Bentuk & Teknologi (RBT), and Neptune = Pendidikan Seni Visual (PSV).
-- [ ] **SUBJ-02**: Celestial schemas and i18n message bundles provide authentic subject titles, taglines, and curriculum descriptions in both Bahasa Melayu (`ms`) and English (`en`).
+- [x] **SUBJ-01**: User sees all 4 outer planets mapped to core KSSR primary subjects: Jupiter = Sains (Science), Saturn = Sejarah (History), Uranus = Reka Bentuk & Teknologi (RBT), and Neptune = Pendidikan Seni Visual (PSV).
+- [x] **SUBJ-02**: Celestial schemas and i18n message bundles provide authentic subject titles, taglines, and curriculum descriptions in both Bahasa Melayu (`ms`) and English (`en`).
 
 ### Geological Provinces & Feature Cartography
 - [ ] **GEO-01**: User can explore 7 authentic geological or atmospheric features/regions per outer planet (28 total regions) with spherical coordinates, elevation/depth profiles, badges, and learning objectives.
