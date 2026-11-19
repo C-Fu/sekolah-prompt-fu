@@ -4,7 +4,16 @@ import React, { useMemo } from "react";
 import { useLevelSlug } from "@/components/kids/providers/level-context";
 import { getLevelBySlug } from "@/lib/kids/levels";
 
-export type PlanetTheme = "earth" | "moon" | "mars" | "venus" | "mercury";
+export type PlanetTheme =
+  | "earth"
+  | "moon"
+  | "mars"
+  | "venus"
+  | "mercury"
+  | "jupiter"
+  | "saturn"
+  | "uranus"
+  | "neptune";
 
 export interface PlanetThemeStyle {
   id: PlanetTheme;
@@ -38,6 +47,26 @@ export const PLANET_THEMES: Record<PlanetTheme, PlanetThemeStyle> = {
     background: "linear-gradient(180deg, #1E1B4B 0%, #3B0764 50%, #0F0E2A 100%)",
     accentColor: "#A855F7",
   },
+  jupiter: {
+    id: "jupiter",
+    background: "linear-gradient(180deg, #451A03 0%, #B45309 50%, #1E0A00 100%)",
+    accentColor: "#F59E0B",
+  },
+  saturn: {
+    id: "saturn",
+    background: "linear-gradient(180deg, #3A2E05 0%, #A16207 50%, #1A1402 100%)",
+    accentColor: "#EAB308",
+  },
+  uranus: {
+    id: "uranus",
+    background: "linear-gradient(180deg, #083344 0%, #0E7490 50%, #031822 100%)",
+    accentColor: "#06B6D4",
+  },
+  neptune: {
+    id: "neptune",
+    background: "linear-gradient(180deg, #172554 0%, #1D4ED8 50%, #08112C 100%)",
+    accentColor: "#3B82F6",
+  },
 };
 
 /**
@@ -60,6 +89,33 @@ export function getThemeForLevelSlug(slug?: string): PlanetTheme {
   if (slug.startsWith("9-") || slug.includes("-moral-") || slug.startsWith("utarid-")) {
     return "mercury";
   }
+  if (
+    slug.startsWith("10-") ||
+    slug.includes("-sains-") ||
+    slug.startsWith("musytari-") ||
+    slug.startsWith("jupiter-")
+  ) {
+    return "jupiter";
+  }
+  if (
+    slug.startsWith("11-") ||
+    slug.includes("-sejarah-") ||
+    slug.startsWith("zuhal-") ||
+    slug.startsWith("saturn-")
+  ) {
+    return "saturn";
+  }
+  if (slug.startsWith("12-") || slug.includes("-rbt-") || slug.startsWith("uranus-")) {
+    return "uranus";
+  }
+  if (
+    slug.startsWith("13-") ||
+    slug.includes("-psv-") ||
+    slug.startsWith("neptun-") ||
+    slug.startsWith("neptune-")
+  ) {
+    return "neptune";
+  }
 
   // Also query registered level if available
   const level = getLevelBySlug(slug);
@@ -69,6 +125,10 @@ export function getThemeForLevelSlug(slug?: string): PlanetTheme {
     if (level.world === 7) return "mars";
     if (level.world === 8) return "venus";
     if (level.world === 9) return "mercury";
+    if (level.world === 10) return "jupiter";
+    if (level.world === 11) return "saturn";
+    if (level.world === 12) return "uranus";
+    if (level.world === 13) return "neptune";
   }
 
   return "earth";
@@ -291,6 +351,194 @@ export function PlanetBackground() {
           <div
             className="absolute top-[80%] left-[75%] w-1.5 h-1.5 bg-[#E879F9] rounded-full animate-pulse"
             style={{ animationDuration: "3.2s", animationDelay: "0.3s" }}
+          />
+        </div>
+      )}
+
+      {/* Jupiter Theme: Amber swirling storm bands atmosphere */}
+      {activeTheme === "jupiter" && (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Bespoke atmospheric radial overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 120%, rgba(217, 119, 6, 0.35) 0%, rgba(180, 83, 9, 0.15) 50%, transparent 80%)",
+            }}
+          />
+          {/* Swirling storm cloud layers */}
+          <div
+            className="absolute inset-0 opacity-25"
+            style={{
+              background:
+                "radial-gradient(ellipse at 30% 60%, rgba(245, 158, 11, 0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(180, 83, 9, 0.3) 0%, transparent 60%)",
+            }}
+          />
+          {/* Amber & bronze celestial particles */}
+          <div
+            className="absolute top-[12%] left-[20%] w-2 h-2 bg-[#FDE68A] rounded-full animate-pulse"
+            style={{ animationDuration: "2.1s" }}
+          />
+          <div
+            className="absolute top-[24%] left-[75%] w-2.5 h-2.5 bg-[#F59E0B] rounded-full animate-pulse"
+            style={{ animationDuration: "2.8s", animationDelay: "0.4s" }}
+          />
+          <div
+            className="absolute top-[38%] left-[40%] w-1.5 h-1.5 bg-[#D97706] rounded-full animate-pulse"
+            style={{ animationDuration: "2.3s", animationDelay: "1.2s" }}
+          />
+          <div
+            className="absolute top-[52%] left-[15%] w-2 h-2 bg-[#FDE68A] rounded-full animate-pulse"
+            style={{ animationDuration: "3.4s", animationDelay: "0.7s" }}
+          />
+          <div
+            className="absolute top-[68%] left-[82%] w-2 h-2 bg-[#F59E0B] rounded-full animate-pulse"
+            style={{ animationDuration: "2.6s", animationDelay: "1.5s" }}
+          />
+          <div
+            className="absolute top-[82%] left-[35%] w-1.5 h-1.5 bg-[#FDE68A] rounded-full animate-pulse"
+            style={{ animationDuration: "3.0s", animationDelay: "0.9s" }}
+          />
+        </div>
+      )}
+
+      {/* Saturn Theme: Golden Ochre antique ring haze */}
+      {activeTheme === "saturn" && (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Bespoke antique ring haze overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 115%, rgba(234, 179, 8, 0.3) 0%, rgba(161, 98, 7, 0.15) 55%, transparent 80%)",
+            }}
+          />
+          {/* Luminous ring band accent */}
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(135deg, transparent 40%, rgba(234, 179, 8, 0.25) 50%, transparent 60%)",
+            }}
+          />
+          {/* Golden star & ring particles */}
+          <div
+            className="absolute top-[14%] left-[18%] w-2 h-2 bg-[#FEF08A] rounded-full animate-pulse"
+            style={{ animationDuration: "2.2s" }}
+          />
+          <div
+            className="absolute top-[26%] left-[82%] w-2.5 h-2.5 bg-[#EAB308] rounded-full animate-pulse"
+            style={{ animationDuration: "3.1s", animationDelay: "0.5s" }}
+          />
+          <div
+            className="absolute top-[42%] left-[30%] w-1.5 h-1.5 bg-[#CA8A04] rounded-full animate-pulse"
+            style={{ animationDuration: "2.5s", animationDelay: "1.0s" }}
+          />
+          <div
+            className="absolute top-[58%] left-[68%] w-2 h-2 bg-[#FEF08A] rounded-full animate-pulse"
+            style={{ animationDuration: "3.3s", animationDelay: "0.3s" }}
+          />
+          <div
+            className="absolute top-[76%] left-[22%] w-2 h-2 bg-[#EAB308] rounded-full animate-pulse"
+            style={{ animationDuration: "2.7s", animationDelay: "1.4s" }}
+          />
+          <div
+            className="absolute top-[85%] left-[60%] w-1.5 h-1.5 bg-[#FEF08A] rounded-full animate-pulse"
+            style={{ animationDuration: "3.0s", animationDelay: "0.8s" }}
+          />
+        </div>
+      )}
+
+      {/* Uranus Theme: Cyan / Blueprint Teal methane glow */}
+      {activeTheme === "uranus" && (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Bespoke methane glow radial overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 110%, rgba(6, 182, 212, 0.3) 0%, rgba(14, 116, 144, 0.15) 50%, transparent 80%)",
+            }}
+          />
+          {/* Methane frost glow layer */}
+          <div
+            className="absolute inset-0 opacity-25 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 20%, rgba(34, 211, 238, 0.25) 0%, transparent 70%)",
+            }}
+          />
+          {/* Cyan crystalline particles */}
+          <div
+            className="absolute top-[10%] left-[22%] w-2 h-2 bg-[#A5F3FC] rounded-full animate-pulse"
+            style={{ animationDuration: "2.0s" }}
+          />
+          <div
+            className="absolute top-[22%] left-[78%] w-2.5 h-2.5 bg-[#06B6D4] rounded-full animate-pulse"
+            style={{ animationDuration: "2.9s", animationDelay: "0.6s" }}
+          />
+          <div
+            className="absolute top-[36%] left-[45%] w-1.5 h-1.5 bg-[#22D3EE] rounded-full animate-pulse"
+            style={{ animationDuration: "2.4s", animationDelay: "1.3s" }}
+          />
+          <div
+            className="absolute top-[54%] left-[12%] w-2 h-2 bg-[#A5F3FC] rounded-full animate-pulse"
+            style={{ animationDuration: "3.2s", animationDelay: "0.4s" }}
+          />
+          <div
+            className="absolute top-[70%] left-[80%] w-2 h-2 bg-[#0891B2] rounded-full animate-pulse"
+            style={{ animationDuration: "2.8s", animationDelay: "1.1s" }}
+          />
+          <div
+            className="absolute top-[84%] left-[30%] w-1.5 h-1.5 bg-[#A5F3FC] rounded-full animate-pulse"
+            style={{ animationDuration: "3.5s", animationDelay: "0.2s" }}
+          />
+        </div>
+      )}
+
+      {/* Neptune Theme: Royal Azure deep cosmic ocean abyss */}
+      {activeTheme === "neptune" && (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Bespoke deep cosmic ocean abyss overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 115%, rgba(37, 99, 235, 0.35) 0%, rgba(29, 78, 216, 0.15) 55%, transparent 80%)",
+            }}
+          />
+          {/* Deep abyss vortex glow */}
+          <div
+            className="absolute inset-0 opacity-30 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 65%)",
+            }}
+          />
+          {/* Royal Azure ocean particles */}
+          <div
+            className="absolute top-[12%] left-[25%] w-2 h-2 bg-[#BFDBFE] rounded-full animate-pulse"
+            style={{ animationDuration: "1.9s" }}
+          />
+          <div
+            className="absolute top-[25%] left-[80%] w-2.5 h-2.5 bg-[#60A5FA] rounded-full animate-pulse"
+            style={{ animationDuration: "2.7s", animationDelay: "0.5s" }}
+          />
+          <div
+            className="absolute top-[40%] left-[20%] w-1.5 h-1.5 bg-[#93C5FD] rounded-full animate-pulse"
+            style={{ animationDuration: "2.3s", animationDelay: "1.1s" }}
+          />
+          <div
+            className="absolute top-[56%] left-[65%] w-2 h-2 bg-[#3B82F6] rounded-full animate-pulse"
+            style={{ animationDuration: "3.1s", animationDelay: "0.7s" }}
+          />
+          <div
+            className="absolute top-[74%] left-[32%] w-2 h-2 bg-[#BFDBFE] rounded-full animate-pulse"
+            style={{ animationDuration: "2.5s", animationDelay: "1.6s" }}
+          />
+          <div
+            className="absolute top-[86%] left-[72%] w-1.5 h-1.5 bg-[#60A5FA] rounded-full animate-pulse"
+            style={{ animationDuration: "3.3s", animationDelay: "0.3s" }}
           />
         </div>
       )}

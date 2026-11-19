@@ -46,6 +46,29 @@ describe("PlanetBackground and getThemeForLevelSlug (THEME-01, D-01)", () => {
       expect(getThemeForLevelSlug("utarid-moral")).toBe("mercury");
     });
 
+    it("returns 'jupiter' for Jupiter Science World 10 levels", () => {
+      expect(getThemeForLevelSlug("10-1-sains-benda-hidup")).toBe("jupiter");
+      expect(getThemeForLevelSlug("musytari-sains")).toBe("jupiter");
+      expect(getThemeForLevelSlug("jupiter-sains")).toBe("jupiter");
+    });
+
+    it("returns 'saturn' for Saturn History World 11 levels", () => {
+      expect(getThemeForLevelSlug("11-1-sejarah-garis-masa")).toBe("saturn");
+      expect(getThemeForLevelSlug("zuhal-sejarah")).toBe("saturn");
+      expect(getThemeForLevelSlug("saturn-sejarah")).toBe("saturn");
+    });
+
+    it("returns 'uranus' for Uranus RBT World 12 levels", () => {
+      expect(getThemeForLevelSlug("12-1-rbt-bentuk-asas")).toBe("uranus");
+      expect(getThemeForLevelSlug("uranus-rbt")).toBe("uranus");
+    });
+
+    it("returns 'neptune' for Neptune PSV World 13 levels", () => {
+      expect(getThemeForLevelSlug("13-1-psv-warna-imaginasi")).toBe("neptune");
+      expect(getThemeForLevelSlug("neptun-psv")).toBe("neptune");
+      expect(getThemeForLevelSlug("neptune-psv")).toBe("neptune");
+    });
+
     it("falls back to 'earth' strictly on unknown or untrusted slugs", () => {
       expect(getThemeForLevelSlug("unknown-slug")).toBe("earth");
       expect(getThemeForLevelSlug("malicious<script>alert(1)</script>")).toBe("earth");
@@ -128,11 +151,69 @@ describe("PlanetBackground and getThemeForLevelSlug (THEME-01, D-01)", () => {
       expect(bg).toHaveAttribute("data-active-theme", "mercury");
       expect(bg.querySelector("svg")).not.toBeInTheDocument();
     });
+
+    it("renders Jupiter amber swirling storms theme for 10-1-sains-benda-hidup", () => {
+      render(
+        <LevelProvider levelSlug="10-1-sains-benda-hidup">
+          <PlanetBackground />
+        </LevelProvider>
+      );
+
+      const bg = screen.getByTestId("planet-background");
+      expect(bg).toHaveAttribute("data-active-theme", "jupiter");
+      expect(bg.querySelector("svg")).not.toBeInTheDocument();
+    });
+
+    it("renders Saturn golden ring haze theme for 11-1-sejarah-garis-masa", () => {
+      render(
+        <LevelProvider levelSlug="11-1-sejarah-garis-masa">
+          <PlanetBackground />
+        </LevelProvider>
+      );
+
+      const bg = screen.getByTestId("planet-background");
+      expect(bg).toHaveAttribute("data-active-theme", "saturn");
+      expect(bg.querySelector("svg")).not.toBeInTheDocument();
+    });
+
+    it("renders Uranus cyan methane glow theme for 12-1-rbt-bentuk-asas", () => {
+      render(
+        <LevelProvider levelSlug="12-1-rbt-bentuk-asas">
+          <PlanetBackground />
+        </LevelProvider>
+      );
+
+      const bg = screen.getByTestId("planet-background");
+      expect(bg).toHaveAttribute("data-active-theme", "uranus");
+      expect(bg.querySelector("svg")).not.toBeInTheDocument();
+    });
+
+    it("renders Neptune royal azure deep ocean theme for 13-1-psv-warna-imaginasi", () => {
+      render(
+        <LevelProvider levelSlug="13-1-psv-warna-imaginasi">
+          <PlanetBackground />
+        </LevelProvider>
+      );
+
+      const bg = screen.getByTestId("planet-background");
+      expect(bg).toHaveAttribute("data-active-theme", "neptune");
+      expect(bg.querySelector("svg")).not.toBeInTheDocument();
+    });
   });
 
   describe("PLANET_THEMES constants", () => {
-    it("defines valid color gradients and accent colors for all 5 planetary themes", () => {
-      const themes = ["earth", "moon", "mars", "venus", "mercury"] as const;
+    it("defines valid color gradients and accent colors for all 9 planetary themes", () => {
+      const themes = [
+        "earth",
+        "moon",
+        "mars",
+        "venus",
+        "mercury",
+        "jupiter",
+        "saturn",
+        "uranus",
+        "neptune",
+      ] as const;
       for (const t of themes) {
         expect(PLANET_THEMES[t]).toBeDefined();
         expect(PLANET_THEMES[t].background).toContain("linear-gradient");
