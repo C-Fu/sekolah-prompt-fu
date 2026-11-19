@@ -2,19 +2,18 @@
 gsd_state_version: "1.0"
 milestone: v1.5
 milestone_name: Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV)
-current_phase: 28
+current_phase: 29
 current_plan: null
-status: complete
-stopped_at: Completed 28-03-PLAN.md
-last_updated: "2026-11-20T03:03:00.000Z"
-state_head: 66e38432e5c5c2ef79fd83341267059f6a119693
+status: in_progress
+stopped_at: Phase 28 verified and completed
+last_updated: "2026-11-19T19:09:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 5
   total_plans: 11
   completed_plans: 11
   percent: 83
-last_activity: 2026-11-20
+last_activity: 2026-11-19
 ---
 
 # Project State
@@ -48,8 +47,9 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 | Phase 26 P02 | 4m | 2 tasks | 3 files |
 | Phase 27 P01 | 3m | 2 tasks | 3 files |
 | Phase 27 P02 | 4m | 2 tasks | 3 files |
-| Phase 28 P02 | 4m 30s | 3 tasks | 7 files |
-| Phase 28 P03 | 8m | 2 tasks | 3 files |
+| Phase 28 P01 | 3m | 2 tasks | 2 files |
+| Phase 28 P02 | 5m | 3 tasks | 7 files |
+| Phase 28 P03 | 8m | 2 tasks | 4 files |
 
 ## Deferred Items
 
@@ -63,22 +63,21 @@ See: `.planning/PROJECT.md` (updated 2026-11-19)
 
 **Resume file:** None
 
-Last session: 2026-11-20T03:03:00.000Z
-Stopped at: Completed 28-03-PLAN.md
-Next action: Run `/gsd-discuss-phase 29` or `/gsd-plan-phase 29`.
+Last session: 2026-11-20T03:09:00+08:00
+Stopped at: Phase 28 verified and completed
+Next action: Run `/gsd-discuss-phase 29`.
 
 ## Current Position
-Phase: 28 - Atmospheric Theming, Navigation & Routing Integration
-Current Plan: 3
-Total Plans in Phase: 3
+Phase: 29 - Milestone Verification & Static Release Certification
+Current Plan: null
+Total Plans in Phase: 0
 
 ## Decisions
 
 - [Phase 24]: Migrated outer planets to canonical KSSR subjects with backward-compatible normalization.
 - [Phase 25]: Populated 28 authentic geological/atmospheric features across Jupiter, Saturn, Uranus, and Neptune (total 63 features).
-- [Phase 26]: Authored 10-1-sains-benda-hidup across 8 sections in BM and EN targeting living/non-living biological characteristics.
-- [Phase 26]: Authored 11-1-sejarah-garis-masa across 8 sections in BM and EN targeting personal timeline chronology and polite interview inquiry.
-- [Phase 27]: Authored 12-1-rbt-bentuk-asas across 8 sections in BM and EN targeting basic 2D/3D shapes and building block constraints.
-- [Phase 27]: Authored 13-1-psv-warna-imaginasi across 8 sections in BM and EN targeting primary colors and line patterns in creative art prompts.
-- [Phase 28]: Expanded total levels dynamically from 23 to 27 by registering Worlds 10-13 and lazy dynamic MDX loaders.
-- [Phase 28]: resolveMissionRoute maps outer planets directly to pilot lesson slugs with legacy alias support.
+- [Phase 26]: Authored 10-1-sains-benda-hidup and 11-1-sejarah-garis-masa in BM and EN.
+- [Phase 27]: Authored 12-1-rbt-bentuk-asas and 13-1-psv-warna-imaginasi in BM and EN.
+- [Phase 28]: Integrated bespoke atmospheres in PlanetBackground for Jupiter, Saturn, Uranus, Neptune.
+- [Phase 28]: Registered levels 10.1, 11.1, 12.1, 13.1, scaling app levels from 23 to 27.
+- [Phase 28]: Wired HUD Feature 1 mission launching to new pilot lessons with ?origin=planets query param.
