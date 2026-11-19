@@ -28,12 +28,16 @@ export function getPlanetTexturePath(planet: Planet): string {
       return '/images/planets/mercury.jpg';
     case 'venus-matematik':
       return '/images/planets/venus_surface.jpg';
+    case 'jupiter-sains':
     case 'jupiter-astronomy':
       return '/images/planets/jupiter.jpg';
+    case 'saturn-sejarah':
     case 'saturn-astronomy':
       return '/images/planets/saturn.jpg';
+    case 'uranus-rbt':
     case 'uranus-astronomy':
       return ''; // Procedural atmosphere
+    case 'neptune-psv':
     case 'neptune-astronomy':
       return '/images/planets/neptune.jpg';
     default: {

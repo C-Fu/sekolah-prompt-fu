@@ -165,7 +165,7 @@ export function PlanetaryHud({
           data-testid="telemetry-card"
           className="w-full md:max-w-lg min-h-0 max-h-56 sm:max-h-72 md:max-h-[380px] p-3 sm:p-4 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-white/15 shadow-2xl text-white flex flex-col justify-between overflow-hidden"
         >
-          {planet.subjectId === 'astronomy' ? (
+          {planet.subjectId === 'astronomy' || planet.features.length === 0 ? (
             <div data-testid="coming-soon-card" className="p-4 text-center my-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold tracking-wide">
                 <span>🚀</span>

@@ -118,10 +118,10 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
     { id: 'venus-matematik', radius: 0.75, dist: 9.5, tex: 'venus_surface.jpg', speed: 0.3 },
     { id: 'earth-prompting', radius: 0.85, dist: 14.5, tex: 'earth.jpg', speed: 0.22 },
     { id: 'mars-english', radius: 0.60, dist: 20.0, tex: 'mars.jpg', speed: 0.16 },
-    { id: 'jupiter-astronomy', radius: 1.45, dist: 26.5, tex: 'jupiter.jpg', speed: 0.11 },
-    { id: 'saturn-astronomy', radius: 1.25, dist: 33.0, tex: 'saturn.jpg', speed: 0.08 },
-    { id: 'uranus-astronomy', radius: 0.95, dist: 39.5, tex: '', speed: 0.06 },
-    { id: 'neptune-astronomy', radius: 0.90, dist: 46.0, tex: 'neptune.jpg', speed: 0.05 },
+    { id: 'jupiter-sains', radius: 1.45, dist: 26.5, tex: 'jupiter.jpg', speed: 0.11 },
+    { id: 'saturn-sejarah', radius: 1.25, dist: 33.0, tex: 'saturn.jpg', speed: 0.08 },
+    { id: 'uranus-rbt', radius: 0.95, dist: 39.5, tex: '', speed: 0.06 },
+    { id: 'neptune-psv', radius: 0.90, dist: 46.0, tex: 'neptune.jpg', speed: 0.05 },
   ];
 
   // Map to store world metadata for theme colors
@@ -151,7 +151,7 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
     pMesh.name = `planet-${cfg.id}`;
 
     // Saturn ring system (lightweight, minimal CPU/GPU overhead)
-    if (cfg.id === 'saturn-astronomy') {
+    if (cfg.id === 'saturn-sejarah' || cfg.id === 'saturn-astronomy') {
       const innerR = cfg.radius * 1.35;
       const outerR = cfg.radius * 2.35;
       const ringGeo = new THREE.RingGeometry(innerR, outerR, 32);
@@ -162,7 +162,7 @@ export function buildSolarSystemScene(): SolarSystemSceneResult {
         opacity: 0.75,
       });
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-      ringMesh.name = 'ring-saturn-astronomy';
+      ringMesh.name = 'ring-saturn-sejarah';
       // 26.7-degree axial tilt in radians (approx 0.466 rad) rotated on X
       ringMesh.rotation.x = Math.PI * 0.5 + 0.466;
       pMesh.add(ringMesh);
