@@ -96,11 +96,10 @@ describe("Planetary Schema & Cartography", () => {
   });
 
   describe("Geological Features and Year Mapping (D-03)", () => {
-    it("defines exactly 7 features for each of the 5 core planets (35 features total)", () => {
+    it("defines exactly 7 features for each of the 9 celestial worlds (63 features total)", () => {
       let totalFeatures = 0;
-      const corePlanets = PLANET_WORLDS.filter((p) => p.features.length > 0);
 
-      for (const planet of corePlanets) {
+      for (const planet of PLANET_WORLDS) {
         expect(planet.features, `Planet ${planet.id} must have 7 features`).toHaveLength(7);
         totalFeatures += planet.features.length;
 
@@ -120,12 +119,11 @@ describe("Planetary Schema & Cartography", () => {
         expect(feature7.featureNumber).toBe(7);
       }
 
-      expect(totalFeatures).toBe(35);
+      expect(totalFeatures).toBe(63);
     });
 
     it("ensures feature slugs are unique within each planet and non-empty", () => {
-      const corePlanets = PLANET_WORLDS.filter((p) => p.features.length > 0);
-      for (const planet of corePlanets) {
+      for (const planet of PLANET_WORLDS) {
         const slugs = planet.features.map((f) => f.id);
         expect(new Set(slugs).size).toBe(7);
 
@@ -137,7 +135,7 @@ describe("Planetary Schema & Cartography", () => {
   });
 
   describe("Bilingual Metadata & Coordinate Validation (D-02, D-05)", () => {
-    it("contains valid coordinate limits for all 35 features", () => {
+    it("contains valid coordinate limits for all 63 features", () => {
       for (const planet of PLANET_WORLDS) {
         for (const feature of planet.features) {
           const { lat, lon } = feature.coordinates;
@@ -149,7 +147,7 @@ describe("Planetary Schema & Cartography", () => {
       }
     });
 
-    it("contains non-empty bilingual fields for all 35 features", () => {
+    it("contains non-empty bilingual fields for all 63 features", () => {
       for (const planet of PLANET_WORLDS) {
         for (const feature of planet.features) {
           expect(feature.name.trim().length, `Feature ${feature.id} name should not be empty`).toBeGreaterThan(0);
@@ -224,9 +222,9 @@ describe("Planetary Schema & Cartography", () => {
       expect(unknown).toBeUndefined();
     });
 
-    it("getAllPlanetFeatures returns exactly 35 features", () => {
+    it("getAllPlanetFeatures returns exactly 63 features", () => {
       const allFeatures = getAllPlanetFeatures();
-      expect(allFeatures).toHaveLength(35);
+      expect(allFeatures).toHaveLength(63);
     });
 
     it("getFeatureBySlug retrieves the exact feature across planets", () => {
@@ -240,6 +238,21 @@ describe("Planetary Schema & Cartography", () => {
 
       const wrongPlanet = getFeatureBySlug("mars-english", "oceanus-procellarum");
       expect(wrongPlanet).toBeUndefined();
+
+      // Outer planet features verification
+      const jupiterFeature = getFeatureBySlug("jupiter-sains", "great-red-spot");
+      expect(jupiterFeature).toBeDefined();
+      expect(jupiterFeature?.name).toContain("Great Red Spot");
+      expect(jupiterFeature?.hasMission).toBe(true);
+
+      const uranusFeature = getFeatureBySlug("uranus-rbt", "miranda-rift-canyon");
+      expect(uranusFeature).toBeDefined();
+      expect(uranusFeature?.name).toContain("Miranda Rift Canyon");
+
+      const neptuneFeature = getFeatureBySlug("neptune-psv", "triton-azure-prism");
+      expect(neptuneFeature).toBeDefined();
+      expect(neptuneFeature?.name).toContain("Triton Azure Prism");
+      expect(neptuneFeature?.isFinalBoss).toBe(true);
     });
 
     it("getFeaturesByPlanet returns 7 features for a valid planet", () => {
@@ -286,14 +299,11 @@ describe("Planetary Schema & Cartography", () => {
       });
     });
 
-    it('keeps 35 curriculum features for the 5 core worlds and 0 features for outer worlds', () => {
-      const coreWorlds = PLANET_WORLDS.filter((w) => w.features.length > 0);
-      expect(coreWorlds.length).toBe(5);
-      coreWorlds.forEach((w) => expect(w.features.length).toBe(7));
-
-      const outerWorlds = PLANET_WORLDS.filter((w) => w.features.length === 0);
-      expect(outerWorlds.length).toBe(4);
-      outerWorlds.forEach((w) => expect(w.features.length).toBe(0));
+    it('populates exactly 7 features for all 9 worlds (63 total features across solar system)', () => {
+      expect(PLANET_WORLDS.length).toBe(9);
+      PLANET_WORLDS.forEach((world) => {
+        expect(world.features.length).toBe(7);
+      });
     });
   });
 });
