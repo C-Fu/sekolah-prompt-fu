@@ -523,6 +523,45 @@ describe('PlanetaryExplorer Integration (THREE-04, D-01, D-03)', () => {
     expect(screen.getByTestId('planetary-hud-root')).toBeInTheDocument();
     expect(venusPill).toHaveAttribute('aria-pressed', 'true');
   });
+
+  describe('Outer Planet Mission Routing (ROUTE-01, D-03)', () => {
+    const outerTestCases = [
+      {
+        id: 'jupiter-sains',
+        expectedRoute: '/level/10-1-sains-benda-hidup?origin=planets',
+      },
+      {
+        id: 'saturn-sejarah',
+        expectedRoute: '/level/11-1-sejarah-garis-masa?origin=planets',
+      },
+      {
+        id: 'uranus-rbt',
+        expectedRoute: '/level/12-1-rbt-bentuk-asas?origin=planets',
+      },
+      {
+        id: 'neptune-psv',
+        expectedRoute: '/level/13-1-psv-warna-imaginasi?origin=planets',
+      },
+    ];
+
+    outerTestCases.forEach(({ id, expectedRoute }) => {
+      it(`launches Feature 1 mission for ${id} routing to ${expectedRoute}`, () => {
+        pushMock.mockClear();
+        render(<PlanetaryExplorer initialMode="planet-cartography" initialPlanetId={id as any} />);
+
+        // HUD should be rendered for this planet
+        expect(screen.getByTestId('planetary-hud-root')).toBeInTheDocument();
+
+        // Launch Feature 1 mission
+        const launchBtn = screen.getByRole('button', { name: /start mission/i });
+        expect(launchBtn).toBeInTheDocument();
+        fireEvent.click(launchBtn);
+
+        expect(pushMock).toHaveBeenCalledTimes(1);
+        expect(pushMock).toHaveBeenCalledWith(expectedRoute);
+      });
+    });
+  });
 });
 
 describe('Standalone /planets Page Route (D-04, THREE-04)', () => {
