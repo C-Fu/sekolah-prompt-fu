@@ -130,6 +130,10 @@ const L_en__6_1_bm_kucing_peromfu = () => import("@/content/kids/en/6-1-bm-kucin
 const L_en__7_1_english_colorful_toys = () => import("@/content/kids/en/7-1-english-colorful-toys.mdx");
 const L_en__8_1_matematik_tambah_bintang = () => import("@/content/kids/en/8-1-matematik-tambah-bintang.mdx");
 const L_en__9_1_moral_sahabat_prihatin = () => import("@/content/kids/en/9-1-moral-sahabat-prihatin.mdx");
+const L_en__10_1_sains_benda_hidup = () => import("@/content/kids/en/10-1-sains-benda-hidup.mdx");
+const L_en__11_1_sejarah_garis_masa = () => import("@/content/kids/en/11-1-sejarah-garis-masa.mdx");
+const L_en__12_1_rbt_bentuk_asas = () => import("@/content/kids/en/12-1-rbt-bentuk-asas.mdx");
+const L_en__13_1_psv_warna_imaginasi = () => import("@/content/kids/en/13-1-psv-warna-imaginasi.mdx");
 const L_es__1_1_meet_peromfu = () => import("@/content/kids/es/1-1-meet-peromfu.mdx");
 const L_es__1_2_first_words = () => import("@/content/kids/es/1-2-first-words.mdx");
 const L_es__1_3_being_clear = () => import("@/content/kids/es/1-3-being-clear.mdx");
@@ -362,6 +366,10 @@ const L_ms__6_1_bm_kucing_peromfu = () => import("@/content/kids/ms/6-1-bm-kucin
 const L_ms__7_1_english_colorful_toys = () => import("@/content/kids/ms/7-1-english-colorful-toys.mdx");
 const L_ms__8_1_matematik_tambah_bintang = () => import("@/content/kids/ms/8-1-matematik-tambah-bintang.mdx");
 const L_ms__9_1_moral_sahabat_prihatin = () => import("@/content/kids/ms/9-1-moral-sahabat-prihatin.mdx");
+const L_ms__10_1_sains_benda_hidup = () => import("@/content/kids/ms/10-1-sains-benda-hidup.mdx");
+const L_ms__11_1_sejarah_garis_masa = () => import("@/content/kids/ms/11-1-sejarah-garis-masa.mdx");
+const L_ms__12_1_rbt_bentuk_asas = () => import("@/content/kids/ms/12-1-rbt-bentuk-asas.mdx");
+const L_ms__13_1_psv_warna_imaginasi = () => import("@/content/kids/ms/13-1-psv-warna-imaginasi.mdx");
 
 const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLevelContent }>>> = {
   ar: {
@@ -472,6 +480,10 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "7-1-english-colorful-toys": L_en__7_1_english_colorful_toys,
     "8-1-matematik-tambah-bintang": L_en__8_1_matematik_tambah_bintang,
     "9-1-moral-sahabat-prihatin": L_en__9_1_moral_sahabat_prihatin,
+    "10-1-sains-benda-hidup": L_en__10_1_sains_benda_hidup,
+    "11-1-sejarah-garis-masa": L_en__11_1_sejarah_garis_masa,
+    "12-1-rbt-bentuk-asas": L_en__12_1_rbt_bentuk_asas,
+    "13-1-psv-warna-imaginasi": L_en__13_1_psv_warna_imaginasi,
   },
   es: {
     "1-1-meet-peromfu": L_es__1_1_meet_peromfu,
@@ -728,6 +740,10 @@ const loaders: Record<string, Record<string, () => Promise<{ default: CompiledLe
     "7-1-english-colorful-toys": L_ms__7_1_english_colorful_toys,
     "8-1-matematik-tambah-bintang": L_ms__8_1_matematik_tambah_bintang,
     "9-1-moral-sahabat-prihatin": L_ms__9_1_moral_sahabat_prihatin,
+    "10-1-sains-benda-hidup": L_ms__10_1_sains_benda_hidup,
+    "11-1-sejarah-garis-masa": L_ms__11_1_sejarah_garis_masa,
+    "12-1-rbt-bentuk-asas": L_ms__12_1_rbt_bentuk_asas,
+    "13-1-psv-warna-imaginasi": L_ms__13_1_psv_warna_imaginasi,
   },
 };
 
