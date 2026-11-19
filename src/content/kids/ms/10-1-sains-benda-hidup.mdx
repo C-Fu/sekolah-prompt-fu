@@ -1,0 +1,109 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Selamat datang ke **Musytari (Planet Sains)**! 🟠 Saya **Peromfu**, rakan sekelas anda di Tahun 1. Kita sedang meluncur megah berhampiran Bintik Merah Gergasi (Great Red Spot), ribut pusaran terbesar di angkasa lepas! Hari ini, kita menjadi saintis cilik yang membimbing AI memerhati dan membezakan **Benda Hidup** dan **Benda Bukan Hidup**.
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Tahukah anda? Sains Tahun 1 mengajar kita bahawa benda hidup mempunyai ciri-ciri istimewa: **bernafas**, **memerlukan air dan makanan**, **bergerak**, **membesar**, dan **membiak**. Benda bukan hidup seperti batu dan kapal angkasa tidak bernafas atau membesar! Apabila membimbing AI, kita mesti menyatakan ciri biologi yang jelas supaya AI dapat membuat pemerhatian sains yang tepat.
+</Panel>
+</Section>
+
+<Section>
+## Cabaran 1: Kenal Pasti Ciri Benda Hidup 🔬
+
+Peromfu mahu membimbing AI melengkapkan kenyataan pemerhatian sains tentang anak pokok bunga matahari di makmal angkasa. Apakah ciri keperluan asas benda hidup yang paling tepat?
+
+<WordPredictor
+  title="Bantu Peromfu Memilih Ciri Sains!"
+  instruction="Lengkapkan arahan pemerhatian ini dengan ciri biologi yang tepat:"
+  sentence="Bantu saintis cilik: Anak pokok ialah benda hidup kerana memerlukan cahaya matahari dan ____ untuk hidup serta membesar."
+  options={["air serta makanan", "bateri mainan", "minyak enjin", "batu kerikil"]}
+  correctAnswer="air serta makanan"
+  explanation="Semua hidupan seperti tumbuh-tumbuhan dan haiwan memerlukan air dan makanan untuk terus hidup serta membesar. Benda bukan hidup tidak memerlukan air dan makanan!"
+  aiThinking="Ciri 'air serta makanan' membolehkan saya mengesahkan bahawa anak pokok tergolong dalam kumpulan benda hidup mengikut prinsip biologi!"
+  successMessage="Tepat sekali! AI kini memahami keperluan asas benda hidup dalam sains!"
+/>
+</Section>
+
+<Section>
+## Cabaran 2: Prompt Pemerhatian vs Kesilapan 🌿
+
+Bandingkan dua arahan di bawah. Arahan manakah yang membimbing AI membuat perbandingan sains yang terperinci antara kucing dan robot mainan?
+
+<PromptVsMistake
+  question="Arahan manakah yang memberikan panduan sains yang tepat dan saintifik kepada AI?"
+  good="Bandingkan seekor kucing dengan robot mainan. Nyatakan sama ada setiap satu bernafas, memerlukan makanan, dan membesar dalam bentuk jadual ringkas."
+  bad="Tengok kucing dan robot itu sekejap."
+  explanation="Arahan pertama sangat jelas kerana menetapkan subjek perbandingan, kriteria biologi yang tepat (bernafas, makanan, membesar), dan format jadual yang kemas!"
+  peromfuMessage="Sentiasa sertakan ciri-ciri sains yang ingin diperhatikan agar jawapan AI tepat dan tersusun!"
+/>
+</Section>
+
+<Section>
+## Cabaran 3: Doktor Prompt — Rawat Arahan Sains 🩺
+
+Peromfu melihat seorang rakan menulis arahan sains yang sangat kabur: *"Cari benda hidup"*. Mari kita rawat arahan ini menjadi panduan sains yang lengkap dan mantap!
+
+<PromptDoctor
+  title="Rawat Prompt Pemerhatian Sains"
+  brokenPrompt="Cari benda hidup"
+  problems={[
+    { issue: "Tiada Peranan Saintis", symptom: "Siapakah AI dan apakah tugas saintifiknya?", fix: "Bertindak sebagai pembantu makmal sains Tahun 1." },
+    { issue: "Tiada Subjek & Lokasi", symptom: "Apakah objek yang perlu diperhati dan di manakah lokasinya?", fix: "Bertindak sebagai pembantu makmal sains Tahun 1. Perhatikan seekor burung pipit dan sebiji batu sungai di taman sains." },
+    { issue: "Tiada Kriteria Biologi", symptom: "Bagaimanakah cara menentukan kumpulan objek tersebut?", fix: "Bertindak sebagai pembantu makmal sains Tahun 1. Perhatikan burung pipit dan batu sungai. Kelaskan kedua-duanya kepada benda hidup atau benda bukan hidup berdasarkan ciri bernafas dan memerlukan makanan." }
+  ]}
+  healedPrompt="Bertindak sebagai pembantu makmal sains Tahun 1. Perhatikan burung pipit dan batu sungai. Kelaskan kedua-duanya kepada benda hidup atau benda bukan hidup berdasarkan ciri bernafas dan memerlukan makanan."
+  successMessage="Syabas! Arahan sains telah dirawat dengan peranan pakar, subjek pemerhatian, dan kriteria biologi yang sangat jelas!"
+/>
+</Section>
+
+<Section>
+## Cabaran 4: Susun Formula Prompt Sains 🧩
+
+Mari bantu Peromfu menyusun formula arahan sains yang teratur: **[Peranan Pembantu Sains] + [Tindakan & Ciri Biologi] + [Format Hasil Pemerhatian]**.
+
+<DragDropPrompt
+  title="Susun Formula Arahan Sains"
+  instruction="Susun blok perkataan mengikut urutan terbaik untuk membimbing AI:"
+  pieces={[
+    "Sebagai pembantu sains cerdik,",
+    "kelaskan pokok bunga orkid dan pasu seramik mengikut ciri membesar serta membiak,",
+    "kemudian senaraikan jawapan dalam dua ruangan yang kemas."
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Cemerlang! Formula prompt sains anda sangat teratur dan mudah difahami oleh AI!"
+/>
+</Section>
+
+<Section>
+## Cabaran 5: Kata Ajaib — Penerokaan Alam ✨
+
+Sekarang mari lengkapkan templat arahan penerokaan alam semula jadi dengan kata kunci sains yang berkuasa agar AI dapat menyusun laporan pemerhatian hidupan liar!
+
+<MagicWords
+  title="Lengkapkan Kata Ajaib Sains"
+  sentence="Sila terangkan mengapa ___ ialah benda hidup kerana memerlukan ___ dan hidup di habitat ___."
+  blanks={[
+    { hint: "🐾 contoh hidupan", answers: ["burung helang", "anak rusa", "ikan laga", "katak pokok", "kancil cerdik"] },
+    { hint: "💧 keperluan asas", answers: ["air dan udara bersih", "makanan serta tempat perlindungan", "udara segar untuk bernafas", "air minuman yang jernih", "cahaya dan khasiat"] },
+    { hint: "🌳 kawasan habitat", answers: ["hutan hujan tropika", "sungai yang mengalir", "paya bakau pesisir", "kolam air tawar", "rimba hijau saujana"] }
+  ]}
+  successMessage="Hebat sekali! Gabungan kata ajaib sains anda membolehkan AI menjana fakta biologi yang sangat terperinci!"
+/>
+</Section>
+
+<Section>
+## Cabaran Unggul: Jaguh Sains Musytari! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Kejayaan cemerlang di Musytari! Anda telah menguasai kemahiran memerhati, membezakan ciri benda hidup dan benda bukan hidup, serta mencipta prompt sains yang jitu dan saintifik!
+</Panel>
+
+<LevelComplete
+  levelSlug="10-1-sains-benda-hidup"
+  stars={3}
+  message="Tahniah! Anda menguasai ciri benda hidup dan prompt sains di Planet Musytari!"
+/>
+</Section>

@@ -1,0 +1,109 @@
+<Section>
+<Panel character="peromfu" mood="excited">
+Welcome to **Jupiter (Science Planet)**! 🟠 I am **Peromfu**, your Year 1 classmate. We are soaring right beside the Great Red Spot, the most magnificent swirling storm in deep space! Today, we become young scientists who guide AI to observe and classify **Living Things** and **Non-Living Things**.
+</Panel>
+</Section>
+
+<Section>
+<Panel character="peromfu" mood="thinking">
+Did you know? Primary Science teaches us that living things have special characteristics: they **breathe**, **need water and food**, **move**, **grow**, and **reproduce**. Non-living things like rocks and spacecraft do not breathe or grow! When prompting AI, we must specify clear biological traits so that the AI makes precise scientific observations.
+</Panel>
+</Section>
+
+<Section>
+## Challenge 1: Identify Living Characteristics 🔬
+
+Peromfu wants to guide the AI to complete a scientific observation statement about a sunflower seedling in our space lab. What core biological life need should we prompt?
+
+<WordPredictor
+  title="Help Peromfu Choose the Science Trait!"
+  instruction="Complete this observation prompt with the accurate biological trait:"
+  sentence="Help a young scientist: A seedling is a living thing because it needs sunlight and ____ to survive and grow."
+  options={["water and food", "toy batteries", "motor engine oil", "hard pebble rocks"]}
+  correctAnswer="water and food"
+  explanation="All living organisms such as plants and animals require water and nourishment to grow and stay alive. Non-living items never need water and food!"
+  aiThinking="The criterion 'water and food' allows me to verify that the sunflower seedling is a biological living thing based on scientific principles!"
+  successMessage="Spot on! The AI now understands the fundamental needs of living things in science!"
+/>
+</Section>
+
+<Section>
+## Challenge 2: Observation Prompt vs Mistake 🌿
+
+Compare the two instructions below. Which prompt guides the AI to perform a rigorous scientific comparison between a pet cat and a toy robot?
+
+<PromptVsMistake
+  question="Which prompt provides clear scientific criteria and structure to the AI?"
+  good="Compare a pet cat with a toy robot. State whether each one breathes, needs food, and grows in a neat summary table."
+  bad="Look at the cat and robot for a second."
+  explanation="The first prompt is crystal clear because it defines the exact comparison subjects, key biological criteria (breathing, food, growth), and a clean table format!"
+  peromfuMessage="Always include specific scientific attributes so that AI responses are accurate, structured, and insightful!"
+/>
+</Section>
+
+<Section>
+## Challenge 3: Prompt Doctor — Heal the Science Prompt 🩺
+
+Peromfu noticed a classmate wrote an extremely vague science prompt: *"Find living things"*. Let's heal this prompt into a rigorous scientific instruction!
+
+<PromptDoctor
+  title="Heal the Science Observation Prompt"
+  brokenPrompt="Find living things"
+  problems={[
+    { issue: "Missing Scientist Role", symptom: "Who is the AI and what is its scientific role?", fix: "Act as a Year 1 science laboratory assistant." },
+    { issue: "Missing Subjects & Context", symptom: "Which specimens should be observed and where?", fix: "Act as a Year 1 science laboratory assistant. Observe a garden sparrow and a river stone in the science garden." },
+    { issue: "Missing Biological Criteria", symptom: "How should the AI classify these specimens?", fix: "Act as a Year 1 science laboratory assistant. Observe a garden sparrow and a river stone. Classify both into living or non-living things based on whether they breathe and require food." }
+  ]}
+  healedPrompt="Act as a Year 1 science laboratory assistant. Observe a garden sparrow and a river stone. Classify both into living or non-living things based on whether they breathe and require food."
+  successMessage="Brilliant! You healed the prompt with an expert role, distinct specimens, and clear biological classification criteria!"
+/>
+</Section>
+
+<Section>
+## Challenge 4: Assemble the Science Prompt Formula 🧩
+
+Let's help Peromfu assemble a structured science prompt formula: **[Science Assistant Role] + [Action & Biological Traits] + [Output Format]**.
+
+<DragDropPrompt
+  title="Assemble the Science Prompt Formula"
+  instruction="Order the blocks in the logical sequence to guide the AI effectively:"
+  pieces={[
+    "As an intelligent science assistant,",
+    "classify an orchid plant and a ceramic flowerpot based on whether they grow and reproduce,",
+    "then organize your findings into two clearly labeled columns."
+  ]}
+  correctOrder={[0, 1, 2]}
+  successMessage="Excellent! Your structured prompt formula makes scientific classification easy and unambiguous for AI!"
+/>
+</Section>
+
+<Section>
+## Challenge 5: Magic Words — Exploring the Natural World ✨
+
+Now let's complete a nature discovery prompt template using powerful science keywords so the AI can draft an in-depth wildlife field report!
+
+<MagicWords
+  title="Complete the Science Magic Words"
+  sentence="Please explain why the ___ is a living organism that needs ___ and thrives in its natural habitat of ___."
+  blanks={[
+    { hint: "🐾 living organism", answers: ["majestic eagle", "gentle deer", "colorful betta fish", "tree frog", "clever mouse deer"] },
+    { hint: "💧 essential life need", answers: ["clean water and air", "food and shelter", "fresh air to breathe", "pure drinking water", "sunlight and nutrients"] },
+    { hint: "🌳 natural habitat", answers: ["tropical rainforest", "flowing freshwater river", "coastal mangrove swamp", "peaceful lotus pond", "green woodland canopy"] }
+  ]}
+  successMessage="Outstanding! Your scientific magic words guide the AI to generate vivid biological facts with scientific depth!"
+/>
+</Section>
+
+<Section>
+## Mastery Boss Challenge: Jupiter Science Champion! 🏆
+
+<Panel character="peromfu" mood="celebrating">
+Magnificent achievement on Jupiter! You have mastered the scientific art of observing, categorizing living vs non-living things, and formulating precise science prompts!
+</Panel>
+
+<LevelComplete
+  levelSlug="10-1-sains-benda-hidup"
+  stars={3}
+  message="Congratulations! You mastered living things and science prompts on Planet Jupiter!"
+/>
+</Section>
