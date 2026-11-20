@@ -73,8 +73,8 @@ function runGate(label, command) {
 /**
  * Derive the level-slug set from the registry (`src/lib/kids/levels.ts`) rather
  * than hard-coding a count — the registry is the source of truth (PATTERNS.md).
- * Level slugs match the `/^\d-\d-/` pattern (e.g. `1-1-meet-peromfu`). A simple
- * Node-stdlib regex over the file text — no TypeScript import.
+ * Level slugs match the `/^\d+-\d+-/` pattern (e.g. `1-1-meet-peromfu`, `10-1-sains-benda-hidup`).
+ * A simple Node-stdlib regex over the file text — no TypeScript import.
  */
 function deriveLevelSlugs() {
   const slugs = new Set();
@@ -83,7 +83,7 @@ function deriveLevelSlugs() {
   const re = /slug:\s*"([^"]+)"/g;
   let m;
   while ((m = re.exec(text)) !== null) {
-    if (/^\d-\d-/.test(m[1])) slugs.add(m[1]);
+    if (/^\d+-\d+-/.test(m[1])) slugs.add(m[1]);
   }
   return [...slugs].sort();
 }
