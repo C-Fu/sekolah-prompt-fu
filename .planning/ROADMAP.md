@@ -89,6 +89,11 @@ Plans:
 ### Phase 29: Milestone Verification & Static Release Certification
 **Goal:** Validate all unit and integration tests, verify TypeScript, run bundle closure and Malay vocabulary checks, and certify 100% static export.
 **Requirements:** `VERIF-01`, `VERIF-02`
+**Plans:** 1 plan
+
+Plans:
+- [ ] 29-01-PLAN.md — Milestone Verification, Static Release Certification & verify-project two-digit slug support
+
 **Success Criteria:**
 1. All unit and integration test suites pass with zero failures (including planetary explorer, HUD, and all 27 level routes).
 2. `npm run verify` runs cleanly with 0 TypeScript errors, 0 ESLint errors, passing vocabulary guards on all 27 MDX lessons, and verified static export files in `out/`.
