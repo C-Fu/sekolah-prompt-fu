@@ -45,9 +45,25 @@ The application is built 100% static (`output: 'export'`) with client-side persi
 
 ## Current State
 
-**Shipped Version:** v1.4 (2026-11-17)  
-**Phases Completed:** 23 phases total across v1.0, v1.1, v1.2, v1.3, and v1.4.  
-**Verification:** 32 test suites, 354/354 unit and integration tests passing; clean production build with 100% static export.
+**Shipped Version:** v1.5 (2026-11-20)  
+**Phases Completed:** 29 phases total across v1.0, v1.1, v1.2, v1.3, v1.4, and v1.5.  
+**Verification:** 32 test files, 393/393 unit and integration tests passing; clean production build with 100% static export (35 static pages and 27 static level routes).
+
+<details>
+<summary>Prior Milestones Summary</summary>
+
+- **v1.0 (2026-11-06):** Core Foundation, Levels & Static Engine (Phases 1–5).
+- **v1.1 (2026-11-07):** Audio, Polish & Kid Engagement (Phases 6–8).
+- **v1.2 (2026-11-09):** Planetary Subject Worlds & KSSR Integration (Phases 9–13).
+- **v1.3 (2026-11-17):** Responsive Polish & Production Hardening (Phases 14–17).
+- **v1.4 (2026-11-17):** Planetary Assets, Data, Solar System Explorer & Allo Typography (Phases 18–23).
+- **v1.5 (2026-11-20):** Outer Planets Curriculum Expansion (KSSR Sains, Sejarah, RBT, PSV) (Phases 24–29).
+
+</details>
+
+## Next Milestone Goals
+
+*Run `/gsd-new-milestone` to define goals for the next version (e.g., Year 2+ curricula, interactive mini-games, teacher dashboard, or audio narration).*
 
 7. **Universal Allo Typography & High-Res Astronomical Pipeline (v1.4):**
    - Self-hosted Josh Puckett's `allo-font` variable webfonts in `public/fonts/allo/` with friendly roundness (`ROND: 50`) and optical sizing for a cheerful, playful, cheeky aesthetic. Removed external Google Fonts.
